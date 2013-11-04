@@ -42,4 +42,5 @@ public class GameData {
     private List<Integer> myLevelNumWaves;
     private List<Integer> myLevelNumEnemies;
     private List<Map<String, Integer>> myLevelWavesEnemyQuantities;
+
 }
