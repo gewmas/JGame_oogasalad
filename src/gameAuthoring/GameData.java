@@ -7,6 +7,7 @@ import java.util.Map;
 public class GameData {
 
     // Basic Game Info
+    // Game name, splash image, etc.
     private String myGameName;
     private String mySplashImage;
     private int myGold;
