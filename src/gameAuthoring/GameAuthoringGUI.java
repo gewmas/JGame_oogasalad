@@ -8,16 +8,18 @@ import javax.swing.JTabbedPane;
 
 public class GameAuthoringGUI {
 
+    // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
+        GameData gameData = new GameData();
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JTabbedPane mainPane = new JTabbedPane();
         mainPane.setPreferredSize(new Dimension(500, 500));
         JPanel basicInfoTab = new BasicInfoTab().getTab();
-        JPanel mapDesignTab = new MapDesignTab().getTab();
-        JPanel towerDesignTab = new TowerDesignTab().getTab();
-        JPanel enemyDesignTab = new EnemyDesignTab().getTab();
-        JPanel levelDesignTab = new LevelDesignTab().getTab();
+        JPanel mapDesignTab = new MapDesignTab(gameData).getTab();
+        JPanel towerDesignTab = new TowerDesignTab(gameData).getTab();
+        JPanel enemyDesignTab = new EnemyDesignTab(gameData).getTab();
+        JPanel levelDesignTab = new LevelDesignTab(gameData).getTab();
         mainPane.addTab("Basic Info", basicInfoTab);
         mainPane.addTab("Map Design", mapDesignTab);
         mainPane.addTab("Tower Design", towerDesignTab);
