@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 
 
+/**
+ * @author BecLai
+ * 
+ */
 public class GameData {
 
     // Basic Game Info
@@ -22,7 +26,6 @@ public class GameData {
     // Index of each list corresponds to one tower
     // Example: Tower 0 will have tower ID that is index 0 in myTowerIDs, tower damage that is index
     // 0 in myTowerDamages, attack speed that is index 0 in myTowerAttackSpeeds...
-
     private List<String> myTowerIDs = new ArrayList<String>();
     private List<String> myTowerImages = new ArrayList<String>();
     private List<Integer> myTowerDamages = new ArrayList<Integer>();
@@ -45,5 +48,53 @@ public class GameData {
     private List<Integer> myLevelNumEnemies = new ArrayList<Integer>();
     private List<HashMap<String, Integer>> myLevelWavesEnemyQuantities =
             new ArrayList<HashMap<String, Integer>>();
+
+    public void addTowerID (String towerID) {
+        myTowerIDs.add(towerID);
+    }
+
+    public void addTowerImage (String towerImage) {
+        myTowerImages.add(towerImage);
+    }
+
+    public void addTowerDamage (int towerDamage) {
+        myTowerDamages.add(towerDamage);
+    }
+
+    public void addTowerAttackSpeed (int towerAttackSpeed) {
+        myTowerAttackSpeeds.add(towerAttackSpeed);
+    }
+
+    public void addTowerCost (int towerCost) {
+        myTowerCosts.add(towerCost);
+    }
+
+    public void addTowerRecyclePrice (int towerRecyclePrice) {
+        myTowerRecyclePrices.add(towerRecyclePrice);
+    }
+
+    public void addTowerLife (int towerLife) {
+        myTowerLives.add(towerLife);
+    }
+
+    public void addEnemyGoldValue (int enemyGoldValue) {
+        myEnemyGoldValue.add(enemyGoldValue);
+    }
+
+    public void addEnemyImage (String enemyImage) {
+        myEnemyImages.add(enemyImage);
+    }
+
+    public void addEnemyLives (int enemyLife) {
+        myEnemyLives.add(enemyLife);
+    }
+
+    public void addEnemySpeed (int enemySpeed) {
+        myEnemySpeeds.add(enemySpeed);
+    }
+
+    public void addEnemyDamage (int enemyDamage) {
+        myEnemyDamages.add(enemyDamage);
+    }
 
 }
