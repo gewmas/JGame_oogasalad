@@ -1,7 +1,8 @@
 package gameAuthoring;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class GameData {
@@ -22,26 +23,27 @@ public class GameData {
     // Example: Tower 0 will have tower ID that is index 0 in myTowerIDs, tower damage that is index
     // 0 in myTowerDamages, attack speed that is index 0 in myTowerAttackSpeeds...
 
-    private List<String> myTowerIDs;
-    private List<String> myTowerImages;
-    private List<Integer> myTowerDamages;
-    private List<Integer> myTowerAttackSpeeds;
-    private List<Integer> myTowerAttackRanges;
-    private List<Integer> myTowerCosts;
-    private List<Integer> myTowerRecyclePrices;
-    private List<Integer> myTowerLives;
+    private List<String> myTowerIDs = new ArrayList<String>();
+    private List<String> myTowerImages = new ArrayList<String>();
+    private List<Integer> myTowerDamages = new ArrayList<Integer>();
+    private List<Integer> myTowerAttackSpeeds = new ArrayList<Integer>();
+    private List<Integer> myTowerAttackRanges = new ArrayList<Integer>();
+    private List<Integer> myTowerCosts = new ArrayList<Integer>();
+    private List<Integer> myTowerRecyclePrices = new ArrayList<Integer>();
+    private List<Integer> myTowerLives = new ArrayList<Integer>();
 
     // Enemy Info
-    private List<Integer> myEnemyGoldValue;
-    private List<String> myEnemyImages;
-    private List<Integer> myEnemyLives;
-    private List<Integer> myEnemySpeeds;
-    private List<Integer> myEnemyDamages;
-    private List<Integer> myEnemySpawnTime;
+    private List<Integer> myEnemyGoldValue = new ArrayList<Integer>();
+    private List<String> myEnemyImages = new ArrayList<String>();
+    private List<Integer> myEnemyLives = new ArrayList<Integer>();
+    private List<Integer> myEnemySpeeds = new ArrayList<Integer>();
+    private List<Integer> myEnemyDamages = new ArrayList<Integer>();
+    private List<Integer> myEnemySpawnTime = new ArrayList<Integer>();
 
     // Level Info
-    private List<Integer> myLevelNumWaves;
-    private List<Integer> myLevelNumEnemies;
-    private List<Map<String, Integer>> myLevelWavesEnemyQuantities;
+    private List<Integer> myLevelNumWaves = new ArrayList<Integer>();
+    private List<Integer> myLevelNumEnemies = new ArrayList<Integer>();
+    private List<HashMap<String, Integer>> myLevelWavesEnemyQuantities =
+            new ArrayList<HashMap<String, Integer>>();
 
 }
