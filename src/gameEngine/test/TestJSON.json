@@ -1,0 +1,11 @@
+{
+    "name": "Tower Destruction II",
+    "splashImage": "something.png",
+    "gold": 200,
+    "numberOfLives": 100,
+    "levels": 5,
+    "difficultyScale": 1.5
+}
+
+
+
