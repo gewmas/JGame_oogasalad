@@ -39,5 +39,12 @@ public class TestParser {
 			assert(true);
 		}
 	}
+	
+	@Test
+	public void testGetMap() {
+			String getNameOfGame = parser.getValue("map");
+			System.out.println(getNameOfGame);
+			assert(false);
+	}
 
 }
