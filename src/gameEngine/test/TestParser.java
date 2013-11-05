@@ -1,13 +1,12 @@
 package gameEngine.test;
 
 import static org.junit.Assert.*;
-
 import java.io.File;
 import java.util.Scanner;
-
 import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONException;
-
+import gameEngine.parser.JSONLibrary.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,11 +39,17 @@ public class TestParser {
 		}
 	}
 	
-//	@Test
-//	public void testGetMap() {
-//			String getNameOfGame = parser.getValue("map");
-//			System.out.println(getNameOfGame);
-//			assert(false);
-//	}
+	@Test
+	public void testGetBGImage() {
+	    JSONObject getMapJSONObject = parser.getJSONObject("map");
+	    assertEquals(getMapJSONObject.get("BGImage"), "image1.png");
+	}
+	
+	@Test
+	public void testGetPath() {
+            JSONObject getMapJSONObject = parser.getJSONObject("map");
+            JSONArray array = getMapJSONObject.getJSONArray("path");
+            assertEquals(array.length(), 2);
+        }
 
 }

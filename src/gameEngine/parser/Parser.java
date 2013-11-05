@@ -23,4 +23,8 @@ public class Parser {
 	public String getValue(String key) {
 		return (String) jsonObject.get(key);
 	}
+	
+	public JSONObject getJSONObject(String key) {
+	    return jsonObject.getJSONObject(key);
+	}
 }
