@@ -1,15 +1,12 @@
 package gameEngine.test;
 
 import static org.junit.Assert.*;
-
 import java.io.File;
 import java.util.Scanner;
-
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONException;
 import gameEngine.parser.JSONLibrary.JSONObject;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
