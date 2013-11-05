@@ -10,6 +10,13 @@ import jgame.JGColor;
 import jgame.platform.JGEngine;
 import org.junit.Test;
 
+/**
+ * 
+ * @author Yuhua
+ * 
+ * Test Tower Enemy and Bullet
+ *
+ */
 public class testTowerEnemyBullet extends JGEngine{
 
         Model model;

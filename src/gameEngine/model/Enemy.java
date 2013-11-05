@@ -2,9 +2,26 @@ package gameEngine.model;
 
 import jgame.JGObject;
 
+/**
+ * 
+ * @author Fabio, Yuhua
+ *
+ */
 public class Enemy extends JGObject {
 
-    public Enemy (String name,
+    double gold;
+    double life;
+    double speed;
+    
+    Model model;
+    
+    public Enemy (
+                  double gold,
+                  double life,
+                  double speed,
+                  Model model,
+                  
+                  String name,
                   boolean unique_id,
                   double x,
                   double y,
@@ -15,6 +32,7 @@ public class Enemy extends JGObject {
     
     @Override
     public void move() {
+        //For test
         x -= 0.1;
         y += 0.1;
     }
@@ -24,9 +42,12 @@ public class Enemy extends JGObject {
         //hit the target enemy, destroy that enemy
         System.out.println("Bullet Hit");
         if(obj.colid == 3){
+//            model.removeEnemy(this);
+            
             obj.remove();
-               remove();
+            remove();
                
+
         }
     }
 
