@@ -10,7 +10,7 @@ public class View extends Frame{
     public View(){
         super();
         canvasPanel = new CanvasPanel();
-        this.add( canvasPanel);
+        this.add(canvasPanel);
         pack();
         setVisible(true);
     }
