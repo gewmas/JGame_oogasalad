@@ -11,9 +11,14 @@ public class GridFactory implements FactoryInterface{
 	
 	@Override
 	public void initialize() {
+	    String pathImage = jsonObject.getString("pathImage");
 	    JSONArray pathList = jsonObject.getJSONArray("path");
-	    //assuming that the grid is 10 x 10...WHAT IS THE GRID SIZE??
-	    
+	    //assuming that the grid is 15 x 15...WHAT IS THE GRID SIZE??
+	    for(int k=0; k<15; k++) {
+	        for(int m=0; m<15; m++) {
+	            
+	        }
+	    }
 		
 	}
 	

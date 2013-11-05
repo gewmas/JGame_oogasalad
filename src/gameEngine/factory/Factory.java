@@ -8,7 +8,6 @@ public class Factory {
 	private GridFactory gridFactory;
 	public Factory(Parser parser) {
 		this.parser = parser;
-		this.parser
 		gridFactory = new GridFactory(this.parser.getJSONObject("map"));
 	}
 	
