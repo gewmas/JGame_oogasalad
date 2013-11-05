@@ -1,6 +1,13 @@
 package gameEngine.model;
 
+import java.util.List;
 import jgame.JGObject;
+
+/**
+ * @author Yuhua
+ *
+ * Tower will shoot the Enemy within shooting range with Bullet 
+ */
 
 public class Tower extends JGObject {
 
@@ -11,6 +18,9 @@ public class Tower extends JGObject {
 	double cost;
 	double recyclePrice;
 
+	Model model;
+	
+	boolean hasShoot = false;
 
 	public Tower ( 
 			double damage,
@@ -18,6 +28,8 @@ public class Tower extends JGObject {
 			double range,
 			double cost,
 			double recyclePrice,
+			
+			Model model,
 
 			String name,
 			boolean unique_id,
@@ -34,11 +46,26 @@ public class Tower extends JGObject {
 		this.range = range;
 		this.cost = cost;
 		this.recyclePrice = recyclePrice;
+		
+		this.model = model;
 
 	}
 
 	@Override
 	public void move() {
+	    //check the enemies within the shooting range
+	    // create bullets
+	    
+	    List<Enemy> enemies = model.getEnemies();
+	    for(Enemy e : enemies){
+	        //check distance between this tower and e then shoot bullets
+	        double dist = Math.sqrt(Math.pow(e.x-x, 2)+Math.pow(e.y-y, 2));
+	        if(dist < range && !hasShoot){
+	            hasShoot = true;
+	            Bullet bullet = new Bullet(e, "bullet", true, x, y, 3, "bullet");
+	        }
+	     }
+
 	    
 	}
 

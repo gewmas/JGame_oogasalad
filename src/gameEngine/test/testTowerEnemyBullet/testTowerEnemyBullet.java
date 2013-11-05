@@ -1,8 +1,10 @@
 package gameEngine.test.testTowerEnemyBullet;
 
 import static org.junit.Assert.*;
+import java.util.List;
 import gameEngine.model.Bullet;
 import gameEngine.model.Enemy;
+import gameEngine.model.Model;
 import gameEngine.model.Tower;
 import jgame.JGColor;
 import jgame.platform.JGEngine;
@@ -10,6 +12,9 @@ import org.junit.Test;
 
 public class testTowerEnemyBullet extends JGEngine{
 
+        Model model;
+        List<Tower> towers;
+        List<Enemy> enemies;
 //	@Test
 	public void test() {
 		//		fail("Not yet implemented");
@@ -33,21 +38,25 @@ public class testTowerEnemyBullet extends JGEngine{
 		defineMedia("mygame.tbl");
 
 		setFrameRate( 60, 2 );
-
-		Tower tower = new Tower(1,1,1,1,1, "tower", false, 100.0, 100.0, 1, "tower");
-		Enemy enemy = new Enemy("enemy", false, 150.0, 150.0, 2, "enemy");
-		Bullet bullet = new Bullet(enemy, "bullet", false, 50.0, 50.0, 3, "bullet");
+		
+		model = new Model();
+		towers = model.getTowers();
+		enemies = model.getEnemies();
 	}
 
 	@Override
 	public void doFrame( ){
 	    moveObjects();
+	    
+	    checkCollision(3, 2);
+	    checkCollision(2, 3);
+//	    checkBGCollision(2, 3);
+//	    checkBG
 	}
 
 	@Override
 	public void paintFrame( )
 	{
-		// nothing to do
-		// the objects paint themselves
+	    
 	}
 }

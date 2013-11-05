@@ -11,7 +11,6 @@ public class Enemy extends JGObject {
                   int collisionid,
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
-        // XXX Auto-generated constructor stub
     }
     
     @Override
@@ -22,7 +21,7 @@ public class Enemy extends JGObject {
 
     @Override
     public void hit(JGObject obj) {
-
+//        System.out.println("Enemy Hit");
 
     }
 
