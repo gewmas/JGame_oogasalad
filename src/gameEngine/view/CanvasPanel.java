@@ -5,6 +5,7 @@ public class CanvasPanel extends Panel {
     
     public CanvasPanel(){
         game = new Game();
+        this.add(game);
     }
     
     

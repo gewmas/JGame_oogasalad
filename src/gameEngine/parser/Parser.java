@@ -1,5 +1,6 @@
 package gameEngine.parser;
 
+import java.util.List;
 import java.util.Scanner;
 
 import gameEngine.parser.JSONLibrary.*;
@@ -22,5 +23,8 @@ public class Parser {
 	
 	public String getValue(String key) {
 		return (String) jsonObject.get(key);
+	}
+	public JSONObject getJSONObject(String key) {
+		return jsonObject.getJSONObject(key);
 	}
 }
