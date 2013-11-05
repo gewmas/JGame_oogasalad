@@ -2,6 +2,7 @@ package gameEngine.model;
 
 import jgame.JGObject;
 
+
 public class Bullet extends JGObject {
 
     public Bullet (String name,
