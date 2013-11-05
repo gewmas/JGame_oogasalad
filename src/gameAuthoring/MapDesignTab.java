@@ -5,8 +5,10 @@ import javax.swing.JPanel;
 
 public class MapDesignTab extends Tab {
 
-    public MapDesignTab (GameData gameData) {
-        super(gameData);
+    private MapDesignData myMapDesignData;
+
+    public MapDesignTab (MapDesignData mapDesignData) {
+        myMapDesignData = mapDesignData;
     }
 
     // TODO: Get rid of magic number

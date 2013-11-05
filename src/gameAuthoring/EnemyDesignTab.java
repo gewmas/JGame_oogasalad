@@ -5,8 +5,10 @@ import javax.swing.JPanel;
 
 public class EnemyDesignTab extends Tab {
 
-    public EnemyDesignTab (GameData gameData) {
-        super(gameData);
+    private EnemyDesignData myEnemyDesignData;
+
+    public EnemyDesignTab (EnemyDesignData enemyDesignData) {
+        myEnemyDesignData = enemyDesignData;
     }
 
     @Override
