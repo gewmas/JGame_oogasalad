@@ -21,8 +21,13 @@ public class Enemy extends JGObject {
 
     @Override
     public void hit(JGObject obj) {
-//        System.out.println("Enemy Hit");
-
+        //hit the target enemy, destroy that enemy
+        System.out.println("Bullet Hit");
+        if(obj.colid == 3){
+            obj.remove();
+               remove();
+               
+        }
     }
 
 }

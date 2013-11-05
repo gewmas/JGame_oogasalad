@@ -32,11 +32,11 @@ public class Bullet extends JGObject {
 	@Override
 	public void hit(JGObject obj) {
 	    //hit the target enemy, destroy that enemy
-	    System.out.println("Bullet Hit");
-	    if(obj.colid == 2){
-	        obj.remove();
-	           remove();
-
-	    }
+//	    System.out.println("Bullet Hit");
+//	    if(obj.colid == 2){
+//	        obj.remove();
+//	           remove();
+//
+//	    }
 	}
 }
