@@ -1,15 +1,16 @@
-package test;
+package gameEngine.test.testTowerEnemyBullet;
 
 import static org.junit.Assert.*;
+import gameEngine.model.Bullet;
+import gameEngine.model.Enemy;
 import gameEngine.model.Tower;
 import jgame.JGColor;
 import jgame.platform.JGEngine;
-
 import org.junit.Test;
 
-public class testModel extends JGEngine{
+public class testTowerEnemyBullet extends JGEngine{
 
-	@Test
+//	@Test
 	public void test() {
 		//		fail("Not yet implemented");
 	}
@@ -34,11 +35,13 @@ public class testModel extends JGEngine{
 		setFrameRate( 60, 2 );
 
 		Tower tower = new Tower(1,1,1,1,1, "tower", false, 100.0, 100.0, 1, "tower");
+		Enemy enemy = new Enemy("enemy", false, 150.0, 150.0, 2, "enemy");
+		Bullet bullet = new Bullet(enemy, "bullet", false, 50.0, 50.0, 3, "bullet");
 	}
 
 	@Override
 	public void doFrame( ){
-
+	    moveObjects();
 	}
 
 	@Override

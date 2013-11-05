@@ -39,8 +39,7 @@ public class Tower extends JGObject {
 
 	@Override
 	public void move() {
-
-
+	    
 	}
 
 	@Override

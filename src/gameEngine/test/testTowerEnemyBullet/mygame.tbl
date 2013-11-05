@@ -15,4 +15,5 @@
 
 
 tower		-	0	tower.png		-
-
+enemy	-	0	player.png	-
+bullet	-	0	bomb.png	-

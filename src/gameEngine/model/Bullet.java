@@ -21,8 +21,12 @@ public class Bullet extends JGObject {
 
 	@Override
 	public void move() {
+	    double dx = targetEnemy.x - x;
+	    double dy = targetEnemy.y - y;
+	    double ds = Math.sqrt(dx*dx+dy*dy);
 
-
+	    x += dx/ds;
+	    y += dy/ds;
 	}
 
 	@Override

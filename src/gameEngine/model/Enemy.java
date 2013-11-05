@@ -13,5 +13,17 @@ public class Enemy extends JGObject {
         super(name, unique_id, x, y, collisionid, gfxname);
         // XXX Auto-generated constructor stub
     }
+    
+    @Override
+    public void move() {
+        x -= 0.1;
+        y += 0.1;
+    }
+
+    @Override
+    public void hit(JGObject obj) {
+
+
+    }
 
 }
