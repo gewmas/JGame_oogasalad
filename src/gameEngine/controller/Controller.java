@@ -1,5 +1,6 @@
 package gameEngine.controller;
 
+import java.io.File;
 import gameEngine.model.Model;
 import gameEngine.view.View;
 
@@ -7,11 +8,18 @@ public class Controller {
 
     Model model;
     View view;
-
-    /*public void newGame(File jsonFile){
-        
+    
+    public Controller(){
+        view = new View(this);
     }
 
+    public void newGame(File jsonFile){
+        //Model parses jsonFile and passes gameData  to view
+        //view.initialize(gameData);
+        view.showGame();
+
+    }
+    /*
     public void setMoney(int money){
         
     }
