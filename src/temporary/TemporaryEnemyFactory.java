@@ -8,6 +8,6 @@ package temporary;
 public class TemporaryEnemyFactory {
     
     public TemporaryEnemy create(){
-        return new TemporaryEnemy(null, true, 100, 400 , 0, "mana");
+        return new TemporaryEnemy(null, true, 100, 400 , 1, "mana");
     }
 }

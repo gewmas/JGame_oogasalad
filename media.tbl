@@ -17,7 +17,9 @@
 // define image to display as background
 
 
-mana	-	0	/resources/img/mana.jpg		-
+mana	-	0	resources/img/mana.jpg		-
+
+heal	-	0	resources/img/heal.jpg		-
 
 
 bgm1	/resources/audio/bgm1.wav
