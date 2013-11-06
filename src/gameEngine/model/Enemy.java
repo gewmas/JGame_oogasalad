@@ -36,6 +36,7 @@ public class Enemy extends JGObject {
     public void move() {
         //Should walk along the Path
         x -= speed;
+        y += 0;
     }
 
     @Override
