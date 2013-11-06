@@ -4,7 +4,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import gameEngine.parser.JSONLibrary.*;
-
+/**
+ * 
+ * @author Harris
+ * 
+ * Parses a JSON file
+ *
+ */
 public class Parser {
 	private Scanner scanner;
 	private JSONObject jsonObject;

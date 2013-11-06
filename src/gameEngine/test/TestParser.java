@@ -10,7 +10,13 @@ import gameEngine.parser.JSONLibrary.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
+/**
+ * 
+ * @author Harris
+ * 
+ * Test JSON parser
+ *
+ */
 public class TestParser {
 	private Parser parser;
 	@Before
