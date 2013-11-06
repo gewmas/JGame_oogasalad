@@ -11,20 +11,22 @@ public class SlowBuff extends Buff {
                      int collisionid,
                      String gfxname,
                      int expire,
-                     IBuffable target) {
-        super(name, unique_id, x, y, collisionid, gfxname, expire, target );
+                     TemporaryEnemy enemy) {
+        super(name, unique_id, x, y, collisionid, gfxname, expire, enemy);
         // TODO Auto-generated constructor stub
     }
 
     @Override
-    public void buffOn (IBuffable target) {
-        ((ISlowBuffable) target).slowBuffOn(this,-5);
-        
+    public void buffOn (TemporaryEnemy enemy) {
+        enemy.changeSpeed(-5);
     }
 
     @Override
-    public void buffOff (IBuffable target) {
-        ((ISlowBuffable) target).slowBuffOff(this,5);
+    public void buffOff (TemporaryEnemy enemy) {
+        enemy.changeSpeed(5);
     }
+
+
+
 
 }

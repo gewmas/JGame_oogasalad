@@ -3,9 +3,8 @@ package temporary;
 import java.util.HashMap;
 import jgame.JGObject;
 import temporary.buff.Buff;
-import temporary.buff.ISlowBuffable;
 
-public class TemporaryEnemy extends JGObject  implements ISlowBuffable {
+public class TemporaryEnemy extends JGObject {
     private HashMap<String,Buff> myBuffMap;
     public TemporaryEnemy (String name,
                            boolean unique_id,
@@ -23,37 +22,26 @@ public class TemporaryEnemy extends JGObject  implements ISlowBuffable {
         super.move();
     }
     
+    public void addBuff(Buff buff){
+        Buff temp=myBuffMap.get(buff.getName());
+        if(temp!=null){
+            myBuffMap.remove(buff.getName());
+            temp.remove();
+        }
+        myBuffMap.put(buff.getName(), buff);         
+    }
+    
+    public void removeBuff(Buff buff){
+        Buff temp=myBuffMap.get(buff.getName());
+        if(temp!=null){
+            myBuffMap.remove(buff.getName());
+            temp.remove();
+        }
+    }
+    
     public void changeSpeed(int speed){
         xspeed+=speed;
     }
-    @Override
-    public double getX () {
-        return this.x;
-    }
-    @Override
-    public double getY () {
-        return this.y;
-    }
-    @Override
-    public void slowBuffOn (Buff buff,int offSet) {
-        Buff temp=myBuffMap.get(buff.getName());
-        if(temp!=null){
-            myBuffMap.remove(buff.getName());
-            temp.remove();
-        }
-        myBuffMap.put(buff.getName(), buff);
-        this.xspeed+=offSet;
-        
-    }
-    @Override
-    public void slowBuffOff (Buff buff,int offSet) {
-        Buff temp=myBuffMap.get(buff.getName());
-        if(temp!=null){
-            myBuffMap.remove(buff.getName());
-            temp.remove();
-            this.xspeed+=offSet;
-        }
-        
-    }
    
+
 }

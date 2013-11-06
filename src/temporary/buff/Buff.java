@@ -5,7 +5,7 @@ import temporary.TemporaryEnemy;
 
 
 public abstract class Buff extends JGObject {
-    private IBuffable myTarget;
+    private TemporaryEnemy myEnemy;
 
     public Buff (String name,
                  boolean unique_id,
@@ -13,25 +13,27 @@ public abstract class Buff extends JGObject {
                  double y,
                  int collisionid,
                  String gfxname,int expire,
-                 IBuffable target) {
+                 TemporaryEnemy enemy) {
         super(name, unique_id, x, y, collisionid, gfxname,expire);
-        myTarget = target;
-    
-        buffOn(myTarget);
+        myEnemy = enemy;
+        
+        myEnemy.addBuff(this);
+        buffOn(myEnemy);
 
     }
 
     public void remove () {
-        buffOff(myTarget);
+        myEnemy.removeBuff(this);
+        buffOff(myEnemy);
         super.remove();
     }
     
     public void move(){
-        this.x=myTarget.getX()-10;
-        this.y=myTarget.getY()-10;
+        this.x=myEnemy.x-10;
+        this.y=myEnemy.y;
     }
 
-    abstract public void buffOn (IBuffable target);
-    abstract public void buffOff (IBuffable target); 
+    abstract public void buffOn (TemporaryEnemy enemy);
+    abstract public void buffOff (TemporaryEnemy enemy); 
 
 }
