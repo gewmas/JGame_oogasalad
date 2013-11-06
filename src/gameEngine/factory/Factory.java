@@ -14,6 +14,7 @@ public class Factory {
      * ex. tower, enemy, bullet, and grid will have factory classes
      *
      */
+    
 	private Parser parser;
 	private GridFactory gridFactory;
 	private TowerFactory towerFactory;

@@ -21,7 +21,7 @@ public class EnemyFactory extends SpriteFactory {
     public Enemy createFromId(String id)
     {
         JSONObject currEnemy = getTypes().get(id);
-        Enemy enemy = new Enemy(currEnemy.getDouble("gold"), currEnemy.getDouble("life"), currEnemy.getDouble("speed"), getLevel(), id, true, 150.0, 150.0, 2, currEnemy.getString("image"));
+        Enemy enemy = new Enemy(currEnemy.getDouble("gold"), currEnemy.getDouble("life"), currEnemy.getDouble("speed"), getLevel(), id, true, 50.0, 50.0, 2, currEnemy.getString("image"));
         return enemy;
     }
     

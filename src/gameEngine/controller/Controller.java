@@ -11,41 +11,27 @@ public class Controller {
     /*public void newGame(File jsonFile){
         
     }
-
-    public void setMoney(int money){
-        
-    }
     
     public int getMoney(){
         
     }
-
     public int getLife(){
         
     }
-
-    public void setTower(Type type, Position pos){
+    public void placeTower(String name, Position pos){
         
     }
-    public List<Tower> getTowers(){
+    public List<TowerInfo> getTowers(){
         
     }
-
-    public List<Enemy> getEnemies(){
-        
-    }
-    public List<Bullet> getBullets(){
+    public List<PathInfo> getPath(){
         
     }
 
-    public List<Path> getPath(){
+    public String getPathImage(){
         
     }
-
-    public Image getPathImage(){
-        
-    }
-    public Image getBackgroundImage(){
+    public String getBackgroundImage(){
         
     }*/
 }

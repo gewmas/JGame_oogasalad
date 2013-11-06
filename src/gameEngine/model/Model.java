@@ -14,14 +14,28 @@ public class Model {
      * Instance variables here used for test purpose
      */
     private GameInfo gameInfo;
-    private Level level;
+//    prviate Factory facotry;
+//  private Warehouse towerWarehouse;
+//  private Warehouse enemyWarehouse;
+    
+    private Level level; // delete later
     
     public Model(Parser parser){
-        
+        // 1 parse jsonfile
+        // 2 create factory
+        // 3 create gameInfo
         gameInfo = new GameInfo(1000, 1000, 1000);
-        level = new Level(gameInfo, parser);
+        // 4 create warehouse - hashmap of different kind of tower, enemy
+        //     warehouse - store lists of towers, enemies
+        // 5 create rule - how each waves created, ruleStart, ruleStop
+        //     rule - waves -> create enemies
+        //new Rule();
 
+        level = new Level(gameInfo, parser); // delete later
     }
+    
+    
+   
 
 
 }

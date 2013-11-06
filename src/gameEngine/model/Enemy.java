@@ -9,6 +9,9 @@ import jgame.JGObject;
  */
 public class Enemy extends JGObject {
 
+    String id;
+    String image;
+    
     double gold;
     double life;
     double speed;
@@ -21,13 +24,16 @@ public class Enemy extends JGObject {
                   double speed,
                   Level level,
                   
-                  String name,
+                  String id,
                   boolean unique_id,
                   double x,
                   double y,
                   int collisionid,
-                  String gfxname) {
-        super(name, unique_id, x, y, collisionid, gfxname);
+                  String image) {
+        super(id, unique_id, x, y, collisionid, image);
+        
+        this.id = id;
+        this.image = image;
         
         this.gold = gold;
         this.life = life;
