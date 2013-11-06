@@ -32,12 +32,12 @@ public class Level {
      * Test just one level
      */
     public void initGameLevelOne(){
-        Tower tower = new Tower(1,0.8,100,100,1, this, "tower", true, 100.0, 100.0, 1, "tower");
+        Tower tower = new Tower(1,0.8,100,100,1, this, "tower", true, 100.0, 100.0, 1, "tower1");
         towers.add(tower);
 
-        Enemy enemy1 = new Enemy(15, 3, 3, this, "enemy", true, 150.0, 150.0, 2, "enemy");
+        Enemy enemy1 = new Enemy(15, 3, 3, this, "enemy", true, 150.0, 150.0, 2, "enemy1");
         enemies.add(enemy1);
-        Enemy enemy2 = new Enemy(15, 10, 10, this, "enemy", true, 80.0, 80.0, 2, "enemy");
+        Enemy enemy2 = new Enemy(15, 10, 10, this, "enemy", true, 80.0, 80.0, 2, "enemy2");
         enemies.add(enemy2);
     }
 
