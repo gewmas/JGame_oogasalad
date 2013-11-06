@@ -11,6 +11,9 @@ import jgame.JGObject;
 
 public class Tower extends JGObject {
 
+    String id;
+    String image; 
+    
     double damage;
     double attackSpeed;
     double range;
@@ -31,16 +34,19 @@ public class Tower extends JGObject {
 
                   Level level,
 
-                  String name,
+                  String id,
                   boolean unique_id,
                   double x,
                   double y,
                   int collisionid,
-                  String gfxname
+                  String image
             ) {
 
-        super(name, unique_id, x, y, collisionid, gfxname);
+        super(id, unique_id, x, y, collisionid, image);
 
+        this.id = id;
+        this.image = image;
+        
         this.damage = damage;
         this.attackSpeed = attackSpeed;
         this.range = range;
