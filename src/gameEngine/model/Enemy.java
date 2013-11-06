@@ -28,12 +28,17 @@ public class Enemy extends JGObject {
                   int collisionid,
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
+        
+        this.gold = gold;
+        this.life = life;
+        this.speed = speed;
+        this.level = level;
     }
     
     @Override
     public void move() {
         //Should walk along the Path
-        x -= speed;
+        x += speed;
         y += 0;
     }
 
@@ -47,7 +52,8 @@ public class Enemy extends JGObject {
             
             if(life <= 0){
                 level.getGameInfo().addGold((int)gold);
-                level.removeEnemy(this);        
+                level.getEnemies().remove(this);
+                
                 remove();
             }
 

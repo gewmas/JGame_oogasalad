@@ -19,7 +19,7 @@ public class Tower extends JGObject {
     double recyclePrice;
 
     Level level;
-    
+
     long prevTime;
 
     public Tower ( 
@@ -48,9 +48,9 @@ public class Tower extends JGObject {
         this.recyclePrice = recyclePrice;
 
         this.level = level;
-        
+
         this.prevTime = System.currentTimeMillis();
-        
+
         level.getGameInfo().loseGold((int)cost);
 
     }
@@ -65,6 +65,7 @@ public class Tower extends JGObject {
             //check distance between this tower and e then shoot bullets
             double dist = Math.sqrt(Math.pow(e.x-x, 2)+Math.pow(e.y-y, 2));
             long deltaTime = (System.currentTimeMillis() - prevTime)/1000; //convert to second
+
             if(dist < range && deltaTime > 1/attackSpeed){
                 new Bullet(e, damage, "bullet", true, x, y, 3, "bullet");
                 prevTime = System.currentTimeMillis();
@@ -78,5 +79,10 @@ public class Tower extends JGObject {
 
     }
 
-
+    public void sell(){
+        level.getGameInfo().addGold((int)recyclePrice);
+        level.getTowers().remove(this);
+        
+        this.remove();
+    }
 }

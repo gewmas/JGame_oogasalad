@@ -35,9 +35,9 @@ public class Level {
         Tower tower = new Tower(1,0.8,100,100,1, this, "tower", true, 100.0, 100.0, 1, "tower");
         towers.add(tower);
 
-        Enemy enemy1 = new Enemy(15, 3, 3, this, "enemy", true, 150.0, 150.0, 2, "enemy");
+        Enemy enemy1 = new Enemy(15, 3, 0.1, this, "enemy", true, 10.0, 150.0, 2, "enemy");
         enemies.add(enemy1);
-        Enemy enemy2 = new Enemy(15, 10, 10, this, "enemy", true, 80.0, 80.0, 2, "enemy");
+        Enemy enemy2 = new Enemy(15, 3, 0.1, this, "enemy", true, 50.0, 80.0, 2, "enemy");
         enemies.add(enemy2);
     }
 
@@ -47,10 +47,6 @@ public class Level {
 
     public List<Enemy> getEnemies () {
         return enemies;
-    }
-
-    public void removeEnemy(Enemy enemy){
-        enemies.remove(enemies.indexOf(enemy));
     }
 
     public GameInfo getGameInfo () {
