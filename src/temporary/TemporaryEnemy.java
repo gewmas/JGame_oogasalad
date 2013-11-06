@@ -1,9 +1,11 @@
 package temporary;
 
+import java.util.HashMap;
 import jgame.JGObject;
+import temporary.buff.Buff;
 
 public class TemporaryEnemy extends JGObject {
-
+    private HashMap<String,Buff> myBuffMap;
     public TemporaryEnemy (String name,
                            boolean unique_id,
                            double x,
@@ -12,6 +14,7 @@ public class TemporaryEnemy extends JGObject {
                            String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
         this.xspeed=10;
+        myBuffMap=new HashMap<String,Buff>();
         
     }
     @Override
@@ -19,8 +22,26 @@ public class TemporaryEnemy extends JGObject {
         super.move();
     }
     
-    public void increaseSpeed(){
-        this.xspeed++;
+    public void addBuff(Buff buff){
+        Buff temp=myBuffMap.get(buff.getName());
+        if(temp!=null){
+            myBuffMap.remove(buff.getName());
+            temp.remove();
+        }
+        myBuffMap.put(buff.getName(), buff);         
     }
+    
+    public void removeBuff(Buff buff){
+        Buff temp=myBuffMap.get(buff.getName());
+        if(temp!=null){
+            myBuffMap.remove(buff.getName());
+            temp.remove();
+        }
+    }
+    
+    public void changeSpeed(int speed){
+        xspeed+=speed;
+    }
+   
 
 }

@@ -1,5 +1,8 @@
 package gameEngine.model;
 
+/*
+ * Author wenxin shi
+ */
 public class GameInfo {
     private int myGold;
     private int myLife;
