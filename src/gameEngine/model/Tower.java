@@ -18,7 +18,7 @@ public class Tower extends JGObject {
     double cost;
     double recyclePrice;
 
-    Model model;
+    Level level;
     
     long prevTime;
 
@@ -29,7 +29,7 @@ public class Tower extends JGObject {
                   double cost,
                   double recyclePrice,
 
-                  Model model,
+                  Level level,
 
                   String name,
                   boolean unique_id,
@@ -47,9 +47,11 @@ public class Tower extends JGObject {
         this.cost = cost;
         this.recyclePrice = recyclePrice;
 
-        this.model = model;
+        this.level = level;
         
         this.prevTime = System.currentTimeMillis();
+        
+        level.getGameInfo().loseGold((int)cost);
 
     }
 
@@ -58,7 +60,7 @@ public class Tower extends JGObject {
         //check the enemies within the shooting range
         // create bullets
 
-        List<Enemy> enemies = model.getEnemies();
+        List<Enemy> enemies = level.getEnemies();
         for(Enemy e : enemies){
             //check distance between this tower and e then shoot bullets
             double dist = Math.sqrt(Math.pow(e.x-x, 2)+Math.pow(e.y-y, 2));
@@ -68,8 +70,6 @@ public class Tower extends JGObject {
                 prevTime = System.currentTimeMillis();
             }
         }
-
-
     }
 
     @Override

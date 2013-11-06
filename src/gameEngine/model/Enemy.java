@@ -13,13 +13,13 @@ public class Enemy extends JGObject {
     double life;
     double speed;
     
-    Model model;
+    Level level;
     
     public Enemy (
                   double gold,
                   double life,
                   double speed,
-                  Model model,
+                  Level level,
                   
                   String name,
                   boolean unique_id,
@@ -28,6 +28,8 @@ public class Enemy extends JGObject {
                   int collisionid,
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
+        
+        this.level = level;
     }
     
     @Override
@@ -42,7 +44,7 @@ public class Enemy extends JGObject {
         //hit the target enemy, destroy that enemy
         System.out.println("Bullet Hit");
         if(obj.colid == 3){
-//            model.removeEnemy(this);
+            level.removeEnemy(this);
             
             obj.remove();
             remove();
