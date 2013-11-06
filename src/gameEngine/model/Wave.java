@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Similar to Rule by @author Jiaran
  *
  */
-public class Level {
+public class Wave {
 
     private GameInfo gameInfo;
     private Parser parser;
@@ -23,7 +23,7 @@ public class Level {
     private List<Tower> towers;
     private List<Enemy> enemies;
 
-    public Level(GameInfo gameInfo, Parser parser){
+    public Wave(GameInfo gameInfo, Parser parser){
         this.gameInfo = gameInfo;
         this.parser = parser;
         towers = new ArrayList<Tower>();

@@ -18,7 +18,7 @@ public class Model {
 //  private Warehouse towerWarehouse;
 //  private Warehouse enemyWarehouse;
     
-    private Level level; // delete later
+    private Wave wave; // delete later
     
     public Model(Parser parser){
         // 1 parse jsonfile

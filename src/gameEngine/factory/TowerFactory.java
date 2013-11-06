@@ -15,6 +15,10 @@ import gameEngine.parser.JSONLibrary.JSONObject;
  */
 public class TowerFactory extends SpriteFactory {
     
+    String name;
+    double damage;
+    
+    
     public TowerFactory(JSONArray jsonArray, Level level) {
         super(jsonArray, level);
     }
