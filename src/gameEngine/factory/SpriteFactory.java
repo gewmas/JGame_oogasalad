@@ -8,23 +8,22 @@ import java.util.HashMap;
 
 public class SpriteFactory implements FactoryInterface {
     
-    private JSONObject jsonObject;
+    private JSONArray jsonArray;
     private Level level;
     private HashMap<String, JSONObject> types;
     
-    public SpriteFactory(JSONObject jsonObject, Level lvl) {
+    public SpriteFactory(JSONArray jsonArray, Level lvl) {
             setTypes(new HashMap<String, JSONObject>());
-            this.jsonObject = jsonObject;
+            this.jsonArray = jsonArray;
             this.setLevel(lvl);
             initialize();
     }
     
     @Override
     public void initialize() {
-        JSONArray enemyList = jsonObject.getJSONArray("enemyType");
-        for (int i = 0; i < enemyList.length(); i++) {
-            JSONObject currEnemy = enemyList.getJSONObject(i);
-            getTypes().put(currEnemy.getString("id"), currEnemy);
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject currSprite = jsonArray.getJSONObject(i);
+            getTypes().put(String.valueOf(currSprite.getInt("id")), currSprite);
         }
     }
     

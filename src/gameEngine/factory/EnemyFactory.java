@@ -14,14 +14,14 @@ import gameEngine.parser.JSONLibrary.JSONObject;
 public class EnemyFactory extends SpriteFactory {
 
     
-    public EnemyFactory(JSONObject jsonObject, Level level) {
-            super(jsonObject, level);
+    public EnemyFactory(JSONArray jsonArray, Level level) {
+            super(jsonArray, level);
     }
     
     public Enemy createFromId(String id)
     {
         JSONObject currEnemy = getTypes().get(id);
-        Enemy enemy = new Enemy(currEnemy.getDouble("gold"), currEnemy.getDouble("life"), currEnemy.getDouble("speed"), getLevel(), id, true, 150.0, 150.0, 2, currEnemy.getString("img"));
+        Enemy enemy = new Enemy(currEnemy.getDouble("gold"), currEnemy.getDouble("life"), currEnemy.getDouble("speed"), getLevel(), id, true, 150.0, 150.0, 2, currEnemy.getString("image"));
         return enemy;
     }
     

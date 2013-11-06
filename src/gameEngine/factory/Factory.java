@@ -13,8 +13,8 @@ public class Factory {
 	public Factory(Parser parser, Level lvl) {
 		this.parser = parser;
 		gridFactory = new GridFactory(this.parser.getJSONObject("map"));
-		towerFactory = new TowerFactory(this.parser.getJSONObject("towerType"), lvl);
-		enemyFactory = new EnemyFactory(this.parser.getJSONObject("enemyType"), lvl);
+		towerFactory = new TowerFactory(this.parser.getJSONArray("towerType"), lvl);
+		enemyFactory = new EnemyFactory(this.parser.getJSONArray("enemyType"), lvl);
 	}
 	
 	public TowerFactory tower() 
