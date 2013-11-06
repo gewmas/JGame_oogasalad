@@ -42,8 +42,7 @@ public class Enemy extends JGObject {
         //hit the target enemy, destroy that enemy
         System.out.println("Bullet Hit");
         if(obj.colid == 3){
-//            model.removeEnemy(this);
-            
+            model.removeEnemy(this);
             obj.remove();
             remove();
                

@@ -13,7 +13,13 @@
 //   file ("-" means none).  Available operations are flip ("x", "y") and
 //   rotate ("r" - right, "l" - left, "u" - 180 degrees).
 
+icons_map		icons16x23.gif		0	0	16	23	0	0
 
-tower		-	0	tower.png		-
-enemy	-	0	player.png	-
+tower1		-	0	tower.png		-
+tower2				tr	0	icons_map	1		-
+
+
+enemy1	-	0	player.png	-
+enemy2			cu	0	icons_map	2		-
+enemy3				ja	0	icons_map	0		-
 bullet	-	0	bomb.png	-
