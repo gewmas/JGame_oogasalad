@@ -11,12 +11,16 @@ public class TemporaryEnemy extends JGObject {
                            int collisionid,
                            String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
-        this.xspeed=1;
+        this.xspeed=10;
         
     }
     @Override
     public void move(){
-        
+        super.move();
+    }
+    
+    public void increaseSpeed(){
+        this.xspeed++;
     }
 
 }
