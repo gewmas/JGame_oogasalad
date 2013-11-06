@@ -21,9 +21,9 @@ public class Factory {
 	
 	public Factory(Parser parser, Level lvl) {
 		this.parser = parser;
-		towerFactory = new TowerFactory(this.parser.getJSONObject("towerType"), lvl);
-		enemyFactory = new EnemyFactory(this.parser.getJSONObject("enemyType"), lvl);
 		gridFactory = new GridFactory(this.parser);
+		towerFactory = new TowerFactory(this.parser.getJSONArray("towerType"), lvl);
+		enemyFactory = new EnemyFactory(this.parser.getJSONArray("enemyType"), lvl);
 	}
 	
 	public TowerFactory tower() 

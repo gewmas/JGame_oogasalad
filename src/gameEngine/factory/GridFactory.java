@@ -49,6 +49,7 @@ public class GridFactory implements FactoryInterface{
 	            if(pathCoordinates.contains(new Coordinate(k, m))) {
 	                
 	            }
+
 	        }
 	        currentYOffset = currentYOffset + height / 15;
 	    }

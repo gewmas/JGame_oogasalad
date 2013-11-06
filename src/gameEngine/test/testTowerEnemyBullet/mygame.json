@@ -23,7 +23,7 @@
 
 "towerType": [
 	{
-	 "id": "1",
+	 "id": 1,
 	 "image": "tower1",
 	 "damage": 1,
 	 "attackSpeed": 0.8,
