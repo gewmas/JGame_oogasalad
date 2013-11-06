@@ -3,13 +3,17 @@ package gameEngine.view;
 import jgame.JGColor;
 import jgame.platform.JGEngine;
 
-public class Game extends JGEngine  {
-    
 
-   
+/**
+ * @author lalitamaraj
+ *         Displays the Game setting using JGEngine to facilitate
+ *         graphics rendering
+ */
+public class Game extends JGEngine {
+
     public Game () {
-        initEngineComponent(600,600);
-       
+        initEngineComponent(600, 600);
+
     }
 
     @Override
@@ -21,9 +25,7 @@ public class Game extends JGEngine  {
     @Override
     public void initGame () {
         setFrameRate(30, 2);
-    
 
-        
     }
 
     @Override
@@ -35,10 +37,6 @@ public class Game extends JGEngine  {
     public void paintFrame () {
         super.paintFrame();
 
-      
-
     }
 
-  
 }
-
