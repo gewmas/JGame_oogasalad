@@ -1,7 +1,11 @@
 package gameEngine.model;
 
+import gameEngine.factory.Factory;
+import gameEngine.factory.TowerFactory;
+import gameEngine.parser.Parser;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * 
@@ -14,13 +18,14 @@ import java.util.List;
 public class Level {
 
     private GameInfo gameInfo;
+    private Parser parser;
 
     private List<Tower> towers;
     private List<Enemy> enemies;
 
-    public Level(GameInfo gameInfo){
+    public Level(GameInfo gameInfo, Parser parser){
         this.gameInfo = gameInfo;
-
+        this.parser = parser;
         towers = new ArrayList<Tower>();
         enemies = new ArrayList<Enemy>();
 
@@ -32,13 +37,15 @@ public class Level {
      * Test just one level
      */
     public void initGameLevelOne(){
-        Tower tower = new Tower(1,0.8,100,100,1, this, "tower", true, 100.0, 100.0, 1, "tower1");
+        
+        Factory factory = new Factory(parser, this);
+
+        Tower tower = factory.tower().createFromId("1");
         towers.add(tower);
 
-        Enemy enemy1 = new Enemy(15, 3, 0.1, this, "enemy", true, 10.0, 150.0, 2, "enemy1");
+        Enemy enemy1 = factory.enemy().createFromId("1");
         enemies.add(enemy1);
-        Enemy enemy2 = new Enemy(15, 3, 0.1, this, "enemy", true, 50.0, 80.0, 2, "enemy2");
-
+        Enemy enemy2 = factory.enemy().createFromId("2");
         enemies.add(enemy2);
     }
 

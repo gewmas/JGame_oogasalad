@@ -1,5 +1,6 @@
 package gameEngine.model;
 
+import gameEngine.parser.Parser;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,10 @@ public class Model {
     private GameInfo gameInfo;
     private Level level;
     
-    public Model(){
+    public Model(Parser parser){
+        
         gameInfo = new GameInfo(1000, 1000, 1000);
-        level = new Level(gameInfo);
+        level = new Level(gameInfo, parser);
 
     }
 

@@ -1,7 +1,12 @@
 package gameEngine.test.testTowerEnemyBullet;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import org.junit.Test;
+import gameEngine.factory.Factory;
 import gameEngine.model.Model;
+import gameEngine.parser.Parser;
 import jgame.JGColor;
 import jgame.platform.JGEngine;
 
@@ -37,8 +42,18 @@ public class testTowerEnemyBullet extends JGEngine {
     public void initGame () {
         defineMedia("mygame.tbl");
         setFrameRate(60, 2);
-
-        new Model();
+        
+        Scanner scanner;
+        try {
+            scanner = new Scanner(new File(System.getProperty("user.dir") + "/gameEngine/test/testTowerEnemyBullet/mygame.json"));
+            Parser parser = new Parser(scanner);
+            new Model(parser);
+        }
+        catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
     }
 
     @Override
