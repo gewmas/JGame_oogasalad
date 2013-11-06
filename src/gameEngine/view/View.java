@@ -1,7 +1,9 @@
 package gameEngine.view;
 
+import java.awt.BorderLayout;
 import java.util.ResourceBundle;
 import gameEngine.view.initialization.InitializationFrame;
+import gameEngine.view.store.TowerStorePanel;
 import gameEngine.controller.Controller;
 
 
@@ -18,9 +20,11 @@ public class View extends Frame {
         super();
 
         canvasPanel = new CanvasPanel();
-        this.add(canvasPanel);
+        this.add(canvasPanel,BorderLayout.WEST);
+        storePanel = new TowerStorePanel();
+        this.add(storePanel,BorderLayout.EAST);
         new InitializationFrame(controller, myResources);
-
+        
     }
 
     public void showGame () {
