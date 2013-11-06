@@ -28,8 +28,6 @@ public class Enemy extends JGObject {
                   int collisionid,
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
-        
-        this.level = level;
     }
     
     @Override
