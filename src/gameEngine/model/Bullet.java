@@ -46,4 +46,8 @@ public class Bullet extends JGObject {
     public void hit(JGObject obj) {
         
     }
+
+    public double getDamage () {
+        return damage;
+    }
 }

@@ -32,9 +32,8 @@ public class Enemy extends JGObject {
     
     @Override
     public void move() {
-        //For test
-        x -= 0.1;
-        y += 0.1;
+        //Should walk along the Path
+        x -= speed;
     }
 
     @Override
@@ -42,10 +41,14 @@ public class Enemy extends JGObject {
         //hit the target enemy, destroy that enemy
         System.out.println("Bullet Hit");
         if(obj.colid == 3){
-            model.removeEnemy(this);
+            life -= ((Bullet)obj).getDamage();
             obj.remove();
-            remove();
-               
+            
+            if(life <= 0){
+                level.getGameInfo().addGold((int)gold);
+                level.removeEnemy(this);        
+                remove();
+            }
 
         }
     }
