@@ -2,6 +2,7 @@ package gameEngine.factory;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import jgame.platform.JGEngine;
 import gameEngine.model.Grid;
 import gameEngine.parser.Parser;
@@ -18,15 +19,17 @@ import jgame.platform.*;
  */
 public class GridFactory implements FactoryInterface{
 	private Parser parser;
+	private ArrayList<ArrayList<Grid>> gridList;
 	public GridFactory(Parser parser) {
 		this.parser = parser;
-		initialize();
+		gridList = new ArrayList<ArrayList<Grid>>();
 	}
 	
 	@Override
 	public void initialize() {
-	    int height = Integer.parseInt(parser.getValue("height"));
-	    int width = Integer.parseInt(parser.getValue("width"));
+	    int height = Integer.parseInt(parser.getValue("heightOfWindow"));
+	    int width = Integer.parseInt(parser.getValue("widthOfWindow"));
+	    int tilesPerRow = Integer.parseInt(parser.getValue("tilesPerRow"));
 	    JSONObject map = parser.getJSONObject("map");
 	    String pathImage = map.getString("pathImage");
 	    JSONArray pathList = map.getJSONArray("path");
@@ -36,26 +39,25 @@ public class GridFactory implements FactoryInterface{
 	        pathCoordinates.add(new Coordinate(coord.getInt("x"), coord.getInt("y")));
 	    }
 	   
-	    ArrayList<ArrayList<Grid>> gridList = new ArrayList<ArrayList<Grid>>();
-	    //assuming that the grid is 15 x 15...WHAT IS THE GRID SIZE??
-	    int currentYOffset = 0;
-	    
+	    int currentYOffset = 0; 
 	    for(int k=0; k<15; k++) {
 	        int currentXOffset = 0;
 	        gridList.add(new ArrayList<Grid>());
 	        for(int m=0; m<15; m++) {
-	            gridList.get(k).add(new Grid("grid", false, currentXOffset, currentYOffset, 8, "tile", currentXOffset, currentYOffset, (int)(width / 15), (int)(height / 15)));
+	            Grid grid = new Grid("grid", false, currentXOffset, currentYOffset, 8, "tile", currentXOffset, currentYOffset, (int)(width / 15), (int)(height / 15));
+	            gridList.get(k).add(grid);
 	            currentXOffset = currentXOffset + width / 15;
 	            if(pathCoordinates.contains(new Coordinate(k, m))) {
-	                
+	                grid.setImage(pathImage);
+	                grid.setOnPath();
 	            }
 
 	        }
 	        currentYOffset = currentYOffset + height / 15;
-	    }
-		
+	    }	    
 	}
 	
-	
-
+        public ArrayList<ArrayList<Grid>> getGridList() {
+            return gridList;
+        }
 }

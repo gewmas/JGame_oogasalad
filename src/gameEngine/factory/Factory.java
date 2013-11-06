@@ -26,6 +26,12 @@ public class Factory {
 		enemyFactory = new EnemyFactory(this.parser.getJSONArray("enemyType"), lvl);
 	}
 	
+	public void initializeAll() {
+	    towerFactory.initialize();
+	    enemyFactory.initialize();
+	    gridFactory.initialize();
+	}
+	
 	public TowerFactory tower() 
 	{
 	    return towerFactory;
@@ -35,5 +41,9 @@ public class Factory {
         {
             return enemyFactory;
         }
+	
+	public GridFactory grid() {
+	    return gridFactory;
+	}
 	
 }

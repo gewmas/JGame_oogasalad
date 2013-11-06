@@ -4,6 +4,9 @@
 "gold" : 200,
 "numberOfLives" : 100,
 "levels": 5,
+"widthOfWindow": 600,
+"heightOfWindow": 400,
+"tilesPerRow": 15,
 "difficultyScale": 1.5,
 "map":
 {
