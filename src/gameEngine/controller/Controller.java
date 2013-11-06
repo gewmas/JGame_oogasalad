@@ -17,6 +17,7 @@ public class Controller {
      * public void setMoney(int money){
      * 
      * }
+     * 
      * public int getMoney(){
      * 
      * }
