@@ -13,13 +13,13 @@ public class Enemy extends JGObject {
     double life;
     double speed;
     
-    Model model;
+    Level level;
     
     public Enemy (
                   double gold,
                   double life,
                   double speed,
-                  Model model,
+                  Level level,
                   
                   String name,
                   boolean unique_id,
