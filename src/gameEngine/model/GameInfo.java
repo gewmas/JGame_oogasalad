@@ -83,7 +83,15 @@ public class GameInfo {
     public void removeTowerInfo (TowerInfo tower) {
         myTowerInfo.remove(tower);
     }
+    
+    public void removeAllTowerInfo(){
+        myTowerInfo=new ArrayList<TowerInfo>();
+    }
 
+    public void removeAllPathInfo(){
+        myPathInfo = new ArrayList<PathInfo>();
+    }
+    
     public List<TowerInfo> getTowerInfo () {
         return myTowerInfo;
     }
