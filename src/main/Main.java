@@ -1,9 +1,10 @@
 package main;
+import gameEngine.controller.Controller;
 
-import gameEngine.view.View;
 
 public class Main {
     public static void main (String[] args) {
-        new View();
+        new Controller();
+
     }
 }

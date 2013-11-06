@@ -4,7 +4,13 @@ import java.util.List;
 import java.util.Scanner;
 
 import gameEngine.parser.JSONLibrary.*;
-
+/**
+ * 
+ * @author Harris
+ * 
+ * Parses a JSON file
+ *
+ */
 public class Parser {
 	private Scanner scanner;
 	private JSONObject jsonObject;
@@ -24,7 +30,13 @@ public class Parser {
 	public String getValue(String key) {
 		return (String) jsonObject.get(key);
 	}
+
 	public JSONObject getJSONObject(String key) {
 		return jsonObject.getJSONObject(key);
 	}
+	
+	public JSONArray getJSONArray(String key) {
+            return jsonObject.getJSONArray(key);
+    }
+
 }
