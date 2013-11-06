@@ -18,6 +18,7 @@ public class Model {
     public Model(){
         gameInfo = new GameInfo(1000, 1000, 1000);
         level = new Level(gameInfo);
+
     }
 
 
