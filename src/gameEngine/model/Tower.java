@@ -10,9 +10,15 @@ import jgame.JGObject;
  */
 
 public class Tower extends JGObject {
-
+    /**
+     * Game Designer
+     */
+    
     String id;
     String image; 
+    
+    double originalX;
+    double originalY;
     
     double damage;
     double attackSpeed;
@@ -46,6 +52,9 @@ public class Tower extends JGObject {
 
         this.id = id;
         this.image = image;
+        
+        this.originalX = x;
+        this.originalY = y;
         
         this.damage = damage;
         this.attackSpeed = attackSpeed;
