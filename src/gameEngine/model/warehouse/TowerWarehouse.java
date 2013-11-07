@@ -10,10 +10,8 @@ import java.util.Map;
 
 /**
  * 
- * @author Yuhua
- *
- * TowerWarehouse store all possible TowerFactory that can create different kind of tower
- * View can look at this TowerWarehouse for all types of Tower
+ * @author Jiaran
+ * similar to tower warehouse. Using to create all types of enemy using enemy id. 
  * 
  */
 
@@ -26,7 +24,7 @@ public class TowerWarehouse implements Warehouse{
         jsonArray = parser.getJSONArray("towerType");
         towers = new HashMap<String,TowerFactory>();
         
-        // loop through all kinds of towers
+        // loop through all kinds 
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject currTower = jsonArray.getJSONObject(i);
             String name = currTower.getString("id");

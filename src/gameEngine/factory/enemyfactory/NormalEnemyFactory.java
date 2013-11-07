@@ -33,7 +33,7 @@ public class NormalEnemyFactory implements EnemyFactory{
 
     @Override
     public Enemy create() {
-        return new Enemy(gold, life, speed, id, true, 400, 400, Constant.ENEMY_CID, image);
+        return new Enemy(gold, life, speed, id, true, 50, 120, Constant.ENEMY_CID, image);
         
     }
 

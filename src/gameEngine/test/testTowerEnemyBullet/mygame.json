@@ -40,14 +40,14 @@
 
 "enemyType":[
 {
-	"id": 1,
+	"id": "1",
 	"gold": 5,
 	"image": "enemy1",
 	"life": 2,
 	"speed": 0.1,
 }, 
 {
-	"id": 2,
+	"id": "2",
 	"gold": 10,
 	"image": "enemy2",
 	"life": 3,

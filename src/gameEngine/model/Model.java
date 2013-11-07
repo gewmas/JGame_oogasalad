@@ -23,7 +23,7 @@ public class Model {
     private Parser parser;
     private GameInfo gameInfo;
     private Warehouse towerWarehouse;
-    private Warehouse enemyWarehouse;
+    private EnemyWarehouse enemyWarehouse;
 
 //    private Rule rule; 
 
@@ -46,7 +46,12 @@ public class Model {
 
         // 3 create gameInfo
         gameInfo = new GameInfo(1000, 1000, 1000, null);
-
+        //finally all rules and waves should be created according to JSon
+        Rule r= new Rule();
+        
+        Wave w= new Wave("1", 5, 1000, 10000, enemyWarehouse);
+        r.addWave(w);
+        r.ruleStart();
         // 4 create path
         
         // 5 create rule - how each waves created, ruleStart, ruleStop

@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import org.junit.Test;
+import gameEngine.Constant.Constant;
 import gameEngine.factory.Factory;
 import gameEngine.model.Model;
+import gameEngine.model.enemy.Enemy;
 import gameEngine.parser.Parser;
 import jgame.JGColor;
 import jgame.JGPoint;
@@ -50,15 +52,15 @@ public class testTowerEnemyBullet extends JGEngine {
         setFrameRate(60, 2);
         
         new Model();
-        
+        //new Enemy(0, 1, 0.1, "5", false, 100, 100, Constant.ENEMY_CID, "enemy1");
     }
 
     @Override
     public void doFrame () {
         moveObjects();
 
-        checkCollision(3, 2);
-        checkCollision(2, 3);
+        checkCollision(Constant.BULLET_CID, Constant.ENEMY_CID);
+        checkCollision(Constant.ENEMY_CID, Constant.BULLET_CID);
     }
 
     @Override

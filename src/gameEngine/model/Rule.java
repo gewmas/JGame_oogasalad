@@ -17,15 +17,20 @@ public class Rule {
     private int myCurrentWaveIndex=0;
     private Timer myTimer = new Timer();
     //user can set how much time for the user to get familiar with the game. 
-    private long myInitialDelay=2000;
+    private long myInitialDelayInMilliseconds=2000;
+    
+    public Rule(long delay){
+        myInitialDelayInMilliseconds=delay;
+    }
     public Rule(){
         
     }
+
     public void addWave(Wave wave){
         Waves.add(wave);
     }
     public void ruleStart(){
-        myTimer.schedule(new StartWave(),myInitialDelay);
+        myTimer.schedule(new StartWave(),myInitialDelayInMilliseconds);
     }
     class StartWave extends TimerTask{
 

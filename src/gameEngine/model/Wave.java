@@ -1,9 +1,9 @@
 package gameEngine.model;
 
+import gameEngine.model.warehouse.EnemyWarehouse;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
-import temporary.TemporaryEnemyFactory;
 
 /**
  * @author Jiaran
@@ -17,11 +17,13 @@ public class Wave implements ActionListener {
     private long myIntervalInMilliSecond=10000;
     //for test. Real Enemy Factory needs to be implemented.This wave can 
     //require different factory by myEnemyType
-    private TemporaryEnemyFactory f = new TemporaryEnemyFactory();
-    public Wave(String type,int num,int period){
+    private EnemyWarehouse myEnemyWarehouse = null;
+    public Wave(String type,int num,int period,long interval,EnemyWarehouse ew){
         mySpawnPeriodInMilliSecond=period;
         myEnemyType=type;
         myNumberOfEnemies=num;
+        myEnemyWarehouse= ew;
+        myIntervalInMilliSecond=interval;
         myTimer= new Timer(mySpawnPeriodInMilliSecond, this);
         
     }
@@ -34,7 +36,10 @@ public class Wave implements ActionListener {
            
        }
        else{
-           f.create();
+           if(myEnemyWarehouse==null)
+               //must be something is wrong
+               return;
+           myEnemyWarehouse.create(myEnemyType);
            myNumberOfEnemies--;
        }
         
