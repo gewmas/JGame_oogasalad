@@ -1,16 +1,11 @@
 package gameEngine.factory.enemyfactory;
 
-import java.util.HashMap;
-import gameEngine.model.Enemy;
-import gameEngine.model.Model;
-import gameEngine.model.tower.Tower;
-import gameEngine.parser.Parser;
-import gameEngine.parser.JSONLibrary.JSONArray;
-import gameEngine.parser.JSONLibrary.JSONObject;
+import gameEngine.model.enemy.Enemy;
+
 
 /**
  * @Author Fabio Berger
  */
 public interface EnemyFactory {
-    public Enemy create();
+    public Enemy create ();
 }

@@ -1,5 +1,6 @@
-package gameEngine.model;
+package gameEngine.model.bullet;
 
+import gameEngine.model.enemy.Enemy;
 import jgame.JGObject;
 
 /**

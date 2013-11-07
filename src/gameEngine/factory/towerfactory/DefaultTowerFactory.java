@@ -1,10 +1,7 @@
 package gameEngine.factory.towerfactory;
 
-import java.util.HashMap;
-import gameEngine.model.Enemy;
 import gameEngine.model.tower.Tower;
 import gameEngine.model.tower.DefaultTower;
-import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 /**
