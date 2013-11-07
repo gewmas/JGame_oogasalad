@@ -45,7 +45,7 @@ public class Model {
         enemyWarehouse = new EnemyWarehouse(parser);
 
         // 3 create gameInfo
-        gameInfo = new GameInfo(1000, 1000, 1000);
+        gameInfo = new GameInfo(1000, 1000, 1000, null);
 
         // 4 create path
         

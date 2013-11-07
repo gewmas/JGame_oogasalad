@@ -1,6 +1,6 @@
 package gameEngine.factory.towerfactory;
 
-import gameEngine.model.Tower;
+import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 public class FancyTowerFactory implements TowerFactory{
@@ -10,7 +10,7 @@ public class FancyTowerFactory implements TowerFactory{
     }
 
     @Override
-    public Tower createTower () {
+    public Tower create() {
         return null;
     }
     

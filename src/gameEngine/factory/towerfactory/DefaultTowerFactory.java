@@ -42,7 +42,7 @@ public class DefaultTowerFactory implements TowerFactory{
     }
 
     @Override
-    public Tower createTower () {
+    public Tower create() {
         Tower tower = (Tower) new DefaultTower(damage, attackSpeed, range, cost, recyclePrice, id, true, x, y, 1, image);
         return tower;
     }

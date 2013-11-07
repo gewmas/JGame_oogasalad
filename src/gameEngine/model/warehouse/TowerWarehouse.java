@@ -43,7 +43,7 @@ public class TowerWarehouse implements Warehouse{
     
     public void create(String name){
         TowerFactory towerFactory = towers.get(name);
-        towerFactory.createTower();
+        towerFactory.create();
     }
     
 }

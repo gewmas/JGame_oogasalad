@@ -16,31 +16,17 @@ public class Factory {
     
 	private Parser parser;
 	private GridFactory gridFactory;
-//	private TowerFactory towerFactory;
-//	private EnemyFactory enemyFactory;
 	
 	public Factory(Parser parser) {
 		this.parser = parser;
 		gridFactory = new GridFactory(this.parser);
-//		towerFactory = new TowerFactory(this.parser.getJSONArray("towerType"));
-//		enemyFactory = new EnemyFactory(this.parser.getJSONArray("enemyType"));
 	}
 	
 	public void initializeAll() {
-//	    towerFactory.initialize();
-//	    enemyFactory.initialize();
 	    gridFactory.initialize();
 	}
 	
-	public DefaultTowerFactory tower() 
-	{
-	    return towerFactory;
-	}
-	
-	public EnemyFactory enemy() 
-        {
-            return enemyFactory;
-        }
+
 	
 	public GridFactory grid() {
 	    return gridFactory;
