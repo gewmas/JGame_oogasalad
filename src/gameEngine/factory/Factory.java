@@ -22,6 +22,12 @@ public class Factory {
 		gridFactory = new GridFactory(this.parser);
 	}
 	
+	public Factory(Parser parser) {
+	    //Note, this was only used to test the GridFactory class
+	    this.parser = parser;
+	    gridFactory = new GridFactory(this.parser);
+	}
+	
 	public void initializeAll() {
 	    gridFactory.initialize();
 	}
