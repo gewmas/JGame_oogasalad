@@ -27,8 +27,12 @@ public class Parser {
 		return returnString;
 	}
 	
-	public String getValue(String key) {
+	public String getString(String key) {
 		return (String) jsonObject.get(key);
+	}
+	
+	public int getInt(String key) {
+	    return jsonObject.getInt(key);
 	}
 
 	public JSONObject getJSONObject(String key) {
