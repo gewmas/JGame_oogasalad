@@ -1,7 +1,7 @@
 package gameEngine.model;
 
 import gameEngine.factory.Factory;
-import gameEngine.factory.TowerFactory;
+import gameEngine.factory.DefaultTowerFactory;
 import gameEngine.parser.Parser;
 import java.util.ArrayList;
 import java.util.List;

@@ -26,8 +26,10 @@
 
 "towerType": [
 	{
-	 "id": 1,
+	 "id": "DefaultTower",
 	 "image": "tower1",
+	 "x" : 100,
+	 "y" : 100,
 	 "damage": 1,
 	 "attackSpeed": 0.8,
 	 "range": 100,	

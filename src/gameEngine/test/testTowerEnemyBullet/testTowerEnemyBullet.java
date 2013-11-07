@@ -8,6 +8,7 @@ import gameEngine.factory.Factory;
 import gameEngine.model.Model;
 import gameEngine.parser.Parser;
 import jgame.JGColor;
+import jgame.JGPoint;
 import jgame.platform.JGEngine;
 
 
@@ -20,10 +21,15 @@ import jgame.platform.JGEngine;
  */
 public class testTowerEnemyBullet extends JGEngine {
 
-    @Test
-    public void test(){
-        
-    }
+//    @Test
+//    public void test(){
+//        
+//    }
+    
+//    public static void main(String[] args) {new testTowerEnemyBullet();}
+//
+//    public testTowerEnemyBullet(){initEngineApplet(); }
+//    public testTowerEnemyBullet(JGPoint size){initEngine(size.x,size.y); }
     
     @Override
     public void initCanvas () {
@@ -43,16 +49,7 @@ public class testTowerEnemyBullet extends JGEngine {
         defineMedia("mygame.tbl");
         setFrameRate(60, 2);
         
-        Scanner scanner;
-        try {
-            scanner = new Scanner(new File(System.getProperty("user.dir") + "/gameEngine/test/testTowerEnemyBullet/mygame.json"));
-            Parser parser = new Parser(scanner);
-            new Model(parser);
-        }
-        catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        new Model();
         
     }
 
