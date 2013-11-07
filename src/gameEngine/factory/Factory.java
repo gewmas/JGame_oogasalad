@@ -1,6 +1,5 @@
 package gameEngine.factory;
 
-import gameEngine.model.Level;
 import gameEngine.parser.Parser;
 
 public class Factory {
@@ -17,31 +16,23 @@ public class Factory {
     
 	private Parser parser;
 	private GridFactory gridFactory;
-	private TowerFactory towerFactory;
-	private EnemyFactory enemyFactory;
 	
-	public Factory(Parser parser, Level lvl) {
+	public Factory(Parser parser) {
 		this.parser = parser;
 		gridFactory = new GridFactory(this.parser);
-		towerFactory = new TowerFactory(this.parser.getJSONArray("towerType"), lvl);
-		enemyFactory = new EnemyFactory(this.parser.getJSONArray("enemyType"), lvl);
+	}
+	
+	public Factory(Parser parser) {
+	    //Note, this was only used to test the GridFactory class
+	    this.parser = parser;
+	    gridFactory = new GridFactory(this.parser);
 	}
 	
 	public void initializeAll() {
-	    towerFactory.initialize();
-	    enemyFactory.initialize();
 	    gridFactory.initialize();
 	}
 	
-	public TowerFactory tower() 
-	{
-	    return towerFactory;
-	}
-	
-	public EnemyFactory enemy() 
-        {
-            return enemyFactory;
-        }
+
 	
 	public GridFactory grid() {
 	    return gridFactory;

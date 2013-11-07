@@ -21,13 +21,17 @@
                { "x": 6, "y": 2 },
                { "x": 7, "y": 2 },
                { "x": 8, "y": 2 }
-           ]
+           ],
+        "startPath": {"x":1, "y":2},
+        "endPath": { "x": 8, "y": 2 }
 },
 
 "towerType": [
 	{
-	 "id": 1,
+	 "id": "DefaultTower",
 	 "image": "tower1",
+	 "x" : 100,
+	 "y" : 100,
 	 "damage": 1,
 	 "attackSpeed": 0.8,
 	 "range": 100,	
@@ -38,14 +42,14 @@
 
 "enemyType":[
 {
-	"id": 1,
+	"id": "1",
 	"gold": 5,
 	"image": "enemy1",
 	"life": 2,
 	"speed": 0.1,
 }, 
 {
-	"id": 2,
+	"id": "2",
 	"gold": 10,
 	"image": "enemy2",
 	"life": 3,

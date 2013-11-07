@@ -31,14 +31,14 @@ public class TestParser {
 	
 	@Test
 	public void testGetNameOfGame() {
-		String getNameOfGame = parser.getValue("name");
+		String getNameOfGame = parser.getString("name");
 		assertEquals(getNameOfGame, "Tower Destruction II");
 	}
 	
 	@Test
 	public void testGetNonexistenAttribute() {
 		try {
-			String getNameOfGame = parser.getValue("totalGold");
+			String getNameOfGame = parser.getString("totalGold");
 			assert(false);
 		} catch (JSONException e) {
 			assert(true);

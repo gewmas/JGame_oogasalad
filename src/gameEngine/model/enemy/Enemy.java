@@ -1,4 +1,4 @@
-package gameEngine.model;
+package gameEngine.model.enemy;
 
 import jgame.JGObject;
 
@@ -16,13 +16,11 @@ public class Enemy extends JGObject {
     double life;
     double speed;
     
-    Level level;
     
     public Enemy (
                   double gold,
                   double life,
                   double speed,
-                  Level level,
                   
                   String id,
                   boolean unique_id,
@@ -38,7 +36,6 @@ public class Enemy extends JGObject {
         this.gold = gold;
         this.life = life;
         this.speed = speed;
-        this.level = level;
     }
     
     @Override
@@ -53,12 +50,12 @@ public class Enemy extends JGObject {
         //hit the target enemy, destroy that enemy
         System.out.println("Bullet Hit");
         if(obj.colid == 3){
-            life -= ((Bullet)obj).getDamage();
+//            life -= ((Bullet)obj).getDamage();
             obj.remove();
             
             if(life <= 0){
-                level.getGameInfo().addGold((int)gold);
-                level.getEnemies().remove(this);
+//                level.getGameInfo().addGold((int)gold);
+//                level.getEnemies().remove(this);
                 
                 remove();
             }
