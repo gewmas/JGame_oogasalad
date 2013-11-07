@@ -1,14 +1,7 @@
 package gameEngine.test.testTowerEnemyBullet;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import org.junit.Test;
 import gameEngine.Constant.Constant;
-import gameEngine.factory.Factory;
 import gameEngine.model.Model;
-import gameEngine.model.enemy.Enemy;
-import gameEngine.parser.Parser;
 import jgame.JGColor;
 import jgame.JGPoint;
 import jgame.platform.JGEngine;
@@ -33,6 +26,16 @@ public class testTowerEnemyBullet extends JGEngine {
 //    public testTowerEnemyBullet(){initEngineApplet(); }
 //    public testTowerEnemyBullet(JGPoint size){initEngine(size.x,size.y); }
     
+    // Jiaran edited. Using this, one can run it as application instead of applet.
+    public static void main (String[] args) {
+        new testTowerEnemyBullet(new JGPoint(960, 700));
+    }
+    
+    /** Application constructor. */
+    public testTowerEnemyBullet (JGPoint size) {
+        initEngine(size.x, size.y);
+    }
+
     @Override
     public void initCanvas () {
         setCanvasSettings(

@@ -31,7 +31,7 @@ public class Model {
         // 1 parse jsonfile
 
         try {
-            scanner = new Scanner(new File(System.getProperty("user.dir") + "/gameEngine/test/testTowerEnemyBullet/mygame.json"));
+            scanner = new Scanner(new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
