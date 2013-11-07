@@ -1,10 +1,12 @@
 package gameEngine.model;
 
+
 import java.util.ArrayList;
 import java.util.List;
 /*
- * wenxin shi
+ * Author wenxin shi
  */
+
 
 public class GameInfo {
     private int myGold;
