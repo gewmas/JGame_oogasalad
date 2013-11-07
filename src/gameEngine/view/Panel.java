@@ -1,5 +1,6 @@
 package gameEngine.view;
 
+import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 
@@ -9,5 +10,7 @@ import javax.swing.JPanel;
  *         of the GUI.
  */
 public class Panel extends JPanel {
-
+    public Panel(){
+        super(new BorderLayout());
+    }
 }

@@ -2,7 +2,7 @@ package gameEngine.view;
 
 import java.awt.BorderLayout;
 import java.util.ResourceBundle;
-import gameEngine.view.initialization.InitializationFrame;
+import javax.swing.JFrame;
 import gameEngine.view.store.TowerStorePanel;
 import gameEngine.controller.Controller;
 
@@ -18,13 +18,13 @@ public class View extends Frame {
 
     public View (Controller controller) {
         super();
-
+       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         canvasPanel = new CanvasPanel();
         this.add(canvasPanel,BorderLayout.WEST);
         storePanel = new TowerStorePanel();
         this.add(storePanel,BorderLayout.EAST);
-        new InitializationFrame(controller, myResources);
-        
+//        new InitializationFrame(controller, myResources);
+        showGame ();
     }
 
     public void showGame () {
