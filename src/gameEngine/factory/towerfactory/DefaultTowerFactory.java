@@ -1,5 +1,6 @@
 package gameEngine.factory.towerfactory;
 
+import gameEngine.Constant.Constant;
 import gameEngine.model.tower.Tower;
 import gameEngine.model.tower.DefaultTower;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -40,7 +41,7 @@ public class DefaultTowerFactory implements TowerFactory{
 
     @Override
     public Tower create() {
-        Tower tower = (Tower) new DefaultTower(damage, attackSpeed, range, cost, recyclePrice, id, true, x, y, 1, image);
+        Tower tower = (Tower) new DefaultTower(damage, attackSpeed, range, cost, recyclePrice, id, true, x, y, Constant.TOWER_CID, image);
         return tower;
     }
 
