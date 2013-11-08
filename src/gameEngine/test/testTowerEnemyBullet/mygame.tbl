@@ -7,7 +7,7 @@
 // initialisation.
 // Note the "-", 0, and "-" field.  For an image:
 // * the second field is the tile name by which it is known (we
-//   use "-" here to indicate "don't care".  
+//   use "-" here to indicate "don't care".
 // * the third field is the tile cid of the tile (we just fill in 0)
 // * the fifth field is the graphical operation to perform on the loaded image
 //   file ("-" means none).  Available operations are flip ("x", "y") and

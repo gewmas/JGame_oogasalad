@@ -53,7 +53,7 @@ public class GridFactory implements FactoryInterface{
 	        int currentXOffset = 0;
 	        gridList.add(new ArrayList<Grid>());
 	        for(int m=0; m<15; m++) {
-	            Grid grid = new Grid("grid", false, currentXOffset, currentYOffset, 8, "block", currentXOffset, currentYOffset, (int)(width / 15), (int)(height / 15));
+	            Grid grid = new Grid("grid", false, currentXOffset, currentYOffset, 8, "block1", currentXOffset, currentYOffset, (int)(width / 15), (int)(height / 15));
 	            gridList.get(k).add(grid);
 	            currentXOffset = currentXOffset + width / 15;
 	            if(pathCoordinates.keySet().contains(new Coordinate(k, m))) {
