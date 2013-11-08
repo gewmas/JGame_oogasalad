@@ -25,5 +25,6 @@ public class Grid extends JGObject {
     public boolean isOnPath() {
         return onPath;
     }
+    //know the x,y position, and getters for that
 
 }

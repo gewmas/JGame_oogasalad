@@ -2,6 +2,7 @@ package gameEngine.test;
 
 import static org.junit.Assert.*;
 import gameEngine.factory.Factory;
+import gameEngine.model.Model;
 import gameEngine.parser.Parser;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,8 +46,9 @@ public class TestGrid extends JGEngine{
 
     @Override
     public void initGame () {
-//        defineMedia("mygame.tbl");
+        defineMedia("mygame.tbl");
         setFrameRate(60, 2);
+//        new Model();
 
         try {
             File file = new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json");
