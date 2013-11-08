@@ -10,7 +10,7 @@ import javax.swing.JPanel;
  *         of the GUI.
  */
 public class Panel extends JPanel {
-    public Panel(){
+    public Panel () {
         super(new BorderLayout());
     }
 }

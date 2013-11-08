@@ -1,11 +1,9 @@
 package gameEngine.view;
 
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.Icon;
 import javax.swing.JButton;
-
 
 
 /**
@@ -15,20 +13,24 @@ import javax.swing.JButton;
  */
 public class Button extends JButton {
 
-    /**Constructor to define button label
+    /**
+     * Constructor to define button label
+     * 
      * @param label Button display label
      */
     public Button (String label) {
         super(label);
         addButtonMouseListener();
     }
-    
-    /**Constructor to define an image on button
+
+    /**
+     * Constructor to define an image on button
+     * 
      * @param label Button label
      * @param icon Icon on button
      */
     public Button (String label, Icon icon) {
-        super(label,icon);
+        super(label, icon);
         addButtonMouseListener();
     }
 
@@ -47,7 +49,6 @@ public class Button extends JButton {
      * this method should be overridden to define this behavior.
      */
     protected void mouseExitedAction () {
-        
 
     }
 
@@ -57,7 +58,6 @@ public class Button extends JButton {
      * this method should be overridden to define this behavior.
      */
     protected void mouseEnteteredAction () {
-     
 
     }
 
@@ -106,7 +106,7 @@ public class Button extends JButton {
 
             @Override
             public void mouseEntered (MouseEvent e) {
-                
+
                 mouseEnteteredAction();
             }
 

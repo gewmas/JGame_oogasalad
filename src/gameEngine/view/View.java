@@ -18,13 +18,13 @@ public class View extends Frame {
 
     public View (Controller controller) {
         super();
-       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         canvasPanel = new CanvasPanel();
-        this.add(canvasPanel,BorderLayout.WEST);
+        this.add(canvasPanel, BorderLayout.WEST);
         storePanel = new TowerStorePanel();
-        this.add(storePanel,BorderLayout.EAST);
-//        new InitializationFrame(controller, myResources);
-        showGame ();
+        this.add(storePanel, BorderLayout.EAST);
+        // new InitializationFrame(controller, myResources);
+        showGame();
     }
 
     public void showGame () {
