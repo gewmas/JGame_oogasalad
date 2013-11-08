@@ -27,7 +27,6 @@ public class Factory {
 	    gridFactory.initialize();
 	}
 	
-
 	
 	public GridFactory grid() {
 	    return gridFactory;
