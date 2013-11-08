@@ -14,24 +14,13 @@ import jgame.platform.JGEngine;
 
 /**
  * 
- * @author Yuhua
+ * @author Harris
  * 
- *         Test Tower Enemy and Bullet
+ * Test Grid
  * 
  */
 public class TestGrid extends JGEngine {
 
-//    @Test
-//    public void test(){
-//        
-//    }
-    
-//    public static void main(String[] args) {new testTowerEnemyBullet();}
-//
-//    public testTowerEnemyBullet(){initEngineApplet(); }
-//    public testTowerEnemyBullet(JGPoint size){initEngine(size.x,size.y); }
-    
-    // Jiaran edited. Using this, one can run it as application instead of applet.
     public static void main (String[] args) {
         new TestGrid(new JGPoint(960, 700));
     }
@@ -60,17 +49,16 @@ public class TestGrid extends JGEngine {
         setFrameRate(60, 2);
         
       try {
-      File file = new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json");
-      Scanner scanner = new Scanner(file);
-      Parser parser = new Parser(scanner);
-      Factory factory = new Factory(parser);
-      factory.grid().initialize();
-  }
-  catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-  }
-//        new Model();
+          File file = new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json");
+          Scanner scanner = new Scanner(file);
+          Parser parser = new Parser(scanner);
+          Factory factory = new Factory(parser);
+          factory.grid().initialize();
+      }
+      catch (FileNotFoundException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+      }
     }
 
     @Override
