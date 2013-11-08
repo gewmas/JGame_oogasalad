@@ -1,5 +1,9 @@
 package gameEngine.model.tower;
 
+import gameEngine.model.Detector;
+import gameEngine.model.bullet.Bullet;
+import gameEngine.model.enemy.Enemy;
+import java.util.List;
 import jgame.JGObject;
 
 
@@ -11,6 +15,8 @@ import jgame.JGObject;
 
 public class Tower extends JGObject {
 
+    Detector dector;
+    
     public Tower (String name,
                   boolean unique_id,
                   double x,
@@ -18,6 +24,8 @@ public class Tower extends JGObject {
                   int collisionid,
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
+        
+        this.dector = new Detector(this.eng);
     }
 
 }

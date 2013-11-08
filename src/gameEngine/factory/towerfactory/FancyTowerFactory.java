@@ -3,10 +3,10 @@ package gameEngine.factory.towerfactory;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
-public class FancyTowerFactory implements TowerFactory{
+public class FancyTowerFactory extends DefaultTowerFactory{
 
     public FancyTowerFactory(JSONObject currTower){
-        
+        super(currTower);
     }
 
     @Override

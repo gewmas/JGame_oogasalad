@@ -1,5 +1,6 @@
 package gameEngine.model;
 
+import gameEngine.model.enemy.Enemy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -7,7 +8,6 @@ import jgame.JGObject;
 import jgame.JGRectangle;
 import jgame.impl.JGEngineInterface;
 import jgame.platform.JGEngine;
-import temporary.TemporaryEnemy;
 
 /**
  * @author Jiaran
@@ -31,11 +31,11 @@ public class Detector {
        
     }
     //cid and prefix should get from a Constant class.
-    public List<TemporaryEnemy> getEnemiesInRange(int centerx, int centery, int range){
+    public List<Enemy> getEnemiesInRange(int centerx, int centery, int range){
         Vector<JGObject> v= getObjects(centerx,centery,range,1,null);
-        List<TemporaryEnemy> result=new ArrayList<TemporaryEnemy>();
+        List<Enemy> result=new ArrayList<Enemy>();
         for ( int i=0;i<v.size();i++){
-            result.add((TemporaryEnemy)v.get(i));
+            result.add((Enemy)v.get(i));
         }
         return result;
     }

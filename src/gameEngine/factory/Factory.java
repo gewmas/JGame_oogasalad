@@ -18,11 +18,6 @@ public class Factory {
 	private GridFactory gridFactory;
 	
 	public Factory(Parser parser) {
-		this.parser = parser;
-		gridFactory = new GridFactory(this.parser);
-	}
-	
-	public Factory(Parser parser) {
 	    //Note, this was only used to test the GridFactory class
 	    this.parser = parser;
 	    gridFactory = new GridFactory(this.parser);
