@@ -8,7 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import gameEngine.controller.Controller;
+import gameEngine.view.Mediator;
+import gameEngine.view.MediatorConstants;
 import gameEngine.view.Panel;
+import gameEngine.view.StyleConstants;
 
 
 /**
@@ -16,24 +20,25 @@ import gameEngine.view.Panel;
  *         Panel to hold the store used to purchase towers
  */
 public class TowerStorePanel extends Panel {
-    public TowerStorePanel () {
+
+
+    public TowerStorePanel (Mediator mediator, Controller controller) {
         super();
-        ImageIcon icon = new ImageIcon("src/resources/right.gif");
-        InfoPanel infoPanel = new InfoPanel();
-        setOpaque(true);
-        TowersOptionPanel options = new TowersOptionPanel("test", infoPanel);
-        JScrollPane sp =
-                new JScrollPane(options, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-        sp.setPreferredSize(new Dimension(300, 100));
-
-        add(sp, BorderLayout.PAGE_START);
-
+        Panel infoPanel = new InfoPanel();
+        Panel options = new TowersOptionPanel(mediator, controller);
+        mediator.addColleague(MediatorConstants.INFO_PANEL_KEY, infoPanel);
+        
         add(infoPanel, BorderLayout.CENTER);
+        add(options, BorderLayout.PAGE_START);
+        
+        setUIStyle();
+    }
 
+    private void setUIStyle () {
+        setOpaque(true);
+        
+       
     }
 
 }

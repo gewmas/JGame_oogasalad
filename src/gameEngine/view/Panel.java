@@ -9,8 +9,27 @@ import javax.swing.JPanel;
  *         Panels used to divide the different sections
  *         of the GUI.
  */
-public class Panel extends JPanel {
+public class Panel extends JPanel implements Colleague {
     public Panel () {
         super(new BorderLayout());
     }
+
+    @Override
+    public void addMediator (Mediator mediator) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void purchaseTower (String tower) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void displayInfo (String displayInfo) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

@@ -25,19 +25,19 @@ public class InfoPanel extends Panel {
         valueField.setFont(displayFont);
 
         setBackground(Color.white);
-         Border valuePanelBorder =
-         BorderFactory.createTitledBorder("Tower Details");
-         setBorder(valuePanelBorder);
+        Border valuePanelBorder =
+                BorderFactory.createTitledBorder("Tower Details");
+        setBorder(valuePanelBorder);
 
         add(label);
 
     }
 
-    public void update (String l) {
-        label.setText(l);
+    @Override
+    public void displayInfo (String displayInfo){
+        label.setText(displayInfo);
 
-       
-
+        
     }
 
 }
