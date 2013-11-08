@@ -14,5 +14,15 @@
 //   rotate ("r" - right, "l" - left, "u" - 180 degrees).
 
 
-tower		-	0	tower.png		-
+// define image to display as background
+
+
+mana	-	0	/resources/img/mana.jpg		-
+
+
+bgm1	/resources/audio/bgm1.wav
+die	/resources/audio/die.wav
+
+
+	
 
