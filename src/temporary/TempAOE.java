@@ -22,15 +22,15 @@ public class TempAOE extends JGObject {
     
     private Set<TemporaryEnemy> mySet=new HashSet<TemporaryEnemy>();
     public void move(){
-        Detector d=new Detector(this.eng);
-        List<TemporaryEnemy> l= d.getEnemiesInRange((int)x, (int)y, 100);
-        for(int i=0;i<l.size();i++){
-            if(mySet.contains(l.get(i)))
-                    ;
-            else{
-                Buff buff=new SlowBuff("a",true,0,0,0,"heal",50,l.get(i));
-                mySet.add(l.get(i));
-           }
-        }
+//        Detector d=new Detector(this.eng);
+//        List<TemporaryEnemy> l= d.getEnemiesInRange((int)x, (int)y, 100);
+//        for(int i=0;i<l.size();i++){
+//            if(mySet.contains(l.get(i)))
+//                    ;
+//            else{
+//                Buff buff=new SlowBuff("a",true,0,0,0,"heal",50,l.get(i));
+//                mySet.add(l.get(i));
+//           }
+//        }
     }
 }
