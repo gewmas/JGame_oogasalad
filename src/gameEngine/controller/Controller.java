@@ -2,7 +2,9 @@ package gameEngine.controller;
 
 import gameEngine.model.Model;
 import gameEngine.view.View;
-
+/*
+ * Part work from wenxin shi
+ */
 public class Controller {
 
     Model model;
@@ -24,13 +26,7 @@ public class Controller {
     public List<TowerInfo> getTowers(){
         
     }
-    public List<PathInfo> getPath(){
         
-    }
-
-    public String getPathImage(){
-        
-    }
     public String getBackgroundImage(){
         
     }*/
