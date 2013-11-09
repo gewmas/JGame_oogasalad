@@ -5,58 +5,54 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.io.File;
 import java.io.IOException;
-import java.util.Observable;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 
 
-public class GridButton extends Observable {
+public class GridButton extends JButton {
 
     private int myX;
     private int myY;
     private JButton myButton;
     private boolean isPath;
+    private Grid myGrid;
+    private File myImgSource;
+    private static final JFileChooser INPUT_CHOOSER =
+            new JFileChooser(System.getProperties().getProperty("user.dir"));
 
-    public GridButton (int x, int y) {
+    public GridButton (int x, int y, Grid grid) {
         myX = x;
         myY = y;
+        myGrid = grid;
+        this.setContentAreaFilled(false);
+        this.setPreferredSize(new Dimension(50, 50));
+        addPathListener(this);
     }
 
-    public JButton create () {
-        myButton = new JButton();
-        myButton.setPreferredSize(new Dimension(50, 50));
-        try {
-            Image grass = ImageIO.read(getClass().getResource("grass_tile.jpg"));
-            myButton.setIcon(new ImageIcon(grass));
-        }
-        catch (IOException ex) {
-            System.out.println("Image not found");
-        }
-        addPathListener();
-        return myButton;
+    public void setImageSource (File imgSource) {
+        myImgSource = imgSource;
     }
 
-    private void addPathListener () {
+    private void addPathListener (final GridButton gButton) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                Image pressed;
                 isPath = true;
+                myGrid.addCoordinate(new Point2D.Double(myX, myY));
                 try {
-                    pressed = ImageIO.read(getClass().getResource("dirt_tile.jpg"));
-                    myButton.setIcon(new ImageIcon(pressed));
-                    setChanged();
-                    notifyObservers(new Point2D.Double(myX, myY));
-                    clearChanged();
+                    Image path = ImageIO.read(myImgSource);
+                    gButton.setIcon(new ImageIcon(path));
                 }
-                catch (IOException e1) {
-                    e1.printStackTrace();
+                catch (IOException ex) {
+                    System.out.println("Image not found");
                 }
             }
         };
-        myButton.addMouseListener(listener);
+        gButton.addMouseListener(listener);
     }
 
     public boolean isPath () {

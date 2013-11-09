@@ -1,43 +1,32 @@
 package gameAuthoring;
+
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Observable;
-import java.util.Observer;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
-public class Grid implements Observer {
+public class Grid extends JPanel {
 
-    JFrame myFrame = new JFrame();
-    JButton[][] myGrid;
+    GridButton[][] myGrid;
     boolean[][] myPath;
     Collection<Point2D> myPathCoordinates = new ArrayList<Point2D>();
 
     public Grid (int width, int height) {
-        myFrame.setLayout(new GridLayout(width, height));
-        myGrid = new JButton[width][height];
+        this.setLayout(new GridLayout(width, height));
+        myGrid = new GridButton[width][height];
         myPath = new boolean[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                GridButton gButton = new GridButton(x, y);
-                gButton.addObserver(this);
-                JButton button = gButton.create();
-                myGrid[x][y] = button;
+                GridButton gButton = new GridButton(x, y, this);
+                myGrid[x][y] = gButton;
                 myPath[x][y] = false;
-                myFrame.add(myGrid[x][y]);
+                this.add(myGrid[x][y]);
             }
         }
-        // JButton done = new JButton("Done");
-        // done.addMouseListener(addPathDoneListener());
-        // myFrame.add(done);
-        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myFrame.pack();
-        myFrame.setVisible(true);
     }
 
     private MouseAdapter addPathDoneListener () {
@@ -54,17 +43,13 @@ public class Grid implements Observer {
         return listener;
     }
 
-    @Override
-    public void update (Observable arg0, Object arg1) {
-        Point2D pathCoordinate = (Point2D.Double) arg1;
-        // System.out.println(pathCoordinate.getX() + "," + pathCoordinate.getY());
-        myPath[(int) pathCoordinate.getX()][(int) pathCoordinate.getY()] = true;
-        isValidPath(0, 0, 2, 2);
+    public void addCoordinate (Point2D coordinate) {
+        myPathCoordinates.add(coordinate);
     }
 
     public boolean isValidPath (int startX, int startY, int endX, int endY) {
         if (startX < 0 || startX >= myGrid.length || startY < 0 || startY >= myGrid[0].length) { return false; }
-        if (!myPath[startX][startY]) { return false; }
+        if (!myGrid[startX][startY].isPath()) { return false; }
         if (startX == endX && startY == endY) {
             System.out.println("path complete");
             for (Point2D point : myPathCoordinates) {
@@ -77,6 +62,8 @@ public class Grid implements Observer {
             myPathCoordinates.add(point);
         }
         return (isValidPath(startX + 1, startY, endX, endY) || isValidPath(startX, startY + 1,
+                                                                           endX, endY) ||
+                isValidPath(startX - 1, startY, endX, endY) || isValidPath(startX, startY - 1,
                                                                            endX, endY));
     }
 

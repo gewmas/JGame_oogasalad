@@ -13,6 +13,8 @@ public class MapDesignTab extends Tab {
     @Override
     public JPanel getTab () {
         JPanel panel = new JPanel();
+        Grid grid = new Grid(5, 5);
+        panel.add(grid);
         return panel;
     }
 }
