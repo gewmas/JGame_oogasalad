@@ -42,7 +42,7 @@ public class View extends Frame {
         mediator.addColleague(MediatorConstants.GAME_KEY, canvasPanel);
 
         mediator.addColleague("view", this);
-        
+
         Panel statsPanel = new StatsPanel();
         add(statsPanel, BorderLayout.SOUTH);
         new InitializationFrame(controller);
