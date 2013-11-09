@@ -1,5 +1,10 @@
 package gameEngine.model.tower;
 
+import java.util.List;
+import gameEngine.Constant.Constant;
+import gameEngine.model.Detector;
+import gameEngine.model.bullet.Bullet;
+import gameEngine.model.enemy.Enemy;
 import jgame.JGObject;
 
 public class DefaultTower extends Tower {
@@ -14,6 +19,8 @@ public class DefaultTower extends Tower {
     double recyclePrice;
 
     long prevTime;
+    
+    
 
     public DefaultTower ( 
                   double damage,
@@ -44,25 +51,24 @@ public class DefaultTower extends Tower {
         this.prevTime = System.currentTimeMillis();
 
 //        level.getGameInfo().loseGold((int)cost);
-
+        
     }
 
     @Override
     public void move() {
-        //check the enemies within the shooting range
+      //check the enemies within the shooting range
         // create bullets
+        List<Enemy> enemies = dector.getEnemiesInRange((int)x, (int)y, (int)range);
+        for(Enemy e : enemies){
+            //check distance between this tower and e then shoot bullets
+            double dist = Math.sqrt(Math.pow(e.x-x, 2)+Math.pow(e.y-y, 2));
+            long deltaTime = (System.currentTimeMillis() - prevTime)/1000; //convert to second
 
-//        List<Enemy> enemies = level.getEnemies();
-//        for(Enemy e : enemies){
-//            //check distance between this tower and e then shoot bullets
-//            double dist = Math.sqrt(Math.pow(e.x-x, 2)+Math.pow(e.y-y, 2));
-//            long deltaTime = (System.currentTimeMillis() - prevTime)/1000; //convert to second
-//
-//            if(dist < range && deltaTime > 1/attackSpeed){
-//                new Bullet(e, damage, "bullet", true, x, y, 3, "bullet");
-//                prevTime = System.currentTimeMillis();
-//            }
-//        }
+            if(dist < range && deltaTime > 1/attackSpeed){
+                new Bullet(e, damage, "bullet", true, x, y, Constant.BULLET_CID, "bullet");
+                prevTime = System.currentTimeMillis();
+            }
+        }
     }
 
     @Override

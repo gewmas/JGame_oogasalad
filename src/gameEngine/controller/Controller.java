@@ -6,7 +6,6 @@ import gameEngine.model.Model;
 import gameEngine.model.TowerInfo;
 import gameEngine.view.View;
 
-
 public class Controller {
 
     Model model;
@@ -24,6 +23,7 @@ public class Controller {
         view.showGame();
 
     }
+
 
     public List<TowerInfo> getTowers () {
         return null;
@@ -54,10 +54,6 @@ public class Controller {
      * }
 
 
-    public Image getPathImage(){
-        
-    }
-    public Image getBackgroundImage(){
         
     }*/
 

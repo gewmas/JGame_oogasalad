@@ -55,7 +55,6 @@ public class testTowerEnemyBullet extends JGEngine {
         setFrameRate(60, 2);
         
         new Model();
-        //new Enemy(0, 1, 0.1, "5", false, 100, 100, Constant.ENEMY_CID, "enemy1");
     }
 
     @Override

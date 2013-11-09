@@ -15,7 +15,6 @@ public class GameInfo {
 
     private String myBGImage;
     private List<TowerInfo> myTowerInfo;
-    private List<PathInfo> myPathInfo;
 
     public GameInfo (int defaultGold, int defaultLife, int waveNum, String BGImage) {
         myGold = defaultGold;
@@ -23,7 +22,6 @@ public class GameInfo {
         myWave = waveNum;
         myBGImage = BGImage;
         myTowerInfo = new ArrayList<TowerInfo>();
-        myPathInfo = new ArrayList<PathInfo>();
     }
 
     public int getGold () {
@@ -90,16 +88,10 @@ public class GameInfo {
         myTowerInfo=new ArrayList<TowerInfo>();
     }
 
-    public void removeAllPathInfo(){
-        myPathInfo = new ArrayList<PathInfo>();
-    }
     
     public List<TowerInfo> getTowerInfo () {
         return myTowerInfo;
     }
 
-    public List<PathInfo> getPathInfo () {
-        return myPathInfo;
-    }
 
 }
