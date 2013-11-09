@@ -2,6 +2,7 @@ package gameEngine.view;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
@@ -37,7 +38,7 @@ public class View extends Frame {
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Panel canvasPanel = new CanvasPanel();
+        Panel canvasPanel = new CanvasPanel(this);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addColleague(MediatorConstants.GAME_KEY, canvasPanel);
 
@@ -45,8 +46,10 @@ public class View extends Frame {
 
         Panel statsPanel = new StatsPanel();
         add(statsPanel, BorderLayout.SOUTH);
-//        new InitializationFrame(controller);
-        showGame ();
+
+        new InitializationFrame(controller);
+        showGame();
+
     }
 
     /**
@@ -85,14 +88,54 @@ public class View extends Frame {
         setCursor(c);
 
     }
+    
+    /**
+     * Tells the controller to send tower purchase instructions to the model
+     * and then reset the cursor
+     */
+    public void buyTower(int x, int y, String tower){
+        controller.purchaseTower(x,y,tower);
+        purchaseTower();
+    }
+    
+    /**
+     * Requests tower information for the tower at the given location
+     */
+    public void getTowerInfo(int x,int y){
+        controller.getTowerInfo(x,y);
+    }
 
     @Override
     /**
      * After tower is purchased, the cursor is set to the default cursor.
      */
-    public void purchaseTower () {
+    public void purchaseTower() {
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-
     }
-
+    
+    /**
+     * Gets the dimensions of the game on initialization 
+     */
+    public Dimension getGameSize(){
+        return controller.getGameSize();
+    }
+    
+    public int getScore(){
+        return controller.getScore();
+    }
+    
+    /**
+     * Gets the background image of the game upon initialization
+     */
+    public String getBGImage(){
+        return controller.getBGImage();
+    }
+    
+    public int getMoney(){
+        return controller.getMoney();
+    }
+    
+    public int getLives(){
+        return controller.getLives();
+    }
 }
