@@ -1,5 +1,6 @@
 package gameEngine.controller;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
 import gameEngine.model.Model;
@@ -29,9 +30,26 @@ public class Controller {
         return null;
 
     }
-
-
+    
+    public void purchaseTower(int x,int y,String tower){
+        
+    }
+    
+    public void getTowerInfo(int x,int y){
+        
+    }
+    
+    public Dimension getGameSize(){
+        return new Dimension(30,30);
+    }    
+    
+    public String getBGImage(){
+        return "src/resources/space_background.jpg";
+    }
+    
     /*
+     * 
+     * 
      * public int getMoney(){
      * 
      * }
