@@ -12,11 +12,9 @@ public class CanvasPanel extends Panel {
         this.add(game);
     }
 
-
-
     @Override
     public void placeTower (TowerInfo towerInfo) {
-        game.purchaseTower(towerInfo.getName());
+        game.placeTower(towerInfo.getName());
 
     }
 

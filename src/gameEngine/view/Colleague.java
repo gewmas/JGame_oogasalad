@@ -6,8 +6,8 @@ import gameEngine.model.TowerInfo;
 /**
  * Interface that can be implemented by components of the view.
  * Colleages work with a mediator to impleent the Mediator
- * design pattern. 
- * Whenever a colleage needs to  communicate with
+ * design pattern.
+ * Whenever a colleage needs to communicate with
  * another component in the view, it does so via the mediator.
  * The methods below are called by the mediator on colleagues.
  * If a colleague is impacted by the actions described in the following method
@@ -28,6 +28,7 @@ public interface Colleague {
 
     /**
      * Behavior a colleague should execute after a tower has been placed
+     * 
      * @param towerInfo datastructure used to store tower information
      */
     public void placeTower (TowerInfo towerInfo);
@@ -37,7 +38,9 @@ public interface Colleague {
      */
     public void purchaseTower ();
 
-    /** Used primarily by the TowerInfo panel to display tower information
+    /**
+     * Used primarily by the TowerInfo panel to display tower information
+     * 
      * @param towerInfo datastructure used to store tower information
      */
     public void displayTowerInfo (TowerInfo towerInfo);
