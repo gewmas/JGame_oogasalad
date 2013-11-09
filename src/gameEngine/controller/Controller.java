@@ -15,9 +15,13 @@ public class Controller {
     Dimension gameSize;
     int money;
     int lives;
+    int score;
 
 
     public Controller () {
+        lives=10;
+        money=100;
+        score=0;
         gameSize=new Dimension(30,30);
         view = new View(this);
     }
@@ -77,6 +81,14 @@ public class Controller {
      */
     public int getLives(){
         return lives;
+    }
+    
+    /**
+     * Return the score of the user
+     */
+    
+    public int getScore(){
+        return score;
     }
      /* public void placeTower(String name, Position pos){
      * 

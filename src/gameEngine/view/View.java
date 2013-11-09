@@ -118,6 +118,10 @@ public class View extends Frame {
         return controller.getGameSize();
     }
     
+    public int getScore(){
+        return controller.getScore();
+    }
+    
     /**
      * Gets the background image of the game upon initialization
      */

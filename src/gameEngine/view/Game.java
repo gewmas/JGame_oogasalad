@@ -5,6 +5,7 @@ import gameEngine.model.Grid;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
+import jgame.Highscore;
 import jgame.JGColor;
 import jgame.JGPoint;
 import jgame.platform.JGEngine;
@@ -45,17 +46,24 @@ public class Game extends StdGame {
     public void initGame () {
         setFrameRate(30, 2);
         initial_lives=view.getLives();
+        lives=view.getLives();
+        money=view.getMoney();
         String bgImage=view.getBGImage();
         defineImage("background","bg",256,bgImage,"-");
         setBGImage("background");
         purchasing=false;
+        setHighscores(10,new Highscore(0,"aaa"),3);
+        startgame_ingame=true;
     }
-
-//    @Override
+    
     public void doFrameInGame() {
         checkCollision(0,0);
         checkUserInteractions();
         updateGameStats();
+        if (getKey(KeyEsc)){
+            clearKey(KeyEsc);
+            lives=0;
+        }
     }
     
     /**
@@ -84,19 +92,22 @@ public class Game extends StdGame {
      */
     public void updateGameStats(){
         lives=view.getLives();
-        System.out.println(lives);
         money=view.getMoney();
-        if (lives==0){
-            gameOver();
-        }
+        score=view.getScore();
     }
 
-//    @Override
-    public void paintFrameInGame () {
+    @Override
+    /**
+     * Override to display amount of money left at all times
+     */
+    public void paintFrame () {
         super.paintFrame();
-        drawString("Money:"+String.valueOf(money),pfWidth()-10,10,1);
+        drawString("Money "+String.valueOf(money),pfWidth()-10,10,1);
     }
 
+    /**
+     * Indicates that the user wants to buy a tower
+     */
     public void placeTower (String tower) {
 //        setBGColor(JGColor.red);
         System.out.println("User wants to purchase " + tower);
