@@ -37,7 +37,7 @@ public class View extends Frame {
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Panel canvasPanel = new CanvasPanel();
+        Panel canvasPanel = new CanvasPanel(this);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addColleague(MediatorConstants.GAME_KEY, canvasPanel);
 
