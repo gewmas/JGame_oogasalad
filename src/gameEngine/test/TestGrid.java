@@ -20,7 +20,7 @@ import jgame.platform.JGEngine;
  * 
  */
 public class TestGrid extends JGEngine {
-
+    
     public static void main (String[] args) {
         new TestGrid(new JGPoint(960, 700));
     }
@@ -49,7 +49,7 @@ public class TestGrid extends JGEngine {
         setFrameRate(60, 2);
         
       try {
-          File file = new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json");
+          File file = new File("src/gameEngine/test/mygame.json");
           Scanner scanner = new Scanner(file);
           Parser parser = new Parser(scanner);
           Factory factory = new Factory(parser);

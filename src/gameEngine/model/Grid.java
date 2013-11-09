@@ -18,6 +18,11 @@ public class Grid extends JGObject {
         
     }
     
+    public Grid(String name, boolean unique_id, double x, double y, int collisionid, String gfxname) {
+        super(name, unique_id, x, y, collisionid, gfxname);
+        onPath = false;
+    }
+    
     public void setOnPath() {
         onPath = true;
     }

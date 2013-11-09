@@ -19,9 +19,13 @@ public class Coordinate {
     public int getY() {
         return y;
     }
-    public boolean equals(Coordinate coordinate) {
-        if(x == coordinate.x && y == coordinate.y) {
-            return true;
+    public boolean equals(Object o) {
+        System.out.println("using the coordinate equals method");
+        if(o instanceof Coordinate) {
+            Coordinate coordinate = (Coordinate)o;
+            if(x == coordinate.x && y == coordinate.y) {
+                return true;
+            }
         }
         return false;
     }
