@@ -24,4 +24,5 @@ enemy1	-	0	player.png	-
 enemy2			cu	0	icons_map	2		-
 enemy3				ja	0	icons_map	0		-
 bullet	-	0	bomb.png	-
-block1	-	0	game-bg.gif	-
+block1	-	0	block.png	-
+path	-	0	path.jpg	-

@@ -10,8 +10,7 @@
 "difficultyScale": 1.5,
 "map":
 {
-	  "BGImage":"ADD_HERE", 
-  	  "pathImage":  "ADD_HERE", 
+  	  "pathImage":  "path.jpg", 
 	  "Path":[ 
                {  "x":1, "y":2},
                { "x": 2, "y": 2 },

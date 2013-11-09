@@ -19,8 +19,9 @@ public class Coordinate {
     public int getY() {
         return y;
     }
+    
+    @Override
     public boolean equals(Object o) {
-        System.out.println("using the coordinate equals method");
         if(o instanceof Coordinate) {
             Coordinate coordinate = (Coordinate)o;
             if(x == coordinate.x && y == coordinate.y) {
@@ -28,5 +29,12 @@ public class Coordinate {
             }
         }
         return false;
+    }
+    
+    @Override
+    public int hashCode() {
+        Integer xInt = x;
+        Integer yInt = y;
+        return xInt.hashCode() + "-".hashCode() + yInt.hashCode();
     }
 }
