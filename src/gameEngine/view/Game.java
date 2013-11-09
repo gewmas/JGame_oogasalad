@@ -16,7 +16,7 @@ import jgame.platform.StdGame;
  *         Displays the Game setting using JGEngine to facilitate
  *         graphics rendering
  */
-public class Game extends JGEngine {
+public class Game extends StdGame {
 
     private int WIDTH=600;
     private int HEIGHT=600;
@@ -24,7 +24,7 @@ public class Game extends JGEngine {
     private View view;
     private boolean purchasing;
     private String towerToPurchase;
-    private int lives;
+//    private int lives;
     private int money; 
     
     public Game (View view) {
@@ -34,9 +34,6 @@ public class Game extends JGEngine {
 
     @Override
     public void initCanvas () {
-        //gameMap=controller.getGrid();
-        //int width=gameMap.size();
-        //int height=gameMap.get(0).size();
         Dimension size=view.getGameSize();
         System.out.println(size.width);
         System.out.println(size.height);
@@ -47,15 +44,26 @@ public class Game extends JGEngine {
     @Override
     public void initGame () {
         setFrameRate(30, 2);
+        initial_lives=view.getLives();
         String bgImage=view.getBGImage();
         defineImage("background","bg",256,bgImage,"-");
         setBGImage("background");
         purchasing=false;
     }
 
-    @Override
-    public void doFrame () {
+//    @Override
+    public void doFrameInGame() {
         checkCollision(0,0);
+        checkUserInteractions();
+        updateGameStats();
+    }
+    
+    /**
+     * Checks if the user has clicked on the screen, and if so, either tries to
+     * buy a tower at the clicked tile position or tries to get the info of
+     * the tower at the clicked tile position
+     */
+    public void checkUserInteractions(){
         if (getMouseButton(1) && getMouseInside()) {
             clearMouseButton(1);
             JGPoint mousePosition=getMousePos();
@@ -70,11 +78,22 @@ public class Game extends JGEngine {
             }
         }
     }
+    
+    /**
+     * Updates the number of lives and money remaining in the game
+     */
+    public void updateGameStats(){
+        lives=view.getLives();
+        System.out.println(lives);
+        money=view.getMoney();
+        if (lives==0){
+            gameOver();
+        }
+    }
 
-    @Override
-    public void paintFrame () {
+//    @Override
+    public void paintFrameInGame () {
         super.paintFrame();
-        drawString("Lives:" + String.valueOf(lives),10,10,-1);
         drawString("Money:"+String.valueOf(money),pfWidth()-10,10,1);
     }
 

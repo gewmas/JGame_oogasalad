@@ -124,4 +124,12 @@ public class View extends Frame {
     public String getBGImage(){
         return controller.getBGImage();
     }
+    
+    public int getMoney(){
+        return controller.getMoney();
+    }
+    
+    public int getLives(){
+        return controller.getLives();
+    }
 }

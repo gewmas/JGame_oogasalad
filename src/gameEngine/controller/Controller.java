@@ -11,11 +11,15 @@ public class Controller {
 
     Model model;
     View view;
+    
+    Dimension gameSize;
+    int money;
+    int lives;
 
 
     public Controller () {
+        gameSize=new Dimension(30,30);
         view = new View(this);
-
     }
 
     public void newGame (File jsonFile) {
@@ -31,32 +35,50 @@ public class Controller {
 
     }
     
+    /**
+     * Sends a call to the model to purchase tower tower at position x,y
+     * If position is invalid, do nothing for now
+     */
     public void purchaseTower(int x,int y,String tower){
         
     }
     
+    /**
+     * Sends a call to the model to update the monitored tower stats to the tower
+     * at x,y. If the position is invalid, do nothing
+     */
     public void getTowerInfo(int x,int y){
         
     }
     
+    /**
+     * Returns the size of the game in number of tiles
+     */
     public Dimension getGameSize(){
-        return new Dimension(30,30);
+        return gameSize;
     }    
     
+    /**
+     * Returns the URL to the game's background image
+     */
     public String getBGImage(){
         return "resources/space_background.jpg";
     }
     
-    /*
-     * 
-     * 
-     * public int getMoney(){
-     * 
-     * }
-     * public int getLife(){
-     * 
-     * }
-     * public void placeTower(String name, Position pos){
+    /**
+     * Returns the amount of money in the game
+     */
+    public int getMoney(){
+        return money;
+    }
+    
+    /**
+     * Return the number of lives remaining
+     */
+    public int getLives(){
+        return lives;
+    }
+     /* public void placeTower(String name, Position pos){
      * 
      * }
      * 
@@ -65,9 +87,6 @@ public class Controller {
      * }
      * 
      * public String getPathImage(){
-     * 
-     * }
-     * public String getBackgroundImage(){
      * 
      * }
 
