@@ -10,6 +10,8 @@ import gameEngine.view.Panel;
 /**
  * @author Lalita Maraj
  *         Panel to hold the store used to purchase towers
+ *         Contains the option to select towers and panel that displays
+ *         tower information
  */
 public class TowerStorePanel extends Panel {
 

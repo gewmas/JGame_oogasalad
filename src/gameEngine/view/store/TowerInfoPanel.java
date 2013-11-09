@@ -11,6 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 
 
+/** Panel that displays tower information
+ * when user hovers over a tower option
+ * @author Lalita Maraj
+ *
+ */
 public class TowerInfoPanel extends Panel {
 
 
@@ -26,8 +31,11 @@ public class TowerInfoPanel extends Panel {
         add(label);
 
     }
-
     @Override
+    /** A method that is called by the Mediator to 
+     * update the information this panel displays
+     */
+   
     public void displayTowerInfo (TowerInfo tower){
         ImageIcon icon = new ImageIcon(tower.getImage()); 
 
