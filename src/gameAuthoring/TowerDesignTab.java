@@ -5,8 +5,10 @@ import javax.swing.JPanel;
 
 public class TowerDesignTab extends Tab {
 
-    public TowerDesignTab (GameData gameData) {
-        super(gameData);
+    private TowerDesignData myTowerDesignData;
+
+    public TowerDesignTab (TowerDesignData towerDesignData) {
+        myTowerDesignData = towerDesignData;
     }
 
     // TODO: Get rid of magic number
