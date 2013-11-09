@@ -1,6 +1,6 @@
 package gameEngine.view.store;
 
-import java.awt.Font;
+
 import gameEngine.model.TowerInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
@@ -12,6 +12,7 @@ import javax.swing.border.Border;
 
 
 public class TowerInfoPanel extends Panel {
+
 
     private JLabel label;
 
@@ -29,11 +30,10 @@ public class TowerInfoPanel extends Panel {
     @Override
     public void displayTowerInfo (TowerInfo tower){
         ImageIcon icon = new ImageIcon(tower.getImage()); 
-        Font f = new Font("Helvetica", StyleConstants.BUTTON_FONT_STYLE,12);
-        label.setFont(f);
+
         label.setIcon(icon);
-        String initialText = "<html>" +
-                tower.getName() + "<ul>" +
+        String initialText = "<html><h1>" +
+                tower.getName() + "</h1><ul>" +
 
                 "<li><font color=red>Cost: </font>" + tower.getCost() + "</li>" +
                 "<li><font color=blue>Description: </font>" + tower.getDescription() + "</li></html>";
