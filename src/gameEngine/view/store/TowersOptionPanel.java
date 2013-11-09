@@ -5,6 +5,7 @@ import gameEngine.model.TowerInfo;
 import gameEngine.view.Mediator;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
@@ -37,7 +38,7 @@ public class TowersOptionPanel extends Panel {
 
         super();
         setUIStyle();
-
+ 
         JPanel options = new JPanel();
         GridLayout experimentLayout = new GridLayout(0, NUM_COLUMNS);
         options.setLayout(experimentLayout);

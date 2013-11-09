@@ -2,7 +2,8 @@ package gameEngine.view;
 
 import gameEngine.model.TowerInfo;
 
-public class CanvasPanel extends Panel implements Colleague {
+
+public class CanvasPanel extends Panel {
     Game game;
 
     public CanvasPanel () {
@@ -10,11 +11,7 @@ public class CanvasPanel extends Panel implements Colleague {
         this.add(game);
     }
 
-    @Override
-    public void addMediator (Mediator mediator) {
-        // TODO Auto-generated method stub
 
-    }
 
     @Override
     public void placeTower (TowerInfo towerInfo) {

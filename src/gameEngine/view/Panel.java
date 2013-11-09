@@ -8,41 +8,36 @@ import javax.swing.JPanel;
 /**
  * @author lalitamaraj
  *         Panels used to divide the different sections
- *         of the GUI.
+ *         of the GUI. Panels implement the Colleague interface because they
+ *         are view components that can interact with other view componetns.
+ *         
  */
 public class Panel extends JPanel implements Colleague {
     public Panel () {
-        super(new BorderLayout());
+        super();
     }
 
     @Override
     public void addMediator (Mediator mediator) {
-        // TODO Auto-generated method stub
+        
 
     }
 
     @Override
     public void placeTower (TowerInfo towerInfo) {
-        // TODO Auto-generated method stub
+        
 
     }
 
-
-
     @Override
     public void displayTowerInfo (TowerInfo tower) {
-        // TODO Auto-generated method stub
         
+
     }
 
     @Override
     public void purchaseTower () {
-        // TODO Auto-generated method stub
-        
+       
     }
-
-
-
-
 
 }

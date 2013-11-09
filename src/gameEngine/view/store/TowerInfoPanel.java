@@ -1,6 +1,7 @@
 package gameEngine.view.store;
 
 
+import java.awt.BorderLayout;
 import gameEngine.model.TowerInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
@@ -23,6 +24,7 @@ public class TowerInfoPanel extends Panel {
 
     public TowerInfoPanel () {
         super();
+        
 
         Border valuePanelBorder =
                 BorderFactory.createTitledBorder(StyleConstants.myResources.getString("TowerInfo"));

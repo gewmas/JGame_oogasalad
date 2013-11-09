@@ -4,6 +4,11 @@ import java.awt.Font;
 import java.util.ResourceBundle;
 
 
+/** Constants that are paramters for the look and feel 
+ * of the GUI
+ * @author Lalita Maraj
+ *
+ */
 public class StyleConstants {
     public static final String BUTTON_FONT = "Helvetica";
     public static final String BUTTON_FONT_KEY = "Button.font";
