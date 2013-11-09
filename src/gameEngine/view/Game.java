@@ -39,7 +39,7 @@ public class Game extends JGEngine {
 
     }
 
-    public void purchaseTower (String tower) {
+    public void placeTower (String tower) {
         setBGColor(JGColor.red);
         System.out.println("User wants to purchase " + tower);
 
