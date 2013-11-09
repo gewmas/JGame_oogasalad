@@ -1,11 +1,11 @@
 package gameEngine.factory.enemyfactory;
 
-import gameAuthoring.Writeable;
+import gameAuthoring.JSONReadable;
+import gameAuthoring.JSONWriteable;
 import gameEngine.Constant.Constant;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.parser.JSONLibrary.JSONObject;
-import java.io.IOException;
-import java.nio.CharBuffer;
+import java.io.File;
 
 
 /**
@@ -15,7 +15,7 @@ import java.nio.CharBuffer;
  *         To add more fancier enemy(eg, boss, or enemy that has different
  *         ability), one can extend from this class.
  */
-public class NormalEnemyFactory implements EnemyFactory, Readable, Writeable {
+public class NormalEnemyFactory implements EnemyFactory, JSONReadable, JSONWriteable {
 
     private String id;
     private String image;
@@ -40,9 +40,15 @@ public class NormalEnemyFactory implements EnemyFactory, Readable, Writeable {
     }
 
     @Override
-    public int read (CharBuffer cb) throws IOException {
+    public File write () {
         // TODO Auto-generated method stub
-        return 0;
+        return null;
+    }
+
+    @Override
+    public void read () {
+        // TODO Auto-generated method stub
+
     }
 
 }

@@ -5,10 +5,8 @@ import javax.swing.JPanel;
 
 public class LevelDesignTab extends Tab {
 
-    private LevelDesignData myLevelDesignData;
+    public LevelDesignTab () {
 
-    public LevelDesignTab (LevelDesignData levelDesignData) {
-        myLevelDesignData = levelDesignData;
     }
 
     @Override

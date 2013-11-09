@@ -3,7 +3,7 @@ package gameAuthoring;
 import java.io.File;
 
 
-public interface Writeable {
+public interface JSONWriteable {
 
     public File write ();
 

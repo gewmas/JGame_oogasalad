@@ -1,13 +1,12 @@
 package gameEngine.factory.towerfactory;
 
-import gameAuthoring.Writeable;
+import gameAuthoring.JSONReadable;
+import gameAuthoring.JSONWriteable;
 import gameEngine.Constant.Constant;
 import gameEngine.model.tower.DefaultTower;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.io.File;
-import java.io.IOException;
-import java.nio.CharBuffer;
 
 
 /**
@@ -16,7 +15,7 @@ import java.nio.CharBuffer;
  *         TowerFactory can create different types of Tower when called by the create() method
  * 
  */
-public class DefaultTowerFactory implements TowerFactory, Readable, Writeable {
+public class DefaultTowerFactory implements TowerFactory, JSONReadable, JSONWriteable {
 
     String id;
     String image;
@@ -53,15 +52,15 @@ public class DefaultTowerFactory implements TowerFactory, Readable, Writeable {
     }
 
     @Override
-    public int read (CharBuffer arg0) throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
     public File write () {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public void read () {
+        // TODO Auto-generated method stub
+
     }
 
 }

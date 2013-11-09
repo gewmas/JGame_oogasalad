@@ -5,10 +5,7 @@ import javax.swing.JPanel;
 
 public class TowerDesignTab extends Tab {
 
-    private TowerDesignData myTowerDesignData;
-
-    public TowerDesignTab (TowerDesignData towerDesignData) {
-        myTowerDesignData = towerDesignData;
+    public TowerDesignTab () {
     }
 
     // TODO: Get rid of magic number

@@ -1,6 +1,6 @@
 package gameAuthoring;
 
-public interface Readable {
+public interface JSONReadable {
 
     public void read ();
 

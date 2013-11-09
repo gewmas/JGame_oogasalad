@@ -5,10 +5,8 @@ import javax.swing.JPanel;
 
 public class EnemyDesignTab extends Tab {
 
-    private EnemyDesignData myEnemyDesignData;
+    public EnemyDesignTab () {
 
-    public EnemyDesignTab (EnemyDesignData enemyDesignData) {
-        myEnemyDesignData = enemyDesignData;
     }
 
     @Override
