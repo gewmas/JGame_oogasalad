@@ -43,7 +43,7 @@ public class View extends Frame {
 
         mediator.addColleague("view", this);
 
-        new InitializationFrame(controller, StyleConstants.myResources);
+        new InitializationFrame(controller);
 
     }
 
