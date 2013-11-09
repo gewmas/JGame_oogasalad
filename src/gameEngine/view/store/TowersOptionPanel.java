@@ -15,14 +15,11 @@ import javax.swing.border.Border;
 
 
 /**
- * 
- * Acts as a container that displays the different types of user input.
- * Each element of displayed information is clickable and copy/paste enabled
- * This class gathers the information to be displayed from the Model and displays it
- * using a JList
+ * Panel that contains the different towers a
+ * user can select.
  * 
  * @author Lalita Maraj
- * @author Susan Zhang
+ * 
  * 
  */
 @SuppressWarnings("serial")
@@ -32,7 +29,11 @@ public class TowersOptionPanel extends Panel {
     private static final int PANEL_WIDTH = 300;
     private static final int PANEL_HEIGHT = 400;
 
-    protected TowersOptionPanel (Mediator mediator,Controller controller) {
+    /**
+     * @param mediator facilitates communication between view components
+     * @param controller facilitates communication between view and model
+     */
+    protected TowersOptionPanel (Mediator mediator, Controller controller) {
 
         super();
         setUIStyle();
@@ -41,15 +42,16 @@ public class TowersOptionPanel extends Panel {
         GridLayout experimentLayout = new GridLayout(0, NUM_COLUMNS);
         options.setLayout(experimentLayout);
         addStoreInventory(options, mediator, controller);
-        JScrollPane sp =
-                new JScrollPane(options, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scrollPane = new JScrollPane(options);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
+        add(scrollPane);
 
-        sp.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        add(sp);
-        
     }
 
+    /**
+     * Set look and feel of the display of available towers
+     */
     private void setUIStyle () {
 
         Border listPanelBorder =
@@ -57,121 +59,23 @@ public class TowersOptionPanel extends Panel {
         setBorder(listPanelBorder);
     }
 
-    private void addStoreInventory (JPanel options, Mediator mediator, Controller controller) {
+    /**
+     * Adds buttons based on the defined towers specified by Model
+     * 
+     * @param optionsPanel panel buttons are added to
+     * @param mediator facilitates communication between view components
+     * @param controller facilitates communication between view and model
+     */
+    private void addStoreInventory (JPanel optionsPanel, Mediator mediator, Controller controller) {
 
         // for (TowerInfo tower: controller.getTowers()){
         // options.add(new TowerStoreButton(tower,mediator,controller));
         // }
         // MOCK DATA
-        TowerInfo tw = new TowerInfo("src/resources/right.gif", 45,"fire","burns things");
-        
-        options.add(new TowerStoreButton(tw,mediator,controller));
-        TowerInfo gw = new TowerInfo("src/resources/mana.jpg", 45,"mana","burns things");
-        options.add(new TowerStoreButton(gw,mediator,controller));
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                 controller));
-//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                 controller));
-//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                 mediator, controller));
-//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                                 controller));
-//                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                                 controller));
-//                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                                 mediator, controller));
-//                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                                 controller));
-//                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                                 controller));
-//                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                                 mediator, controller));
-//
-//                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                         controller));
-//                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                         controller));
-//                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                         mediator, controller));
-//                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-//                                                 controller));
-//                        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-//                                                 controller));
-//                        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-//                                                 mediator, controller));
-
-
-
-        // MOCK DATA
+        TowerInfo tw = new TowerInfo("src/resources/right.gif", 45, "fire", "burns things");
+        optionsPanel.add(new TowerStoreButton(tw, mediator, controller));
+        TowerInfo gw = new TowerInfo("src/resources/mana.jpg", 45, "mana", "burns things");
+        optionsPanel.add(new TowerStoreButton(gw, mediator, controller));
 
     }
 

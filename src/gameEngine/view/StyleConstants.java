@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 
 public class StyleConstants {
-    public static final String BUTTON_FONT = "Serif";
+    public static final String BUTTON_FONT = "Helvetica";
     public static final String BUTTON_FONT_KEY = "Button.font";
     public static final int BUTTON_FONT_SIZE = 12;
     public static final int BUTTON_FONT_STYLE = Font.CENTER_BASELINE;
