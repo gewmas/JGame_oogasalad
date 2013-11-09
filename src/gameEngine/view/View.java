@@ -45,8 +45,8 @@ public class View extends Frame {
 
         Panel statsPanel = new StatsPanel();
         add(statsPanel, BorderLayout.SOUTH);
-        new InitializationFrame(controller);
-
+//        new InitializationFrame(controller);
+        showGame ();
     }
 
     /**
