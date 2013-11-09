@@ -1,10 +1,15 @@
 package gameEngine.view;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.util.ResourceBundle;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import gameEngine.model.TowerInfo;
 import gameEngine.view.initialization.InitializationFrame;
 import gameEngine.view.store.TowerStorePanel;
 import gameEngine.controller.Controller;
@@ -28,7 +33,7 @@ public class View extends Frame {
         canvasPanel = new CanvasPanel();
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addColleague(MediatorConstants.GAME_KEY, canvasPanel);
-
+        mediator.addColleague("view", this);
         // new InitializationFrame(controller, StyleConstants.myResources);
         showGame();
     }
@@ -40,6 +45,7 @@ public class View extends Frame {
         Font f = new Font(StyleConstants.BUTTON_FONT, StyleConstants.BUTTON_FONT_STYLE,
                           StyleConstants.BUTTON_FONT_SIZE);
         UIManager.put(StyleConstants.BUTTON_FONT_KEY, f);
+        
     }
 
     public void showGame () {
@@ -55,6 +61,21 @@ public class View extends Frame {
     private void createStore () {
         storePanel = new TowerStorePanel(mediator, controller);
         this.add(storePanel, BorderLayout.EAST);
+    }
+    
+    @Override
+    public void placeTower(TowerInfo towerInfo){
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage(towerInfo.getImage());
+        Cursor c = toolkit.createCustomCursor(image , new Point(0,0), "img");
+        setCursor (c);
+    
+    }
+    
+    @Override
+    public void purchaseTower () {
+        setCursor (Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        
     }
 
 }

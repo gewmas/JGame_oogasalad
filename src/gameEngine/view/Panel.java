@@ -1,5 +1,6 @@
 package gameEngine.view;
 
+import gameEngine.model.TowerInfo;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
@@ -21,15 +22,27 @@ public class Panel extends JPanel implements Colleague {
     }
 
     @Override
-    public void purchaseTower (String tower) {
+    public void placeTower (TowerInfo towerInfo) {
         // TODO Auto-generated method stub
 
+    }
+
+
+
+    @Override
+    public void displayTowerInfo (TowerInfo tower) {
+        // TODO Auto-generated method stub
+        
     }
 
     @Override
-    public void displayInfo (String displayInfo) {
+    public void purchaseTower () {
         // TODO Auto-generated method stub
-
+        
     }
+
+
+
+
 
 }

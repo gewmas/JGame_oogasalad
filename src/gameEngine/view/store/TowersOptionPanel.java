@@ -32,10 +32,7 @@ public class TowersOptionPanel extends Panel {
     private static final int PANEL_WIDTH = 300;
     private static final int PANEL_HEIGHT = 400;
 
-    protected TowersOptionPanel (
-
-                                 Mediator mediator,
-                                 Controller controller) {
+    protected TowersOptionPanel (Mediator mediator,Controller controller) {
 
         super();
         setUIStyle();
@@ -66,106 +63,111 @@ public class TowersOptionPanel extends Panel {
         // options.add(new TowerStoreButton(tower,mediator,controller));
         // }
         // MOCK DATA
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                 controller));
-        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                 controller));
-        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                 mediator, controller));
-        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                                 controller));
-                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                                 controller));
-                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                                 mediator, controller));
-                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                                 controller));
-                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                                 controller));
-                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                                 mediator, controller));
-
-                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                         controller));
-                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                         controller));
-                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                         mediator, controller));
-                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
-                                                 controller));
-                        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
-                                                 controller));
-                        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
-                                                 mediator, controller));
+        TowerInfo tw = new TowerInfo("src/resources/right.gif", 45,"fire","burns things");
+        
+        options.add(new TowerStoreButton(tw,mediator,controller));
+        TowerInfo gw = new TowerInfo("src/resources/mana.jpg", 45,"mana","burns things");
+        options.add(new TowerStoreButton(gw,mediator,controller));
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                 controller));
+//        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                 controller));
+//        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                 mediator, controller));
+//        options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                                 controller));
+//                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                                 controller));
+//                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                                 mediator, controller));
+//                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                                 controller));
+//                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                                 controller));
+//                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                                 mediator, controller));
+//
+//                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                         controller));
+//                options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                         controller));
+//                options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                         mediator, controller));
+//                options.add(new TowerStoreButton("ice", null, 45, "desc", "power", mediator,
+//                                                 controller));
+//                        options.add(new TowerStoreButton("monkey", null, 2, "desc", "power", mediator,
+//                                                 controller));
+//                        options.add(new TowerStoreButton("fire", null, 22, "desc", "power",
+//                                                 mediator, controller));
 
 
 

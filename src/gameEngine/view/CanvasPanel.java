@@ -1,5 +1,7 @@
 package gameEngine.view;
 
+import gameEngine.model.TowerInfo;
+
 public class CanvasPanel extends Panel implements Colleague {
     Game game;
 
@@ -15,8 +17,8 @@ public class CanvasPanel extends Panel implements Colleague {
     }
 
     @Override
-    public void purchaseTower (String tower) {
-        game.purchaseTower(tower);
+    public void placeTower (TowerInfo towerInfo) {
+        game.purchaseTower(towerInfo.getName());
 
     }
 

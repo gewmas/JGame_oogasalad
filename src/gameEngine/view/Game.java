@@ -1,5 +1,6 @@
 package gameEngine.view;
 
+
 import jgame.JGColor;
 import jgame.platform.JGEngine;
 
@@ -9,7 +10,7 @@ import jgame.platform.JGEngine;
  *         Displays the Game setting using JGEngine to facilitate
  *         graphics rendering
  */
-public class Game extends JGEngine implements Colleague {
+public class Game extends JGEngine  {
 
     public Game () {
         initEngineComponent(600, 600);
@@ -39,23 +40,13 @@ public class Game extends JGEngine implements Colleague {
 
     }
 
-    @Override
-    public void addMediator (Mediator mediator) {
-        // TODO Auto-generated method stub
 
-    }
 
-    @Override
     public void purchaseTower (String tower) {
         setBGColor(JGColor.red);
         System.out.println("User wants to purchase " + tower);
 
     }
 
-    @Override
-    public void displayInfo (String displayInfo) {
-        // TODO Auto-generated method stub
-
-    }
 
 }

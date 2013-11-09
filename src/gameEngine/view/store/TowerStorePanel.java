@@ -25,7 +25,7 @@ public class TowerStorePanel extends Panel {
     public TowerStorePanel (Mediator mediator, Controller controller) {
         super();
 
-        Panel infoPanel = new InfoPanel();
+        Panel infoPanel = new TowerInfoPanel();
         Panel options = new TowersOptionPanel(mediator, controller);
         mediator.addColleague(MediatorConstants.INFO_PANEL_KEY, infoPanel);
         
