@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -29,6 +30,18 @@ public class MapDesignTab extends Tab {
         GridBagConstraints c = new GridBagConstraints();
         JButton imageChooser = new JButton("Choose path image");
         JButton checkPath = new JButton("Check if path is valid");
+        imageChooser.addMouseListener(createPathListener());
+        checkPath.addMouseListener(createPathCheckListener());
+        c.gridwidth = 3;
+        c.gridx = 2;
+        c.insets = new Insets(10, 10, 10, 10);
+        panel.add(myGrid, c);
+        panel.add(imageChooser, c);
+        panel.add(checkPath, c);
+        return panel;
+    }
+
+    public MouseAdapter createPathListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
@@ -40,12 +53,21 @@ public class MapDesignTab extends Tab {
                 }
             }
         };
-        imageChooser.addMouseListener(listener);
-        c.gridwidth = 3;
-        c.gridx = 2;
-        c.insets = new Insets(10, 10, 10, 10);
-        panel.add(myGrid, c);
-        panel.add(imageChooser, c);
-        return panel;
+        return listener;
+    }
+
+    public MouseAdapter createPathCheckListener () {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                if (myGrid.isValidPathHelper()) {
+                    JOptionPane.showMessageDialog(null, "Valid path!");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Invalid path!");
+                }
+            }
+        };
+        return listener;
     }
 }

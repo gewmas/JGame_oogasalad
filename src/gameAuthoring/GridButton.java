@@ -57,7 +57,22 @@ public class GridButton extends JButton {
                     }
                 }
                 if (SwingUtilities.isRightMouseButton(e)) {
-
+                    String[] options = { "Set as start", "Set as end" };
+                    String choice =
+                            (String) JOptionPane.showInputDialog(
+                                                                 null,
+                                                                 "Set path start and end:",
+                                                                 "Set path start and end",
+                                                                 JOptionPane.PLAIN_MESSAGE,
+                                                                 null,
+                                                                 options,
+                                                                 "");
+                    if (choice.equals("Set as start")) {
+                        myGrid.setPathStart(new Point2D.Double(myX, myY));
+                    }
+                    if (choice.equals("Set as end")) {
+                        myGrid.setPathEnd(new Point2D.Double(myX, myY));
+                    }
                 }
             }
         };

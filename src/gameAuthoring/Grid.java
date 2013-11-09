@@ -14,6 +14,8 @@ public class Grid extends JPanel {
 
     GridButton[][] myGrid;
     boolean[][] myPath;
+    private Point2D myStart;
+    private Point2D myEnd;
     Collection<Point2D> myPathCoordinates = new ArrayList<Point2D>();
 
     public Grid (int width, int height) {
@@ -54,6 +56,21 @@ public class Grid extends JPanel {
 
     public void addCoordinate (Point2D coordinate) {
         myPathCoordinates.add(coordinate);
+    }
+
+    public void setPathStart (Point2D start) {
+        myStart = start;
+        System.out.println(myStart.toString());
+    }
+
+    public void setPathEnd (Point2D end) {
+        myEnd = end;
+        System.out.println(myEnd.toString());
+    }
+
+    public boolean isValidPathHelper () {
+        return isValidPath((int) myStart.getX(), (int) myStart.getY(), (int) myEnd.getX(),
+                           (int) myEnd.getY());
     }
 
     public boolean isValidPath (int startX, int startY, int endX, int endY) {
