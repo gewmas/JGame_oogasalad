@@ -25,6 +25,7 @@ public class GridButton extends JButton {
     public GridButton (int x, int y, Grid grid) {
         myCoordinate = new Point2D.Double(x, y);
         myGrid = grid;
+        isPath = false;
         this.setPreferredSize(new Dimension(50, 50));
         addPathListener(this);
     }

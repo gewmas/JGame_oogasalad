@@ -73,7 +73,7 @@ public class Grid extends JPanel {
     }
 
     public boolean isValidPathHelper () {
-        myPathCoordinates.clear();
+        // myPathCoordinates.clear();
         return isValidPath((int) myStart.getX(), (int) myStart.getY(), (int) myEnd.getX(),
                            (int) myEnd.getY());
     }

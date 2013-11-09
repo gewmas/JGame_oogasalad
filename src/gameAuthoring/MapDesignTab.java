@@ -38,9 +38,8 @@ public class MapDesignTab extends Tab {
         JLabel label = new JLabel("Current path image");
         myCurrentImage = new JButton();
         myCurrentImage.setPreferredSize(new Dimension(50, 50));
-        JButton imageChooser = new JButton("Choose path image");
+        myCurrentImage.addMouseListener(createPathListener());
         JButton checkPath = new JButton("Check if path is valid");
-        imageChooser.addMouseListener(createPathListener());
         checkPath.addMouseListener(createPathCheckListener());
         c.gridwidth = 3;
         c.gridx = 2;
@@ -48,7 +47,6 @@ public class MapDesignTab extends Tab {
         panel.add(label, c);
         panel.add(myCurrentImage, c);
         panel.add(myGrid, c);
-        panel.add(imageChooser, c);
         panel.add(checkPath, c);
         return panel;
     }
