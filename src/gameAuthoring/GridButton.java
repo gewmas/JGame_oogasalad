@@ -10,7 +10,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 
 
 public class GridButton extends JButton {
@@ -21,14 +20,11 @@ public class GridButton extends JButton {
     private boolean isPath;
     private Grid myGrid;
     private File myImgSource;
-    private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir"));
 
     public GridButton (int x, int y, Grid grid) {
         myX = x;
         myY = y;
         myGrid = grid;
-        this.setContentAreaFilled(false);
         this.setPreferredSize(new Dimension(50, 50));
         addPathListener(this);
     }
@@ -46,6 +42,7 @@ public class GridButton extends JButton {
                 try {
                     Image path = ImageIO.read(myImgSource);
                     gButton.setIcon(new ImageIcon(path));
+                    gButton.setPreferredSize(new Dimension(50, 50));
                 }
                 catch (IOException ex) {
                     System.out.println("Image not found");

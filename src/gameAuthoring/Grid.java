@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JPanel;
@@ -41,6 +42,14 @@ public class Grid extends JPanel {
             }
         };
         return listener;
+    }
+
+    public void setImageSource (File imgSource) {
+        for (int x = 0; x < myGrid.length; x++) {
+            for (int y = 0; y < myGrid[0].length; y++) {
+                myGrid[x][y].setImageSource(imgSource);
+            }
+        }
     }
 
     public void addCoordinate (Point2D coordinate) {
