@@ -10,6 +10,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 
 public class GridButton extends JButton {
@@ -38,14 +40,24 @@ public class GridButton extends JButton {
             @Override
             public void mouseClicked (MouseEvent e) {
                 isPath = true;
-                myGrid.addCoordinate(new Point2D.Double(myX, myY));
-                try {
-                    Image path = ImageIO.read(myImgSource);
-                    gButton.setIcon(new ImageIcon(path));
-                    gButton.setPreferredSize(new Dimension(50, 50));
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    myGrid.addCoordinate(new Point2D.Double(myX, myY));
+                    try {
+                        if (myImgSource == null) {
+                            JOptionPane.showMessageDialog(null, "No image defined");
+                        }
+                        else {
+                            Image path = ImageIO.read(myImgSource);
+                            gButton.setIcon(new ImageIcon(path));
+                            gButton.setPreferredSize(new Dimension(50, 50));
+                        }
+                    }
+                    catch (IOException ex) {
+                        System.out.println("Image not found");
+                    }
                 }
-                catch (IOException ex) {
-                    System.out.println("Image not found");
+                if (SwingUtilities.isRightMouseButton(e)) {
+
                 }
             }
         };

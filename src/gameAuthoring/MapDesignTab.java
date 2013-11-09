@@ -28,6 +28,7 @@ public class MapDesignTab extends Tab {
         myGrid = new Grid(5, 5);
         GridBagConstraints c = new GridBagConstraints();
         JButton imageChooser = new JButton("Choose path image");
+        JButton checkPath = new JButton("Check if path is valid");
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
