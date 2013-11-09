@@ -1,6 +1,5 @@
 package gameEngine.view;
 
-
 import jgame.JGColor;
 import jgame.platform.JGEngine;
 
@@ -10,7 +9,7 @@ import jgame.platform.JGEngine;
  *         Displays the Game setting using JGEngine to facilitate
  *         graphics rendering
  */
-public class Game extends JGEngine  {
+public class Game extends JGEngine {
 
     public Game () {
         initEngineComponent(600, 600);
@@ -40,13 +39,10 @@ public class Game extends JGEngine  {
 
     }
 
-
-
     public void purchaseTower (String tower) {
         setBGColor(JGColor.red);
         System.out.println("User wants to purchase " + tower);
 
     }
-
 
 }

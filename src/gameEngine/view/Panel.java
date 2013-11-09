@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  */
 public class Panel extends JPanel implements Colleague {
     public Panel () {
-        super(new BorderLayout());
+        super();
     }
 
     @Override
@@ -27,22 +27,16 @@ public class Panel extends JPanel implements Colleague {
 
     }
 
-
-
     @Override
     public void displayTowerInfo (TowerInfo tower) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void purchaseTower () {
         // TODO Auto-generated method stub
-        
+
     }
-
-
-
-
 
 }

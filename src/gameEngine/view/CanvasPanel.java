@@ -2,6 +2,7 @@ package gameEngine.view;
 
 import gameEngine.model.TowerInfo;
 
+
 public class CanvasPanel extends Panel implements Colleague {
     Game game;
 

@@ -33,11 +33,9 @@ public class Mediator {
         colleagues.get(MediatorConstants.INFO_PANEL_KEY).displayTowerInfo(tower);
 
     }
-    
-    public void purchaseTower(){
+
+    public void purchaseTower () {
         colleagues.get("view").purchaseTower();
     }
-    
-    
 
 }

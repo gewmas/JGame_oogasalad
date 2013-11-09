@@ -12,11 +12,11 @@ public class FileSelectorButton extends Button {
     public FileSelectorButton (String label, Controller controller) {
         super(label);
         this.controller = controller;
-  
 
     }
-    @Override 
-    protected void mouseClickAction() {
+
+    @Override
+    protected void mouseClickAction () {
         JFileChooser chooser =
                 new JFileChooser(System.getProperties().getProperty("user.dir"));
 
@@ -28,5 +28,5 @@ public class FileSelectorButton extends Button {
         }
 
     }
-   
+
 }
