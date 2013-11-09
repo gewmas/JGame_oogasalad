@@ -1,4 +1,4 @@
-package gameEngine.model;
+package gameAuthoring;
 
 import java.io.File;
 

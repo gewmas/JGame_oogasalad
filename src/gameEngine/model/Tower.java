@@ -1,10 +1,9 @@
 package gameEngine.model;
 
-import java.io.File;
 import jgame.JGObject;
 
 
-public class Tower extends JGObject implements Readable, Writeable {
+public class Tower extends JGObject {
 
     double damage;
     double attackSpeed;
@@ -44,18 +43,6 @@ public class Tower extends JGObject implements Readable, Writeable {
 
     @Override
     public void hit (JGObject obj) {
-
-    }
-
-    @Override
-    public File write () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void read () {
-        // TODO Auto-generated method stub
 
     }
 
