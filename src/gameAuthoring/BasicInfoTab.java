@@ -5,9 +5,10 @@ import javax.swing.JPanel;
 
 public class BasicInfoTab extends Tab {
 
-    public BasicInfoTab (GameData gameData) {
-        super(gameData);
-        // TODO Auto-generated constructor stub
+    private BasicInfoData myBasicInfoData;
+
+    public BasicInfoTab (BasicInfoData basicInfoData) {
+        myBasicInfoData = basicInfoData;
     }
 
     // TO DO: Get rid of magic number

@@ -12,8 +12,10 @@ public class Controller {
     Model model;
     View view;
 
+
     public Controller () {
         view = new View(this);
+
     }
 
     public void newGame (File jsonFile) {
@@ -27,6 +29,7 @@ public class Controller {
         return null;
 
     }
+
 
     /*
      * public int getMoney(){
@@ -49,5 +52,14 @@ public class Controller {
      * public String getBackgroundImage(){
      * 
      * }
-     */
+
+
+    public Image getPathImage(){
+        
+    }
+    public Image getBackgroundImage(){
+        
+    }*/
+
+
 }
