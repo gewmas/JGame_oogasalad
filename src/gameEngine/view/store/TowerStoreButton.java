@@ -7,21 +7,23 @@ import gameEngine.view.Button;
 import gameEngine.view.Mediator;
 
 
-/** A button that represents a tower that a user can purchase.
+/**
+ * A button that represents a tower that a user can purchase.
  * When hovered over, the tower information is displayed on the GUI
+ * 
  * @author Lalita Maraj
- *
+ * 
  */
 public class TowerStoreButton extends Button {
 
-    private static final int MAX_BUTTON_TEXT_LENGTH = 5;
+    private static final int MAX_BUTTON_TEXT_LENGTH = 6;
     private static final Color HOVER_BUTTON_COLOR = Color.BLUE;
     private static final Color HOVER_TEXT_COLOR = Color.RED;
     private static final Color HOVER_EXIT_TEXT_COLOR = Color.BLACK;
     private Mediator mediator;
     private TowerInfo towerInfo;
 
-    /** 
+    /**
      * @param towerInfo the tower info data structure of the tower the button represents
      * @param mediator facilitates communication between view components
      * @param controller facilitates communication between view and model
@@ -32,7 +34,7 @@ public class TowerStoreButton extends Button {
         this.mediator = mediator;
         this.towerInfo = towerInfo;
         setToolTipText(towerInfo.getName());
-        
+
         setOpaque(true);
 
     }
@@ -49,7 +51,9 @@ public class TowerStoreButton extends Button {
 
     }
 
-    /** Trims the name  of the button to meet size requirements if necessary
+    /**
+     * Trims the name of the button to meet size requirements if necessary
+     * 
      * @param name name of tower
      * @return trimmed name
      */
@@ -61,7 +65,7 @@ public class TowerStoreButton extends Button {
     }
 
     /**
-     * When the cursor moves away from the button, 
+     * When the cursor moves away from the button,
      * the button reverts back to its orignal background
      * and foreground
      */
