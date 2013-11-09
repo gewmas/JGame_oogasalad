@@ -58,6 +58,10 @@ public class Grid extends JPanel {
         myPathCoordinates.add(coordinate);
     }
 
+    public void removeCoordinate (Point2D coordinate) {
+        myPathCoordinates.remove(coordinate);
+    }
+
     public void setPathStart (Point2D start) {
         myStart = start;
         System.out.println(myStart.toString());
@@ -69,6 +73,7 @@ public class Grid extends JPanel {
     }
 
     public boolean isValidPathHelper () {
+        myPathCoordinates.clear();
         return isValidPath((int) myStart.getX(), (int) myStart.getY(), (int) myEnd.getX(),
                            (int) myEnd.getY());
     }
@@ -83,9 +88,8 @@ public class Grid extends JPanel {
             }
             return true;
         }
-        Point2D point = new Point2D.Double(startX, startY);
-        if (!myPathCoordinates.contains(point)) {
-            myPathCoordinates.add(point);
+        if (!myPathCoordinates.contains(myGrid[startX][startY].getCoordinate())) {
+            myPathCoordinates.add(myGrid[startX][startY].getCoordinate());
         }
         return (isValidPath(startX + 1, startY, endX, endY) || isValidPath(startX, startY + 1,
                                                                            endX, endY) ||

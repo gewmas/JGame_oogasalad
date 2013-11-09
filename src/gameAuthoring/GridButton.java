@@ -16,16 +16,14 @@ import javax.swing.SwingUtilities;
 
 public class GridButton extends JButton {
 
-    private int myX;
-    private int myY;
+    private Point2D myCoordinate;
     private JButton myButton;
     private boolean isPath;
     private Grid myGrid;
     private File myImgSource;
 
     public GridButton (int x, int y, Grid grid) {
-        myX = x;
-        myY = y;
+        myCoordinate = new Point2D.Double(x, y);
         myGrid = grid;
         this.setPreferredSize(new Dimension(50, 50));
         addPathListener(this);
@@ -39,21 +37,27 @@ public class GridButton extends JButton {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                isPath = true;
+                isPath = !isPath;
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    myGrid.addCoordinate(new Point2D.Double(myX, myY));
-                    try {
-                        if (myImgSource == null) {
-                            JOptionPane.showMessageDialog(null, "No image defined");
+                    if (isPath) {
+                        myGrid.addCoordinate(myCoordinate);
+                        try {
+                            if (myImgSource == null) {
+                                JOptionPane.showMessageDialog(null, "No image defined");
+                            }
+                            else {
+                                Image path = ImageIO.read(myImgSource);
+                                gButton.setIcon(new ImageIcon(path));
+                                gButton.setPreferredSize(new Dimension(50, 50));
+                            }
                         }
-                        else {
-                            Image path = ImageIO.read(myImgSource);
-                            gButton.setIcon(new ImageIcon(path));
-                            gButton.setPreferredSize(new Dimension(50, 50));
+                        catch (IOException ex) {
+                            System.out.println("Image not found");
                         }
                     }
-                    catch (IOException ex) {
-                        System.out.println("Image not found");
+                    else {
+                        myGrid.removeCoordinate(myCoordinate);
+                        gButton.setIcon(null);
                     }
                 }
                 if (SwingUtilities.isRightMouseButton(e)) {
@@ -68,10 +72,10 @@ public class GridButton extends JButton {
                                                                  options,
                                                                  "");
                     if (choice.equals("Set as start")) {
-                        myGrid.setPathStart(new Point2D.Double(myX, myY));
+                        myGrid.setPathStart(myCoordinate);
                     }
                     if (choice.equals("Set as end")) {
-                        myGrid.setPathEnd(new Point2D.Double(myX, myY));
+                        myGrid.setPathEnd(myCoordinate);
                     }
                 }
             }
@@ -81,6 +85,10 @@ public class GridButton extends JButton {
 
     public boolean isPath () {
         return isPath;
+    }
+
+    public Point2D getCoordinate () {
+        return myCoordinate;
     }
 
 }
