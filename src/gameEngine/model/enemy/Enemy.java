@@ -1,5 +1,7 @@
 package gameEngine.model.enemy;
 
+import gameEngine.Constant.Constant;
+import gameEngine.model.bullet.Bullet;
 import jgame.JGObject;
 
 /**
@@ -49,8 +51,8 @@ public class Enemy extends JGObject {
     public void hit(JGObject obj) {
         //hit the target enemy, destroy that enemy
         System.out.println("Bullet Hit");
-        if(obj.colid == 3){
-//            life -= ((Bullet)obj).getDamage();
+        if(obj.colid == Constant.BULLET_CID){
+            life -= ((Bullet)obj).getDamage();
             obj.remove();
             
             if(life <= 0){
