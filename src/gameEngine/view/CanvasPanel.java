@@ -15,7 +15,7 @@ public class CanvasPanel extends Panel {
 
     @Override
     public void placeTower (TowerInfo towerInfo) {
-        game.purchaseTower(towerInfo.getName());
+        game.placeTower(towerInfo.getName());
 
     }
 
