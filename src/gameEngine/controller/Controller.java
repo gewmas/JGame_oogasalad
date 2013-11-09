@@ -44,7 +44,7 @@ public class Controller {
     }    
     
     public String getBGImage(){
-        return "src/resources/space_background.jpg";
+        return "resources/space_background.jpg";
     }
     
     /*

@@ -39,6 +39,7 @@ public class Game extends JGEngine {
         //int height=gameMap.get(0).size();
         Dimension size=view.getGameSize();
         System.out.println(size.width);
+        System.out.println(size.height);
         setCanvasSettings(size.width, size.height, WIDTH/size.width,
                           HEIGHT/size.height, null, JGColor.white, null);
     }
@@ -47,7 +48,7 @@ public class Game extends JGEngine {
     public void initGame () {
         setFrameRate(30, 2);
         String bgImage=view.getBGImage();
-        defineImage("background","background",256,bgImage,null);
+        defineImage("background","bg",256,bgImage,"-");
         setBGImage("background");
         purchasing=false;
     }
