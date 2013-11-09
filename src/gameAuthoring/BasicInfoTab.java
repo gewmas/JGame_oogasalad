@@ -5,10 +5,8 @@ import javax.swing.JPanel;
 
 public class BasicInfoTab extends Tab {
 
-    private BasicInfoData myBasicInfoData;
+    public BasicInfoTab () {
 
-    public BasicInfoTab (BasicInfoData basicInfoData) {
-        myBasicInfoData = basicInfoData;
     }
 
     // TO DO: Get rid of magic number
