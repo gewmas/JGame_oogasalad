@@ -60,7 +60,7 @@ public class GridFactory implements FactoryInterface{
 	            currentXOffset = currentXOffset + width / 15;
 	            if(pathCoordinates.keySet().contains(new Coordinate(k, m))) {
 	                grid.setGraphic(pathImage);
-	                grid.setTileBBox(currentXOffset, currentYOffset, (int)(width / tilesPerRow), (int)(height / tilesPerRow));
+	                grid.setBBox(currentXOffset, currentYOffset, (int)(width / tilesPerRow), (int)(height / tilesPerRow));
 	                grid.setOnPath();
 	                pathCoordinates.put(new Coordinate(k, m), grid);
 	            }
@@ -68,7 +68,6 @@ public class GridFactory implements FactoryInterface{
 	        currentYOffset = currentYOffset + height / 15;
 	    }
 	    
-
 	   //generate path Linked List
 	    for(int k=0; k<pathList.length(); k++) {
 	        JSONObject coord = pathList.getJSONObject(k);
