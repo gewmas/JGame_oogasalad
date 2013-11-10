@@ -22,7 +22,7 @@ import gameEngine.controller.Controller;
  * @author Lalita Maraj
  * 
  */
-public class View extends Frame {
+public class View extends Frame implements Colleague{
 
     private Controller controller;
     private Mediator mediator;
@@ -42,22 +42,15 @@ public class View extends Frame {
         Panel canvasPanel = new CanvasPanel(this);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addColleague(MediatorConstants.GAME_KEY, canvasPanel);
-
         mediator.addColleague("view", this);
-
         Panel statsPanel = new StatsPanel();
         add(statsPanel, BorderLayout.SOUTH);
 
         setJMenuBar(new Menu(engineView, controller));
 
-        //
-        // showGame ();
-
     }
 
-    private void closeWindow () {
-        this.dispose();
-    }
+
 
     /**
      * Setting the Look and Feel of the UI
@@ -144,5 +137,15 @@ public class View extends Frame {
 
     public int getLives () {
         return controller.getLives();
+    }
+
+
+
+
+
+    @Override
+    public void displayTowerInfo (TowerInfo towerInfo) {
+       //No behavior
+        
     }
 }

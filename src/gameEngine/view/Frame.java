@@ -10,34 +10,11 @@ import javax.swing.JFrame;
  *         The frame can interact with the view components so
  *         it implements the Colleague interface
  */
-public class Frame extends JFrame implements Colleague {
+public class Frame extends JFrame {
 
     public Frame () {
         super();
     }
 
-    @Override
-    public void addMediator (Mediator mediator) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void placeTower (TowerInfo towerInfo) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void displayTowerInfo (TowerInfo tower) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void purchaseTower () {
-        // TODO Auto-generated method stub
-
-    }
 
 }
