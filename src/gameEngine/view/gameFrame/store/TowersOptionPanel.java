@@ -1,10 +1,10 @@
-package gameEngine.view.store;
+package gameEngine.view.gameFrame.store;
 
 import gameEngine.model.TowerInfo;
-import gameEngine.view.GameFrame;
-import gameEngine.view.GameFrameMediator;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
+import gameEngine.view.gameFrame.GameFrame;
+import gameEngine.view.gameFrame.GameFrameMediator;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
-package gameEngine.view.store;
+package gameEngine.view.gameFrame.store;
 
 import java.awt.BorderLayout;
-import gameEngine.view.GameFrame;
-import gameEngine.view.GameFrameMediator;
-import gameEngine.view.ColleagueKeys;
 import gameEngine.view.Panel;
+import gameEngine.view.gameFrame.ColleagueKeys;
+import gameEngine.view.gameFrame.GameFrame;
+import gameEngine.view.gameFrame.GameFrameMediator;
 
 
 /**

@@ -1,10 +1,10 @@
-package gameEngine.view.store;
+package gameEngine.view.gameFrame.store;
 
 import java.awt.Color;
 import gameEngine.model.TowerInfo;
 import gameEngine.view.Button;
-import gameEngine.view.GameFrame;
-import gameEngine.view.GameFrameMediator;
+import gameEngine.view.gameFrame.GameFrame;
+import gameEngine.view.gameFrame.GameFrameMediator;
 
 
 /**

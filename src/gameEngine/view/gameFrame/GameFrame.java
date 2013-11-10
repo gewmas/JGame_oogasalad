@@ -1,4 +1,4 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -13,8 +13,12 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import gameEngine.model.TowerInfo;
-import gameEngine.view.menu.Menu;
-import gameEngine.view.store.TowerStorePanel;
+import gameEngine.view.Frame;
+import gameEngine.view.Panel;
+import gameEngine.view.StyleConstants;
+import gameEngine.view.View;
+import gameEngine.view.gameFrame.menu.Menu;
+import gameEngine.view.gameFrame.store.TowerStorePanel;
 import gameEngine.controller.Controller;
 
 

@@ -1,6 +1,7 @@
 package gameEngine.view;
 
 import gameEngine.model.TowerInfo;
+import gameEngine.view.gameFrame.GameFrameColleague;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 

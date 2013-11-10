@@ -1,4 +1,4 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
 import gameEngine.controller.Controller;
 import gameEngine.model.Grid;
