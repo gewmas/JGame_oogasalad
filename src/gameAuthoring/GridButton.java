@@ -37,9 +37,9 @@ public class GridButton extends JButton {
     private void addPathListener (final GridButton gButton) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
-                isPath = !isPath;
+            public void mouseClicked (MouseEvent e) {            
                 if (SwingUtilities.isLeftMouseButton(e)) {
+                    isPath = !isPath;
                     if (isPath) {
                         myGrid.addCoordinate(myCoordinate);
                         try {
