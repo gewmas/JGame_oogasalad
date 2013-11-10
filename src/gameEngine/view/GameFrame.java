@@ -44,7 +44,7 @@ public class GameFrame extends Frame implements Colleague {
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        mediator.addColleague(MediatorConstants.GAMEFRAME_KEY, this);
+        mediator.addColleague(ColleagueKeys.GAMEFRAME.toString(), this);
         Panel statsPanel = new StatsPanel();
         add(statsPanel, BorderLayout.SOUTH);
 
@@ -73,7 +73,7 @@ public class GameFrame extends Frame implements Colleague {
     public void createGame () {
         Panel canvasPanel = new CanvasPanel(this);
         this.add(canvasPanel, BorderLayout.WEST);
-        mediator.addColleague(MediatorConstants.GAME_KEY, canvasPanel);
+        mediator.addColleague(ColleagueKeys.GAME.toString(), canvasPanel);
     }
 
     /**
@@ -159,7 +159,7 @@ public class GameFrame extends Frame implements Colleague {
         List<TowerInfo> towerInfo = new ArrayList<TowerInfo>();
         ;
         TowerInfo fire =
-                new TowerInfo("src/gameEngine/view/resources/right.gif", 45, "fire",
+                new TowerInfo("src/gameEngine/view/resources/mana.jpg", 45, "fire",
                               "burns enemies");
         towerInfo.add(fire);
         TowerInfo ice =
