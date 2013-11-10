@@ -1,7 +1,6 @@
 package gameEngine.view;
 
 import gameEngine.controller.Controller;
-import gameEngine.model.TowerInfo;
 import gameEngine.view.initialization.InitializationFrame;
 
 
