@@ -1,6 +1,5 @@
 package gameEngine.view.store;
 
-import gameEngine.controller.Controller;
 import gameEngine.model.TowerInfo;
 import gameEngine.view.GameFrame;
 import gameEngine.view.Mediator;
@@ -30,7 +29,7 @@ public class TowersOptionPanel extends Panel {
 
     /**
      * @param mediator facilitates communication between view components
-     * @param gameFrame facilitates communication between view and model
+     * @param gameFrame facilitates communication between view and controller
      */
     protected TowersOptionPanel (Mediator mediator, GameFrame gameFrame) {
 
@@ -68,7 +67,7 @@ public class TowersOptionPanel extends Panel {
      */
     private void addStoreInventory (JPanel optionsPanel, Mediator mediator, GameFrame gameFrame) {
 
-        // for (TowerInfo tower: controller.getTowers()){
+        // for (TowerInfo tower: gameFrame.getTowers()){
         // options.add(new TowerStoreButton(tower,mediator,controller));
         // }
         // MOCK DATA
@@ -83,6 +82,7 @@ public class TowersOptionPanel extends Panel {
         optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
         optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
         optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
+        // END MOCK DATA
 
     }
 

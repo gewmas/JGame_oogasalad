@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import gameEngine.model.TowerInfo;
@@ -39,7 +40,7 @@ public class GameFrame extends Frame implements Colleague {
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        mediator.addColleague("view", this);
+        mediator.addColleague(MediatorConstants.GAMEFRAME_KEY, this);
         Panel statsPanel = new StatsPanel();
         add(statsPanel, BorderLayout.SOUTH);
 
@@ -145,5 +146,9 @@ public class GameFrame extends Frame implements Colleague {
     public void displayTowerInfo (TowerInfo towerInfo) {
         // No behavior
 
+    }
+
+    public List<TowerInfo> getTowers () {
+        return controller.getTowers();
     }
 }

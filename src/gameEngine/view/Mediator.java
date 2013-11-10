@@ -51,7 +51,7 @@ public class Mediator {
      */
     public void placeTower (TowerInfo towerInfo) {
         colleagues.get(MediatorConstants.GAME_KEY).placeTower(towerInfo);
-        colleagues.get("view").placeTower(towerInfo);
+        colleagues.get(MediatorConstants.GAMEFRAME_KEY).placeTower(towerInfo);
     }
 
     /**
