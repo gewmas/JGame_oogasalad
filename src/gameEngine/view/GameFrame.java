@@ -75,7 +75,7 @@ public class GameFrame extends Frame implements Colleague {
      * Create the store of Towers
      */
     private void createStore () {
-        Panel storePanel = new TowerStorePanel(mediator, controller);
+        Panel storePanel = new TowerStorePanel(mediator, this);
         this.add(storePanel, BorderLayout.EAST);
     }
 

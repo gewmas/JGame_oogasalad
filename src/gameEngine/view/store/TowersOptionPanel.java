@@ -2,6 +2,7 @@ package gameEngine.view.store;
 
 import gameEngine.controller.Controller;
 import gameEngine.model.TowerInfo;
+import gameEngine.view.GameFrame;
 import gameEngine.view.Mediator;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
@@ -29,16 +30,16 @@ public class TowersOptionPanel extends Panel {
 
     /**
      * @param mediator facilitates communication between view components
-     * @param controller facilitates communication between view and model
+     * @param gameFrame facilitates communication between view and model
      */
-    protected TowersOptionPanel (Mediator mediator, Controller controller) {
+    protected TowersOptionPanel (Mediator mediator, GameFrame gameFrame) {
 
         super();
         setUIStyle();
 
         JPanel options = new JPanel();
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        addStoreInventory(options, mediator, controller);
+        addStoreInventory(options, mediator, gameFrame);
 
         JScrollPane scrollPane = new JScrollPane(options);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -63,25 +64,25 @@ public class TowersOptionPanel extends Panel {
      * 
      * @param optionsPanel panel buttons are added to
      * @param mediator facilitates communication between view components
-     * @param controller facilitates communication between view and model
+     * @param gameFrame facilitates communication between view and model
      */
-    private void addStoreInventory (JPanel optionsPanel, Mediator mediator, Controller controller) {
+    private void addStoreInventory (JPanel optionsPanel, Mediator mediator, GameFrame gameFrame) {
 
         // for (TowerInfo tower: controller.getTowers()){
         // options.add(new TowerStoreButton(tower,mediator,controller));
         // }
         // MOCK DATA
         TowerInfo tw = new TowerInfo("src/resources/right.gif", 45, "fire", "burns enemies");
-        optionsPanel.add(new TowerStoreButton(tw, mediator, controller));
+        optionsPanel.add(new TowerStoreButton(tw, mediator, gameFrame));
         TowerInfo gw = new TowerInfo("src/resources/mana.jpg", 45, "ice", "freeze enemies");
-        optionsPanel.add(new TowerStoreButton(gw, mediator, controller));
-        optionsPanel.add(new TowerStoreButton(gw, mediator, controller));
-        optionsPanel.add(new TowerStoreButton(gw, mediator, controller));
-        optionsPanel.add(new TowerStoreButton(gw, mediator, controller));
-        optionsPanel.add(new TowerStoreButton(gw, mediator, controller));
-        optionsPanel.add(new TowerStoreButton(gw, mediator, controller));
-        optionsPanel.add(new TowerStoreButton(gw, mediator, controller));
-        optionsPanel.add(new TowerStoreButton(gw, mediator, controller));
+        optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
+        optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
+        optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
+        optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
+        optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
+        optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
+        optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
+        optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
 
     }
 

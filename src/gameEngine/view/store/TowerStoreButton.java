@@ -4,6 +4,7 @@ import java.awt.Color;
 import gameEngine.controller.Controller;
 import gameEngine.model.TowerInfo;
 import gameEngine.view.Button;
+import gameEngine.view.GameFrame;
 import gameEngine.view.Mediator;
 
 
@@ -26,9 +27,9 @@ public class TowerStoreButton extends Button {
     /**
      * @param towerInfo the tower info data structure of the tower the button represents
      * @param mediator facilitates communication between view components
-     * @param controller facilitates communication between view and model
+     * @param gameFrame facilitates communication between view and model
      */
-    public TowerStoreButton (TowerInfo towerInfo, Mediator mediator, Controller controller) {
+    public TowerStoreButton (TowerInfo towerInfo, Mediator mediator, GameFrame gameFrame) {
         super(trimName(towerInfo.getName()));
 
         this.mediator = mediator;
