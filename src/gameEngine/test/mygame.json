@@ -4,13 +4,13 @@
 "gold" : 200,
 "numberOfLives" : 100,
 "levels": 5,
-"widthOfWindow": 600,
-"heightOfWindow": 400,
+"widthOfWindow": 960,
+"heightOfWindow": 700,
 "tilesPerRow": 15,
 "difficultyScale": 1.5,
 "map":
 {
-  	  "pathImage":  "path.jpg", 
+  	  "pathImage":  "path", 
 	  "Path":[ 
                {  "x":1, "y":2},
                { "x": 2, "y": 2 },
