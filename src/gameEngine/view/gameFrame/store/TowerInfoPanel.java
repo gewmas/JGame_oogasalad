@@ -11,7 +11,7 @@ import javax.swing.border.Border;
 
 
 /**
- * Panel that displays tower information
+ * Panel that displays tower informations
  * when user hovers over a tower option
  * 
  * @author Lalita Maraj
@@ -19,8 +19,8 @@ import javax.swing.border.Border;
  */
 public class TowerInfoPanel extends Panel {
 
-    private JList<String> myList;
-    private DefaultListModel<String> myListModel;
+    private JList myList;
+    private DefaultListModel myListModel;
 
     public TowerInfoPanel () {
         super();
@@ -38,8 +38,8 @@ public class TowerInfoPanel extends Panel {
      * Initlizes JList contents and adds
      */
     private void initializeContents () {
-        myListModel = new DefaultListModel<String>();
-        myList = new JList<String>(myListModel);
+        myListModel = new DefaultListModel();
+        myList = new JList(myListModel);
 
         JScrollPane listScrollPane = new JScrollPane(myList);
         listScrollPane.setSize(10, 10);
