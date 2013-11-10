@@ -19,8 +19,8 @@ import javax.swing.border.Border;
  */
 public class TowerInfoPanel extends Panel {
 
-    private JList<String> myList;
-    private DefaultListModel<String> myListModel;
+    private JList myList;
+    private DefaultListModel myListModel;
 
     public TowerInfoPanel () {
         super();
@@ -38,8 +38,8 @@ public class TowerInfoPanel extends Panel {
      * Initlizes JList contents and adds
      */
     private void initializeContents () {
-        myListModel = new DefaultListModel<String>();
-        myList = new JList<String>(myListModel);
+        myListModel = new DefaultListModel();
+        myList = new JList(myListModel);
 
         JScrollPane listScrollPane = new JScrollPane(myList);
         listScrollPane.setSize(10, 10);
@@ -54,9 +54,9 @@ public class TowerInfoPanel extends Panel {
     public void displayTowerInfo (TowerInfo tower) {
         // ImageIcon icon = new ImageIcon(tower.getImage());
         myListModel.clear();
-        myListModel.addElement("Tower: " + tower.getName());
-        myListModel.addElement("Cost: " + Integer.toString(tower.getCost()));
-        myListModel.addElement("Description: " + tower.getDescription());
+        myListModel.addElement(TowerInfoFields.NAME + tower.getName());
+        myListModel.addElement(TowerInfoFields.COST + Integer.toString(tower.getCost()));
+        myListModel.addElement(TowerInfoFields.DESCRIPTION + tower.getDescription());
 
     }
 
