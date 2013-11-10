@@ -1,6 +1,6 @@
 package main;
-import gameEngine.controller.Controller;
 
+import gameEngine.controller.Controller;
 
 
 public class Main {
