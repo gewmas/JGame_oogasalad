@@ -48,9 +48,9 @@ public class Game extends StdGame {
         initial_lives = gameFrame.getLives();
         lives = gameFrame.getLives();
         money = gameFrame.getMoney();
-        String bgImage = gameFrame.getBGImage();
-        defineImage("background", "bg", 256, bgImage, "-");
-        setBGImage("background");
+//        String bgImage = gameFrame.getBGImage();
+//        defineImage("background", "bg", 256, bgImage, "-");
+//        setBGImage("background");
         purchasing = false;
         setHighscores(10, new Highscore(0, "aaa"), 3);
         startgame_ingame = true;
