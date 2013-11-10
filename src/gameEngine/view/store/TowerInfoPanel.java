@@ -54,9 +54,9 @@ public class TowerInfoPanel extends Panel {
     public void displayTowerInfo (TowerInfo tower) {
         // ImageIcon icon = new ImageIcon(tower.getImage());
         myListModel.clear();
-        myListModel.addElement("Tower: " + tower.getName());
-        myListModel.addElement("Cost: " + Integer.toString(tower.getCost()));
-        myListModel.addElement("Description: " + tower.getDescription());
+        myListModel.addElement(TowerInfoFields.NAME + tower.getName());
+        myListModel.addElement(TowerInfoFields.COST + Integer.toString(tower.getCost()));
+        myListModel.addElement(TowerInfoFields.DESCRIPTION + tower.getDescription());
 
     }
 

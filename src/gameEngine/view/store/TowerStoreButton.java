@@ -31,8 +31,8 @@ public class TowerStoreButton extends Button {
      */
     public TowerStoreButton (TowerInfo towerInfo, Mediator mediator, GameFrame gameFrame) {
         super(trimName(towerInfo.getName()));
-        active = false;
-        this.setEnabled(false);
+        active = true; //to be changed!
+        this.setEnabled(true);
         this.mediator = mediator;
         this.towerInfo = towerInfo;
         setToolTipText(towerInfo.getName());
