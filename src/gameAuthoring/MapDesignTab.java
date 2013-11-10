@@ -1,6 +1,7 @@
 package gameAuthoring;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -10,12 +11,15 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import net.miginfocom.swing.MigLayout;
 
 
 public class MapDesignTab extends Tab {
@@ -32,10 +36,14 @@ public class MapDesignTab extends Tab {
     // TODO: Get rid of magic number
     @Override
     public JPanel getTab () {
-        JPanel panel = new JPanel(new GridBagLayout());
+        JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
+        JPanel gridPanel = new JPanel(new GridBagLayout());
+        gridPanel.setPreferredSize(new Dimension(500, 500));
         myGrid = new Grid(5, 5);
-        GridBagConstraints c = new GridBagConstraints();
+        JLabel title = new JLabel("Map Design");
+        title.setFont(new Font("Arial", Font.BOLD, 30));
         JLabel label = new JLabel("Current path image");
+        label.setFont(new Font("Arial", Font.BOLD, 20));
         myCurrentImage = new JButton();
         myCurrentImage.setPreferredSize(new Dimension(50, 50));
         myCurrentImage.addMouseListener(createPathListener());
@@ -43,15 +51,20 @@ public class MapDesignTab extends Tab {
         checkPath.addMouseListener(createPathCheckListener());
         JButton setBackground = new JButton("Set background image");
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
-        c.gridwidth = 3;
-        c.gridx = 2;
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridwidth = 1;
         c.insets = new Insets(10, 10, 10, 10);
-        panel.add(label, c);
-        panel.add(myCurrentImage, c);
-        panel.add(myGrid, c);
-        panel.add(setBackground, c);
-        panel.add(checkPath, c);
-        return panel;
+        mainPanel.add(title, "span 2");
+        gridPanel.add(label, c);
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        gridPanel.add(myCurrentImage, c);
+        gridPanel.add(myGrid, c);
+        gridPanel.add(checkPath, c);
+        gridPanel.add(setBackground, c);
+        mainPanel.add(gridPanel, "span 2, align center");
+        Border b = BorderFactory.createLoweredBevelBorder();
+        gridPanel.setBorder(b);
+        return mainPanel;
     }
 
     public MouseAdapter createPathListener () {

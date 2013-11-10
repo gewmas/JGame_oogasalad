@@ -6,10 +6,13 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -27,15 +30,21 @@ public class TowerDesignTab extends Tab {
     public JPanel getTab () {
         JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
         JLabel title = new JLabel("Tower Design");
-        title.setFont(new Font("Arial", Font.BOLD, 20));
+        title.setFont(new Font("Arial", Font.BOLD, 30));
         mainPanel.add(title, "span 2");
         mainPanel.setPreferredSize(new Dimension(500, 500));
-        myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
+        myScrollPanel = new JPanel(new MigLayout("wrap 8"));
         TowerDesignPanel towerDesignDialog = new TowerDesignPanel(this);
-        mainPanel.add(towerDesignDialog);
+        mainPanel.add(towerDesignDialog, "span 2");
         myCreatedTowers = new JScrollPane(myScrollPanel);
-        myCreatedTowers.setPreferredSize(new Dimension(200, 400));
-        mainPanel.add(myCreatedTowers, "pad 30 60 10 40");
+        myCreatedTowers.setPreferredSize(new Dimension(380, 200));
+        Border b = BorderFactory.createLoweredBevelBorder();
+        myCreatedTowers.setBorder(BorderFactory
+                .createTitledBorder(b, "Created Towers",
+                                    TitledBorder.CENTER,
+                                    TitledBorder.TOP,
+                                    new Font("Arial", Font.BOLD, 16)));
+        mainPanel.add(myCreatedTowers);
         return mainPanel;
     }
 

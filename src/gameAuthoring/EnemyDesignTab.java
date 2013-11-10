@@ -1,14 +1,18 @@
 package gameAuthoring;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -25,12 +29,21 @@ public class EnemyDesignTab extends Tab {
     public JPanel getTab () {
         JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
         mainPanel.setPreferredSize(new Dimension(500, 500));
-        myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
+        JLabel title = new JLabel("Enemy Design");
+        title.setFont(new Font("Arial", Font.BOLD, 30));
+        mainPanel.add(title, "span 2");
+        myScrollPanel = new JPanel(new MigLayout("wrap 4"));
         EnemyDesignPanel enemyDesignPanel = new EnemyDesignPanel(this);
-        mainPanel.add(enemyDesignPanel);
+        mainPanel.add(enemyDesignPanel, "span 2");
         myCreatedEnemies = new JScrollPane(myScrollPanel);
-        myCreatedEnemies.setPreferredSize(new Dimension(200, 400));
-        mainPanel.add(myCreatedEnemies, "pad 30 60 10 40");
+        myCreatedEnemies.setPreferredSize(new Dimension(380, 350));
+        Border b = BorderFactory.createLoweredBevelBorder();
+        myCreatedEnemies.setBorder(BorderFactory
+                .createTitledBorder(b, "Created Enemies",
+                                    TitledBorder.CENTER,
+                                    TitledBorder.TOP,
+                                    new Font("Arial", Font.BOLD, 16)));
+        mainPanel.add(myCreatedEnemies, "aligny center");
         return mainPanel;
     }
 
@@ -47,7 +60,6 @@ public class EnemyDesignTab extends Tab {
         JLabel enemyNameLabel = new JLabel(enemyName);
         myScrollPanel.add(enemyNameLabel);
         myScrollPanel.add(enemyIcon);
-
     }
 
 }

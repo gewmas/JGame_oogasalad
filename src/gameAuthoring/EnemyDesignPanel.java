@@ -7,12 +7,14 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -64,6 +66,8 @@ public class EnemyDesignPanel extends JPanel {
         this.add(enemyImageChooser);
         this.add(myEnemyImage);
         this.add(createEnemyButton);
+        Border b = BorderFactory.createLoweredBevelBorder();
+        this.setBorder(b);
     }
 
     public MouseAdapter createPathListener () {

@@ -7,12 +7,14 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import net.miginfocom.swing.MigLayout;
 
@@ -83,6 +85,8 @@ public class TowerDesignPanel extends JPanel {
         this.add(towerImageChooser, "aligny center");
         this.add(myTowerImage);
         this.add(createTowerButton);
+        Border b = BorderFactory.createLoweredBevelBorder();
+        this.setBorder(b);
 
     }
 
