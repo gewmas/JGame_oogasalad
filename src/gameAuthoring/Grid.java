@@ -73,7 +73,7 @@ public class Grid extends JPanel {
     }
 
     public boolean isValidPathHelper () {
-        // myPathCoordinates.clear();
+        myPathCoordinates.clear();
         return isValidPath((int) myStart.getX(), (int) myStart.getY(), (int) myEnd.getX(),
                            (int) myEnd.getY());
     }
@@ -91,6 +91,11 @@ public class Grid extends JPanel {
         if (!myPathCoordinates.contains(myGrid[startX][startY].getCoordinate())) {
             myPathCoordinates.add(myGrid[startX][startY].getCoordinate());
         }
+        
+        else{
+            return false;
+        }
+        
         return (isValidPath(startX + 1, startY, endX, endY) || isValidPath(startX, startY + 1,
                                                                            endX, endY) ||
                 isValidPath(startX - 1, startY, endX, endY) || isValidPath(startX, startY - 1,

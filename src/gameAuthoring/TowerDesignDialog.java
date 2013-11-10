@@ -13,6 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -41,6 +42,10 @@ public class TowerDesignDialog extends JDialog {
     private JLabel myTowerImage;
 
     public TowerDesignDialog (TowerDesignTab towerDesignTab) {
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                                                                     "JPG & GIF Images", "jpg", "gif");
+        INPUT_CHOOSER.setFileFilter(filter);
+        
         myTowerDesignTab = towerDesignTab;
         myName = new JLabel("Name");
         myDamage = new JLabel("Damage");
