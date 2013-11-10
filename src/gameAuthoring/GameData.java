@@ -10,19 +10,30 @@ public class GameData {
     private String myGameName;
     private int myGold;
     private int myLives;
-    
+
     private String mySplashImage;
     private int myNumLevels;
-    private Collection<TowerFactory> myTowerFactory;
-    private Collection<EnemyFactory> myEnemyFactory;
-    
-    
-    public void setGameName(String gameName){
+    private Collection<TowerFactory> myTowers;
+    private Collection<EnemyFactory> myEnemies;
+
+    public void setGameName (String gameName) {
         myGameName = gameName;
     }
+
+    public void setGold (int gold) {
+        myGold = gold;
+    }
+
+    public void setLives (int lives) {
+        myLives = lives;
+    }
     
-    public void setGold(String gold){
-        
+    public void addTower(TowerFactory tower){
+        myTowers.add(tower);      
+    }
+    
+    public void addEnemy(EnemyFactory enemy){
+        myEnemies.add(enemy);
     }
 
 }

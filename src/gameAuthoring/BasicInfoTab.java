@@ -16,7 +16,8 @@ public class BasicInfoTab extends Tab {
     private JTextField myGold;
     private JTextField myLives;
 
-    public BasicInfoTab () {
+    public BasicInfoTab (GameData gameData) {
+        super(gameData);
         getTab();
     }
 
@@ -28,10 +29,11 @@ public class BasicInfoTab extends Tab {
         JLabel gold = new JLabel("Starting Gold");
         JLabel lives = new JLabel("Starting Lives");
         
+        JButton setSplashImageButton = new JButton("Choose Splash Image");
+
         JButton setInfoButton = new JButton("Set Info");
         setInfoButton.addMouseListener(setInfoListener());
-        
-  
+
         myGameName = new JTextField();
         myGameName.setPreferredSize(new Dimension(200, 30));
         myGold = new JTextField();
@@ -46,20 +48,22 @@ public class BasicInfoTab extends Tab {
         panel.add(myGold);
         panel.add(lives);
         panel.add(myLives);
+        panel.add(setSplashImageButton);
         panel.add(setInfoButton);
 
         return panel;
     }
-    
-    public MouseAdapter setInfoListener(){
+
+    public MouseAdapter setInfoListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-              String s = myGameName.getText();
-              System.out.println(s);
+                myGameData.setGameName(myGameName.getText());
+                myGameData.setGold(Integer.parseInt(myGold.getText()));
+                myGameData.setLives(Integer.parseInt(myLives.getText()));
             }
         };
         return listener;
-        
+
     }
 }

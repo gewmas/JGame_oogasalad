@@ -25,8 +25,8 @@ public class MapDesignTab extends Tab {
     private Grid myGrid;
     private JButton myCurrentImage;
 
-    public MapDesignTab () {
-
+    public MapDesignTab (GameData gameData) {
+        super(gameData);
     }
 
     // TODO: Get rid of magic number

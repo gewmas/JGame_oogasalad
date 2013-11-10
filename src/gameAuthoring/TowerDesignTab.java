@@ -20,8 +20,8 @@ public class TowerDesignTab extends Tab {
     private JScrollPane myCreatedTowers;
     private JPanel myScrollPanel;
 
-    public TowerDesignTab () {
-
+    public TowerDesignTab (GameData gameData) {
+        super(gameData);
     }
 
     // TODO: Get rid of magic number

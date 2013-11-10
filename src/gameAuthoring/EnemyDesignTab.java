@@ -20,8 +20,8 @@ public class EnemyDesignTab extends Tab {
     private JScrollPane myCreatedEnemies;
     private JPanel myScrollPanel;
 
-    public EnemyDesignTab () {
-
+    public EnemyDesignTab (GameData gameData) {
+        super(gameData);
     }
 
     @Override
