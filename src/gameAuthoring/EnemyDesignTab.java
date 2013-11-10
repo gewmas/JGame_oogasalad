@@ -24,7 +24,7 @@ public class EnemyDesignTab extends Tab {
         mainPanel.setPreferredSize(new Dimension(500, 500));
         myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
         JButton button = new JButton("Create New Enemy Type");
-        // button.addMouseListener(createNewTowerListener(this));
+        button.addMouseListener(createNewEnemyListener(this));
         mainPanel.add(button, "pad 0 20 0 20");
         myCreatedEnemies = new JScrollPane(myScrollPanel);
         myCreatedEnemies.setPreferredSize(new Dimension(200, 400));
@@ -36,7 +36,9 @@ public class EnemyDesignTab extends Tab {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-
+                EnemyDesignDialog enemyDesignDialog = new EnemyDesignDialog(enemyDesignTab);
+                enemyDesignDialog.setSize(new Dimension(300, 350));
+                enemyDesignDialog.setVisible(true);
             }
         };
         return listener;
