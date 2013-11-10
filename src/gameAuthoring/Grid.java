@@ -7,8 +7,6 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JPanel;
 
 
@@ -18,7 +16,8 @@ public class Grid extends JPanel {
     boolean[][] myPath;
     private Point2D myStart;
     private Point2D myEnd;
-    private Collection<Point2D> myPathCoordinates = new ArrayList<Point2D>();
+    Collection<Point2D> myPathCoordinates = new ArrayList<Point2D>();
+
     public Grid (int width, int height) {
         this.setLayout(new GridLayout(width, height));
         myGrid = new GridButton[width][height];
@@ -74,20 +73,12 @@ public class Grid extends JPanel {
     }
 
     public boolean isValidPathHelper () {
-        myPathCoordinates.clear();
-
-        for (int i = 0; i < myPath[0].length; i++) {
-            for (int j = 0; j < myPath.length; j++) {
-                System.out.print(myGrid[i][j].isPath() ? '.' : 'x');
-            }
-            System.out.println();
-        }
-
+        // myPathCoordinates.clear();
         return isValidPath((int) myStart.getX(), (int) myStart.getY(), (int) myEnd.getX(),
                            (int) myEnd.getY());
     }
 
-    private boolean isValidPath (int startX, int startY, int endX, int endY) {
+    public boolean isValidPath (int startX, int startY, int endX, int endY) {
         if (startX < 0 || startX >= myGrid.length || startY < 0 || startY >= myGrid[0].length) { return false; }
         if (!myGrid[startX][startY].isPath()) { return false; }
         if (startX == endX && startY == endY) {
@@ -97,13 +88,8 @@ public class Grid extends JPanel {
             }
             return true;
         }
-
         if (!myPathCoordinates.contains(myGrid[startX][startY].getCoordinate())) {
             myPathCoordinates.add(myGrid[startX][startY].getCoordinate());
-        }
-
-        else {
-            return false;
         }
         return (isValidPath(startX + 1, startY, endX, endY) || isValidPath(startX, startY + 1,
                                                                            endX, endY) ||
