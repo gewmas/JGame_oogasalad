@@ -8,6 +8,7 @@ import javax.swing.AbstractAction;
 
 public class RestartGameMenuItem extends AbstractAction {
     private Controller controller;
+
     public RestartGameMenuItem (Controller controller) {
 
         super(StyleConstants.myResources.getString("RestartGameFileMenu"));
@@ -16,7 +17,7 @@ public class RestartGameMenuItem extends AbstractAction {
 
     @Override
     public void actionPerformed (ActionEvent e) {
-//        controller.restart();
+        // controller.restart();
 
     }
 

@@ -22,7 +22,7 @@ import gameEngine.controller.Controller;
  * @author Lalita Maraj
  * 
  */
-public class View extends Frame implements Colleague {
+public class GameFrame extends Frame implements Colleague {
 
     private Controller controller;
     private Mediator mediator;
@@ -31,7 +31,7 @@ public class View extends Frame implements Colleague {
      * @param controller facilitates communication between view and model
      * @param engineView
      */
-    public View (Controller controller, EngineView engineView) {
+    public GameFrame (Controller controller, EngineView engineView) {
         super();
         mediator = new Mediator();
         this.controller = controller;

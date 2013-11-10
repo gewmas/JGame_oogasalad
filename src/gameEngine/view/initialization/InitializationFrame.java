@@ -23,10 +23,9 @@ public class InitializationFrame extends Frame {
     public InitializationFrame (Controller controller, EngineView engineView) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        getContentPane().add(new InitializationPanel(controller, this,engineView));
+        getContentPane().add(new InitializationPanel(controller, this, engineView));
         pack();
         setVisible(true);
     }
 
-   
 }

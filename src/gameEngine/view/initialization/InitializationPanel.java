@@ -17,15 +17,17 @@ import gameEngine.controller.*;
 
 public class InitializationPanel extends Panel {
 
-    public InitializationPanel (Controller controller, JFrame initializationFrame,EngineView engineView) {
+    public InitializationPanel (Controller controller,
+                                JFrame initializationFrame,
+                                EngineView engineView) {
         super();
 
         JLabel message = new JLabel(StyleConstants.myResources.getString("Welcome"));
         add(message);
 
         Button selectorButton =
-                new FileSelectorButton(controller, engineView,initializationFrame);
-        Button cancelButton = new CancelButton( initializationFrame);
+                new FileSelectorButton(controller, engineView, initializationFrame);
+        Button cancelButton = new CancelButton(initializationFrame);
         add(cancelButton);
         add(selectorButton);
     }

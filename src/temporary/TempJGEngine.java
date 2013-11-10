@@ -39,21 +39,20 @@ public class TempJGEngine extends JGEngine {
     public void startInGame () {
 
         setPFSize(3 * 16, 43);
-        Rule r=new Rule();
-        //r.addWave(new Wave(null, 5, 1000));
-        //r.addWave(new Wave(null, 5, 1000));
+        Rule r = new Rule();
+        // r.addWave(new Wave(null, 5, 1000));
+        // r.addWave(new Wave(null, 5, 1000));
         r.ruleStart();
         new TempAOE(null, false, 400, 400, 0, null);
-        
-        
+
     }
 
     public void paintFrameInGame () {
-        
+
     }
 
     public void doFrameInGame () {
         this.moveObjects();
-        
+
     }
 }

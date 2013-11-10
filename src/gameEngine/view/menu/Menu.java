@@ -12,13 +12,14 @@ import javax.swing.JMenuBar;
  */
 public class Menu extends JMenuBar {
     EngineView engineView;
-    public Menu(EngineView engineView, Controller controller){
+
+    public Menu (EngineView engineView, Controller controller) {
         this.engineView = engineView;
         JMenu menuitem = new JMenu("File");
         menuitem.add(new NewGameMenuItem(engineView));
         menuitem.add(new RestartGameMenuItem(controller));
         add(menuitem);
-        
+
     }
-    
+
 }

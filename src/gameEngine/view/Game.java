@@ -22,13 +22,13 @@ public class Game extends StdGame {
     private int WIDTH = 600;
     private int HEIGHT = 600;
 
-    private View view;
+    private GameFrame view;
     private boolean purchasing;
     private String towerToPurchase;
     // private int lives;
     private int money;
 
-    public Game (View view) {
+    public Game (GameFrame view) {
         this.view = view;
         initEngineComponent(WIDTH, HEIGHT);
     }

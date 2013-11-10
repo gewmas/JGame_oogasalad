@@ -45,10 +45,10 @@ public class FileSelectorButton extends Button {
         if (selected == JFileChooser.APPROVE_OPTION) {
             File file = new File(chooser.getSelectedFile().toString());
             // to do: check that it is a Json file
-           if (controller.newGame(file)){
-               engineView.showGame();
-               frame.dispose();
-           }
+            if (controller.newGame(file)) {
+                engineView.showGame();
+                frame.dispose();
+            }
         }
 
     }
