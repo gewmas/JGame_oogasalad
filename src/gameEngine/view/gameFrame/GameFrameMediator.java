@@ -1,4 +1,4 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
 import gameEngine.model.TowerInfo;
 import java.util.HashMap;

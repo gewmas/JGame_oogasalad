@@ -1,4 +1,4 @@
-package gameEngine.view.menu;
+package gameEngine.view.gameFrame.menu;
 
 import gameEngine.view.View;
 import gameEngine.view.StyleConstants;

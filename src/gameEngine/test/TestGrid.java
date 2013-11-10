@@ -2,7 +2,9 @@ package gameEngine.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.LinkedList;
 import java.util.Scanner;
+import gameEngine.model.Grid;
 import gameEngine.Constant.Constant;
 import gameEngine.factory.Factory;
 import gameEngine.model.Model;
@@ -16,15 +18,15 @@ import jgame.platform.JGEngine;
  * 
  * @author Harris
  * 
- *         Test Grid
+ * Test Grid
  * 
  */
 public class TestGrid extends JGEngine {
-
+    
     public static void main (String[] args) {
         new TestGrid(new JGPoint(960, 700));
     }
-
+    
     /** Application constructor. */
     public TestGrid (JGPoint size) {
         initEngine(size.x, size.y);
@@ -47,18 +49,23 @@ public class TestGrid extends JGEngine {
     public void initGame () {
         defineMedia("mygame.tbl");
         setFrameRate(60, 2);
-
-        try {
-            File file = new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json");
-            Scanner scanner = new Scanner(file);
-            Parser parser = new Parser(scanner);
-            Factory factory = new Factory(parser);
-            factory.grid().initialize();
-        }
-        catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
+      try {
+          File file = new File("src/gameEngine/test/mygame.json");
+          Scanner scanner = new Scanner(file);
+          Parser parser = new Parser(scanner);
+          Factory factory = new Factory(parser);
+          factory.grid().initialize();
+          LinkedList<Grid> pathList = factory.grid().getPathList();
+          for(Grid grid: pathList) {
+              System.out.println("Path x=" + grid.getXPos() + " y=" + grid.getYPos());
+          }
+          
+      }
+      catch (FileNotFoundException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+      }
     }
 
     @Override
