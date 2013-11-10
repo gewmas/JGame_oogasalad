@@ -39,9 +39,7 @@ public class GameFrame extends Frame implements Colleague {
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Panel canvasPanel = new CanvasPanel(this);
-        this.add(canvasPanel, BorderLayout.WEST);
-        mediator.addColleague(MediatorConstants.GAME_KEY, canvasPanel);
+        
         mediator.addColleague("view", this);
         Panel statsPanel = new StatsPanel();
         add(statsPanel, BorderLayout.SOUTH);
@@ -61,12 +59,19 @@ public class GameFrame extends Frame implements Colleague {
     }
 
     public void showGame () {
+        createGame();
         createStore();
         pack();
         setVisible(true);
 
     }
 
+    public void createGame(){
+        Panel canvasPanel = new CanvasPanel(this);
+        this.add(canvasPanel, BorderLayout.WEST);
+        mediator.addColleague(MediatorConstants.GAME_KEY, canvasPanel);
+    }
+    
     /**
      * Create the store of Towers
      */

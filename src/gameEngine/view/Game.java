@@ -22,20 +22,20 @@ public class Game extends StdGame {
     private int WIDTH = 600;
     private int HEIGHT = 600;
 
-    private GameFrame view;
+    private GameFrame gameFrame;
     private boolean purchasing;
     private String towerToPurchase;
     // private int lives;
     private int money;
 
-    public Game (GameFrame view) {
-        this.view = view;
+    public Game (GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
         initEngineComponent(WIDTH, HEIGHT);
     }
 
     @Override
     public void initCanvas () {
-        Dimension size = view.getGameSize();
+        Dimension size = gameFrame.getGameSize();
         System.out.println(size.width);
         System.out.println(size.height);
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
@@ -45,10 +45,10 @@ public class Game extends StdGame {
     @Override
     public void initGame () {
         setFrameRate(30, 2);
-        initial_lives = view.getLives();
-        lives = view.getLives();
-        money = view.getMoney();
-        String bgImage = view.getBGImage();
+        initial_lives = gameFrame.getLives();
+        lives = gameFrame.getLives();
+        money = gameFrame.getMoney();
+        String bgImage = gameFrame.getBGImage();
         defineImage("background", "bg", 256, bgImage, "-");
         setBGImage("background");
         purchasing = false;
@@ -77,12 +77,12 @@ public class Game extends StdGame {
             JGPoint mousePosition = getMousePos();
             JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
             if (purchasing) {
-                view.buyTower(tilePosition.x, tilePosition.y, towerToPurchase);
+                gameFrame.buyTower(tilePosition.x, tilePosition.y, towerToPurchase);
                 purchasing = false;
                 System.out.format("Buying tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
             else {
-                view.getTowerInfo(tilePosition.x, tilePosition.y);
+                gameFrame.getTowerInfo(tilePosition.x, tilePosition.y);
                 System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
         }
@@ -92,9 +92,9 @@ public class Game extends StdGame {
      * Updates the number of lives and money remaining in the game
      */
     public void updateGameStats () {
-        lives = view.getLives();
-        money = view.getMoney();
-        score = view.getScore();
+        lives = gameFrame.getLives();
+        money = gameFrame.getMoney();
+        score = gameFrame.getScore();
     }
 
     @Override
