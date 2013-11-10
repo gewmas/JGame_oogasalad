@@ -83,6 +83,7 @@ public class GridButton extends JButton {
         };
         gButton.addMouseListener(listener);
     }
+    
 
     public boolean isPath () {
         return isPath;
