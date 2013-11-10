@@ -41,12 +41,15 @@ public class MapDesignTab extends Tab {
         myCurrentImage.addMouseListener(createPathListener());
         JButton checkPath = new JButton("Check if path is valid");
         checkPath.addMouseListener(createPathCheckListener());
+        JButton setBackground = new JButton("Set background image");
+        setBackground.addMouseListener(createGridBackgroundListener(myGrid));
         c.gridwidth = 3;
         c.gridx = 2;
         c.insets = new Insets(10, 10, 10, 10);
         panel.add(label, c);
         panel.add(myCurrentImage, c);
         panel.add(myGrid, c);
+        panel.add(setBackground, c);
         panel.add(checkPath, c);
         return panel;
     }
@@ -66,7 +69,6 @@ public class MapDesignTab extends Tab {
                         myCurrentImage.setIcon(new ImageIcon(path));
                     }
                     catch (IOException e1) {
-                        // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
                 }
@@ -84,6 +86,21 @@ public class MapDesignTab extends Tab {
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Invalid path!");
+                }
+            }
+        };
+        return listener;
+    }
+
+    public MouseAdapter createGridBackgroundListener (final Grid grid) {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                int loadObject = INPUT_CHOOSER.showOpenDialog(null);
+                if (loadObject == JFileChooser.APPROVE_OPTION) {
+                    System.out.println(INPUT_CHOOSER.getSelectedFile());
+                    File imgSource = INPUT_CHOOSER.getSelectedFile();
+                    myGrid.setBackgroundImageSource(imgSource);
                 }
             }
         };

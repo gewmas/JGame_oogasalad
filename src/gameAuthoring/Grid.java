@@ -17,11 +17,12 @@ import javax.swing.JPanel;
 
 public class Grid extends JPanel {
 
-    GridButton[][] myGrid;
+    private GridButton[][] myGrid;
     boolean[][] myPath;
     private Point2D myStart;
     private Point2D myEnd;
-    Collection<Point2D> myPathCoordinates = new ArrayList<Point2D>();
+    private Collection<Point2D> myPathCoordinates = new ArrayList<Point2D>();
+    private File myBackgroundImage;
 
     public Grid (int width, int height) {
         this.setLayout(new GridLayout(width, height));
@@ -61,6 +62,10 @@ public class Grid extends JPanel {
                 myGrid[x][y].setImageSource(imgSource);
             }
         }
+    }
+
+    public void setBackgroundImageSource (File bgSource) {
+        myBackgroundImage = bgSource;
     }
 
     public void addCoordinate (Point2D coordinate) {
@@ -119,36 +124,33 @@ public class Grid extends JPanel {
 
     @Override
     public void paintComponent (Graphics page) {
-
-        super.paintComponent(page);
-        Image img = null;
-        try {
-            img = ImageIO.read(getClass().getResource("bg.jpg"));
+        if (myBackgroundImage == null) {
+            super.paintComponent(page);
         }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        else {
+            super.paintComponent(page);
+            Image img = null;
+            try {
+                img = ImageIO.read(myBackgroundImage);
+            }
+            catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            int h = img.getHeight(null);
+            int w = img.getWidth(null);
+
+            if (w > this.getWidth() || w < this.getWidth()) {
+                img = img.getScaledInstance(getWidth(), -1, Image.SCALE_DEFAULT);
+                h = img.getHeight(null);
+            }
+            if (h > this.getHeight() || h < this.getHeight()) {
+                img = img.getScaledInstance(-1, getHeight(), Image.SCALE_DEFAULT);
+            }
+            int x = (getWidth() - img.getWidth(null)) / 2;
+            int y = (getHeight() - img.getHeight(null)) / 2;
+            page.drawImage(img, x, y, null);
         }
-        int h = img.getHeight(null);
-        int w = img.getWidth(null);
-
-        // Scale Horizontally:
-        if (w > this.getWidth() || w < this.getWidth()) {
-            img = img.getScaledInstance(getWidth(), -1, Image.SCALE_DEFAULT);
-            h = img.getHeight(null);
-        }
-
-        // Scale Vertically:
-        if (h > this.getHeight() || h < this.getHeight()) {
-            img = img.getScaledInstance(-1, getHeight(), Image.SCALE_DEFAULT);
-        }
-
-        // Center Images
-        int x = (getWidth() - img.getWidth(null)) / 2;
-        int y = (getHeight() - img.getHeight(null)) / 2;
-
-        // Draw it
-        page.drawImage(img, x, y, null);
     }
 
     public static void main (String[] args) {

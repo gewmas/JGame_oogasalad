@@ -35,10 +35,11 @@ public class TowerDesignDialog extends JDialog {
     private JLabel myTowerImage;
 
     public TowerDesignDialog (TowerDesignTab towerDesignTab) {
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                                                                     "JPG & GIF Images", "jpg", "gif");
+        FileNameExtensionFilter filter =
+                new FileNameExtensionFilter(
+                                            "JPG & GIF Images", "jpg", "gif");
         INPUT_CHOOSER.setFileFilter(filter);
-        
+
         myTowerDesignTab = towerDesignTab;
         JLabel name = new JLabel("Name");
         JLabel damage = new JLabel("Damage");
@@ -101,7 +102,6 @@ public class TowerDesignDialog extends JDialog {
                         myTowerImage.setIcon(new ImageIcon(tower));
                     }
                     catch (IOException e1) {
-                        // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
                 }
