@@ -18,7 +18,7 @@ public class StatsPanel extends Panel {
         super();
         label = new JLabel("THIS IS AN EXAMPLE");
         Border valuePanelBorder =
-                BorderFactory.createTitledBorder(StyleConstants.myResources
+                BorderFactory.createTitledBorder(StyleConstants.resourceBundle
                         .getString("TowerStatistics"));
         setBorder(valuePanelBorder);
 

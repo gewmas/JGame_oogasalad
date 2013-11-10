@@ -6,6 +6,8 @@ package gameEngine.view;
  * @author Lalita Maraj
  * 
  */
+// CHANGE TO ENUM CLASS
+// CHANGE NAME (MAYBE SOMETHING )
 public class MediatorConstants {
     public final static String GAME_KEY = "game";
     public static final String INFO_PANEL_KEY = "info";

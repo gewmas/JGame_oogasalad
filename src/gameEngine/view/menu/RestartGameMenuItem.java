@@ -11,7 +11,7 @@ public class RestartGameMenuItem extends AbstractAction {
 
     public RestartGameMenuItem (Controller controller) {
 
-        super(StyleConstants.myResources.getString("RestartGameFileMenu"));
+        super(StyleConstants.resourceBundle.getString("RestartGameFileMenu"));
         this.controller = controller;
     }
 

@@ -23,7 +23,7 @@ public class View {
         initializationFrame = new InitializationFrame(controller, this);
 
     }
-    
+
     // May need to actually initialize the game when this is called
     public void showGame () {
         gameFrame.showGame();
@@ -34,5 +34,4 @@ public class View {
         initializationFrame = new InitializationFrame(controller, this);
     }
 
-    
 }

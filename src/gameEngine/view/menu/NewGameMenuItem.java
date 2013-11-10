@@ -17,7 +17,7 @@ class NewGameMenuItem extends AbstractAction {
     private View engineView;
 
     public NewGameMenuItem (View engineView) {
-        super(StyleConstants.myResources.getString("NewGameFileMenu"));
+        super(StyleConstants.resourceBundle.getString("NewGameFileMenu"));
         this.engineView = engineView;
     }
 
