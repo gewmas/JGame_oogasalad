@@ -47,11 +47,11 @@ public class TowerStoreButton extends Button {
      * is displayed and the button's foreground and background colors are changed.
      */
     protected void mouseEnteteredAction () {
-        if (active) {
-            this.setBackground(HOVER_BUTTON_COLOR);
-            this.setForeground(HOVER_TEXT_COLOR);
-            mediator.displayTowerInfo(towerInfo);
-        }
+
+        this.setBackground(HOVER_BUTTON_COLOR);
+        this.setForeground(HOVER_TEXT_COLOR);
+
+        mediator.displayTowerInfo(towerInfo);
 
     }
 
@@ -74,10 +74,10 @@ public class TowerStoreButton extends Button {
      * and foreground
      */
     protected void mouseExitedAction () {
-        if (active) {
+        
             this.setBackground(null);
             this.setForeground(HOVER_EXIT_TEXT_COLOR);
-        }
+        
 
     }
 

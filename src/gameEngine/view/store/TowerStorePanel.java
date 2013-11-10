@@ -15,7 +15,7 @@ import gameEngine.view.Panel;
  */
 public class TowerStorePanel extends Panel {
     private TowersOptionPanel storeOptions;
-    private GameFrame gameFrame;
+   
 
     /**
      * @param mediator facilitates communication between view components
@@ -26,7 +26,7 @@ public class TowerStorePanel extends Panel {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
-        this.gameFrame = gameFrame;
+    
 
         Panel TowerInfoPanel = new TowerInfoPanel();
         mediator.addColleague(MediatorConstants.INFO_PANEL_KEY, TowerInfoPanel);
