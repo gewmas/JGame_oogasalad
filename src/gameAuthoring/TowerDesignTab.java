@@ -18,24 +18,25 @@ import net.miginfocom.swing.MigLayout;
 public class TowerDesignTab extends Tab {
 
     private JScrollPane myCreatedTowers;
-    private JPanel myPanel;
+    private JPanel myScrollPanel;
 
     public TowerDesignTab () {
-        getTab();
+
     }
 
     // TODO: Get rid of magic number
     @Override
     public JPanel getTab () {
-        JPanel panel = new JPanel(new MigLayout());
-        myPanel = new JPanel(new MigLayout("wrap 2"));
+        JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
+        mainPanel.setPreferredSize(new Dimension(500, 500));
+        myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
         JButton button = new JButton("Create New Tower Type");
         button.addMouseListener(createNewTowerListener(this));
-        panel.add(button, "span 2, align center");
-        myCreatedTowers = new JScrollPane(myPanel);
-        myCreatedTowers.setPreferredSize(new Dimension(300, 300));
-        panel.add(myCreatedTowers);
-        return panel;
+        mainPanel.add(button, "pad 0 20 0 20");
+        myCreatedTowers = new JScrollPane(myScrollPanel);
+        myCreatedTowers.setPreferredSize(new Dimension(200, 400));
+        mainPanel.add(myCreatedTowers, "pad 30 60 10 40");
+        return mainPanel;
     }
 
     public void addTower (File imgSource, String towerName) {
@@ -50,13 +51,12 @@ public class TowerDesignTab extends Tab {
         }
 
         JLabel towerNameLabel = new JLabel(towerName);
-        myPanel.add(towerNameLabel);
-        myPanel.add(towerIcon);
+        myScrollPanel.add(towerNameLabel);
+        myScrollPanel.add(towerIcon);
 
     }
 
     public MouseAdapter createNewTowerListener (final TowerDesignTab towerDesignTab) {
-
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
