@@ -31,7 +31,7 @@ public class TowerStoreButton extends Button {
      */
     public TowerStoreButton (TowerInfo towerInfo, Mediator mediator, GameFrame gameFrame) {
         super(trimName(towerInfo.getName()));
-        active = true; //to be changed!
+        active = true; // to be changed!
         this.setEnabled(true);
         this.mediator = mediator;
         this.towerInfo = towerInfo;
@@ -74,10 +74,9 @@ public class TowerStoreButton extends Button {
      * and foreground
      */
     protected void mouseExitedAction () {
-        
-            this.setBackground(null);
-            this.setForeground(HOVER_EXIT_TEXT_COLOR);
-        
+
+        this.setBackground(null);
+        this.setForeground(HOVER_EXIT_TEXT_COLOR);
 
     }
 

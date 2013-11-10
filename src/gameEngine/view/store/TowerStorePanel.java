@@ -3,7 +3,7 @@ package gameEngine.view.store;
 import java.awt.BorderLayout;
 import gameEngine.view.GameFrame;
 import gameEngine.view.Mediator;
-import gameEngine.view.MediatorConstants;
+import gameEngine.view.ColleagueKeys;
 import gameEngine.view.Panel;
 
 
@@ -15,7 +15,6 @@ import gameEngine.view.Panel;
  */
 public class TowerStorePanel extends Panel {
     private TowersOptionPanel storeOptions;
-   
 
     /**
      * @param mediator facilitates communication between view components
@@ -26,13 +25,12 @@ public class TowerStorePanel extends Panel {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
-    
 
         Panel TowerInfoPanel = new TowerInfoPanel();
-        mediator.addColleague(MediatorConstants.INFO_PANEL_KEY, TowerInfoPanel);
+        mediator.addColleague(ColleagueKeys.INFOPANEL.toString(), TowerInfoPanel);
 
         storeOptions = new TowersOptionPanel(mediator, gameFrame);
-        mediator.addColleague(MediatorConstants.STORE_OPTIONS_KEY, storeOptions);
+        mediator.addColleague(ColleagueKeys.STOREOPTIONS.toString(), storeOptions);
 
         add(TowerInfoPanel, BorderLayout.CENTER);
         add(storeOptions, BorderLayout.PAGE_START);
