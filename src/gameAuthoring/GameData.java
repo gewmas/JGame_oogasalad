@@ -8,11 +8,21 @@ import java.util.Collection;
 public class GameData {
 
     private String myGameName;
-    private String mySplashImage;
     private int myGold;
     private int myLives;
+    
+    private String mySplashImage;
     private int myNumLevels;
     private Collection<TowerFactory> myTowerFactory;
     private Collection<EnemyFactory> myEnemyFactory;
+    
+    
+    public void setGameName(String gameName){
+        myGameName = gameName;
+    }
+    
+    public void setGold(String gold){
+        
+    }
 
 }

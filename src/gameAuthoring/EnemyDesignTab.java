@@ -1,9 +1,15 @@
 package gameAuthoring;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
@@ -30,6 +36,23 @@ public class EnemyDesignTab extends Tab {
         myCreatedEnemies.setPreferredSize(new Dimension(200, 400));
         mainPanel.add(myCreatedEnemies, "pad 30 60 10 40");
         return mainPanel;
+    }
+    
+    public void addEnemy (File imgSource, String enemyName) {
+        JLabel enemyIcon = new JLabel();
+        try {
+            Image enemyImage = ImageIO.read(imgSource);
+            enemyIcon.setIcon(new ImageIcon(enemyImage));
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        JLabel enemyNameLabel = new JLabel(enemyName);
+        myScrollPanel.add(enemyNameLabel);
+        myScrollPanel.add(enemyIcon);
+
     }
 
     public MouseAdapter createNewEnemyListener (final EnemyDesignTab enemyDesignTab) {

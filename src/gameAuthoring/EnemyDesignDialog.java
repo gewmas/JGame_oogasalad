@@ -50,6 +50,7 @@ public class EnemyDesignDialog extends JDialog {
         JButton enemyImageChooser = new JButton("Choose enemy image");
         enemyImageChooser.addMouseListener(createPathListener());
         JButton createEnemyButton = new JButton("Create Enemy");
+        createEnemyButton.addMouseListener(createEnemyButtonListener(this));
 
         this.setTitle("Creating new Enemy");
         this.setLayout(new MigLayout("wrap 2"));
@@ -85,6 +86,17 @@ public class EnemyDesignDialog extends JDialog {
                         e1.printStackTrace();
                     }
                 }
+            }
+        };
+        return listener;
+    }
+    
+    public MouseAdapter createEnemyButtonListener (final EnemyDesignDialog enemyDesignDialog) {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
+                enemyDesignDialog.dispose();
             }
         };
         return listener;
