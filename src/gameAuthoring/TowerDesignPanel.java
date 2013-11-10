@@ -9,15 +9,15 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import net.miginfocom.swing.MigLayout;
 
 
-public class TowerDesignDialog extends JDialog {
+public class TowerDesignPanel extends JPanel {
 
     private TowerDesignTab myTowerDesignTab;
     private static final JFileChooser INPUT_CHOOSER =
@@ -34,7 +34,7 @@ public class TowerDesignDialog extends JDialog {
 
     private JLabel myTowerImage;
 
-    public TowerDesignDialog (TowerDesignTab towerDesignTab) {
+    public TowerDesignPanel (TowerDesignTab towerDesignTab) {
         FileNameExtensionFilter filter =
                 new FileNameExtensionFilter(
                                             "JPG & GIF Images", "jpg", "gif");
@@ -67,7 +67,6 @@ public class TowerDesignDialog extends JDialog {
         JButton createTowerButton = new JButton("Create Tower");
         createTowerButton.addMouseListener(createTowerButtonListener(this));
 
-        this.setTitle("Creating new Tower");
         this.setLayout(new MigLayout("wrap 2"));
         this.add(name);
         this.add(myNameField);
@@ -110,12 +109,18 @@ public class TowerDesignDialog extends JDialog {
         return listener;
     }
 
-    public MouseAdapter createTowerButtonListener (final TowerDesignDialog towerDesignDialog) {
+    public MouseAdapter createTowerButtonListener (final TowerDesignPanel towerDesignDialog) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
                 myTowerDesignTab.addTower(myImageSource, myNameField.getText());
-                towerDesignDialog.dispose();
+                myNameField.setText("");
+                myDamageField.setText("");
+                myAttackSpeedField.setText("");
+                myRangeField.setText("");
+                myCostField.setText("");
+                myRecyclePriceField.setText("");
+                myTowerImage.setIcon(null);
             }
         };
         return listener;

@@ -1,14 +1,12 @@
 package gameAuthoring;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -28,11 +26,13 @@ public class TowerDesignTab extends Tab {
     @Override
     public JPanel getTab () {
         JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
+        JLabel title = new JLabel("Tower Design");
+        title.setFont(new Font("Arial", Font.BOLD, 20));
+        mainPanel.add(title, "span 2");
         mainPanel.setPreferredSize(new Dimension(500, 500));
         myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
-        JButton button = new JButton("Create New Tower Type");
-        button.addMouseListener(createNewTowerListener(this));
-        mainPanel.add(button, "pad 0 20 0 20");
+        TowerDesignPanel towerDesignDialog = new TowerDesignPanel(this);
+        mainPanel.add(towerDesignDialog);
         myCreatedTowers = new JScrollPane(myScrollPanel);
         myCreatedTowers.setPreferredSize(new Dimension(200, 400));
         mainPanel.add(myCreatedTowers, "pad 30 60 10 40");
@@ -54,17 +54,5 @@ public class TowerDesignTab extends Tab {
         myScrollPanel.add(towerNameLabel);
         myScrollPanel.add(towerIcon);
 
-    }
-
-    public MouseAdapter createNewTowerListener (final TowerDesignTab towerDesignTab) {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                TowerDesignDialog towerDesignDialog = new TowerDesignDialog(towerDesignTab);
-                towerDesignDialog.setSize(new Dimension(300, 350));
-                towerDesignDialog.setVisible(true);
-            }
-        };
-        return listener;
     }
 }

@@ -14,7 +14,7 @@ public class GameAuthoringGUI {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JTabbedPane mainPane = new JTabbedPane();
-        mainPane.setPreferredSize(new Dimension(500, 500));
+        mainPane.setPreferredSize(new Dimension(650, 650));
         JPanel basicInfoTab = new BasicInfoTab(gameData).getTab();
         JPanel mapDesignTab = new MapDesignTab(gameData).getTab();
         JPanel towerDesignTab = new TowerDesignTab(gameData).getTab();

@@ -9,14 +9,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 
-public class EnemyDesignDialog extends JDialog {
+public class EnemyDesignPanel extends JPanel {
 
     private EnemyDesignTab myEnemyDesignTab;
     private static final JFileChooser INPUT_CHOOSER =
@@ -30,7 +30,7 @@ public class EnemyDesignDialog extends JDialog {
     private JLabel myEnemyImage;
     private File myImageSource;
 
-    public EnemyDesignDialog (EnemyDesignTab enemyDesignTab) {
+    public EnemyDesignPanel (EnemyDesignTab enemyDesignTab) {
         myEnemyDesignTab = enemyDesignTab;
         JLabel name = new JLabel("Name");
         JLabel gold = new JLabel("Worth in Gold");
@@ -52,7 +52,6 @@ public class EnemyDesignDialog extends JDialog {
         JButton createEnemyButton = new JButton("Create Enemy");
         createEnemyButton.addMouseListener(createEnemyButtonListener(this));
 
-        this.setTitle("Creating new Enemy");
         this.setLayout(new MigLayout("wrap 2"));
         this.add(name);
         this.add(myNameField);
@@ -82,7 +81,6 @@ public class EnemyDesignDialog extends JDialog {
                         myEnemyImage.setIcon(new ImageIcon(tower));
                     }
                     catch (IOException e1) {
-                        // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
                 }
@@ -90,13 +88,16 @@ public class EnemyDesignDialog extends JDialog {
         };
         return listener;
     }
-    
-    public MouseAdapter createEnemyButtonListener (final EnemyDesignDialog enemyDesignDialog) {
+
+    public MouseAdapter createEnemyButtonListener (final EnemyDesignPanel enemyDesignDialog) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
                 myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
-                enemyDesignDialog.dispose();
+                myNameField.setText("");
+                myGoldField.setText("");
+                myLifeField.setText("");
+                mySpeedField.setText("");
             }
         };
         return listener;
