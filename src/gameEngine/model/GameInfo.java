@@ -1,12 +1,12 @@
 package gameEngine.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
+
+
 /*
  * Author wenxin shi
  */
-
 
 public class GameInfo {
     private int myGold;
@@ -83,15 +83,13 @@ public class GameInfo {
     public void removeTowerInfo (TowerInfo tower) {
         myTowerInfo.remove(tower);
     }
-    
-    public void removeAllTowerInfo(){
-        myTowerInfo=new ArrayList<TowerInfo>();
+
+    public void removeAllTowerInfo () {
+        myTowerInfo = new ArrayList<TowerInfo>();
     }
 
-    
     public List<TowerInfo> getTowerInfo () {
         return myTowerInfo;
     }
-
 
 }

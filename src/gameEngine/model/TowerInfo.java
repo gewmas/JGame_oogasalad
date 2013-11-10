@@ -1,4 +1,5 @@
 package gameEngine.model;
+
 /*
  * wenxin shi
  */
@@ -7,28 +8,28 @@ public class TowerInfo {
     private int myCost;
     private String myName;
     private String myDescription;
-    
-    public TowerInfo(String image, int cost,String name,String description){
-        myImage=image;
-        myCost=cost;
-        myName=name;
-        myDescription=description;
+
+    public TowerInfo (String image, int cost, String name, String description) {
+        myImage = image;
+        myCost = cost;
+        myName = name;
+        myDescription = description;
     }
-    
-    public String getImage(){
+
+    public String getImage () {
         return myImage;
     }
-    
-    public int getCost(){
+
+    public int getCost () {
         return myCost;
     }
-    
-    public String getName(){
+
+    public String getName () {
         return myName;
     }
 
-    public String getDescription(){
+    public String getDescription () {
         return myDescription;
     }
-    
+
 }

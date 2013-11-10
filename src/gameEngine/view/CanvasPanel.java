@@ -7,7 +7,7 @@ import gameEngine.model.TowerInfo;
 public class CanvasPanel extends Panel {
     Game game;
 
-    public CanvasPanel (View view) {
+    public CanvasPanel (GameFrame view) {
         game = new Game(view);
         this.add(game);
     }

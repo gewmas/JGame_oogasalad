@@ -18,11 +18,6 @@ public class Panel extends JPanel implements Colleague {
     }
 
     @Override
-    public void addMediator (Mediator mediator) {
-
-    }
-
-    @Override
     public void placeTower (TowerInfo towerInfo) {
 
     }
