@@ -16,7 +16,6 @@ public class CancelButton extends Button {
 
     protected void mouseClickAction () {
         frame.dispose();
-
     }
 
 }
