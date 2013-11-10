@@ -1,10 +1,7 @@
 package gameEngine.view.initialization;
 
-import gameEngine.view.Button;
-import gameEngine.view.View;
+import gameEngine.view.GameFrame;
 import gameEngine.view.Frame;
-import gameEngine.view.StyleConstants;
-import gameEngine.controller.*;
 
 
 /**
@@ -17,13 +14,13 @@ import gameEngine.controller.*;
 public class InitializationFrame extends Frame {
 
     /**
-     * @param controller facilitates communication between view and model
+     * @param gameFrame interface between view components and controller
      */
-
-    public InitializationFrame (Controller controller, View engineView) {
+    public InitializationFrame (GameFrame gameFrame) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        getContentPane().add(new InitializationPanel(controller, this, engineView));
+        getContentPane().add(new InitializationPanel(this, gameFrame));
+
         pack();
         setVisible(true);
     }

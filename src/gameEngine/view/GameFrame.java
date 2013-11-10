@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import gameEngine.model.TowerInfo;
@@ -26,6 +29,7 @@ public class GameFrame extends Frame implements Colleague {
 
     private Controller controller;
     private Mediator mediator;
+    private View engineView;
 
     /**
      * @param controller facilitates communication between view and model
@@ -35,11 +39,12 @@ public class GameFrame extends Frame implements Colleague {
         super();
         mediator = new Mediator();
         this.controller = controller;
+        this.engineView = engineView;
 
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        mediator.addColleague("view", this);
+        mediator.addColleague(MediatorConstants.GAMEFRAME_KEY, this);
         Panel statsPanel = new StatsPanel();
         add(statsPanel, BorderLayout.SOUTH);
 
@@ -75,7 +80,7 @@ public class GameFrame extends Frame implements Colleague {
      * Create the store of Towers
      */
     private void createStore () {
-        Panel storePanel = new TowerStorePanel(mediator, controller);
+        Panel storePanel = new TowerStorePanel(mediator, this);
         this.add(storePanel, BorderLayout.EAST);
     }
 
@@ -134,7 +139,9 @@ public class GameFrame extends Frame implements Colleague {
     }
 
     public int getMoney () {
-        return controller.getMoney();
+        // MOCK DATA TO BE REMOVED WHEN CONTROLLER IS INTEGRATED
+        return 400;
+        // return controller.getMoney();
     }
 
     public int getLives () {
@@ -144,6 +151,36 @@ public class GameFrame extends Frame implements Colleague {
     @Override
     public void displayTowerInfo (TowerInfo towerInfo) {
         // No behavior
+
+    }
+
+    public List<TowerInfo> getTowers () {
+        // MOCK DATA TO BE REPLACED WHEN CONTROLLER INTEGRATION IS ESTABLISHED
+        List<TowerInfo> towerInfo = new ArrayList<TowerInfo>();
+        ;
+        TowerInfo fire =
+                new TowerInfo("src/gameEngine/view/resources/right.gif", 45, "fire",
+                              "burns enemies");
+        towerInfo.add(fire);
+        TowerInfo ice =
+                new TowerInfo("src/gameEngine/view/resources/right.gif", 700, "ice",
+                              "freezes enemies");
+        towerInfo.add(ice);
+        return towerInfo;
+        // END MOCK DATA
+        // return controller.getTowers();
+    }
+
+    public boolean newGame (File file) {
+        if (controller.newGame(file)) {
+            engineView.loadNewGame();
+        }
+        return true;
+    }
+
+    @Override
+    public void updateStoreStatus () {
+        // DO NOTHING
 
     }
 }

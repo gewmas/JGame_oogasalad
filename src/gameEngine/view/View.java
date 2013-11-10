@@ -1,7 +1,6 @@
 package gameEngine.view;
 
 import gameEngine.controller.Controller;
-import gameEngine.model.TowerInfo;
 import gameEngine.view.initialization.InitializationFrame;
 
 
@@ -20,18 +19,19 @@ public class View {
     public View (Controller controller) {
         this.controller = controller;
         gameFrame = new GameFrame(controller, this);
-        initializationFrame = new InitializationFrame(controller, this);
+        initializationFrame = new InitializationFrame(gameFrame);
 
-    }
-
-    // May need to actually initialize the game when this is called
-    public void showGame () {
-        gameFrame.showGame();
     }
 
     public void selectNewGame () {
         gameFrame.dispose();
-        initializationFrame = new InitializationFrame(controller, this);
+        gameFrame = new GameFrame(controller, this);
+        initializationFrame = new InitializationFrame(gameFrame);
+    }
+
+    public void loadNewGame () {
+        gameFrame.showGame();
+        initializationFrame.dispose();
     }
 
 }

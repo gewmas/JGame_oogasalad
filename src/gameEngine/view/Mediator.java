@@ -51,7 +51,7 @@ public class Mediator {
      */
     public void placeTower (TowerInfo towerInfo) {
         colleagues.get(MediatorConstants.GAME_KEY).placeTower(towerInfo);
-        colleagues.get("view").placeTower(towerInfo);
+        colleagues.get(MediatorConstants.GAMEFRAME_KEY).placeTower(towerInfo);
     }
 
     /**
@@ -70,7 +70,14 @@ public class Mediator {
      * that are impacted by the purchase of a tower
      */
     public void purchaseTower () {
-        colleagues.get("view").purchaseTower();
+        colleagues.get(MediatorConstants.GAMEFRAME_KEY).purchaseTower();
+    }
+
+    /**
+     * Updates the enabled status of store items.
+     */
+    public void updateStoreStatus () {
+        colleagues.get(MediatorConstants.STORE_OPTIONS_KEY).updateStoreStatus();
     }
 
 }

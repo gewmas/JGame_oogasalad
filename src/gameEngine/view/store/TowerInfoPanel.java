@@ -4,8 +4,9 @@ import gameEngine.model.TowerInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
 
@@ -18,7 +19,8 @@ import javax.swing.border.Border;
  */
 public class TowerInfoPanel extends Panel {
 
-    private JLabel label;
+    private JList<String> myList;
+    private DefaultListModel<String> myListModel;
 
     public TowerInfoPanel () {
         super();
@@ -27,9 +29,21 @@ public class TowerInfoPanel extends Panel {
                 BorderFactory.createTitledBorder(StyleConstants.resourceBundle
                         .getString("TowerInfo"));
         setBorder(valuePanelBorder);
-        label = new JLabel();
-        label.setSize(100, 100);
-        add(label);
+
+        initializeContents();
+
+    }
+
+    /**
+     * Initlizes JList contents and adds
+     */
+    private void initializeContents () {
+        myListModel = new DefaultListModel<String>();
+        myList = new JList<String>(myListModel);
+
+        JScrollPane listScrollPane = new JScrollPane(myList);
+        listScrollPane.setSize(10, 10);
+        add(listScrollPane);
 
     }
 
@@ -38,17 +52,11 @@ public class TowerInfoPanel extends Panel {
      * update the information this panel displays
      */
     public void displayTowerInfo (TowerInfo tower) {
-        ImageIcon icon = new ImageIcon(tower.getImage());
-
-        label.setIcon(icon);
-        String initialText =
-                "<html><h1>" +
-                        tower.getName() + "</h1><ul>" +
-
-                        "<li><font color=red>Cost: </font>" + tower.getCost() + "</li>" +
-                        "<li><font color=blue>Description: </font>" + tower.getDescription() +
-                        "</li></html>";
-        label.setText(initialText);
+        // ImageIcon icon = new ImageIcon(tower.getImage());
+        myListModel.clear();
+        myListModel.addElement("Tower: " + tower.getName());
+        myListModel.addElement("Cost: " + Integer.toString(tower.getCost()));
+        myListModel.addElement("Description: " + tower.getDescription());
 
     }
 

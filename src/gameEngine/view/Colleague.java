@@ -24,8 +24,7 @@ public interface Colleague {
      * 
      * @param mediator facilitates communication between view components
      */
-    // public void addMediator (Mediator mediator);
-
+    
     /**
      * Behavior a colleague should execute after a tower has been placed
      * 
@@ -44,5 +43,14 @@ public interface Colleague {
      * @param towerInfo datastructure used to store tower information
      */
     public void displayTowerInfo (TowerInfo towerInfo);
+
+    /**
+     * Used primarily by the TowerStorePanel to update the status of 
+     * the TowerStoreButton.
+     * If the user has enough money to purchase the tower, the button will
+     * be enabled. 
+     * Otherwise, the button will be disabled.
+     */
+    public void updateStoreStatus ();
 
 }

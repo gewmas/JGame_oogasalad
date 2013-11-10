@@ -17,7 +17,7 @@ public class StyleConstants {
     public static final int BUTTON_FONT_SIZE = 12;
     public static final int BUTTON_FONT_STYLE = Font.CENTER_BASELINE;
 
-    public static final String DEFAULT_RESOURCE_PACKAGE = "resources.";
+    public static final String DEFAULT_RESOURCE_PACKAGE = "gameEngine/view/resources.";
     public static final String USER_DIR = "user.dir";
 
     public static final ResourceBundle resourceBundle = ResourceBundle
