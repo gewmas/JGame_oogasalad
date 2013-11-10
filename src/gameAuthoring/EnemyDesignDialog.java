@@ -1,7 +1,13 @@
 package gameAuthoring;
 
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -21,6 +27,7 @@ public class EnemyDesignDialog extends JDialog {
     private JTextField myLifeField;
     private JTextField mySpeedField;
 
+    private JLabel myEnemyImage;
     private File myImageSource;
 
     public EnemyDesignDialog (EnemyDesignTab enemyDesignTab) {
@@ -29,7 +36,6 @@ public class EnemyDesignDialog extends JDialog {
         JLabel gold = new JLabel("Worth in Gold");
         JLabel lives = new JLabel("Number of Lives");
         JLabel speed = new JLabel("Speed");
-        JLabel enemyImage = new JLabel("Enemy Image");
 
         myNameField = new JTextField();
         myNameField.setPreferredSize(new Dimension(200, 30));
@@ -39,8 +45,10 @@ public class EnemyDesignDialog extends JDialog {
         myLifeField.setPreferredSize(new Dimension(200, 30));
         mySpeedField = new JTextField();
         mySpeedField.setPreferredSize(new Dimension(200, 30));
+        myEnemyImage = new JLabel();
 
-        JButton enemyImageChooser = new JButton("Choose tower image");
+        JButton enemyImageChooser = new JButton("Choose enemy image");
+        enemyImageChooser.addMouseListener(createPathListener());
         JButton createEnemyButton = new JButton("Create Enemy");
 
         this.setTitle("Creating new Enemy");
@@ -53,9 +61,32 @@ public class EnemyDesignDialog extends JDialog {
         this.add(myLifeField);
         this.add(speed);
         this.add(mySpeedField);
-        this.add(enemyImage);
         this.add(enemyImageChooser);
+        this.add(myEnemyImage);
         this.add(createEnemyButton);
+    }
 
+    public MouseAdapter createPathListener () {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                int loadObject = INPUT_CHOOSER.showOpenDialog(null);
+                if (loadObject == JFileChooser.APPROVE_OPTION) {
+                    System.out.println(INPUT_CHOOSER.getSelectedFile());
+                    File imgSource = INPUT_CHOOSER.getSelectedFile();
+                    myImageSource = imgSource;
+                    Image tower;
+                    try {
+                        tower = ImageIO.read(imgSource);
+                        myEnemyImage.setIcon(new ImageIcon(tower));
+                    }
+                    catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                }
+            }
+        };
+        return listener;
     }
 }

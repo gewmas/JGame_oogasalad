@@ -22,13 +22,6 @@ public class TowerDesignDialog extends JDialog {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir"));
 
-    private JLabel myName;
-    private JLabel myDamage;
-    private JLabel myAttackSpeed;
-    private JLabel myRange;
-    private JLabel myCost;
-    private JLabel myRecyclePrice;
-
     private JTextField myNameField;
     private JTextField myDamageField;
     private JTextField myAttackSpeedField;
@@ -42,12 +35,12 @@ public class TowerDesignDialog extends JDialog {
 
     public TowerDesignDialog (TowerDesignTab towerDesignTab) {
         myTowerDesignTab = towerDesignTab;
-        myName = new JLabel("Name");
-        myDamage = new JLabel("Damage");
-        myAttackSpeed = new JLabel("Attack Speed");
-        myRange = new JLabel("Range");
-        myCost = new JLabel("Cost");
-        myRecyclePrice = new JLabel("Recycle Price");
+        JLabel name = new JLabel("Name");
+        JLabel damage = new JLabel("Damage");
+        JLabel attackspeed = new JLabel("Attack Speed");
+        JLabel range = new JLabel("Range");
+        JLabel cost = new JLabel("Cost");
+        JLabel recyclePrice = new JLabel("Recycle Price");
         myTowerImage = new JLabel();
         JButton towerImageChooser = new JButton("Choose tower image");
         towerImageChooser.addMouseListener(createPathListener());
@@ -70,17 +63,17 @@ public class TowerDesignDialog extends JDialog {
 
         this.setTitle("Creating new Tower");
         this.setLayout(new MigLayout("wrap 2"));
-        this.add(myName);
+        this.add(name);
         this.add(myNameField);
-        this.add(myDamage);
+        this.add(damage);
         this.add(myDamageField);
-        this.add(myAttackSpeed);
+        this.add(attackspeed);
         this.add(myAttackSpeedField);
-        this.add(myRange);
+        this.add(range);
         this.add(myRangeField);
-        this.add(myCost);
+        this.add(cost);
         this.add(myCostField);
-        this.add(myRecyclePrice);
+        this.add(recyclePrice);
         this.add(myRecyclePriceField);
         this.add(towerImageChooser, "aligny center");
         this.add(myTowerImage);
