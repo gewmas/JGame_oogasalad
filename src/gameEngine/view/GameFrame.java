@@ -25,10 +25,10 @@ import gameEngine.controller.Controller;
  * @author Lalita Maraj
  * 
  */
-public class GameFrame extends Frame implements Colleague {
+public class GameFrame extends Frame implements GameFrameColleague {
 
     private Controller controller;
-    private Mediator mediator;
+    private GameFrameMediator mediator;
     private View engineView;
 
     /**
@@ -37,7 +37,7 @@ public class GameFrame extends Frame implements Colleague {
      */
     public GameFrame (Controller controller, View engineView) {
         super();
-        mediator = new Mediator();
+        mediator = new GameFrameMediator();
         this.controller = controller;
         this.engineView = engineView;
 

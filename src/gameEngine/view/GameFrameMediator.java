@@ -22,12 +22,12 @@ import java.util.Map;
  * @author Lalita Maraj
  * 
  */
-public class Mediator {
+public class GameFrameMediator {
 
-    private Map<String, Colleague> colleagues;
+    private Map<String, GameFrameColleague> colleagues;
 
-    public Mediator () {
-        colleagues = new HashMap<String, Colleague>();
+    public GameFrameMediator () {
+        colleagues = new HashMap<String, GameFrameColleague>();
 
     }
 
@@ -39,7 +39,7 @@ public class Mediator {
      * @param name key of colleague
      * @param colleague Colleague to be added
      */
-    public void addColleague (String name, Colleague colleague) {
+    public void addColleague (String name, GameFrameColleague colleague) {
         colleagues.put(name, colleague);
     }
 

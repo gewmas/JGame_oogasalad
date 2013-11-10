@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  *         are view components that can interact with other view componetns.
  * 
  */
-public class Panel extends JPanel implements Colleague {
+public class Panel extends JPanel implements GameFrameColleague {
     public Panel () {
         super();
     }
