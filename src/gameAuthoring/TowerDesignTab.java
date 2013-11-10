@@ -7,21 +7,19 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
+import net.miginfocom.swing.MigLayout;
 
 
 public class TowerDesignTab extends Tab {
-    
+
     private JScrollPane myCreatedTowers;
     private JPanel myPanel;
-    
+
     public TowerDesignTab () {
         getTab();
     }
@@ -29,16 +27,18 @@ public class TowerDesignTab extends Tab {
     // TODO: Get rid of magic number
     @Override
     public JPanel getTab () {
-        myPanel = new JPanel();
-        JButton button = new JButton("Create New Tower Type");      
+        JPanel panel = new JPanel(new MigLayout());
+        myPanel = new JPanel(new MigLayout("wrap 2"));
+        JButton button = new JButton("Create New Tower Type");
         button.addMouseListener(createNewTowerListener(this));
-        myCreatedTowers = new JScrollPane();
-        myPanel.add(button);
-        myPanel.add(myCreatedTowers);
-        return myPanel;
-    }  
-    
-    public void addTower(File imgSource, String towerName){
+        panel.add(button, "span 2, align center");
+        myCreatedTowers = new JScrollPane(myPanel);
+        myCreatedTowers.setPreferredSize(new Dimension(300, 300));
+        panel.add(myCreatedTowers);
+        return panel;
+    }
+
+    public void addTower (File imgSource, String towerName) {
         JLabel towerIcon = new JLabel();
         try {
             Image towerImage = ImageIO.read(imgSource);
@@ -48,13 +48,13 @@ public class TowerDesignTab extends Tab {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
-        JLabel towerNameLabel = new JLabel("Tower Name");
+
+        JLabel towerNameLabel = new JLabel(towerName);
         myPanel.add(towerNameLabel);
         myPanel.add(towerIcon);
-        
+
     }
-  
+
     public MouseAdapter createNewTowerListener (final TowerDesignTab towerDesignTab) {
 
         MouseAdapter listener = new MouseAdapter() {
