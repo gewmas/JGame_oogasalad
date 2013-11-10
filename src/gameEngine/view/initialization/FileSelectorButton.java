@@ -19,7 +19,6 @@ import gameEngine.controller.*;
  */
 public class FileSelectorButton extends Button {
     private GameFrame gameFrame;
-  
 
     /**
      * @param controller facilitates communication between view and model

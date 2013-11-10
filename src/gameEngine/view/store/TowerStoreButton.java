@@ -22,6 +22,7 @@ public class TowerStoreButton extends Button {
     private static final Color HOVER_EXIT_TEXT_COLOR = Color.BLACK;
     private Mediator mediator;
     private TowerInfo towerInfo;
+    private Boolean active;
 
     /**
      * @param towerInfo the tower info data structure of the tower the button represents
@@ -30,7 +31,8 @@ public class TowerStoreButton extends Button {
      */
     public TowerStoreButton (TowerInfo towerInfo, Mediator mediator, GameFrame gameFrame) {
         super(trimName(towerInfo.getName()));
-
+        active = false;
+        this.setEnabled(false);
         this.mediator = mediator;
         this.towerInfo = towerInfo;
         setToolTipText(towerInfo.getName());
@@ -45,9 +47,11 @@ public class TowerStoreButton extends Button {
      * is displayed and the button's foreground and background colors are changed.
      */
     protected void mouseEnteteredAction () {
-        this.setBackground(HOVER_BUTTON_COLOR);
-        this.setForeground(HOVER_TEXT_COLOR);
-        mediator.displayTowerInfo(towerInfo);
+        if (active) {
+            this.setBackground(HOVER_BUTTON_COLOR);
+            this.setForeground(HOVER_TEXT_COLOR);
+            mediator.displayTowerInfo(towerInfo);
+        }
 
     }
 
@@ -70,8 +74,10 @@ public class TowerStoreButton extends Button {
      * and foreground
      */
     protected void mouseExitedAction () {
-        this.setBackground(null);
-        this.setForeground(HOVER_EXIT_TEXT_COLOR);
+        if (active) {
+            this.setBackground(null);
+            this.setForeground(HOVER_EXIT_TEXT_COLOR);
+        }
 
     }
 
@@ -81,7 +87,14 @@ public class TowerStoreButton extends Button {
      * 
      */
     protected void mouseClickAction () {
-        mediator.placeTower(towerInfo);
+        if (active) {
+            mediator.placeTower(towerInfo);
+        }
+    }
+
+    public void toggleButtonActivation (int moneySupply) {
+        active = moneySupply >= towerInfo.getCost();
+        setEnabled(active);
 
     }
 

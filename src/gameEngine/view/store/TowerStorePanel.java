@@ -14,7 +14,8 @@ import gameEngine.view.Panel;
  *         tower information
  */
 public class TowerStorePanel extends Panel {
-    private Panel storeOptions;
+    private TowersOptionPanel storeOptions;
+    private GameFrame gameFrame;
 
     /**
      * @param mediator facilitates communication between view components
@@ -25,16 +26,17 @@ public class TowerStorePanel extends Panel {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
+        this.gameFrame = gameFrame;
+
         Panel TowerInfoPanel = new TowerInfoPanel();
-        storeOptions = new TowersOptionPanel(mediator, gameFrame);
         mediator.addColleague(MediatorConstants.INFO_PANEL_KEY, TowerInfoPanel);
+
+        storeOptions = new TowersOptionPanel(mediator, gameFrame);
+        mediator.addColleague(MediatorConstants.STORE_OPTIONS_KEY, storeOptions);
+
         add(TowerInfoPanel, BorderLayout.CENTER);
         add(storeOptions, BorderLayout.PAGE_START);
 
-    }
-
-    public void openStore () {
-        // TODO: ADD IMPLEMENTATION
     }
 
 }

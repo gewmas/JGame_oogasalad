@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -29,6 +30,7 @@ public class GameFrame extends Frame implements Colleague {
     private Controller controller;
     private Mediator mediator;
     private View engineView;
+
     /**
      * @param controller facilitates communication between view and model
      * @param engineView
@@ -137,7 +139,9 @@ public class GameFrame extends Frame implements Colleague {
     }
 
     public int getMoney () {
-        return controller.getMoney();
+        // MOCK DATA TO BE REMOVED WHEN CONTROLLER IS INTEGRATED
+        return 400;
+        // return controller.getMoney();
     }
 
     public int getLives () {
@@ -151,13 +155,32 @@ public class GameFrame extends Frame implements Colleague {
     }
 
     public List<TowerInfo> getTowers () {
-        return controller.getTowers();
+        // MOCK DATA TO BE REPLACED WHEN CONTROLLER INTEGRATION IS ESTABLISHED
+        List<TowerInfo> towerInfo = new ArrayList<TowerInfo>();
+        ;
+        TowerInfo fire =
+                new TowerInfo("src/gameEngine/view/resources/right.gif", 45, "fire",
+                              "burns enemies");
+        towerInfo.add(fire);
+        TowerInfo ice =
+                new TowerInfo("src/gameEngine/view/resources/right.gif", 700, "ice",
+                              "freezes enemies");
+        towerInfo.add(ice);
+        return towerInfo;
+        // END MOCK DATA
+        // return controller.getTowers();
     }
 
     public boolean newGame (File file) {
-        if (controller.newGame(file)){
+        if (controller.newGame(file)) {
             engineView.loadNewGame();
         }
         return true;
+    }
+
+    @Override
+    public void updateInventoryStatus () {
+        // DO NOTHING
+
     }
 }

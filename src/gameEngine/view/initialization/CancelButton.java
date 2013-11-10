@@ -19,6 +19,7 @@ public class CancelButton extends Button {
         this.frame = frame;
 
     }
+
     @Override
     /**
      * Closes initialization Frame when button is clicked

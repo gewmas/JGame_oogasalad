@@ -12,4 +12,5 @@ public class MediatorConstants {
     public final static String GAME_KEY = "game";
     public static final String INFO_PANEL_KEY = "info";
     public static final String GAMEFRAME_KEY = "gameFrame";
+    public static final String STORE_OPTIONS_KEY = "storeOptions";
 }

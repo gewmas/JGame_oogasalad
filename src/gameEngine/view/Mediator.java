@@ -70,7 +70,11 @@ public class Mediator {
      * that are impacted by the purchase of a tower
      */
     public void purchaseTower () {
-        colleagues.get("view").purchaseTower();
+        colleagues.get(MediatorConstants.GAMEFRAME_KEY).purchaseTower();
+    }
+
+    public void openStore () {
+        colleagues.get(MediatorConstants.STORE_OPTIONS_KEY).updateInventoryStatus();
     }
 
 }

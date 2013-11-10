@@ -45,4 +45,6 @@ public interface Colleague {
      */
     public void displayTowerInfo (TowerInfo towerInfo);
 
+    public void updateInventoryStatus ();
+
 }

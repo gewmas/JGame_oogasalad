@@ -23,15 +23,13 @@ public class View {
 
     }
 
-
-
     public void selectNewGame () {
         gameFrame.dispose();
         gameFrame = new GameFrame(controller, this);
         initializationFrame = new InitializationFrame(gameFrame);
     }
-    
-    public void loadNewGame(){
+
+    public void loadNewGame () {
         gameFrame.showGame();
         initializationFrame.dispose();
     }
