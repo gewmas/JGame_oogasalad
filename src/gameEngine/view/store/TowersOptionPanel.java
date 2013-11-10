@@ -68,7 +68,7 @@ public class TowersOptionPanel extends Panel {
     private void addStoreInventory (JPanel optionsPanel, Mediator mediator, GameFrame gameFrame) {
 
         // for (TowerInfo tower: gameFrame.getTowers()){
-        // options.add(new TowerStoreButton(tower,mediator,controller));
+        // options.add(new TowerStoreButton(tower,mediator,gameFrame));
         // }
         // MOCK DATA
         TowerInfo tw = new TowerInfo("src/resources/right.gif", 45, "fire", "burns enemies");

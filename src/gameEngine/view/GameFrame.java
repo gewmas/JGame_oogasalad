@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.io.File;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -27,7 +28,7 @@ public class GameFrame extends Frame implements Colleague {
 
     private Controller controller;
     private Mediator mediator;
-
+    private View engineView;
     /**
      * @param controller facilitates communication between view and model
      * @param engineView
@@ -36,6 +37,7 @@ public class GameFrame extends Frame implements Colleague {
         super();
         mediator = new Mediator();
         this.controller = controller;
+        this.engineView = engineView;
 
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,5 +152,12 @@ public class GameFrame extends Frame implements Colleague {
 
     public List<TowerInfo> getTowers () {
         return controller.getTowers();
+    }
+
+    public boolean newGame (File file) {
+        if (controller.newGame(file)){
+            engineView.loadNewGame();
+        }
+        return true;
     }
 }
