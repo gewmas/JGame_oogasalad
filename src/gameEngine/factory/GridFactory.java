@@ -1,13 +1,10 @@
 package gameEngine.factory;
 
-import gameAuthoring.JSONReadable;
-import gameAuthoring.JSONWriteable;
 import gameEngine.model.Grid;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import helpers.Coordinate;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -19,7 +16,7 @@ import java.util.HashSet;
  *         Constructs the grid
  * 
  */
-public class GridFactory implements FactoryInterface, JSONReadable, JSONWriteable {
+public class GridFactory implements FactoryInterface {
     private Parser parser;
     private ArrayList<ArrayList<Grid>> gridList;
     private Coordinate pathStart;
@@ -103,15 +100,4 @@ public class GridFactory implements FactoryInterface, JSONReadable, JSONWriteabl
         return gridList;
     }
 
-    @Override
-    public File write () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void read () {
-        // TODO Auto-generated method stub
-
-    }
 }

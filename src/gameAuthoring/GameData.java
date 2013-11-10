@@ -1,7 +1,5 @@
 package gameAuthoring;
 
-import gameEngine.factory.enemyfactory.EnemyFactory;
-import gameEngine.factory.towerfactory.TowerFactory;
 import java.util.Collection;
 
 
@@ -13,8 +11,8 @@ public class GameData {
 
     private String mySplashImage;
     private int myNumLevels;
-    private Collection<TowerFactory> myTowers;
-    private Collection<EnemyFactory> myEnemies;
+    private Collection<TowerJSON> myTowers;
+    private Collection<EnemyJSON> myEnemies;
 
     public void setGameName (String gameName) {
         myGameName = gameName;
@@ -27,13 +25,13 @@ public class GameData {
     public void setLives (int lives) {
         myLives = lives;
     }
-    
-    public void addTower(TowerFactory tower){
-        myTowers.add(tower);      
+
+    public void addTower (TowerJSON towerJSON) {
+        myTowers.add(towerJSON);
     }
-    
-    public void addEnemy(EnemyFactory enemy){
-        myEnemies.add(enemy);
+
+    public void addEnemy (EnemyJSON enemyJSON) {
+        myEnemies.add(enemyJSON);
     }
 
 }

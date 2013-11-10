@@ -16,6 +16,10 @@ import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * @author BecLai
+ * 
+ */
 public class TowerDesignTab extends Tab {
 
     private JScrollPane myCreatedTowers;
