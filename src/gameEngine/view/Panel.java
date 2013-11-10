@@ -33,7 +33,7 @@ public class Panel extends JPanel implements Colleague {
     }
 
     @Override
-    public void updateInventoryStatus () {
+    public void updateStoreStatus () {
         // TODO Auto-generated method stub
 
     }

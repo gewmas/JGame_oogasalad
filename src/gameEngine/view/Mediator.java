@@ -73,8 +73,11 @@ public class Mediator {
         colleagues.get(MediatorConstants.GAMEFRAME_KEY).purchaseTower();
     }
 
-    public void openStore () {
-        colleagues.get(MediatorConstants.STORE_OPTIONS_KEY).updateInventoryStatus();
+    /**
+     * Updates the enabled status of store items.
+     */
+    public void updateStoreStatus () {
+        colleagues.get(MediatorConstants.STORE_OPTIONS_KEY).updateStoreStatus();
     }
 
 }

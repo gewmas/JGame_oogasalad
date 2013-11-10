@@ -179,7 +179,7 @@ public class GameFrame extends Frame implements Colleague {
     }
 
     @Override
-    public void updateInventoryStatus () {
+    public void updateStoreStatus () {
         // DO NOTHING
 
     }

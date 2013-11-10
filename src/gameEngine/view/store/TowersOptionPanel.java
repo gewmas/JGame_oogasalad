@@ -97,7 +97,7 @@ public class TowersOptionPanel extends Panel {
      * money supply
      * 
      */
-    public void updateInventoryStatus () {
+    public void updateStoreStatus () {
         for (TowerStoreButton button : storeItems) {
             button.toggleButtonActivation(gameFrame.getMoney());
         }
