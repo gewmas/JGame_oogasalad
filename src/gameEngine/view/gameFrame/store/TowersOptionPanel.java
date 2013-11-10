@@ -1,10 +1,10 @@
-package gameEngine.view.store;
+package gameEngine.view.gameFrame.store;
 
 import gameEngine.model.TowerInfo;
-import gameEngine.view.GameFrame;
-import gameEngine.view.Mediator;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
+import gameEngine.view.gameFrame.GameFrame;
+import gameEngine.view.gameFrame.GameFrameMediator;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class TowersOptionPanel extends Panel {
      * @param mediator facilitates communication between view components
      * @param gameFrame facilitates communication between view and controller
      */
-    protected TowersOptionPanel (Mediator mediator, GameFrame gameFrame) {
+    protected TowersOptionPanel (GameFrameMediator mediator, GameFrame gameFrame) {
 
         super();
         this.gameFrame = gameFrame;
@@ -51,7 +51,7 @@ public class TowersOptionPanel extends Panel {
      * 
      * @param mediator facilitates communication between view components
      */
-    private void createOptionsScrollPanel (Mediator mediator) {
+    private void createOptionsScrollPanel (GameFrameMediator mediator) {
         JPanel options = new JPanel();
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         addStoreInventory(options, mediator);
@@ -80,7 +80,7 @@ public class TowersOptionPanel extends Panel {
      * @param mediator facilitates communication between view components
      * @param gameFrame facilitates communication between view and model
      */
-    private void addStoreInventory (JPanel optionsPanel, Mediator mediator) {
+    private void addStoreInventory (JPanel optionsPanel, GameFrameMediator mediator) {
 
         for (TowerInfo tower : gameFrame.getTowers()) {
             TowerStoreButton towerButton = new TowerStoreButton(tower, mediator, gameFrame);

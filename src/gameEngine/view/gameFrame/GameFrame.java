@@ -1,4 +1,4 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -13,8 +13,12 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import gameEngine.model.TowerInfo;
-import gameEngine.view.menu.Menu;
-import gameEngine.view.store.TowerStorePanel;
+import gameEngine.view.Frame;
+import gameEngine.view.Panel;
+import gameEngine.view.StyleConstants;
+import gameEngine.view.View;
+import gameEngine.view.gameFrame.menu.Menu;
+import gameEngine.view.gameFrame.store.TowerStorePanel;
 import gameEngine.controller.Controller;
 
 
@@ -25,10 +29,10 @@ import gameEngine.controller.Controller;
  * @author Lalita Maraj
  * 
  */
-public class GameFrame extends Frame implements Colleague {
+public class GameFrame extends Frame implements GameFrameColleague {
 
     private Controller controller;
-    private Mediator mediator;
+    private GameFrameMediator mediator;
     private View engineView;
 
     /**
@@ -37,7 +41,7 @@ public class GameFrame extends Frame implements Colleague {
      */
     public GameFrame (Controller controller, View engineView) {
         super();
-        mediator = new Mediator();
+        mediator = new GameFrameMediator();
         this.controller = controller;
         this.engineView = engineView;
 

@@ -1,6 +1,7 @@
 package gameEngine.view;
 
 import gameEngine.model.TowerInfo;
+import gameEngine.view.gameFrame.GameFrameColleague;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
@@ -12,7 +13,7 @@ import javax.swing.JPanel;
  *         are view components that can interact with other view componetns.
  * 
  */
-public class Panel extends JPanel implements Colleague {
+public class Panel extends JPanel implements GameFrameColleague {
     public Panel () {
         super();
     }

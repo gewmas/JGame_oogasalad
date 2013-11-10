@@ -1,4 +1,4 @@
-package gameEngine.view.store;
+package gameEngine.view.gameFrame.store;
 
 import gameEngine.model.TowerInfo;
 import gameEngine.view.Panel;

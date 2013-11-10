@@ -6,7 +6,7 @@ import java.util.List;
 import gameEngine.model.Model;
 import gameEngine.model.TowerInfo;
 import gameEngine.view.View;
-import gameEngine.view.GameFrame;
+import gameEngine.view.gameFrame.GameFrame;
 
 
 public class Controller {

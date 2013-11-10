@@ -1,4 +1,4 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
 import gameEngine.model.TowerInfo;
 
@@ -16,7 +16,7 @@ import gameEngine.model.TowerInfo;
  * @author Lalita Maraj
  * 
  */
-public interface Colleague {
+public interface GameFrameColleague {
 
     /**
      * Allows a colleage to add a mediator that they can use
