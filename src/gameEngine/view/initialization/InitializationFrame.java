@@ -13,16 +13,14 @@ import gameEngine.view.Frame;
  */
 public class InitializationFrame extends Frame {
 
-
-
-    /** 
+    /**
      * @param gameFrame interface between view components and controller
      */
     public InitializationFrame (GameFrame gameFrame) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         getContentPane().add(new InitializationPanel(this, gameFrame));
-        
+
         pack();
         setVisible(true);
     }

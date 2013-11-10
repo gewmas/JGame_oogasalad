@@ -16,9 +16,7 @@ import gameEngine.view.StyleConstants;
 
 public class InitializationPanel extends Panel {
 
-    public InitializationPanel (
-                                JFrame initializationFrame,
-                                GameFrame gameFrame) {
+    public InitializationPanel (JFrame initializationFrame, GameFrame gameFrame) {
         super();
 
         JLabel message = new JLabel(StyleConstants.resourceBundle.getString("Welcome"));
