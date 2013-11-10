@@ -36,6 +36,8 @@ public class TowerDesignDialog extends JDialog {
     private JTextField myCostField;
     private JTextField myRecyclePriceField;
 
+    private File myImageSource;
+
     private JLabel myTowerImage;
 
     public TowerDesignDialog (TowerDesignTab towerDesignTab) {
@@ -64,6 +66,7 @@ public class TowerDesignDialog extends JDialog {
         myRecyclePriceField.setPreferredSize(new Dimension(200, 30));
 
         JButton createTowerButton = new JButton("Create Tower");
+        createTowerButton.addMouseListener(createTowerButtonListener(this));
 
         this.setTitle("Creating new Tower");
         this.setLayout(new MigLayout("wrap 2"));
@@ -93,6 +96,7 @@ public class TowerDesignDialog extends JDialog {
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     System.out.println(INPUT_CHOOSER.getSelectedFile());
                     File imgSource = INPUT_CHOOSER.getSelectedFile();
+                    myImageSource = imgSource;
                     Image tower;
                     try {
                         tower = ImageIO.read(imgSource);
@@ -108,11 +112,12 @@ public class TowerDesignDialog extends JDialog {
         return listener;
     }
 
-    public MouseAdapter createTowerButtonListener () {
+    public MouseAdapter createTowerButtonListener (final TowerDesignDialog towerDesignDialog) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-
+                myTowerDesignTab.addTower(myImageSource, myNameField.getText());
+                towerDesignDialog.dispose();
             }
         };
         return listener;
