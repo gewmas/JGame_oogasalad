@@ -102,6 +102,7 @@ public class EnemyDesignPanel extends JPanel {
                 myGoldField.setText("");
                 myLifeField.setText("");
                 mySpeedField.setText("");
+                myEnemyImage.setIcon(null);
             }
         };
         return listener;
