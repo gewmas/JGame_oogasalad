@@ -31,7 +31,7 @@ public class GameFrame extends Frame implements Colleague {
      * @param controller facilitates communication between view and model
      * @param engineView
      */
-    public GameFrame (Controller controller, EngineView engineView) {
+    public GameFrame (Controller controller, View engineView) {
         super();
         mediator = new Mediator();
         this.controller = controller;

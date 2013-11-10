@@ -1,6 +1,6 @@
 package gameEngine.view.menu;
 
-import gameEngine.view.EngineView;
+import gameEngine.view.View;
 import gameEngine.view.StyleConstants;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
@@ -14,9 +14,9 @@ import javax.swing.AbstractAction;
  */
 @SuppressWarnings("serial")
 class NewGameMenuItem extends AbstractAction {
-    private EngineView engineView;
+    private View engineView;
 
-    public NewGameMenuItem (EngineView engineView) {
+    public NewGameMenuItem (View engineView) {
         super(StyleConstants.myResources.getString("NewGameFileMenu"));
         this.engineView = engineView;
     }

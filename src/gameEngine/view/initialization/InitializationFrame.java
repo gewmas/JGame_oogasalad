@@ -1,7 +1,7 @@
 package gameEngine.view.initialization;
 
 import gameEngine.view.Button;
-import gameEngine.view.EngineView;
+import gameEngine.view.View;
 import gameEngine.view.Frame;
 import gameEngine.view.StyleConstants;
 import gameEngine.controller.*;
@@ -20,7 +20,7 @@ public class InitializationFrame extends Frame {
      * @param controller facilitates communication between view and model
      */
 
-    public InitializationFrame (Controller controller, EngineView engineView) {
+    public InitializationFrame (Controller controller, View engineView) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         getContentPane().add(new InitializationPanel(controller, this, engineView));

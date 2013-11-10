@@ -4,12 +4,12 @@ import gameEngine.controller.Controller;
 import gameEngine.view.initialization.InitializationFrame;
 
 
-public class EngineView {
+public class View {
     private GameFrame gameFrame;
     private Frame initializationFrame;
     private Controller controller;
 
-    public EngineView (Controller controller) {
+    public View (Controller controller) {
         this.controller = controller;
         gameFrame = new GameFrame(controller, this);
         initializationFrame = new InitializationFrame(controller, this);

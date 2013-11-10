@@ -5,14 +5,14 @@ import java.io.File;
 import java.util.List;
 import gameEngine.model.Model;
 import gameEngine.model.TowerInfo;
-import gameEngine.view.EngineView;
+import gameEngine.view.View;
 import gameEngine.view.GameFrame;
 
 
 public class Controller {
 
     Model model;
-    EngineView view;
+    View view;
 
     Dimension gameSize;
     int money;
@@ -24,7 +24,7 @@ public class Controller {
         money = 100;
         score = 0;
         gameSize = new Dimension(30, 30);
-        view = new EngineView(this);
+        view = new View(this);
     }
 
     public boolean newGame (File jsonFile) {

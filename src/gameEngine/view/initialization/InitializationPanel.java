@@ -3,7 +3,7 @@ package gameEngine.view.initialization;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import gameEngine.view.Button;
-import gameEngine.view.EngineView;
+import gameEngine.view.View;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.controller.*;
@@ -19,7 +19,7 @@ public class InitializationPanel extends Panel {
 
     public InitializationPanel (Controller controller,
                                 JFrame initializationFrame,
-                                EngineView engineView) {
+                                View engineView) {
         super();
 
         JLabel message = new JLabel(StyleConstants.myResources.getString("Welcome"));

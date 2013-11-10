@@ -4,7 +4,7 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import gameEngine.view.Button;
-import gameEngine.view.EngineView;
+import gameEngine.view.View;
 import gameEngine.view.StyleConstants;
 import gameEngine.controller.*;
 
@@ -18,13 +18,13 @@ import gameEngine.controller.*;
  */
 public class FileSelectorButton extends Button {
     private Controller controller;
-    private EngineView engineView;
+    private View engineView;
     private JFrame frame;
 
     /**
      * @param controller facilitates communication between view and model
      */
-    public FileSelectorButton (Controller controller, EngineView engineView, JFrame frame) {
+    public FileSelectorButton (Controller controller, View engineView, JFrame frame) {
         super(StyleConstants.myResources.getString("SelectFile"));
         this.controller = controller;
         this.engineView = engineView;
