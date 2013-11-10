@@ -19,7 +19,7 @@ import gameEngine.controller.Controller;
  * The main view class that holds all the panels and frames included in the
  * Game Engine GUI
  * 
- * @author Lalita Maraj
+ * @author Lalita Maraj, Alex Zhu
  * 
  */
 public class View extends Frame {
@@ -59,7 +59,8 @@ public class View extends Frame {
         UIManager.put(StyleConstants.BUTTON_FONT_KEY, f);
 
     }
-
+    
+    // May need to actually initialize the game when this is called
     public void showGame () {
         createStore();
         pack();
@@ -118,10 +119,6 @@ public class View extends Frame {
         return controller.getGameSize();
     }
     
-    public int getScore(){
-        return controller.getScore();
-    }
-    
     /**
      * Gets the background image of the game upon initialization
      */
@@ -129,10 +126,26 @@ public class View extends Frame {
         return controller.getBGImage();
     }
     
+    /**
+     * Gets the score of the player, updated each frame of the game
+     * @return
+     */
+    public int getScore(){
+        return controller.getScore();
+    }
+    
+    /**
+     * Gets the amount of money the user has, updated each frame of
+     * the game
+     */
     public int getMoney(){
         return controller.getMoney();
     }
     
+    /**
+     * Gets the number of lives the user has, updated each frame of
+     * the game
+     */
     public int getLives(){
         return controller.getLives();
     }
