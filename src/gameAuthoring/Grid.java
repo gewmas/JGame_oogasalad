@@ -1,12 +1,17 @@
 package gameAuthoring;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 
@@ -20,12 +25,16 @@ public class Grid extends JPanel {
 
     public Grid (int width, int height) {
         this.setLayout(new GridLayout(width, height));
+        this.setBackground(Color.blue);
         myGrid = new GridButton[width][height];
         myPath = new boolean[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 GridButton gButton = new GridButton(x, y, this);
                 myGrid[x][y] = gButton;
+                gButton.setOpaque(false);
+                gButton.setContentAreaFilled(false);
+                gButton.setBorderPainted(true);
                 myPath[x][y] = false;
                 this.add(myGrid[x][y]);
             }
@@ -97,15 +106,49 @@ public class Grid extends JPanel {
         if (!myPathCoordinates.contains(myGrid[startX][startY].getCoordinate())) {
             myPathCoordinates.add(myGrid[startX][startY].getCoordinate());
         }
-        
-        else{
+
+        else {
             return false;
         }
-        
+
         return (isValidPath(startX + 1, startY, endX, endY) || isValidPath(startX, startY + 1,
                                                                            endX, endY) ||
                 isValidPath(startX - 1, startY, endX, endY) || isValidPath(startX, startY - 1,
                                                                            endX, endY));
+    }
+
+    @Override
+    public void paintComponent (Graphics page) {
+
+        super.paintComponent(page);
+        Image img = null;
+        try {
+            img = ImageIO.read(getClass().getResource("bg.jpg"));
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        int h = img.getHeight(null);
+        int w = img.getWidth(null);
+
+        // Scale Horizontally:
+        if (w > this.getWidth() || w < this.getWidth()) {
+            img = img.getScaledInstance(getWidth(), -1, Image.SCALE_DEFAULT);
+            h = img.getHeight(null);
+        }
+
+        // Scale Vertically:
+        if (h > this.getHeight() || h < this.getHeight()) {
+            img = img.getScaledInstance(-1, getHeight(), Image.SCALE_DEFAULT);
+        }
+
+        // Center Images
+        int x = (getWidth() - img.getWidth(null)) / 2;
+        int y = (getHeight() - img.getHeight(null)) / 2;
+
+        // Draw it
+        page.drawImage(img, x, y, null);
     }
 
     public static void main (String[] args) {
