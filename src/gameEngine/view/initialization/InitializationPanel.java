@@ -22,7 +22,7 @@ public class InitializationPanel extends Panel {
                                 View engineView) {
         super();
 
-        JLabel message = new JLabel(StyleConstants.myResources.getString("Welcome"));
+        JLabel message = new JLabel(StyleConstants.resourceBundle.getString("Welcome"));
         add(message);
 
         Button selectorButton =

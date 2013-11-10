@@ -20,7 +20,8 @@ public class StyleConstants {
     public static final String DEFAULT_RESOURCE_PACKAGE = "resources.";
     public static final String USER_DIR = "user.dir";
 
-    public static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE +
-                                                                        "Labels");
+    public static final ResourceBundle resourceBundle = ResourceBundle
+            .getBundle(DEFAULT_RESOURCE_PACKAGE +
+                       "Labels");
 
 }

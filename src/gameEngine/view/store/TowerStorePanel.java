@@ -14,22 +14,27 @@ import gameEngine.view.Panel;
  *         tower information
  */
 public class TowerStorePanel extends Panel {
+    private Panel storeOptions;
 
     /**
      * @param mediator facilitates communication between view components
      * @param controller facilitates communication between view and model
      */
+
     public TowerStorePanel (Mediator mediator, Controller controller) {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
         Panel TowerInfoPanel = new TowerInfoPanel();
-        Panel storeOptions = new TowersOptionPanel(mediator, controller);
+        storeOptions = new TowersOptionPanel(mediator, controller);
         mediator.addColleague(MediatorConstants.INFO_PANEL_KEY, TowerInfoPanel);
-
         add(TowerInfoPanel, BorderLayout.CENTER);
         add(storeOptions, BorderLayout.PAGE_START);
 
+    }
+
+    public void openStore () {
+        // TODO: ADD IMPLEMENTATION
     }
 
 }

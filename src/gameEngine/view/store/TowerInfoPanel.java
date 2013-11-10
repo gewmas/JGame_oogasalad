@@ -24,7 +24,8 @@ public class TowerInfoPanel extends Panel {
         super();
 
         Border valuePanelBorder =
-                BorderFactory.createTitledBorder(StyleConstants.myResources.getString("TowerInfo"));
+                BorderFactory.createTitledBorder(StyleConstants.resourceBundle
+                        .getString("TowerInfo"));
         setBorder(valuePanelBorder);
         label = new JLabel();
         label.setSize(100, 100);

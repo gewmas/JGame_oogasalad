@@ -9,7 +9,7 @@ public class CancelButton extends Button {
     JFrame frame;
 
     public CancelButton (JFrame frame) {
-        super(StyleConstants.myResources.getString("Cancel"));
+        super(StyleConstants.resourceBundle.getString("Cancel"));
         this.frame = frame;
 
     }

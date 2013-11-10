@@ -53,7 +53,8 @@ public class TowersOptionPanel extends Panel {
     private void setUIStyle () {
 
         Border listPanelBorder =
-                BorderFactory.createTitledBorder(StyleConstants.myResources.getString("StoreName"));
+                BorderFactory.createTitledBorder(StyleConstants.resourceBundle
+                        .getString("StoreName"));
         setBorder(listPanelBorder);
     }
 

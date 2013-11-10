@@ -25,7 +25,7 @@ public class FileSelectorButton extends Button {
      * @param controller facilitates communication between view and model
      */
     public FileSelectorButton (Controller controller, View engineView, JFrame frame) {
-        super(StyleConstants.myResources.getString("SelectFile"));
+        super(StyleConstants.resourceBundle.getString("SelectFile"));
         this.controller = controller;
         this.engineView = engineView;
         this.frame = frame;
