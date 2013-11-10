@@ -1,21 +1,20 @@
 package gameEngine.view;
 
+import gameEngine.controller.Controller;
 import gameEngine.model.TowerInfo;
 
 
 public class CanvasPanel extends Panel {
     Game game;
 
-    public CanvasPanel () {
-        game = new Game();
+    public CanvasPanel (GameFrame view) {
+        game = new Game(view);
         this.add(game);
     }
 
-
-
     @Override
     public void placeTower (TowerInfo towerInfo) {
-        game.purchaseTower(towerInfo.getName());
+        game.placeTower(towerInfo.getName());
 
     }
 

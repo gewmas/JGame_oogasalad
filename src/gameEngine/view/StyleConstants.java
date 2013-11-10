@@ -4,10 +4,12 @@ import java.awt.Font;
 import java.util.ResourceBundle;
 
 
-/** Constants that are paramters for the look and feel 
+/**
+ * Constants that are paramters for the look and feel
  * of the GUI
+ * 
  * @author Lalita Maraj
- *
+ * 
  */
 public class StyleConstants {
     public static final String BUTTON_FONT = "Helvetica";
@@ -15,10 +17,11 @@ public class StyleConstants {
     public static final int BUTTON_FONT_SIZE = 12;
     public static final int BUTTON_FONT_STYLE = Font.CENTER_BASELINE;
 
-    public static final String DEFAULT_RESOURCE_PACKAGE = "resources.";
+    public static final String DEFAULT_RESOURCE_PACKAGE = "gameEngine/view/resources.";
     public static final String USER_DIR = "user.dir";
 
-    public static ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE +
-                                                                        "Labels");
+    public static final ResourceBundle resourceBundle = ResourceBundle
+            .getBundle(DEFAULT_RESOURCE_PACKAGE +
+                       "Labels");
 
 }

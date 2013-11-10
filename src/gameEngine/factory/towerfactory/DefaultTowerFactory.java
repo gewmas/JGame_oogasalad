@@ -5,31 +5,32 @@ import gameEngine.model.tower.Tower;
 import gameEngine.model.tower.DefaultTower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
+
 /**
  * 
  * @author Yuhua Fabio
- * TowerFactory can create different types of Tower when called by the create() method
+ *         TowerFactory can create different types of Tower when called by the create() method
  * 
  */
-public class DefaultTowerFactory implements TowerFactory{
-    
+public class DefaultTowerFactory implements TowerFactory {
+
     String id;
-    String image; 
-    
+    String image;
+
     double x;
     double y;
-    
+
     double damage;
     double attackSpeed;
     double range;
 
     double cost;
     double recyclePrice;
-    
-    public DefaultTowerFactory(JSONObject currTower) {
+
+    public DefaultTowerFactory (JSONObject currTower) {
         this.id = currTower.getString("id");
         this.image = currTower.getString("image");
-        
+
         this.x = currTower.getDouble("x");
         this.y = currTower.getDouble("y");
         this.damage = currTower.getDouble("damage");
@@ -40,13 +41,11 @@ public class DefaultTowerFactory implements TowerFactory{
     }
 
     @Override
-    public Tower create() {
-        Tower tower = (Tower) new DefaultTower(damage, attackSpeed, range, cost, recyclePrice, id, true, x, y, Constant.TOWER_CID, image);
+    public Tower create () {
+        Tower tower =
+                (Tower) new DefaultTower(damage, attackSpeed, range, cost, recyclePrice, id, true,
+                                         x, y, Constant.TOWER_CID, image);
         return tower;
     }
-
-    
-
-
 
 }

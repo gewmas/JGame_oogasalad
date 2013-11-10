@@ -16,21 +16,21 @@ import jgame.platform.JGEngine;
  */
 public class testTowerEnemyBullet extends JGEngine {
 
-//    @Test
-//    public void test(){
-//        
-//    }
-    
-//    public static void main(String[] args) {new testTowerEnemyBullet();}
-//
-//    public testTowerEnemyBullet(){initEngineApplet(); }
-//    public testTowerEnemyBullet(JGPoint size){initEngine(size.x,size.y); }
-    
+    // @Test
+    // public void test(){
+    //
+    // }
+
+    // public static void main(String[] args) {new testTowerEnemyBullet();}
+    //
+    // public testTowerEnemyBullet(){initEngineApplet(); }
+    // public testTowerEnemyBullet(JGPoint size){initEngine(size.x,size.y); }
+
     // Jiaran edited. Using this, one can run it as application instead of applet.
     public static void main (String[] args) {
         new testTowerEnemyBullet(new JGPoint(960, 700));
     }
-    
+
     /** Application constructor. */
     public testTowerEnemyBullet (JGPoint size) {
         initEngine(size.x, size.y);
@@ -53,7 +53,7 @@ public class testTowerEnemyBullet extends JGEngine {
     public void initGame () {
         defineMedia("mygame.tbl");
         setFrameRate(60, 2);
-        
+
         new Model();
     }
 

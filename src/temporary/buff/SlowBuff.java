@@ -2,6 +2,7 @@ package temporary.buff;
 
 import temporary.TemporaryEnemy;
 
+
 public class SlowBuff extends Buff {
 
     public SlowBuff (String name,
@@ -25,8 +26,5 @@ public class SlowBuff extends Buff {
     public void buffOff (TemporaryEnemy enemy) {
         enemy.changeSpeed(5);
     }
-
-
-
 
 }
