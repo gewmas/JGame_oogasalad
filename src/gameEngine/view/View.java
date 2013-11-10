@@ -8,11 +8,9 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.UIManager;
 import gameEngine.model.TowerInfo;
-import gameEngine.view.initialization.InitializationFrame;
+import gameEngine.view.menu.Menu;
 import gameEngine.view.store.TowerStorePanel;
 import gameEngine.controller.Controller;
 
@@ -49,21 +47,9 @@ public class View extends Frame {
 
         Panel statsPanel = new StatsPanel();
         add(statsPanel, BorderLayout.SOUTH);
-        Button cancelButton = new Button(StyleConstants.myResources.getString("Cancel")) {
-            @Override
-            /** A closes frame on click
-             *
-             */
-            protected void mouseClickAction () {
-                closeWindow();
 
-            }
-        };
-        JMenuBar menu = new JMenuBar();
-        JMenu menuitem = new JMenu("file");
-        menu.add(menuitem);
-        setJMenuBar(menu);
-        add(cancelButton);
+        setJMenuBar(new Menu(engineView, controller));
+
         //
         // showGame ();
 

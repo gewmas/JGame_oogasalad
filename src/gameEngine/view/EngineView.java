@@ -20,6 +20,7 @@ public class EngineView {
     }
 
     public void selectNewGame () {
+        gameFrame.dispose();
         initializationFrame = new InitializationFrame(controller, this);
     }
 
