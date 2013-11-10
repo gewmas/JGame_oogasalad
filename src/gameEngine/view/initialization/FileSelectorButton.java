@@ -3,6 +3,7 @@ package gameEngine.view.initialization;
 import java.io.File;
 import javax.swing.JFileChooser;
 import gameEngine.view.Button;
+import gameEngine.view.EngineView;
 import gameEngine.view.StyleConstants;
 import gameEngine.controller.*;
 
@@ -16,13 +17,15 @@ import gameEngine.controller.*;
  */
 public class FileSelectorButton extends Button {
     Controller controller;
+    private EngineView engineView;
 
     /**
      * @param controller facilitates communication between view and model
      */
-    public FileSelectorButton (Controller controller) {
+    public FileSelectorButton (Controller controller, EngineView engineView) {
         super(StyleConstants.myResources.getString("SelectFile"));
         this.controller = controller;
+        this.engineView = engineView;
 
     }
 
@@ -39,7 +42,9 @@ public class FileSelectorButton extends Button {
         if (selected == JFileChooser.APPROVE_OPTION) {
             File file = new File(chooser.getSelectedFile().toString());
             // to do: check that it is a Json file
-            controller.newGame(file);
+           if (controller.newGame(file)){
+               engineView.showGame();
+           }
         }
 
     }

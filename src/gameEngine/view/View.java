@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.UIManager;
 import gameEngine.model.TowerInfo;
 import gameEngine.view.initialization.InitializationFrame;
@@ -29,8 +31,9 @@ public class View extends Frame {
 
     /**
      * @param controller facilitates communication between view and model
+     * @param engineView
      */
-    public View (Controller controller) {
+    public View (Controller controller, EngineView engineView) {
         super();
         mediator = new Mediator();
         this.controller = controller;
@@ -46,10 +49,28 @@ public class View extends Frame {
 
         Panel statsPanel = new StatsPanel();
         add(statsPanel, BorderLayout.SOUTH);
+        Button cancelButton = new Button(StyleConstants.myResources.getString("Cancel")) {
+            @Override
+            /** A closes frame on click
+             *
+             */
+            protected void mouseClickAction () {
+                closeWindow();
 
-//        new InitializationFrame(controller);
-        showGame ();
+            }
+        };
+        JMenuBar menu = new JMenuBar();
+        JMenu menuitem = new JMenu("file");
+        menu.add(menuitem);
+        setJMenuBar(menu);
+        add(cancelButton);
+        //
+        // showGame ();
 
+    }
+
+    private void closeWindow () {
+        this.dispose();
     }
 
     /**
@@ -88,54 +109,54 @@ public class View extends Frame {
         setCursor(c);
 
     }
-    
+
     /**
      * Tells the controller to send tower purchase instructions to the model
      * and then reset the cursor
      */
-    public void buyTower(int x, int y, String tower){
-        controller.purchaseTower(x,y,tower);
+    public void buyTower (int x, int y, String tower) {
+        controller.purchaseTower(x, y, tower);
         purchaseTower();
     }
-    
+
     /**
      * Requests tower information for the tower at the given location
      */
-    public void getTowerInfo(int x,int y){
-        controller.getTowerInfo(x,y);
+    public void getTowerInfo (int x, int y) {
+        controller.getTowerInfo(x, y);
     }
 
     @Override
     /**
      * After tower is purchased, the cursor is set to the default cursor.
      */
-    public void purchaseTower() {
+    public void purchaseTower () {
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
-    
+
     /**
-     * Gets the dimensions of the game on initialization 
+     * Gets the dimensions of the game on initialization
      */
-    public Dimension getGameSize(){
+    public Dimension getGameSize () {
         return controller.getGameSize();
     }
-    
-    public int getScore(){
+
+    public int getScore () {
         return controller.getScore();
     }
-    
+
     /**
      * Gets the background image of the game upon initialization
      */
-    public String getBGImage(){
+    public String getBGImage () {
         return controller.getBGImage();
     }
-    
-    public int getMoney(){
+
+    public int getMoney () {
         return controller.getMoney();
     }
-    
-    public int getLives(){
+
+    public int getLives () {
         return controller.getLives();
     }
 }

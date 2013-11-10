@@ -5,12 +5,13 @@ import java.io.File;
 import java.util.List;
 import gameEngine.model.Model;
 import gameEngine.model.TowerInfo;
+import gameEngine.view.EngineView;
 import gameEngine.view.View;
 
 public class Controller {
 
     Model model;
-    View view;
+    EngineView view;
     
     Dimension gameSize;
     int money;
@@ -23,13 +24,14 @@ public class Controller {
         money=100;
         score=0;
         gameSize=new Dimension(30,30);
-        view = new View(this);
+        view = new EngineView(this);
     }
 
-    public void newGame (File jsonFile) {
+    public boolean newGame (File jsonFile) {
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
-        view.showGame();
+        return true;
+//        view.showGame();
 
     }
 
