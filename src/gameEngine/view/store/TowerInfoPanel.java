@@ -11,7 +11,7 @@ import javax.swing.border.Border;
 
 
 /**
- * Panel that displays tower information
+ * Panel that displays tower informations
  * when user hovers over a tower option
  * 
  * @author Lalita Maraj
