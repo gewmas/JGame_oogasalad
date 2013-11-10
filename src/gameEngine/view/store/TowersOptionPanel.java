@@ -71,9 +71,9 @@ public class TowersOptionPanel extends Panel {
         // options.add(new TowerStoreButton(tower,mediator,gameFrame));
         // }
         // MOCK DATA
-        TowerInfo tw = new TowerInfo("src/resources/right.gif", 45, "fire", "burns enemies");
+        TowerInfo tw = new TowerInfo("src/gameEngine/view/resources/right.gif", 45, "fire", "burns enemies");
         optionsPanel.add(new TowerStoreButton(tw, mediator, gameFrame));
-        TowerInfo gw = new TowerInfo("src/resources/mana.jpg", 45, "ice", "freeze enemies");
+        TowerInfo gw = new TowerInfo("src/gameEngine/view/resources/mana.jpg", 45, "ice", "freeze enemies");
         optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
         optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
         optionsPanel.add(new TowerStoreButton(gw, mediator, gameFrame));
