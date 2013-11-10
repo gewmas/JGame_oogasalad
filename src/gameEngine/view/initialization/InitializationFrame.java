@@ -22,22 +22,11 @@ public class InitializationFrame extends Frame {
 
     public InitializationFrame (Controller controller, EngineView engineView) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        Button cancelButton = new Button(StyleConstants.myResources.getString("Cancel")) {
-            @Override
-            /** A closes frame on click
-             *
-             */
-            protected void mouseClickAction () {
-                closeWindow();
 
-            }
-        };
-        getContentPane().add(new InitializationPanel(controller, cancelButton,engineView));
+        getContentPane().add(new InitializationPanel(controller, this,engineView));
         pack();
         setVisible(true);
     }
 
-    private void closeWindow () {
-        this.dispose();
-    }
+   
 }

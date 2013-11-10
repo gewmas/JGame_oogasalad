@@ -24,7 +24,7 @@ public interface Colleague {
      * 
      * @param mediator facilitates communication between view components
      */
-//    public void addMediator (Mediator mediator);
+    // public void addMediator (Mediator mediator);
 
     /**
      * Behavior a colleague should execute after a tower has been placed

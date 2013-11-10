@@ -16,5 +16,4 @@ public class Frame extends JFrame {
         super();
     }
 
-
 }

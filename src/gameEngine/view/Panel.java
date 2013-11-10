@@ -17,8 +17,6 @@ public class Panel extends JPanel implements Colleague {
         super();
     }
 
- 
-
     @Override
     public void placeTower (TowerInfo towerInfo) {
 

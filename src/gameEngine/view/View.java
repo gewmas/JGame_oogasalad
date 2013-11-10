@@ -22,7 +22,7 @@ import gameEngine.controller.Controller;
  * @author Lalita Maraj
  * 
  */
-public class View extends Frame implements Colleague{
+public class View extends Frame implements Colleague {
 
     private Controller controller;
     private Mediator mediator;
@@ -49,8 +49,6 @@ public class View extends Frame implements Colleague{
         setJMenuBar(new Menu(engineView, controller));
 
     }
-
-
 
     /**
      * Setting the Look and Feel of the UI
@@ -139,13 +137,9 @@ public class View extends Frame implements Colleague{
         return controller.getLives();
     }
 
-
-
-
-
     @Override
     public void displayTowerInfo (TowerInfo towerInfo) {
-       //No behavior
-        
+        // No behavior
+
     }
 }

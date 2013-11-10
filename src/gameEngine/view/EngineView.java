@@ -13,6 +13,7 @@ public class EngineView {
         this.controller = controller;
         gameFrame = new View(controller, this);
         initializationFrame = new InitializationFrame(controller, this);
+
     }
 
     public void showGame () {

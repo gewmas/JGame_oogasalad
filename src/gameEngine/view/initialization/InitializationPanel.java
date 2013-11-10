@@ -1,5 +1,6 @@
 package gameEngine.view.initialization;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import gameEngine.view.Button;
 import gameEngine.view.EngineView;
@@ -16,14 +17,15 @@ import gameEngine.controller.*;
 
 public class InitializationPanel extends Panel {
 
-    public InitializationPanel (Controller controller, Button cancelButton,EngineView engineView) {
+    public InitializationPanel (Controller controller, JFrame initializationFrame,EngineView engineView) {
         super();
 
         JLabel message = new JLabel(StyleConstants.myResources.getString("Welcome"));
         add(message);
 
         Button selectorButton =
-                new FileSelectorButton(controller, engineView);
+                new FileSelectorButton(controller, engineView,initializationFrame);
+        Button cancelButton = new CancelButton( initializationFrame);
         add(cancelButton);
         add(selectorButton);
     }
