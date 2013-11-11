@@ -19,7 +19,7 @@ public class Model {
     /**
      * @author Yuhua
      * 
-     * Pipeline of Model is as below.
+     * warehouse - store different kinds of tower, enemy warehouse 
      * 
      */
 
@@ -31,11 +31,12 @@ public class Model {
     private GridFactory gridFactory;
     private LinkedList<Tile> path;
     private Detector detector;
+    private Rule rule; //how each waves created, ruleStart, ruleStop
 
     // private Rule rule;
 
     public Model () {
-        
+        rule = new Rule();
     }
     
     public void newGame(File jsonFile) throws Exception{
@@ -49,33 +50,22 @@ public class Model {
         gridFactory.initialize();
         path = gridFactory.getPathList();
         
-        // 2 create factory by warehouse - hashmap of different kind of tower, enemy
-        // warehouse - store lists of towers, enemies
+        // 2 create factory by 
               
         towerWarehouse = new TowerWarehouse(parser);
-        towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, path);
+        
+        gameInfo = new GameInfo(1000, 1000, 1000, null);
+
         
     }
     
     public void startGame(){
-        // 2 create factory by warehouse - hashmap of different kind of tower, enemy
-        // warehouse - store lists of towers, enemies
         towerWarehouse.create("DefaultTower"); // test, should be called within Rule
 
-        // 3 create gameInfo
-        gameInfo = new GameInfo(1000, 1000, 1000, null);
-        // finally all rules and waves should be created according to JSon
-        Rule r = new Rule();
-
         Wave w = new Wave("1", 5, 1000, 10000, enemyWarehouse);
-        r.addWave(w);
-        r.ruleStart();
-        // 4 create path
-
-        // 5 create rule - how each waves created, ruleStart, ruleStop
-        // rule - waves -> create enemies
-        // new Rule();
+        rule.addWave(w);
+        rule.ruleStart();
 
     }
     
