@@ -35,4 +35,10 @@ public class DefaultTowerFactory extends TowerFactory {
         return tower;
     }
 
+    @Override
+    public Tower create (int x, int y) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

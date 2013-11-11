@@ -15,6 +15,16 @@ import jgame.JGObject;
 
 public class Tower extends JGObject {
 
+    double damage;
+    double attackSpeed;
+    double range;
+
+    double x;
+    double y;
+    
+    double cost;
+    double recyclePrice;
+    
     Detector dector;
 
     public Tower (String name,
@@ -24,8 +34,16 @@ public class Tower extends JGObject {
                   int collisionid,
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
-
+        
         this.dector = new Detector(this.eng);
+    }
+
+    public double getX () {
+        return x;
+    }
+
+    public double getY () {
+        return y;
     }
 
 }
