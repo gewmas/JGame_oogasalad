@@ -20,6 +20,7 @@ public abstract class TowerFactory {
     double recyclePrice;
     
     public abstract Tower create ();
+    public abstract Tower create (int x, int y);
     
     public String getImage () {
         return image;
@@ -36,5 +37,7 @@ public abstract class TowerFactory {
     public String getDescription () {
         return description;
     }
+
+    
     
 }

@@ -1,7 +1,7 @@
 package gameEngine.view.gameFrame;
 
 import gameEngine.controller.Controller;
-import gameEngine.model.Grid;
+import gameEngine.model.Tile;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;

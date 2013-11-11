@@ -1,13 +1,15 @@
 package gameEngine.model;
 
+import gameEngine.factory.GridFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
-import gameEngine.model.warehouse.Warehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,7 +19,7 @@ public class Model {
     /**
      * @author Yuhua
      * 
-     *         Pipeline of Model is as below.
+     * Pipeline of Model is as below.
      * 
      */
 
@@ -26,6 +28,9 @@ public class Model {
     private GameInfo gameInfo;
     private TowerWarehouse towerWarehouse;
     private EnemyWarehouse enemyWarehouse;
+    private GridFactory gridFactory;
+    private LinkedList<Tile> path;
+    private Detector detector;
 
     // private Rule rule;
 
@@ -40,15 +45,23 @@ public class Model {
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
 
-
+        gridFactory = new GridFactory(parser);
+        gridFactory.initialize();
+        path = gridFactory.getPathList();
+        
+        // 2 create factory by warehouse - hashmap of different kind of tower, enemy
+        // warehouse - store lists of towers, enemies
+              
+        towerWarehouse = new TowerWarehouse(parser);
+        towerWarehouse = new TowerWarehouse(parser);
+        enemyWarehouse = new EnemyWarehouse(parser);
+        
     }
     
     public void startGame(){
         // 2 create factory by warehouse - hashmap of different kind of tower, enemy
         // warehouse - store lists of towers, enemies
-        towerWarehouse = new TowerWarehouse(parser);
         towerWarehouse.create("DefaultTower"); // test, should be called within Rule
-        enemyWarehouse = new EnemyWarehouse(parser);
 
         // 3 create gameInfo
         gameInfo = new GameInfo(1000, 1000, 1000, null);
@@ -65,11 +78,47 @@ public class Model {
         // new Rule();
 
     }
-
     
+    public List<Tile> getPathList() {
+        return path;
+    }
 
+    /**
+     * return all kinds of TowerFactory
+     */
     public List<TowerFactory> getTowerFactory () {
         return towerWarehouse.getTowerFactory();
     }
 
+    /**
+     * Ask TowerWarehouse to create tower
+     * 
+     * @param x
+     * @param y
+     * @param tower
+     */
+    public void purchaseTower (int x, int y, String name) {
+        towerWarehouse.create(x, y, name);
+    }
+    
+    public Tower getTowerInfo (int x, int y) {
+        //detector not init yet, can't find engineinterface
+        int range = 10;
+        return detector.getTowerInRange(x, y, range);
+    }
+
+    
+    /*
+     * GameInfo getter method
+     */
+    public int getMoney () {
+        return gameInfo.getGold();
+    }
+
+    public int getLife () {
+        return gameInfo.getLife();
+    }
+
+   
+    
 }

@@ -48,6 +48,11 @@ public class TowerWarehouse implements Warehouse {
         towerFactory.create();
     }
     
+    public void create(int x, int y, String name){
+        TowerFactory towerFactory = towers.get(name);
+        towerFactory.create(x, y);
+    }
+    
     public List<TowerFactory> getTowerFactory (){
         List<TowerFactory> towerFactory = new ArrayList<TowerFactory>();
         
