@@ -45,11 +45,6 @@ public class GameFrame extends Frame implements Colleague {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         mediator.addColleague(ColleagueKeys.GAMEFRAME.toString(), this);
-        Panel statsPanel = new StatsPanel();
-        add(statsPanel, BorderLayout.SOUTH);
-
-        setJMenuBar(new Menu(engineView, controller));
-
     }
 
     /**
@@ -65,15 +60,25 @@ public class GameFrame extends Frame implements Colleague {
     public void showGame () {
         createGame();
         createStore();
+        createStats();
+        createMenu();
         pack();
         setVisible(true);
-
     }
-
+    
     public void createGame () {
         Panel canvasPanel = new CanvasPanel(this);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addColleague(ColleagueKeys.GAME.toString(), canvasPanel);
+    }
+    
+    public void createStats(){
+        Panel statsPanel = new StatsPanel();
+        add(statsPanel, BorderLayout.SOUTH);
+    }
+    
+    public void createMenu(){
+        setJMenuBar(new Menu(engineView, controller));
     }
 
     /**

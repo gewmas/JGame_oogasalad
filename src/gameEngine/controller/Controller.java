@@ -18,7 +18,8 @@ public class Controller {
     int money;
     int lives;
     int score;
-
+    TowerInfo selectedTower;
+    
     public Controller () {
         lives = 10;
         money = 100;
@@ -28,11 +29,16 @@ public class Controller {
     }
 
     public boolean newGame (File jsonFile) {
+        
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
         return true;
         // view.showGame();
 
+    }
+    
+    public void startGame(){
+        
     }
 
     public List<TowerInfo> getTowers () {
