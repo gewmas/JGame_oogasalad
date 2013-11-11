@@ -55,6 +55,7 @@ public class Enemy extends JGObject {
     @Override
     public void move () {
         // Should walk along the Path
+//        System.out.println("X is: "+x+"d and y: "+y+" and path center x: "+path.element().getCenterX()+" and path center y:"+path.element().getCenterY());
         if(x == path.element().getCenterX() && y == path.element().getCenterY()) {
             calculateNewDirection();
         }
