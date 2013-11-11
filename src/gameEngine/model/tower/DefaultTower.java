@@ -14,7 +14,7 @@ public class DefaultTower extends Tower {
     
 
     long prevTime;
-
+    private Detector<Enemy> dector;
     public DefaultTower (
                          double damage,
                          double attackSpeed,
@@ -41,7 +41,7 @@ public class DefaultTower extends Tower {
         this.y = y;
 
         this.prevTime = System.currentTimeMillis();
-
+        this.dector = new Detector<Enemy>(this.eng);
         // level.getGameInfo().loseGold((int)cost);
 
     }
@@ -50,7 +50,7 @@ public class DefaultTower extends Tower {
     public void move () {
         // check the enemies within the shooting range
         // create bullets
-        List<Enemy> enemies = dector.getEnemiesInRange((int) x, (int) y, (int) range);
+        List<Enemy> enemies = dector.getTargetsInRange((int) x, (int) y, (int) range);
         for (Enemy e : enemies) {
             // check distance between this tower and e then shoot bullets
             double dist = Math.sqrt(Math.pow(e.x - x, 2) + Math.pow(e.y - y, 2));
