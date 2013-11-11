@@ -20,7 +20,7 @@ public class Controller {
 
     public Controller () {
 
-        gameSize = new Dimension(30, 30);
+        gameSize = new Dimension(20, 20);
         view = new View(this);
         model = new Model();
     }
@@ -49,8 +49,8 @@ public class Controller {
      * Sends a call to the model to purchase tower tower at position x,y
      * If position is invalid, do nothing for now
      */
-    public void purchaseTower (int x, int y, String name) {
-        model.purchaseTower(x, y, name);
+    public boolean purchaseTower (int x, int y, String name) {
+        return model.purchaseTower(x, y, name);
     }
 
     /**
