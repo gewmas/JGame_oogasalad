@@ -27,9 +27,11 @@ public class Game extends StdGame {
     private GameFrame gameFrame;
     private boolean purchasing;
     private String towerToPurchase;
+    private GameFrameMediator mediator;
 
-    public Game (GameFrame gameFrame) {
+    public Game (GameFrame gameFrame, GameFrameMediator mediator) {
         this.gameFrame = gameFrame;
+        this.mediator = mediator;
         initEngineComponent(WIDTH, HEIGHT);
     }
 
@@ -68,7 +70,7 @@ public class Game extends StdGame {
         checkCollision(0, 0);
         checkUserInteractions();
         updateGameStats();
-        gameFrame.updateStoreStatus();
+        mediator.updateStoreStatus();
         if (getKey(KeyEsc)) {
             clearKey(KeyEsc);
             lives = 0;

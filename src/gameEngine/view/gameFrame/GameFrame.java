@@ -74,7 +74,7 @@ public class GameFrame extends Frame implements GameFrameColleague {
     }
     
     public void createGame () {
-        Panel canvasPanel = new CanvasPanel(this);
+        Panel canvasPanel = new CanvasPanel(this,mediator);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addColleague(ColleagueKeys.GAME.toString(), canvasPanel);
     }
@@ -183,6 +183,6 @@ public class GameFrame extends Frame implements GameFrameColleague {
 
     @Override
     public void updateStoreStatus () {
-        storePanel.updateStoreStatus();
+       
     }
 }

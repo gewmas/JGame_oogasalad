@@ -8,8 +8,8 @@ import gameEngine.view.Panel;
 public class CanvasPanel extends Panel {
     Game game;
 
-    public CanvasPanel (GameFrame view) {
-        game = new Game(view);
+    public CanvasPanel (GameFrame view,GameFrameMediator mediator) {
+        game = new Game(view, mediator);
         this.add(game);
     }
 
