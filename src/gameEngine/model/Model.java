@@ -66,10 +66,22 @@ public class Model {
 
     }
 
-    
-
+    /**
+     * return all kinds of TowerFactory
+     */
     public List<TowerFactory> getTowerFactory () {
         return towerWarehouse.getTowerFactory();
     }
 
+    /**
+     * Ask TowerWarehouse to create tower
+     * 
+     * @param x
+     * @param y
+     * @param tower
+     */
+    public void purchaseTower (int x, int y, String name) {
+        towerWarehouse.create(x, y, name);
+    }
+    
 }
