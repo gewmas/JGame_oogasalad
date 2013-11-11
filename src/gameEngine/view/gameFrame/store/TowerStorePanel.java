@@ -1,10 +1,10 @@
-package gameEngine.view.store;
+package gameEngine.view.gameFrame.store;
 
 import java.awt.BorderLayout;
-import gameEngine.view.GameFrame;
-import gameEngine.view.Mediator;
-import gameEngine.view.ColleagueKeys;
 import gameEngine.view.Panel;
+import gameEngine.view.gameFrame.ColleagueKeys;
+import gameEngine.view.gameFrame.GameFrame;
+import gameEngine.view.gameFrame.GameFrameMediator;
 
 
 /**
@@ -21,7 +21,7 @@ public class TowerStorePanel extends Panel {
      * @param gameFrame facilitates communication between view and controller
      */
 
-    public TowerStorePanel (Mediator mediator, GameFrame gameFrame) {
+    public TowerStorePanel (GameFrameMediator mediator, GameFrame gameFrame) {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);

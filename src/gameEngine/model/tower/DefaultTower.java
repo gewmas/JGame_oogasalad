@@ -9,13 +9,9 @@ import jgame.JGObject;
 
 
 public class DefaultTower extends Tower {
-
-    double damage;
-    double attackSpeed;
-    double range;
-
-    double cost;
-    double recyclePrice;
+    
+    
+    
 
     long prevTime;
 
@@ -40,8 +36,9 @@ public class DefaultTower extends Tower {
         this.range = range;
         this.cost = cost;
         this.recyclePrice = recyclePrice;
-
-        // this.level = level;
+        
+        this.x = x;
+        this.y = y;
 
         this.prevTime = System.currentTimeMillis();
 

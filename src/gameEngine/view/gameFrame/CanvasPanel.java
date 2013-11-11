@@ -1,7 +1,8 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
 import gameEngine.controller.Controller;
-import gameEngine.model.TowerInfo;
+import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.view.Panel;
 
 
 public class CanvasPanel extends Panel {
@@ -13,7 +14,7 @@ public class CanvasPanel extends Panel {
     }
 
     @Override
-    public void placeTower (TowerInfo towerInfo) {
+    public void placeTower (TowerFactory towerInfo) {
         game.placeTower(towerInfo.getName());
 
     }
