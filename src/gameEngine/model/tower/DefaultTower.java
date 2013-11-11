@@ -41,7 +41,7 @@ public class DefaultTower extends Tower {
         this.y = y;
 
         this.prevTime = System.currentTimeMillis();
-        this.dector = new Detector<Enemy>(this.eng);
+        this.dector = new Detector<Enemy>(this.eng,Enemy.class);
         // level.getGameInfo().loseGold((int)cost);
 
     }

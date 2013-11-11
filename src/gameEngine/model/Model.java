@@ -88,7 +88,7 @@ public class Model {
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
     public Tower getTowerInfo (int x, int y) {
-        Detector<Tower> d= new Detector<Tower>(myEng);
+        Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
         return d.getOneTargetInRange(x, y, 10);
     }
 

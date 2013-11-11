@@ -29,8 +29,9 @@ public class Detector<T extends JGObject> {
     private JGEngineInterface myEng;
     //Because of Erasure, we need to use reflection to help complete the function
     private Class<T> myType;
-    public Detector (JGEngineInterface eng) {
+    public Detector (JGEngineInterface eng, Class<T> type) {
         myEng = eng;
+        myType=type;
 
     }
 
