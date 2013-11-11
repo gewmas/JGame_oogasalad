@@ -20,6 +20,8 @@ import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.store.TowerStorePanel;
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.Tile;
+import gameEngine.model.tower.Tower;
 
 
 /**
@@ -34,6 +36,7 @@ public class GameFrame extends Frame implements GameFrameColleague {
     private Controller controller;
     private GameFrameMediator mediator;
     private View engineView;
+    private Panel storePanel;
 
     /**
      * @param controller facilitates communication between view and model
@@ -49,11 +52,6 @@ public class GameFrame extends Frame implements GameFrameColleague {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         mediator.addColleague(ColleagueKeys.GAMEFRAME.toString(), this);
-        Panel statsPanel = new StatsPanel();
-        add(statsPanel, BorderLayout.SOUTH);
-
-        setJMenuBar(new Menu(engineView, controller));
-
     }
 
     /**
@@ -69,22 +67,32 @@ public class GameFrame extends Frame implements GameFrameColleague {
     public void showGame () {
         createGame();
         createStore();
+        createStats();
+        createMenu();
         pack();
         setVisible(true);
-
     }
-
+    
     public void createGame () {
         Panel canvasPanel = new CanvasPanel(this);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addColleague(ColleagueKeys.GAME.toString(), canvasPanel);
+    }
+    
+    public void createStats(){
+        Panel statsPanel = new StatsPanel();
+        add(statsPanel, BorderLayout.SOUTH);
+    }
+    
+    public void createMenu(){
+        setJMenuBar(new Menu(engineView, controller));
     }
 
     /**
      * Create the store of Towers
      */
     private void createStore () {
-        Panel storePanel = new TowerStorePanel(mediator, this);
+        storePanel = new TowerStorePanel(mediator, this);
         this.add(storePanel, BorderLayout.EAST);
     }
 
@@ -97,7 +105,6 @@ public class GameFrame extends Frame implements GameFrameColleague {
         Image image = toolkit.getImage(towerInfo.getImage());
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
         setCursor(c);
-
     }
 
     /**
@@ -112,8 +119,8 @@ public class GameFrame extends Frame implements GameFrameColleague {
     /**
      * Requests tower information for the tower at the given location
      */
-    public void getTowerInfo (int x, int y) {
-        controller.getTowerInfo(x, y);
+    public Tower getTowerInfo (int x, int y) {
+        return controller.getTowerInfo(x, y);
     }
 
     @Override
@@ -130,9 +137,9 @@ public class GameFrame extends Frame implements GameFrameColleague {
     public Dimension getGameSize () {
         return controller.getGameSize();
     }
-
-    public int getScore () {
-        return controller.getScore();
+    
+    public List<Tile> getPath(){
+        return controller.getPath();
     }
 
     /**
@@ -154,12 +161,9 @@ public class GameFrame extends Frame implements GameFrameColleague {
     @Override
     public void displayTowerInfo (TowerFactory towerInfo) {
         // No behavior
-
     }
 
     public List<TowerFactory> getTowers () {
-       
-
         return controller.getTowerFactory();
     }
 
@@ -179,7 +183,6 @@ public class GameFrame extends Frame implements GameFrameColleague {
 
     @Override
     public void updateStoreStatus () {
-        // DO NOTHING
-
+        storePanel.updateStoreStatus();
     }
 }

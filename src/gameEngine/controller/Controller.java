@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.List;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Model;
+import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrame;
@@ -16,7 +17,6 @@ public class Controller {
     View view;
 
     Dimension gameSize;
-
 
     public Controller () {
 
@@ -30,7 +30,6 @@ public class Controller {
         view.startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
-
         // view.showGame();
     }
     
@@ -59,7 +58,13 @@ public class Controller {
      * at x,y. If the position is invalid, do nothing
      */
     public Tower getTowerInfo (int x, int y) {
-        return model.getTowerInfo(x, y);
+        Tower tower;
+        try {
+            tower=model.getTowerInfo(x,y);
+        } catch (Exception e) {
+            tower=null;
+        }
+        return tower;
     }
 
     /**
@@ -88,33 +93,13 @@ public class Controller {
      */
     public int getLives () {
         return model.getLife();
+    }  
+     
+    public List<Tile> getPath(){
+        return model.getPathList();
     }
 
-    /**
-     * Return the score of the user
-     * 
-     * @author Yuhua Money is considered as the score
-     * 
-     */
-    public int getScore () {
-        //TODO Front-end guy, please delete this method
-        return 0;
-    }
-    
-    /*
-     * 
-     * 
-     * public List<PathInfo> getPath(){
-     * 
-     * }
-     * 
-     * public String getPathImage(){
-     * 
-     * }
-     * 
-     * 
-     * 
-     * }
-     */
+//    public String getPathImage(){
+//    }     
 
 }

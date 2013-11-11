@@ -2,6 +2,7 @@ package gameEngine.model.warehouse;
 
 import gameEngine.factory.towerfactory.DefaultTowerFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.GameInfo;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -47,10 +48,16 @@ public class TowerWarehouse implements Warehouse {
         TowerFactory towerFactory = towers.get(name);
         towerFactory.create();
     }
-    
-    public void create(int x, int y, String name){
+    // Jiaran edit, something's wrong please contact.
+    public boolean create(int x, int y, String name,GameInfo g){
         TowerFactory towerFactory = towers.get(name);
-        towerFactory.create(x, y);
+        if(towerFactory.getCost()<=g.getGold()){
+            g.loseGold(towerFactory.getCost());
+            towerFactory.create(x, y);
+            return true;
+        }
+        else
+            return false;
     }
     
     public List<TowerFactory> getTowerFactory (){

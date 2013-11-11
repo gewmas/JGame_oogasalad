@@ -2,9 +2,11 @@ package gameEngine.view.gameFrame;
 
 import gameEngine.controller.Controller;
 import gameEngine.model.Tile;
+import gameEngine.model.tower.Tower;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 import jgame.Highscore;
 import jgame.JGColor;
 import jgame.JGPoint;
@@ -36,8 +38,6 @@ public class Game extends StdGame {
     @Override
     public void initCanvas () {
         Dimension size = gameFrame.getGameSize();
-        System.out.println(size.width);
-        System.out.println(size.height);
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
     }
@@ -54,12 +54,23 @@ public class Game extends StdGame {
         purchasing = false;
         setHighscores(10, new Highscore(0, "aaa"), 3);
         startgame_ingame = true;
+        List<Tile> pathList=gameFrame.getPath();
+        int tileCount=0;
+        for (Tile tile:pathList){
+            defineImage("tile"+String.valueOf(tileCount),"#"+String.valueOf(tileCount),256,tile.getPathImage(),"-");
+            JGPoint tilePos=getTileIndex(tile.getX(),tile.getY());
+            setTile(tilePos.x,tilePos.y,"#"+String.valueOf(tileCount));
+            System.out.println(tilePos.x);
+            System.out.println(tilePos.y);
+            tileCount++;
+        }
     }
 
     public void doFrameInGame () {
         checkCollision(0, 0);
         checkUserInteractions();
         updateGameStats();
+        gameFrame.updateStoreStatus();
         if (getKey(KeyEsc)) {
             clearKey(KeyEsc);
             lives = 0;
@@ -82,7 +93,8 @@ public class Game extends StdGame {
                 System.out.format("Buying tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
             else {
-                gameFrame.getTowerInfo(tilePosition.x, tilePosition.y);
+                Tower tower=gameFrame.getTowerInfo(tilePosition.x, tilePosition.y);
+                if (tower==null) System.out.println("No tower here");
                 System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
         }
@@ -94,7 +106,6 @@ public class Game extends StdGame {
     public void updateGameStats () {
         lives = gameFrame.getLives();
         money = gameFrame.getMoney();
-        score = gameFrame.getScore();
     }
 
     @Override

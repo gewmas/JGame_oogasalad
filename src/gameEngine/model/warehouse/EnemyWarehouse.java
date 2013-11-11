@@ -2,20 +2,24 @@ package gameEngine.model.warehouse;
 
 import gameEngine.factory.enemyfactory.EnemyFactory;
 import gameEngine.factory.enemyfactory.NormalEnemyFactory;
+import gameEngine.model.Tile;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 
 public class EnemyWarehouse implements Warehouse {
 
     private JSONArray jsonArray;
+    private LinkedList<Tile> path;
     private Map<String, EnemyFactory> myEnemyFactories;
 
-    public EnemyWarehouse (Parser parser) {
+    public EnemyWarehouse (Parser parser, LinkedList<Tile> enemyPath) {
         jsonArray = parser.getJSONArray("enemyType");
+        path = enemyPath;
         myEnemyFactories = new HashMap<String, EnemyFactory>();
 
         // loop through all kinds of enemies
@@ -35,6 +39,6 @@ public class EnemyWarehouse implements Warehouse {
 
     public void create (String name) {
         EnemyFactory enemyFactory = myEnemyFactories.get(name);
-        enemyFactory.create();
+        enemyFactory.create(path);
     }
 }
