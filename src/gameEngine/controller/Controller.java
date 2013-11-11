@@ -5,7 +5,6 @@ import java.io.File;
 import java.util.List;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Model;
-import gameEngine.model.TowerInfo;
 import gameEngine.view.View;
 import gameEngine.view.GameFrame;
 
@@ -34,6 +33,7 @@ public class Controller {
         
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
+
         // view.showGame();
     }
     
