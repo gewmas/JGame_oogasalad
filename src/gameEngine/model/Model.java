@@ -54,7 +54,7 @@ public class Model {
               
         towerWarehouse = new TowerWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
-        enemyWarehouse = new EnemyWarehouse(parser);
+        enemyWarehouse = new EnemyWarehouse(parser, path);
         
     }
     
