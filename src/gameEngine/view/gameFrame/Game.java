@@ -38,8 +38,6 @@ public class Game extends StdGame {
     @Override
     public void initCanvas () {
         Dimension size = gameFrame.getGameSize();
-        System.out.println(size.width);
-        System.out.println(size.height);
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
     }
@@ -60,7 +58,10 @@ public class Game extends StdGame {
         int tileCount=0;
         for (Tile tile:pathList){
             defineImage("tile"+String.valueOf(tileCount),"#"+String.valueOf(tileCount),256,tile.getPathImage(),"-");
-            setTile((int)(tile.getX()),(int)(tile.getY()),"#"+String.valueOf(tileCount));
+            JGPoint tilePos=getTileIndex(tile.getX(),tile.getY());
+            setTile(tilePos.x,tilePos.y,"#"+String.valueOf(tileCount));
+            System.out.println(tilePos.x);
+            System.out.println(tilePos.y);
             tileCount++;
         }
     }
