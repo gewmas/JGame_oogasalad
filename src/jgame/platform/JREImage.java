@@ -98,46 +98,6 @@ class JREImage implements JGImage {
         }
         return new JREImage(img);
     }
-    
-    public JGImage loadImage (String imgfile,int width, int height) {
-        Image img = (Image) loadedimages.get(imgfile);
-        if (img == null) {
-            URL imgurl = getClass().getResource(imgfile);
-            if (imgurl == null) {
-                try {
-                    File imgf = new File(imgfile);
-                    if (imgf.canRead()) {
-                        imgurl = imgf.toURL();
-                    }
-                    else {
-                        imgurl = new URL(imgfile);
-                        // throw new JGameError(
-                        // "File "+imgfile+" not found.",true);
-                    }
-                }
-                catch (MalformedURLException e) {
-                    // e.printStackTrace();
-                    throw new JGameError(
-                                         "File not found or malformed path or URL '" + imgfile +
-                                                 "'.", true);
-                }
-            }
-            img = output_comp.getToolkit().createImage(imgurl);
-            loadedimages.put(imgfile, img);
-        }
-        try {
-            ensureLoaded(img);
-        }
-        catch (Exception e) {
-            // e.printStackTrace();
-            throw new JGameError("Error loading image " + imgfile);
-        }
-        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = resizedImage.createGraphics();
-        g.drawImage(img, 0, 0, width, height, null);
-        g.dispose();
-        return new JREImage(resizedImage);
-    }
 
     /** Behaves like loadImage(String). Returns null if there was an error. */
     public static JGImage loadImage (URL imgurl) {
