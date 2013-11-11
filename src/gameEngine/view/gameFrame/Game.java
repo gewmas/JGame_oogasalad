@@ -70,6 +70,7 @@ public class Game extends StdGame {
         checkCollision(0, 0);
         checkUserInteractions();
         updateGameStats();
+        gameFrame.updateStoreStatus();
         if (getKey(KeyEsc)) {
             clearKey(KeyEsc);
             lives = 0;

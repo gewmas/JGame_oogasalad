@@ -36,6 +36,7 @@ public class GameFrame extends Frame implements GameFrameColleague {
     private Controller controller;
     private GameFrameMediator mediator;
     private View engineView;
+    private Panel storePanel;
 
     /**
      * @param controller facilitates communication between view and model
@@ -91,7 +92,7 @@ public class GameFrame extends Frame implements GameFrameColleague {
      * Create the store of Towers
      */
     private void createStore () {
-        Panel storePanel = new TowerStorePanel(mediator, this);
+        storePanel = new TowerStorePanel(mediator, this);
         this.add(storePanel, BorderLayout.EAST);
     }
 
@@ -182,7 +183,6 @@ public class GameFrame extends Frame implements GameFrameColleague {
 
     @Override
     public void updateStoreStatus () {
-        // DO NOTHING
-
+        storePanel.updateStoreStatus();
     }
 }
