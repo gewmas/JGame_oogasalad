@@ -9,7 +9,8 @@ import jgame.JGObject;
 
 
 public class DefaultTower extends Tower {
-
+    
+    
     double damage;
     double attackSpeed;
     double range;
