@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -87,6 +88,11 @@ public class Grid extends JPanel {
     }
 
     public boolean isValidPathHelper () {
+        if (myStart == null || myEnd == null) {
+            JOptionPane.showMessageDialog(null, "Start or Endpoint not defined!");
+            return false;
+        }
+
         myPathCoordinates.clear();
         for (int i = 0; i < myPath[0].length; i++) {
             for (int j = 0; j < myPath.length; j++) {

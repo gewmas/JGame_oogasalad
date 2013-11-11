@@ -3,8 +3,6 @@ package gameAuthoring.JSONObjects;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 
-
-
 public class EnemyJSONObject extends JSONObject {
 
     public EnemyJSONObject (String ID, int gold, String imagePath, int lives, int speed) {

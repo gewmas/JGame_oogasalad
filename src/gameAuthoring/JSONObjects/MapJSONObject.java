@@ -14,7 +14,7 @@ public class MapJSONObject extends JSONObject {
                           Point2D start,
                           Point2D end,
                           Collection<Point2D> pathPoints) {
-        
+
         for (Point2D p : pathPoints) {
             pathList.put(new PointJSONObject(p));
         }
