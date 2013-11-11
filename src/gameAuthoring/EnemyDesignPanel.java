@@ -22,7 +22,7 @@ public class EnemyDesignPanel extends JPanel {
 
     private EnemyDesignTab myEnemyDesignTab;
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir"));
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
 
     private JTextField myNameField;
     private JTextField myGoldField;
@@ -76,7 +76,6 @@ public class EnemyDesignPanel extends JPanel {
             public void mouseClicked (MouseEvent e) {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(INPUT_CHOOSER.getSelectedFile());
                     File imgSource = INPUT_CHOOSER.getSelectedFile();
                     myImageSource = imgSource;
                     Image tower;
