@@ -27,8 +27,6 @@ public class Game extends StdGame {
     private GameFrame gameFrame;
     private boolean purchasing;
     private String towerToPurchase;
-    // private int lives;
-    private int money;
 
     public Game (GameFrame gameFrame) {
         this.gameFrame = gameFrame;
@@ -47,7 +45,7 @@ public class Game extends StdGame {
         setFrameRate(30, 2);
         initial_lives = gameFrame.getLives();
         lives = gameFrame.getLives();
-        money = gameFrame.getMoney();
+        score = gameFrame.getMoney();
         String bgImage = "space_background.jpg";
         defineImage("background", "bg", 256, bgImage, "-");
         setBGImage("background");
@@ -105,16 +103,13 @@ public class Game extends StdGame {
      */
     public void updateGameStats () {
         lives = gameFrame.getLives();
-        money = gameFrame.getMoney();
+        score = gameFrame.getMoney();
     }
 
     @Override
-    /**
-     * Override to display amount of money left at all times
-     */
     public void paintFrame () {
         super.paintFrame();
-        drawString("Money " + String.valueOf(money), pfWidth() - 10, 10, 1);
+//        drawString("Money " + String.valueOf(sc), pfWidth() - 10, 10, 1);
     }
 
     /**
