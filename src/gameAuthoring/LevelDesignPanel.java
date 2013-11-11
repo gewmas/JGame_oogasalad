@@ -7,13 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 
 public class LevelDesignPanel extends JPanel {
     private LevelDesignTab myLevelDesignTab;
-    JTextField numberOfWavesField;
     private JScrollPane myCreatedWaves;
     private JPanel myScrollPanel;
 
@@ -31,7 +29,7 @@ public class LevelDesignPanel extends JPanel {
         JPanel panel = new JPanel(new MigLayout("wrap 1"));
 
         JButton createWaveButton = new JButton("Add Wave");
-        createWaveButton.addMouseListener(createWaveListener(myScrollPanel));
+        createWaveButton.addMouseListener(createWaveListener());
 
         JButton createLevelButton = new JButton("Create Level");
         createLevelButton.addMouseListener(createLevelListener());
@@ -51,12 +49,10 @@ public class LevelDesignPanel extends JPanel {
         return listener;
     }
 
-    private MouseAdapter createWaveListener (final JPanel scrollPanel) {
+    private MouseAdapter createWaveListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                System.out.println("clicked");
-
 
                 myScrollPanel.add(new JLabel("test"));
                 myScrollPanel.repaint();
@@ -65,6 +61,5 @@ public class LevelDesignPanel extends JPanel {
         };
         return listener;
     }
-
 
 }
