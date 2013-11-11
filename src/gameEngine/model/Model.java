@@ -7,11 +7,10 @@ import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import jgame.impl.JGEngineInterface;
 
 
 public class Model {
@@ -30,7 +29,7 @@ public class Model {
     private EnemyWarehouse enemyWarehouse;
     private GridFactory gridFactory;
     private LinkedList<Tile> path;
-    private Detector detector;
+    private JGEngineInterface myEng;
     private Rule rule; //how each waves created, ruleStart, ruleStop
 
     // private Rule rule;
@@ -80,21 +79,17 @@ public class Model {
         return towerWarehouse.getTowerFactory();
     }
 
-    /**
-     * Ask TowerWarehouse to create tower
-     * 
-     * @param x
-     * @param y
-     * @param tower
-     */
-    public void purchaseTower (int x, int y, String name) {
-        towerWarehouse.create(x, y, name);
+    // Jiaran purchase, get tower info. If something is wrong plz contact
+     
+    public boolean purchaseTower (int x, int y, String name) {
+        return towerWarehouse.create(x, y, name,gameInfo);
     }
-    
+    //Jiaran Im thinking maybe this should return a TowerInfo instead of Tower
+    // Tower can implemetns Towerinfo which has getDescription,getDamage....
+    // now it is not functional because no myEng, we need discussion on this.
     public Tower getTowerInfo (int x, int y) {
-        //detector not init yet, can't find engineinterface
-        int range = 10;
-        return detector.getTowerInRange(x, y, range);
+        Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
+        return d.getOneTargetInRange(x, y, 10);
     }
 
     

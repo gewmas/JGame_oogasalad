@@ -30,7 +30,6 @@ public class Controller {
         view.startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
-
         // view.showGame();
     }
     
