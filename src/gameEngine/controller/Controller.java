@@ -5,6 +5,7 @@ import java.io.File;
 import java.util.List;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Model;
+import gameEngine.model.tower.Tower;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrame;
 
@@ -15,14 +16,10 @@ public class Controller {
     View view;
 
     Dimension gameSize;
-    int money;
-    int lives;
-    int score;
+
 
     public Controller () {
-        lives = 10;
-        money = 100;
-        score = 0;
+
         gameSize = new Dimension(30, 30);
         view = new View(this);
         model = new Model();
@@ -30,7 +27,7 @@ public class Controller {
 
     public void newGame (File jsonFile) throws Exception {
         model.newGame(jsonFile); //will throw exception if fail
-        
+        view.startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
         // view.showGame();
@@ -60,8 +57,8 @@ public class Controller {
      * Sends a call to the model to update the monitored tower stats to the tower
      * at x,y. If the position is invalid, do nothing
      */
-    public void getTowerInfo (int x, int y) {
-
+    public Tower getTowerInfo (int x, int y) {
+        return model.getTowerInfo(x, y);
     }
 
     /**
@@ -82,27 +79,29 @@ public class Controller {
      * Returns the amount of money in the game
      */
     public int getMoney () {
-        return money;
+        return model.getMoney();
     }
 
     /**
      * Return the number of lives remaining
      */
     public int getLives () {
-        return lives;
+        return model.getLife();
     }
 
     /**
      * Return the score of the user
-     */
-
-    public int getScore () {
-        return score;
-    }
-    /*
-     * public void placeTower(String name, Position pos){
      * 
-     * }
+     * @author Yuhua Money is considered as the score
+     * 
+     */
+    public int getScore () {
+        //TODO Front-end guy, please delete this method
+        return 0;
+    }
+    
+    /*
+     * 
      * 
      * public List<PathInfo> getPath(){
      * 
