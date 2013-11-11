@@ -53,7 +53,7 @@ public class Model {
         // 2 create factory by 
               
         towerWarehouse = new TowerWarehouse(parser);
-        enemyWarehouse = new EnemyWarehouse(parser);
+        enemyWarehouse = new EnemyWarehouse(parser, path);
         
         gameInfo = new GameInfo(1000, 1000, 1000, null);
 
