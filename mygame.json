@@ -1,0 +1,101 @@
+{
+"name": "Tower Destruction II",
+"spashImage" :  "game-bg.png",
+"gold" : 200,
+"numberOfLives" : 100,
+"levels": 5,
+"widthOfWindow": 600,
+"heightOfWindow": 400,
+"tilesPerRow": 15,
+"difficultyScale": 1.5,
+"map":
+{
+  	  "pathImage":  "path.jpg", 
+	  "Path":[ 
+               {  "x":1, "y":4},
+               { "x": 2, "y": 4 },
+               { "x": 3, "y": 4 },
+               { "x": 4, "y": 4 },
+               { "x": 5, "y": 4 },
+               { "x": 6, "y": 4 },
+               { "x": 7, "y": 4 },
+               { "x": 8, "y": 4 }
+           ]
+},
+
+"towerType": [
+	{
+	 "id": "DefaultTower",
+	 "image": "tower1",
+	 "x" : 100,
+	 "y" : 100,
+	 "damage": 1,
+	 "attackSpeed": 0.8,
+	 "range": 100,	
+	 "cost": 100, 
+	 "recyclePrice":  50
+	} 
+],
+
+"enemyType":[
+{
+	"id": "1",
+	"gold": 5,
+	"image": "enemy1",
+	"life": 2,
+	"speed": 0.1,
+}, 
+{
+	"id": "2",
+	"gold": 10,
+	"image": "enemy2",
+	"life": 3,
+	"speed": 0.1,
+}
+],
+
+"levelData":[
+	{	
+	"level":1,
+	"numberWaves": 2,
+	"enemiesOfWave" : [ 
+			{
+			"wave":1, 
+		    "enemies": 
+			    [
+					{"id":1,"quantity": 10},
+				]	
+			},
+			{
+			"wave":2, 
+		    "enemies": 
+			    [
+					{"id":1,"quantity": 15},
+				]	
+			}
+		]
+	},
+	{	
+	"level":2,
+	"numberWaves": 2,
+	"enemiesOfWave" : [ 
+			{
+			"wave":1, 
+		    "enemies": 
+			    [
+					{"id":2,"quantity":10}
+				]	
+			},
+			{
+			"wave":1, 
+		    "enemies": 
+			    [
+					{"id":2,"quantity":20}
+				]	
+			}
+		]
+	}
+]  
+
+}
+
