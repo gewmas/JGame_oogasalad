@@ -40,15 +40,14 @@ public class Model {
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
 
-
+        towerWarehouse = new TowerWarehouse(parser);
+        enemyWarehouse = new EnemyWarehouse(parser);
     }
     
     public void startGame(){
         // 2 create factory by warehouse - hashmap of different kind of tower, enemy
         // warehouse - store lists of towers, enemies
-        towerWarehouse = new TowerWarehouse(parser);
         towerWarehouse.create("DefaultTower"); // test, should be called within Rule
-        enemyWarehouse = new EnemyWarehouse(parser);
 
         // 3 create gameInfo
         gameInfo = new GameInfo(1000, 1000, 1000, null);
