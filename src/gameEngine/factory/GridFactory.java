@@ -56,13 +56,13 @@ public class GridFactory implements FactoryInterface{
 	        for(int m=0; m<tilesPerRow; m++) {
 	            Tile tile = new Tile(currentXOffset, currentYOffset, (width / tilesPerRow) + currentXOffset, (height / tilesPerRow) + currentYOffset);
 	            gridList.get(k).add(tile);
-	            currentXOffset = currentXOffset + width / 15;
+	            currentXOffset = currentXOffset + width / tilesPerRow;
 	            if(pathCoordinates.keySet().contains(new Coordinate(k, m))) {
 	                tile.setOnPath(pathImage);
 	                pathCoordinates.put(new Coordinate(k, m), tile);
 	            }
 	        }
-	        currentYOffset = currentYOffset + height / 15;
+	        currentYOffset = currentYOffset + height / tilesPerRow;
 	    }
 	    
 	   //generate path Linked List

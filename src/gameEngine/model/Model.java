@@ -1,5 +1,6 @@
 package gameEngine.model;
 
+import gameEngine.factory.GridFactory;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.model.warehouse.Warehouse;
@@ -7,6 +8,7 @@ import gameEngine.parser.Parser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,6 +27,8 @@ public class Model {
     private GameInfo gameInfo;
     private Warehouse towerWarehouse;
     private EnemyWarehouse enemyWarehouse;
+    private GridFactory gridFactory;
+    private LinkedList<Tile> path;
 
     // private Rule rule;
 
@@ -41,8 +45,13 @@ public class Model {
         }
         parser = new Parser(scanner);
 
+        gridFactory = new GridFactory(parser);
+        gridFactory.initialize();
+        path = gridFactory.getPathList();
+        
         // 2 create factory by warehouse - hashmap of different kind of tower, enemy
         // warehouse - store lists of towers, enemies
+              
         towerWarehouse = new TowerWarehouse(parser);
         towerWarehouse.create("DefaultTower"); // test, should be called within Rule
         enemyWarehouse = new EnemyWarehouse(parser);
@@ -61,6 +70,10 @@ public class Model {
         // rule - waves -> create enemies
         // new Rule();
 
+    }
+    
+    public List<Tile> getPathList() {
+        return path;
     }
 
 }

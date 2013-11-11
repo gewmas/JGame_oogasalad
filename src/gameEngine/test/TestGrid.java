@@ -3,6 +3,7 @@ package gameEngine.test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import gameEngine.model.Tile;
 import gameEngine.Constant.Constant;
@@ -49,23 +50,14 @@ public class TestGrid extends JGEngine {
     public void initGame () {
         defineMedia("mygame.tbl");
         setFrameRate(60, 2);
-        
-      try {
-          File file = new File("src/gameEngine/test/mygame.json");
-          Scanner scanner = new Scanner(file);
-          Parser parser = new Parser(scanner);
-          Factory factory = new Factory(parser);
-          factory.grid().initialize();
-          LinkedList<Tile> pathList = factory.grid().getPathList();
-          for(Tile tile: pathList) {
-              System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
-          }
-          
-      }
-      catch (FileNotFoundException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-      }
+       
+              Model model = new Model();
+              List<Tile> pathList = model.getPathList();
+              for(Tile tile: pathList) {
+                  System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
+                  System.out.println("Center x=" + tile.getCenterX() + " center y=" + tile.getCenterY());
+                  System.out.println("img path is " + tile.getPathImage());
+              }
     }
 
     @Override
