@@ -43,6 +43,7 @@ public class View {
     public void newGame (File file) {
         try {
             controller.newGame(file);
+            initializationFrame.dispose();
         }
         catch (Exception e) {
             // TODO Auto-generated catch block
