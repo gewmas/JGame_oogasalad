@@ -1,5 +1,6 @@
 package gameEngine.model;
 
+import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.model.warehouse.Warehouse;
@@ -23,24 +24,26 @@ public class Model {
     private Scanner scanner;
     private Parser parser;
     private GameInfo gameInfo;
-    private Warehouse towerWarehouse;
+    private TowerWarehouse towerWarehouse;
     private EnemyWarehouse enemyWarehouse;
 
     // private Rule rule;
 
     public Model () {
-        // 1 parse jsonfile
+        
+    }
+    
+    public void newGame(File jsonFile) throws Exception{
+        // For test convenience
+//        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
 
-        try {
-            scanner =
-                    new Scanner(new File(System.getProperty("user.dir") +
-                                         "/src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
 
+
+    }
+    
+    public void startGame(){
         // 2 create factory by warehouse - hashmap of different kind of tower, enemy
         // warehouse - store lists of towers, enemies
         towerWarehouse = new TowerWarehouse(parser);
@@ -61,6 +64,12 @@ public class Model {
         // rule - waves -> create enemies
         // new Rule();
 
+    }
+
+    
+
+    public List<TowerFactory> getTowerFactory () {
+        return towerWarehouse.getTowerFactory();
     }
 
 }

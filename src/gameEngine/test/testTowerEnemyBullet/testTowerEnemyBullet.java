@@ -1,5 +1,6 @@
 package gameEngine.test.testTowerEnemyBullet;
 
+import java.io.File;
 import gameEngine.Constant.Constant;
 import gameEngine.model.Model;
 import jgame.JGColor;
@@ -54,7 +55,15 @@ public class testTowerEnemyBullet extends JGEngine {
         defineMedia("mygame.tbl");
         setFrameRate(60, 2);
 
-        new Model();
+        Model model = new Model();
+        try {
+            model.newGame(new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
+        }
+        catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        model.startGame();
     }
 
     @Override

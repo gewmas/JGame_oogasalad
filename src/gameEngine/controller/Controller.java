@@ -3,6 +3,7 @@ package gameEngine.controller;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Model;
 import gameEngine.model.TowerInfo;
 import gameEngine.view.View;
@@ -25,19 +26,23 @@ public class Controller {
         score = 0;
         gameSize = new Dimension(30, 30);
         view = new View(this);
+        model = new Model();
     }
 
-    public boolean newGame (File jsonFile) {
+    public void newGame (File jsonFile) throws Exception {
+        model.newGame(jsonFile); //will throw exception if fail
+        
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
-        return true;
         // view.showGame();
-
+    }
+    
+    public void startGame(){
+        model.startGame();
     }
 
-    public List<TowerInfo> getTowers () {
-        return null;
-
+    public List<TowerFactory> getTowerFactory () {
+        return model.getTowerFactory();  
     }
 
     /**
