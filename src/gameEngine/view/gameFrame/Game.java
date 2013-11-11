@@ -47,7 +47,7 @@ public class Game extends StdGame {
         lives = gameFrame.getLives();
         score = gameFrame.getMoney();
         String bgImage = "space_background.jpg";
-        defineImage("background", "bg", 256, bgImage, "-",300,300);
+        defineImage("background", "bg", 256, bgImage, "-");
         setBGImage("background");
         purchasing = false;
         setHighscores(10, new Highscore(0, "aaa"), 3);
