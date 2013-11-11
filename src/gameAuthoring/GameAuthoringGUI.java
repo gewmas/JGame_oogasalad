@@ -20,11 +20,13 @@ public class GameAuthoringGUI {
         JPanel towerDesignTab = new TowerDesignTab(gameData).getTab();
         JPanel enemyDesignTab = new EnemyDesignTab(gameData).getTab();
         JPanel levelDesignTab = new LevelDesignTab(gameData).getTab();
+        JPanel miscellaneousTab = new MiscellaneousTab(gameData).getTab();
         mainPane.addTab("Basic Info", basicInfoTab);
         mainPane.addTab("Map Design", mapDesignTab);
         mainPane.addTab("Tower Design", towerDesignTab);
         mainPane.addTab("Enemy Design", enemyDesignTab);
         mainPane.addTab("Level Design", levelDesignTab);
+        mainPane.addTab("Miscellaneous", miscellaneousTab);
         frame.setContentPane(mainPane);
         frame.pack();
         frame.setLocationByPlatform(true);

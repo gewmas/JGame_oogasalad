@@ -26,12 +26,17 @@ public class GameData {
         myLives = lives;
     }
 
-    public void addTower (TowerJSON towerJSON) {
-        myTowers.add(towerJSON);
+    public void addTower (String name,
+                          int damage,
+                          int attackSpeed,
+                          int range,
+                          int cost,
+                          int recyclePrice) {
+
     }
 
-    public void addEnemy (EnemyJSON enemyJSON) {
-        myEnemies.add(enemyJSON);
+    public void addEnemy (String name, int gold, int life, int speed, String image) {
+
     }
 
 }
