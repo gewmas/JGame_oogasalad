@@ -1,13 +1,11 @@
 package gameEngine.model;
 
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
-import gameEngine.model.warehouse.Warehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,7 +15,7 @@ public class Model {
     /**
      * @author Yuhua
      * 
-     *         Pipeline of Model is as below.
+     * Pipeline of Model is as below.
      * 
      */
 
@@ -26,6 +24,8 @@ public class Model {
     private GameInfo gameInfo;
     private TowerWarehouse towerWarehouse;
     private EnemyWarehouse enemyWarehouse;
+    
+    private Detector detector;
 
     // private Rule rule;
 
@@ -42,6 +42,7 @@ public class Model {
 
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser);
+        
     }
     
     public void startGame(){
@@ -82,5 +83,25 @@ public class Model {
     public void purchaseTower (int x, int y, String name) {
         towerWarehouse.create(x, y, name);
     }
+    
+    public Tower getTowerInfo (int x, int y) {
+        //detector not init yet, can't find engineinterface
+        int range = 10;
+        return detector.getTowerInRange(x, y, range);
+    }
+
+    
+    /*
+     * GameInfo getter method
+     */
+    public int getMoney () {
+        return gameInfo.getGold();
+    }
+
+    public int getLife () {
+        return gameInfo.getLife();
+    }
+
+   
     
 }
