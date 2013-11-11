@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame.store;
 
-import gameEngine.model.TowerInfo;
+
+import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import javax.swing.BorderFactory;
@@ -51,7 +52,7 @@ public class TowerInfoPanel extends Panel {
     /** A method that is called by the Mediator to 
      * update the information this panel displays
      */
-    public void displayTowerInfo (TowerInfo tower) {
+    public void displayTowerInfo (TowerFactory tower) {
         // ImageIcon icon = new ImageIcon(tower.getImage());
         myListModel.clear();
         myListModel.addElement(TowerInfoFields.NAME + tower.getName());

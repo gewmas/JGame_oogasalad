@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame;
 
-import gameEngine.model.TowerInfo;
+
+import gameEngine.factory.towerfactory.TowerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +50,7 @@ public class GameFrameMediator {
      * 
      * @param towername
      */
-    public void placeTower (TowerInfo towerInfo) {
+    public void placeTower (TowerFactory towerInfo) {
         colleagues.get(ColleagueKeys.GAME.toString()).placeTower(towerInfo);
         colleagues.get(ColleagueKeys.GAMEFRAME.toString()).placeTower(towerInfo);
     }
@@ -60,7 +61,7 @@ public class GameFrameMediator {
      * 
      * @param tower
      */
-    public void displayTowerInfo (TowerInfo tower) {
+    public void displayTowerInfo (TowerFactory tower) {
         colleagues.get(ColleagueKeys.INFOPANEL.toString()).displayTowerInfo(tower);
 
     }

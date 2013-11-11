@@ -1,7 +1,7 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.Color;
-import gameEngine.model.TowerInfo;
+import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.view.Button;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.GameFrameMediator;
@@ -21,7 +21,7 @@ public class TowerStoreButton extends Button {
     private static final Color HOVER_TEXT_COLOR = Color.RED;
     private static final Color HOVER_EXIT_TEXT_COLOR = Color.BLACK;
     private GameFrameMediator mediator;
-    private TowerInfo towerInfo;
+    private TowerFactory towerInfo;
     private Boolean active;
 
     /**
@@ -29,7 +29,7 @@ public class TowerStoreButton extends Button {
      * @param mediator facilitates communication between view components
      * @param gameFrame facilitates communication between view and controller
      */
-    public TowerStoreButton (TowerInfo towerInfo, GameFrameMediator mediator, GameFrame gameFrame) {
+    public TowerStoreButton (TowerFactory towerInfo, GameFrameMediator mediator, GameFrame gameFrame) {
         super(trimName(towerInfo.getName()));
         active = true; // to be changed!
         this.setEnabled(true);
