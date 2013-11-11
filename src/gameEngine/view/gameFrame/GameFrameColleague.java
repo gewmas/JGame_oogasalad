@@ -1,6 +1,6 @@
 package gameEngine.view.gameFrame;
 
-import gameEngine.model.TowerInfo;
+import gameEngine.factory.towerfactory.TowerFactory;
 
 
 /**
@@ -30,7 +30,7 @@ public interface GameFrameColleague {
      * 
      * @param towerInfo datastructure used to store tower information
      */
-    public void placeTower (TowerInfo towerInfo);
+    public void placeTower (TowerFactory towerInfo);
 
     /**
      * Behavior a colleague should execute after a tower has been purchased
@@ -42,7 +42,7 @@ public interface GameFrameColleague {
      * 
      * @param towerInfo datastructure used to store tower information
      */
-    public void displayTowerInfo (TowerInfo towerInfo);
+    public void displayTowerInfo (TowerFactory towerInfo);
 
     /**
      * Used primarily by the TowerStorePanel to update the status of
