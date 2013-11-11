@@ -34,5 +34,9 @@ public class View {
         gameFrame.showGame();
         initializationFrame.dispose();
     }
+    
+    public void startGame(){
+        gameFrame.showGame();
+    }
 
 }

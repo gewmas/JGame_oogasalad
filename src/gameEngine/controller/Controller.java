@@ -30,6 +30,7 @@ public class Controller {
     public boolean newGame (File jsonFile) {
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
+        view.startGame();
         return true;
         // view.showGame();
 
