@@ -1,43 +1,39 @@
 package gameAuthoring;
 
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 
-public class TestJSONWrite {
 
+public class TestJSONWrite {
+    GameData myGameData;
     Writer writer;
     
     public TestJSONWrite () {
-//        writer = new PrintWriter(System.out);
-//        EnemyJSON testEnemy = new EnemyJSON("test", 1, "imgsrc", 2, 3);
-//        
-//        testEnemy.write(writer);
-//        FileWriter file = new FileWriter("c:\\test.json");
-//        file.write(testEnemy.);
-//        file.flush();
-//        file.close();
+        myGameData = new GameData();
     }
     
     public void testWrite(){
         writer = new PrintWriter(System.out);
-        EnemyJSON testEnemy = new EnemyJSON("test", 1, "imgsrc", 2, 3);
-        try {
-            writer.write("what", 0, 4);
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         
-        try {
-            writer.flush();
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        JSONObject container = new JSONObject();
+        
+        
+        EnemyJSON testEnemy = new EnemyJSON("test", 1, "imgsrc", 2, 3);
+        EnemyJSON testEnemy2 = new EnemyJSON("test2", 1, "imgsrc2", 2, 3);
+        
+        JSONArray list = new JSONArray();
+        
+        list.put(testEnemy);
+        list.put(testEnemy2);
+        container.put("enemyType", list);
+       
+        System.out.println(container.toString(1));
+        
+        
         testEnemy.write(writer);
     }
     
