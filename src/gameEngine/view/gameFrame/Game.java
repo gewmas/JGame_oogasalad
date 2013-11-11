@@ -1,7 +1,7 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
 import gameEngine.controller.Controller;
-import gameEngine.model.Grid;
+import gameEngine.model.Tile;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class Game extends StdGame {
         initial_lives = gameFrame.getLives();
         lives = gameFrame.getLives();
         money = gameFrame.getMoney();
-        String bgImage = gameFrame.getBGImage();
+        String bgImage = "space_background.jpg";
         defineImage("background", "bg", 256, bgImage, "-");
         setBGImage("background");
         purchasing = false;

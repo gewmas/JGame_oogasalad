@@ -4,9 +4,9 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import gameEngine.view.Button;
-import gameEngine.view.GameFrame;
 import gameEngine.view.View;
 import gameEngine.view.StyleConstants;
+import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.controller.*;
 
 
@@ -18,14 +18,14 @@ import gameEngine.controller.*;
  * 
  */
 public class FileSelectorButton extends Button {
-    private GameFrame gameFrame;
+    private View view;
 
     /**
      * @param controller facilitates communication between view and model
      */
-    public FileSelectorButton (GameFrame gameFrame) {
+    public FileSelectorButton (View view) {
         super(StyleConstants.resourceBundle.getString("SelectFile"));
-        this.gameFrame = gameFrame;
+        this.view= view;
 
     }
 
@@ -41,7 +41,7 @@ public class FileSelectorButton extends Button {
         int selected = chooser.showOpenDialog(null);
         if (selected == JFileChooser.APPROVE_OPTION) {
             File file = new File(chooser.getSelectedFile().toString());
-            gameFrame.newGame(file);
+            view.newGame(file);
         }
 
     }

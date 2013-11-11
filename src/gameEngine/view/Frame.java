@@ -1,6 +1,6 @@
 package gameEngine.view;
 
-import gameEngine.model.TowerInfo;
+
 import javax.swing.JFrame;
 
 

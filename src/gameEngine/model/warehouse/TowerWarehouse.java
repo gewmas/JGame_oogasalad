@@ -5,8 +5,11 @@ import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 
 /**
@@ -43,6 +46,21 @@ public class TowerWarehouse implements Warehouse {
     public void create (String name) {
         TowerFactory towerFactory = towers.get(name);
         towerFactory.create();
+    }
+    
+    public void create(int x, int y, String name){
+        TowerFactory towerFactory = towers.get(name);
+        towerFactory.create(x, y);
+    }
+    
+    public List<TowerFactory> getTowerFactory (){
+        List<TowerFactory> towerFactory = new ArrayList<TowerFactory>();
+        
+        for(Entry<String, TowerFactory> entry : towers.entrySet()){
+            towerFactory.add(entry.getValue());
+        }
+        
+        return towerFactory;
     }
 
 }
