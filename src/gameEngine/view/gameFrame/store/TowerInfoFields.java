@@ -1,4 +1,4 @@
-package gameEngine.view.store;
+package gameEngine.view.gameFrame.store;
 
 /**
  * An enumerated class that contains the Fields of tower information

@@ -1,6 +1,7 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
-import gameEngine.model.TowerInfo;
+
+import gameEngine.factory.towerfactory.TowerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,12 +23,12 @@ import java.util.Map;
  * @author Lalita Maraj
  * 
  */
-public class Mediator {
+public class GameFrameMediator {
 
-    private Map<String, Colleague> colleagues;
+    private Map<String, GameFrameColleague> colleagues;
 
-    public Mediator () {
-        colleagues = new HashMap<String, Colleague>();
+    public GameFrameMediator () {
+        colleagues = new HashMap<String, GameFrameColleague>();
 
     }
 
@@ -39,7 +40,7 @@ public class Mediator {
      * @param name key of colleague
      * @param colleague Colleague to be added
      */
-    public void addColleague (String name, Colleague colleague) {
+    public void addColleague (String name, GameFrameColleague colleague) {
         colleagues.put(name, colleague);
     }
 
@@ -49,7 +50,7 @@ public class Mediator {
      * 
      * @param towername
      */
-    public void placeTower (TowerInfo towerInfo) {
+    public void placeTower (TowerFactory towerInfo) {
         colleagues.get(ColleagueKeys.GAME.toString()).placeTower(towerInfo);
         colleagues.get(ColleagueKeys.GAMEFRAME.toString()).placeTower(towerInfo);
     }
@@ -60,7 +61,7 @@ public class Mediator {
      * 
      * @param tower
      */
-    public void displayTowerInfo (TowerInfo tower) {
+    public void displayTowerInfo (TowerFactory tower) {
         colleagues.get(ColleagueKeys.INFOPANEL.toString()).displayTowerInfo(tower);
 
     }

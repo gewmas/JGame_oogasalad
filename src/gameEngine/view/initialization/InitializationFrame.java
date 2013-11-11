@@ -1,7 +1,7 @@
 package gameEngine.view.initialization;
 
-import gameEngine.view.GameFrame;
 import gameEngine.view.Frame;
+import gameEngine.view.gameFrame.GameFrame;
 
 
 /**

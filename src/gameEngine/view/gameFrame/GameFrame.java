@@ -1,4 +1,4 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
@@ -12,10 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-import gameEngine.model.TowerInfo;
-import gameEngine.view.menu.Menu;
-import gameEngine.view.store.TowerStorePanel;
+import gameEngine.view.Frame;
+import gameEngine.view.Panel;
+import gameEngine.view.StyleConstants;
+import gameEngine.view.View;
+import gameEngine.view.gameFrame.menu.Menu;
+import gameEngine.view.gameFrame.store.TowerStorePanel;
 import gameEngine.controller.Controller;
+import gameEngine.factory.towerfactory.TowerFactory;
 
 
 /**
@@ -25,10 +29,10 @@ import gameEngine.controller.Controller;
  * @author Lalita Maraj
  * 
  */
-public class GameFrame extends Frame implements Colleague {
+public class GameFrame extends Frame implements GameFrameColleague {
 
     private Controller controller;
-    private Mediator mediator;
+    private GameFrameMediator mediator;
     private View engineView;
 
     /**
@@ -37,7 +41,7 @@ public class GameFrame extends Frame implements Colleague {
      */
     public GameFrame (Controller controller, View engineView) {
         super();
-        mediator = new Mediator();
+        mediator = new GameFrameMediator();
         this.controller = controller;
         this.engineView = engineView;
 
@@ -88,7 +92,7 @@ public class GameFrame extends Frame implements Colleague {
     /**
      * Changes the default cursor to the image of the tower to be placed
      */
-    public void placeTower (TowerInfo towerInfo) {
+    public void placeTower (TowerFactory towerInfo) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = toolkit.getImage(towerInfo.getImage());
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
@@ -139,9 +143,8 @@ public class GameFrame extends Frame implements Colleague {
     }
 
     public int getMoney () {
-        // MOCK DATA TO BE REMOVED WHEN CONTROLLER IS INTEGRATED
-        return 400;
-        // return controller.getMoney();
+     
+         return controller.getMoney();
     }
 
     public int getLives () {
@@ -149,32 +152,28 @@ public class GameFrame extends Frame implements Colleague {
     }
 
     @Override
-    public void displayTowerInfo (TowerInfo towerInfo) {
+    public void displayTowerInfo (TowerFactory towerInfo) {
         // No behavior
 
     }
 
-    public List<TowerInfo> getTowers () {
-        // MOCK DATA TO BE REPLACED WHEN CONTROLLER INTEGRATION IS ESTABLISHED
-        List<TowerInfo> towerInfo = new ArrayList<TowerInfo>();
-        ;
-        TowerInfo fire =
-                new TowerInfo("src/gameEngine/view/resources/mana.jpg", 45, "fire",
-                              "burns enemies");
-        towerInfo.add(fire);
-        TowerInfo ice =
-                new TowerInfo("src/gameEngine/view/resources/right.gif", 700, "ice",
-                              "freezes enemies");
-        towerInfo.add(ice);
-        return towerInfo;
-        // END MOCK DATA
-        // return controller.getTowers();
+    public List<TowerFactory> getTowers () {
+       
+
+        return controller.getTowerFactory();
     }
 
     public boolean newGame (File file) {
-        if (controller.newGame(file)) {
+        try {
+            controller.newGame(file);
             engineView.loadNewGame();
         }
+        catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+
         return true;
     }
 
