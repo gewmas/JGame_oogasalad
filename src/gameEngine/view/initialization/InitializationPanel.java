@@ -3,9 +3,9 @@ package gameEngine.view.initialization;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import gameEngine.view.Button;
-import gameEngine.view.GameFrame;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
+import gameEngine.view.gameFrame.GameFrame;
 
 
 /**

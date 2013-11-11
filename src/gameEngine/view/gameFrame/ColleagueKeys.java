@@ -1,4 +1,4 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
 /**
  * Keys of each colleague used by the Mediator class
