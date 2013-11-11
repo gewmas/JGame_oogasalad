@@ -2,10 +2,16 @@ package gameAuthoring;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -14,10 +20,15 @@ import net.miginfocom.swing.MigLayout;
 
 
 public class BasicInfoTab extends Tab {
+    private static final JFileChooser INPUT_CHOOSER =
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
 
     private JTextField myGameName;
     private JTextField myGold;
     private JTextField myLives;
+    private JLabel mySplashImageLabel;
+    private String mySplashImage;
+    
 
     public BasicInfoTab (GameData gameData) {
         super(gameData);
@@ -37,6 +48,9 @@ public class BasicInfoTab extends Tab {
         mainPanel.add(title, "span 2");
 
         JButton setSplashImageButton = new JButton("Choose Splash Image");
+        setSplashImageButton.addMouseListener(setSplashImageListener());
+        
+        mySplashImageLabel = new JLabel();
 
         JButton setInfoButton = new JButton("Set Info");
         setInfoButton.addMouseListener(setInfoListener());
@@ -47,6 +61,8 @@ public class BasicInfoTab extends Tab {
         myGold.setPreferredSize(new Dimension(200, 30));
         myLives = new JTextField();
         myLives.setPreferredSize(new Dimension(200, 30));
+        
+        
 
         subPanel.add(gameName);
         subPanel.add(myGameName);
@@ -54,7 +70,8 @@ public class BasicInfoTab extends Tab {
         subPanel.add(myGold);
         subPanel.add(lives);
         subPanel.add(myLives);
-        subPanel.add(setSplashImageButton, "span 2");
+        subPanel.add(setSplashImageButton);
+        subPanel.add(mySplashImageLabel);
         subPanel.add(setInfoButton);
         Border b = BorderFactory.createLoweredBevelBorder();
         subPanel.setBorder(b);
@@ -70,6 +87,23 @@ public class BasicInfoTab extends Tab {
                 myGameData.setGameName(myGameName.getText());
                 myGameData.setGold(Integer.parseInt(myGold.getText()));
                 myGameData.setLives(Integer.parseInt(myLives.getText()));
+                myGameData.setSplashImage(mySplashImage);
+            }
+        };
+        return listener;
+
+    }
+
+    public MouseAdapter setSplashImageListener () {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                int loadObject = INPUT_CHOOSER.showOpenDialog(null);
+                if (loadObject == JFileChooser.APPROVE_OPTION) {
+                        mySplashImage = INPUT_CHOOSER.getSelectedFile().toString();
+                        mySplashImageLabel.setText(mySplashImage.replace(System.getProperties().getProperty("user.dir"), ""));
+                }
+
             }
         };
         return listener;

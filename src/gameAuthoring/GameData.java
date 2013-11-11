@@ -1,5 +1,7 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.EnemyJSONObject;
+import gameAuthoring.JSONObjects.TowerJSONObject;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.io.File;
@@ -11,7 +13,7 @@ import javax.swing.JFileChooser;
 
 public class GameData {
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir"));
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources");
 
     private String myGameName;
     private int myGold;
@@ -27,8 +29,8 @@ public class GameData {
     JSONArray enemyList = new JSONArray();
     JSONArray levelList = new JSONArray();
 
-    private Collection<TowerJSON> myTowers;
-    private Collection<EnemyJSON> myEnemies;
+    private Collection<TowerJSONObject> myTowers;
+    private Collection<EnemyJSONObject> myEnemies;
 
     private JSONObject container;
 
@@ -44,7 +46,7 @@ public class GameData {
         myLives = lives;
     }
 
-    private void setSplashImage (String splashImage) {
+    public void setSplashImage (String splashImage) {
         mySplashImage = splashImage;
     }
 
@@ -72,12 +74,12 @@ public class GameData {
                           int recyclePrice) {
 
         towerList
-                .put(new TowerJSON(name, imagePath, damage, attackSpeed, range, cost, recyclePrice));
+                .put(new TowerJSONObject(name, imagePath, damage, attackSpeed, range, cost, recyclePrice));
 
     }
 
     public void addEnemy (String name, int gold, String image, int life, int speed) {
-        enemyList.put(new EnemyJSON(name, gold, image, life, speed));
+        enemyList.put(new EnemyJSONObject(name, gold, image, life, speed));
     }
 
     public void testWrite () {

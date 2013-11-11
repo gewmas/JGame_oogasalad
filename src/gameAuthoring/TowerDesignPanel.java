@@ -23,7 +23,7 @@ public class TowerDesignPanel extends JPanel {
 
     private TowerDesignTab myTowerDesignTab;
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir"));
+            new JFileChooser(System.getProperties().getProperty("user.dir")+ "/resources/img");
 
     private JTextField myNameField;
     private JTextField myDamageField;
@@ -31,6 +31,7 @@ public class TowerDesignPanel extends JPanel {
     private JTextField myRangeField;
     private JTextField myCostField;
     private JTextField myRecyclePriceField;
+ 
 
     private File myImageSource;
 
@@ -96,7 +97,6 @@ public class TowerDesignPanel extends JPanel {
             public void mouseClicked (MouseEvent e) {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(INPUT_CHOOSER.getSelectedFile());
                     File imgSource = INPUT_CHOOSER.getSelectedFile();
                     myImageSource = imgSource;
                     Image tower;

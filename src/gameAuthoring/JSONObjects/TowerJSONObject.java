@@ -1,11 +1,11 @@
-package gameAuthoring;
+package gameAuthoring.JSONObjects;
 
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 
-public class TowerJSON extends JSONObject {
+public class TowerJSONObject extends JSONObject {
 
-    public TowerJSON (String gameName, String imagePath, int damage, int attackSpeed, int range, int cost, int recyclePrice) {
+    public TowerJSONObject (String gameName, String imagePath, int damage, int attackSpeed, int range, int cost, int recyclePrice) {
         this.put("id", gameName);
         this.put("image", imagePath);
         this.put("damage", damage);

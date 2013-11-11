@@ -1,5 +1,6 @@
-package gameAuthoring;
+package gameAuthoring.JSONObjects;
 
+import gameAuthoring.GameData;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.io.FileWriter;
@@ -22,8 +23,8 @@ public class TestJSONWrite {
         JSONObject container = new JSONObject();
         
         
-        EnemyJSON testEnemy = new EnemyJSON("test", 1, "imgsrc", 2, 3);
-        EnemyJSON testEnemy2 = new EnemyJSON("test2", 1, "imgsrc2", 2, 3);
+        EnemyJSONObject testEnemy = new EnemyJSONObject("test", 1, "imgsrc", 2, 3);
+        EnemyJSONObject testEnemy2 = new EnemyJSONObject("test2", 1, "imgsrc2", 2, 3);
         
         JSONArray list = new JSONArray();
         
