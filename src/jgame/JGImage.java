@@ -13,6 +13,12 @@ public interface JGImage {
      * Throws JGError when there was an error.
      */
     public JGImage loadImage (String imgfile);
+    
+    /**
+     * Written by Alex Zhu
+     * Same as normal loadImage, but will resize the image according to width and height
+     */
+    public JGImage loadImage (String imgfile, int width, int height);
 
     /** Behaves like loadImage(String). Returns null if there was an error. */
     // midp has no url
