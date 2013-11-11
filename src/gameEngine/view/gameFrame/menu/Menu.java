@@ -1,4 +1,4 @@
-package gameEngine.view.menu;
+package gameEngine.view.gameFrame.menu;
 
 import gameEngine.controller.Controller;
 import gameEngine.view.View;

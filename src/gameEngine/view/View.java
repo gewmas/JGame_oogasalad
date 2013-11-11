@@ -1,6 +1,7 @@
 package gameEngine.view;
 
 import gameEngine.controller.Controller;
+import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.initialization.InitializationFrame;
 
 

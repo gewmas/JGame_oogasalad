@@ -1,5 +1,7 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
+import gameEngine.view.Panel;
+import gameEngine.view.StyleConstants;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
