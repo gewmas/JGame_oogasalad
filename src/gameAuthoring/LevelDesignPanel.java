@@ -3,10 +3,12 @@ package gameAuthoring;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -20,7 +22,9 @@ public class LevelDesignPanel extends JPanel {
         this.setLayout(new MigLayout("wrap 2"));
         myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
         myCreatedWaves = new JScrollPane(myScrollPanel);
-        myCreatedWaves.setPreferredSize(new Dimension(200, 300));
+        myCreatedWaves.setPreferredSize(new Dimension(300, 300));
+        Border b = BorderFactory.createLoweredBevelBorder();
+        this.setBorder(b);
         this.add(createLevelPanel());
         this.add(myCreatedWaves);
     }

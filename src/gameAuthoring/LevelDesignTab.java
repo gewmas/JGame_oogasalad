@@ -1,12 +1,12 @@
 package gameAuthoring;
 
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JButton;
+import java.awt.Font;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -23,19 +23,23 @@ public class LevelDesignTab extends Tab {
 
     @Override
     public JPanel getTab () {
-        JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
+        JPanel mainPanel = new JPanel(new MigLayout("wrap 1"));
         myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
+        JLabel title = new JLabel("Miscellaneous");
+        title.setFont(new Font("Arial", Font.BOLD, 30));
+        mainPanel.add(title);
         LevelDesignPanel levelDesignPanel = new LevelDesignPanel(this);
         mainPanel.add(levelDesignPanel);
         myCreatedLevels = new JScrollPane(myScrollPanel);
-        myCreatedLevels.setPreferredSize(new Dimension(200, 400));
+        Border b = BorderFactory.createLoweredBevelBorder();
+        myCreatedLevels.setBorder(b);
+        myCreatedLevels.setPreferredSize(new Dimension(440, 300));
         mainPanel.add(myCreatedLevels);
 
         return mainPanel;
     }
 
-    
-    public void addLevel (int numWaves){
+    public void addLevel (int numWaves) {
         numLevels++;
         JPanel levelPanel = new JPanel(new MigLayout("wrap 2"));
         JLabel level = new JLabel(numLevels + "");
