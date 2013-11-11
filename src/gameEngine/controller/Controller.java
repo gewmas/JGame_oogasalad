@@ -33,7 +33,6 @@ public class Controller {
         view.startGame();
         return true;
         // view.showGame();
-
     }
 
     public List<TowerInfo> getTowers () {
