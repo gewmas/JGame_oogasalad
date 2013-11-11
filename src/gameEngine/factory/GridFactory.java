@@ -20,14 +20,14 @@ import jgame.platform.*;
  * Constructs the grid
  *
  */
-public class GridFactory implements FactoryInterface{
+public class GridFactory implements FactoryInterface {
 	private Parser parser;
 	private ArrayList<ArrayList<Tile>> gridList;
         LinkedList<Tile> path;
 	public GridFactory(Parser parser) {
-		this.parser = parser;
-		gridList = new ArrayList<ArrayList<Tile>>();
-		path = new LinkedList<Tile>();
+	this.parser = parser;
+	gridList = new ArrayList<ArrayList<Tile>>();
+	path = new LinkedList<Tile>();
 	}
 	
 	@Override
@@ -60,6 +60,7 @@ public class GridFactory implements FactoryInterface{
 	            if(pathCoordinates.keySet().contains(new Coordinate(k, m))) {
 	                tile.setOnPath(pathImage);
 	                pathCoordinates.put(new Coordinate(k, m), tile);
+	                System.out.println("center x: "+tile.getCenterX()+" and centerY: "+tile.getCenterY());
 	            }
 	        }
 	        currentYOffset = currentYOffset + height / tilesPerRow;

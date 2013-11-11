@@ -25,7 +25,7 @@ public class Tower extends JGObject {
     double cost;
     double recyclePrice;
     
-    Detector dector;
+    
 
     public Tower (String name,
                   boolean unique_id,
@@ -35,7 +35,7 @@ public class Tower extends JGObject {
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
         
-        this.dector = new Detector(this.eng);
+        
     }
 
     public double getX () {
