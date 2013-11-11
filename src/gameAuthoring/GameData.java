@@ -1,12 +1,15 @@
 package gameAuthoring;
 
 import gameAuthoring.JSONObjects.EnemyJSONObject;
+import gameAuthoring.JSONObjects.MapJSONObject;
 import gameAuthoring.JSONObjects.TowerJSONObject;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JFileChooser;
 
@@ -29,8 +32,10 @@ public class GameData {
     JSONArray enemyList = new JSONArray();
     JSONArray levelList = new JSONArray();
 
-    private Collection<TowerJSONObject> myTowers;
-    private Collection<EnemyJSONObject> myEnemies;
+    MapJSONObject myMap;
+
+    // private Collection<TowerJSONObject> myTowers;
+    // private Collection<EnemyJSONObject> myEnemies;
 
     private JSONObject container;
 
@@ -74,7 +79,8 @@ public class GameData {
                           int recyclePrice) {
 
         towerList
-                .put(new TowerJSONObject(name, imagePath, damage, attackSpeed, range, cost, recyclePrice));
+                .put(new TowerJSONObject(name, imagePath, damage, attackSpeed, range, cost,
+                                         recyclePrice));
 
     }
 
@@ -96,28 +102,41 @@ public class GameData {
         this.addEnemy("Enemy1", 100, "path", 10, 11);
         this.addEnemy("Enemy2", 100, "path", 10, 11);
 
-        container.put("name", myGameName);
-        container.put("gold", myGold);
-        container.put("numberOfLives", myLives);
-        container.put("splashImage", mySplashImage);
-        container.put("widthOfWindow", myWindowWidth);
-        container.put("heightOfWindow", myWindowHeight);
-        container.put("difficultyScale", myDifficultyScale);
-        container.put("tilesPerRow", myTilesPerRow);
+        // container.put("name", myGameName);
+        // container.put("gold", myGold);
+        // container.put("numberOfLives", myLives);
+        // container.put("splashImage", mySplashImage);
+        // container.put("widthOfWindow", myWindowWidth);
+        // container.put("heightOfWindow", myWindowHeight);
+        // container.put("difficultyScale", myDifficultyScale);
+        // container.put("tilesPerRow", myTilesPerRow);
+        //
+        // container.put("levels", levelList.length());
+        // container.put("towerType", towerList);
+        // container.put("enemyType", enemyList);
+        // container.put("levelData", levelList);
 
-        container.put("levels", levelList.length());
-        container.put("towerType", towerList);
-        container.put("enemyType", enemyList);
-        container.put("levelData", levelList);
+        Collection<Point2D> woop = new ArrayList<Point2D>();
+        woop.add(new Point2D.Double(1, 2));
+        woop.add(new Point2D.Double(2, 3));
+        woop.add(new Point2D.Double(3, 3));
 
-        // System.out.println(container.toString(1));
-        writeToFile();
+        myMap = new MapJSONObject("OMG",
+                                  "WHAT",
+                                  new Point2D.Double(1, 2),
+                                  new Point2D.Double(1, 2),
+                                  woop);
+
+        container.put("map", myMap);
+        System.out.println(container.toString(1));
+
+        // writeToFile();
 
     }
 
     public void writeToFile () {
         int result = INPUT_CHOOSER.showSaveDialog(null);
-        
+
         if (result == JFileChooser.APPROVE_OPTION) {
             File file = INPUT_CHOOSER.getSelectedFile();
             try {
