@@ -45,6 +45,17 @@ public class Detector {
         return result;
     }
     
+    /**
+     * @author Yuhua
+     * 
+     * Jiaran, I add this to get current tower
+     * Not test yet, have to do it in range and find the right one
+     * 
+     * @param centerx
+     * @param centery
+     * @param range
+     * @return
+     */
     public Tower getTowerInRange (int centerx, int centery, int range) {
         Vector<JGObject> v = getObjects(centerx, centery, range, Constant.TOWER_CID, null);
         
