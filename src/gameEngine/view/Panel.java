@@ -1,6 +1,5 @@
 package gameEngine.view;
 
-
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.view.gameFrame.GameFrameColleague;
 import java.awt.BorderLayout;
@@ -31,12 +30,6 @@ public class Panel extends JPanel implements GameFrameColleague {
 
     @Override
     public void purchaseTower () {
-
-    }
-
-    @Override
-    public void updateStoreStatus () {
-        // TODO Auto-generated method stub
 
     }
 

@@ -44,13 +44,5 @@ public interface GameFrameColleague {
      */
     public void displayTowerInfo (TowerFactory towerInfo);
 
-    /**
-     * Used primarily by the TowerStorePanel to update the status of
-     * the TowerStoreButton.
-     * If the user has enough money to purchase the tower, the button will
-     * be enabled.
-     * Otherwise, the button will be disabled.
-     */
-    public void updateStoreStatus ();
 
 }

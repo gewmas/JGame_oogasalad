@@ -2,6 +2,7 @@ package gameEngine.view.gameFrame;
 
 
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.view.gameFrame.store.TowersOptionPanel;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,10 +27,13 @@ import java.util.Map;
 public class GameFrameMediator {
 
     private Map<String, GameFrameColleague> colleagues;
-
+    private TowersOptionPanel storeOptions;
     public GameFrameMediator () {
         colleagues = new HashMap<String, GameFrameColleague>();
 
+    }
+    public void addTowersOptionPanel(TowersOptionPanel storeOptions){
+        this.storeOptions = storeOptions;
     }
 
     /**
@@ -77,7 +81,7 @@ public class GameFrameMediator {
      * Updates the enabled status of store items.
      */
     public void updateStoreStatus () {
-        colleagues.get(ColleagueKeys.STOREOPTIONS.toString()).updateStoreStatus();
+        storeOptions.updateStoreStatus();
     }
 
 }

@@ -182,11 +182,6 @@ public class GameFrame extends Frame implements GameFrameColleague {
     }
 
     @Override
-    public void updateStoreStatus () {
-       
-    }
-
-    @Override
     public void placeTower (TowerFactory towerInfo) {
         // TODO Auto-generated method stub
         
