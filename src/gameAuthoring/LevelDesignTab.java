@@ -20,7 +20,7 @@ public class LevelDesignTab extends Tab {
 
     public LevelDesignTab (GameData gameData) {
         super(gameData);
-        numLevels = 0;
+        numLevels = 1;
     }
 
     @Override
@@ -42,10 +42,10 @@ public class LevelDesignTab extends Tab {
     }
 
     public void addLevel (LevelJSONObject level) {
-        numLevels++;
         JButton levelButton = new JButton("Level " + numLevels);
         myScrollPanel.add(levelButton);
         myGameData.addLevel(level);
+        numLevels++;
     }
 
     public int getLevel () {

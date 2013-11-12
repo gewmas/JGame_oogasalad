@@ -62,6 +62,7 @@ public class LevelDesignPanel extends JPanel {
                                             numWaves, myWaves);
                 myLevelDesignTab.addLevel(newLevel);
                 myWaves.clear();
+                numWaves = 0;
                 myScrollPanel.removeAll();
             }
         };
