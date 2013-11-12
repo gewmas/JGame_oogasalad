@@ -62,7 +62,7 @@ public class Model {
     public void startGame(){
         towerWarehouse.create("DefaultTower"); // test, should be called within Rule
 
-        Wave w = new Wave("1", 5, 1000, 10000, enemyWarehouse);
+        Wave w = new Wave("1", 10, 500, 1000, enemyWarehouse);
         rule.addWave(w);
         rule.ruleStart();
 

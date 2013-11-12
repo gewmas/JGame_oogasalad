@@ -23,6 +23,7 @@ public class Enemy extends JGObject {
     double xMovement;
     double yMovement;
     int pathIndex;
+    double pathStep;
     
     LinkedList<Tile> path;
 
@@ -52,22 +53,42 @@ public class Enemy extends JGObject {
         this.pathIndex = 0;
         this.x = x;
         this.y = y;
+        
+        calculatePathStep();
+        calculateNewDirection();
     }
 
     @Override
     public void move () {
         // Should walk along the Path
-        if(x == path.get(pathIndex).getCenterX() && y == path.get(pathIndex).getCenterY()) {
+        if(reachedPoint()) {
+//            System.out.println("Reached point!");
             calculateNewDirection();
         }
         x += xMovement*speed;
         y += yMovement*speed;
     }
+    
+    public boolean reachedPoint() {
+        if(yMovement == 0) {
+            double x1 = path.get(pathIndex-1).getCenterX();
+            if(Math.abs(x1-x) > pathStep) {
+                return true;
+            }
+        } else {
+            double y1 = path.get(pathIndex-1).getCenterY();
+            if(Math.abs(y1-y) > pathStep) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 
     @Override
     public void hit (JGObject obj) {
         // hit the target enemy, destroy that enemy
-        System.out.println("Bullet Hit");
+//        System.out.println("Bullet Hit");
         if (obj.colid == Constant.BULLET_CID) {
             life -= ((Bullet) obj).getDamage();
             obj.remove();
@@ -78,26 +99,43 @@ public class Enemy extends JGObject {
 
                 remove();
             }
-
         }
     }
     
     public void calculateNewDirection() {
         pathIndex = pathIndex + 1;
-        if(x == path.get(pathIndex).getCenterX()) {
-            if(y < path.get(pathIndex).getCenterY()) {
-                this.yMovement = 1;
-            } else {
+        double x1 = path.get(pathIndex).getCenterX();
+        double y1 = path.get(pathIndex).getCenterY();
+        if(Math.abs(x-x1) < Math.abs(y-y1)) {
+            if((y-y1) > 0) {
                 this.yMovement = -1;
+            } else {
+                this.yMovement = 1;
             }
             this.xMovement = 0;
         } else {
-            if(x < path.get(pathIndex).getCenterX()) {
-                this.xMovement = 1;
-            } else {
+            if((x-x1) > 0) {
                 this.xMovement = -1;
+            } else {
+                this.xMovement = 1;
             }
             this.yMovement = 0;
+        }
+    }
+    
+    public void calculatePathStep() {
+        double x1 = path.get(pathIndex).getCenterX();
+        double y1 = path.get(pathIndex).getCenterY();
+        
+        double x2 = path.get((pathIndex+1)).getCenterX();
+        double y2 = path.get((pathIndex+1)).getCenterY();
+        
+        if(x1 == x2) {
+            //Y direction distance
+            pathStep = Math.abs(y1-y2);
+        } else {
+            // x direction distance
+            pathStep = Math.abs(x1-x2);
         }
     }
 
