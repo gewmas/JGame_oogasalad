@@ -25,7 +25,6 @@ public class LevelDesignDialog extends JDialog {
     private LevelDesignPanel myLevelDesignPanel;
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir"));
-    private int myNumWaves;
     private Map<String, Integer> myEnemiesPerWave = new HashMap<String, Integer>();
     private Map<JTextField, EnemyJSONObject> myTextFields =
             new HashMap<JTextField, EnemyJSONObject>();
@@ -60,9 +59,9 @@ public class LevelDesignDialog extends JDialog {
             catch (IOException e) {
                 e.printStackTrace();
             }
-            createWaveButton.addMouseListener(createWaveDesignListener(this));
             this.add(createWaveButton, "span 2");
         }
+        createWaveButton.addMouseListener(createWaveDesignListener(this));
     }
 
     public MouseAdapter createWaveDesignListener (final LevelDesignDialog levelDesignDialog) {
@@ -73,8 +72,8 @@ public class LevelDesignDialog extends JDialog {
                     EnemyJSONObject enemy = myTextFields.get(field);
                     myEnemiesPerWave.put(enemy.getString("id"), Integer.parseInt(field.getText()));
                     levelDesignDialog.setVisible(false);
-                    myLevelDesignPanel.addWave(myEnemiesPerWave);
                 }
+                myLevelDesignPanel.addWave(myEnemiesPerWave);
             }
         };
         return listener;

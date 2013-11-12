@@ -48,6 +48,7 @@ public class LevelDesignPanel extends JPanel {
 
     public void addWave (Map<String, Integer> wave) {
         numWaves++;
+        System.out.println("adding new wave");
         myScrollPanel.add(new JButton("Wave " + numWaves));
         myWaves.add(wave);
     }
