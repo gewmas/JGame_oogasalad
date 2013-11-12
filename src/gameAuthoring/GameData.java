@@ -31,6 +31,8 @@ public class GameData {
     private int myTilesPerRow;
     private double myDifficultyScale;
 
+    private int numLevels;
+
     JSONArray myTowerList = new JSONArray();
     JSONArray myEnemyList = new JSONArray();
     JSONArray myLevelList = new JSONArray();
@@ -44,38 +46,47 @@ public class GameData {
 
     public GameData () {
         container = new JSONObject();
+        numLevels = 0;
     }
 
     public void setGameName (String gameName) {
         myGameName = gameName;
+        container.put("name", myGameName);
     }
 
     public void setGold (int gold) {
         myGold = gold;
+        container.put("gold", myGold);
     }
 
     protected void setLives (int lives) {
         myLives = lives;
+        container.put("numberOfLives", myLives);
     }
 
     protected void setSplashImage (String splashImage) {
         mySplashImage = splashImage;
+        container.put("splashImage", mySplashImage);
     }
 
     protected void setWindowWidth (int windowWidth) {
         myWindowWidth = windowWidth;
+        container.put("widthOfWindow", myWindowWidth);
     }
 
     protected void setWindowHeight (int windowHeight) {
         myWindowHeight = windowHeight;
+        container.put("heightOfWindow", myWindowHeight);
     }
 
     protected void setTilesPerRow (int tilesPerRow) {
         myTilesPerRow = tilesPerRow;
+        container.put("tilesPerRow", myTilesPerRow);
     }
 
     protected void setDifficultyScale (float difficultyScale) {
         myDifficultyScale = difficultyScale;
+        container.put("difficultyScale", myDifficultyScale);
     }
 
     protected void addTower (String name, String imagePath,
@@ -111,6 +122,10 @@ public class GameData {
                                   pointList);
 
         container.put("map", myMap);
+    }
+    
+    protected void addLevel(int level, int numWaves, ArrayList<Map<String, Integer>> enemyWaveList){
+        myLevelList.put(new LevelJSONObject(level, numWaves, enemyWaveList));
     }
 
     protected void testWrite () { // This method is here only for the sake of testing (don't judge)
@@ -164,15 +179,6 @@ public class GameData {
     }
 
     protected void addDataToContainer () {
-        container.put("name", myGameName);
-        container.put("gold", myGold);
-        container.put("numberOfLives", myLives);
-        container.put("splashImage", mySplashImage);
-        container.put("widthOfWindow", myWindowWidth);
-        container.put("heightOfWindow", myWindowHeight);
-        container.put("difficultyScale", myDifficultyScale);
-        container.put("tilesPerRow", myTilesPerRow);
-
         container.put("levels", myLevelList.length());
         container.put("towerType", myTowerList);
         container.put("enemyType", myEnemyList);
