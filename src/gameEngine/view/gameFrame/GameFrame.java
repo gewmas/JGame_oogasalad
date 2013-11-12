@@ -166,19 +166,19 @@ public class GameFrame extends Frame  {
 //        return controller.getTowerFactory();
 //    }
 
-    public boolean newGame (File file) {
-        try {
-            controller.newGame(file);
-            engineView.loadNewGame();
-        }
-        catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-
-        return true;
-    }
+//    public boolean newGame (File file) {
+//        try {
+//            controller.newGame(file);
+//            engineView.loadNewGame();
+//        }
+//        catch (Exception e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        
+//
+//        return true;
+//    }
 
 
 
