@@ -15,12 +15,7 @@ public class CanvasPanel extends Panel {
         this.add(game);
     }
 
-<<<<<<< HEAD
-
     public void placeTower (TowerInfo towerInfo) {
-=======
-    public void placeTower (TowerFactory towerInfo) {
->>>>>>> master
         game.placeTower(towerInfo.getName());
     }
 

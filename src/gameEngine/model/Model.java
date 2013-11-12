@@ -86,7 +86,7 @@ public class Model {
         List<TowerInfo> result= new ArrayList<TowerInfo>();
         List<TowerFactory> factoryList=towerWarehouse.getTowerFactory();
         for(int i=0; i< factoryList.size();i++){
-            result.add((TowerInfo)factoryList.get(i));
+            result.add((TowerInfo)(factoryList.get(i)));
             
         }
         return result;

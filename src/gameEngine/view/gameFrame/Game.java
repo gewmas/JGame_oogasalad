@@ -96,7 +96,6 @@ public class Game extends StdGame {
                 System.out.format("Buying tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }
             else {
-<<<<<<< HEAD
                 TowerInfo tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
                 if (tower==null) {
                     System.out.println("No tower here");
@@ -104,16 +103,6 @@ public class Game extends StdGame {
                     mediator.displayTowerInfo(tower);
                 }
                 System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
-=======
-                Tower tower = view.getTowerInfo(mousePosition.x, mousePosition.y);
-                if (tower == null) {
-                    System.out.println("No tower here");
-                }
-                else {
-                    // mediator.displayTowerInfo(tower);
-                }
-                System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);
->>>>>>> master
             }
         }
     }

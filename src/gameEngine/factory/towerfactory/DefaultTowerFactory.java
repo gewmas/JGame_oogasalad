@@ -20,8 +20,8 @@ public class DefaultTowerFactory extends TowerFactory {
         this.id = currTower.getString("id");
         this.image = currTower.getString("image");
 
-        this.x = currTower.getDouble("x");
-        this.y = currTower.getDouble("y");
+//        this.x = currTower.getDouble("x");
+//        this.y = currTower.getDouble("y");
         this.damage = currTower.getDouble("damage");
         this.attackSpeed = currTower.getDouble("attackSpeed");
         this.range = currTower.getDouble("range");
