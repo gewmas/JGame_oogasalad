@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.LevelJSONObject;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.BorderFactory;
@@ -40,10 +41,11 @@ public class LevelDesignTab extends Tab {
         return mainPanel;
     }
 
-    public void addLevel () {
+    public void addLevel (LevelJSONObject level) {
         numLevels++;
         JButton levelButton = new JButton("Level " + numLevels);
         myScrollPanel.add(levelButton);
+        myGameData.addLevel(level);
     }
 
     public int getLevel () {

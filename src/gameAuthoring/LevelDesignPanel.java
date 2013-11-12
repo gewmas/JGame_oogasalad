@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -17,7 +17,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class LevelDesignPanel extends JPanel {
     private LevelDesignTab myLevelDesignTab;
-    private Collection<Map<String, Integer>> myWaves =
+    private List<Map<String, Integer>> myWaves =
             new ArrayList<Map<String, Integer>>();
     private JScrollPane myCreatedWaves;
     private JPanel myScrollPanel;
@@ -57,10 +57,10 @@ public class LevelDesignPanel extends JPanel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 myScrollPanel.removeAll();
-                myLevelDesignTab.addLevel();
                 LevelJSONObject newLevel =
                         new LevelJSONObject(myLevelDesignTab.getLevel(),
-                                            numWaves, (List) myWaves);
+                                            numWaves, myWaves);
+                myLevelDesignTab.addLevel(newLevel);
             }
         };
         return listener;

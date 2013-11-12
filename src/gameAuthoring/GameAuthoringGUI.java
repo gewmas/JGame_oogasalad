@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameAuthoring.menuBar.MenuBar;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,6 +13,8 @@ public class GameAuthoringGUI {
     public GameAuthoringGUI () {
         GameData gameData = new GameData();
         JFrame frame = new JFrame();
+        MenuBar menu = new MenuBar(gameData);
+        frame.setJMenuBar(menu);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JTabbedPane mainPane = new JTabbedPane();
         mainPane.setPreferredSize(new Dimension(650, 650));
