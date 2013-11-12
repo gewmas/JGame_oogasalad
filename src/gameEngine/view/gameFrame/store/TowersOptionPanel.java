@@ -28,6 +28,7 @@ import net.miginfocom.swing.MigLayout;
 @SuppressWarnings("serial")
 public class TowersOptionPanel extends Panel {
 
+    private static final String LAYOUT_WRAP = "wrap 4";
     private static final int PANEL_WIDTH = 250;
     private static final int PANEL_HEIGHT = 400;
     private List<TowerStoreButton> storeItems;
@@ -55,11 +56,10 @@ public class TowersOptionPanel extends Panel {
      * @param mediator facilitates communication between view components
      */
     private void createOptionsScrollPanel (GameFrameMediator mediator) {
-        JPanel options = new JPanel(new MigLayout("wrap 4"));
+        JPanel options = new JPanel(new MigLayout(LAYOUT_WRAP));
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         addStoreInventory(options, mediator);
 
-        
         JScrollPane scrollPane = new JScrollPane(options);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -86,19 +86,18 @@ public class TowersOptionPanel extends Panel {
      * @param view facilitates communication between view and model
      */
     private void addStoreInventory (JPanel optionsPanel, GameFrameMediator mediator) {
-      
+
         for (TowerFactory tower : view.getTowers()) {
             TowerStoreButton towerButton = new TowerStoreButton(tower, mediator, view);
             optionsPanel.add(towerButton);
             storeItems.add(towerButton);
-        
-       }
-    }
 
+        }
+    }
 
     /**
      * Used to update the status of each TowerStoreButton.
-     * Toggles their enabled/disabled status based on the user's 
+     * Toggles their enabled/disabled status based on the user's
      * money supply
      * 
      */
