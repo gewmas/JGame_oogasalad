@@ -1,3 +1,4 @@
+
 package gameEngine.factory.towerfactory;
 
 import gameEngine.Constant.Constant;
@@ -56,6 +57,12 @@ public class DefaultTowerFactory extends TowerFactory {
     public double getY () {
         // TODO Auto-generated method stub
         return 0;
+    }
+
+    @Override
+    public String getTowerName () {
+        // TODO Auto-generated method stub
+        return id;
     }
 
 }

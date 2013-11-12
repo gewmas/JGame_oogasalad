@@ -9,7 +9,7 @@ package gameEngine.model.tower;
  */
 public interface TowerInfo {
 
-    public String getName ();
+    public String getTowerName ();
 
     public double getX ();
 

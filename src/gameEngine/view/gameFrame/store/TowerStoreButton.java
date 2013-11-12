@@ -42,7 +42,7 @@ public class TowerStoreButton extends Button {
         this.setIcon(icon);
         this.mediator = mediator;
         this.towerInfo = tower;
-        setToolTipText(tower.getName());
+        setToolTipText(tower.getTowerName());
 
         setOpaque(true);
 
