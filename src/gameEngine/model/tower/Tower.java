@@ -13,7 +13,7 @@ import jgame.JGObject;
  *         Tower will shoot the Enemy within shooting range with Bullet
  */
 
-public class Tower extends JGObject {
+public class Tower extends JGObject implements TowerInfo{
 
     double damage;
     double attackSpeed;
@@ -44,6 +44,26 @@ public class Tower extends JGObject {
 
     public double getY () {
         return y;
+    }
+
+    public double getDamage () {
+        return damage;
+    }
+
+    public double getAttackSpeed () {
+        return attackSpeed;
+    }
+
+    public double getRange () {
+        return range;
+    }
+
+    public double getCost () {
+        return cost;
+    }
+
+    public double getRecyclePrice () {
+        return recyclePrice;
     }
 
 }

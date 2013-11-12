@@ -7,6 +7,7 @@ import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Model;
 import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrame;
 
@@ -57,14 +58,14 @@ public class Controller {
      * Sends a call to the model to update the monitored tower stats to the tower
      * at x,y. If the position is invalid, do nothing
      */
-    public Tower getTowerInfo (int x, int y) {
-        Tower tower;
+    public TowerInfo getTowerInfo (int x, int y) {
+        TowerInfo towerInfo;
         try {
-            tower=model.getTowerInfo(x,y);
+            towerInfo=model.getTowerInfo(x,y);
         } catch (Exception e) {
-            tower=null;
+            towerInfo=null;
         }
-        return tower;
+        return towerInfo;
     }
 
     /**

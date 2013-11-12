@@ -48,11 +48,11 @@ public class TowerWarehouse implements Warehouse {
         TowerFactory towerFactory = towers.get(name);
         towerFactory.create();
     }
-    // Jiaran edit, something's wrong please contact.
-    public boolean create(int x, int y, String name,GameInfo g){
+
+    public boolean create(int x, int y, String name,GameInfo gameInfo){
         TowerFactory towerFactory = towers.get(name);
-        if(towerFactory.getCost()<=g.getGold()){
-            g.loseGold(towerFactory.getCost());
+        if(towerFactory.getCost()<=gameInfo.getGold()){
+            gameInfo.loseGold(towerFactory.getCost());
             towerFactory.create(x, y);
             return true;
         }

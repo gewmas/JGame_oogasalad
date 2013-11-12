@@ -3,6 +3,7 @@ package gameEngine.model;
 import gameEngine.factory.GridFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
@@ -87,7 +88,7 @@ public class Model {
     //Jiaran Im thinking maybe this should return a TowerInfo instead of Tower
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
-    public Tower getTowerInfo (int x, int y) {
+    public TowerInfo getTowerInfo (int x, int y) {
         Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
         return d.getOneTargetInRange(x, y, 10);
     }
