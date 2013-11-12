@@ -96,6 +96,13 @@ public class EnemyDesignPanel extends JPanel {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
+                GameData myGameData = myEnemyDesignTab.getGameData();
+                myGameData.addEnemy(myNameField.getText(),
+                                    Integer.parseInt(myGoldField.getText()),
+                                    myImageSource.toString().replace(System.getProperties().getProperty("user.dir"), ""),
+                                    Integer.parseInt(myLifeField.getText()),
+                                    Integer.parseInt(mySpeedField.getText()));
+
                 myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
                 myNameField.setText("");
                 myGoldField.setText("");

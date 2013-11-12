@@ -26,6 +26,11 @@ public class BasicInfoTab extends Tab {
     private JTextField myGameName;
     private JTextField myGold;
     private JTextField myLives;
+    private JTextField myWindowWidth;
+    private JTextField myWindowHeight;
+    private JTextField myTilesPerRow;
+    private JTextField myDifficultyScale;
+    
     private JLabel mySplashImageLabel;
     private String mySplashImage;
     
@@ -44,6 +49,12 @@ public class BasicInfoTab extends Tab {
         JLabel gold = new JLabel("Starting Gold");
         JLabel lives = new JLabel("Starting Lives");
         JLabel title = new JLabel("Basic Game Info");
+        JLabel width = new JLabel("Window Width");
+        JLabel height = new JLabel("Window Height");
+        JLabel tiles = new JLabel("Tiles Per Row");
+        JLabel difficultyScale = new JLabel("Difficulty Scale");
+        
+        
         title.setFont(new Font("Arial", Font.BOLD, 30));
         mainPanel.add(title, "span 2");
 
@@ -61,8 +72,16 @@ public class BasicInfoTab extends Tab {
         myGold.setPreferredSize(new Dimension(200, 30));
         myLives = new JTextField();
         myLives.setPreferredSize(new Dimension(200, 30));
+        myWindowWidth = new JTextField();
+        myWindowWidth.setPreferredSize(new Dimension(200, 30));
+        myWindowHeight = new JTextField();
+        myWindowHeight.setPreferredSize(new Dimension(200, 30));
+        myTilesPerRow = new JTextField();
+        myTilesPerRow.setPreferredSize(new Dimension(200, 30));
+        myDifficultyScale = new JTextField();
+        myDifficultyScale.setPreferredSize(new Dimension(200, 30));
         
-        
+
 
         subPanel.add(gameName);
         subPanel.add(myGameName);
@@ -70,6 +89,16 @@ public class BasicInfoTab extends Tab {
         subPanel.add(myGold);
         subPanel.add(lives);
         subPanel.add(myLives);
+        subPanel.add(width);
+        subPanel.add(myWindowWidth);
+        subPanel.add(height);
+        subPanel.add(myWindowHeight);
+        subPanel.add(tiles);
+        subPanel.add(myTilesPerRow);
+        subPanel.add(difficultyScale);
+        subPanel.add(myDifficultyScale);
+        
+        
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
         subPanel.add(setInfoButton);
