@@ -93,7 +93,11 @@ public class Game extends StdGame {
             }
             else {
                 Tower tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
-                if (tower==null) System.out.println("No tower here");
+                if (tower==null) {
+                    System.out.println("No tower here");
+                } else {
+                    //mediator.displayTowerInfo(tower);
+                }
                 System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
         }
