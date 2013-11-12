@@ -49,15 +49,22 @@ public class TestGrid extends JGEngine {
     @Override
     public void initGame () {
         defineMedia("mygame.tbl");
-        setFrameRate(60, 2);
-
-        Model model = new Model();
-        List<Tile> pathList = model.getPathList();
-        for (Tile tile : pathList) {
-            System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
-            System.out.println("Center x=" + tile.getCenterX() + " center y=" + tile.getCenterY());
-            System.out.println("img path is " + tile.getPathImage());
-        }
+        setFrameRate(60, 2);       
+              Model model = new Model();
+              try {
+                model.newGame(new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
+            }
+            catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+              
+              List<Tile> pathList = model.getPathList();
+              for(Tile tile: pathList) {
+                  System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
+                  System.out.println("Center x=" + tile.getCenterX() + " center y=" + tile.getCenterY());
+                  System.out.println("img path is " + tile.getPathImage());
+              }
     }
 
     @Override

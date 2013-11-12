@@ -1,6 +1,8 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.view.Button;
 import gameEngine.view.View;
@@ -17,13 +19,13 @@ import gameEngine.view.gameFrame.GameFrameMediator;
  */
 public class TowerStoreButton extends Button {
 
-    private static final int MAX_BUTTON_TEXT_LENGTH = 6;
     private static final Color HOVER_BUTTON_COLOR = Color.BLUE;
     private static final Color HOVER_TEXT_COLOR = Color.RED;
     private static final Color HOVER_EXIT_TEXT_COLOR = Color.BLACK;
     private GameFrameMediator mediator;
     private TowerFactory towerInfo;
     private Boolean active;
+    private Boolean storeOpen;
 
     /**
      * @param towerInfo the tower info data structure of the tower the button represents
@@ -31,9 +33,13 @@ public class TowerStoreButton extends Button {
      * @param view facilitates communication between view and controller
      */
     public TowerStoreButton (TowerFactory towerInfo, GameFrameMediator mediator, View view) {
-        super(trimName(towerInfo.getName()));
-        active = false; // to be changed!
-        this.setEnabled(active);
+        super("");
+        storeOpen = false;
+        active = false;
+        this.setEnabled(false);
+
+        ImageIcon icon = new ImageIcon(towerInfo.getImage());
+        this.setIcon(icon);
         this.mediator = mediator;
         this.towerInfo = towerInfo;
         setToolTipText(towerInfo.getName());
@@ -48,25 +54,12 @@ public class TowerStoreButton extends Button {
      * is displayed and the button's foreground and background colors are changed.
      */
     protected void mouseEnteteredAction () {
+        if (storeOpen) {
+            this.setBackground(HOVER_BUTTON_COLOR);
+            this.setForeground(HOVER_TEXT_COLOR);
 
-        this.setBackground(HOVER_BUTTON_COLOR);
-        this.setForeground(HOVER_TEXT_COLOR);
-
-        mediator.displayTowerInfo(towerInfo);
-
-    }
-
-    /**
-     * Trims the name of the button to meet size requirements if necessary
-     * 
-     * @param name name of tower
-     * @return trimmed name
-     */
-    private static String trimName (String name) {
-        if (name.length() > MAX_BUTTON_TEXT_LENGTH) { return name.substring(0,
-                                                                            MAX_BUTTON_TEXT_LENGTH) +
-                                                             "..."; }
-        return name;
+            mediator.displayTowerInfo(towerInfo);
+        }
     }
 
     /**
@@ -75,9 +68,10 @@ public class TowerStoreButton extends Button {
      * and foreground
      */
     protected void mouseExitedAction () {
-
-        this.setBackground(null);
-        this.setForeground(HOVER_EXIT_TEXT_COLOR);
+        if (storeOpen) {
+            this.setBackground(null);
+            this.setForeground(HOVER_EXIT_TEXT_COLOR);
+        }
 
     }
 
@@ -93,6 +87,10 @@ public class TowerStoreButton extends Button {
     }
 
     public void toggleButtonActivation (int moneySupply) {
+        if (storeOpen == false) {
+            storeOpen = true;
+        }
+
         active = moneySupply >= towerInfo.getCost();
         setEnabled(active);
 

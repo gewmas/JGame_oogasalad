@@ -20,18 +20,16 @@ import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.store.TowerStorePanel;
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.Tile;
-import gameEngine.model.tower.Tower;
 
 
 /**
  * The main view class that holds all the panels and frames included in the
  * Game Engine GUI
  * 
- * @author Lalita Maraj
+ * @author Lalita Maraj Alex Zhu
  * 
  */
-public class GameFrame extends Frame implements GameFrameColleague {
+public class GameFrame extends Frame  {
 
     private Controller controller;
     private GameFrameMediator mediator;
@@ -108,66 +106,6 @@ public class GameFrame extends Frame implements GameFrameColleague {
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
         setCursor(c);
     }
-//
-//    /**
-//     * Tells the controller to send tower purchase instructions to the model
-//     * and then reset the cursor
-//     */
-//    public void buyTower (int x, int y, String tower) {
-//        controller.purchaseTower(x, y, tower);
-//        purchaseTower();
-//    }
-//
-//    /**
-//     * Requests tower information for the tower at the given location
-//     */
-//    public Tower getTowerInfo (int x, int y) {
-//        return controller.getTowerInfo(x, y);
-//    }
-//
-//    @Override
-//    /**
-//     * After tower is purchased, the cursor is set to the default cursor.
-//     */
-//    public void purchaseTower () {
-//        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-//    }
-//
-//    /**
-//     * Gets the dimensions of the game on initialization
-//     */
-//    public Dimension getGameSize () {
-//        return controller.getGameSize();
-//    }
-//    
-//    public List<Tile> getPath(){
-//        return controller.getPath();
-//    }
-//
-//    /**
-//     * Gets the background image of the game upon initialization
-//     */
-//    public String getBGImage () {
-//        return controller.getBGImage();
-//    }
-//
-//    public int getMoney () {
-//     
-//         return controller.getMoney();
-//    }
-//
-//    public int getLives () {
-//        return controller.getLives();
-//    }
-//
-//    @Override
-//    public void displayTowerInfo (TowerFactory towerInfo) {
-//        // No behavior
-//    }
-//
-//    public List<TowerFactory> getTowers () {
-//        return controller.getTowerFactory();
-//    }
 
     public boolean newGame (File file) {
         try {
@@ -175,13 +113,11 @@ public class GameFrame extends Frame implements GameFrameColleague {
             engineView.loadNewGame();
         }
         catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         return true;
     }
-
     
     public void purchaseTower () {
 

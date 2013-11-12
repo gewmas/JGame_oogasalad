@@ -1,4 +1,4 @@
-    package gameEngine.view.gameFrame;
+package gameEngine.view.gameFrame;
 
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;

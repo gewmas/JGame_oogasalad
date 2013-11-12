@@ -16,7 +16,7 @@ import jgame.platform.StdGame;
 
 
 /**
- * @author lalitamaraj alexzhu
+ * @author Lalita Maraj Alex Zhu
  *         Displays the Game setting using JGEngine to facilitate
  *         graphics rendering
  */
