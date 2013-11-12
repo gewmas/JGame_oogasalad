@@ -64,10 +64,12 @@ public class View {
      * Tells the controller to send tower purchase instructions to the model
      * and then reset the cursor
      */
-    public void buyTower (int x, int y, String tower) {
+    public boolean buyTower (int x, int y, String tower) {
         if (controller.purchaseTower(x, y, tower)) {
             gameFrame.purchaseTower();
+            return true;
         }
+        return false;
     }
 
     /**

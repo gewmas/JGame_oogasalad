@@ -88,8 +88,9 @@ public class Game extends StdGame {
             JGPoint mousePosition = getMousePos();
             JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
             if (purchasing) {
-                view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase);
-                purchasing = false;
+                if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)){
+                    purchasing = false;
+                }
                 System.out.format("Buying tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }
             else {

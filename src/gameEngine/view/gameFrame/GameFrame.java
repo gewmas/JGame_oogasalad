@@ -98,7 +98,6 @@ public class GameFrame extends Frame {
      * Changes the default cursor to the image of the tower to be placed
      */
     public void placeTower (TowerFactory towerInfo) {
-
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = toolkit.getImage(towerInfo.getImage());
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
@@ -118,9 +117,7 @@ public class GameFrame extends Frame {
     }
 
     public void purchaseTower () {
-
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-
     }
 
 }
