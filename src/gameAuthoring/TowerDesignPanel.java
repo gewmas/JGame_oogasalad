@@ -23,7 +23,7 @@ public class TowerDesignPanel extends JPanel {
 
     private TowerDesignTab myTowerDesignTab;
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir")+ "/resources/img");
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
 
     private JTextField myNameField;
     private JTextField myDamageField;
@@ -31,7 +31,6 @@ public class TowerDesignPanel extends JPanel {
     private JTextField myRangeField;
     private JTextField myCostField;
     private JTextField myRecyclePriceField;
- 
 
     private File myImageSource;
 
@@ -117,6 +116,14 @@ public class TowerDesignPanel extends JPanel {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
+                GameData myGameData = myTowerDesignTab.getGameData();
+                myGameData.addTower(myNameField.getText(), myImageSource.toString().replace(System.getProperties().getProperty("user.dir"), ""),
+                Integer.parseInt(myDamageField.getText()),
+                Integer.parseInt(myAttackSpeedField.getText()),
+                Integer.parseInt(myRangeField.getText()),
+                Integer.parseInt(myCostField.getText()),
+                Integer.parseInt(myRecyclePriceField.getText()));
+                
                 myTowerDesignTab.addTower(myImageSource, myNameField.getText());
                 myNameField.setText("");
                 myDamageField.setText("");
@@ -129,5 +136,4 @@ public class TowerDesignPanel extends JPanel {
         };
         return listener;
     }
-
 }
