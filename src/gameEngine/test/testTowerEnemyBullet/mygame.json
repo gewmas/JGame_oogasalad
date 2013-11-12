@@ -44,7 +44,7 @@
 	 "x" : 100,
 	 "y" : 100,
 	 "damage": 1,
-	 "attackSpeed": 0.8,
+	 "attackSpeed": 1,
 	 "range": 100,	
 	 "cost": 100, 
 	 "recyclePrice":  50
@@ -56,8 +56,8 @@
 	"id": "1",
 	"gold": 5,
 	"image": "enemy1",
-	"life": 20,
-	"speed": 0.9,
+	"life": 2,
+	"speed": 0.5,
 }, 
 {
 	"id": "2",
