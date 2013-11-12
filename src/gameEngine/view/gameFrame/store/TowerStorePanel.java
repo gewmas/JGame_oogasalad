@@ -2,8 +2,7 @@ package gameEngine.view.gameFrame.store;
 
 import java.awt.BorderLayout;
 import gameEngine.view.Panel;
-import gameEngine.view.gameFrame.ColleagueKeys;
-import gameEngine.view.gameFrame.GameFrame;
+import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrameMediator;
 
 
@@ -18,21 +17,20 @@ public class TowerStorePanel extends Panel {
 
     /**
      * @param mediator facilitates communication between view components
-     * @param gameFrame facilitates communication between view and controller
+     * @param engineView facilitates communication between view and controller
      */
 
-    public TowerStorePanel (GameFrameMediator mediator, GameFrame gameFrame) {
+    public TowerStorePanel (GameFrameMediator mediator, View engineView) {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
 
-        Panel TowerInfoPanel = new TowerInfoPanel();
-        mediator.addColleague(ColleagueKeys.INFOPANEL.toString(), TowerInfoPanel);
+       TowerInfoPanel towerInfoPanel = new TowerInfoPanel();
+        mediator.addTowerInfoPanel( towerInfoPanel);
 
-        storeOptions = new TowersOptionPanel(mediator, gameFrame);
-        mediator.addColleague(ColleagueKeys.STOREOPTIONS.toString(), storeOptions);
-
-        add(TowerInfoPanel, BorderLayout.CENTER);
+        storeOptions = new TowersOptionPanel(mediator, engineView);
+        mediator.addTowersOptionPanel(storeOptions);
+        add(towerInfoPanel, BorderLayout.CENTER);
         add(storeOptions, BorderLayout.PAGE_START);
 
     }
