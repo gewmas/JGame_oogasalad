@@ -79,8 +79,8 @@ public class Game extends StdGame {
 
     /**
      * Checks if the user has clicked on the screen, and if so, either tries to
-     * buy a tower at the clicked tile position or tries to get the info of
-     * the tower at the clicked tile position
+     * buy a tower at the clicked mouse position or tries to get the info of
+     * the tower at the clicked mouse position
      */
     public void checkUserInteractions () {
         if (getMouseButton(1) && getMouseInside()) {
@@ -88,19 +88,19 @@ public class Game extends StdGame {
             JGPoint mousePosition = getMousePos();
             JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
             if (purchasing) {
-                view.buyTower(tilePosition.x, tilePosition.y, towerToPurchase);
+                view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase);
                 purchasing = false;
-                System.out.format("Buying tower at: %d,%d\n", tilePosition.x, tilePosition.y);
+                System.out.format("Buying tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }
             else {
-                Tower tower = view.getTowerInfo(tilePosition.x, tilePosition.y);
+                Tower tower = view.getTowerInfo(mousePosition.x, mousePosition.y);
                 if (tower == null) {
                     System.out.println("No tower here");
                 }
                 else {
                     // mediator.displayTowerInfo(tower);
                 }
-                System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
+                System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }
         }
     }
