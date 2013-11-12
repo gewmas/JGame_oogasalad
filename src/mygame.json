@@ -4,29 +4,29 @@
 "gold" : 200,
 "numberOfLives" : 100,
 "levels": 5,
-"widthOfWindow": 600,
-"heightOfWindow": 400,
+"widthOfWindow": 960,
+"heightOfWindow": 700,
 "tilesPerRow": 15,
 "difficultyScale": 1.5,
 "map":
 {
-  	  "pathImage":  "path.jpg", 
+  	  "pathImage":  "path", 
 	  "Path":[ 
-               {  "x":1, "y":4},
-               { "x": 2, "y": 4 },
-               { "x": 3, "y": 4 },
-               { "x": 4, "y": 4 },
-               { "x": 5, "y": 4 },
-               { "x": 6, "y": 4 },
-               { "x": 7, "y": 4 },
-               { "x": 8, "y": 4 }
+               {  "x":1, "y":5},
+               { "x": 2, "y": 5 },
+               { "x": 3, "y": 5 },
+               { "x": 4, "y": 5 },
+               { "x": 5, "y": 5 },
+               { "x": 6, "y": 5 },
+               { "x": 7, "y": 5 },
+               { "x": 8, "y": 5 }
            ]
 },
 
 "towerType": [
 	{
 	 "id": "DefaultTower",
-	 "image": "src/gameEngine/view/gameFrame/store/smile.png",
+	 "image": "tower1",
 	 "x" : 100,
 	 "y" : 100,
 	 "damage": 1,

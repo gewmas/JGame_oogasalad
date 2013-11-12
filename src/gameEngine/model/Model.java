@@ -6,7 +6,6 @@ import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
-import java.awt.Dimension;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -116,6 +115,7 @@ public class Model {
     public GameInfo getGameInfo() {
         return gameInfo;
     }
+
    
     
 }

@@ -3,6 +3,7 @@ package gameEngine.view.gameFrame;
 import gameEngine.controller.Controller;
 import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
+import gameEngine.view.View;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -24,18 +25,20 @@ public class Game extends StdGame {
     private int WIDTH = 600;
     private int HEIGHT = 600;
 
-    private GameFrame gameFrame;
+    private View view;
     private boolean purchasing;
     private String towerToPurchase;
+    private GameFrameMediator mediator;
 
-    public Game (GameFrame gameFrame) {
-        this.gameFrame = gameFrame;
+    public Game (View view, GameFrameMediator mediator) {
+        this.view = view;
+        this.mediator = mediator;
         initEngineComponent(WIDTH, HEIGHT);
     }
 
     @Override
     public void initCanvas () {
-        Dimension size = gameFrame.getGameSize();
+        Dimension size = view.getGameSize();
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
     }
@@ -43,16 +46,16 @@ public class Game extends StdGame {
     @Override
     public void initGame () {
         setFrameRate(30, 2);
-        initial_lives = gameFrame.getLives();
-        lives = gameFrame.getLives();
-        score = gameFrame.getMoney();
+        initial_lives = view.getLives();
+        lives = view.getLives();
+        score = view.getMoney();
         String bgImage = "space_background.jpg";
         defineImage("background", "bg", 256, bgImage, "-");
         setBGImage("background");
         purchasing = false;
         setHighscores(10, new Highscore(0, "aaa"), 3);
         startgame_ingame = true;
-        List<Tile> pathList=gameFrame.getPath();
+        List<Tile> pathList=view.getPath();
         int tileCount=0;
         for (Tile tile:pathList){
             defineImage("tile"+String.valueOf(tileCount),"#"+String.valueOf(tileCount),256,tile.getPathImage(),"-");
@@ -66,7 +69,7 @@ public class Game extends StdGame {
         checkCollision(0, 0);
         checkUserInteractions();
         updateGameStats();
-        gameFrame.updateStoreStatus();
+        mediator.updateStoreStatus();
         if (getKey(KeyEsc)) {
             clearKey(KeyEsc);
             lives = 0;
@@ -84,12 +87,12 @@ public class Game extends StdGame {
             JGPoint mousePosition = getMousePos();
             JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
             if (purchasing) {
-                gameFrame.buyTower(tilePosition.x, tilePosition.y, towerToPurchase);
+                view.buyTower(tilePosition.x, tilePosition.y, towerToPurchase);
                 purchasing = false;
                 System.out.format("Buying tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
             else {
-                Tower tower=gameFrame.getTowerInfo(tilePosition.x, tilePosition.y);
+                Tower tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
                 if (tower==null) System.out.println("No tower here");
                 System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
@@ -100,8 +103,8 @@ public class Game extends StdGame {
      * Updates the number of lives and money remaining in the game
      */
     public void updateGameStats () {
-        lives = gameFrame.getLives();
-        score = gameFrame.getMoney();
+        lives = view.getLives();
+        score = view.getMoney();
     }
 
     @Override
@@ -114,7 +117,7 @@ public class Game extends StdGame {
      * Indicates that the user wants to buy a tower
      */
     public void placeTower (String tower) {
-        // setBGColor(JGColor.red);
+//         setBGColor(JGColor.red);
         System.out.println("User wants to purchase " + tower);
         purchasing = true;
         towerToPurchase = tower;
