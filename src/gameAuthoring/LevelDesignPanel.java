@@ -60,7 +60,7 @@ public class LevelDesignPanel extends JPanel {
                 myLevelDesignTab.addLevel();
                 LevelJSONObject newLevel =
                         new LevelJSONObject(myLevelDesignTab.getLevel(),
-                                            numWaves, myWaves);
+                                            numWaves, (List) myWaves);
             }
         };
         return listener;

@@ -1,6 +1,8 @@
 package gameAuthoring.JSONObjects;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -8,7 +10,7 @@ import gameEngine.parser.JSONLibrary.JSONObject;
 
 public class LevelJSONObject extends JSONObject {
 
-    public LevelJSONObject (int level, int numWaves, ArrayList<Map<String, Integer>> enemyMapList) {
+    public LevelJSONObject (int level, int numWaves, List<Map<String, Integer>> enemyMapList) {
         this.put("level", level);
         this.put("numberWaves", numWaves);
         JSONArray myWaves = new JSONArray();
