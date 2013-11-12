@@ -1,6 +1,5 @@
 package gameEngine.view.gameFrame.store;
 
-
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.Panel;
@@ -49,8 +48,8 @@ public class TowerInfoPanel extends Panel {
 
     }
 
-
-    /** A method that is called by the Mediator to 
+    /**
+     * A method that is called by the Mediator to
      * update the information this panel displays
      */
     public void displayTowerInfo (TowerInfo tower) {

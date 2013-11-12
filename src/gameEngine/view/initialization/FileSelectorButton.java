@@ -25,7 +25,7 @@ public class FileSelectorButton extends Button {
      */
     public FileSelectorButton (View view) {
         super(StyleConstants.resourceBundle.getString("SelectFile"));
-        this.view= view;
+        this.view = view;
 
     }
 

@@ -21,11 +21,13 @@ public class Tower extends JGObject implements TowerInfo{
 
     double x;
     double y;
-    
+
     double cost;
     double recyclePrice;
+
     String description;
     
+
 
     public Tower (String name,
                   boolean unique_id,
@@ -34,7 +36,10 @@ public class Tower extends JGObject implements TowerInfo{
                   int collisionid,
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
+
+
         this.name=name;        
+
     }
 
     public double getX () {
@@ -75,8 +80,8 @@ public class Tower extends JGObject implements TowerInfo{
     }
 
     @Override
-    public double getCost () {
-        return cost;
+    public int getCost () {
+        return (int)cost;
     }
 
     @Override

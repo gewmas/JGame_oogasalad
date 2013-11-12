@@ -10,15 +10,22 @@ import gameEngine.view.View;
 public class CanvasPanel extends Panel {
     Game game;
 
-    public CanvasPanel (View view,GameFrameMediator mediator) {
+    public CanvasPanel (View view, GameFrameMediator mediator) {
         game = new Game(view, mediator);
         this.add(game);
     }
 
+<<<<<<< HEAD
 
     public void placeTower (TowerInfo towerInfo) {
+=======
+    public void placeTower (TowerFactory towerInfo) {
+>>>>>>> master
         game.placeTower(towerInfo.getName());
+    }
 
+    public void endGame () {
+        game.destroy();
     }
 
 }

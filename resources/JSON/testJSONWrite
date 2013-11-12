@@ -1,0 +1,125 @@
+{
+   "numberOfLives": 2,
+   "enemyType": [
+      {
+         "id": "wopfd",
+         "life": 2,
+         "speed": 3,
+         "image": "/resources/img/heal.jpg",
+         "gold": 1
+      },
+      {
+         "id": "dsafds",
+         "life": 2,
+         "speed": 3,
+         "image": "/resources/img/mana.jpg",
+         "gold": 1
+      }
+   ],
+   "tilesPerRow": 5,
+   "difficultyScale": 6,
+   "widthOfWindow": 3,
+   "levels": 1,
+   "name": "what",
+   "map": {
+      "startPath": {
+         "y": 0,
+         "x": 0
+      },
+      "pathImage": "/resources/img/dirt_tile.jpg",
+      "endPath": {
+         "y": 4,
+         "x": 4
+      },
+      "BGImage": "/resources/img/bg.jpg",
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 1,
+            "x": 0
+         },
+         {
+            "y": 1,
+            "x": 1
+         },
+         {
+            "y": 2,
+            "x": 1
+         },
+         {
+            "y": 2,
+            "x": 2
+         },
+         {
+            "y": 3,
+            "x": 2
+         },
+         {
+            "y": 3,
+            "x": 3
+         },
+         {
+            "y": 4,
+            "x": 3
+         }
+      ]
+   },
+   "splashImage": "/resources/img/mana.jpg",
+   "levelData": [{
+      "level": 0,
+      "enemiesOfWave": [
+         {
+            "enemies": [
+               {
+                  "id": "dsafds",
+                  "quantity": 2
+               },
+               {
+                  "id": "wopfd",
+                  "quantity": 1
+               }
+            ],
+            "wave": 1
+         },
+         {
+            "enemies": [
+               {
+                  "id": "dsafds",
+                  "quantity": 3
+               },
+               {
+                  "id": "wopfd",
+                  "quantity": 2
+               }
+            ],
+            "wave": 2
+         }
+      ],
+      "numberWaves": 2
+   }],
+   "gold": 1,
+   "heightOfWindow": 4,
+   "towerType": [
+      {
+         "id": "wow",
+         "range": 3,
+         "damage": 1,
+         "attackSpeed": 2,
+         "image": "/resources/img/mana.jpg",
+         "recyclePrice": 5,
+         "cost": 4
+      },
+      {
+         "id": "sodfd",
+         "range": 3,
+         "damage": 1,
+         "attackSpeed": 2,
+         "image": "/resources/img/heal.jpg",
+         "recyclePrice": 5,
+         "cost": 4
+      }
+   ]
+}

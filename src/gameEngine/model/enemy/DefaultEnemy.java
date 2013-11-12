@@ -4,6 +4,7 @@ import gameEngine.model.Model;
 import gameEngine.model.Tile;
 import java.util.LinkedList;
 
+
 public class DefaultEnemy extends Enemy {
 
     public DefaultEnemy (double gold,

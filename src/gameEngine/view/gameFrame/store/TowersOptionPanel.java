@@ -55,6 +55,7 @@ public class TowersOptionPanel extends Panel {
      * @param mediator facilitates communication between view components
      */
     private void createOptionsScrollPanel (GameFrameMediator mediator) {
+
         JPanel options = new JPanel(new MigLayout(LAYOUT_WRAP));
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         addStoreInventory(options, mediator);
@@ -63,7 +64,6 @@ public class TowersOptionPanel extends Panel {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         add(scrollPane);
-
     }
 
     /**

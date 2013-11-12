@@ -15,6 +15,7 @@ public class GameInfo {
     private int myWave;
 
     private String myBGImage;
+
     private Dimension myDimension;
     // private List<TowerInfo> myTowerInfo;
 
@@ -43,9 +44,7 @@ public class GameInfo {
         return myDimension;
     }
 
-    public String getBGImage () {
-        return myBGImage;
-    }
+
 
     public int getGold () {
         return myGold;
@@ -94,6 +93,12 @@ public class GameInfo {
     public void setBGImage (String BGImage) {
         myBGImage = BGImage;
     }
+
+
+    public String getBGImage () {
+        return myBGImage;
+    }
+
 
     // public void addTowerInfo (TowerInfo tower) {
     // myTowerInfo.add(tower);

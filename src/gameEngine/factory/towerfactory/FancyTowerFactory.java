@@ -14,4 +14,5 @@ public class FancyTowerFactory extends DefaultTowerFactory {
     public Tower create () {
         return null;
     }
+
 }

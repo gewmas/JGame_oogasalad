@@ -42,8 +42,6 @@
 	{
 	 "id": "DefaultTower",
 	 "image": "tower1",
-	 "x" : 100,
-	 "y" : 100,
 	 "damage": 1,
 	 "attackSpeed": 1,
 	 "range": 100,	
@@ -78,14 +76,14 @@
 			"wave":1, 
 		    "enemies": 
 			    [
-					{"id":1,"quantity": 10},
+					{"id": "ID" ,"quantity": 10},
 				]	
 			},
 			{
 			"wave":2, 
 		    "enemies": 
 			    [
-					{"id":1,"quantity": 15},
+					{"id": "ID1" ,"quantity": 15},
 				]	
 			}
 		]

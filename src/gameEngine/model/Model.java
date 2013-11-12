@@ -21,7 +21,7 @@ public class Model {
     /**
      * @author Yuhua
      * 
-     * warehouse - store different kinds of tower, enemy warehouse 
+     *         warehouse - store different kinds of tower, enemy warehouse
      * 
      */
 
@@ -33,17 +33,18 @@ public class Model {
     private GridFactory gridFactory;
     private LinkedList<Tile> path;
     private JGEngineInterface myEng;
-    private Rule rule; //how each waves created, ruleStart, ruleStop
+    private Rule rule; // how each waves created, ruleStart, ruleStop
 
     // private Rule rule;
 
     public Model () {
         rule = new Rule();
     }
-    
-    public void newGame(File jsonFile) throws Exception{
+
+    public void newGame (File jsonFile) throws Exception {
         // For test convenience
-//        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
+        // jsonFile = new File(System.getProperty("user.dir") +
+        // "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
 
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
@@ -51,18 +52,18 @@ public class Model {
         gridFactory = new GridFactory(parser);
         gridFactory.initialize();
         path = gridFactory.getPathList();
-        
-        // 2 create factory by 
-              
+
+        // 2 create factory by
+
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
         
         gameInfo = new GameInfo(parser);
 
-        
+
     }
-    
-    public void startGame(){
+
+    public void startGame () {
         towerWarehouse.create("DefaultTower"); // test, should be called within Rule
 
         Wave w = new Wave("1", 10, 500, 1000, enemyWarehouse);
@@ -70,8 +71,10 @@ public class Model {
         rule.ruleStart();
 
     }
-    
-    public LinkedList<Tile> getPathList() {
+
+    //Yuhua change it
+//    public List<Tile> getPathList () {
+    public LinkedList<Tile> getPathList () {
         return path;
     }
 
@@ -90,19 +93,19 @@ public class Model {
     }
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact
-     
     public boolean purchaseTower (int x, int y, String name) {
-        return towerWarehouse.create(x, y, name,gameInfo);
+        return towerWarehouse.create(x, y, name, gameInfo);
     }
+
     //Jiaran: Im thinking maybe this should return a TowerInfo instead of Tower
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
     public TowerInfo getTowerInfo (int x, int y) {
         Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
         return (TowerInfo)d.getOneTargetInRange(x, y, 10);
+
     }
 
-    
     /*
      * GameInfo getter method
      */
@@ -131,6 +134,4 @@ public class Model {
         return gameInfo;
     }
 
-   
-    
 }

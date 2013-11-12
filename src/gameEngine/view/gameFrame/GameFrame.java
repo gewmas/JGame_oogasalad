@@ -27,10 +27,10 @@ import gameEngine.model.tower.TowerInfo;
  * The main view class that holds all the panels and frames included in the
  * Game Engine GUI
  * 
- * @author Lalita Maraj
+ * @author Lalita Maraj Alex Zhu
  * 
  */
-public class GameFrame extends Frame  {
+public class GameFrame extends Frame {
 
     private Controller controller;
     private GameFrameMediator mediator;
@@ -41,16 +41,16 @@ public class GameFrame extends Frame  {
      * @param controller facilitates communication between view and model
      * @param engineView
      */
-    public GameFrame (Controller controller, View engineView) {
+    public GameFrame (Controller controller, View engineView, GameFrameMediator mediator) {
         super();
-        mediator = new GameFrameMediator();
+        this.mediator = mediator;
         this.controller = controller;
         this.engineView = engineView;
 
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        mediator.addGameFrame( this);
+        mediator.addGameFrame(this);
     }
 
     /**
@@ -66,25 +66,25 @@ public class GameFrame extends Frame  {
     public void showGame () {
         createGame();
         createStore();
-//        createStats();
+        // createStats();
         createMenu();
         pack();
         setVisible(true);
     }
-    
+
     public void createGame () {
-        CanvasPanel canvasPanel = new CanvasPanel(engineView,mediator);
+        CanvasPanel canvasPanel = new CanvasPanel(engineView, mediator);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addGame(canvasPanel);
     }
-    
-//    public void createStats(){
-//        Panel statsPanel = new StatsPanel();
-//        add(statsPanel, BorderLayout.SOUTH);
-//    }
-    
-    public void createMenu(){
-        setJMenuBar(new Menu(engineView, controller));
+
+    // public void createStats(){
+    // Panel statsPanel = new StatsPanel();
+    // add(statsPanel, BorderLayout.SOUTH);
+    // }
+
+    public void createMenu () {
+        setJMenuBar(new Menu(engineView));
     }
 
     /**
@@ -95,97 +95,35 @@ public class GameFrame extends Frame  {
         this.add(storePanel, BorderLayout.EAST);
     }
 
-
     /**
      * Changes the default cursor to the image of the tower to be placed
      */
+<<<<<<< HEAD
     public void placeTower (TowerInfo towerInfo) {
        
+=======
+    public void placeTower (TowerFactory towerInfo) {
+>>>>>>> master
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = toolkit.getImage(towerInfo.getImage());
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
         setCursor(c);
     }
-//
-//    /**
-//     * Tells the controller to send tower purchase instructions to the model
-//     * and then reset the cursor
-//     */
-//    public void buyTower (int x, int y, String tower) {
-//        controller.purchaseTower(x, y, tower);
-//        purchaseTower();
-//    }
-//
-//    /**
-//     * Requests tower information for the tower at the given location
-//     */
-//    public Tower getTowerInfo (int x, int y) {
-//        return controller.getTowerInfo(x, y);
-//    }
-//
-//    @Override
-//    /**
-//     * After tower is purchased, the cursor is set to the default cursor.
-//     */
-//    public void purchaseTower () {
-//        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-//    }
-//
-//    /**
-//     * Gets the dimensions of the game on initialization
-//     */
-//    public Dimension getGameSize () {
-//        return controller.getGameSize();
-//    }
-//    
-//    public List<Tile> getPath(){
-//        return controller.getPath();
-//    }
-//
-//    /**
-//     * Gets the background image of the game upon initialization
-//     */
-//    public String getBGImage () {
-//        return controller.getBGImage();
-//    }
-//
-//    public int getMoney () {
-//     
-//         return controller.getMoney();
-//    }
-//
-//    public int getLives () {
-//        return controller.getLives();
-//    }
-//
-//    @Override
-//    public void displayTowerInfo (TowerFactory towerInfo) {
-//        // No behavior
-//    }
-//
-//    public List<TowerFactory> getTowers () {
-//        return controller.getTowerFactory();
-//    }
 
-//    public boolean newGame (File file) {
-//        try {
-//            controller.newGame(file);
-//            engineView.loadNewGame();
-//        }
-//        catch (Exception e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        
-//
-//        return true;
-//    }
+    public boolean newGame (File file) {
+        try {
+            engineView.newGame(file);
+            engineView.loadNewGame();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        return true;
+    }
 
-
-    
     public void purchaseTower () {
-      setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-      
-  }
+        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+    }
+
 }

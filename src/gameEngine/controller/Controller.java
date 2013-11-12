@@ -15,6 +15,7 @@ public class Controller {
     Model model;
     View view;
 
+
     Dimension gameSize;
 
     public Controller () {
@@ -25,14 +26,14 @@ public class Controller {
     }
 
     public void newGame (File jsonFile) throws Exception {
-        model.newGame(jsonFile); //will throw exception if fail
+        model.newGame(jsonFile); // will throw exception if fail
         view.startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
         // view.showGame();
     }
-    
-    public void startGame(){
+
+    public void startGame () {
         model.startGame();
     }
 
@@ -42,6 +43,10 @@ public class Controller {
      */
     public List<TowerInfo> getTowerFactory () {
         return model.getAllTowerInfo();  
+//=======
+//    public List<TowerFactory> getTowerFactory () {
+//        return model.getTowerFactory();
+//>>>>>>> master
     }
 
     /**
@@ -62,6 +67,7 @@ public class Controller {
             towerinfo=model.getTowerInfo(x,y);
         } catch (Exception e) {
             towerinfo=null;
+
         }
         return towerinfo;
     }
@@ -92,13 +98,14 @@ public class Controller {
      */
     public int getLives () {
         return model.getLife();
-    }  
-     
-    public List<Tile> getPath(){
+    }
+
+    public List<Tile> getPath () {
         return model.getPathList();
     }
 
-//    public String getPathImage(){
-//    }     
+    // public String getPathImage(){
+    // }
+
 
 }
