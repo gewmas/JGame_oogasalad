@@ -89,8 +89,8 @@ public class Model {
     //Jiaran Im thinking maybe this should return a TowerInfo instead of Tower
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
-    public TowerInfo getTowerInfo (int x, int y) {
-        Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
+    public TowerInfo getTowerInfo (int x, int y, JGEngineInterface eng) {
+        Detector<Tower> d= new Detector<Tower>(eng,Tower.class);
         return d.getOneTargetInRange(x, y, 10);
     }
 

@@ -3,6 +3,7 @@ package gameEngine.controller;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import jgame.impl.JGEngineInterface;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Model;
 import gameEngine.model.Tile;
@@ -58,10 +59,10 @@ public class Controller {
      * Sends a call to the model to update the monitored tower stats to the tower
      * at x,y. If the position is invalid, do nothing
      */
-    public TowerInfo getTowerInfo (int x, int y) {
+    public TowerInfo getTowerInfo (int x, int y, JGEngineInterface eng) {
         TowerInfo towerInfo;
         try {
-            towerInfo=model.getTowerInfo(x,y);
+            towerInfo=model.getTowerInfo(x,y, eng);
         } catch (Exception e) {
             towerInfo=null;
         }
