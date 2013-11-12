@@ -42,9 +42,9 @@ public class GameFrame extends Frame implements GameFrameColleague {
      * @param controller facilitates communication between view and model
      * @param engineView
      */
-    public GameFrame (Controller controller, View engineView) {
+    public GameFrame (Controller controller, View engineView, GameFrameMediator mediator) {
         super();
-        mediator = new GameFrameMediator();
+        this.mediator = mediator;
         this.controller = controller;
         this.engineView = engineView;
 
@@ -85,7 +85,7 @@ public class GameFrame extends Frame implements GameFrameColleague {
     // }
 
     public void createMenu () {
-        setJMenuBar(new Menu(engineView, controller));
+        setJMenuBar(new Menu(engineView));
     }
 
     /**
@@ -171,7 +171,7 @@ public class GameFrame extends Frame implements GameFrameColleague {
 
     public boolean newGame (File file) {
         try {
-            controller.newGame(file);
+            engineView.newGame(file);
             engineView.loadNewGame();
         }
         catch (Exception e) {

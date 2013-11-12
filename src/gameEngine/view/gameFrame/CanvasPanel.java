@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame;
+    package gameEngine.view.gameFrame;
 
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
@@ -14,10 +14,12 @@ public class CanvasPanel extends Panel {
         this.add(game);
     }
 
-
     public void placeTower (TowerFactory towerInfo) {
         game.placeTower(towerInfo.getName());
-
+    }
+    
+    public void endGame(){
+        game.destroy();
     }
 
 }

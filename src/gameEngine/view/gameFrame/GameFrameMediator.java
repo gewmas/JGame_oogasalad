@@ -51,6 +51,14 @@ public class GameFrameMediator {
     public void addColleague (String name, GameFrameColleague colleague) {
         colleagues.put(name, colleague);
     }
+    
+    /**
+     * Destroys the jgame instance so that it can be reloaded
+     */
+    
+    public void endGame(){
+        canvasPanel.endGame();
+    }
 
     /**
      * Notifies all colleagues that need to be updated
@@ -88,17 +96,17 @@ public class GameFrameMediator {
     public void updateStoreStatus () {
         storeOptions.updateStoreStatus();
     }
+    
     public void addGameFrame (GameFrame gameFrame) {
-       this.gameFrame = gameFrame;
-        
+       this.gameFrame = gameFrame; 
     }
+    
     public void addGame (CanvasPanel canvasPanel) {
        this.canvasPanel = canvasPanel;
-        
     }
+    
     public void addTowerInfoPanel (TowerInfoPanel towerInfoPanel) {
        this.towerInfoPanel  = towerInfoPanel;
-        
     }
 
 }
