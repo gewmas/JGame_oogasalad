@@ -1,12 +1,12 @@
 package gameEngine.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
+
+
 /*
  * Author wenxin shi
  */
-
 
 public class GameInfo {
     private int myGold;
@@ -14,16 +14,14 @@ public class GameInfo {
     private int myWave;
 
     private String myBGImage;
-    private List<TowerInfo> myTowerInfo;
-    private List<PathInfo> myPathInfo;
+//    private List<TowerInfo> myTowerInfo;
 
     public GameInfo (int defaultGold, int defaultLife, int waveNum, String BGImage) {
         myGold = defaultGold;
         myLife = defaultLife;
         myWave = waveNum;
         myBGImage = BGImage;
-        myTowerInfo = new ArrayList<TowerInfo>();
-        myPathInfo = new ArrayList<PathInfo>();
+//        myTowerInfo = new ArrayList<TowerInfo>();
     }
 
     public int getGold () {
@@ -78,28 +76,20 @@ public class GameInfo {
         return myBGImage;
     }
 
-    public void addTowerInfo (TowerInfo tower) {
-        myTowerInfo.add(tower);
-    }
-
-    public void removeTowerInfo (TowerInfo tower) {
-        myTowerInfo.remove(tower);
-    }
-    
-    public void removeAllTowerInfo(){
-        myTowerInfo=new ArrayList<TowerInfo>();
-    }
-
-    public void removeAllPathInfo(){
-        myPathInfo = new ArrayList<PathInfo>();
-    }
-    
-    public List<TowerInfo> getTowerInfo () {
-        return myTowerInfo;
-    }
-
-    public List<PathInfo> getPathInfo () {
-        return myPathInfo;
-    }
+//    public void addTowerInfo (TowerInfo tower) {
+//        myTowerInfo.add(tower);
+//    }
+//
+//    public void removeTowerInfo (TowerInfo tower) {
+//        myTowerInfo.remove(tower);
+//    }
+//
+//    public void removeAllTowerInfo () {
+//        myTowerInfo = new ArrayList<TowerInfo>();
+//    }
+//
+//    public List<TowerInfo> getTowerInfo () {
+//        return myTowerInfo;
+//    }
 
 }

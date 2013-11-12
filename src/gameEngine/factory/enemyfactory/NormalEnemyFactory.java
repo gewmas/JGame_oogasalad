@@ -1,6 +1,8 @@
 package gameEngine.factory.enemyfactory;
 
+import java.util.LinkedList;
 import gameEngine.Constant.Constant;
+import gameEngine.model.Tile;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
@@ -31,8 +33,9 @@ public class NormalEnemyFactory implements EnemyFactory {
     }
 
     @Override
-    public Enemy create () {
-        return new Enemy(gold, life, speed, id, true, 50, 120, Constant.ENEMY_CID, image);
+    public Enemy create (LinkedList<Tile> path) {
+        return new Enemy(gold, life, speed, id, true, path.element().getCenterX(), path.element().getCenterY(), Constant.ENEMY_CID, image, path);
+
 
     }
 

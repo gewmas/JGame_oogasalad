@@ -1,35 +1,38 @@
 package gameEngine.test;
 
-import static org.junit.Assert.*;
-import gameEngine.factory.Factory;
-import gameEngine.parser.Parser;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
+import gameEngine.model.Tile;
+import gameEngine.Constant.Constant;
+import gameEngine.factory.Factory;
+import gameEngine.model.Model;
+import gameEngine.parser.Parser;
 import jgame.JGColor;
+import jgame.JGPoint;
 import jgame.platform.JGEngine;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
-public class TestGrid extends JGEngine{
 
-    @Before
-    public void setUp () throws Exception {
-        initGame();
-        initCanvas();
-        
-    }
-
-    @After
-    public void tearDown () throws Exception {
-    }
-
-    @Test
-    public void test () {
-        fail("Not yet implemented");
+/**
+ * 
+ * @author Harris
+ * 
+ * Test Grid
+ * 
+ */
+public class TestGrid extends JGEngine {
+    
+    public static void main (String[] args) {
+        new TestGrid(new JGPoint(960, 700));
     }
     
+    /** Application constructor. */
+    public TestGrid (JGPoint size) {
+        initEngine(size.x, size.y);
+    }
+
     @Override
     public void initCanvas () {
         setCanvasSettings(
@@ -45,21 +48,24 @@ public class TestGrid extends JGEngine{
 
     @Override
     public void initGame () {
-//        defineMedia("mygame.tbl");
+        defineMedia("mygame.tbl");
         setFrameRate(60, 2);
-
-        try {
-            File file = new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json");
-            Scanner scanner = new Scanner(file);
-            Parser parser = new Parser(scanner);
-            Factory factory = new Factory(parser);
-            factory.grid().initialize();
-        }
-        catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
+       
+              Model model = new Model();
+              try {
+                model.newGame(new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
+            }
+            catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+              
+              List<Tile> pathList = model.getPathList();
+              for(Tile tile: pathList) {
+                  System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
+                  System.out.println("Center x=" + tile.getCenterX() + " center y=" + tile.getCenterY());
+                  System.out.println("img path is " + tile.getPathImage());
+              }
     }
 
     @Override
@@ -70,5 +76,4 @@ public class TestGrid extends JGEngine{
     @Override
     public void paintFrame () {
     }
-
 }

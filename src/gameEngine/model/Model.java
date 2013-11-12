@@ -1,67 +1,109 @@
 package gameEngine.model;
 
+import gameEngine.factory.GridFactory;
+import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
-import gameEngine.model.warehouse.Warehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import jgame.impl.JGEngineInterface;
+
 
 public class Model {
 
     /**
      * @author Yuhua
      * 
-     * Pipeline of Model is as below.
+     * warehouse - store different kinds of tower, enemy warehouse 
      * 
      */
-    
+
     private Scanner scanner;
     private Parser parser;
     private GameInfo gameInfo;
-    private Warehouse towerWarehouse;
+    private TowerWarehouse towerWarehouse;
     private EnemyWarehouse enemyWarehouse;
+    private GridFactory gridFactory;
+    private LinkedList<Tile> path;
+    private JGEngineInterface myEng;
+    private Rule rule; //how each waves created, ruleStart, ruleStop
 
-//    private Rule rule; 
+    // private Rule rule;
 
-    public Model(){
-        // 1 parse jsonfile
+    public Model () {
+        rule = new Rule();
+    }
+    
+    public void newGame(File jsonFile) throws Exception{
+        // For test convenience
+//        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
 
-        try {
-            scanner = new Scanner(new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
 
-        // 2 create factory by warehouse - hashmap of different kind of tower, enemy
-        //     warehouse - store lists of towers, enemies
+        gridFactory = new GridFactory(parser);
+        gridFactory.initialize();
+        path = gridFactory.getPathList();
+        
+        // 2 create factory by 
+              
         towerWarehouse = new TowerWarehouse(parser);
-        towerWarehouse.create("DefaultTower"); //test, should be called within Rule
-        enemyWarehouse = new EnemyWarehouse(parser);
-
-        // 3 create gameInfo
+        enemyWarehouse = new EnemyWarehouse(parser, path);
+        
         gameInfo = new GameInfo(1000, 1000, 1000, null);
-        //finally all rules and waves should be created according to JSon
-        Rule r= new Rule();
+
         
-        Wave w= new Wave("1", 5, 1000, 10000, enemyWarehouse);
-        r.addWave(w);
-        r.ruleStart();
-        // 4 create path
-        
-        // 5 create rule - how each waves created, ruleStart, ruleStop
-        //     rule - waves -> create enemies
-        //new Rule();
+    }
+    
+    public void startGame(){
+        towerWarehouse.create("DefaultTower"); // test, should be called within Rule
+
+        Wave w = new Wave("1", 10, 500, 1000, enemyWarehouse);
+        rule.addWave(w);
+        rule.ruleStart();
 
     }
+    
+    public List<Tile> getPathList() {
+        return path;
+    }
 
+    /**
+     * return all kinds of TowerFactory
+     */
+    public List<TowerFactory> getTowerFactory () {
+        return towerWarehouse.getTowerFactory();
+    }
 
+    // Jiaran purchase, get tower info. If something is wrong plz contact
+     
+    public boolean purchaseTower (int x, int y, String name) {
+        return towerWarehouse.create(x, y, name,gameInfo);
+    }
+    //Jiaran Im thinking maybe this should return a TowerInfo instead of Tower
+    // Tower can implemetns Towerinfo which has getDescription,getDamage....
+    // now it is not functional because no myEng, we need discussion on this.
+    public Tower getTowerInfo (int x, int y) {
+        Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
+        return d.getOneTargetInRange(x, y, 10);
+    }
 
+    
+    /*
+     * GameInfo getter method
+     */
+    public int getMoney () {
+        return gameInfo.getGold();
+    }
 
+    public int getLife () {
+        return gameInfo.getLife();
+    }
 
+   
+    
 }

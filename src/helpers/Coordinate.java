@@ -19,10 +19,22 @@ public class Coordinate {
     public int getY() {
         return y;
     }
-    public boolean equals(Coordinate coordinate) {
-        if(x == coordinate.x && y == coordinate.y) {
-            return true;
+    
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Coordinate) {
+            Coordinate coordinate = (Coordinate)o;
+            if(x == coordinate.x && y == coordinate.y) {
+                return true;
+            }
         }
         return false;
+    }
+    
+    @Override
+    public int hashCode() {
+        Integer xInt = x;
+        Integer yInt = y;
+        return xInt.hashCode() + "-".hashCode() + yInt.hashCode();
     }
 }
