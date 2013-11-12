@@ -16,6 +16,7 @@ public class Controller {
     Model model;
     View view;
 
+
     Dimension gameSize;
 
     public Controller () {
@@ -101,5 +102,6 @@ public class Controller {
 
 //    public String getPathImage(){
 //    }     
+
 
 }

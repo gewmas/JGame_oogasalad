@@ -1,8 +1,8 @@
 package gameEngine.factory.towerfactory;
 
 import gameEngine.Constant.Constant;
-import gameEngine.model.tower.Tower;
 import gameEngine.model.tower.DefaultTower;
+import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 
@@ -12,7 +12,9 @@ import gameEngine.parser.JSONLibrary.JSONObject;
  *         TowerFactory can create different types of Tower when called by the create() method
  * 
  */
+
 public class DefaultTowerFactory extends TowerFactory {
+
 
     public DefaultTowerFactory (JSONObject currTower) {
         this.id = currTower.getString("id");
@@ -34,6 +36,7 @@ public class DefaultTowerFactory extends TowerFactory {
                                          x, y, Constant.TOWER_CID, image);
         return tower;
     }
+
 
     @Override
     public Tower create (int x, int y) {

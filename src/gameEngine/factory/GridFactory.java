@@ -1,5 +1,6 @@
 package gameEngine.factory;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,15 +13,19 @@ import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import helpers.Coordinate;
-import jgame.platform.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+
 /**
  * 
  * @author Harris
  * 
- * Constructs the grid
- *
+ *         Constructs the grid
+ * 
  */
 public class GridFactory implements FactoryInterface {
+
 	private Parser parser;
 	private ArrayList<ArrayList<Tile>> gridList;
         LinkedList<Tile> path;
@@ -81,4 +86,5 @@ public class GridFactory implements FactoryInterface {
         public LinkedList<Tile> getPathList() {
             return path;
         }
+
 }
