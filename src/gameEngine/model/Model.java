@@ -3,11 +3,9 @@ package gameEngine.model;
 import gameEngine.factory.GridFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.tower.Tower;
-import gameEngine.model.tower.TowerInfo;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
-import java.awt.Dimension;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -81,16 +79,16 @@ public class Model {
         return towerWarehouse.getTowerFactory();
     }
 
-    // Jiaran: purchase, get tower info. If something is wrong plz contact
+    // Jiaran purchase, get tower info. If something is wrong plz contact
      
     public boolean purchaseTower (int x, int y, String name) {
         return towerWarehouse.create(x, y, name,gameInfo);
     }
-    //Jiaran: Im thinking maybe this should return a TowerInfo instead of Tower
+    //Jiaran Im thinking maybe this should return a TowerInfo instead of Tower
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
-    public TowerInfo getTowerInfo (int x, int y, JGEngineInterface eng) {
-        Detector<Tower> d= new Detector<Tower>(eng,Tower.class);
+    public Tower getTowerInfo (int x, int y) {
+        Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
         return d.getOneTargetInRange(x, y, 10);
     }
 
@@ -105,10 +103,7 @@ public class Model {
     public int getLife () {
         return gameInfo.getLife();
     }
-    
-    public String getBGImage () {
-        return gameInfo.getBGImage();
-    }
+
    
     
 }

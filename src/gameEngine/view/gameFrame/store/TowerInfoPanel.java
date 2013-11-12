@@ -48,7 +48,7 @@ public class TowerInfoPanel extends Panel {
 
     }
 
-    @Override
+
     /** A method that is called by the Mediator to 
      * update the information this panel displays
      */

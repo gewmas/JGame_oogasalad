@@ -1,9 +1,5 @@
 package gameEngine.view;
 
-
-import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.view.gameFrame.GameFrameColleague;
-import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 
@@ -14,30 +10,9 @@ import javax.swing.JPanel;
  *         are view components that can interact with other view componetns.
  * 
  */
-public class Panel extends JPanel implements GameFrameColleague {
+public class Panel extends JPanel {
     public Panel () {
         super();
-    }
-
-    @Override
-    public void placeTower (TowerFactory towerInfo) {
-
-    }
-
-    @Override
-    public void displayTowerInfo (TowerFactory tower) {
-
-    }
-
-    @Override
-    public void purchaseTower () {
-
-    }
-
-    @Override
-    public void updateStoreStatus () {
-        // TODO Auto-generated method stub
-
     }
 
 }
