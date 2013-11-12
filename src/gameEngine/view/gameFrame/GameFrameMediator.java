@@ -1,8 +1,8 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
-import gameEngine.model.TowerInfo;
-import java.util.HashMap;
-import java.util.Map;
+import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.view.gameFrame.store.TowerInfoPanel;
+import gameEngine.view.gameFrame.store.TowersOptionPanel;
 
 
 /**
@@ -22,25 +22,15 @@ import java.util.Map;
  * @author Lalita Maraj
  * 
  */
-public class Mediator {
+public class GameFrameMediator {
 
-    private Map<String, Colleague> colleagues;
+    private TowersOptionPanel storeOptions;
+    private GameFrame gameFrame;
+    private CanvasPanel canvasPanel;
+    private TowerInfoPanel towerInfoPanel;
 
-    public Mediator () {
-        colleagues = new HashMap<String, Colleague>();
-
-    }
-
-    /**
-     * a map is used to store all the colleagues the mediator liasons
-     * with. Key strings are stored in the MediatorConstants class and
-     * shuld be used to both add and get colleagues.
-     * 
-     * @param name key of colleague
-     * @param colleague Colleague to be added
-     */
-    public void addColleague (String name, Colleague colleague) {
-        colleagues.put(name, colleague);
+    public void addTowersOptionPanel (TowersOptionPanel storeOptions) {
+        this.storeOptions = storeOptions;
     }
 
     /**
@@ -49,9 +39,10 @@ public class Mediator {
      * 
      * @param towername
      */
-    public void placeTower (TowerInfo towerInfo) {
-        colleagues.get(MediatorConstants.GAME_KEY).placeTower(towerInfo);
-        colleagues.get(MediatorConstants.GAMEFRAME_KEY).placeTower(towerInfo);
+    public void placeTower (TowerFactory towerInfo) {
+
+        canvasPanel.placeTower(towerInfo);
+        gameFrame.placeTower(towerInfo);
     }
 
     /**
@@ -60,9 +51,8 @@ public class Mediator {
      * 
      * @param tower
      */
-    public void displayTowerInfo (TowerInfo tower) {
-        colleagues.get(MediatorConstants.INFO_PANEL_KEY).displayTowerInfo(tower);
-
+    public void displayTowerInfo (TowerFactory tower) {
+        towerInfoPanel.displayTowerInfo(tower);
     }
 
     /**
@@ -70,14 +60,29 @@ public class Mediator {
      * that are impacted by the purchase of a tower
      */
     public void purchaseTower () {
-        colleagues.get(MediatorConstants.GAMEFRAME_KEY).purchaseTower();
+        gameFrame.purchaseTower();
     }
 
     /**
      * Updates the enabled status of store items.
      */
     public void updateStoreStatus () {
-        colleagues.get(MediatorConstants.STORE_OPTIONS_KEY).updateStoreStatus();
+        storeOptions.updateStoreStatus();
+    }
+
+    public void addGameFrame (GameFrame gameFrame) {
+        this.gameFrame = gameFrame;
+
+    }
+
+    public void addGame (CanvasPanel canvasPanel) {
+        this.canvasPanel = canvasPanel;
+
+    }
+
+    public void addTowerInfoPanel (TowerInfoPanel towerInfoPanel) {
+        this.towerInfoPanel = towerInfoPanel;
+
     }
 
 }

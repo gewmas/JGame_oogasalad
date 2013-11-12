@@ -1,13 +1,13 @@
 package gameEngine.model;
 
-import gameEngine.model.enemy.Enemy;
+import gameEngine.Constant.Constant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import jgame.JGObject;
 import jgame.JGRectangle;
 import jgame.impl.JGEngineInterface;
-import jgame.platform.JGEngine;
+
 
 
 /**
@@ -25,23 +25,36 @@ import jgame.platform.JGEngine;
  *         enemies begin with the name of "enemyXX".
  * 
  */
-public class Detector {
+public class Detector<T extends JGObject> {
     private JGEngineInterface myEng;
-
-    public Detector (JGEngineInterface eng) {
+    //Because of Erasure, we need to use reflection to help complete the function
+    private Class<T> myType;
+    public Detector (JGEngineInterface eng, Class<T> type) {
         myEng = eng;
+        myType=type;
 
     }
 
     // cid and prefix should get from a Constant class.
-    public List<Enemy> getEnemiesInRange (int centerx, int centery, int range) {
-        Vector<JGObject> v = getObjects(centerx, centery, range, 1, null);
-        List<Enemy> result = new ArrayList<Enemy>();
+    @SuppressWarnings("unchecked")
+    public List<T> getTargetsInRange (int centerx, int centery, int range) {
+        Vector<JGObject> v = getObjects(centerx, centery, range, Constant.query(myType), null);
+        List<T> result = new ArrayList<T>();
         for (int i = 0; i < v.size(); i++) {
-            result.add((Enemy) v.get(i));
+            result.add((T) v.get(i));
         }
         return result;
     }
+
+    @SuppressWarnings("unchecked")
+    public T getOneTargetInRange (int centerx, int centery, int range) {
+        Vector<JGObject> v = getObjects(centerx, centery, range, Constant.query(myType), null);
+
+        T result = (T) v.get(0);
+        return result;
+    }
+
+  
 
     @SuppressWarnings("unchecked")
     private Vector<JGObject> getObjects (int centerx, int centery, int range, int cid, String prefix) {

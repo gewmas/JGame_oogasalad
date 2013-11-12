@@ -3,9 +3,10 @@ package gameEngine.view.initialization;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import gameEngine.view.Button;
-import gameEngine.view.GameFrame;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
+import gameEngine.view.View;
+import gameEngine.view.gameFrame.GameFrame;
 
 
 /**
@@ -16,13 +17,13 @@ import gameEngine.view.StyleConstants;
 
 public class InitializationPanel extends Panel {
 
-    public InitializationPanel (JFrame initializationFrame, GameFrame gameFrame) {
+    public InitializationPanel (JFrame initializationFrame, View view) {
         super();
 
         JLabel message = new JLabel(StyleConstants.resourceBundle.getString("Welcome"));
         add(message);
 
-        Button selectorButton = new FileSelectorButton(gameFrame);
+        Button selectorButton = new FileSelectorButton(view);
         Button cancelButton = new CancelButton(initializationFrame);
         add(cancelButton);
         add(selectorButton);

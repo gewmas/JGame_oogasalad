@@ -3,10 +3,12 @@ package gameEngine.controller;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Model;
-import gameEngine.model.TowerInfo;
+import gameEngine.model.Tile;
+import gameEngine.model.tower.Tower;
 import gameEngine.view.View;
-import gameEngine.view.GameFrame;
+import gameEngine.view.gameFrame.GameFrame;
 
 
 public class Controller {
@@ -15,45 +17,54 @@ public class Controller {
     View view;
 
     Dimension gameSize;
-    int money;
-    int lives;
-    int score;
 
     public Controller () {
-        lives = 10;
-        money = 100;
-        score = 0;
-        gameSize = new Dimension(30, 30);
+
+        gameSize = new Dimension(20, 20);
         view = new View(this);
+        model = new Model();
     }
 
-    public boolean newGame (File jsonFile) {
+    public void newGame (File jsonFile) throws Exception {
+        model.newGame(jsonFile); //will throw exception if fail
+        view.startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
-        return true;
         // view.showGame();
-
+    }
+    
+    public void startGame(){
+        model.startGame();
     }
 
-    public List<TowerInfo> getTowers () {
-        return null;
-
+    /**
+     * Get All kinds of TowerFactory
+     * However, can only return the basic property of the TowerFactory
+     */
+    public List<TowerFactory> getTowerFactory () {
+        return model.getTowerFactory();  
     }
 
     /**
      * Sends a call to the model to purchase tower tower at position x,y
      * If position is invalid, do nothing for now
      */
-    public void purchaseTower (int x, int y, String tower) {
-
+    public boolean purchaseTower (int x, int y, String name) {
+        return model.purchaseTower(x, y, name);
     }
 
     /**
      * Sends a call to the model to update the monitored tower stats to the tower
      * at x,y. If the position is invalid, do nothing
      */
-    public void getTowerInfo (int x, int y) {
-
+    public Tower getTowerInfo (int x, int y) {
+        Tower tower;
+        try {
+            tower=model.getTowerInfo(x,y);
+        } catch (Exception e) {
+            tower=null;
+        }
+        return tower;
     }
 
     /**
@@ -74,39 +85,21 @@ public class Controller {
      * Returns the amount of money in the game
      */
     public int getMoney () {
-        return money;
+        return model.getMoney();
     }
 
     /**
      * Return the number of lives remaining
      */
     public int getLives () {
-        return lives;
+        return model.getLife();
+    }  
+     
+    public List<Tile> getPath(){
+        return model.getPathList();
     }
 
-    /**
-     * Return the score of the user
-     */
-
-    public int getScore () {
-        return score;
-    }
-    /*
-     * public void placeTower(String name, Position pos){
-     * 
-     * }
-     * 
-     * public List<PathInfo> getPath(){
-     * 
-     * }
-     * 
-     * public String getPathImage(){
-     * 
-     * }
-     * 
-     * 
-     * 
-     * }
-     */
+//    public String getPathImage(){
+//    }     
 
 }

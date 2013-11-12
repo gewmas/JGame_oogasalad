@@ -605,6 +605,28 @@ public class EngineLogic {
         defineImage(name, tilename, collisionid, img,
                     img_op, top, left, width, height);
     }
+    
+    /**
+     * Written by Alex Zhu
+     * Resizes image to dimx by dimy before returning
+     */
+    public void defineImage (Object pkg_obj, String name, String tilename,
+                             int collisionid, String imgfile, String img_op,int dimx,int dimy) {
+        if (images_loaded.containsKey(name)
+            && !images_loaded.get(name).equals(imgfile)) {
+            // if associated file is not the same, undefine old image
+            undefineImage(name);
+        }
+        JGImage img = null;
+        if (!imgfile.equals("null")) {
+            imgfile = getAbsolutePath(pkg_obj, imgfile);
+            img = imageutil.loadImage(imgfile);
+            img=img.scale(dimx, dimy);
+            images_loaded.put(name, imgfile);
+        }
+        defineImage(name, tilename, collisionid, img,
+                    img_op, 0, 0, -1, -1);
+    }
 
     /**
      * passing -1 to top,left,width,height indicates these have to be taken

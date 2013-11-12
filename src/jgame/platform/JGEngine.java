@@ -215,6 +215,16 @@ public abstract class JGEngine extends Applet implements JGEngineInterface {
                        top, left, width, height);
     }
 
+    /**
+     * Written by Alex Zhu
+     * Same as standard jgame defineImage, but allows resizing of the image to
+     * dimx by dimy
+     */
+    public void defineImage (String name, String tilename, int collisionid,
+                             String imgfile, String img_op,int dimx, int dimy) {
+        el.defineImage(this, name, tilename, collisionid, imgfile, img_op,dimx,dimy);
+    }
+    
     public void defineImage (String imgname, String tilename, int collisionid,
                              String imgfile, String img_op) {
         el.defineImage(this, imgname, tilename, collisionid, imgfile, img_op);

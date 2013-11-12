@@ -12,20 +12,7 @@ import gameEngine.parser.JSONLibrary.JSONObject;
  *         TowerFactory can create different types of Tower when called by the create() method
  * 
  */
-public class DefaultTowerFactory implements TowerFactory {
-
-    String id;
-    String image;
-
-    double x;
-    double y;
-
-    double damage;
-    double attackSpeed;
-    double range;
-
-    double cost;
-    double recyclePrice;
+public class DefaultTowerFactory extends TowerFactory {
 
     public DefaultTowerFactory (JSONObject currTower) {
         this.id = currTower.getString("id");
@@ -46,6 +33,12 @@ public class DefaultTowerFactory implements TowerFactory {
                 (Tower) new DefaultTower(damage, attackSpeed, range, cost, recyclePrice, id, true,
                                          x, y, Constant.TOWER_CID, image);
         return tower;
+    }
+
+    @Override
+    public Tower create (int x, int y) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

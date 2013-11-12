@@ -1,10 +1,13 @@
-package gameEngine.view;
+package gameEngine.view.gameFrame;
 
 import gameEngine.controller.Controller;
-import gameEngine.model.Grid;
+import gameEngine.model.Tile;
+import gameEngine.model.tower.Tower;
+import gameEngine.view.View;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 import jgame.Highscore;
 import jgame.JGColor;
 import jgame.JGPoint;
@@ -22,22 +25,20 @@ public class Game extends StdGame {
     private int WIDTH = 600;
     private int HEIGHT = 600;
 
-    private GameFrame gameFrame;
+    private View view;
     private boolean purchasing;
     private String towerToPurchase;
-    // private int lives;
-    private int money;
+    private GameFrameMediator mediator;
 
-    public Game (GameFrame gameFrame) {
-        this.gameFrame = gameFrame;
+    public Game (View view, GameFrameMediator mediator) {
+        this.view = view;
+        this.mediator = mediator;
         initEngineComponent(WIDTH, HEIGHT);
     }
 
     @Override
     public void initCanvas () {
-        Dimension size = gameFrame.getGameSize();
-        System.out.println(size.width);
-        System.out.println(size.height);
+        Dimension size = view.getGameSize();
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
     }
@@ -45,21 +46,30 @@ public class Game extends StdGame {
     @Override
     public void initGame () {
         setFrameRate(30, 2);
-        initial_lives = gameFrame.getLives();
-        lives = gameFrame.getLives();
-        money = gameFrame.getMoney();
-        String bgImage = gameFrame.getBGImage();
+        initial_lives = view.getLives();
+        lives = view.getLives();
+        score = view.getMoney();
+        String bgImage = "space_background.jpg";
         defineImage("background", "bg", 256, bgImage, "-");
         setBGImage("background");
         purchasing = false;
         setHighscores(10, new Highscore(0, "aaa"), 3);
         startgame_ingame = true;
+        List<Tile> pathList=view.getPath();
+        int tileCount=0;
+        for (Tile tile:pathList){
+            defineImage("tile"+String.valueOf(tileCount),"#"+String.valueOf(tileCount),256,tile.getPathImage(),"-");
+            JGPoint tilePos=getTileIndex(tile.getX(),tile.getY());
+            setTile(tilePos.x,tilePos.y,"#"+String.valueOf(tileCount));
+            tileCount++;
+        }
     }
 
     public void doFrameInGame () {
         checkCollision(0, 0);
         checkUserInteractions();
         updateGameStats();
+        mediator.updateStoreStatus();
         if (getKey(KeyEsc)) {
             clearKey(KeyEsc);
             lives = 0;
@@ -77,12 +87,13 @@ public class Game extends StdGame {
             JGPoint mousePosition = getMousePos();
             JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
             if (purchasing) {
-                gameFrame.buyTower(tilePosition.x, tilePosition.y, towerToPurchase);
+                view.buyTower(tilePosition.x, tilePosition.y, towerToPurchase);
                 purchasing = false;
                 System.out.format("Buying tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
             else {
-                gameFrame.getTowerInfo(tilePosition.x, tilePosition.y);
+                Tower tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
+                if (tower==null) System.out.println("No tower here");
                 System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
         }
@@ -92,25 +103,21 @@ public class Game extends StdGame {
      * Updates the number of lives and money remaining in the game
      */
     public void updateGameStats () {
-        lives = gameFrame.getLives();
-        money = gameFrame.getMoney();
-        score = gameFrame.getScore();
+        lives = view.getLives();
+        score = view.getMoney();
     }
 
     @Override
-    /**
-     * Override to display amount of money left at all times
-     */
     public void paintFrame () {
         super.paintFrame();
-        drawString("Money " + String.valueOf(money), pfWidth() - 10, 10, 1);
+//        drawString("Money " + String.valueOf(sc), pfWidth() - 10, 10, 1);
     }
 
     /**
      * Indicates that the user wants to buy a tower
      */
     public void placeTower (String tower) {
-        // setBGColor(JGColor.red);
+//         setBGColor(JGColor.red);
         System.out.println("User wants to purchase " + tower);
         purchasing = true;
         towerToPurchase = tower;

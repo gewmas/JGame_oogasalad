@@ -1,6 +1,7 @@
-package gameEngine.view.store;
+package gameEngine.view.gameFrame.store;
 
-import gameEngine.model.TowerInfo;
+
+import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import javax.swing.BorderFactory;
@@ -11,7 +12,7 @@ import javax.swing.border.Border;
 
 
 /**
- * Panel that displays tower information
+ * Panel that displays tower informations
  * when user hovers over a tower option
  * 
  * @author Lalita Maraj
@@ -19,8 +20,8 @@ import javax.swing.border.Border;
  */
 public class TowerInfoPanel extends Panel {
 
-    private JList<String> myList;
-    private DefaultListModel<String> myListModel;
+    private JList myList;
+    private DefaultListModel myListModel;
 
     public TowerInfoPanel () {
         super();
@@ -38,8 +39,8 @@ public class TowerInfoPanel extends Panel {
      * Initlizes JList contents and adds
      */
     private void initializeContents () {
-        myListModel = new DefaultListModel<String>();
-        myList = new JList<String>(myListModel);
+        myListModel = new DefaultListModel();
+        myList = new JList(myListModel);
 
         JScrollPane listScrollPane = new JScrollPane(myList);
         listScrollPane.setSize(10, 10);
@@ -47,16 +48,16 @@ public class TowerInfoPanel extends Panel {
 
     }
 
-    @Override
+
     /** A method that is called by the Mediator to 
      * update the information this panel displays
      */
-    public void displayTowerInfo (TowerInfo tower) {
+    public void displayTowerInfo (TowerFactory tower) {
         // ImageIcon icon = new ImageIcon(tower.getImage());
         myListModel.clear();
-        myListModel.addElement("Tower: " + tower.getName());
-        myListModel.addElement("Cost: " + Integer.toString(tower.getCost()));
-        myListModel.addElement("Description: " + tower.getDescription());
+        myListModel.addElement(TowerInfoFields.NAME + tower.getName());
+        myListModel.addElement(TowerInfoFields.COST + Integer.toString(tower.getCost()));
+        myListModel.addElement(TowerInfoFields.DESCRIPTION + tower.getDescription());
 
     }
 

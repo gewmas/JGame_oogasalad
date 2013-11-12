@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import jgame.platform.JGEngine;
-import gameEngine.model.Grid;
+import gameEngine.model.Tile;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -20,14 +20,14 @@ import jgame.platform.*;
  * Constructs the grid
  *
  */
-public class GridFactory implements FactoryInterface{
+public class GridFactory implements FactoryInterface {
 	private Parser parser;
-	private ArrayList<ArrayList<Grid>> gridList;
-        LinkedList<Grid> path;
+	private ArrayList<ArrayList<Tile>> gridList;
+        LinkedList<Tile> path;
 	public GridFactory(Parser parser) {
-		this.parser = parser;
-		gridList = new ArrayList<ArrayList<Grid>>();
-		path = new LinkedList<Grid>();
+	this.parser = parser;
+	gridList = new ArrayList<ArrayList<Tile>>();
+	path = new LinkedList<Tile>();
 	}
 	
 	@Override
@@ -42,30 +42,28 @@ public class GridFactory implements FactoryInterface{
 	    JSONArray pathList = map.getJSONArray("Path");
 	    
 	    //create a map of all of the path coordinates and null grid objects
-	    HashMap<Coordinate, Grid> pathCoordinates = new HashMap<Coordinate, Grid>();
+	    HashMap<Coordinate, Tile> pathCoordinates = new HashMap<Coordinate, Tile>();
 	    for(int k=0; k<pathList.length(); k++) {
 	        JSONObject coord = pathList.getJSONObject(k);
 	        pathCoordinates.put(new Coordinate(coord.getInt("x"), coord.getInt("y")), null);
 	    }
 	    
 	    //create a 2D array of grid elements
-	    int currentYOffset = 0; 
+	    
+	    int currentXOffset = 0;
 	    for(int k=0; k<tilesPerRow; k++) {
-	        int currentXOffset = 0;
-	        gridList.add(new ArrayList<Grid>());
+	        int currentYOffset = 0;  
+	        gridList.add(new ArrayList<Tile>());
 	        for(int m=0; m<tilesPerRow; m++) {
-	            Grid grid = new Grid("grid", true, currentXOffset, currentYOffset, 8, "block1");
-	            grid.setPos(currentXOffset, currentYOffset);
-	            gridList.get(k).add(grid);
-	            currentXOffset = currentXOffset + width / 15;
+	            Tile tile = new Tile(currentXOffset, currentYOffset, (width / tilesPerRow) + currentXOffset, (height / tilesPerRow) + currentYOffset);
+	            gridList.get(k).add(tile);
+	            currentYOffset = currentYOffset + height / tilesPerRow;
 	            if(pathCoordinates.keySet().contains(new Coordinate(k, m))) {
-	                grid.setGraphic(pathImage);
-	                grid.setBBox(currentXOffset, currentYOffset, (int)(width / tilesPerRow), (int)(height / tilesPerRow));
-	                grid.setOnPath();
-	                pathCoordinates.put(new Coordinate(k, m), grid);
+	                tile.setOnPath(pathImage);
+	                pathCoordinates.put(new Coordinate(k, m), tile);
 	            }
 	        }
-	        currentYOffset = currentYOffset + height / 15;
+	        currentXOffset = currentXOffset + width / tilesPerRow;
 	    }
 	    
 	   //generate path Linked List
@@ -75,13 +73,12 @@ public class GridFactory implements FactoryInterface{
 	    }
 	    	    
 	}
-	
 
-        public ArrayList<ArrayList<Grid>> getGridList() {
+        public ArrayList<ArrayList<Tile>> getGridList() {
             return gridList;
         }
         
-        public LinkedList<Grid> getPathList() {
+        public LinkedList<Tile> getPathList() {
             return path;
         }
 }
