@@ -40,7 +40,7 @@ public class LevelDesignPanel extends JPanel {
         JButton createWaveButton = new JButton("Add Wave");
         createWaveButton.addMouseListener(createWaveListener(myLevelDesignTab, this));
         JButton createLevelButton = new JButton("Create Level");
-        createLevelButton.addMouseListener(createLevelListener());
+        createLevelButton.addMouseListener(createLevelListener(this));
         panel.add(createWaveButton);
         panel.add(createLevelButton);
         return panel;
@@ -52,15 +52,16 @@ public class LevelDesignPanel extends JPanel {
         myWaves.add(wave);
     }
 
-    private MouseAdapter createLevelListener () {
+    private MouseAdapter createLevelListener (final LevelDesignPanel levelDesignPanel) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                myScrollPanel.removeAll();
                 LevelJSONObject newLevel =
                         new LevelJSONObject(myLevelDesignTab.getLevel(),
                                             numWaves, myWaves);
                 myLevelDesignTab.addLevel(newLevel);
+                myWaves.clear();
+                myScrollPanel.removeAll();
             }
         };
         return listener;
