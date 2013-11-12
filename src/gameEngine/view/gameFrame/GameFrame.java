@@ -112,8 +112,10 @@ public class GameFrame extends Frame implements GameFrameColleague {
      * and then reset the cursor
      */
     public void buyTower (int x, int y, String tower) {
-        controller.purchaseTower(x, y, tower);
-        purchaseTower();
+        if (controller.purchaseTower(x, y, tower)){
+            purchaseTower();
+            System.out.println("Tower bought");
+        }
     }
 
     /**
