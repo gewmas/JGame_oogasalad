@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameAuthoring.menuBar.MenuBar;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,20 +11,25 @@ public class GameAuthoringGUI {
 
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
+        GameData gameData = new GameData();
         JFrame frame = new JFrame();
+        MenuBar menu = new MenuBar(gameData);
+        frame.setJMenuBar(menu);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JTabbedPane mainPane = new JTabbedPane();
-        mainPane.setPreferredSize(new Dimension(500, 500));
-        JPanel basicInfoTab = new BasicInfoTab(new BasicInfoData()).getTab();
-        JPanel mapDesignTab = new MapDesignTab(new MapDesignData()).getTab();
-        JPanel towerDesignTab = new TowerDesignTab(new TowerDesignData()).getTab();
-        JPanel enemyDesignTab = new EnemyDesignTab(new EnemyDesignData()).getTab();
-        JPanel levelDesignTab = new LevelDesignTab(new LevelDesignData()).getTab();
+        mainPane.setPreferredSize(new Dimension(650, 650));
+        JPanel basicInfoTab = new BasicInfoTab(gameData).getTab();
+        JPanel mapDesignTab = new MapDesignTab(gameData).getTab();
+        JPanel towerDesignTab = new TowerDesignTab(gameData).getTab();
+        JPanel enemyDesignTab = new EnemyDesignTab(gameData).getTab();
+        JPanel levelDesignTab = new LevelDesignTab(gameData).getTab();
+        JPanel miscellaneousTab = new MiscellaneousTab(gameData).getTab();
         mainPane.addTab("Basic Info", basicInfoTab);
         mainPane.addTab("Map Design", mapDesignTab);
         mainPane.addTab("Tower Design", towerDesignTab);
         mainPane.addTab("Enemy Design", enemyDesignTab);
         mainPane.addTab("Level Design", levelDesignTab);
+        mainPane.addTab("Miscellaneous", miscellaneousTab);
         frame.setContentPane(mainPane);
         frame.pack();
         frame.setLocationByPlatform(true);

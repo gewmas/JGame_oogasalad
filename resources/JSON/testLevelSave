@@ -1,0 +1,71 @@
+{
+   "levels": 2,
+   "enemyType": [
+      {
+         "id": "fdfd",
+         "life": 2,
+         "speed": 3,
+         "image": "/resources/img/dirt_tile.jpg",
+         "gold": 1
+      },
+      {
+         "id": "arg",
+         "life": 2,
+         "speed": 3,
+         "image": "/resources/img/mana.jpg",
+         "gold": 12
+      }
+   ],
+   "levelData": [
+      {
+         "level": 1,
+         "enemiesOfWave": [
+            {
+               "enemies": [
+                  {
+                     "id": "arg",
+                     "quantity": 2
+                  },
+                  {
+                     "id": "fdfd",
+                     "quantity": 1
+                  }
+               ],
+               "wave": 1
+            },
+            {
+               "enemies": [
+                  {
+                     "id": "arg",
+                     "quantity": 3
+                  },
+                  {
+                     "id": "fdfd",
+                     "quantity": 2
+                  }
+               ],
+               "wave": 2
+            }
+         ],
+         "numberWaves": 2
+      },
+      {
+         "level": 2,
+         "enemiesOfWave": [{
+            "enemies": [
+               {
+                  "id": "arg",
+                  "quantity": 2
+               },
+               {
+                  "id": "fdfd",
+                  "quantity": 1
+               }
+            ],
+            "wave": 1
+         }],
+         "numberWaves": 1
+      }
+   ],
+   "towerType": []
+}
