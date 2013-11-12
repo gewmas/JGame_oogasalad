@@ -28,15 +28,15 @@ public class View {
 
     public View (Controller controller) {
         this.controller = controller;
-        mediator=new GameFrameMediator();
-        gameFrame = new GameFrame(controller, this,mediator);
+        mediator = new GameFrameMediator();
+        gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame = new InitializationFrame(this);
     }
 
     public void selectNewGame () {
         mediator.endGame();
         gameFrame.dispose();
-        gameFrame = new GameFrame(controller, this,mediator);
+        gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame = new InitializationFrame(this);
     }
 
@@ -65,9 +65,9 @@ public class View {
      * and then reset the cursor
      */
     public void buyTower (int x, int y, String tower) {
-        if (controller.purchaseTower(x, y, tower)){
+        if (controller.purchaseTower(x, y, tower)) {
             gameFrame.purchaseTower();
-        }     
+        }
     }
 
     /**

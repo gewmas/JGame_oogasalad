@@ -17,8 +17,8 @@ public class CanvasPanel extends Panel {
     public void placeTower (TowerFactory towerInfo) {
         game.placeTower(towerInfo.getName());
     }
-    
-    public void endGame(){
+
+    public void endGame () {
         game.destroy();
     }
 

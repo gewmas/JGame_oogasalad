@@ -29,7 +29,7 @@ import gameEngine.factory.towerfactory.TowerFactory;
  * @author Lalita Maraj Alex Zhu
  * 
  */
-public class GameFrame extends Frame  {
+public class GameFrame extends Frame {
 
     private Controller controller;
     private GameFrameMediator mediator;
@@ -49,7 +49,7 @@ public class GameFrame extends Frame  {
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        mediator.addGameFrame( this);
+        mediator.addGameFrame(this);
     }
 
     /**
@@ -72,7 +72,7 @@ public class GameFrame extends Frame  {
     }
 
     public void createGame () {
-        CanvasPanel canvasPanel = new CanvasPanel(engineView,mediator);
+        CanvasPanel canvasPanel = new CanvasPanel(engineView, mediator);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addGame(canvasPanel);
     }
@@ -94,13 +94,11 @@ public class GameFrame extends Frame  {
         this.add(storePanel, BorderLayout.EAST);
     }
 
-
-
     /**
      * Changes the default cursor to the image of the tower to be placed
      */
     public void placeTower (TowerFactory towerInfo) {
-       
+
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = toolkit.getImage(towerInfo.getImage());
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
@@ -118,11 +116,11 @@ public class GameFrame extends Frame  {
 
         return true;
     }
-    
+
     public void purchaseTower () {
 
-      setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-      
-  }
+        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
+    }
 
 }

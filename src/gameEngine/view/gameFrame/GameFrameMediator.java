@@ -32,14 +32,15 @@ public class GameFrameMediator {
     public void addTowersOptionPanel (TowersOptionPanel storeOptions) {
         this.storeOptions = storeOptions;
     }
-    
+
     /**
      * Destroys the jgame instance so that it can be reloaded
      */
-    
-    public void endGame(){
+
+    public void endGame () {
         canvasPanel.endGame();
     }
+
     /**
      * Notifies all colleagues that need to be updated
      * when a user is trying to purchase a tower
