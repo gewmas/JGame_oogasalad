@@ -13,7 +13,7 @@ public class Constant {
     public static final int TOWER_CID = 2;
     public static final int BULLET_CID = 4;
     public static int query(Class T){
-        System.out.println(T.getName());
+//        System.out.println(T.getName());
         if(T.getName().equals("gameEngine.model.enemy.Enemy")){
             return ENEMY_CID;
         }
