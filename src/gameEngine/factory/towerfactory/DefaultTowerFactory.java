@@ -37,8 +37,10 @@ public class DefaultTowerFactory extends TowerFactory {
 
     @Override
     public Tower create (int x, int y) {
-        // TODO Auto-generated method stub
-        return null;
+        Tower tower =
+                (Tower) new DefaultTower(damage, attackSpeed, range, cost, recyclePrice, id, true,
+                                         x, y, Constant.TOWER_CID, image);
+        return tower;
     }
 
 }

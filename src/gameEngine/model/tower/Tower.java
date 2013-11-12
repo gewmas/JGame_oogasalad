@@ -34,7 +34,7 @@ public class Tower extends JGObject {
                   int collisionid,
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
-        
+        System.out.println("haha");
         
     }
 
