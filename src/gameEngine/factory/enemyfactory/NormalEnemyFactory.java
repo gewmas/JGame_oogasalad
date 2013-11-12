@@ -2,6 +2,7 @@ package gameEngine.factory.enemyfactory;
 
 import java.util.LinkedList;
 import gameEngine.Constant.Constant;
+import gameEngine.model.Model;
 import gameEngine.model.Tile;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.model.tower.DefaultTower;
@@ -35,8 +36,8 @@ public class NormalEnemyFactory implements EnemyFactory {
     }
 
     @Override
-    public Enemy create (LinkedList<Tile> path) {
-        return new Enemy(gold, life, speed, id, true, path.element().getCenterX(), path.element().getCenterY(), Constant.ENEMY_CID, image, path);
+    public Enemy create (Model model) {
+        return new Enemy(gold, life, speed, id, true, Constant.ENEMY_CID, image, model);
 
     }
 
