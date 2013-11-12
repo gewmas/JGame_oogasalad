@@ -79,12 +79,12 @@ public class Model {
         return towerWarehouse.getTowerFactory();
     }
 
-    // Jiaran purchase, get tower info. If something is wrong plz contact
+    // Jiaran: purchase, get tower info. If something is wrong plz contact
      
     public boolean purchaseTower (int x, int y, String name) {
         return towerWarehouse.create(x, y, name,gameInfo);
     }
-    //Jiaran Im thinking maybe this should return a TowerInfo instead of Tower
+    //Jiaran: Im thinking maybe this should return a TowerInfo instead of Tower
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
     public Tower getTowerInfo (int x, int y) {
