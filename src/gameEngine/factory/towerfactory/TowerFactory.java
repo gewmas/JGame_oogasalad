@@ -4,7 +4,7 @@ import gameEngine.model.tower.Tower;
 
 
 public abstract class TowerFactory {
-    
+
     String id;
     String description;
     String image;
@@ -18,16 +18,17 @@ public abstract class TowerFactory {
 
     double cost;
     double recyclePrice;
-    
+
     public abstract Tower create ();
+
     public abstract Tower create (int x, int y);
-    
+
     public String getImage () {
         return image;
     }
 
     public int getCost () {
-        return (int)cost;
+        return (int) cost;
     }
 
     public String getName () {
@@ -38,6 +39,4 @@ public abstract class TowerFactory {
         return description;
     }
 
-    
-    
 }

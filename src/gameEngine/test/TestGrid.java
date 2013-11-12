@@ -19,15 +19,15 @@ import jgame.platform.JGEngine;
  * 
  * @author Harris
  * 
- * Test Grid
+ *         Test Grid
  * 
  */
 public class TestGrid extends JGEngine {
-    
+
     public static void main (String[] args) {
         new TestGrid(new JGPoint(960, 700));
     }
-    
+
     /** Application constructor. */
     public TestGrid (JGPoint size) {
         initEngine(size.x, size.y);
@@ -50,14 +50,14 @@ public class TestGrid extends JGEngine {
     public void initGame () {
         defineMedia("mygame.tbl");
         setFrameRate(60, 2);
-       
-              Model model = new Model();
-              List<Tile> pathList = model.getPathList();
-              for(Tile tile: pathList) {
-                  System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
-                  System.out.println("Center x=" + tile.getCenterX() + " center y=" + tile.getCenterY());
-                  System.out.println("img path is " + tile.getPathImage());
-              }
+
+        Model model = new Model();
+        List<Tile> pathList = model.getPathList();
+        for (Tile tile : pathList) {
+            System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
+            System.out.println("Center x=" + tile.getCenterX() + " center y=" + tile.getCenterY());
+            System.out.println("img path is " + tile.getPathImage());
+        }
     }
 
     @Override

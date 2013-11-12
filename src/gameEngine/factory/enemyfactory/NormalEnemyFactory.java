@@ -36,7 +36,8 @@ public class NormalEnemyFactory implements EnemyFactory {
 
     @Override
     public Enemy create (LinkedList<Tile> path) {
-        return new Enemy(gold, life, speed, id, true, path.element().getCenterX(), path.element().getCenterY(), Constant.ENEMY_CID, image, path);
+        return new Enemy(gold, life, speed, id, true, path.element().getCenterX(), path.element()
+                .getCenterY(), Constant.ENEMY_CID, image, path);
 
     }
 

@@ -21,11 +21,9 @@ public class Tower extends JGObject {
 
     double x;
     double y;
-    
+
     double cost;
     double recyclePrice;
-    
-    
 
     public Tower (String name,
                   boolean unique_id,
@@ -34,8 +32,7 @@ public class Tower extends JGObject {
                   int collisionid,
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
-        
-        
+
     }
 
     public double getX () {

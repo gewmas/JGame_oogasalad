@@ -26,14 +26,14 @@ public class Controller {
     }
 
     public void newGame (File jsonFile) throws Exception {
-        model.newGame(jsonFile); //will throw exception if fail
+        model.newGame(jsonFile); // will throw exception if fail
         view.startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
         // view.showGame();
     }
-    
-    public void startGame(){
+
+    public void startGame () {
         model.startGame();
     }
 
@@ -42,7 +42,7 @@ public class Controller {
      * However, can only return the basic property of the TowerFactory
      */
     public List<TowerFactory> getTowerFactory () {
-        return model.getTowerFactory();  
+        return model.getTowerFactory();
     }
 
     /**
@@ -60,9 +60,10 @@ public class Controller {
     public Tower getTowerInfo (int x, int y) {
         Tower tower;
         try {
-            tower=model.getTowerInfo(x,y);
-        } catch (Exception e) {
-            tower=null;
+            tower = model.getTowerInfo(x, y);
+        }
+        catch (Exception e) {
+            tower = null;
         }
         return tower;
     }
@@ -93,13 +94,13 @@ public class Controller {
      */
     public int getLives () {
         return model.getLife();
-    }  
-     
-    public List<Tile> getPath(){
+    }
+
+    public List<Tile> getPath () {
         return model.getPathList();
     }
 
-//    public String getPathImage(){
-//    }     
+    // public String getPathImage(){
+    // }
 
 }

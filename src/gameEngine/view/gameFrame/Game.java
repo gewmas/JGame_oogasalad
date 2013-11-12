@@ -55,12 +55,13 @@ public class Game extends StdGame {
         purchasing = false;
         setHighscores(10, new Highscore(0, "aaa"), 3);
         startgame_ingame = true;
-        List<Tile> pathList=view.getPath();
-        int tileCount=0;
-        for (Tile tile:pathList){
-            defineImage("tile"+String.valueOf(tileCount),"#"+String.valueOf(tileCount),256,tile.getPathImage(),"-");
-            JGPoint tilePos=getTileIndex(tile.getX(),tile.getY());
-            setTile(tilePos.x,tilePos.y,"#"+String.valueOf(tileCount));
+        List<Tile> pathList = view.getPath();
+        int tileCount = 0;
+        for (Tile tile : pathList) {
+            defineImage("tile" + String.valueOf(tileCount), "#" + String.valueOf(tileCount), 256,
+                        tile.getPathImage(), "-");
+            JGPoint tilePos = getTileIndex(tile.getX(), tile.getY());
+            setTile(tilePos.x, tilePos.y, "#" + String.valueOf(tileCount));
             tileCount++;
         }
     }
@@ -92,11 +93,12 @@ public class Game extends StdGame {
                 System.out.format("Buying tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
             else {
-                Tower tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
-                if (tower==null) {
+                Tower tower = view.getTowerInfo(tilePosition.x, tilePosition.y);
+                if (tower == null) {
                     System.out.println("No tower here");
-                } else {
-                    //mediator.displayTowerInfo(tower);
+                }
+                else {
+                    // mediator.displayTowerInfo(tower);
                 }
                 System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
@@ -114,7 +116,7 @@ public class Game extends StdGame {
     @Override
     public void paintFrame () {
         super.paintFrame();
-//        drawString("Money " + String.valueOf(sc), pfWidth() - 10, 10, 1);
+        // drawString("Money " + String.valueOf(sc), pfWidth() - 10, 10, 1);
     }
 
     /**

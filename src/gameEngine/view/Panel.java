@@ -1,6 +1,5 @@
 package gameEngine.view;
 
-
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.view.gameFrame.GameFrameColleague;
 import java.awt.BorderLayout;

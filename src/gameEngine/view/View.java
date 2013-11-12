@@ -44,8 +44,8 @@ public class View {
         gameFrame.showGame();
         initializationFrame.dispose();
     }
-    
-    public void startGame(){
+
+    public void startGame () {
         gameFrame.showGame();
     }
 
@@ -58,9 +58,9 @@ public class View {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+
     }
-    
+
     /**
      * Changes the default cursor to the image of the tower to be placed
      */
@@ -100,8 +100,8 @@ public class View {
     public Dimension getGameSize () {
         return controller.getGameSize();
     }
-    
-    public List<Tile> getPath(){
+
+    public List<Tile> getPath () {
         return controller.getPath();
     }
 
@@ -113,7 +113,7 @@ public class View {
     }
 
     public int getMoney () {
-         return controller.getMoney();
+        return controller.getMoney();
     }
 
     public int getLives () {

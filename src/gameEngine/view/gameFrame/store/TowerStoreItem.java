@@ -7,19 +7,21 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+
 public class TowerStoreItem extends JLabel {
     private static final Color HOVER_BUTTON_COLOR = Color.BLUE;
     private static final Color HOVER_TEXT_COLOR = Color.RED;
     private static final Color HOVER_EXIT_TEXT_COLOR = Color.BLACK;
-    TowerStoreItem(){
+
+    TowerStoreItem () {
         super();
         this.setSize(32, 32);
         this.setBorder(BorderFactory.createBevelBorder(1));
         ImageIcon icon = new ImageIcon("src/gameEngine/view/gameFrame/store/smile.png");
         this.setIcon(icon);
-        addButtonMouseListener ();
+        addButtonMouseListener();
     }
-    
+
     /**
      * Defines the behavior that will occur when the button
      * is clicked. If Button class is extened,
@@ -105,6 +107,5 @@ public class TowerStoreItem extends JLabel {
 
         });
     }
-
 
 }

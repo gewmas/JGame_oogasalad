@@ -9,12 +9,10 @@ import jgame.JGObject;
 
 
 public class DefaultTower extends Tower {
-    
-    
-    
 
     long prevTime;
     private Detector<Enemy> dector;
+
     public DefaultTower (
                          double damage,
                          double attackSpeed,
@@ -36,12 +34,12 @@ public class DefaultTower extends Tower {
         this.range = range;
         this.cost = cost;
         this.recyclePrice = recyclePrice;
-        
+
         this.x = x;
         this.y = y;
 
         this.prevTime = System.currentTimeMillis();
-        this.dector = new Detector<Enemy>(this.eng,Enemy.class);
+        this.dector = new Detector<Enemy>(this.eng, Enemy.class);
         // level.getGameInfo().loseGold((int)cost);
 
     }

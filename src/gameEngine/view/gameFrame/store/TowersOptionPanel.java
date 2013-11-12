@@ -55,37 +55,37 @@ public class TowersOptionPanel extends Panel {
      */
     private void createOptionsScrollPanel (GameFrameMediator mediator) {
         JPanel options = new JPanel();
-//        GridLayout gridLayout = new GridLayout(0,5);
-//        options.setLayout(gridLayout);
+        // GridLayout gridLayout = new GridLayout(0,5);
+        // options.setLayout(gridLayout);
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         addStoreInventory(options, mediator);
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-        
+        // options.add(new TowerStoreItem());
+        // options.add(new TowerStoreItem());
+        // options.add(new TowerStoreItem());
+        // options.add(new TowerStoreItem());
+        // options.add(new TowerStoreItem());
+        // options.add(new TowerStoreItem());
+        // options.add(new TowerStoreItem());
+
         JScrollPane scrollPane = new JScrollPane(options);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         add(scrollPane);
-//        options.add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
+        // options.add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
+        // add(new TowerStoreItem());
     }
 
     /**
