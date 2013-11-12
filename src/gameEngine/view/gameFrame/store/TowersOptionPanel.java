@@ -3,6 +3,7 @@ package gameEngine.view.gameFrame.store;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
+import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.GameFrameMediator;
 import java.awt.Dimension;
@@ -29,16 +30,16 @@ public class TowersOptionPanel extends Panel {
     private static final int PANEL_WIDTH = 300;
     private static final int PANEL_HEIGHT = 400;
     private List<TowerStoreButton> storeItems;
-    private GameFrame gameFrame;
+    private View view;
 
     /**
      * @param mediator facilitates communication between view components
-     * @param gameFrame facilitates communication between view and controller
+     * @param engineView facilitates communication between view and controller
      */
-    protected TowersOptionPanel (GameFrameMediator mediator, GameFrame gameFrame) {
+    protected TowersOptionPanel (GameFrameMediator mediator, View engineView) {
 
         super();
-        this.gameFrame = gameFrame;
+        this.view = engineView;
         this.storeItems = new ArrayList<TowerStoreButton>();
 
         setUIStyle();
@@ -103,12 +104,12 @@ public class TowersOptionPanel extends Panel {
      * 
      * @param optionsPanel panel buttons are added to
      * @param mediator facilitates communication between view components
-     * @param gameFrame facilitates communication between view and model
+     * @param view facilitates communication between view and model
      */
     private void addStoreInventory (JPanel optionsPanel, GameFrameMediator mediator) {
 
-        for (TowerFactory tower : gameFrame.getTowers()) {
-            TowerStoreButton towerButton = new TowerStoreButton(tower, mediator, gameFrame);
+        for (TowerFactory tower : view.getTowers()) {
+            TowerStoreButton towerButton = new TowerStoreButton(tower, mediator, view);
             optionsPanel.add(towerButton);
             storeItems.add(towerButton);
         }
@@ -124,7 +125,7 @@ public class TowersOptionPanel extends Panel {
      */
     public void updateStoreStatus () {
         for (TowerStoreButton button : storeItems) {
-            button.toggleButtonActivation(gameFrame.getMoney());
+            button.toggleButtonActivation(view.getMoney());
         }
     }
 

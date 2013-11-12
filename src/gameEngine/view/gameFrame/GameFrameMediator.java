@@ -63,7 +63,6 @@ public class GameFrameMediator {
      */
     public void displayTowerInfo (TowerFactory tower) {
         colleagues.get(ColleagueKeys.INFOPANEL.toString()).displayTowerInfo(tower);
-
     }
 
     /**

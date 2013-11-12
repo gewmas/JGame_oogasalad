@@ -3,6 +3,7 @@ package gameEngine.view.gameFrame.store;
 import java.awt.Color;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.view.Button;
+import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.GameFrameMediator;
 
@@ -27,9 +28,9 @@ public class TowerStoreButton extends Button {
     /**
      * @param towerInfo the tower info data structure of the tower the button represents
      * @param mediator facilitates communication between view components
-     * @param gameFrame facilitates communication between view and controller
+     * @param view facilitates communication between view and controller
      */
-    public TowerStoreButton (TowerFactory towerInfo, GameFrameMediator mediator, GameFrame gameFrame) {
+    public TowerStoreButton (TowerFactory towerInfo, GameFrameMediator mediator, View view) {
         super(trimName(towerInfo.getName()));
         active = false; // to be changed!
         this.setEnabled(active);
