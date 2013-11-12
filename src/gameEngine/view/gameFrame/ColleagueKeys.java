@@ -8,9 +8,8 @@ package gameEngine.view.gameFrame;
  * 
  */
 public enum ColleagueKeys {
-    GAME("game"),
-    INFOPANEL("info"),
-    GAMEFRAME("gameframe");
+ 
+    INFOPANEL("info");
     private String key;
 
     ColleagueKeys (String key) {

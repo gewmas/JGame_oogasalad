@@ -25,17 +25,6 @@ public interface GameFrameColleague {
      * @param mediator facilitates communication between view components
      */
 
-    /**
-     * Behavior a colleague should execute after a tower has been placed
-     * 
-     * @param towerInfo datastructure used to store tower information
-     */
-    public void placeTower (TowerFactory towerInfo);
-
-    /**
-     * Behavior a colleague should execute after a tower has been purchased
-     */
-    public void purchaseTower ();
 
     /**
      * Used primarily by the TowerInfo panel to display tower information

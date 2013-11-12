@@ -28,6 +28,8 @@ public class GameFrameMediator {
 
     private Map<String, GameFrameColleague> colleagues;
     private TowersOptionPanel storeOptions;
+    private GameFrame gameFrame;
+    private CanvasPanel canvasPanel;
     public GameFrameMediator () {
         colleagues = new HashMap<String, GameFrameColleague>();
 
@@ -55,8 +57,9 @@ public class GameFrameMediator {
      * @param towername
      */
     public void placeTower (TowerFactory towerInfo) {
-        colleagues.get(ColleagueKeys.GAME.toString()).placeTower(towerInfo);
-        colleagues.get(ColleagueKeys.GAMEFRAME.toString()).placeTower(towerInfo);
+      
+        canvasPanel.placeTower(towerInfo);
+        gameFrame.placeTower(towerInfo);
     }
 
     /**
@@ -74,7 +77,7 @@ public class GameFrameMediator {
      * that are impacted by the purchase of a tower
      */
     public void purchaseTower () {
-        colleagues.get(ColleagueKeys.GAMEFRAME.toString()).purchaseTower();
+        gameFrame.purchaseTower();
     }
 
     /**
@@ -82,6 +85,14 @@ public class GameFrameMediator {
      */
     public void updateStoreStatus () {
         storeOptions.updateStoreStatus();
+    }
+    public void addGameFrame (GameFrame gameFrame) {
+       this.gameFrame = gameFrame;
+        
+    }
+    public void addGame (CanvasPanel canvasPanel) {
+       this.canvasPanel = canvasPanel;
+        
     }
 
 }

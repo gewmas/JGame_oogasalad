@@ -19,17 +19,7 @@ public class Panel extends JPanel implements GameFrameColleague {
     }
 
     @Override
-    public void placeTower (TowerFactory towerInfo) {
-
-    }
-
-    @Override
     public void displayTowerInfo (TowerFactory tower) {
-
-    }
-
-    @Override
-    public void purchaseTower () {
 
     }
 
