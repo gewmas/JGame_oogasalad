@@ -121,9 +121,7 @@ public class Model {
         return gameInfo.getDimension();
     }
 
-    public String getBGImage () {
-        return gameInfo.getBGImage();
-    }
+
 
    
     

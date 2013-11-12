@@ -8,6 +8,8 @@
 "heightOfWindow": 700,
 "tilesPerRow": 15,
 "difficultyScale": 1.5,
+"BGImage" :  "resources/space_background.jpg",
+
 "map":
 {
   	  "pathImage":  "path", 

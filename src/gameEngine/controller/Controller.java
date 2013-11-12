@@ -79,7 +79,6 @@ public class Controller {
      */
     public String getBGImage () {
         return model.getBGImage();
-//        return "resources/space_background.jpg";
     }
 
     /**
