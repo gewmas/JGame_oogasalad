@@ -1,0 +1,57 @@
+{
+   "widthOfWindow": 10,
+   "levels": 1,
+   "name": "308 is the best class ever",
+   "map": {
+      "startPath": {
+         "y": 0,
+         "x": 0
+      },
+      "pathImage": "/resources/img/dirt_tile.jpg",
+      "endPath": {
+         "y": 4,
+         "x": 4
+      },
+      "BGImage": "/resources/img/bg.jpg",
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 1,
+            "x": 0
+         },
+         {
+            "y": 1,
+            "x": 1
+         },
+         {
+            "y": 2,
+            "x": 1
+         },
+         {
+            "y": 2,
+            "x": 2
+         },
+         {
+            "y": 3,
+            "x": 2
+         },
+         {
+            "y": 3,
+            "x": 3
+         },
+         {
+            "y": 4,
+            "x": 3
+         }
+      ]
+   },
+   "numberOfLives": 10,
+   "splashImage": "/resources/img/heal.jpg",
+   "tilesPerRow": 10,
+   "difficultyScale": 1.5,
+   "heightOfWindow": 10,
+   "gold": 10
+}

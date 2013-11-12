@@ -25,7 +25,7 @@ import net.miginfocom.swing.MigLayout;
 public class MapDesignTab extends Tab {
 
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/gameAuthoring");
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
     private Grid myGrid;
     private JButton myCurrentPathImage;
     private String myBackgroundImage;

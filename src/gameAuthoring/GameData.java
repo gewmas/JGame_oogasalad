@@ -31,22 +31,17 @@ public class GameData {
     private int myTilesPerRow;
     private double myDifficultyScale;
 
-    private int numLevels;
+    
 
     JSONArray myTowerList = new JSONArray();
     JSONArray myEnemyList = new JSONArray();
     JSONArray myLevelList = new JSONArray();
 
     MapJSONObject myMap;
-
-    // private Collection<TowerJSONObject> myTowers;
-    // private Collection<EnemyJSONObject> myEnemies;
-
     private JSONObject container;
 
     public GameData () {
         container = new JSONObject();
-        numLevels = 0;
     }
 
     public void setGameName (String gameName) {
@@ -180,7 +175,9 @@ public class GameData {
 
     private void addDataToContainer () {
         container.put("levels", myLevelList.length());
-
+        container.put("towerType", myTowerList);
+        container.put("enemyType", myEnemyList);
+        container.put("levelData", myLevelList);
     }
 
     public void writeToFile () {

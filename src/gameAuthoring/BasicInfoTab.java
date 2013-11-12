@@ -133,8 +133,8 @@ public class BasicInfoTab extends Tab {
             public void mouseClicked (MouseEvent e) {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
-                        mySplashImage = INPUT_CHOOSER.getSelectedFile().toString();
-                        mySplashImageLabel.setText(mySplashImage.replace(System.getProperties().getProperty("user.dir"), ""));
+                        mySplashImage = INPUT_CHOOSER.getSelectedFile().toString().replace(System.getProperties().getProperty("user.dir"), "");
+                        mySplashImageLabel.setText(mySplashImage);
                 }
 
             }

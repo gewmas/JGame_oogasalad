@@ -25,7 +25,14 @@ public class MenuBar extends JMenuBar {
             }
 
         });
+        
+        menu.add(new AbstractAction("Load"){          
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                //TODO: Implement this
+            }
+        });
+        
         return menu;
     }
-
 }
