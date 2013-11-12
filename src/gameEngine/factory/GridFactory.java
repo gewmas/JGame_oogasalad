@@ -49,21 +49,21 @@ public class GridFactory implements FactoryInterface {
 	    }
 	    
 	    //create a 2D array of grid elements
-	    int currentYOffset = 0; 
+	    
+	    int currentXOffset = 0;
 	    for(int k=0; k<tilesPerRow; k++) {
-	        int currentXOffset = 0;
+	        int currentYOffset = 0;  
 	        gridList.add(new ArrayList<Tile>());
 	        for(int m=0; m<tilesPerRow; m++) {
 	            Tile tile = new Tile(currentXOffset, currentYOffset, (width / tilesPerRow) + currentXOffset, (height / tilesPerRow) + currentYOffset);
 	            gridList.get(k).add(tile);
-	            currentXOffset = currentXOffset + width / tilesPerRow;
+	            currentYOffset = currentYOffset + height / tilesPerRow;
 	            if(pathCoordinates.keySet().contains(new Coordinate(k, m))) {
 	                tile.setOnPath(pathImage);
 	                pathCoordinates.put(new Coordinate(k, m), tile);
-	                System.out.println("center x: "+tile.getCenterX()+" and centerY: "+tile.getCenterY());
 	            }
 	        }
-	        currentYOffset = currentYOffset + height / tilesPerRow;
+	        currentXOffset = currentXOffset + width / tilesPerRow;
 	    }
 	    
 	   //generate path Linked List
