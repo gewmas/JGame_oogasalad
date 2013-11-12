@@ -1,8 +1,12 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.LevelJSONObject;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,6 +17,8 @@ import net.miginfocom.swing.MigLayout;
 
 public class LevelDesignPanel extends JPanel {
     private LevelDesignTab myLevelDesignTab;
+    private Collection<Map<String, Integer>> myWaves =
+            new ArrayList<Map<String, Integer>>();
     private JScrollPane myCreatedWaves;
     private JPanel myScrollPanel;
     private int numWaves = 0;
@@ -40,9 +46,10 @@ public class LevelDesignPanel extends JPanel {
         return panel;
     }
 
-    public void addWave () {
+    public void addWave (Map<String, Integer> wave) {
         numWaves++;
         myScrollPanel.add(new JButton("Wave " + numWaves));
+        myWaves.add(wave);
     }
 
     private MouseAdapter createLevelListener () {
@@ -50,6 +57,10 @@ public class LevelDesignPanel extends JPanel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 myScrollPanel.removeAll();
+                myLevelDesignTab.addLevel();
+                LevelJSONObject newLevel =
+                        new LevelJSONObject(myLevelDesignTab.getLevel(),
+                                            numWaves, myWaves);
             }
         };
         return listener;

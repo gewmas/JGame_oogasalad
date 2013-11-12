@@ -2,9 +2,6 @@ package gameAuthoring;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,8 +16,6 @@ public class LevelDesignTab extends Tab {
     private JScrollPane myCreatedLevels;
     private JPanel myScrollPanel;
     private int numLevels;
-    private Collection<Map<String, Integer>> myWaves =
-            new ArrayList<Map<String, Integer>>();
 
     public LevelDesignTab (GameData gameData) {
         super(gameData);
@@ -31,7 +26,7 @@ public class LevelDesignTab extends Tab {
     public JPanel getTab () {
         JPanel mainPanel = new JPanel(new MigLayout("wrap 1"));
         myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
-        JLabel title = new JLabel("Miscellaneous");
+        JLabel title = new JLabel("Level Design");
         title.setFont(new Font("Arial", Font.BOLD, 30));
         mainPanel.add(title);
         LevelDesignPanel levelDesignPanel = new LevelDesignPanel(this);
@@ -47,13 +42,12 @@ public class LevelDesignTab extends Tab {
 
     public void addLevel () {
         numLevels++;
-        JButton levelButton = new JButton(numLevels + "");
+        JButton levelButton = new JButton("Level " + numLevels);
         myScrollPanel.add(levelButton);
     }
 
-    // public void
-
-    public void addWave (Map<String, Integer> wave) {
-        myWaves.add(wave);
+    public int getLevel () {
+        return numLevels;
     }
+
 }

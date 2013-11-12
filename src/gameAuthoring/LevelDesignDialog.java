@@ -72,9 +72,8 @@ public class LevelDesignDialog extends JDialog {
                 for (JTextField field : myTextFields.keySet()) {
                     EnemyJSONObject enemy = myTextFields.get(field);
                     myEnemiesPerWave.put(enemy.getString("id"), Integer.parseInt(field.getText()));
-                    myLevelDesignTab.addWave(myEnemiesPerWave);
                     levelDesignDialog.setVisible(false);
-                    myLevelDesignPanel.addWave();
+                    myLevelDesignPanel.addWave(myEnemiesPerWave);
                 }
             }
         };
