@@ -20,8 +20,6 @@ import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.store.TowerStorePanel;
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.Tile;
-import gameEngine.model.tower.Tower;
 
 
 /**
@@ -31,7 +29,7 @@ import gameEngine.model.tower.Tower;
  * @author Lalita Maraj
  * 
  */
-public class GameFrame extends Frame implements GameFrameColleague {
+public class GameFrame extends Frame  {
 
     private Controller controller;
     private GameFrameMediator mediator;

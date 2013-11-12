@@ -1,12 +1,8 @@
 package gameEngine.view.gameFrame;
 
-
 import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.view.Panel;
 import gameEngine.view.gameFrame.store.TowerInfoPanel;
 import gameEngine.view.gameFrame.store.TowersOptionPanel;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**
@@ -28,29 +24,13 @@ import java.util.Map;
  */
 public class GameFrameMediator {
 
-    private Map<String, GameFrameColleague> colleagues;
     private TowersOptionPanel storeOptions;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
     private TowerInfoPanel towerInfoPanel;
-    public GameFrameMediator () {
-        colleagues = new HashMap<String, GameFrameColleague>();
 
-    }
-    public void addTowersOptionPanel(TowersOptionPanel storeOptions){
+    public void addTowersOptionPanel (TowersOptionPanel storeOptions) {
         this.storeOptions = storeOptions;
-    }
-
-    /**
-     * a map is used to store all the colleagues the mediator liasons
-     * with. Key strings are stored in the MediatorConstants class and
-     * shuld be used to both add and get colleagues.
-     * 
-     * @param name key of colleague
-     * @param colleague Colleague to be added
-     */
-    public void addColleague (String name, GameFrameColleague colleague) {
-        colleagues.put(name, colleague);
     }
 
     /**
@@ -60,7 +40,7 @@ public class GameFrameMediator {
      * @param towername
      */
     public void placeTower (TowerFactory towerInfo) {
-      
+
         canvasPanel.placeTower(towerInfo);
         gameFrame.placeTower(towerInfo);
     }
@@ -89,17 +69,20 @@ public class GameFrameMediator {
     public void updateStoreStatus () {
         storeOptions.updateStoreStatus();
     }
+
     public void addGameFrame (GameFrame gameFrame) {
-       this.gameFrame = gameFrame;
-        
+        this.gameFrame = gameFrame;
+
     }
+
     public void addGame (CanvasPanel canvasPanel) {
-       this.canvasPanel = canvasPanel;
-        
+        this.canvasPanel = canvasPanel;
+
     }
+
     public void addTowerInfoPanel (TowerInfoPanel towerInfoPanel) {
-       this.towerInfoPanel  = towerInfoPanel;
-        
+        this.towerInfoPanel = towerInfoPanel;
+
     }
 
 }
