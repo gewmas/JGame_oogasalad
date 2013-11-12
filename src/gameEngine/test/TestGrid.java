@@ -52,6 +52,14 @@ public class TestGrid extends JGEngine {
         setFrameRate(60, 2);
        
               Model model = new Model();
+              try {
+                model.newGame(new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
+            }
+            catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+              
               List<Tile> pathList = model.getPathList();
               for(Tile tile: pathList) {
                   System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
