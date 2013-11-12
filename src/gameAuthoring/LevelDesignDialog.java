@@ -1,42 +1,83 @@
 package gameAuthoring;
 
 import gameAuthoring.JSONObjects.EnemyJSONObject;
+import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+import net.miginfocom.swing.MigLayout;
 
 
 public class LevelDesignDialog extends JDialog {
 
     private LevelDesignTab myLevelDesignTab;
+    private LevelDesignPanel myLevelDesignPanel;
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir"));
     private int myNumWaves;
-    private Map<Integer, String> myEnemiesPerWave = new HashMap<Integer, String>();
+    private Map<String, Integer> myEnemiesPerWave = new HashMap<String, Integer>();
+    private Map<JTextField, EnemyJSONObject> myTextFields =
+            new HashMap<JTextField, EnemyJSONObject>();
 
-    public LevelDesignDialog (LevelDesignTab levelDesignTab) {
+    public LevelDesignDialog (LevelDesignTab levelDesignTab, LevelDesignPanel levelDesignPanel) {
         myLevelDesignTab = levelDesignTab;
+        myLevelDesignPanel = levelDesignPanel;
+        this.setLayout(new MigLayout("wrap 2, align center"));
+        JButton createWaveButton = new JButton("Create Wave");
+        JLabel enemyTypeTitle = new JLabel("Enemy Type");
+        JLabel enemyNumberTitle = new JLabel("Number");
+        this.add(enemyTypeTitle);
+        this.add(enemyNumberTitle, "pad 0 30 10 40");
         GameData gameData = myLevelDesignTab.getGameData();
-
         for (int i = 0; i < gameData.getEnemyList().length(); i++) {
             EnemyJSONObject enemy = (EnemyJSONObject) gameData.getEnemyList().get(i);
             String imagePath = enemy.getString("image");
             JLabel enemyIcon = new JLabel();
+            enemyIcon.setPreferredSize(new Dimension(50, 50));
+            JTextField enemyNumber = new JTextField();
+            enemyNumber.setPreferredSize(new Dimension(50, 20));
+            myTextFields.put(enemyNumber, enemy);
             Image enemyImage;
             try {
-                enemyImage = ImageIO.read(getClass().getResource(imagePath));
+                enemyImage =
+                        ImageIO.read(new File(System.getProperties().getProperty("user.dir") +
+                                              imagePath));
                 enemyIcon.setIcon(new ImageIcon(enemyImage));
                 this.add(enemyIcon);
+                this.add(enemyNumber, "pad 0 30 10 40");
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
+            createWaveButton.addMouseListener(createWaveDesignListener(this));
+            this.add(createWaveButton, "span 2");
         }
+    }
+
+    public MouseAdapter createWaveDesignListener (final LevelDesignDialog levelDesignDialog) {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                for (JTextField field : myTextFields.keySet()) {
+                    EnemyJSONObject enemy = myTextFields.get(field);
+                    myEnemiesPerWave.put(enemy.getString("id"), Integer.parseInt(field.getText()));
+                    myLevelDesignTab.addWave(myEnemiesPerWave);
+                    levelDesignDialog.setVisible(false);
+                    myLevelDesignPanel.addWave();
+                }
+            }
+        };
+        return listener;
     }
 }

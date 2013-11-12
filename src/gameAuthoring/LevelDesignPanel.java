@@ -15,6 +15,7 @@ public class LevelDesignPanel extends JPanel {
     private LevelDesignTab myLevelDesignTab;
     private JScrollPane myCreatedWaves;
     private JPanel myScrollPanel;
+    private int numWaves = 0;
 
     public LevelDesignPanel (LevelDesignTab levelDesignTab) {
         myLevelDesignTab = levelDesignTab;
@@ -31,12 +32,17 @@ public class LevelDesignPanel extends JPanel {
     private JPanel createLevelPanel () {
         JPanel panel = new JPanel(new MigLayout("wrap 1"));
         JButton createWaveButton = new JButton("Add Wave");
-        createWaveButton.addMouseListener(createWaveListener(myLevelDesignTab));
+        createWaveButton.addMouseListener(createWaveListener(myLevelDesignTab, this));
         JButton createLevelButton = new JButton("Create Level");
         createLevelButton.addMouseListener(createLevelListener());
         panel.add(createWaveButton);
         panel.add(createLevelButton);
         return panel;
+    }
+
+    public void addWave () {
+        numWaves++;
+        myScrollPanel.add(new JButton("Wave " + numWaves));
     }
 
     private MouseAdapter createLevelListener () {
@@ -49,11 +55,13 @@ public class LevelDesignPanel extends JPanel {
         return listener;
     }
 
-    private MouseAdapter createWaveListener (final LevelDesignTab levelDesignTab) {
+    private MouseAdapter createWaveListener (final LevelDesignTab levelDesignTab,
+                                             final LevelDesignPanel levelDesignPanel) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                LevelDesignDialog levelDesignDialog = new LevelDesignDialog(levelDesignTab);
+                LevelDesignDialog levelDesignDialog =
+                        new LevelDesignDialog(levelDesignTab, levelDesignPanel);
                 levelDesignDialog.setSize(new Dimension(300, 350));
                 levelDesignDialog.setVisible(true);
             }

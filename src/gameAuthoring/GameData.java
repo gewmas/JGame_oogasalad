@@ -44,6 +44,10 @@ public class GameData {
 
     public GameData () {
         container = new JSONObject();
+        container.put("towerType", myTowerList);
+        container.put("enemyType", myEnemyList);
+        container.put("levelData", myLevelList);
+        container.put("levelData", myLevelList);
     }
 
     public void setGameName (String gameName) {
@@ -160,10 +164,7 @@ public class GameData {
         container.put("tilesPerRow", myTilesPerRow);
 
         container.put("levels", myLevelList.length());
-        container.put("towerType", myTowerList);
-        container.put("enemyType", myEnemyList);
-        container.put("levelData", myLevelList);
-        container.put("levelData", myLevelList);
+
     }
 
     public void writeToFile () {
