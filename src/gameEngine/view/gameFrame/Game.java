@@ -47,6 +47,7 @@ public class Game extends StdGame {
     @Override
     public void initGame () {
         setFrameRate(30, 2);
+        defineMedia("mygame.tbl");
         initial_lives = view.getLives();
         lives = view.getLives();
         score = view.getMoney();
