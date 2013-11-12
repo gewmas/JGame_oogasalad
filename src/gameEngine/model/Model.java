@@ -53,7 +53,7 @@ public class Model {
         // 2 create factory by 
               
         towerWarehouse = new TowerWarehouse(parser);
-        enemyWarehouse = new EnemyWarehouse(parser, path);
+        enemyWarehouse = new EnemyWarehouse(parser, this);
         
         gameInfo = new GameInfo(parser);
 
@@ -69,7 +69,7 @@ public class Model {
 
     }
     
-    public List<Tile> getPathList() {
+    public LinkedList<Tile> getPathList() {
         return path;
     }
 
@@ -103,6 +103,18 @@ public class Model {
 
     public int getLife () {
         return gameInfo.getLife();
+    }
+    
+    public String getBGImage () {
+        return gameInfo.getBGImage();
+    }
+    
+    /*
+     * Model Getter methods
+     */
+    
+    public GameInfo getGameInfo() {
+        return gameInfo;
     }
 
     public Dimension getGameSize () {
