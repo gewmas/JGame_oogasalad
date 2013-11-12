@@ -15,6 +15,8 @@ import jgame.JGObject;
 
 public class Tower extends JGObject implements TowerInfo{
     String name;
+    String image;
+    
     double damage;
     double attackSpeed;
     double range;
@@ -38,8 +40,8 @@ public class Tower extends JGObject implements TowerInfo{
         super(name, unique_id, x, y, collisionid, gfxname);
 
 
-        this.name=name;        
-
+        this.name = name;        
+        this.image = gfxname;
     }
 
     public double getX () {
@@ -86,7 +88,6 @@ public class Tower extends JGObject implements TowerInfo{
 
     @Override
     public String getImage () {
-        // TODO Auto-generated method stub
-        return null;
+        return image;
     }
 }

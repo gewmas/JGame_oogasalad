@@ -91,12 +91,7 @@ public class Model {
         }
         return result;
     }
-
-    // Jiaran: purchase, get tower info. If something is wrong plz contact
-    public boolean purchaseTower (int x, int y, String name) {
-        return towerWarehouse.create(x, y, name, gameInfo);
-    }
-
+    
     //Jiaran: Im thinking maybe this should return a TowerInfo instead of Tower
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
@@ -105,6 +100,15 @@ public class Model {
         return (TowerInfo)d.getOneTargetInRange(x, y, 10);
 
     }
+
+    // Jiaran: purchase, get tower info. If something is wrong plz contact
+    public boolean purchaseTower (int x, int y, String name) {
+        //TODO Should check (x,y) valid first
+        
+        return towerWarehouse.create(x, y, name, gameInfo);
+    }
+
+   
 
     /*
      * GameInfo getter method

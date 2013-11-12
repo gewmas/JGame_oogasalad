@@ -43,10 +43,6 @@ public class Controller {
      */
     public List<TowerInfo> getTowerFactory () {
         return model.getAllTowerInfo();  
-//=======
-//    public List<TowerFactory> getTowerFactory () {
-//        return model.getTowerFactory();
-//>>>>>>> master
     }
 
     /**
@@ -67,7 +63,6 @@ public class Controller {
             towerinfo=model.getTowerInfo(x,y);
         } catch (Exception e) {
             towerinfo=null;
-
         }
         return towerinfo;
     }
