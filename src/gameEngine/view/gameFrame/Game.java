@@ -61,8 +61,6 @@ public class Game extends StdGame {
             defineImage("tile"+String.valueOf(tileCount),"#"+String.valueOf(tileCount),256,tile.getPathImage(),"-");
             JGPoint tilePos=getTileIndex(tile.getX(),tile.getY());
             setTile(tilePos.x,tilePos.y,"#"+String.valueOf(tileCount));
-            System.out.println(tilePos.x);
-            System.out.println(tilePos.y);
             tileCount++;
         }
     }
