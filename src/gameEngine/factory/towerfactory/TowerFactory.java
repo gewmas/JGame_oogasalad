@@ -1,9 +1,9 @@
 package gameEngine.factory.towerfactory;
 
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.*;
 
-
-public abstract class TowerFactory {
+public abstract class TowerFactory implements TowerInfo {
     
     String id;
     String description;
@@ -26,8 +26,8 @@ public abstract class TowerFactory {
         return image;
     }
 
-    public int getCost () {
-        return (int)cost;
+    public double getCost () {
+        return cost;
     }
 
     public String getName () {
@@ -37,7 +37,21 @@ public abstract class TowerFactory {
     public String getDescription () {
         return description;
     }
-
+    
+   
+    public double getDamage (){
+        return damage;
+    }
+    public double getAttackSpeed (){
+        return attackSpeed;
+    }
+    public double getRange (){
+        return range;
+    }
+    
+    public double getRecyclePrice (){
+        return recyclePrice;
+    }
     
     
 }

@@ -3,11 +3,12 @@ package gameEngine.model;
 import gameEngine.factory.GridFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
-import java.awt.Dimension;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -55,7 +56,7 @@ public class Model {
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
         
-        gameInfo = new GameInfo(parser);
+        gameInfo = new GameInfo(1000, 1000, 1000, null);
 
         
     }
@@ -63,7 +64,7 @@ public class Model {
     public void startGame(){
         towerWarehouse.create("DefaultTower"); // test, should be called within Rule
 
-        Wave w = new Wave("1", 10, 1000, 1000, enemyWarehouse);
+        Wave w = new Wave("1", 10, 500, 1000, enemyWarehouse);
         rule.addWave(w);
         rule.ruleStart();
 
@@ -76,8 +77,14 @@ public class Model {
     /**
      * return all kinds of TowerFactory
      */
-    public List<TowerFactory> getTowerFactory () {
-        return towerWarehouse.getTowerFactory();
+    public List<TowerInfo> getTowerFactory () {
+        List<TowerInfo> result= new ArrayList<TowerInfo>();
+        List<TowerFactory> factoryList=towerWarehouse.getTowerFactory();
+        for(int i=0; i< factoryList.size();i++){
+            result.add((TowerInfo)factoryList.get(i));
+            
+        }
+        return result;
     }
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact
@@ -88,9 +95,9 @@ public class Model {
     //Jiaran: Im thinking maybe this should return a TowerInfo instead of Tower
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
-    public Tower getTowerInfo (int x, int y) {
+    public TowerInfo getTowerInfo (int x, int y) {
         Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
-        return d.getOneTargetInRange(x, y, 10);
+        return (TowerInfo)d.getOneTargetInRange(x, y, 10);
     }
 
     
@@ -116,12 +123,6 @@ public class Model {
     public GameInfo getGameInfo() {
         return gameInfo;
     }
-
-    public Dimension getGameSize () {
-        return gameInfo.getDimension();
-    }
-
-
 
    
     
