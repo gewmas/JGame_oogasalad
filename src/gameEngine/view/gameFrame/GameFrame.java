@@ -31,7 +31,7 @@ import gameEngine.model.tower.Tower;
  * @author Lalita Maraj
  * 
  */
-public class GameFrame extends Frame implements GameFrameColleague {
+public class GameFrame extends Frame  {
 
     private Controller controller;
     private GameFrameMediator mediator;
