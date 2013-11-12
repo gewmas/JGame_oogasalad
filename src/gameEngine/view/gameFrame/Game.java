@@ -1,5 +1,6 @@
 package gameEngine.view.gameFrame;
 
+import gameEngine.Constant.Constant;
 import gameEngine.controller.Controller;
 import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
@@ -69,6 +70,9 @@ public class Game extends StdGame {
     }
 
     public void doFrameInGame () {
+        moveObjects();
+        checkCollision(Constant.BULLET_CID, Constant.ENEMY_CID);
+        checkCollision(Constant.ENEMY_CID, Constant.BULLET_CID);
         checkCollision(0, 0);
         checkUserInteractions();
         updateGameStats();

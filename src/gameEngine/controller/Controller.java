@@ -28,6 +28,7 @@ public class Controller {
     public void newGame (File jsonFile) throws Exception {
         model.newGame(jsonFile); // will throw exception if fail
         view.startGame();
+        startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
         // view.showGame();
