@@ -20,8 +20,6 @@ import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.store.TowerStorePanel;
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.Tile;
-import gameEngine.model.tower.Tower;
 
 
 /**

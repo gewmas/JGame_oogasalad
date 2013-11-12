@@ -1,7 +1,5 @@
 package gameEngine.view;
 
-import gameEngine.factory.towerfactory.TowerFactory;
-import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 
