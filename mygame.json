@@ -26,7 +26,7 @@
 "towerType": [
 	{
 	 "id": "DefaultTower",
-	 "image": "tower1",
+	 "image": "src/gameEngine/view/gameFrame/store/smile.png",
 	 "x" : 100,
 	 "y" : 100,
 	 "damage": 1,

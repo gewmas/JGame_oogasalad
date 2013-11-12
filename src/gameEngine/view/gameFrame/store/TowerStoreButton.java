@@ -1,6 +1,8 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.view.Button;
 import gameEngine.view.View;
@@ -24,16 +26,20 @@ public class TowerStoreButton extends Button {
     private GameFrameMediator mediator;
     private TowerFactory towerInfo;
     private Boolean active;
-
+    private Boolean open;
     /**
      * @param towerInfo the tower info data structure of the tower the button represents
      * @param mediator facilitates communication between view components
      * @param view facilitates communication between view and controller
      */
     public TowerStoreButton (TowerFactory towerInfo, GameFrameMediator mediator, View view) {
-        super(trimName(towerInfo.getName()));
-        active = false; // to be changed!
-        this.setEnabled(active);
+        super("");
+        open  = false;
+        active = false; 
+        this.setEnabled(false);
+    
+        ImageIcon icon = new ImageIcon(towerInfo.getImage());
+        this.setIcon(icon);
         this.mediator = mediator;
         this.towerInfo = towerInfo;
         setToolTipText(towerInfo.getName());
@@ -48,12 +54,12 @@ public class TowerStoreButton extends Button {
      * is displayed and the button's foreground and background colors are changed.
      */
     protected void mouseEnteteredAction () {
-
+        if (open){
         this.setBackground(HOVER_BUTTON_COLOR);
         this.setForeground(HOVER_TEXT_COLOR);
 
         mediator.displayTowerInfo(towerInfo);
-
+        }
     }
 
     /**
@@ -75,9 +81,10 @@ public class TowerStoreButton extends Button {
      * and foreground
      */
     protected void mouseExitedAction () {
-
+        if (open){
         this.setBackground(null);
         this.setForeground(HOVER_EXIT_TEXT_COLOR);
+        }
 
     }
 
@@ -93,6 +100,10 @@ public class TowerStoreButton extends Button {
     }
 
     public void toggleButtonActivation (int moneySupply) {
+        if (open == false){
+            open = true;
+        }
+        
         active = moneySupply >= towerInfo.getCost();
         setEnabled(active);
 

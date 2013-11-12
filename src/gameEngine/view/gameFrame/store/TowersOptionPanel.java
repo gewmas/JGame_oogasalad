@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
+import net.miginfocom.swing.MigLayout;
 
 
 /**
@@ -27,7 +28,8 @@ import javax.swing.border.Border;
 @SuppressWarnings("serial")
 public class TowersOptionPanel extends Panel {
 
-    private static final int PANEL_WIDTH = 300;
+    private static final String LAYOUT_WRAP = "wrap 4";
+    private static final int PANEL_WIDTH = 250;
     private static final int PANEL_HEIGHT = 400;
     private List<TowerStoreButton> storeItems;
     private View view;
@@ -54,38 +56,15 @@ public class TowersOptionPanel extends Panel {
      * @param mediator facilitates communication between view components
      */
     private void createOptionsScrollPanel (GameFrameMediator mediator) {
-        JPanel options = new JPanel();
-//        GridLayout gridLayout = new GridLayout(0,5);
-//        options.setLayout(gridLayout);
+        JPanel options = new JPanel(new MigLayout(LAYOUT_WRAP));
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         addStoreInventory(options, mediator);
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-//        options.add(new TowerStoreItem());
-        
+
         JScrollPane scrollPane = new JScrollPane(options);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         add(scrollPane);
-//        options.add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
-//        add(new TowerStoreItem());
+
     }
 
     /**
@@ -112,14 +91,13 @@ public class TowersOptionPanel extends Panel {
             TowerStoreButton towerButton = new TowerStoreButton(tower, mediator, view);
             optionsPanel.add(towerButton);
             storeItems.add(towerButton);
+
         }
-
     }
-
 
     /**
      * Used to update the status of each TowerStoreButton.
-     * Toggles their enabled/disabled status based on the user's 
+     * Toggles their enabled/disabled status based on the user's
      * money supply
      * 
      */
