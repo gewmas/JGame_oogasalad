@@ -3,7 +3,7 @@ package gameEngine.factory.towerfactory;
 import gameEngine.model.tower.Tower;
 import gameEngine.model.tower.*;
 
-public abstract class TowerFactory {
+public abstract class TowerFactory implements TowerInfo{
     
     String id;
     String description;
