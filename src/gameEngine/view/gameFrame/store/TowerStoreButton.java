@@ -38,8 +38,7 @@ public class TowerStoreButton extends Button {
         storeOpen = false;
         active = false;
         this.setEnabled(false);
-
-        ImageIcon icon = new ImageIcon(tower.getImage());
+        ImageIcon icon = new ImageIcon("resources/img/"+tower.getImage()+".png");
         this.setIcon(icon);
         this.mediator = mediator;
         this.towerInfo = tower;

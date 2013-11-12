@@ -100,7 +100,8 @@ public class GameFrame extends Frame {
      */
     public void placeTower (TowerInfo towerInfo) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage(towerInfo.getImage());
+        System.out.println(towerInfo.getImage());
+        Image image = toolkit.getImage("resources/img/"+towerInfo.getImage()+".png");
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
         setCursor(c);
     }
