@@ -124,9 +124,14 @@ public class GameData {
 
         container.put("map", myMap);
     }
-    
-    protected void addLevel(int level, int numWaves, List<Map<String, Integer>> enemyWaveList){
+
+    @Deprecated
+    protected void addLevel (int level, int numWaves, List<Map<String, Integer>> enemyWaveList) {
         myLevelList.put(new LevelJSONObject(level, numWaves, enemyWaveList));
+    }
+    
+    protected void addLevel(LevelJSONObject level){
+        myLevelList.put(level);
     }
 
     protected void testWrite () { // This method is here only for the sake of testing (don't judge)
@@ -179,7 +184,7 @@ public class GameData {
 
     }
 
-    protected void addDataToContainer () {
+    private void addDataToContainer () {
         container.put("levels", myLevelList.length());
         container.put("towerType", myTowerList);
         container.put("enemyType", myEnemyList);
@@ -187,7 +192,9 @@ public class GameData {
         container.put("levelData", myLevelList);
     }
 
-    protected void writeToFile () {
+    public void writeToFile () {
+        addDataToContainer();
+
         int result = INPUT_CHOOSER.showSaveDialog(null);
 
         if (result == JFileChooser.APPROVE_OPTION) {

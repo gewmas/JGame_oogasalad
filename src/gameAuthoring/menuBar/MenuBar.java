@@ -1,5 +1,6 @@
 package gameAuthoring.menuBar;
 
+import gameAuthoring.GameData;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JMenu;
@@ -7,9 +8,11 @@ import javax.swing.JMenuBar;
 
 
 public class MenuBar extends JMenuBar {
+    GameData myGameData;
 
-    public MenuBar () {
+    public MenuBar (GameData gameData) {
         add(fileMenu());
+        myGameData = gameData;
     }
 
     private JMenu fileMenu () {
@@ -18,7 +21,7 @@ public class MenuBar extends JMenuBar {
 
             @Override
             public void actionPerformed (ActionEvent e) {
-                System.out.println("test");
+                myGameData.writeToFile();
             }
 
         });
