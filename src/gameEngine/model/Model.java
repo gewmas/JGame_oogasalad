@@ -6,6 +6,7 @@ import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
+import java.awt.Dimension;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class Model {
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
         
-        gameInfo = new GameInfo(1000, 1000, 1000, null);
+        gameInfo = new GameInfo(parser);
 
         
     }
@@ -79,12 +80,12 @@ public class Model {
         return towerWarehouse.getTowerFactory();
     }
 
-    // Jiaran purchase, get tower info. If something is wrong plz contact
+    // Jiaran: purchase, get tower info. If something is wrong plz contact
      
     public boolean purchaseTower (int x, int y, String name) {
         return towerWarehouse.create(x, y, name,gameInfo);
     }
-    //Jiaran Im thinking maybe this should return a TowerInfo instead of Tower
+    //Jiaran: Im thinking maybe this should return a TowerInfo instead of Tower
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
     public Tower getTowerInfo (int x, int y) {
@@ -115,6 +116,12 @@ public class Model {
     public GameInfo getGameInfo() {
         return gameInfo;
     }
+
+    public Dimension getGameSize () {
+        return gameInfo.getDimension();
+    }
+
+
 
    
     
