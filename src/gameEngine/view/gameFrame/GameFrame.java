@@ -51,7 +51,7 @@ public class GameFrame extends Frame implements GameFrameColleague {
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        mediator.addColleague(ColleagueKeys.GAMEFRAME.toString(), this);
+        mediator.addGameFrame( this);
     }
 
     /**
@@ -74,9 +74,9 @@ public class GameFrame extends Frame implements GameFrameColleague {
     }
     
     public void createGame () {
-        Panel canvasPanel = new CanvasPanel(engineView,mediator);
+        CanvasPanel canvasPanel = new CanvasPanel(engineView,mediator);
         this.add(canvasPanel, BorderLayout.WEST);
-        mediator.addColleague(ColleagueKeys.GAME.toString(), canvasPanel);
+        mediator.addGame(canvasPanel);
     }
     
 //    public void createStats(){
@@ -96,16 +96,17 @@ public class GameFrame extends Frame implements GameFrameColleague {
         this.add(storePanel, BorderLayout.EAST);
     }
 
-//    @Override
-//    /**
-//     * Changes the default cursor to the image of the tower to be placed
-//     */
-//    public void placeTower (TowerFactory towerInfo) {
-//        Toolkit toolkit = Toolkit.getDefaultToolkit();
-//        Image image = toolkit.getImage(towerInfo.getImage());
-//        Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
-//        setCursor(c);
-//    }
+
+    /**
+     * Changes the default cursor to the image of the tower to be placed
+     */
+    public void placeTower (TowerFactory towerInfo) {
+       
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage(towerInfo.getImage());
+        Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
+        setCursor(c);
+    }
 //
 //    /**
 //     * Tells the controller to send tower purchase instructions to the model
@@ -181,26 +182,16 @@ public class GameFrame extends Frame implements GameFrameColleague {
         return true;
     }
 
-    @Override
-    public void updateStoreStatus () {
-       
-    }
 
-    @Override
-    public void placeTower (TowerFactory towerInfo) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void purchaseTower () {
-        // TODO Auto-generated method stub
-        
-    }
 
     @Override
     public void displayTowerInfo (TowerFactory towerInfo) {
         // TODO Auto-generated method stub
         
     }
+    
+    public void purchaseTower () {
+      setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+      
+  }
 }

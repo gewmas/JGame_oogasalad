@@ -31,8 +31,7 @@ public class TowerStorePanel extends Panel {
         mediator.addColleague(ColleagueKeys.INFOPANEL.toString(), TowerInfoPanel);
 
         storeOptions = new TowersOptionPanel(mediator, engineView);
-        mediator.addColleague(ColleagueKeys.STOREOPTIONS.toString(), storeOptions);
-
+        mediator.addTowersOptionPanel(storeOptions);
         add(TowerInfoPanel, BorderLayout.CENTER);
         add(storeOptions, BorderLayout.PAGE_START);
 
