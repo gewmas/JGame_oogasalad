@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import jgame.impl.JGEngineInterface;
 import gameEngine.view.Frame;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
@@ -22,6 +23,7 @@ import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.TowerInfo;
 
 
 /**
@@ -120,9 +122,10 @@ public class GameFrame extends Frame implements GameFrameColleague {
 
     /**
      * Requests tower information for the tower at the given location
+     * @param game 
      */
-    public Tower getTowerInfo (int x, int y) {
-        return controller.getTowerInfo(x, y);
+    public TowerInfo getTowerInfo (int x, int y, JGEngineInterface game) {
+        return controller.getTowerInfo(x, y,game);
     }
 
     @Override

@@ -3,6 +3,7 @@ package gameEngine.view.gameFrame;
 import gameEngine.controller.Controller;
 import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.TowerInfo;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -89,7 +90,7 @@ public class Game extends StdGame {
                 System.out.format("Buying tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
             else {
-                Tower tower=gameFrame.getTowerInfo(tilePosition.x, tilePosition.y);
+                TowerInfo tower=gameFrame.getTowerInfo(tilePosition.x, tilePosition.y,this);
                 if (tower==null) System.out.println("No tower here");
                 System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
