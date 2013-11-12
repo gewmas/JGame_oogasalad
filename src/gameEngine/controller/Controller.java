@@ -1,14 +1,13 @@
 package gameEngine.controller;
 
-import java.awt.Dimension;
-import java.io.File;
-import java.util.List;
-import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Model;
 import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrame;
+import java.awt.Dimension;
+import java.io.File;
+import java.util.List;
 
 
 public class Controller {
@@ -41,8 +40,8 @@ public class Controller {
      * Get All kinds of TowerFactory
      * However, can only return the basic property of the TowerFactory
      */
-    public List<TowerFactory> getTowerFactory () {
-        return model.getTowerFactory();  
+    public List<TowerInfo> getTowerFactory () {
+        return model.getAllTowerInfo();  
     }
 
     /**
@@ -57,14 +56,14 @@ public class Controller {
      * Sends a call to the model to update the monitored tower stats to the tower
      * at x,y. If the position is invalid, do nothing
      */
-    public Tower getTowerInfo (int x, int y) {
-        Tower tower;
+    public TowerInfo getTowerInfo (int x, int y) {
+        TowerInfo towerinfo;
         try {
-            tower=model.getTowerInfo(x,y);
+            towerinfo=model.getTowerInfo(x,y);
         } catch (Exception e) {
-            tower=null;
+            towerinfo=null;
         }
-        return tower;
+        return towerinfo;
     }
 
     /**

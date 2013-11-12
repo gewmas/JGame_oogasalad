@@ -77,7 +77,8 @@ public class Model {
     /**
      * return all kinds of TowerFactory
      */
-    public List<TowerInfo> getTowerFactory () {
+    //edit by Jiaran to hold encapsulation by passing TowerInfo.
+    public List<TowerInfo> getAllTowerInfo () {
         List<TowerInfo> result= new ArrayList<TowerInfo>();
         List<TowerFactory> factoryList=towerWarehouse.getTowerFactory();
         for(int i=0; i< factoryList.size();i++){
