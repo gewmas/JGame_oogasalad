@@ -6,6 +6,7 @@ import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
+import java.awt.Dimension;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
@@ -54,7 +55,7 @@ public class Model {
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, path);
         
-        gameInfo = new GameInfo(1000, 1000, 1000, null);
+        gameInfo = new GameInfo(parser);
 
         
     }
@@ -102,6 +103,14 @@ public class Model {
 
     public int getLife () {
         return gameInfo.getLife();
+    }
+
+    public Dimension getGameSize () {
+        return gameInfo.getDimension();
+    }
+
+    public String getBGImage () {
+        return gameInfo.getBGImage();
     }
 
    

@@ -71,14 +71,15 @@ public class Controller {
      * Returns the size of the game in number of tiles
      */
     public Dimension getGameSize () {
-        return gameSize;
+        return model.getGameSize();
     }
 
     /**
      * Returns the URL to the game's background image
      */
     public String getBGImage () {
-        return "resources/space_background.jpg";
+        return model.getBGImage();
+//        return "resources/space_background.jpg";
     }
 
     /**
