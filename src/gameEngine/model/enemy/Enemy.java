@@ -22,6 +22,7 @@ public class Enemy extends JGObject {
     double speed;
     double xMovement;
     double yMovement;
+    int pathIndex;
     
     LinkedList<Tile> path;
 
@@ -48,6 +49,7 @@ public class Enemy extends JGObject {
         this.life = life;
         this.speed = speed;
         this.path = path;
+        this.pathIndex = 0;
         this.x = x;
         this.y = y;
     }
@@ -55,7 +57,7 @@ public class Enemy extends JGObject {
     @Override
     public void move () {
         // Should walk along the Path
-        if(x == path.element().getCenterX() && y == path.element().getCenterY()) {
+        if(x == path.get(pathIndex).getCenterX() && y == path.get(pathIndex).getCenterY()) {
             calculateNewDirection();
         }
         x += xMovement*speed;
@@ -81,16 +83,16 @@ public class Enemy extends JGObject {
     }
     
     public void calculateNewDirection() {
-        path.pop();
-        if(x == path.element().getCenterX()) {
-            if(y < path.element().getCenterY()) {
+        pathIndex = pathIndex + 1;
+        if(x == path.get(pathIndex).getCenterX()) {
+            if(y < path.get(pathIndex).getCenterY()) {
                 this.yMovement = 1;
             } else {
                 this.yMovement = -1;
             }
             this.xMovement = 0;
         } else {
-            if(x < path.element().getCenterX()) {
+            if(x < path.get(pathIndex).getCenterX()) {
                 this.xMovement = 1;
             } else {
                 this.xMovement = -1;
