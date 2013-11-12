@@ -123,7 +123,7 @@ public class Game extends StdGame {
      * Indicates that the user wants to buy a tower
      */
     public void placeTower (String tower) {
-        // setBGColor(JGColor.red);
+//         setBGColor(JGColor.red);
         System.out.println("User wants to purchase " + tower);
         purchasing = true;
         towerToPurchase = tower;

@@ -18,25 +18,4 @@ public class Panel extends JPanel implements GameFrameColleague {
         super();
     }
 
-    @Override
-    public void placeTower (TowerFactory towerInfo) {
-
-    }
-
-    @Override
-    public void displayTowerInfo (TowerFactory tower) {
-
-    }
-
-    @Override
-    public void purchaseTower () {
-
-    }
-
-    @Override
-    public void updateStoreStatus () {
-        // TODO Auto-generated method stub
-
-    }
-
 }

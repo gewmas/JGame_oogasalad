@@ -1,6 +1,9 @@
 package gameEngine.view.gameFrame;
 
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.view.Panel;
+import gameEngine.view.gameFrame.store.TowerInfoPanel;
+import gameEngine.view.gameFrame.store.TowersOptionPanel;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,10 +28,16 @@ import java.util.Map;
 public class GameFrameMediator {
 
     private Map<String, GameFrameColleague> colleagues;
-
+    private TowersOptionPanel storeOptions;
+    private GameFrame gameFrame;
+    private CanvasPanel canvasPanel;
+    private TowerInfoPanel towerInfoPanel;
     public GameFrameMediator () {
         colleagues = new HashMap<String, GameFrameColleague>();
 
+    }
+    public void addTowersOptionPanel(TowersOptionPanel storeOptions){
+        this.storeOptions = storeOptions;
     }
 
     /**
@@ -50,8 +59,9 @@ public class GameFrameMediator {
      * @param towername
      */
     public void placeTower (TowerFactory towerInfo) {
-        colleagues.get(ColleagueKeys.GAME.toString()).placeTower(towerInfo);
-        colleagues.get(ColleagueKeys.GAMEFRAME.toString()).placeTower(towerInfo);
+      
+        canvasPanel.placeTower(towerInfo);
+        gameFrame.placeTower(towerInfo);
     }
 
     /**
@@ -61,7 +71,7 @@ public class GameFrameMediator {
      * @param tower
      */
     public void displayTowerInfo (TowerFactory tower) {
-        colleagues.get(ColleagueKeys.INFOPANEL.toString()).displayTowerInfo(tower);
+        towerInfoPanel.displayTowerInfo(tower);
     }
 
     /**
@@ -69,14 +79,26 @@ public class GameFrameMediator {
      * that are impacted by the purchase of a tower
      */
     public void purchaseTower () {
-        colleagues.get(ColleagueKeys.GAMEFRAME.toString()).purchaseTower();
+        gameFrame.purchaseTower();
     }
 
     /**
      * Updates the enabled status of store items.
      */
     public void updateStoreStatus () {
-        colleagues.get(ColleagueKeys.STOREOPTIONS.toString()).updateStoreStatus();
+        storeOptions.updateStoreStatus();
+    }
+    public void addGameFrame (GameFrame gameFrame) {
+       this.gameFrame = gameFrame;
+        
+    }
+    public void addGame (CanvasPanel canvasPanel) {
+       this.canvasPanel = canvasPanel;
+        
+    }
+    public void addTowerInfoPanel (TowerInfoPanel towerInfoPanel) {
+       this.towerInfoPanel  = towerInfoPanel;
+        
     }
 
 }

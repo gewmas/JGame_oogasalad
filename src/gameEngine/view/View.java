@@ -2,9 +2,6 @@ package gameEngine.view;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.io.File;
 import java.util.List;
 import gameEngine.controller.Controller;
@@ -58,17 +55,6 @@ public class View {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-    }
-
-    /**
-     * Changes the default cursor to the image of the tower to be placed
-     */
-    public void placeTower (TowerFactory towerInfo) {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage(towerInfo.getImage());
-        Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
-        gameFrame.setCursor(c);
     }
 
     /**
@@ -77,7 +63,7 @@ public class View {
      */
     public void buyTower (int x, int y, String tower) {
         controller.purchaseTower(x, y, tower);
-        purchaseTower();
+
     }
 
     /**
@@ -85,13 +71,6 @@ public class View {
      */
     public Tower getTowerInfo (int x, int y) {
         return controller.getTowerInfo(x, y);
-    }
-
-    /**
-     * After tower is purchased, the cursor is set to the default cursor.
-     */
-    public void purchaseTower () {
-        gameFrame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 
     /**
