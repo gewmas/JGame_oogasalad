@@ -14,7 +14,7 @@ import jgame.JGObject;
  */
 
 public class Tower extends JGObject implements TowerInfo{
-
+    String name;
     double damage;
     double attackSpeed;
     double range;
@@ -34,8 +34,7 @@ public class Tower extends JGObject implements TowerInfo{
                   int collisionid,
                   String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
-        
-        
+        this.name=name;        
     }
 
     public double getX () {
@@ -45,22 +44,32 @@ public class Tower extends JGObject implements TowerInfo{
     public double getY () {
         return y;
     }
-
+    
+    @Override
+    public String getName(){
+        return name;
+    }
+    
+    @Override
     public String getDescription () {
         return description;
     }
     
-   
+    @Override
     public double getDamage (){
         return damage;
     }
+    
+    @Override
     public double getAttackSpeed (){
         return attackSpeed;
     }
+    
+    @Override
     public double getRange (){
         return range;
     }
-    
+    @Override
     public double getRecyclePrice (){
         return recyclePrice;
     }
@@ -68,5 +77,11 @@ public class Tower extends JGObject implements TowerInfo{
     @Override
     public double getCost () {
         return cost;
+    }
+
+    @Override
+    public String getImage () {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

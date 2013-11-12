@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame.store;
 
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
@@ -85,7 +86,7 @@ public class TowersOptionPanel extends Panel {
      */
     private void addStoreInventory (JPanel optionsPanel, GameFrameMediator mediator) {
 
-        for (TowerFactory tower : view.getTowers()) {
+        for (TowerInfo tower : view.getTowers()) {
             TowerStoreButton towerButton = new TowerStoreButton(tower, mediator, view);
             optionsPanel.add(towerButton);
             storeItems.add(towerButton);

@@ -20,6 +20,7 @@ import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.store.TowerStorePanel;
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.tower.TowerInfo;
 
 
 /**
@@ -98,7 +99,7 @@ public class GameFrame extends Frame  {
     /**
      * Changes the default cursor to the image of the tower to be placed
      */
-    public void placeTower (TowerFactory towerInfo) {
+    public void placeTower (TowerInfo towerInfo) {
        
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = toolkit.getImage(towerInfo.getImage());

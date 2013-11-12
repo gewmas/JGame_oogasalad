@@ -8,6 +8,7 @@ import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.initialization.InitializationFrame;
 
@@ -70,7 +71,7 @@ public class View {
     /**
      * Requests tower information for the tower at the given location
      */
-    public Tower getTowerInfo (int x, int y) {
+    public TowerInfo getTowerInfo (int x, int y) {
         return controller.getTowerInfo(x, y);
     }
 
@@ -100,7 +101,7 @@ public class View {
         return controller.getLives();
     }
 
-    public List<TowerFactory> getTowers () {
+    public List<TowerInfo> getTowers () {
         return controller.getTowerFactory();
     }
 }
