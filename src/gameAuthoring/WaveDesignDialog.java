@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 
-public class LevelDesignDialog extends JDialog {
+public class WaveDesignDialog extends JDialog {
 
     private LevelDesignTab myLevelDesignTab;
     private LevelDesignPanel myLevelDesignPanel;
@@ -29,7 +29,7 @@ public class LevelDesignDialog extends JDialog {
     private Map<JTextField, EnemyJSONObject> myTextFields =
             new HashMap<JTextField, EnemyJSONObject>();
 
-    public LevelDesignDialog (LevelDesignTab levelDesignTab, LevelDesignPanel levelDesignPanel) {
+    public WaveDesignDialog (LevelDesignTab levelDesignTab, LevelDesignPanel levelDesignPanel) {
         myLevelDesignTab = levelDesignTab;
         myLevelDesignPanel = levelDesignPanel;
         this.setLayout(new MigLayout("wrap 2, align center"));
@@ -64,7 +64,7 @@ public class LevelDesignDialog extends JDialog {
         createWaveButton.addMouseListener(createWaveDesignListener(this));
     }
 
-    public MouseAdapter createWaveDesignListener (final LevelDesignDialog levelDesignDialog) {
+    public MouseAdapter createWaveDesignListener (final WaveDesignDialog levelDesignDialog) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {

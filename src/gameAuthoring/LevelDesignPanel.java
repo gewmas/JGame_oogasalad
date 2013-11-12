@@ -48,7 +48,6 @@ public class LevelDesignPanel extends JPanel {
 
     public void addWave (Map<String, Integer> wave) {
         numWaves++;
-        System.out.println("adding new wave");
         myScrollPanel.add(new JButton("Wave " + numWaves));
         myWaves.add(wave);
     }
@@ -74,8 +73,8 @@ public class LevelDesignPanel extends JPanel {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                LevelDesignDialog levelDesignDialog =
-                        new LevelDesignDialog(levelDesignTab, levelDesignPanel);
+                WaveDesignDialog levelDesignDialog =
+                        new WaveDesignDialog(levelDesignTab, levelDesignPanel);
                 levelDesignDialog.setSize(new Dimension(300, 350));
                 levelDesignDialog.setVisible(true);
             }
