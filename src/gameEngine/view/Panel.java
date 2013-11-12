@@ -18,9 +18,4 @@ public class Panel extends JPanel implements GameFrameColleague {
         super();
     }
 
-    @Override
-    public void displayTowerInfo (TowerFactory tower) {
-
-    }
-
 }

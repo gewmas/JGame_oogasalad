@@ -26,12 +26,4 @@ public interface GameFrameColleague {
      */
 
 
-    /**
-     * Used primarily by the TowerInfo panel to display tower information
-     * 
-     * @param towerInfo datastructure used to store tower information
-     */
-    public void displayTowerInfo (TowerFactory towerInfo);
-
-
 }

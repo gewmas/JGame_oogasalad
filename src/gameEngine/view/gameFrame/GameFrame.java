@@ -184,11 +184,6 @@ public class GameFrame extends Frame implements GameFrameColleague {
 
 
 
-    @Override
-    public void displayTowerInfo (TowerFactory towerInfo) {
-        // TODO Auto-generated method stub
-        
-    }
     
     public void purchaseTower () {
       setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
