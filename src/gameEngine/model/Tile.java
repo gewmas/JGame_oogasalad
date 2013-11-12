@@ -13,7 +13,7 @@ import jgame.JGObject;
 public class Tile {
 
     private boolean hasPath, hasTower;
-    private double xPos, yPos, centerX, centerY;
+    private double xPos, yPos, centerX, centerY, endX, endY;
     private String imgPath;
 
     public Tile (double x, double y, double endX, double endY) {
@@ -21,6 +21,8 @@ public class Tile {
         hasTower = false;
         xPos = x;
         yPos = y;
+        this.endX = endX;
+        this.endY = endY;
         imgPath = "";
         this.centerX = (x + endX) / 2;
         this.centerY = (y + endY) / 2;
@@ -53,6 +55,14 @@ public class Tile {
 
     public double getY () {
         return yPos;
+    }
+    
+    public double getEndX() {
+        return endX;
+    }
+    
+    public double getEndY() {
+        return endY;
     }
 
     public double getCenterX () {

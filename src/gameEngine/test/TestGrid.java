@@ -65,6 +65,9 @@ public class TestGrid extends JGEngine {
             System.out.println("Center x=" + tile.getCenterX() + " center y=" + tile.getCenterY());
             System.out.println("img path is " + tile.getPathImage());
         }
+        
+        System.out.println("tile is on path? " + model.getTile(405,  165).hasPath());
+        System.out.println("tile is on path? " + model.getTile(405,  305).hasPath());
     }
 
     @Override

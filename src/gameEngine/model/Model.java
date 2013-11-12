@@ -34,6 +34,7 @@ public class Model {
     private LinkedList<Tile> path;
     private JGEngineInterface myEng;
     private Rule rule; // how each waves created, ruleStart, ruleStop
+    private ArrayList<ArrayList<Tile>> grid;
 
     // private Rule rule;
 
@@ -52,6 +53,7 @@ public class Model {
         gridFactory = new GridFactory(parser);
         gridFactory.initialize();
         path = gridFactory.getPathList();
+        grid = gridFactory.getGridList();
 
         // 2 create factory by
 
@@ -106,6 +108,19 @@ public class Model {
         //TODO Should check (x,y) valid first
         
         return towerWarehouse.create(x, y, name, gameInfo);
+    }
+    
+    public Tile getTile(int x, int y) {
+        for(int k=0; k<grid.size(); k++) {
+            ArrayList<Tile> tempArray = grid.get(k);
+            for(int m=0; m<tempArray.size(); m++) {
+                Tile tile = tempArray.get(m);
+                if(tile.getX() <= x && tile.getEndX() >= x && tile.getY() <= y && tile.getEndY() >= y) {
+                    return tile;
+                }
+            }
+        }
+        return null;
     }
 
    
