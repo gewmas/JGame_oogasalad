@@ -13,6 +13,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JFileChooser;
 
@@ -124,7 +125,7 @@ public class GameData {
         container.put("map", myMap);
     }
     
-    protected void addLevel(int level, int numWaves, ArrayList<Map<String, Integer>> enemyWaveList){
+    protected void addLevel(int level, int numWaves, List<Map<String, Integer>> enemyWaveList){
         myLevelList.put(new LevelJSONObject(level, numWaves, enemyWaveList));
     }
 
