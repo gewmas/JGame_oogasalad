@@ -5,7 +5,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
@@ -31,13 +30,10 @@ public class LevelDesignPanel extends JPanel {
 
     private JPanel createLevelPanel () {
         JPanel panel = new JPanel(new MigLayout("wrap 1"));
-
         JButton createWaveButton = new JButton("Add Wave");
-        createWaveButton.addMouseListener(createWaveListener());
-
+        createWaveButton.addMouseListener(createWaveListener(myLevelDesignTab));
         JButton createLevelButton = new JButton("Create Level");
         createLevelButton.addMouseListener(createLevelListener());
-
         panel.add(createWaveButton);
         panel.add(createLevelButton);
         return panel;
@@ -53,14 +49,13 @@ public class LevelDesignPanel extends JPanel {
         return listener;
     }
 
-    private MouseAdapter createWaveListener () {
+    private MouseAdapter createWaveListener (final LevelDesignTab levelDesignTab) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-
-                myScrollPanel.add(new JLabel("test"));
-                myScrollPanel.repaint();
-
+                LevelDesignDialog levelDesignDialog = new LevelDesignDialog(levelDesignTab);
+                levelDesignDialog.setSize(new Dimension(300, 350));
+                levelDesignDialog.setVisible(true);
             }
         };
         return listener;

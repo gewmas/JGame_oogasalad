@@ -95,6 +95,10 @@ public class GameData {
         myEnemyList.put(new EnemyJSONObject(name, gold, image, life, speed));
     }
 
+    public JSONArray getEnemyList () {
+        return myEnemyList;
+    }
+
     public void testWrite () { // This method is here only for the sake of testing (don't judge)
 
         this.setGameName("Tower Destruction");

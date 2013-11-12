@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 
 public class Tab {
-    
+
     protected GameData myGameData;
 
     public Tab (GameData gameData) {
@@ -16,4 +16,7 @@ public class Tab {
         return panel;
     }
 
+    public GameData getGameData () {
+        return myGameData;
+    }
 }
