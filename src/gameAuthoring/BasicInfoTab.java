@@ -116,6 +116,10 @@ public class BasicInfoTab extends Tab {
                 myGameData.setGameName(myGameName.getText());
                 myGameData.setGold(Integer.parseInt(myGold.getText()));
                 myGameData.setLives(Integer.parseInt(myLives.getText()));
+                myGameData.setWindowWidth(Integer.parseInt(myWindowWidth.getText()));
+                myGameData.setWindowHeight(Integer.parseInt(myWindowHeight.getText()));
+                myGameData.setTilesPerRow(Integer.parseInt(myTilesPerRow.getText()));
+                myGameData.setDifficultyScale(Float.parseFloat(myDifficultyScale.getText()));
                 myGameData.setSplashImage(mySplashImage);
             }
         };

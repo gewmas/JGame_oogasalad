@@ -58,36 +58,36 @@ public class GameData {
         myGold = gold;
     }
 
-    public void setLives (int lives) {
+    protected void setLives (int lives) {
         myLives = lives;
     }
 
-    public void setSplashImage (String splashImage) {
+    protected void setSplashImage (String splashImage) {
         mySplashImage = splashImage;
     }
 
-    private void setWindowWidth (int windowWidth) {
+    protected void setWindowWidth (int windowWidth) {
         myWindowWidth = windowWidth;
     }
 
-    private void setWindowHeight (int windowHeight) {
+    protected void setWindowHeight (int windowHeight) {
         myWindowHeight = windowHeight;
     }
 
-    private void setTilesPerRow (int tilesPerRow) {
+    protected void setTilesPerRow (int tilesPerRow) {
         myTilesPerRow = tilesPerRow;
     }
 
-    private void setDifficultScale (float difficultyScale) {
+    protected void setDifficultyScale (float difficultyScale) {
         myDifficultyScale = difficultyScale;
     }
 
-    public void addTower (String name, String imagePath,
-                          int damage,
-                          int attackSpeed,
-                          int range,
-                          int cost,
-                          int recyclePrice) {
+    protected void addTower (String name, String imagePath,
+                             int damage,
+                             int attackSpeed,
+                             int range,
+                             int cost,
+                             int recyclePrice) {
 
         myTowerList
                 .put(new TowerJSONObject(name, imagePath, damage, attackSpeed, range, cost,
@@ -95,15 +95,29 @@ public class GameData {
 
     }
 
-    public void addEnemy (String name, int gold, String image, int life, int speed) {
+    protected void addEnemy (String name, int gold, String image, int life, int speed) {
         myEnemyList.put(new EnemyJSONObject(name, gold, image, life, speed));
     }
 
-    public JSONArray getEnemyList () {
+    protected JSONArray getEnemyList () {
         return myEnemyList;
     }
 
-    public void testWrite () { // This method is here only for the sake of testing (don't judge)
+    protected void setMap (String bgImage,
+                           String pathImage,
+                           Point2D start,
+                           Point2D end,
+                           Collection<Point2D> pointList) {
+        myMap = new MapJSONObject(bgImage,
+                                  pathImage,
+                                  start,
+                                  end,
+                                  pointList);
+
+        container.put("map", myMap);
+    }
+
+    protected void testWrite () { // This method is here only for the sake of testing (don't judge)
 
         this.setGameName("Tower Destruction");
         this.setGold(200);
@@ -153,7 +167,7 @@ public class GameData {
 
     }
 
-    public void addDataToContainer () {
+    protected void addDataToContainer () {
         container.put("name", myGameName);
         container.put("gold", myGold);
         container.put("numberOfLives", myLives);
@@ -167,7 +181,7 @@ public class GameData {
 
     }
 
-    public void writeToFile () {
+    protected void writeToFile () {
         int result = INPUT_CHOOSER.showSaveDialog(null);
 
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -185,7 +199,7 @@ public class GameData {
 
     }
 
-    public static void main (String[] args) {
+    protected static void main (String[] args) {
         GameData x = new GameData();
         x.testWrite();
     }

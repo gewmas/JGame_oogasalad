@@ -27,7 +27,10 @@ public class MapDesignTab extends Tab {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/gameAuthoring");
     private Grid myGrid;
-    private JButton myCurrentImage;
+    private JButton myCurrentPathImage;
+    private String myBackgroundImage;
+    private String myPathImage;
+    
 
     public MapDesignTab (GameData gameData) {
         super(gameData);
@@ -44,10 +47,10 @@ public class MapDesignTab extends Tab {
         title.setFont(new Font("Arial", Font.BOLD, 30));
         JLabel label = new JLabel("Current path image");
         label.setFont(new Font("Arial", Font.BOLD, 20));
-        myCurrentImage = new JButton();
-        myCurrentImage.setPreferredSize(new Dimension(50, 50));
-        myCurrentImage.addMouseListener(createPathListener());
-        JButton checkPath = new JButton("Check if path is valid");
+        myCurrentPathImage = new JButton();
+        myCurrentPathImage.setPreferredSize(new Dimension(50, 50));
+        myCurrentPathImage.addMouseListener(createPathListener());
+        JButton checkPath = new JButton("Create Map");
         checkPath.addMouseListener(createPathCheckListener());
         JButton setBackground = new JButton("Set background image");
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
@@ -57,17 +60,17 @@ public class MapDesignTab extends Tab {
         mainPanel.add(title, "span 2");
         gridPanel.add(label, c);
         c.gridwidth = GridBagConstraints.REMAINDER;
-        gridPanel.add(myCurrentImage, c);
+        gridPanel.add(myCurrentPathImage, c);
         gridPanel.add(myGrid, c);
-        gridPanel.add(checkPath, c);
         gridPanel.add(setBackground, c);
+        gridPanel.add(checkPath, c);
         mainPanel.add(gridPanel, "span 2, align center");
         Border b = BorderFactory.createLoweredBevelBorder();
         gridPanel.setBorder(b);
         return mainPanel;
     }
 
-    public MouseAdapter createPathListener () {
+    private MouseAdapter createPathListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
@@ -78,8 +81,9 @@ public class MapDesignTab extends Tab {
                     myGrid.setImageSource(imgSource);
                     Image path;
                     try {
+                        myPathImage = imgSource.toString().replace(System.getProperties().getProperty("user.dir"), "");
                         path = ImageIO.read(imgSource);
-                        myCurrentImage.setIcon(new ImageIcon(path));
+                        myCurrentPathImage.setIcon(new ImageIcon(path));
                     }
                     catch (IOException e1) {
                         e1.printStackTrace();
@@ -90,33 +94,37 @@ public class MapDesignTab extends Tab {
         return listener;
     }
 
-    public MouseAdapter createPathCheckListener () {
+    private MouseAdapter createPathCheckListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
                 if (myGrid.isValidPathHelper()) {
-                    JOptionPane.showMessageDialog(null, "Valid path!");
+                    JOptionPane.showMessageDialog(null, "Valid path! Map Written");
+                    myGameData.setMap(myBackgroundImage, myPathImage, myGrid.getPathStart(), myGrid.getPathEnd(), myGrid.getPathCoordinates()); 
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "Invalid path!");
+                    JOptionPane.showMessageDialog(null, "Invalid path! Please fix path and try again");
                 }
             }
         };
         return listener;
     }
 
-    public MouseAdapter createGridBackgroundListener (final Grid grid) {
+    private MouseAdapter createGridBackgroundListener (final Grid grid) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(INPUT_CHOOSER.getSelectedFile());
                     File imgSource = INPUT_CHOOSER.getSelectedFile();
+                    myBackgroundImage = imgSource.toString().replace(System.getProperties().getProperty("user.dir"), "");                
                     myGrid.setBackgroundImageSource(imgSource);
                 }
             }
         };
         return listener;
     }
+    
+
+
 }

@@ -82,9 +82,21 @@ public class Grid extends JPanel {
         System.out.println(myStart.toString());
     }
 
+    public Point2D getPathStart () {
+        return myStart;
+    }
+    
     public void setPathEnd (Point2D end) {
         myEnd = end;
         System.out.println(myEnd.toString());
+    }
+    
+    public Point2D getPathEnd () {
+        return myEnd;
+    }
+    
+    public Collection<Point2D> getPathCoordinates(){
+        return myPathCoordinates;
     }
 
     public boolean isValidPathHelper () {
