@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.Button;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrame;
@@ -23,26 +24,25 @@ public class TowerStoreButton extends Button {
     private static final Color HOVER_TEXT_COLOR = Color.RED;
     private static final Color HOVER_EXIT_TEXT_COLOR = Color.BLACK;
     private GameFrameMediator mediator;
-    private TowerFactory towerInfo;
+    private TowerInfo towerInfo;
     private Boolean active;
     private Boolean storeOpen;
 
     /**
-     * @param towerInfo the tower info data structure of the tower the button represents
+     * @param tower the tower info data structure of the tower the button represents
      * @param mediator facilitates communication between view components
      * @param view facilitates communication between view and controller
      */
-    public TowerStoreButton (TowerFactory towerInfo, GameFrameMediator mediator, View view) {
+    public TowerStoreButton (TowerInfo tower, GameFrameMediator mediator, View view) {
         super("");
         storeOpen = false;
         active = false;
         this.setEnabled(false);
-
-        ImageIcon icon = new ImageIcon(towerInfo.getImage());
+        ImageIcon icon = new ImageIcon("resources/img/"+tower.getImage()+".png");
         this.setIcon(icon);
         this.mediator = mediator;
-        this.towerInfo = towerInfo;
-        setToolTipText(towerInfo.getName());
+        this.towerInfo = tower;
+        setToolTipText(tower.getTowerName());
 
         setOpaque(true);
 

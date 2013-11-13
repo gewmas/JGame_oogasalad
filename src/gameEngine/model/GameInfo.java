@@ -1,7 +1,7 @@
 package gameEngine.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import gameEngine.parser.Parser;
+import java.awt.Dimension;
 
 
 /*
@@ -9,20 +9,42 @@ import java.util.List;
  */
 
 public class GameInfo {
+    private String myName;
     private int myGold;
     private int myLife;
     private int myWave;
 
     private String myBGImage;
-//    private List<TowerInfo> myTowerInfo;
 
-    public GameInfo (int defaultGold, int defaultLife, int waveNum, String BGImage) {
-        myGold = defaultGold;
-        myLife = defaultLife;
-        myWave = waveNum;
-        myBGImage = BGImage;
-//        myTowerInfo = new ArrayList<TowerInfo>();
+    private Dimension myDimension;
+    // private List<TowerInfo> myTowerInfo;
+
+    private Parser myParser;
+
+    public GameInfo (Parser parser) {
+          myGold=parser.getInt("gold");
+          myLife =parser.getInt("numberOfLives");
+//        wave will be changed when the different levels are load.
+        myWave = 1000;
+        int x = parser.getInt("widthOfWindow");
+        int y = parser.getInt("heightOfWindow");
+        int numPerRow =parser.getInt("tilesPerRow");
+//      myDimension=new Dimension(x/numPerRow,y/numPerRow);
+//      right now I just put the 20*20 dimension
+        myDimension = new Dimension(20, 20);
+        myBGImage = parser.getString("BGImage");
+        // myTowerInfo = new ArrayList<TowerInfo>();
+        
+    //    System.out.println(myGold+";"+myLife+";"+myWave+";"+x+";"+y+";"+myBGImage);
+        
     }
+
+
+    public Dimension getDimension () {
+        return myDimension;
+    }
+
+
 
     public int getGold () {
         return myGold;
@@ -72,24 +94,26 @@ public class GameInfo {
         myBGImage = BGImage;
     }
 
+
     public String getBGImage () {
         return myBGImage;
     }
 
-//    public void addTowerInfo (TowerInfo tower) {
-//        myTowerInfo.add(tower);
-//    }
-//
-//    public void removeTowerInfo (TowerInfo tower) {
-//        myTowerInfo.remove(tower);
-//    }
-//
-//    public void removeAllTowerInfo () {
-//        myTowerInfo = new ArrayList<TowerInfo>();
-//    }
-//
-//    public List<TowerInfo> getTowerInfo () {
-//        return myTowerInfo;
-//    }
+
+    // public void addTowerInfo (TowerInfo tower) {
+    // myTowerInfo.add(tower);
+    // }
+    //
+    // public void removeTowerInfo (TowerInfo tower) {
+    // myTowerInfo.remove(tower);
+    // }
+    //
+    // public void removeAllTowerInfo () {
+    // myTowerInfo = new ArrayList<TowerInfo>();
+    // }
+    //
+    // public List<TowerInfo> getTowerInfo () {
+    // return myTowerInfo;
+    // }
 
 }

@@ -3,6 +3,7 @@ package gameEngine.view.gameFrame;
 import gameEngine.controller.Controller;
 import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.View;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -16,7 +17,7 @@ import jgame.platform.StdGame;
 
 
 /**
- * @author lalitamaraj alexzhu
+ * @author Lalita Maraj Alex Zhu
  *         Displays the Game setting using JGEngine to facilitate
  *         graphics rendering
  */
@@ -46,6 +47,7 @@ public class Game extends StdGame {
     @Override
     public void initGame () {
         setFrameRate(30, 2);
+        defineMedia("mygame.tbl");
         initial_lives = view.getLives();
         lives = view.getLives();
         score = view.getMoney();
@@ -55,12 +57,13 @@ public class Game extends StdGame {
         purchasing = false;
         setHighscores(10, new Highscore(0, "aaa"), 3);
         startgame_ingame = true;
-        List<Tile> pathList=view.getPath();
-        int tileCount=0;
-        for (Tile tile:pathList){
-            defineImage("tile"+String.valueOf(tileCount),"#"+String.valueOf(tileCount),256,tile.getPathImage(),"-");
-            JGPoint tilePos=getTileIndex(tile.getX(),tile.getY());
-            setTile(tilePos.x,tilePos.y,"#"+String.valueOf(tileCount));
+        List<Tile> pathList = view.getPath();
+        int tileCount = 0;
+        for (Tile tile : pathList) {
+            defineImage("tile" + String.valueOf(tileCount), "#" + String.valueOf(tileCount), 256,
+                        tile.getPathImage(), "-");
+            JGPoint tilePos = getTileIndex(tile.getX(), tile.getY());
+            setTile(tilePos.x, tilePos.y, "#" + String.valueOf(tileCount));
             tileCount++;
         }
     }
@@ -78,8 +81,8 @@ public class Game extends StdGame {
 
     /**
      * Checks if the user has clicked on the screen, and if so, either tries to
-     * buy a tower at the clicked tile position or tries to get the info of
-     * the tower at the clicked tile position
+     * buy a tower at the clicked mouse position or tries to get the info of
+     * the tower at the clicked mouse position
      */
     public void checkUserInteractions () {
         if (getMouseButton(1) && getMouseInside()) {
@@ -87,13 +90,18 @@ public class Game extends StdGame {
             JGPoint mousePosition = getMousePos();
             JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
             if (purchasing) {
-                view.buyTower(tilePosition.x, tilePosition.y, towerToPurchase);
-                purchasing = false;
-                System.out.format("Buying tower at: %d,%d\n", tilePosition.x, tilePosition.y);
+                if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)){
+                    purchasing = false;
+                }
+                System.out.format("Buying tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }
             else {
-                Tower tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
-                if (tower==null) System.out.println("No tower here");
+                TowerInfo tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
+                if (tower==null) {
+                    System.out.println("No tower here");
+                } else {
+                    mediator.displayTowerInfo(tower);
+                }
                 System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
         }
@@ -110,14 +118,14 @@ public class Game extends StdGame {
     @Override
     public void paintFrame () {
         super.paintFrame();
-//        drawString("Money " + String.valueOf(sc), pfWidth() - 10, 10, 1);
+        // drawString("Money " + String.valueOf(sc), pfWidth() - 10, 10, 1);
     }
 
     /**
      * Indicates that the user wants to buy a tower
      */
     public void placeTower (String tower) {
-//         setBGColor(JGColor.red);
+        // setBGColor(JGColor.red);
         System.out.println("User wants to purchase " + tower);
         purchasing = true;
         towerToPurchase = tower;

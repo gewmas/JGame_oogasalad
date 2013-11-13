@@ -1,14 +1,13 @@
 package gameEngine.controller;
 
-import java.awt.Dimension;
-import java.io.File;
-import java.util.List;
-import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Model;
 import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrame;
+import java.awt.Dimension;
+import java.io.File;
+import java.util.List;
 
 
 public class Controller {
@@ -27,14 +26,14 @@ public class Controller {
     }
 
     public void newGame (File jsonFile) throws Exception {
-        model.newGame(jsonFile); //will throw exception if fail
+        model.newGame(jsonFile); // will throw exception if fail
         view.startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
         // view.showGame();
     }
-    
-    public void startGame(){
+
+    public void startGame () {
         model.startGame();
     }
 
@@ -42,8 +41,8 @@ public class Controller {
      * Get All kinds of TowerFactory
      * However, can only return the basic property of the TowerFactory
      */
-    public List<TowerFactory> getTowerFactory () {
-        return model.getTowerFactory();  
+    public List<TowerInfo> getTowerFactory () {
+        return model.getAllTowerInfo();  
     }
 
     /**
@@ -58,28 +57,28 @@ public class Controller {
      * Sends a call to the model to update the monitored tower stats to the tower
      * at x,y. If the position is invalid, do nothing
      */
-    public Tower getTowerInfo (int x, int y) {
-        Tower tower;
+    public TowerInfo getTowerInfo (int x, int y) {
+        TowerInfo towerinfo;
         try {
-            tower=model.getTowerInfo(x,y);
+            towerinfo=model.getTowerInfo(x,y);
         } catch (Exception e) {
-            tower=null;
+            towerinfo=null;
         }
-        return tower;
+        return towerinfo;
     }
 
     /**
      * Returns the size of the game in number of tiles
      */
     public Dimension getGameSize () {
-        return gameSize;
+        return model.getGameSize();
     }
 
     /**
      * Returns the URL to the game's background image
      */
     public String getBGImage () {
-        return "resources/space_background.jpg";
+        return model.getBGImage();
     }
 
     /**
@@ -94,14 +93,14 @@ public class Controller {
      */
     public int getLives () {
         return model.getLife();
-    }  
-     
-    public List<Tile> getPath(){
+    }
+
+    public List<Tile> getPath () {
         return model.getPathList();
     }
 
-//    public String getPathImage(){
-//    }     
+    // public String getPathImage(){
+    // }
 
 
 }
