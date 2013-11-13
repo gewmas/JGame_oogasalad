@@ -47,7 +47,11 @@ public abstract class TowerFactory implements TowerInfo{
     public double getAttackSpeed (){
         return attackSpeed;
     }
-    public double getRange (){
+    public int getAttackMode() {
+		return attackMode;
+	}
+
+	public double getRange (){
         return range;
     }
     

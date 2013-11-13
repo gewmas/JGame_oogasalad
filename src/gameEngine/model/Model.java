@@ -21,7 +21,7 @@ public class Model {
     /**
      * @author Yuhua
      * 
-     *         warehouse - store different kinds of tower, enemy warehouse
+     * warehouse - store different kinds of tower, enemy warehouse
      * 
      */
 
@@ -44,8 +44,7 @@ public class Model {
 
     public void newGame (File jsonFile) throws Exception {
         // For test convenience
-        // jsonFile = new File(System.getProperty("user.dir") +
-        // "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
+        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
 
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
@@ -56,18 +55,14 @@ public class Model {
         grid = gridFactory.getGridList();
 
         // 2 create factory by
-
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
         
         gameInfo = new GameInfo(parser);
-
-
     }
 
     public void startGame () {
         //towerWarehouse.create("DefaultTower"); // test, should be called within Rule
-
         Wave w = new Wave("1", 10, 500, 1000, enemyWarehouse);
         rule.addWave(w);
         rule.ruleStart();
@@ -124,9 +119,7 @@ public class Model {
         }
         return null;
     }
-
-   
-
+    
     /*
      * GameInfo getter method
      */

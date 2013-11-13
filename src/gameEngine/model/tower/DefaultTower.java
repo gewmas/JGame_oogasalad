@@ -35,7 +35,7 @@ public class DefaultTower extends Tower {
 
         this.damage = damage;
         this.attackSpeed = attackSpeed;
-        this.attackMode = 1;
+        this.attackMode = attackMode;
         
         this.range = range;
         this.cost = cost;
@@ -151,7 +151,6 @@ public class DefaultTower extends Tower {
     public void sell () {
         // level.getGameInfo().addGold((int)recyclePrice);
         // level.getTowers().remove(this);
-
         this.remove();
     }
 

@@ -80,7 +80,11 @@ public class Tower extends JGObject implements TowerInfo{
         return attackSpeed;
     }
     
-    @Override
+    public int getAttackMode() {
+		return attackMode;
+	}
+
+	@Override
     public double getRange (){
         return range;
     }
