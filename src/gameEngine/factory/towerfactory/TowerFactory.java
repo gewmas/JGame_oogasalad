@@ -14,12 +14,13 @@ public abstract class TowerFactory implements TowerInfo{
 
     double damage;
     double attackSpeed;
+    
+    int attackMode;
+    
     double range;
 
     double cost;
     double recyclePrice;
-
-    public abstract Tower create ();
 
     public abstract Tower create (int x, int y);
 

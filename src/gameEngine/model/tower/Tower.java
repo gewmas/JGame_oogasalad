@@ -1,9 +1,5 @@
 package gameEngine.model.tower;
 
-import gameEngine.model.Detector;
-import gameEngine.model.bullet.Bullet;
-import gameEngine.model.enemy.Enemy;
-import java.util.List;
 import jgame.JGObject;
 
 
@@ -19,6 +15,16 @@ public class Tower extends JGObject implements TowerInfo{
     
     double damage;
     double attackSpeed;
+    
+    /**
+     * AttackMode include 
+     * 0 - shoot the closest enemy
+     * 1 - shoot the farthest enemy
+     * 2 - shoot weakest enemy with least life
+     * 3 - shoot strongest enemy with most life
+     */
+    int attackMode;
+    
     double range;
 
     double x;
@@ -44,11 +50,13 @@ public class Tower extends JGObject implements TowerInfo{
         this.image = gfxname;
     }
 
-    public double getX () {
+    @Override
+	public double getX () {
         return x;
     }
 
-    public double getY () {
+    @Override
+	public double getY () {
         return y;
     }
     

@@ -25,24 +25,16 @@ public class DefaultTowerFactory extends TowerFactory {
 //        this.y = currTower.getDouble("y");
         this.damage = currTower.getDouble("damage");
         this.attackSpeed = currTower.getDouble("attackSpeed");
+        this.attackMode = 0;
         this.range = currTower.getDouble("range");
         this.cost = currTower.getDouble("cost");
         this.recyclePrice = currTower.getDouble("recyclePrice");
     }
 
     @Override
-    public Tower create () {
-        Tower tower =
-                (Tower) new DefaultTower(damage, attackSpeed, range, cost, recyclePrice, id, true,
-                                         x, y, Constant.TOWER_CID, image);
-        return tower;
-    }
-
-
-    @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new DefaultTower(damage, attackSpeed, range, cost, recyclePrice, id, true,
+                (Tower) new DefaultTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, id, true,
                                          x, y, Constant.TOWER_CID, image);
         return tower;
     }

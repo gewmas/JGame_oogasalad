@@ -105,9 +105,11 @@ public class Model {
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact
     public boolean purchaseTower (int x, int y, String name) {
-        //TODO Should check (x,y) valid first
-        
-        return towerWarehouse.create(x, y, name, gameInfo);
+        Tile currentTile = getTile(x, y);
+        if(currentTile.isEmpty()){
+            return towerWarehouse.create(x, y, name, gameInfo);
+        }
+    	return false;
     }
     
     public Tile getTile(int x, int y) {

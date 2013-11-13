@@ -159,4 +159,8 @@ public class Enemy extends JGObject {
         }
     }
 
+	public double getLife() {
+		return life;
+	}
+
 }
