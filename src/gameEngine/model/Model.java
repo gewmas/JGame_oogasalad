@@ -44,7 +44,7 @@ public class Model {
 
     public void newGame (File jsonFile) throws Exception {
         // For test convenience
-        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
+//        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
 
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);

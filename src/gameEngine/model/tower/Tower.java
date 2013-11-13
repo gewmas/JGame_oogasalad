@@ -12,10 +12,10 @@ import jgame.JGObject;
 public class Tower extends JGObject implements TowerInfo{
     String towerName;
     String image;
-    
+
     double damage;
     double attackSpeed;
-    
+
     /**
      * AttackMode include 
      * 0 - shoot the closest enemy
@@ -24,7 +24,7 @@ public class Tower extends JGObject implements TowerInfo{
      * 3 - shoot strongest enemy with most life
      */
     int attackMode;
-    
+
     double range;
 
     double x;
@@ -34,7 +34,7 @@ public class Tower extends JGObject implements TowerInfo{
     double recyclePrice;
 
     String description;
-    
+
 
 
     public Tower (String name,
@@ -48,43 +48,44 @@ public class Tower extends JGObject implements TowerInfo{
 
         this.towerName = name;        
         this.image = gfxname;
+        
     }
 
     @Override
-	public double getX () {
+    public double getX () {
         return x;
     }
 
     @Override
-	public double getY () {
+    public double getY () {
         return y;
     }
-    
+
     @Override
     public String getTowerName(){
         return towerName;
     }
-    
+
     @Override
     public String getDescription () {
         return description;
     }
-    
+
     @Override
     public double getDamage (){
         return damage;
     }
-    
+
     @Override
     public double getAttackSpeed (){
         return attackSpeed;
     }
-    
-    public int getAttackMode() {
-		return attackMode;
-	}
 
-	@Override
+    public int getAttackMode() {
+        return attackMode;
+    }
+
+    @Override
     public double getRange (){
         return range;
     }
