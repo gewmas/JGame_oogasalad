@@ -8,7 +8,9 @@ import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Tile;
 import gameEngine.model.tower.Tower;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.gameFrame.GameFrame;
+import gameEngine.view.gameFrame.GameFrameMediator;
 import gameEngine.view.initialization.InitializationFrame;
 
 
@@ -23,17 +25,19 @@ public class View {
     private GameFrame gameFrame;
     private Frame initializationFrame;
     private Controller controller;
+    private GameFrameMediator mediator;
 
     public View (Controller controller) {
         this.controller = controller;
-        gameFrame = new GameFrame(controller, this);
+        mediator = new GameFrameMediator();
+        gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame = new InitializationFrame(this);
-
     }
 
     public void selectNewGame () {
+        mediator.endGame();
         gameFrame.dispose();
-        gameFrame = new GameFrame(controller, this);
+        gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame = new InitializationFrame(this);
     }
 
@@ -55,22 +59,24 @@ public class View {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
 
     /**
      * Tells the controller to send tower purchase instructions to the model
      * and then reset the cursor
      */
-    public void buyTower (int x, int y, String tower) {
-        controller.purchaseTower(x, y, tower);
-
+    public boolean buyTower (int x, int y, String tower) {
+        if (controller.purchaseTower(x, y, tower)) {
+            gameFrame.purchaseTower();
+            return true;
+        }
+        return false;
     }
 
     /**
      * Requests tower information for the tower at the given location
      */
-    public Tower getTowerInfo (int x, int y) {
+    public TowerInfo getTowerInfo (int x, int y) {
         return controller.getTowerInfo(x, y);
     }
 
@@ -100,7 +106,7 @@ public class View {
         return controller.getLives();
     }
 
-    public List<TowerFactory> getTowers () {
+    public List<TowerInfo> getTowers () {
         return controller.getTowerFactory();
     }
 }

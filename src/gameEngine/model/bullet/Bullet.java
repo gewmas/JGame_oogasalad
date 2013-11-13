@@ -35,6 +35,9 @@ public class Bullet extends JGObject {
 
     @Override
     public void move () {
+    	//if target enemy destroy other bullets, remove
+    	if(!targetEnemy.isAlive()) remove();
+    	
         double dx = targetEnemy.x - x;
         double dy = targetEnemy.y - y;
         double ds = Math.sqrt(dx * dx + dy * dy);

@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame;
 
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.gameFrame.store.TowerInfoPanel;
 import gameEngine.view.gameFrame.store.TowersOptionPanel;
 
@@ -34,12 +35,20 @@ public class GameFrameMediator {
     }
 
     /**
+     * Destroys the jgame instance so that it can be reloaded
+     */
+
+    public void endGame () {
+        canvasPanel.endGame();
+    }
+
+    /**
      * Notifies all colleagues that need to be updated
      * when a user is trying to purchase a tower
      * 
      * @param towername
      */
-    public void placeTower (TowerFactory towerInfo) {
+    public void placeTower (TowerInfo towerInfo) {
 
         canvasPanel.placeTower(towerInfo);
         gameFrame.placeTower(towerInfo);
@@ -51,7 +60,7 @@ public class GameFrameMediator {
      * 
      * @param tower
      */
-    public void displayTowerInfo (TowerFactory tower) {
+    public void displayTowerInfo (TowerInfo tower) {
         towerInfoPanel.displayTowerInfo(tower);
     }
 
@@ -82,7 +91,6 @@ public class GameFrameMediator {
 
     public void addTowerInfoPanel (TowerInfoPanel towerInfoPanel) {
         this.towerInfoPanel = towerInfoPanel;
-
     }
 
 }

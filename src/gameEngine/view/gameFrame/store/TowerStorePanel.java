@@ -25,8 +25,8 @@ public class TowerStorePanel extends Panel {
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
 
-       TowerInfoPanel towerInfoPanel = new TowerInfoPanel();
-        mediator.addTowerInfoPanel( towerInfoPanel);
+        TowerInfoPanel towerInfoPanel = new TowerInfoPanel();
+        mediator.addTowerInfoPanel(towerInfoPanel);
 
         storeOptions = new TowersOptionPanel(mediator, engineView);
         mediator.addTowersOptionPanel(storeOptions);

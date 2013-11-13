@@ -20,7 +20,7 @@ import java.util.Map.Entry;
  * 
  */
 
-public class TowerWarehouse implements Warehouse {
+public class TowerWarehouse extends Warehouse {
 
     private JSONArray jsonArray;
     Map<String, TowerFactory> towers;
@@ -44,29 +44,30 @@ public class TowerWarehouse implements Warehouse {
         }
     }
 
-    public void create (String name) {
-        TowerFactory towerFactory = towers.get(name);
-        towerFactory.create();
-    }
+//    public void create (String name) {
+//        TowerFactory towerFactory = towers.get(name);
+//        towerFactory.create();
+//    }
+
     // Jiaran edit, something's wrong please contact.
+    //wenxin I cast it to int
     public boolean create(int x, int y, String name,GameInfo g){
         TowerFactory towerFactory = towers.get(name);
         if(towerFactory.getCost()<=g.getGold()){
-            g.loseGold(towerFactory.getCost());
+            g.loseGold((int) towerFactory.getCost());
             towerFactory.create(x, y);
             return true;
         }
-        else
-            return false;
+        else return false;
     }
-    
-    public List<TowerFactory> getTowerFactory (){
+
+    public List<TowerFactory> getTowerFactory () {
         List<TowerFactory> towerFactory = new ArrayList<TowerFactory>();
-        
-        for(Entry<String, TowerFactory> entry : towers.entrySet()){
+
+        for (Entry<String, TowerFactory> entry : towers.entrySet()) {
             towerFactory.add(entry.getValue());
         }
-        
+
         return towerFactory;
     }
 

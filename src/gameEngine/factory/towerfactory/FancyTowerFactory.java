@@ -10,8 +10,6 @@ public class FancyTowerFactory extends DefaultTowerFactory {
         super(currTower);
     }
 
-    @Override
-    public Tower create () {
-        return null;
-    }
+    
+
 }

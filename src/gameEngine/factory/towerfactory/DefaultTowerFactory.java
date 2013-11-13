@@ -1,8 +1,9 @@
+
 package gameEngine.factory.towerfactory;
 
 import gameEngine.Constant.Constant;
-import gameEngine.model.tower.Tower;
 import gameEngine.model.tower.DefaultTower;
+import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 
@@ -12,33 +13,48 @@ import gameEngine.parser.JSONLibrary.JSONObject;
  *         TowerFactory can create different types of Tower when called by the create() method
  * 
  */
+
 public class DefaultTowerFactory extends TowerFactory {
+
 
     public DefaultTowerFactory (JSONObject currTower) {
         this.id = currTower.getString("id");
         this.image = currTower.getString("image");
 
-        this.x = currTower.getDouble("x");
-        this.y = currTower.getDouble("y");
+//        this.x = currTower.getDouble("x");
+//        this.y = currTower.getDouble("y");
         this.damage = currTower.getDouble("damage");
         this.attackSpeed = currTower.getDouble("attackSpeed");
+        this.attackMode = 0;
         this.range = currTower.getDouble("range");
         this.cost = currTower.getDouble("cost");
         this.recyclePrice = currTower.getDouble("recyclePrice");
     }
 
     @Override
-    public Tower create () {
+    public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new DefaultTower(damage, attackSpeed, range, cost, recyclePrice, id, true,
+                (Tower) new DefaultTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, id, true,
                                          x, y, Constant.TOWER_CID, image);
         return tower;
     }
 
     @Override
-    public Tower create (int x, int y) {
+    public double getX () {
         // TODO Auto-generated method stub
-        return null;
+        return 0;
+    }
+
+    @Override
+    public double getY () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public String getTowerName () {
+        // TODO Auto-generated method stub
+        return id;
     }
 
 }

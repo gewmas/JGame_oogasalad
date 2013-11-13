@@ -9,7 +9,6 @@ import jgame.JGRectangle;
 import jgame.impl.JGEngineInterface;
 
 
-
 /**
  * @author Jiaran
  *         In this game, we have lots of detection to decide
@@ -27,11 +26,12 @@ import jgame.impl.JGEngineInterface;
  */
 public class Detector<T extends JGObject> {
     private JGEngineInterface myEng;
-    //Because of Erasure, we need to use reflection to help complete the function
+    // Because of Erasure, we need to use reflection to help complete the function
     private Class<T> myType;
+
     public Detector (JGEngineInterface eng, Class<T> type) {
         myEng = eng;
-        myType=type;
+        myType = type;
 
     }
 
@@ -53,8 +53,6 @@ public class Detector<T extends JGObject> {
         T result = (T) v.get(0);
         return result;
     }
-
-  
 
     @SuppressWarnings("unchecked")
     private Vector<JGObject> getObjects (int centerx, int centery, int range, int cid, String prefix) {
