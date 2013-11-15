@@ -25,7 +25,7 @@ public class DefaultTowerFactory extends TowerFactory {
 //        this.y = currTower.getDouble("y");
         this.damage = currTower.getDouble("damage");
         this.attackSpeed = currTower.getDouble("attackSpeed");
-        this.attackMode = currTower.getInt("attackMode");
+        //this.attackMode = currTower.getInt("attackMode");
         this.range = currTower.getDouble("range");
         this.cost = currTower.getDouble("cost");
         this.recyclePrice = currTower.getDouble("recyclePrice");
