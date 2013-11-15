@@ -1,6 +1,6 @@
 package gameEngine.model;
 
-import gameEngine.factory.GridFactory;
+import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.tower.Tower;
 import gameEngine.model.tower.TowerInfo;
@@ -122,24 +122,10 @@ public class Model {
     
     /*
      * GameInfo getter method
-     */
-    public int getMoney () {
-        return gameInfo.getGold();
-    }
+     *deleted by Jiaran based on Duvall's suggestion. Delete this when
+     *every on is aware
+     **/
 
-    public int getLife () {
-        return gameInfo.getLife();
-    }
-    
-    public String getBGImage () {
-        return gameInfo.getBGImage();
-    }
-    
-    
-    public Dimension getGameSize () {
-             return gameInfo.getDimension();
-     }
-    
     /*
      * Model Getter methods
      */
