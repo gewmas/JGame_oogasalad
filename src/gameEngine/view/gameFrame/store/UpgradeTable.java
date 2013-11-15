@@ -2,14 +2,12 @@ package gameEngine.view.gameFrame.store;
 
 import java.util.Vector;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-
 
 
 public class UpgradeTable extends AbstractTableModel {
 
     Vector textData = new Vector();
-   
+
     public void addText (String text) {
         // textData.clear();
         textData.addElement(text);

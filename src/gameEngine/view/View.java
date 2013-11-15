@@ -59,12 +59,10 @@ public class View {
             controller.newGame(file);
             initializationFrame.dispose();
         }
-        
         catch (Exception e) {
-            e.printStackTrace();
-//            JOptionPane.showMessageDialog(null,
-//                                          StyleConstants.resourceBundle
-//                                                  .getString("FileErrorMessage"));
+            JOptionPane.showMessageDialog(null,
+                                          StyleConstants.resourceBundle
+                                                  .getString("FileErrorMessage"));
         }
     }
 
