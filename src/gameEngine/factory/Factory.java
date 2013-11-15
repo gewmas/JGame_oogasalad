@@ -1,5 +1,6 @@
 package gameEngine.factory;
 
+import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.parser.Parser;
 
 

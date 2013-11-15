@@ -59,7 +59,7 @@ public class TestGrid extends JGEngine {
             e.printStackTrace();
         }
 
-        List<Tile> pathList = model.getPathList();
+        LinkedList<Tile> pathList = model.getPathList();
         for (Tile tile : pathList) {
             System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
             System.out.println("Center x=" + tile.getCenterX() + " center y=" + tile.getCenterY());

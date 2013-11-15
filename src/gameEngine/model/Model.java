@@ -1,6 +1,6 @@
 package gameEngine.model;
 
-import gameEngine.factory.GridFactory;
+import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.tower.Tower;
 import gameEngine.model.tower.TowerInfo;
