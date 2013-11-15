@@ -1,11 +1,13 @@
 package gameEngine.view;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
-import javax.swing.JOptionPane;
 import gameEngine.controller.Controller;
+import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.Tile;
+import gameEngine.model.tower.Tower;
 import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.GameFrameMediator;
@@ -32,9 +34,6 @@ public class View {
         initializationFrame = new InitializationFrame(this);
     }
 
-    /**
-     * Called if a user wants to start a different game in the middle of playing a game.
-     */
     public void selectNewGame () {
         mediator.endGame();
         gameFrame.dispose();
@@ -51,18 +50,14 @@ public class View {
         gameFrame.showGame();
     }
 
-    /**
-     * @param file selected file from user
-     */
     public void newGame (File file) {
         try {
             controller.newGame(file);
             initializationFrame.dispose();
         }
         catch (Exception e) {
-            JOptionPane.showMessageDialog(null,
-                                          StyleConstants.resourceBundle
-                                                  .getString("FileErrorMessage"));
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
     }
 

@@ -29,7 +29,7 @@ public class TowersOptionPanel extends Panel {
 
     private static final String LAYOUT_WRAP = "wrap 4";
     private static final int PANEL_WIDTH = 250;
-    private static final int PANEL_HEIGHT = 200;
+    private static final int PANEL_HEIGHT = 400;
     private List<TowerStoreButton> storeItems;
     private View view;
 
