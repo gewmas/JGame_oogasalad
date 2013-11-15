@@ -44,7 +44,7 @@ public class Model {
 
     public void newGame (File jsonFile) throws Exception {
         // For test convenience
-        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
+//        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
 
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
@@ -101,7 +101,7 @@ public class Model {
     // Jiaran: purchase, get tower info. If something is wrong plz contact
     public boolean purchaseTower (int x, int y, String name) {
         Tile currentTile = getTile(x, y);
-        if(currentTile.isEmpty()){
+        if(currentTile.isEmpty()&&!currentTile.hasPath()){
             return towerWarehouse.create(x, y, name, gameInfo);
         }
     	return false;

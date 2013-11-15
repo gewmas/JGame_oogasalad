@@ -53,7 +53,61 @@ public class Controller {
     public boolean purchaseTower (int x, int y, String name) {
         return model.purchaseTower(x, y, name);
     }
-
+    
+    /**
+     * @author Yuhua
+     * 
+     * Sell Tower at (x,y)
+     * Succeed, return true, added gold
+     * No such tower, return false
+     * 
+     * @param x
+     * @param y
+     * @return
+     */
+    public boolean sellTower(int x, int y){
+        
+        return false;
+    }
+    
+    /**
+     * @author Yuhua
+     * 
+     * Upgrade Tower at (x, y)
+     * Succeed, return true, decrease gold
+     * No such tower/Insufficient fund, return false
+     * 
+     * @param x
+     * @param y
+     * @return
+     */
+    public boolean upgradeTower(int x, int y){
+        
+        return false;
+    }
+    
+    /**
+     * Set Tower Attack Mode at (x, y)
+     * 
+     * AttackMode include 
+     * 0 - shoot the closest enemy
+     * 1 - shoot the farthest enemy
+     * 2 - shoot weakest enemy with least life
+     * 3 - shoot strongest enemy with most life
+     *
+     * Return true when set tower attackMode succeed
+     * Return false when no such tower/already at that attackMode
+     * 
+     * @param x
+     * @param y
+     * @param attackMode
+     * @return
+     */
+    public boolean setTowerAttackMode(int x, int y, int attackMode){
+        
+        return false;
+    }
+    
     /**
      * Sends a call to the model to update the monitored tower stats to the tower
      * at x,y. If the position is invalid, do nothing

@@ -1,0 +1,117 @@
+{
+"name": "Tower Destruction II",
+"spashImage" :  "game-bg.png",
+"BGImage" :  "resources/space_background.jpg",
+"gold" : 200,
+"numberOfLives" : 100,
+"levels": 5,
+"widthOfWindow": 600,
+"heightOfWindow": 600,
+"tilesPerRow": 20,
+"difficultyScale": 1.5,
+"map":
+{
+  	  "pathImage":  "path.jpg", 
+	  "Path":[ 
+               { "x": 0, "y": 0 },
+               { "x": 0, "y": 1 },
+               { "x": 1, "y": 1 },
+               { "x": 1, "y": 2 },
+               { "x": 2, "y": 2 },
+               { "x": 2, "y": 1 },
+               { "x": 3, "y": 1 },
+               { "x": 3, "y": 2 },
+               { "x": 3, "y": 3 },
+               { "x": 4, "y": 3 },
+               { "x": 5, "y": 3 },
+               { "x": 5, "y": 4 },
+               { "x": 5, "y": 5 },
+               { "x": 6, "y": 5 },
+               { "x": 7, "y": 5 },
+               { "x": 8, "y": 5 },
+               { "x": 9, "y": 5 },
+               { "x": 10, "y": 5 },
+               { "x": 11, "y": 5 },
+               { "x": 12, "y": 5 },
+               { "x": 13, "y": 5 },
+               { "x": 14, "y": 5 }
+           ]
+},
+
+"towerType": [
+	{
+	 "id": "DefaultTower",
+	 "image": "tower1",
+	 "x": 32,
+	 "y": 32,
+	 "damage": 1,
+	 "attackSpeed": 0.8,
+	 "attackMode": 1,
+	 "range": 100,	
+	 "cost": 100, 
+	 "recyclePrice":  50,
+	} 
+],
+
+"enemyType":[
+{
+	"id": "1",
+	"gold": 5,
+	"image": "enemy1",
+	"life": 2,
+	"speed": 0.5,
+}, 
+{
+	"id": "2",
+	"gold": 10,
+	"image": "enemy2",
+	"life": 3,
+	"speed": 0.1,
+}
+],
+
+"levelData":[
+	{	
+	"level":1,
+	"numberWaves": 2,
+	"enemiesOfWave" : [ 
+			{
+			"wave":1, 
+		    "enemies": 
+			    [
+					{"id": "ID" ,"quantity": 10},
+				]	
+			},
+			{
+			"wave":2, 
+		    "enemies": 
+			    [
+					{"id": "ID1" ,"quantity": 15},
+				]	
+			}
+		]
+	},
+	{	
+	"level":2,
+	"numberWaves": 2,
+	"enemiesOfWave" : [ 
+			{
+			"wave":1, 
+		    "enemies": 
+			    [
+					{"id":2,"quantity":10}
+				]	
+			},
+			{
+			"wave":1, 
+		    "enemies": 
+			    [
+					{"id":2,"quantity":20}
+				]	
+			}
+		]
+	}
+]  
+
+}
+
