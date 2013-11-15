@@ -2,10 +2,15 @@ package gameEngine.model.tower;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 import gameEngine.Constant.Constant;
 import gameEngine.model.Detector;
 import gameEngine.model.bullet.Bullet;
 import gameEngine.model.enemy.Enemy;
+import gameEngine.model.enemy.comparator.FurthestDistanceEnemyComparator;
+import gameEngine.model.enemy.comparator.ShortestDistanceEnemyComparator;
+import gameEngine.model.enemy.comparator.StrongestEnemyComparator;
+import gameEngine.model.enemy.comparator.WeakestEnemyComparator;
 import jgame.JGObject;
 
 
@@ -14,7 +19,10 @@ public class DefaultTower extends Tower {
     long prevTime;
     private Detector<Enemy> dector;
     
-    Enemy targetEnemy;
+    //Number of shooting at one time
+    int attackAmount = 1;
+    List<Enemy> targetEnemies;
+    
 
     public DefaultTower (
                          double damage,
@@ -46,22 +54,27 @@ public class DefaultTower extends Tower {
 
         this.prevTime = System.currentTimeMillis();
         this.dector = new Detector<Enemy>(this.eng, Enemy.class);
+        
+        this.description = "I am a description";
         // level.getGameInfo().loseGold((int)cost);
-
+        targetEnemies = new ArrayList<Enemy>();
     }
 
     @Override
     public void move () {
         // check the enemies within the shooting range
         // create bullets
-    	targetEnemy = null;
-        getEnemyInRange();
-        
-        
         // check the time after last shoot
         long deltaTime = (System.currentTimeMillis() - prevTime) / 1000; // convert to second
-        if (targetEnemy != null && deltaTime > 1 / attackSpeed) {
-            new Bullet(targetEnemy, damage, "bullet", true, x, y, Constant.BULLET_CID, "bullet");
+        
+        if (deltaTime > 1 / attackSpeed) {
+            targetEnemies.clear();
+            getEnemyInRange();
+        
+//            System.out.println(targetEnemies.size());
+            for(Enemy targetEnemy : targetEnemies){
+                new Bullet(targetEnemy, damage, "bullet", true, x, y, Constant.BULLET_CID, "bullet");
+            }
             prevTime = System.currentTimeMillis();
         }
     }
@@ -70,77 +83,75 @@ public class DefaultTower extends Tower {
     	List<Enemy> enemies = dector.getTargetsInRange((int) x, (int) y, (int) range);
     	if(enemies.isEmpty())return; //No enemy in range
     	
-		List<Enemy> enemiesInRange = new ArrayList<Enemy>();
-		for (Enemy e : enemies) {
-			// check distance between this tower and e then shoot bullets
-	        double dist = Math.sqrt(Math.pow(e.x - x, 2) + Math.pow(e.y - y, 2));
-	        if (dist < range) {
-	            enemiesInRange.add(e);
-	        }
-		}
-		
-		if(enemiesInRange.isEmpty())return; //No enemy in range, double check
+    	List<Enemy> enemiesInRange = new ArrayList<Enemy>();
+    	for (Enemy e : enemies) {
+    	    // check distance between this tower and e then shoot bullets
+    	    double dist = Math.sqrt(Math.pow(e.x - x, 2) + Math.pow(e.y - y, 2));
+    	    if (dist < range) {
+    	        enemiesInRange.add(e);
+    	    }
+    	}
+
+    	if(enemiesInRange.isEmpty())return; //No enemy in range, double check
 		
     	if(attackMode == 0){
-    		getClosestEnemy(enemiesInRange);
+    	    getClosestEnemy(enemiesInRange);
     	}else if(attackMode == 1){
-    		getFurtherestEnemy(enemiesInRange);
+    	    getFurtherestEnemy(enemiesInRange);
     	}else if(attackMode == 2){
-    		getWeakestEnemy(enemiesInRange);
+    	    getWeakestEnemy(enemiesInRange);
     	}else if(attackMode == 3){
-    		getStrongestEnemy(enemiesInRange);
+    	    getStrongestEnemy(enemiesInRange);
     	}
     	
     	//if can't find one, but there is enemy in range
     	//assign one
-    	if(targetEnemy == null && !enemiesInRange.isEmpty()){
-    		targetEnemy = enemiesInRange.get(0);
-    	}
+//    	if(targetEnemies.isEmpty() && !enemiesInRange.isEmpty()){
+//    	    targetEnemies.add(enemiesInRange.get(0));
+//    	}
     }
+    
+    
     
     //Implement AttackMode
     public void getClosestEnemy(List<Enemy> enemiesInRange){
-    	double closestDist = Double.MAX_VALUE;
-    	for(Enemy e : enemiesInRange){
-	        double dist = Math.sqrt(Math.pow(e.x - x, 2) + Math.pow(e.y - y, 2));
-	        if(dist < closestDist){
-	        	closestDist = dist;
-	        	targetEnemy = e;
-	        }
-    	}
+        ShortestDistanceEnemyComparator comparator = new ShortestDistanceEnemyComparator(this);
+        PriorityQueue<Enemy> queue = new PriorityQueue<Enemy>(attackAmount, comparator);
+        
+        UpdateTargetEnemies(queue, enemiesInRange);
     }
     
     public void getFurtherestEnemy(List<Enemy> enemiesInRange){
-    	double furtherestDist = Double.MIN_VALUE;
-    	for(Enemy e : enemiesInRange){
-	        double dist = Math.sqrt(Math.pow(e.x - x, 2) + Math.pow(e.y - y, 2));
-	        if(dist > furtherestDist){
-	        	furtherestDist = dist;
-	        	targetEnemy = e;
-	        }
-    	}
+        FurthestDistanceEnemyComparator comparator = new FurthestDistanceEnemyComparator(this);
+        PriorityQueue<Enemy> queue = new PriorityQueue<Enemy>(attackAmount, comparator);
+        
+        UpdateTargetEnemies(queue, enemiesInRange);
     }
+
     
     public void getWeakestEnemy(List<Enemy> enemiesInRange){
-    	double weakestLife = Double.MAX_VALUE;
-    	for(Enemy e : enemiesInRange){
-    		double life = e.getLife();
-	        if(life < weakestLife){
-	        	weakestLife = life;
-	        	targetEnemy = e;
-	        }
-    	}
+        WeakestEnemyComparator comparator = new WeakestEnemyComparator();
+        PriorityQueue<Enemy> queue = new PriorityQueue<Enemy>(attackAmount, comparator);
+        
+        UpdateTargetEnemies(queue, enemiesInRange);
     }
     
     public void getStrongestEnemy(List<Enemy> enemiesInRange){
-    	double strongestLife = Double.MIN_VALUE;
-    	for(Enemy e : enemiesInRange){
-    		double life = e.getLife();
-	        if(life > strongestLife){
-	        	strongestLife = life;
-	        	targetEnemy = e;
-	        }
-    	}
+        StrongestEnemyComparator comparator = new StrongestEnemyComparator();
+        PriorityQueue<Enemy> queue = new PriorityQueue<Enemy>(attackAmount, comparator);
+        
+        UpdateTargetEnemies(queue, enemiesInRange);
+    }
+    
+    private void UpdateTargetEnemies (PriorityQueue<Enemy> queue, List<Enemy> enemiesInRange) {
+        for(Enemy e : enemiesInRange){
+            queue.add(e);
+        }
+        
+//        System.out.println("Queue size" + queue.size());
+        for(int i = 0; i < attackAmount && !queue.isEmpty(); i++){
+            targetEnemies.add(queue.remove());
+        }
     }
 
     @Override

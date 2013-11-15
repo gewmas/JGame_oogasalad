@@ -1,5 +1,6 @@
 package gameEngine.model.bullet;
 
+import gameEngine.Constant.Constant;
 import gameEngine.model.enemy.Enemy;
 import jgame.JGObject;
 
@@ -48,10 +49,17 @@ public class Bullet extends JGObject {
 
     @Override
     public void hit (JGObject obj) {
-
+        //Bullet can only kill target Enemy
+        if(obj == targetEnemy){
+            remove();
+        }
     }
 
     public double getDamage () {
         return damage;
+    }
+
+    public Enemy getTargetEnemy () {
+        return targetEnemy;
     }
 }
