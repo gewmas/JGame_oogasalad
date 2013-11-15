@@ -1,10 +1,10 @@
 package main;
 
-import gameEngine.view.View;
+import gameEngine.controller.Controller;
 
 
 public class Main {
     public static void main (String[] args) {
-        new View();
+        new Controller();
     }
 }
