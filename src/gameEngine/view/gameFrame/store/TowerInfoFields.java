@@ -7,10 +7,16 @@ package gameEngine.view.gameFrame.store;
  * @author Lalita Maraj
  * 
  */
-public enum TowerInfoFields {
+public enum TowerInfoFields  {
     NAME("Tower", "red"),
     COST("Cost", "green"),
-    DESCRIPTION("Description", "blue");
+    DESCRIPTION("Description", "blue"),
+    ATTACKSPEED("Attack Speed","red"),
+    ATTACKMODE("Attack Mode","green"),
+    DAMAGE("Damage","blue"),
+    RANGE("Range","red"),
+    RECYCLE("Recycle Price","green");
+    
 
     private static final String HTML_CLOSE = " :</font> ";
     private static final String HTML_STYLE_FONT = " style=font-weight:bold>";
@@ -35,5 +41,16 @@ public enum TowerInfoFields {
 
         return HTML_FONT_COLOR + color + HTML_STYLE_FONT + field + HTML_CLOSE;
     }
+    
+    public String addValue(Double value){
+        return HTML_FONT_COLOR + color + HTML_STYLE_FONT + field + HTML_CLOSE + Double.toString(value);
+    }
 
+    public String addValue (String value) {
+        return HTML_FONT_COLOR + color + HTML_STYLE_FONT + field + HTML_CLOSE + value;
+    }
+
+    public String addValue (int value) {
+        return HTML_FONT_COLOR + color + HTML_STYLE_FONT + field + HTML_CLOSE + value;
+    }
 }
