@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Label;
 import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.Panel;
@@ -26,12 +27,12 @@ public class TowerInfoPanel extends Panel {
 
     private JList myInfoList;
     private StoreListModel myInfoListModel;
-    
-    private JList myUpgradeList;
-    private StoreListModel myUpgradeListModel;
+
+    private UpgradeTable upgradeTable;
 
     public TowerInfoPanel () {
         super();
+        this.setLayout(new GridLayout(0, 1));
 
         Border valuePanelBorder =
                 BorderFactory.createTitledBorder(StyleConstants.resourceBundle
@@ -49,14 +50,17 @@ public class TowerInfoPanel extends Panel {
 
         myInfoListModel = new StoreListModel();
         myInfoList = new JList(myInfoListModel);
-        myInfoList.setVisibleRowCount(15);
-        JScrollPane listScrollPane = new JScrollPane(myInfoList);   
+
+        JScrollPane listScrollPane = new JScrollPane(myInfoList);
         add(listScrollPane);
-    
-        
+        upgradeTable = new UpgradeTable();
 
+        JTable table = new JTable(upgradeTable);
 
-        
+        JScrollPane tableSP = new JScrollPane(table);
+
+        add(tableSP);
+
     }
 
     /**
@@ -64,21 +68,25 @@ public class TowerInfoPanel extends Panel {
      * update the information this panel displays
      */
     public void displayTowerInfo (TowerInfo tower) {
-    
-        myInfoListModel.clear();
-    
-        myInfoListModel.addItem((TowerInfoFields.NAME.addValue(tower.getTowerName())), tower.getTowerName());
-        myInfoListModel.addItem(TowerInfoFields.COST.addValue(tower.getCost() ),tower.getCost());
-        myInfoListModel.addItem(TowerInfoFields.DESCRIPTION + tower.getDescription(), tower.getDescription());
-        
-        myInfoListModel.addItem(TowerInfoFields.ATTACKSPEED.addValue(tower.getAttackSpeed()),tower.getAttackSpeed() );
-        myInfoListModel.addItem(TowerInfoFields.ATTACKMODE.addValue(tower.getAttackMode()), tower.getAttackMode());
-        myInfoListModel.addItem(TowerInfoFields.DAMAGE.addValue(tower.getDamage()) ,tower.getDamage());
 
-        
-        myInfoListModel.addItem(TowerInfoFields.RANGE.addValue(tower.getRange()),tower.getRange() );//.getName());
-        myInfoListModel.addItem(TowerInfoFields.RECYCLE.addValue(tower.getRecyclePrice()) ,tower.getRecyclePrice());
-     
+        myInfoListModel.clear();
+
+        myInfoListModel.addItem((TowerInfoFields.NAME.addValue(tower.getTowerName())),
+                                tower.getTowerName());
+        myInfoListModel.addItem(TowerInfoFields.COST.addValue(tower.getCost()), tower.getCost());
+        myInfoListModel.addItem(TowerInfoFields.DESCRIPTION + tower.getDescription(),
+                                tower.getDescription());
+
+        myInfoListModel.addItem(TowerInfoFields.ATTACKSPEED.addValue(tower.getAttackSpeed()),
+                                tower.getAttackSpeed());
+        myInfoListModel.addItem(TowerInfoFields.ATTACKMODE.addValue(tower.getAttackMode()),
+                                tower.getAttackMode());
+        myInfoListModel.addItem(TowerInfoFields.DAMAGE.addValue(tower.getDamage()),
+                                tower.getDamage());
+
+        myInfoListModel.addItem(TowerInfoFields.RANGE.addValue(tower.getRange()), tower.getRange());// .getName());
+        myInfoListModel.addItem(TowerInfoFields.RECYCLE.addValue(tower.getRecyclePrice()),
+                                tower.getRecyclePrice());
 
     }
 
