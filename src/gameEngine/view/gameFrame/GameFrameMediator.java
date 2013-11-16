@@ -2,8 +2,8 @@ package gameEngine.view.gameFrame;
 
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.tower.TowerInfo;
-import gameEngine.view.gameFrame.store.TowerInfoPanel;
-import gameEngine.view.gameFrame.store.TowersOptionPanel;
+import gameEngine.view.gameFrame.store.StoreInfoPanel;
+import gameEngine.view.gameFrame.store.StoreOptionsPanel;
 
 
 /**
@@ -25,12 +25,12 @@ import gameEngine.view.gameFrame.store.TowersOptionPanel;
  */
 public class GameFrameMediator {
 
-    private TowersOptionPanel storeOptions;
+    private StoreOptionsPanel storeOptions;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
-    private TowerInfoPanel towerInfoPanel;
+    private StoreInfoPanel towerInfoPanel;
 
-    public void addTowersOptionPanel (TowersOptionPanel storeOptions) {
+    public void addTowersOptionPanel (StoreOptionsPanel storeOptions) {
         this.storeOptions = storeOptions;
     }
 
@@ -57,11 +57,10 @@ public class GameFrameMediator {
     /**
      * Used by display information about a tower
      * on the Tower Info Panel
-     * 
-     * @param tower
+     * @param towerInformation TODO
      */
-    public void displayTowerInfo (TowerInfo tower) {
-        towerInfoPanel.displayTowerInfo(tower);
+    public void displayTowerInfo (String towerInformation) {
+        towerInfoPanel.displayTowerInfo(towerInformation);
     }
 
     /**
@@ -89,7 +88,7 @@ public class GameFrameMediator {
 
     }
 
-    public void addTowerInfoPanel (TowerInfoPanel towerInfoPanel) {
+    public void addTowerInfoPanel (StoreInfoPanel towerInfoPanel) {
         this.towerInfoPanel = towerInfoPanel;
     }
 
