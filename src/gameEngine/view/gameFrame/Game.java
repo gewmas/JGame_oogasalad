@@ -40,6 +40,8 @@ public class Game extends StdGame {
     @Override
     public void initCanvas () {
         Dimension size = view.getGameSize();
+        System.out.println(size.width);
+        System.out.println(size.height);
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
     }
