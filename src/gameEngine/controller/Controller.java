@@ -126,28 +126,28 @@ public class Controller {
      * Returns the size of the game in number of tiles
      */
     public Dimension getGameSize () {
-        return model.getGameSize();
+        return model.getGameInfo().getDimension();
     }
 
     /**
      * Returns the URL to the game's background image
      */
     public String getBGImage () {
-        return model.getBGImage();
+        return model.getGameInfo().getBGImage();
     }
 
     /**
      * Returns the amount of money in the game
      */
     public int getMoney () {
-        return model.getMoney();
+        return model.getGameInfo().getGold();
     }
 
     /**
      * Return the number of lives remaining
      */
     public int getLives () {
-        return model.getLife();
+        return model.getGameInfo().getLife();
     }
 
     public List<Tile> getPath () {

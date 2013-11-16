@@ -12,25 +12,27 @@ import jgame.JGObject;
  */
 public class Tile {
 
-    private boolean hasPath, hasTower;
+    private boolean hasPath, hasTower, hasBarrier;
     private double xPos, yPos, centerX, centerY, endX, endY;
-    private String imgPath;
+    private String pathImage, barrierImage;
 
     public Tile (double x, double y, double endX, double endY) {
         hasPath = false;
         hasTower = false;
+        hasBarrier = false;
         xPos = x;
         yPos = y;
         this.endX = endX;
         this.endY = endY;
-        imgPath = "";
+        pathImage = "";
+        barrierImage = "";
         this.centerX = (x + endX) / 2;
         this.centerY = (y + endY) / 2;
     }
 
     public void setOnPath (String imgPath) {
         hasPath = true;
-        this.imgPath = imgPath;
+        this.pathImage = imgPath;
     }
 
     public void setTower () {
@@ -44,9 +46,13 @@ public class Tile {
     public boolean hasTower () {
         return hasTower;
     }
+    
+    public boolean hasBarrier () {
+        return hasBarrier;
+    }
 
     public boolean isEmpty () {
-        return (!hasPath) && (!hasTower);
+        return (!hasPath) && (!hasTower) && (!hasBarrier);
     }
 
     public double getX () {
@@ -74,7 +80,16 @@ public class Tile {
     }
 
     public String getPathImage () {
-        return imgPath;
+        return pathImage;
+    }
+    
+    public String getBarrierImage() {
+        return barrierImage;
+    }
+    
+    public void setBarrier(String imgPath) {
+        hasBarrier = true;
+        barrierImage = imgPath;
     }
 
 }
