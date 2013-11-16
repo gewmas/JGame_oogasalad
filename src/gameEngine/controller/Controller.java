@@ -2,7 +2,6 @@ package gameEngine.controller;
 
 import gameEngine.model.Model;
 import gameEngine.model.Tile;
-import gameEngine.model.tower.Tower;
 import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.View;
 import java.awt.Dimension;
@@ -39,6 +38,11 @@ public class Controller {
     }
 
     /**
+     * @author Yuhua
+     * Tower Related Method
+     */
+    
+    /**
      * Get All kinds of TowerFactory
      * However, can only return the basic property of the TowerFactory
      */
@@ -46,6 +50,20 @@ public class Controller {
         return model.getAllTowerInfo();  
     }
 
+    /**
+     * Sends a call to the model to update the monitored tower stats to the tower
+     * at x,y. If the position is invalid, do nothing
+     */
+    public TowerInfo getTowerInfo (int x, int y) {
+        TowerInfo towerinfo;
+        try {
+            towerinfo=model.getTowerInfo(x,y);
+        } catch (Exception e) {
+            towerinfo=null;
+        }
+        return towerinfo;
+    }
+    
     /**
      * Sends a call to the model to purchase tower tower at position x,y
      * If position is invalid, do nothing for now
@@ -66,8 +84,7 @@ public class Controller {
      * @return
      */
     public boolean sellTower(int x, int y){
-        
-        return false;
+        return model.sellTower(x, y);
     }
     
     /**
@@ -82,11 +99,11 @@ public class Controller {
      * @return
      */
     public boolean upgradeTower(int x, int y){
-        
-        return false;
+        return model.upgradeTower(x, y);
     }
     
     /**
+     * @author Yuhua
      * Set Tower Attack Mode at (x, y)
      * 
      * AttackMode include 
@@ -104,23 +121,10 @@ public class Controller {
      * @return
      */
     public boolean setTowerAttackMode(int x, int y, int attackMode){
-        
-        return false;
+        return model.setTowerAttackMode(x, y, attackMode);
     }
     
-    /**
-     * Sends a call to the model to update the monitored tower stats to the tower
-     * at x,y. If the position is invalid, do nothing
-     */
-    public TowerInfo getTowerInfo (int x, int y) {
-        TowerInfo towerinfo;
-        try {
-            towerinfo=model.getTowerInfo(x,y);
-        } catch (Exception e) {
-            towerinfo=null;
-        }
-        return towerinfo;
-    }
+    
 
     /**
      * Returns the size of the game in number of tiles
