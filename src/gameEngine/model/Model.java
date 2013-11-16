@@ -34,6 +34,7 @@ public class Model {
     private JGEngineInterface myEng;
     private Rule rule; // how each waves created, ruleStart, ruleStop
     private ArrayList<ArrayList<Tile>> grid;
+    private ArrayList<Tile> barriers;
 
     public Model () {
         rule = new Rule();
@@ -50,6 +51,7 @@ public class Model {
         gridFactory.initialize();
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
+        barriers = gridFactory.getBarrierList();
 
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
@@ -68,6 +70,10 @@ public class Model {
     //    public List<Tile> getPathList () {
     public LinkedList<Tile> getPathList () {
         return path;
+    }
+    
+    public ArrayList<Tile> getBarrierList () {
+        return barriers;
     }
 
     /**
