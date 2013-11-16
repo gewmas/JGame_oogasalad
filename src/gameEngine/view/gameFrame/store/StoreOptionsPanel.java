@@ -29,7 +29,7 @@ public abstract class StoreOptionsPanel extends Panel {
 
     private static final String LAYOUT_WRAP = "wrap 4";
     private static final int PANEL_WIDTH = 250;
-    private static final int PANEL_HEIGHT = 300;
+    private static final int PANEL_HEIGHT = 200;
     protected List<StoreItemButton> storeItems;
     protected View view;
 

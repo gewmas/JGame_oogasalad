@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import javax.swing.BorderFactory;
@@ -38,11 +39,12 @@ public class StoreInfoPanel extends Panel {
     private void initializeContents () {
 
         text = new JTextPane();
-        text.setPreferredSize(new Dimension(200,200));
+        
+        text.setPreferredSize(new Dimension(300,100));
         text.setContentType( "text/html" ); 
         
         JScrollPane listScrollPane = new JScrollPane(text);
-        listScrollPane.setSize(10, 10);
+//        listScrollPane.setSize(10, 10);
         add(listScrollPane);
 
     }
