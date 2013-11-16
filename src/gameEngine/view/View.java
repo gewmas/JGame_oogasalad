@@ -25,20 +25,19 @@ public class View {
     private GameFrame gameFrame;
     private Frame initializationFrame;
     private Controller controller;
-    private GameFrameMediator mediator;
 
     public View (Controller controller) {
         this.controller = controller;
-        mediator = new GameFrameMediator();
-        gameFrame = new GameFrame(controller, this, mediator);
+
+        gameFrame = new GameFrame(this);
         initializationFrame = new InitializationFrame(this);
     }
 
     public void selectNewGame () {
-        mediator.endGame();
-        gameFrame.dispose();
-        gameFrame = new GameFrame(controller, this, mediator);
-        initializationFrame = new InitializationFrame(this);
+        // mediator.endGame();
+        // gameFrame.dispose();
+        // gameFrame = new GameFrame(controller, this, mediator);
+        // initializationFrame = new InitializationFrame(this);
     }
 
     public void loadNewGame () {

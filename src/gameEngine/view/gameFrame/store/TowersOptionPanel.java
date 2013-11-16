@@ -37,7 +37,7 @@ public class TowersOptionPanel extends Panel {
      * @param mediator facilitates communication between view components
      * @param engineView facilitates communication between view and controller
      */
-    protected TowersOptionPanel (GameFrameMediator mediator, View engineView) {
+    public TowersOptionPanel (GameFrameMediator mediator, View engineView) {
 
         super();
         this.view = engineView;

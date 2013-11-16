@@ -2,7 +2,9 @@ package gameEngine.view.gameFrame;
 
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.tower.TowerInfo;
+import gameEngine.view.Panel;
 import gameEngine.view.gameFrame.store.TowerInfoPanel;
+import gameEngine.view.gameFrame.store.TowerStorePanel;
 import gameEngine.view.gameFrame.store.TowersOptionPanel;
 
 
@@ -25,14 +27,12 @@ import gameEngine.view.gameFrame.store.TowersOptionPanel;
  */
 public class GameFrameMediator {
 
-    private TowersOptionPanel storeOptions;
+
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
-    private TowerInfoPanel towerInfoPanel;
+    private TowerStorePanel storePanel;
 
-    public void addTowersOptionPanel (TowersOptionPanel storeOptions) {
-        this.storeOptions = storeOptions;
-    }
+  
 
     /**
      * Destroys the jgame instance so that it can be reloaded
@@ -61,7 +61,7 @@ public class GameFrameMediator {
      * @param tower
      */
     public void displayTowerInfo (TowerInfo tower) {
-        towerInfoPanel.displayTowerInfo(tower);
+        storePanel.displayTowerInfo(tower);
     }
 
     /**
@@ -76,7 +76,7 @@ public class GameFrameMediator {
      * Updates the enabled status of store items.
      */
     public void updateStoreStatus () {
-        storeOptions.updateStoreStatus();
+        storePanel.updateStoreStatus();
     }
 
     public void addGameFrame (GameFrame gameFrame) {
@@ -84,13 +84,14 @@ public class GameFrameMediator {
 
     }
 
-    public void addGame (CanvasPanel canvasPanel) {
+    public void addGamePanel (CanvasPanel canvasPanel) {
         this.canvasPanel = canvasPanel;
 
     }
 
-    public void addTowerInfoPanel (TowerInfoPanel towerInfoPanel) {
-        this.towerInfoPanel = towerInfoPanel;
+    public void addStorePanel (TowerStorePanel storePanel) {
+        this.storePanel = storePanel;
+        
     }
 
 }
