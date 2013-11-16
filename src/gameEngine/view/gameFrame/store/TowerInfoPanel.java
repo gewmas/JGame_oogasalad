@@ -1,12 +1,9 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.Dimension;
-import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
@@ -21,8 +18,7 @@ import javax.swing.border.Border;
  */
 public class TowerInfoPanel extends Panel {
 
-    private JList myList;
-    private DefaultListModel myListModel;
+ 
     private JTextPane text;
     public TowerInfoPanel () {
         super();
@@ -40,8 +36,7 @@ public class TowerInfoPanel extends Panel {
      * Initlizes JList contents and adds
      */
     private void initializeContents () {
-        myListModel = new DefaultListModel();
-        myList = new JList(myListModel);
+
         text = new JTextPane();
         text.setPreferredSize(new Dimension(200,200));
         text.setContentType( "text/html" ); 
@@ -59,7 +54,6 @@ public class TowerInfoPanel extends Panel {
      */
     public void displayTowerInfo (String displayInformation) {
 
-        myListModel.clear();
         text.setText(displayInformation);
         
     }
