@@ -14,7 +14,6 @@ import jgame.JGColor;
 import jgame.JGPoint;
 import jgame.platform.JGEngine;
 
-
 /**
  * 
  * @author Harris
@@ -59,12 +58,17 @@ public class TestGrid extends JGEngine {
             e.printStackTrace();
         }
 
-        List<Tile> pathList = model.getPathList();
+        LinkedList<Tile> pathList = model.getPathList();
         for (Tile tile : pathList) {
             System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
             System.out.println("Center x=" + tile.getCenterX() + " center y=" + tile.getCenterY());
             System.out.println("img path is " + tile.getPathImage());
         }
+        System.out.println("tile is on path? " + model.getTile(405,  165).hasPath());//should be on path
+        System.out.println("tile is on path? " + model.getTile(405,  305).hasPath());//should not be on path
+        
+        System.out.println("tile has barrier? " + model.getTile(160, 90).hasBarrier());//should have barrier
+        System.out.println("tile has barrier? " + model.getTile(405,  305).hasBarrier());//should not have barrier
     }
 
     @Override

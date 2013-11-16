@@ -18,7 +18,7 @@ public interface TowerInfo {
     public double getDamage ();
 
     public double getAttackSpeed ();
-
+    public int getAttackMode();
     public double getRange ();
 
     public int getCost ();
