@@ -13,7 +13,16 @@ import gameEngine.model.enemy.comparator.StrongestEnemyComparator;
 import gameEngine.model.enemy.comparator.WeakestEnemyComparator;
 import jgame.JGObject;
 
-
+/**
+ * 
+ * @author Yuhua
+ *
+ * DefaultTower can attack enemy, those who also enemies should extends DefaultTower
+ * Like MultipleShootTower which shoot multiple Bullet at one time
+ * However, Tower like BoostTower and FreezeTower would not extends DefaultTower 
+ * because they will not shoot, but change properties
+ * 
+ */
 public class DefaultTower extends Tower {
 
     long prevTime;
@@ -163,6 +172,18 @@ public class DefaultTower extends Tower {
         // level.getGameInfo().addGold((int)recyclePrice);
         // level.getTowers().remove(this);
         this.remove();
+    }
+
+    @Override
+    public void upgrade () {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void setAttackMode (int attackMode) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

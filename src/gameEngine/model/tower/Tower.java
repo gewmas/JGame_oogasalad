@@ -9,7 +9,7 @@ import jgame.JGObject;
  *         Tower will shoot the Enemy within shooting range with Bullet
  */
 
-public class Tower extends JGObject implements TowerInfo{
+public abstract class Tower extends JGObject implements TowerInfo{
     String towerName;
     String image;
 
@@ -51,6 +51,16 @@ public class Tower extends JGObject implements TowerInfo{
         
     }
 
+    /**
+     * Tower Function Method
+     */
+    public abstract void sell();
+    public abstract void upgrade();
+    public abstract void setAttackMode (int attackMode);
+    
+    /**
+     * TowerInfo Getter Method
+     */
     @Override
     public double getX () {
         return x;
@@ -103,4 +113,6 @@ public class Tower extends JGObject implements TowerInfo{
     public String getImage () {
         return image;
     }
+    
+    
 }
