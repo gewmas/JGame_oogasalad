@@ -48,14 +48,11 @@ public class GridFactory {
             String pathImage = map.getString("pathImage");
             JSONArray pathList = map.getJSONArray("Path");
             JSONArray barrierList;
-            String barrierImage;
             try {
                 //barriers may not be created by game designer
                 barrierList = map.getJSONArray("Barriers");
-                barrierImage = map.getString("barrierImage");
             } catch (Exception e){
                 barrierList = null;
-                barrierImage = null;
             }
 
             //create a map of all of the path coordinates and null grid objects
@@ -67,10 +64,12 @@ public class GridFactory {
             
             //create a map of all the barrier coordinates and null grid objects
             HashMap<Coordinate, Tile> barrierCoordinates = new HashMap<Coordinate, Tile>();
+            HashMap<Coordinate, String> barrierImages = new HashMap<Coordinate, String>();
             if(barrierList != null) {
                 for(int k=0; k<barrierList.length(); k++) {
                     JSONObject coord = barrierList.getJSONObject(k);
                     barrierCoordinates.put(new Coordinate(coord.getInt("x"), coord.getInt("y")), null);
+                    barrierImages.put(new Coordinate(coord.getInt("x"), coord.getInt("y")), coord.getString("image"));
                 }
             }
             
@@ -87,7 +86,7 @@ public class GridFactory {
                         tile.setOnPath(pathImage);
                         pathCoordinates.put(new Coordinate(k, m), tile);
                     } else if(barrierCoordinates.keySet().contains(new Coordinate(k, m))) {
-                        tile.setBarrier(barrierImage);
+                        tile.setBarrier(barrierImages.get(new Coordinate(k, m)));
                         barrierCoordinates.put(new Coordinate(k, m), tile);
                     }
                 }
