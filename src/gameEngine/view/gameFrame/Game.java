@@ -104,7 +104,7 @@ public class Game extends StdGame {
                 if (tower==null) {
                     System.out.println("No tower here");
                 } else {
-                    mediator.displayTowerInfo(tower);
+                    mediator.displayTowerInfo(null);
                 }
                 System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }

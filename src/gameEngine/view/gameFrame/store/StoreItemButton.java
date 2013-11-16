@@ -1,13 +1,10 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.Color;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.Button;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.GameFrameMediator;
 
 
@@ -18,7 +15,7 @@ import gameEngine.view.gameFrame.GameFrameMediator;
  * @author Lalita Maraj
  * 
  */
-public class TowerStoreButton extends Button {
+public class StoreItemButton extends Button implements TowerInfoFields{
 
     private static final Color HOVER_BUTTON_COLOR = Color.BLUE;
     private static final Color HOVER_TEXT_COLOR = Color.RED;
@@ -27,27 +24,43 @@ public class TowerStoreButton extends Button {
     private TowerInfo towerInfo;
     private Boolean active;
     private Boolean storeOpen;
+    private String towerDisplayInfo;
 
     /**
      * @param tower the tower info data structure of the tower the button represents
      * @param mediator facilitates communication between view components
      * @param view facilitates communication between view and controller
      */
-    public TowerStoreButton (TowerInfo tower, GameFrameMediator mediator, View view) {
+    public StoreItemButton (TowerInfo tower, GameFrameMediator mediator, View view) {
         super("");
         storeOpen = false;
         active = false;
         this.setEnabled(false);
-        ImageIcon icon = new ImageIcon("resources/img/"+tower.getImage()+".png");
+        ImageIcon icon = new ImageIcon("resources/img/" + tower.getImage() + ".png");
         this.setIcon(icon);
         this.mediator = mediator;
         this.towerInfo = tower;
         setToolTipText(tower.getTowerName());
-
+        this.towerDisplayInfo = formatTowerDisplayInformation();
         setOpaque(true);
 
     }
-
+    private String formatTowerDisplayInformation(){
+        String ret = "<html><ul>";
+        ret+= TOWER + towerInfo.getTowerName();
+        ret+= COST + towerInfo.getCost();
+        ret+= DESCRIPTION + towerInfo.getDescription();
+        ret+= DAMAGE + towerInfo.getDamage();
+        
+        ret+= ATTACKSPEED+ towerInfo.getAttackSpeed();
+        ret+= ATTACKMODE+ towerInfo.getAttackMode();
+        ret+= RANGE+ towerInfo.getRange();
+        ret+= RECYCLE + towerInfo.getRecyclePrice();
+       
+        return ret;
+    }
+    
+ 
     @Override
     /**
      * When the button is hovered over, the tower information 
@@ -58,7 +71,7 @@ public class TowerStoreButton extends Button {
             this.setBackground(HOVER_BUTTON_COLOR);
             this.setForeground(HOVER_TEXT_COLOR);
 
-            mediator.displayTowerInfo(towerInfo);
+            mediator.displayTowerInfo(towerDisplayInfo);
         }
     }
 

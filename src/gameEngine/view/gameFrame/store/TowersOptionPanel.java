@@ -29,8 +29,8 @@ public class TowersOptionPanel extends Panel {
 
     private static final String LAYOUT_WRAP = "wrap 4";
     private static final int PANEL_WIDTH = 250;
-    private static final int PANEL_HEIGHT = 400;
-    private List<TowerStoreButton> storeItems;
+    private static final int PANEL_HEIGHT = 300;
+    private List<StoreItemButton> storeItems;
     private View view;
 
     /**
@@ -41,7 +41,7 @@ public class TowersOptionPanel extends Panel {
 
         super();
         this.view = engineView;
-        this.storeItems = new ArrayList<TowerStoreButton>();
+        this.storeItems = new ArrayList<StoreItemButton>();
 
         setUIStyle();
         createOptionsScrollPanel(mediator);
@@ -87,7 +87,7 @@ public class TowersOptionPanel extends Panel {
     private void addStoreInventory (JPanel optionsPanel, GameFrameMediator mediator) {
 
         for (TowerInfo tower : view.getTowers()) {
-            TowerStoreButton towerButton = new TowerStoreButton(tower, mediator, view);
+            StoreItemButton towerButton = new StoreItemButton(tower, mediator, view);
             optionsPanel.add(towerButton);
             storeItems.add(towerButton);
 
@@ -101,7 +101,7 @@ public class TowersOptionPanel extends Panel {
      * 
      */
     public void updateStoreStatus () {
-        for (TowerStoreButton button : storeItems) {
+        for (StoreItemButton button : storeItems) {
             button.toggleButtonActivation(view.getMoney());
         }
     }

@@ -57,11 +57,10 @@ public class GameFrameMediator {
     /**
      * Used by display information about a tower
      * on the Tower Info Panel
-     * 
-     * @param tower
+     * @param towerInformation TODO
      */
-    public void displayTowerInfo (TowerInfo tower) {
-        towerInfoPanel.displayTowerInfo(tower);
+    public void displayTowerInfo (String towerInformation) {
+        towerInfoPanel.displayTowerInfo(towerInformation);
     }
 
     /**

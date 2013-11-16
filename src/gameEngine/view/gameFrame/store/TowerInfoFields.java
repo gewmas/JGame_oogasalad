@@ -7,33 +7,25 @@ package gameEngine.view.gameFrame.store;
  * @author Lalita Maraj
  * 
  */
-public enum TowerInfoFields {
-    NAME("Tower", "red"),
-    COST("Cost", "green"),
-    DESCRIPTION("Description", "blue");
+public interface TowerInfoFields {
 
-    private static final String HTML_CLOSE = " :</font> ";
-    private static final String HTML_STYLE_FONT = " style=font-weight:bold>";
-    private static final String HTML_FONT_COLOR = "<html><font color=";
-    private String field;
-    private String color;
+    static final String HTML_CLOSE = " :</font>";
 
-    /**
-     * @param field name of field
-     * @param color color text is to be displayed with
-     */
-    TowerInfoFields (String field, String color) {
-        this.field = field;
-        this.color = color;
-    }
+    static final String HTML_FONT_OPENNING = "<li><font color=blue style=font-weight:bold>";
 
-    @Override
-    /**
-     *Returns the field formatted with HTML styling
-     */
-    public String toString () {
+    static final String TOWER = HTML_FONT_OPENNING + "Tower" + HTML_CLOSE;
+    static final String COST = HTML_FONT_OPENNING + "Cost" + HTML_CLOSE;
+    static final String DESCRIPTION = HTML_FONT_OPENNING + "Description" +
+                                      HTML_CLOSE;
+    static final String ATTACKSPEED = HTML_FONT_OPENNING + "Attack Speed" +
+                                      HTML_CLOSE;
+    static final String ATTACKMODE = HTML_FONT_OPENNING + "Attack Mode" +
+                                     HTML_CLOSE;
 
-        return HTML_FONT_COLOR + color + HTML_STYLE_FONT + field + HTML_CLOSE;
-    }
+    static final String RANGE = HTML_FONT_OPENNING + "Range" + HTML_CLOSE;
+    static final String RECYCLE = HTML_FONT_OPENNING + "Recycle Price" +
+                                  HTML_CLOSE;
+
+    static final String DAMAGE = HTML_FONT_OPENNING + "Damage" + HTML_CLOSE;
 
 }
