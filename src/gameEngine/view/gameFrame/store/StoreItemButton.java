@@ -2,7 +2,7 @@ package gameEngine.view.gameFrame.store;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
-import gameEngine.model.tower.TowerInfo;
+import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Button;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrameMediator;
@@ -21,7 +21,7 @@ public class StoreItemButton extends Button implements TowerInfoFields{
     private static final Color HOVER_TEXT_COLOR = Color.RED;
     private static final Color HOVER_EXIT_TEXT_COLOR = Color.BLACK;
     private GameFrameMediator mediator;
-    private TowerInfo towerInfo;
+    private PurchaseInfo towerInfo;
     private Boolean active;
     private Boolean storeOpen;
     private String towerDisplayInfo;
@@ -31,7 +31,7 @@ public class StoreItemButton extends Button implements TowerInfoFields{
      * @param mediator facilitates communication between view components
      * @param view facilitates communication between view and controller
      */
-    public StoreItemButton (TowerInfo tower, GameFrameMediator mediator, View view) {
+    public StoreItemButton (PurchaseInfo tower, GameFrameMediator mediator, View view) {
         super("");
         storeOpen = false;
         active = false;
@@ -40,14 +40,14 @@ public class StoreItemButton extends Button implements TowerInfoFields{
         this.setIcon(icon);
         this.mediator = mediator;
         this.towerInfo = tower;
-        setToolTipText(tower.getTowerName());
+        setToolTipText(tower.getItemName());
         this.towerDisplayInfo = formatTowerDisplayInformation();
         setOpaque(true);
 
     }
     private String formatTowerDisplayInformation(){
         String ret = "<html><ul>";
-        ret+= TOWER + towerInfo.getTowerName();
+        ret+= TOWER + towerInfo.getItemName();
         ret+= COST + towerInfo.getCost();
         ret+= DESCRIPTION + towerInfo.getDescription();
         ret+= DAMAGE + towerInfo.getDamage();

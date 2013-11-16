@@ -1,5 +1,6 @@
 package gameEngine.model.tower;
 
+import gameEngine.model.purchase.PurchaseInfo;
 import jgame.JGObject;
 
 
@@ -9,7 +10,7 @@ import jgame.JGObject;
  *         Tower will shoot the Enemy within shooting range with Bullet
  */
 
-public abstract class Tower extends JGObject implements TowerInfo{
+public abstract class Tower extends JGObject implements PurchaseInfo{
     String towerName;
     String image;
 
@@ -72,7 +73,7 @@ public abstract class Tower extends JGObject implements TowerInfo{
     }
 
     @Override
-    public String getTowerName(){
+    public String getItemName(){
         return towerName;
     }
 

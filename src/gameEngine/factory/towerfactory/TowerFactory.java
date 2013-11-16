@@ -1,9 +1,9 @@
 package gameEngine.factory.towerfactory;
 
-import gameEngine.model.tower.Tower;
+import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tower.*;
 
-public abstract class TowerFactory implements TowerInfo{
+public abstract class TowerFactory implements PurchaseInfo{
     
     String id;
     String description;

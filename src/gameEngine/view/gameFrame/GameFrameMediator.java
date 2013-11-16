@@ -1,7 +1,7 @@
 package gameEngine.view.gameFrame;
 
 import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.tower.TowerInfo;
+import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.gameFrame.store.StoreInfoPanel;
 import gameEngine.view.gameFrame.store.StoreOptionsPanel;
 
@@ -48,7 +48,7 @@ public class GameFrameMediator {
      * 
      * @param towername
      */
-    public void placeTower (TowerInfo towerInfo) {
+    public void placeTower (PurchaseInfo towerInfo) {
 
         canvasPanel.placeTower(towerInfo);
         gameFrame.placeTower(towerInfo);

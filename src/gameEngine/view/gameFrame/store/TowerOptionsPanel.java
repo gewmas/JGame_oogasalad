@@ -1,7 +1,7 @@
 package gameEngine.view.gameFrame.store;
 
 import java.util.List;
-import gameEngine.model.tower.TowerInfo;
+import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrameMediator;
 
@@ -13,7 +13,7 @@ public class TowerOptionsPanel extends StoreOptionsPanel{
     }
 
     @Override
-    protected List<TowerInfo> getItems () {
+    protected List<PurchaseInfo> getItems () {
         // TODO Auto-generated method stub
         return view.getTowers();
     }

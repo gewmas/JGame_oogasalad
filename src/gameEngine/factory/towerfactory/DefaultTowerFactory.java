@@ -52,7 +52,7 @@ public class DefaultTowerFactory extends TowerFactory {
     }
 
     @Override
-    public String getTowerName () {
+    public String getItemName () {
         // TODO Auto-generated method stub
         return id;
     }
