@@ -1,6 +1,7 @@
 package gameEngine.model.tile;
 
 import jgame.JGObject;
+import gameEngine.Constant.Constant;
 import gameEngine.model.purchase.PurchaseInfo;
 
 /**
@@ -11,12 +12,15 @@ import gameEngine.model.purchase.PurchaseInfo;
 public class TemporaryBarrier extends JGObject implements PurchaseInfo{
     private String barrierName, image;
     private double damage, attackSpeed, range, x, y, cost, recyclePrice;
-    private String description;
-    
-    public TemporaryBarrier(String name, boolean unique_id, double x, double y, int collisionid, String gfxname) {
-        super(name, unique_id, x, y, collisionid, gfxname);
-        
+    private static final String DESCRIPTION = "Buy a puddle of water to drown your enemies!  The sun is hot, so let's hope it doesn't evaporate too quickly";
+    private static final int COST = 10;
+    private Tile tile;
 
+    
+    public TemporaryBarrier(String name, boolean unique_id, String gfxname, Tile tile) {
+        super(name, unique_id, tile.getCenterX(), tile.getCenterY(), Constant.BULLET_CID, gfxname);
+        
+        this.tile = tile;
         this.barrierName = name;        
         this.image = gfxname;
     }
@@ -28,62 +32,53 @@ public class TemporaryBarrier extends JGObject implements PurchaseInfo{
 
     @Override
     public double getX () {
-        // TODO Auto-generated method stub
-        return 0;
+        return tile.getCenterX();
     }
 
     @Override
     public double getY () {
-        // TODO Auto-generated method stub
-        return 0;
+        return tile.getCenterY();
     }
 
     @Override
     public double getDamage () {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public double getAttackSpeed () {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public int getAttackMode () {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public double getRange () {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public int getCost () {
-        // TODO Auto-generated method stub
-        return 0;
+        return COST;
     }
 
     @Override
     public double getRecyclePrice () {
-        // TODO Auto-generated method stub
+        //FIGURE OUT WHAT RECYCLE PRICE MEANS
         return 0;
     }
 
     @Override
     public String getDescription () {
-        // TODO Auto-generated method stub
-        return null;
+        return DESCRIPTION;
     }
 
     @Override
     public String getImage () {
-        // TODO Auto-generated method stub
-        return null;
+        return image;
     }
 
 }
