@@ -16,11 +16,11 @@ import javax.swing.border.Border;
  * @author Lalita Maraj
  * 
  */
-public class TowerInfoPanel extends Panel {
+public class StoreInfoPanel extends Panel {
 
  
     private JTextPane text;
-    public TowerInfoPanel () {
+    public StoreInfoPanel () {
         super();
 
         Border valuePanelBorder =

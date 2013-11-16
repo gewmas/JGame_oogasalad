@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.BorderLayout;
+import javax.swing.JTabbedPane;
 import gameEngine.view.Panel;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrameMediator;
@@ -12,26 +13,31 @@ import gameEngine.view.gameFrame.GameFrameMediator;
  *         Contains the option to select towers and panel that displays
  *         tower information
  */
-public class TowerStorePanel extends Panel {
-    private TowersOptionPanel storeOptions;
+public class StorePanel extends Panel {
+    private StoreOptionsPanel towerStoreOptions;
+    private StoreOptionsPanel objectsStoreOptions;
 
     /**
      * @param mediator facilitates communication between view components
      * @param engineView facilitates communication between view and controller
      */
 
-    public TowerStorePanel (GameFrameMediator mediator, View engineView) {
+    public StorePanel (GameFrameMediator mediator, View engineView) {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
 
-        TowerInfoPanel towerInfoPanel = new TowerInfoPanel();
+        StoreInfoPanel towerInfoPanel = new StoreInfoPanel();
         mediator.addTowerInfoPanel(towerInfoPanel);
-
-        storeOptions = new TowersOptionPanel(mediator, engineView);
-        mediator.addTowersOptionPanel(storeOptions);
+        JTabbedPane storeTabbedPane = new JTabbedPane();
+        
+        towerStoreOptions = new TowerOptionsPanel(mediator, engineView);
+        objectsStoreOptions =  new TowerOptionsPanel(mediator, engineView);
+        storeTabbedPane.addTab("Towers",towerStoreOptions);
+        storeTabbedPane.addTab("Objects", objectsStoreOptions);
+        mediator.addTowersOptionPanel(towerStoreOptions);
         add(towerInfoPanel, BorderLayout.CENTER);
-        add(storeOptions, BorderLayout.PAGE_START);
+        add(storeTabbedPane, BorderLayout.PAGE_START);
 
     }
 
