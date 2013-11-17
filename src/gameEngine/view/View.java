@@ -3,6 +3,7 @@ package gameEngine.view;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import javax.swing.JOptionPane;
 import gameEngine.controller.Controller;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -54,8 +55,9 @@ public class View {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+           
+            JOptionPane.showMessageDialog(null,
+                                          StyleConstants.resourceBundle.getString("FileReadError"));
         }
     }
 
