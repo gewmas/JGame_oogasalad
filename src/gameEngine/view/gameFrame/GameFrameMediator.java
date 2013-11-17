@@ -1,6 +1,5 @@
 package gameEngine.view.gameFrame;
 
-import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.gameFrame.store.StoreInfoPanel;
 import gameEngine.view.gameFrame.store.StoreOptionsPanel;
