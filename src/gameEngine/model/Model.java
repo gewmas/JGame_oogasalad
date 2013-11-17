@@ -2,8 +2,9 @@ package gameEngine.model;
 
 import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.purchase.PurchaseInfo;
+import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
-import gameEngine.model.tower.TowerInfo;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
@@ -34,6 +35,7 @@ public class Model {
     private JGEngineInterface myEng;
     private Rule rule; // how each waves created, ruleStart, ruleStop
     private ArrayList<ArrayList<Tile>> grid;
+    private ArrayList<Tile> barriers;
 
     public Model () {
         rule = new Rule();
@@ -50,6 +52,7 @@ public class Model {
         gridFactory.initialize();
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
+        barriers = gridFactory.getBarrierList();
 
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
@@ -69,6 +72,10 @@ public class Model {
     public LinkedList<Tile> getPathList () {
         return path;
     }
+    
+    public ArrayList<Tile> getBarrierList () {
+        return barriers;
+    }
 
     /**
      * @author Yuhua
@@ -79,11 +86,11 @@ public class Model {
      * return all kinds of TowerFactory
      */
     //edit by Jiaran to hold encapsulation by passing TowerInfo.
-    public List<TowerInfo> getAllTowerInfo () {
-        List<TowerInfo> result= new ArrayList<TowerInfo>();
+    public List<PurchaseInfo> getAllTowerInfo () {
+        List<PurchaseInfo> result= new ArrayList<PurchaseInfo>();
         List<TowerFactory> factoryList=towerWarehouse.getTowerFactory();
         for(int i=0; i< factoryList.size();i++){
-            result.add((TowerInfo)(factoryList.get(i)));
+            result.add((PurchaseInfo)(factoryList.get(i)));
 
         }
         return result;
@@ -99,8 +106,8 @@ public class Model {
     //Jiaran: Im thinking maybe this should return a TowerInfo instead of Tower
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
-    public TowerInfo getTowerInfo (int x, int y) {
-        return (TowerInfo)checkTowerAtXY(x, y);
+    public PurchaseInfo getTowerInfo (int x, int y) {
+        return (PurchaseInfo)checkTowerAtXY(x, y);
 
     }
 

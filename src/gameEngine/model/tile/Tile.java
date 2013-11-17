@@ -1,4 +1,4 @@
-package gameEngine.model;
+package gameEngine.model.tile;
 
 import jgame.JGObject;
 

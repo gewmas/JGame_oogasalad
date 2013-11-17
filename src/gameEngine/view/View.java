@@ -6,9 +6,9 @@ import java.io.File;
 import java.util.List;
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.Tile;
+import gameEngine.model.purchase.PurchaseInfo;
+import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
-import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.GameFrameMediator;
 import gameEngine.view.initialization.InitializationFrame;
@@ -76,7 +76,7 @@ public class View {
     /**
      * Requests tower information for the tower at the given location
      */
-    public TowerInfo getTowerInfo (int x, int y) {
+    public PurchaseInfo getTowerInfo (int x, int y) {
         return controller.getTowerInfo(x, y);
     }
 
@@ -106,7 +106,7 @@ public class View {
         return controller.getLives();
     }
 
-    public List<TowerInfo> getTowers () {
+    public List<PurchaseInfo> getTowers () {
         return controller.getTowerFactory();
     }
 }

@@ -3,10 +3,10 @@ package gameEngine.model.enemy;
 import java.util.LinkedList;
 import gameEngine.Constant.Constant;
 import gameEngine.model.bullet.Bullet;
+import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import jgame.JGObject;
 import gameEngine.model.Model;
-import gameEngine.model.Tile;
 
 
 /**
