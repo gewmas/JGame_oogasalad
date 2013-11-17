@@ -50,6 +50,10 @@ public class GameFrameMediator {
     public void placeTower (PurchaseInfo towerInfo) {
 
         canvasPanel.placeTower(towerInfo);
+       
+    }
+    
+    public void setCursorImage(PurchaseInfo towerInfo){
         gameFrame.placeTower(towerInfo);
     }
 

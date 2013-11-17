@@ -55,7 +55,7 @@ public class View {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-           
+
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }
