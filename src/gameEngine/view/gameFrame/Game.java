@@ -130,18 +130,19 @@ public class Game extends StdGame {
     /**
      * Indicates that the user wants to buy a tower
      */
-    public void placeTower (String tower) {
+    public void placeTower (PurchaseInfo purchaseInfo) {
         // setBGColor(JGColor.red);
-        if (tower.equals(towerToPurchase)){
+        if (purchaseInfo.getItemName().equals(towerToPurchase)){
             mediator.exitPurchase();
             System.out.println("Tower cancelled");
             towerToPurchase=null;
             purchasing=false;
             return;
         }
-        System.out.println("User wants to purchase " + tower);
+        mediator.setCursorImage(purchaseInfo);
+        System.out.println("User wants to purchase " + purchaseInfo.getItemName());
         purchasing = true;
-        towerToPurchase = tower;
+        towerToPurchase = purchaseInfo.getItemName();
     }
 
 }
