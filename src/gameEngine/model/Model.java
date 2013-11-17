@@ -108,7 +108,6 @@ public class Model {
     // now it is not functional because no myEng, we need discussion on this.
     public PurchaseInfo getTowerInfo (int x, int y) {
         return (PurchaseInfo)checkTowerAtXY(x, y);
-
     }
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact

@@ -67,7 +67,7 @@ public class TemporaryBarrier extends JGObject implements PurchaseInfo{
 
     @Override
     public double getRecyclePrice () {
-        //FIGURE OUT WHAT RECYCLE PRICE MEANS
+        //You can't recycle a temporary barrier (ex. a puddle of water)
         return 0;
     }
 
