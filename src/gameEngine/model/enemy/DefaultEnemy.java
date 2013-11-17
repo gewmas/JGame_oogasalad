@@ -1,7 +1,7 @@
 package gameEngine.model.enemy;
 
 import gameEngine.model.Model;
-import gameEngine.model.Tile;
+import gameEngine.model.tile.Tile;
 import java.util.LinkedList;
 
 

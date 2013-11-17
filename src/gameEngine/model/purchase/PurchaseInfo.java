@@ -1,4 +1,4 @@
-package gameEngine.model.tower;
+package gameEngine.model.purchase;
 
 /**
  * @author Jiaran and Yuhua all tower and tower factory
@@ -7,9 +7,9 @@ package gameEngine.model.tower;
  * towerfactory.
  *
  */
-public interface TowerInfo {
+public interface PurchaseInfo {
 
-    public String getTowerName ();
+    public String getItemName ();
 
     public double getX ();
 

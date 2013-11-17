@@ -3,7 +3,7 @@ package gameEngine.model.warehouse;
 import gameEngine.factory.enemyfactory.EnemyFactory;
 import gameEngine.factory.enemyfactory.NormalEnemyFactory;
 import gameEngine.model.Model;
-import gameEngine.model.Tile;
+import gameEngine.model.tile.Tile;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
