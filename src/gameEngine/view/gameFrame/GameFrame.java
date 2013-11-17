@@ -118,7 +118,7 @@ public class GameFrame extends Frame {
         return true;
     }
 
-    public void purchaseTower () {
+    public void restoreDefaultCursor () {
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 

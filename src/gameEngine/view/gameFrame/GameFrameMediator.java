@@ -66,10 +66,16 @@ public class GameFrameMediator {
      * Executes the actions on the view components
      * that are impacted by the purchase of a tower
      */
-    public void purchaseTower () {
-        gameFrame.purchaseTower();
+    
+    public void exitPurchase(){
+        storeOptions.exitPurchase();
+        restoreDefaultCursor();
     }
-
+    
+    public void restoreDefaultCursor() {
+        gameFrame.restoreDefaultCursor();
+    }
+    
     /**
      * Updates the enabled status of store items.
      */

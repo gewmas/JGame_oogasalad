@@ -66,11 +66,7 @@ public class View {
      * and then reset the cursor
      */
     public boolean buyTower (int x, int y, String tower) {
-        if (controller.purchaseTower(x, y, tower)) {
-            gameFrame.purchaseTower();
-            return true;
-        }
-        return false;
+        return (controller.purchaseTower(x, y, tower));
     }
 
     /**
