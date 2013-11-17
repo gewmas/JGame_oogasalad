@@ -1,14 +1,11 @@
 package gameEngine.view;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
 import gameEngine.controller.Controller;
-import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
-import gameEngine.model.tower.Tower;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.GameFrameMediator;
 import gameEngine.view.initialization.InitializationFrame;
@@ -23,7 +20,7 @@ import gameEngine.view.initialization.InitializationFrame;
  */
 public class View {
     private GameFrame gameFrame;
-    private Frame initializationFrame;
+    private InitializationFrame initializationFrame;
     private Controller controller;
     private GameFrameMediator mediator;
 
@@ -32,18 +29,19 @@ public class View {
         mediator = new GameFrameMediator();
         gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame = new InitializationFrame(this);
+        initializationFrame.showFrame();
     }
 
     public void selectNewGame () {
         mediator.endGame();
         gameFrame.dispose();
         gameFrame = new GameFrame(controller, this, mediator);
-        initializationFrame = new InitializationFrame(this);
+        initializationFrame.setVisible(true);
     }
 
     public void loadNewGame () {
         gameFrame.showGame();
-        initializationFrame.dispose();
+        initializationFrame.setVisible(false);
     }
 
     public void startGame () {
@@ -53,7 +51,7 @@ public class View {
     public void newGame (File file) {
         try {
             controller.newGame(file);
-            initializationFrame.dispose();
+            initializationFrame.setVisible(false);
         }
         catch (Exception e) {
             // TODO Auto-generated catch block
