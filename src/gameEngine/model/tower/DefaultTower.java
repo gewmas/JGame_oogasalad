@@ -2,6 +2,7 @@ package gameEngine.model.tower;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import gameEngine.Constant.Constant;
 import gameEngine.model.Detector;
@@ -202,6 +203,12 @@ public class DefaultTower extends Tower {
     @Override
     public void setAttackMode (int attackMode) {
     	this.attackMode = attackMode;
+    }
+
+    @Override
+    public Map<String, String> getInfo () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

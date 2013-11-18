@@ -1,5 +1,6 @@
 package gameEngine.factory.towerfactory;
 
+import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tower.*;
 
@@ -59,5 +60,8 @@ public abstract class TowerFactory implements PurchaseInfo{
         return recyclePrice;
     }
     
+    public Map<String, String> getInfo(){
+        return null;
+    }
 
 }

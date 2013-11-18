@@ -1,5 +1,6 @@
 package gameEngine.model.tower;
 
+import java.util.Map;
 import gameEngine.model.Detector;
 import gameEngine.model.enemy.Enemy;
 
@@ -7,16 +8,16 @@ import gameEngine.model.enemy.Enemy;
  * 
  * @author Yuhua
  *
- * Freeze Tower would slow down all enemies in range by slowFactor
+ * Freeze Tower would slow down or other functionall enemies in range by slowFactor
  * The enemies get back normal speed when out of range
  * 
  */
-public class FreezeTower extends Tower {
+public class MagicTower extends Tower {
 
 	private Detector<Enemy> detector;
 	private double slowFactor;
 	
-    public FreezeTower (String name,
+    public MagicTower (String name,
                         boolean unique_id,
                         double x,
                         double y,
@@ -59,6 +60,12 @@ public class FreezeTower extends Tower {
     public void setAttackMode (int attackMode) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public Map<String, String> getInfo () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

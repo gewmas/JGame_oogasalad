@@ -114,9 +114,8 @@ public class Model {
     // Jiaran: purchase, get tower info. If something is wrong plz contact
     public boolean purchaseTower (int x, int y, String name) {
         Tile currentTile = getTile(x, y);
-        if(currentTile.isEmpty()&&!currentTile.hasPath()){
-            return towerWarehouse.create(x, y, name, gameInfo);
-        }
+        if (currentTile.isEmpty() && !currentTile.hasPath()) { return towerWarehouse
+                .create((int) currentTile.getX(), (int) currentTile.getY(), name, gameInfo); }
         return false;
     }
 

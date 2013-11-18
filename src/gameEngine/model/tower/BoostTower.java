@@ -1,5 +1,6 @@
 package gameEngine.model.tower;
 
+import java.util.Map;
 import gameEngine.model.Detector;
 import gameEngine.model.enemy.Enemy;
 
@@ -58,6 +59,12 @@ public class BoostTower extends Tower {
 		// TODO Auto-generated method stub
 
 	}
+
+    @Override
+    public Map<String, String> getInfo () {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
 
 
