@@ -2,12 +2,9 @@ package gameEngine.view.initialization;
 
 import java.io.File;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import gameEngine.view.Button;
 import gameEngine.view.View;
 import gameEngine.view.StyleConstants;
-import gameEngine.view.gameFrame.GameFrame;
-import gameEngine.controller.*;
 
 
 /**
