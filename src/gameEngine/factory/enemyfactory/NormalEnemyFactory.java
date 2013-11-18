@@ -38,13 +38,5 @@ public class NormalEnemyFactory implements EnemyFactory {
     public Enemy create (Model model) {
         return new Enemy(gold, life, speed, id, true, Constant.ENEMY_CID, image, model);
     }
-    
-  //Yuhua comment out
-//    public Enemy create (LinkedList<Tile> path) {
-//        return new Enemy(gold, life, speed, id, true, path.element().getCenterX(), path.element()
-//                .getCenterY(), Constant.ENEMY_CID, image, path);
-//
-//
-//    }
 
 }

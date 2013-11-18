@@ -70,15 +70,15 @@ public class Controller {
      * Sends a call to the model to update the monitored barrier stats to the barrier
      * at x,y. If the position is invalid, do nothing
      */
-//    public PurchaseInfo getTemporaryBarrierInfo (int x, int y) {
-//        PurchaseInfo barrierInfo;
-//        try {
-//            barrierInfo=model.getBarrierInfo(x,y);
-//        } catch (Exception e) {
-//            barrierInfo=null;
-//        }
-//        return barrierInfo;
-//    }
+    public PurchaseInfo getTemporaryBarrierInfo (int x, int y) {
+        PurchaseInfo barrierInfo;
+        try {
+            barrierInfo=model.getBarrierInfo(x,y);
+        } catch (Exception e) {
+            barrierInfo=null;
+        }
+        return barrierInfo;
+    }
     
     /**
      * Sends a call to the model to purchase tower tower at position x,y
@@ -181,9 +181,5 @@ public class Controller {
     public List<Tile> getPath () {
         return model.getPathList();
     }
-
-    // public String getPathImage(){
-    // }
-
 
 }
