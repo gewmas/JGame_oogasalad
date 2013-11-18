@@ -100,7 +100,6 @@ public class GameFrame extends Frame {
      */
     public void placeTower (PurchaseInfo towerInfo) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        System.out.println(towerInfo.getImage());
         Image image = toolkit.getImage("resources/img/"+towerInfo.getImage()+".png");
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
         setCursor(c);
@@ -118,7 +117,8 @@ public class GameFrame extends Frame {
         return true;
     }
 
-    public void purchaseTower () {
+    public void restoreDefaultCursor () {
+        System.out.println("Restore");
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 
