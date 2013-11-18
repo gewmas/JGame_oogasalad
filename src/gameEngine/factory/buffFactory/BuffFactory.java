@@ -9,7 +9,7 @@ import gameEngine.model.buff.IBuffable;
 public abstract class BuffFactory {
     
     private static BuffFactory myBuffFactory;
-    private HashMap<Integer,BuffFactory> myFactoryMap=new HashMap<>();
+    private HashMap<Integer,BuffFactory> myFactoryMap=new HashMap<Integer,BuffFactory>();
 
     public void createBuffs(IBuffable target, int buffIds){
         createBuffs(target,buffIds,0);
