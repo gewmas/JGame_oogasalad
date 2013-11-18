@@ -1,5 +1,7 @@
 package gameEngine.model.tower;
 
+import java.util.HashMap;
+import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
 import jgame.JGObject;
 
@@ -36,7 +38,7 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
 
     String description;
 
-
+    Map<String, String> info;
 
     public Tower (String name,
                   boolean unique_id,
@@ -49,6 +51,8 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
 
         this.towerName = name;        
         this.image = gfxname;
+        
+        this.info = new HashMap<String, String>();
         
     }
 
@@ -65,32 +69,27 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
     /**
      * TowerInfo Getter Method
      */
-    @Override
+    
     public double getX () {
         return x;
     }
 
-    @Override
     public double getY () {
         return y;
     }
 
-    @Override
     public String getItemName(){
         return towerName;
     }
 
-    @Override
     public String getDescription () {
         return description;
     }
 
-    @Override
     public double getDamage (){
         return damage;
     }
 
-    @Override
     public double getAttackSpeed (){
         return attackSpeed;
     }
@@ -99,21 +98,17 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
         return attackMode;
     }
 
-    @Override
     public double getRange (){
         return range;
     }
-    @Override
     public double getRecyclePrice (){
         return recyclePrice;
     }
 
-    @Override
     public int getCost () {
         return (int)cost;
     }
 
-    @Override
     public String getImage () {
         return image;
     }

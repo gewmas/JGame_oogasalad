@@ -1,5 +1,7 @@
 package gameEngine.model.purchase;
 
+import java.util.Map;
+
 /**
  * @author Jiaran and Yuhua all tower and tower factory
  * implements TowerInfo so that front end people can 
@@ -9,6 +11,8 @@ package gameEngine.model.purchase;
  */
 public interface PurchaseInfo {
 
+    public Map<String, String> getInfo();
+    
     public String getItemName ();
 
     public double getX ();
