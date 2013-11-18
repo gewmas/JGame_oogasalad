@@ -105,4 +105,9 @@ public class GameFrameMediator {
     public void clearDisplay(){
         this.towerInfoPanel.clearDisplay();
     }
+
+    public void openStore () {
+      storeOptions.addStoreInventory();
+        
+    }
 }

@@ -85,11 +85,11 @@ public abstract class StoreOptionsPanel extends Panel {
      * @param mediator facilitates communication between view components
      * @param view facilitates communication between view and model
      */
-    public void addStoreInventory (JPanel optionsPanel, GameFrameMediator mediator) {
+    public void addStoreInventory () {
         List<PurchaseInfo> towerInformation = getItems();
         for (PurchaseInfo tower : towerInformation) {
             StoreItemButton towerButton = new StoreItemButton(tower, mediator, view);
-            optionsPanel.add(towerButton);
+            options.add(towerButton);
             storeItems.add(towerButton);
         }
         this.revalidate();
@@ -107,7 +107,7 @@ public abstract class StoreOptionsPanel extends Panel {
         for (StoreItemButton button : storeItems) {
             button.toggleButtonActivation(view.getMoney());
         }
-        addStoreInventory(options, mediator);
+      
        
     }
 
