@@ -1,6 +1,8 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -26,7 +28,6 @@ public class StoreItemButton extends Button {
     private PurchaseInfo towerInfo;
     private Boolean active;
     private Boolean storeOpen;
-
     private Map<String, String> towerDisplayInfo;
 
     /**
@@ -48,6 +49,7 @@ public class StoreItemButton extends Button {
         setOpaque(true);
         towerDisplayInfo = new HashMap();
         formatTowerDisplayInformation();
+        this.addMouseAdapter();
     }
 
     private void formatTowerDisplayInformation () {
@@ -62,12 +64,12 @@ public class StoreItemButton extends Button {
 
     }
 
-    @Override
+ 
     /**
      * When the button is hovered over, the tower information 
      * is displayed and the button's foreground and background colors are changed.
      */
-    protected void mouseEnteteredAction () {
+    private  void highlightButton () {
         if (storeOpen) {
             this.setBackground(HOVER_BUTTON_COLOR);
             this.setForeground(HOVER_TEXT_COLOR);
@@ -81,7 +83,7 @@ public class StoreItemButton extends Button {
      * the button reverts back to its orignal background
      * and foreground
      */
-    protected void mouseExitedAction () {
+    private void unHighlightButton () {
 
         this.setBackground(null);
         this.setForeground(HOVER_EXIT_TEXT_COLOR);
@@ -95,7 +97,7 @@ public class StoreItemButton extends Button {
      * is exited. When button is clicked, that allowers users to place a tower.
      * 
      */
-    protected void mouseClickAction () {
+    private void placeTower() {
         if (active) {
             mediator.placeTower(towerInfo);
         }
@@ -108,6 +110,20 @@ public class StoreItemButton extends Button {
 
         active = moneySupply >= towerInfo.getCost();
         setEnabled(active);
+
+    }
+    private void addMouseAdapter(){
+        addMouseListener(new MouseAdapter() { 
+            public void mouseClicked(MouseEvent me) { 
+                placeTower();
+            } 
+            public void mouseExited(MouseEvent me){
+                unHighlightButton();
+            }
+            public void mouseEntered(MouseEvent me){
+                highlightButton();
+            }
+          }); 
 
     }
 }
