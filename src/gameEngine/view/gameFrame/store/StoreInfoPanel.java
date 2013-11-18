@@ -45,7 +45,7 @@ public class StoreInfoPanel extends Panel {
 
         text = new JTextPane();
 
-        text.setPreferredSize(new Dimension(300, 100));
+//        text.setPreferredSize(new Dimension(300, 100));
         text.setContentType("text/html");
         model =
                 new DefaultTableModel(null,
