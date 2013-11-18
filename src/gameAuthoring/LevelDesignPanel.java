@@ -22,7 +22,7 @@ public class LevelDesignPanel extends JPanel {
     private JScrollPane myCreatedWaves;
     private JPanel myScrollPanel;
     private int numWaves = 0;
-    private LevelDesignDialog myLevelDesignDialog;
+    private WaveDesignDialog myWaveDesignDialog;
 
     public LevelDesignPanel (LevelDesignTab levelDesignTab) {
         myLevelDesignTab = levelDesignTab;
@@ -65,6 +65,7 @@ public class LevelDesignPanel extends JPanel {
                                             numWaves, myWaves);
                 myLevelDesignTab.addLevel(newLevel, levelDesignPanel);
                 myWaves.clear();
+                numWaves = 0;
                 myScrollPanel.removeAll();
             }
         };
@@ -76,11 +77,11 @@ public class LevelDesignPanel extends JPanel {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                LevelDesignDialog levelDesignDialog =
-                        new LevelDesignDialog(levelDesignTab, levelDesignPanel);
-                levelDesignDialog.setSize(new Dimension(300, 350));
-                levelDesignDialog.setVisible(true);
-                myLevelDesignDialog = levelDesignDialog;
+                WaveDesignDialog waveDesignDialog =
+                        new WaveDesignDialog(levelDesignTab, levelDesignPanel);
+                waveDesignDialog.setSize(new Dimension(300, 350));
+                waveDesignDialog.setVisible(true);
+                myWaveDesignDialog = waveDesignDialog;
             }
         };
         return listener;

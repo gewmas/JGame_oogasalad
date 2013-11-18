@@ -10,10 +10,7 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JFileChooser;
 
 
@@ -26,12 +23,11 @@ public class GameData {
     private int myLives;
 
     private String mySplashImage;
+    private String myBackgroundImage;
     private int myWindowWidth;
     private int myWindowHeight;
     private int myTilesPerRow;
     private double myDifficultyScale;
-
-    
 
     JSONArray myTowerList = new JSONArray();
     JSONArray myEnemyList = new JSONArray();
@@ -42,6 +38,10 @@ public class GameData {
 
     public GameData () {
         container = new JSONObject();
+    }
+
+    public Object get (String objectName) {
+        return container.get(objectName);
     }
 
     public void setGameName (String gameName) {
@@ -62,6 +62,11 @@ public class GameData {
     protected void setSplashImage (String splashImage) {
         mySplashImage = splashImage;
         container.put("splashImage", mySplashImage);
+    }
+
+    protected void setBackgroundImage (String backgroundImage) {
+        myBackgroundImage = backgroundImage;
+        container.put("BGImage", myBackgroundImage);
     }
 
     protected void setWindowWidth (int windowWidth) {
@@ -97,6 +102,10 @@ public class GameData {
 
     }
 
+    protected void addLevel (LevelJSONObject level) {
+        myLevelList.put(level);
+    }
+
     protected void addEnemy (String name, int gold, String image, int life, int speed) {
         myEnemyList.put(new EnemyJSONObject(name, gold, image, life, speed));
     }
@@ -105,72 +114,16 @@ public class GameData {
         return myEnemyList;
     }
 
-    protected void setMap (String bgImage,
-                           String pathImage,
+    protected void setMap (String pathImage,
                            Point2D start,
                            Point2D end,
                            Collection<Point2D> pointList) {
-        myMap = new MapJSONObject(bgImage,
-                                  pathImage,
+        myMap = new MapJSONObject(pathImage,
                                   start,
                                   end,
                                   pointList);
 
         container.put("map", myMap);
-    }
-
-    protected void addLevel (LevelJSONObject level) {
-        myLevelList.put(level);
-    }
-
-    protected void testWrite () { // This method is here only for the sake of testing (don't judge)
-
-        this.setGameName("Tower Destruction");
-        this.setGold(200);
-        this.setLives(100);
-
-        this.addTower("bob", "path", 10, 15, 11, 9, 8);
-        this.addTower("pewpew", "path", 10, 15, 11, 9, 8);
-
-        this.addEnemy("Enemy1", 100, "path", 10, 11);
-        this.addEnemy("Enemy2", 100, "path", 10, 11);
-
-        mySplashImage = "blargh";
-        myWindowWidth = 600;
-        myWindowHeight = 400;
-        myTilesPerRow = 15;
-        myDifficultyScale = 1.5;
-
-        Collection<Point2D> woop = new ArrayList<Point2D>();
-        woop.add(new Point2D.Double(1, 2));
-        woop.add(new Point2D.Double(2, 3));
-        woop.add(new Point2D.Double(3, 3));
-
-        myMap = new MapJSONObject("backgroundImg",
-                                  "pathImg",
-                                  new Point2D.Double(1, 2),
-                                  new Point2D.Double(1, 2),
-                                  woop);
-
-        container.put("map", myMap);
-
-        ArrayList<Map<String, Integer>> enemyMapList = new ArrayList<Map<String, Integer>>();
-        Map<String, Integer> map1 = new HashMap<String, Integer>();
-        Map<String, Integer> map2 = new HashMap<String, Integer>();
-
-        map1.put("steve", 11);
-        map2.put("steve", 11);
-
-        enemyMapList.add(map1);
-        enemyMapList.add(map2);
-
-        myLevelList.put(new LevelJSONObject(1, 2, enemyMapList));
-        map1.put("bob", 10);
-        myLevelList.put(new LevelJSONObject(2, 2, enemyMapList));
-
-        addDataToContainer();
-        writeToFile();
-
     }
 
     private void addDataToContainer () {
@@ -198,11 +151,6 @@ public class GameData {
 
         }
 
-    }
-
-    protected static void main (String[] args) {
-        GameData x = new GameData();
-        x.testWrite();
     }
 
 }

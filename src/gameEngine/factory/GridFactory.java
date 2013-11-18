@@ -1,6 +1,14 @@
 package gameEngine.factory;
 
-import gameEngine.model.Grid;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import jgame.platform.JGEngine;
+import gameEngine.model.Tile;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -17,87 +25,66 @@ import java.util.HashSet;
  * 
  */
 public class GridFactory implements FactoryInterface {
-    private Parser parser;
-    private ArrayList<ArrayList<Grid>> gridList;
-    private Coordinate pathStart;
-    private Coordinate pathEnd;
-    private ArrayList<Grid> path;
-    private int nextGridOnPathX;
-    private int nextGridOnPathY;
 
-    public GridFactory (Parser parser) {
+        private Parser parser;
+        private ArrayList<ArrayList<Tile>> gridList;
+        LinkedList<Tile> path;
+        public GridFactory(Parser parser) {
         this.parser = parser;
-        gridList = new ArrayList<ArrayList<Grid>>();
-        path = new ArrayList<Grid>();
-        nextGridOnPathX = 0;
-        nextGridOnPathY = 0;
-    }
-
-    @Override
-    public void initialize () {
-        // get all of the necessary values from the JSON
-        int height = parser.getInt("heightOfWindow");
-        int width = parser.getInt("widthOfWindow");
-        int tilesPerRow = parser.getInt("tilesPerRow");
-        JSONObject map = parser.getJSONObject("map");
-        String pathImage = map.getString("pathImage");
-        JSONArray pathList = map.getJSONArray("Path");
-        pathStart =
-                new Coordinate(map.getJSONObject("startPath").getInt("x"), map
-                        .getJSONObject("startPath").getInt("y"));
-        pathEnd =
-                new Coordinate(map.getJSONObject("endPath").getInt("x"), map
-                        .getJSONObject("endPath").getInt("y"));
-
-        // create a set of all of the path coordinates
-        HashSet<Coordinate> pathCoordinates = new HashSet<Coordinate>();
-        for (int k = 0; k < pathList.length(); k++) {
-            JSONObject coord = pathList.getJSONObject(k);
-            pathCoordinates.add(new Coordinate(coord.getInt("x"), coord.getInt("y")));
+        gridList = new ArrayList<ArrayList<Tile>>();
+        path = new LinkedList<Tile>();
         }
+        
+        @Override
+        public void initialize() {
 
-        // create a 2D array of grid elements
-        int currentYOffset = 0;
-        for (int k = 0; k < 15; k++) {
+            //get all of the necessary values from the JSON
+            int height = parser.getInt("heightOfWindow");
+            int width = parser.getInt("widthOfWindow");
+            int tilesPerRow = parser.getInt("tilesPerRow");
+            JSONObject map = parser.getJSONObject("map");
+            String pathImage = map.getString("pathImage");
+            JSONArray pathList = map.getJSONArray("Path");
+            
+            //create a map of all of the path coordinates and null grid objects
+            HashMap<Coordinate, Tile> pathCoordinates = new HashMap<Coordinate, Tile>();
+            for(int k=0; k<pathList.length(); k++) {
+                JSONObject coord = pathList.getJSONObject(k);
+                pathCoordinates.put(new Coordinate(coord.getInt("x"), coord.getInt("y")), null);
+            }
+            
+            //create a 2D array of grid elements
+            
             int currentXOffset = 0;
-            gridList.add(new ArrayList<Grid>());
-            for (int m = 0; m < 15; m++) {
-                Grid grid =
-                        new Grid("grid", false, currentXOffset, currentYOffset, 8, "block",
-                                 currentXOffset, currentYOffset, (int) (width / 15),
-                                 (int) (height / 15));
-                gridList.get(k).add(grid);
-                currentXOffset = currentXOffset + width / 15;
-                if (pathCoordinates.contains(new Coordinate(k, m))) {
-                    grid.setImage(pathImage);
-                    grid.setOnPath();
+            for(int k=0; k<tilesPerRow; k++) {
+                int currentYOffset = 0;  
+                gridList.add(new ArrayList<Tile>());
+                for(int m=0; m<tilesPerRow; m++) {
+                    Tile tile = new Tile(currentXOffset, currentYOffset, (width / tilesPerRow) + currentXOffset, (height / tilesPerRow) + currentYOffset);
+                    gridList.get(k).add(tile);
+                    currentYOffset = currentYOffset + height / tilesPerRow;
+                    if(pathCoordinates.keySet().contains(new Coordinate(k, m))) {
+                        tile.setOnPath(pathImage);
+                        pathCoordinates.put(new Coordinate(k, m), tile);
+                    }
                 }
+                currentXOffset = currentXOffset + width / tilesPerRow;
             }
-            currentYOffset = currentYOffset + height / 15;
+            
+           //generate path Linked List
+            for(int k=0; k<pathList.length(); k++) {
+                JSONObject coord = pathList.getJSONObject(k);
+                path.add(pathCoordinates.get(new Coordinate(coord.getInt("x"), coord.getInt("y"))));
+            }
+                        
         }
 
-        // figure out direction that player travels (assuming path is straight)
-        if (pathEnd.getX() - pathStart.getX() != 0) {
-            if (pathEnd.getX() - pathStart.getX() < 0) {
-                nextGridOnPathX = -1;
-            }
-            else {
-                nextGridOnPathX = 1;
-            }
+        public ArrayList<ArrayList<Tile>> getGridList() {
+            return gridList;
         }
-        if (pathEnd.getY() - pathStart.getY() != 0) {
-            if (pathEnd.getY() - pathStart.getY() < 0) {
-                nextGridOnPathY = -1;
-            }
-            else {
-                nextGridOnPathY = 1;
-            }
+        
+        public LinkedList<Tile> getPathList() {
+            return path;
         }
-
-    }
-
-    public ArrayList<ArrayList<Grid>> getGridList () {
-        return gridList;
-    }
 
 }

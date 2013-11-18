@@ -28,7 +28,7 @@ public class LevelDesignTab extends Tab {
 
     public LevelDesignTab (GameData gameData) {
         super(gameData);
-        numLevels = 0;
+        numLevels = 1;
     }
 
     @Override
