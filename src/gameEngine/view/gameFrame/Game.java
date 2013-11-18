@@ -68,6 +68,10 @@ public class Game extends StdGame {
             tileCount++;
         }
     }
+    
+    public void startInGame() {
+        view.startModel();
+    }
 
     public void doFrameInGame () {
         moveObjects();
