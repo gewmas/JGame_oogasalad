@@ -26,7 +26,7 @@ import jgame.JGObject;
 public class DefaultTower extends Tower {
 
     long prevTime;
-    private Detector<Enemy> dector;
+    private Detector<Enemy> detector;
     
     //Number of shooting at one time
     int attackAmount = 1;
@@ -62,7 +62,7 @@ public class DefaultTower extends Tower {
         this.y = y;
 
         this.prevTime = System.currentTimeMillis();
-        this.dector = new Detector<Enemy>(this.eng, Enemy.class);
+        this.detector = new Detector<Enemy>(this.eng, Enemy.class);
         
         this.description = "I am a description";
         // level.getGameInfo().loseGold((int)cost);
@@ -89,7 +89,7 @@ public class DefaultTower extends Tower {
     }
     
     public void getEnemyInRange(){
-    	List<Enemy> enemies = dector.getTargetsInRange((int) x, (int) y, (int) range);
+    	List<Enemy> enemies = detector.getTargetsInRange((int) x, (int) y, (int) range);
     	if(enemies.isEmpty())return; //No enemy in range
     	
     	List<Enemy> enemiesInRange = new ArrayList<Enemy>();
@@ -168,7 +168,8 @@ public class DefaultTower extends Tower {
 
     }
 
-    public void sell () {
+    @Override
+	public void sell () {
         // level.getGameInfo().addGold((int)recyclePrice);
         // level.getTowers().remove(this);
         this.remove();
@@ -176,14 +177,31 @@ public class DefaultTower extends Tower {
 
     @Override
     public void upgrade () {
-        // TODO Auto-generated method stub
-        
+    	damage++;
+    	attackSpeed+=1;
     }
+    
+    @Override
+	public void downgrade(){
+    	damage--;
+    	attackSpeed-=1;
+    }
+    
+    @Override
+   	public void upgrade(double factor) {
+    	damage *= factor;
+    	attackSpeed *= factor;
+   	}
+
+   	@Override
+   	public void downgrade(double factor) {
+   		damage /= factor;
+    	attackSpeed /= factor;
+   	}
 
     @Override
     public void setAttackMode (int attackMode) {
-        // TODO Auto-generated method stub
-        
+    	this.attackMode = attackMode;
     }
 
 }

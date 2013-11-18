@@ -57,6 +57,9 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
      */
     public abstract void sell();
     public abstract void upgrade();
+    public abstract void downgrade(); 
+    public abstract void upgrade(double factor);
+    public abstract void downgrade(double factor); //when sell BoostTower, downgrade Tower in range
     public abstract void setAttackMode (int attackMode);
     
     /**
