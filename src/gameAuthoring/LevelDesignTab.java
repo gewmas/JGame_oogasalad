@@ -62,6 +62,8 @@ public class LevelDesignTab extends Tab {
         myMainPanel.add(myLevelDesignPanel);
         myMainPanel.add(myCreatedLevels);
         myLevelDesignPanel.setVisible(true);
+        myMainPanel.validate();
+        myMainPanel.repaint();
     }
 
     public MouseAdapter createLevelButtonListener (final JButton button) {
@@ -76,7 +78,9 @@ public class LevelDesignTab extends Tab {
                 myLevelDesignPanel = level;
                 myMainPanel.add(myLevelDesignPanel);
                 myMainPanel.add(myCreatedLevels);
-                myLevelDesignPanel.setVisible(true);
+                // myLevelDesignPanel.setVisible(true);
+                myMainPanel.validate();
+                myMainPanel.repaint();
             }
         };
         return listener;
