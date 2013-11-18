@@ -37,7 +37,7 @@ public class GridButton extends JButton {
     private void addPathListener (final GridButton gButton) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {            
+            public void mouseClicked (MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     isPath = !isPath;
                     if (isPath) {
@@ -83,7 +83,14 @@ public class GridButton extends JButton {
         };
         gButton.addMouseListener(listener);
     }
-    
+
+    public void setPathStatusFalse () {
+        isPath = false;
+    }
+
+    public void setPathStatusTrue () {
+        isPath = true;
+    }
 
     public boolean isPath () {
         return isPath;

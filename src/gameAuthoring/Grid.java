@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 public class Grid extends JPanel {
 
     private GridButton[][] myGrid;
-    boolean[][] myPath;
     private Point2D myStart;
     private Point2D myEnd;
     private Collection<Point2D> myPathCoordinates = new ArrayList<Point2D>();
@@ -33,7 +32,6 @@ public class Grid extends JPanel {
         myWidth = width;
         myHeight = height;
         myGrid = new GridButton[width][height];
-        myPath = new boolean[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 GridButton gButton = new GridButton(x, y, this);
@@ -41,7 +39,6 @@ public class Grid extends JPanel {
                 gButton.setOpaque(false);
                 gButton.setContentAreaFilled(false);
                 gButton.setBorderPainted(true);
-                myPath[x][y] = false;
                 this.add(myGrid[x][y]);
             }
         }
@@ -50,7 +47,7 @@ public class Grid extends JPanel {
     public void reset () {
         for (int i = 0; i < myWidth; i++) {
             for (int j = 0; j < myHeight; j++) {
-                myPath[i][j] = false;
+                myGrid[i][j].setPathStatusFalse();
                 myGrid[i][j].setIcon(null);
             }
         }
@@ -119,12 +116,14 @@ public class Grid extends JPanel {
         }
 
         myPathCoordinates.clear();
-        for (int i = 0; i < myPath[0].length; i++) {
-            for (int j = 0; j < myPath.length; j++) {
-                System.out.print(myGrid[i][j].isPath() ? '.' : 'x');
-            }
-            System.out.println();
-        }
+        /*
+         * for (int i = 0; i < myPath[0].length; i++) {
+         * for (int j = 0; j < myPath.length; j++) {
+         * System.out.print(myGrid[i][j].isPath() ? '.' : 'x');
+         * }
+         * System.out.println();
+         * }
+         */
         return isValidPath((int) myStart.getX(), (int) myStart.getY(), (int) myEnd.getX(),
                            (int) myEnd.getY());
     }
