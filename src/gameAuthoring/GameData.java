@@ -23,6 +23,7 @@ public class GameData {
     private int myLives;
 
     private String mySplashImage;
+    private String myBackgroundImage;
     private int myWindowWidth;
     private int myWindowHeight;
     private int myTilesPerRow;
@@ -37,6 +38,10 @@ public class GameData {
 
     public GameData () {
         container = new JSONObject();
+    }
+
+    public Object get (String objectName) {
+        return container.get(objectName);
     }
 
     public void setGameName (String gameName) {
@@ -57,6 +62,11 @@ public class GameData {
     protected void setSplashImage (String splashImage) {
         mySplashImage = splashImage;
         container.put("splashImage", mySplashImage);
+    }
+
+    protected void setBackgroundImage (String backgroundImage) {
+        myBackgroundImage = backgroundImage;
+        container.put("BGImage", myBackgroundImage);
     }
 
     protected void setWindowWidth (int windowWidth) {
@@ -104,13 +114,11 @@ public class GameData {
         return myEnemyList;
     }
 
-    protected void setMap (String bgImage,
-                           String pathImage,
+    protected void setMap (String pathImage,
                            Point2D start,
                            Point2D end,
                            Collection<Point2D> pointList) {
-        myMap = new MapJSONObject(bgImage,
-                                  pathImage,
+        myMap = new MapJSONObject(pathImage,
                                   start,
                                   end,
                                   pointList);

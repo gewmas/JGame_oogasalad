@@ -100,7 +100,8 @@ public class MapDesignTab extends Tab {
             public void mouseClicked (MouseEvent e) {
                 if (myGrid.isValidPathHelper()) {
                     JOptionPane.showMessageDialog(null, "Valid path! Map Written");
-                    myGameData.setMap(myBackgroundImage, myPathImage, myGrid.getPathStart(), myGrid.getPathEnd(), myGrid.getPathCoordinates()); 
+                    myGameData.setBackgroundImage(myBackgroundImage);
+                    myGameData.setMap(myPathImage, myGrid.getPathStart(), myGrid.getPathEnd(), myGrid.getPathCoordinates()); 
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Invalid path! Please fix path and try again");
