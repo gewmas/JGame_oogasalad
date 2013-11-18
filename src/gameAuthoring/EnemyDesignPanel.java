@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -97,18 +98,37 @@ public class EnemyDesignPanel extends JPanel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 GameData myGameData = myEnemyDesignTab.getGameData();
-                myGameData.addEnemy(myNameField.getText(),
-                                    Integer.parseInt(myGoldField.getText()),
-                                    myImageSource.toString().replace(System.getProperties().getProperty("user.dir"), ""),
-                                    Integer.parseInt(myLifeField.getText()),
-                                    Integer.parseInt(mySpeedField.getText()));
-
-                myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
-                myNameField.setText("");
-                myGoldField.setText("");
-                myLifeField.setText("");
-                mySpeedField.setText("");
-                myEnemyImage.setIcon(null);
+                try {
+                    int gold = Integer.parseInt(myGoldField.getText());
+                    int life = Integer.parseInt(myLifeField.getText());
+                    int speed = Integer.parseInt(mySpeedField.getText());
+                    if (gold < 0 || life < 0) {
+                        JOptionPane
+                                .showMessageDialog(null,
+                                                   "Cannot have negative values for gold, life, or speed");
+                    }
+                    else {
+                        myGameData
+                                .addEnemy(myNameField.getText(),
+                                          gold,
+                                          myImageSource.toString()
+                                                  .replace(System.getProperties()
+                                                          .getProperty("user.dir"),
+                                                           ""),
+                                          life,
+                                          speed);
+                        myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
+                        myNameField.setText("");
+                        myGoldField.setText("");
+                        myLifeField.setText("");
+                        mySpeedField.setText("");
+                        myEnemyImage.setIcon(null);
+                    }
+                }
+                catch (NumberFormatException n)
+                {
+                    JOptionPane.showMessageDialog(null, "Invalid input");
+                }
             }
         };
         return listener;

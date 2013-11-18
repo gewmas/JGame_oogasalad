@@ -56,7 +56,6 @@ public class EnemyDesignTab extends Tab {
         catch (IOException e) {
             e.printStackTrace();
         }
-
         JLabel enemyNameLabel = new JLabel(enemyName);
         myScrollPanel.add(enemyNameLabel);
         myScrollPanel.add(enemyIcon);

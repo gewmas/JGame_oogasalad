@@ -22,6 +22,7 @@ public class LevelDesignPanel extends JPanel {
     private JScrollPane myCreatedWaves;
     private JPanel myScrollPanel;
     private int numWaves = 0;
+    private LevelDesignDialog myLevelDesignDialog;
 
     public LevelDesignPanel (LevelDesignTab levelDesignTab) {
         myLevelDesignTab = levelDesignTab;
@@ -49,7 +50,9 @@ public class LevelDesignPanel extends JPanel {
     public void addWave (Map<String, Integer> wave) {
         numWaves++;
         System.out.println("adding new wave");
-        myScrollPanel.add(new JButton("Wave " + numWaves));
+        JButton newWave = new JButton("Wave" + numWaves);
+        myScrollPanel.add(newWave);
+        newWave.setVisible(true);
         myWaves.add(wave);
     }
 
@@ -60,7 +63,7 @@ public class LevelDesignPanel extends JPanel {
                 LevelJSONObject newLevel =
                         new LevelJSONObject(myLevelDesignTab.getLevel(),
                                             numWaves, myWaves);
-                myLevelDesignTab.addLevel(newLevel);
+                myLevelDesignTab.addLevel(newLevel, levelDesignPanel);
                 myWaves.clear();
                 myScrollPanel.removeAll();
             }
@@ -77,6 +80,7 @@ public class LevelDesignPanel extends JPanel {
                         new LevelDesignDialog(levelDesignTab, levelDesignPanel);
                 levelDesignDialog.setSize(new Dimension(300, 350));
                 levelDesignDialog.setVisible(true);
+                myLevelDesignDialog = levelDesignDialog;
             }
         };
         return listener;
