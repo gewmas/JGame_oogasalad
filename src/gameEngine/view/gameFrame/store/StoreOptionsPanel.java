@@ -108,4 +108,11 @@ public abstract class StoreOptionsPanel extends Panel {
         }
     }
 
+    public void exitPurchase () {
+        for (StoreItemButton button : storeItems) {
+            button.setSelected(false);
+        }
+        
+    }
+
 }

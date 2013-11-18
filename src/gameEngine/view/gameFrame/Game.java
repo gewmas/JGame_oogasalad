@@ -95,7 +95,9 @@ public class Game extends StdGame {
             JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
             if (purchasing) {
                 if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)){
+                    towerToPurchase=null;
                     purchasing = false;
+                    mediator.exitPurchase();
                 }
                 System.out.format("Buying tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }
@@ -128,11 +130,19 @@ public class Game extends StdGame {
     /**
      * Indicates that the user wants to buy a tower
      */
-    public void placeTower (String tower) {
+    public void placeTower (PurchaseInfo purchaseInfo) {
         // setBGColor(JGColor.red);
-        System.out.println("User wants to purchase " + tower);
+        if (purchaseInfo.getItemName().equals(towerToPurchase)){
+            mediator.exitPurchase();
+            System.out.println("Tower cancelled");
+            towerToPurchase=null;
+            purchasing=false;
+            return;
+        }
+        mediator.setCursorImage(purchaseInfo);
+        System.out.println("User wants to purchase " + purchaseInfo.getItemName());
         purchasing = true;
-        towerToPurchase = tower;
+        towerToPurchase = purchaseInfo.getItemName();
     }
 
 }
