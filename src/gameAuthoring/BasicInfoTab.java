@@ -171,7 +171,7 @@ public class BasicInfoTab extends Tab {
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     mySplashImage =
                             INPUT_CHOOSER.getSelectedFile().toString()
-                                    .replace(System.getProperties().getProperty("user.dir"), "");
+                                    .replace(System.getProperties().getProperty("user.dir") + "/", "");
                     mySplashImageLabel.setText(mySplashImage);
                 }
 

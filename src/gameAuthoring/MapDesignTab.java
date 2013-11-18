@@ -117,7 +117,7 @@ public class MapDesignTab extends Tab {
                     try {
                         myPathImage =
                                 imgSource.toString().replace(System.getProperties()
-                                        .getProperty("user.dir"), "");
+                                        .getProperty("user.dir") + "/", "");
                         path = ImageIO.read(imgSource);
                         myCurrentPathImage.setIcon(new ImageIcon(path));
                     }
@@ -157,7 +157,7 @@ public class MapDesignTab extends Tab {
                     File imgSource = INPUT_CHOOSER.getSelectedFile();
                     myBackgroundImage =
                             imgSource.toString().replace(System.getProperties()
-                                    .getProperty("user.dir"), "");
+                                    .getProperty("user.dir") + "/", "");
                     myGrid.setBackgroundImageSource(imgSource);
                 }
             }

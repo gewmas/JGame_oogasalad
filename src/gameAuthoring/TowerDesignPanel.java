@@ -40,7 +40,7 @@ public class TowerDesignPanel extends JPanel {
     public TowerDesignPanel (TowerDesignTab towerDesignTab) {
         FileNameExtensionFilter filter =
                 new FileNameExtensionFilter(
-                                            "JPG & GIF Images", "jpg", "gif");
+                                            "JPG & GIF Images", "jpg", "gif", "png");
         INPUT_CHOOSER.setFileFilter(filter);
 
         myTowerDesignTab = towerDesignTab;
@@ -135,7 +135,7 @@ public class TowerDesignPanel extends JPanel {
                                 .addTower(myNameField.getText(),
                                           myImageSource.toString()
                                                   .replace(System.getProperties()
-                                                          .getProperty("user.dir"),
+                                                          .getProperty("user.dir") + "/",
                                                            ""),
                                           Integer.parseInt(myDamageField.getText()),
                                           Integer.parseInt(myAttackSpeedField.getText()),

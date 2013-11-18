@@ -113,7 +113,7 @@ public class EnemyDesignPanel extends JPanel {
                                           gold,
                                           myImageSource.toString()
                                                   .replace(System.getProperties()
-                                                          .getProperty("user.dir"),
+                                                          .getProperty("user.dir") + "/",
                                                            ""),
                                           life,
                                           speed);
