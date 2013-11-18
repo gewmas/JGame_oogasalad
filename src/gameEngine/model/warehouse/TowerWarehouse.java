@@ -20,7 +20,7 @@ import java.util.Map.Entry;
  * 
  */
 
-public class TowerWarehouse implements Warehouse {
+public class TowerWarehouse extends Warehouse {
 
     private JSONArray jsonArray;
     Map<String, TowerFactory> towers;
@@ -44,10 +44,10 @@ public class TowerWarehouse implements Warehouse {
         }
     }
 
-    public void create (String name) {
-        TowerFactory towerFactory = towers.get(name);
-        towerFactory.create();
-    }
+//    public void create (String name) {
+//        TowerFactory towerFactory = towers.get(name);
+//        towerFactory.create();
+//    }
 
     // Jiaran edit, something's wrong please contact.
     //wenxin I cast it to int

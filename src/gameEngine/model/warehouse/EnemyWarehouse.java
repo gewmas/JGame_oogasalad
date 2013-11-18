@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 
-public class EnemyWarehouse implements Warehouse {
+public class EnemyWarehouse extends Warehouse {
 
     private JSONArray jsonArray;
     private Model model;

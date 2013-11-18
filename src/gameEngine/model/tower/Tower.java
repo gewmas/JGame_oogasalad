@@ -1,9 +1,5 @@
 package gameEngine.model.tower;
 
-import gameEngine.model.Detector;
-import gameEngine.model.bullet.Bullet;
-import gameEngine.model.enemy.Enemy;
-import java.util.List;
 import jgame.JGObject;
 
 
@@ -13,12 +9,22 @@ import jgame.JGObject;
  *         Tower will shoot the Enemy within shooting range with Bullet
  */
 
-public class Tower extends JGObject implements TowerInfo{
+public abstract class Tower extends JGObject implements TowerInfo{
     String towerName;
     String image;
-    
+
     double damage;
     double attackSpeed;
+
+    /**
+     * AttackMode include 
+     * 0 - shoot the closest enemy
+     * 1 - shoot the farthest enemy
+     * 2 - shoot weakest enemy with least life
+     * 3 - shoot strongest enemy with most life
+     */
+    int attackMode;
+
     double range;
 
     double x;
@@ -28,7 +34,7 @@ public class Tower extends JGObject implements TowerInfo{
     double recyclePrice;
 
     String description;
-    
+
 
 
     public Tower (String name,
@@ -42,36 +48,53 @@ public class Tower extends JGObject implements TowerInfo{
 
         this.towerName = name;        
         this.image = gfxname;
+        
     }
 
+    /**
+     * Tower Function Method
+     */
+    public abstract void sell();
+    public abstract void upgrade();
+    public abstract void setAttackMode (int attackMode);
+    
+    /**
+     * TowerInfo Getter Method
+     */
+    @Override
     public double getX () {
         return x;
     }
 
+    @Override
     public double getY () {
         return y;
     }
-    
+
     @Override
     public String getTowerName(){
         return towerName;
     }
-    
+
     @Override
     public String getDescription () {
         return description;
     }
-    
+
     @Override
     public double getDamage (){
         return damage;
     }
-    
+
     @Override
     public double getAttackSpeed (){
         return attackSpeed;
     }
-    
+
+    public int getAttackMode() {
+        return attackMode;
+    }
+
     @Override
     public double getRange (){
         return range;
@@ -90,4 +113,6 @@ public class Tower extends JGObject implements TowerInfo{
     public String getImage () {
         return image;
     }
+    
+    
 }

@@ -3,6 +3,7 @@ package gameEngine.model.enemy;
 import java.util.LinkedList;
 import gameEngine.Constant.Constant;
 import gameEngine.model.bullet.Bullet;
+import gameEngine.model.tower.Tower;
 import jgame.JGObject;
 import gameEngine.model.Model;
 import gameEngine.model.Tile;
@@ -53,10 +54,10 @@ public class Enemy extends JGObject {
 
         this.x = path.get(0).getCenterX();
         this.y = path.get(0).getCenterY();
-        
+
         //Yuhua change it
-//        this.x = x;
-//        this.y = y;
+        //        this.x = x;
+        //        this.y = y;
 
 
         calculatePathStep();
@@ -91,25 +92,33 @@ public class Enemy extends JGObject {
     public void hit (JGObject obj) {
         // hit the target enemy, destroy that enemy
         // System.out.println("Bullet Hit");
+       
         if (obj.colid == Constant.BULLET_CID) {
-            life -= ((Bullet) obj).getDamage();
-            obj.remove();
+            Bullet bullet = (Bullet)obj;
+            if(this == bullet.getTargetEnemy()){
+                /**
+                 * @author Yuhua
+                 * bullet can only hurt target enemy
+                 * no obj.remove(), let bullet kill itself
+                 */
+                life -= ((Bullet) obj).getDamage();
+                if (life <= 0) {
+                    // level.getGameInfo().addGold((int)gold);
+                    // level.getEnemies().remove(this);
 
-            if (life <= 0) {
-                // level.getGameInfo().addGold((int)gold);
-                // level.getEnemies().remove(this);
-
-                remove();
+                    remove();
+                }
             }
+ 
         }
     }
 
-    
+
     public void reachedGoal() {
         model.getGameInfo().loseLife();
         remove();
     }
-    
+
 
 
     public void calculateNewDirection () {
@@ -157,6 +166,18 @@ public class Enemy extends JGObject {
             // x direction distance
             pathStep = Math.abs(x1 - x2);
         }
+    }
+
+    public double getLife() {
+        return life;
+    }
+    
+    /**
+     * @author Yuhua
+     * For comparator to compare shortest/furthest enemy
+     */
+    public double getDistanceFromTower(Tower tower){
+        return Math.sqrt(Math.pow(x - tower.getX(), 2) + Math.pow(y - tower.getY(), 2));
     }
 
 }

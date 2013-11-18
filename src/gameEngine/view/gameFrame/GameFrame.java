@@ -17,7 +17,7 @@ import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.menu.Menu;
-import gameEngine.view.gameFrame.store.TowerStorePanel;
+import gameEngine.view.gameFrame.store.StorePanel;
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.tower.TowerInfo;
@@ -91,7 +91,7 @@ public class GameFrame extends Frame {
      * Create the store of Towers
      */
     private void createStore () {
-        storePanel = new TowerStorePanel(mediator, engineView);
+        storePanel = new StorePanel(mediator, engineView);
         this.add(storePanel, BorderLayout.EAST);
     }
 
