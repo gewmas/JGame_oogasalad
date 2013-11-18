@@ -1,5 +1,6 @@
 package gameEngine.view.gameFrame.store;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.HashMap;
@@ -23,7 +24,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class StoreInfoPanel extends Panel {
 
-    private JTextPane text;
     private DefaultTableModel model;
 
     public StoreInfoPanel () {
@@ -43,10 +43,6 @@ public class StoreInfoPanel extends Panel {
      */
     private void initializeContents () {
 
-        text = new JTextPane();
-
-//        text.setPreferredSize(new Dimension(300, 100));
-        text.setContentType("text/html");
         model =
                 new DefaultTableModel(null,
                                       new Object[] {
@@ -55,6 +51,9 @@ public class StoreInfoPanel extends Panel {
                                                     StyleConstants.resourceBundle
                                                             .getString("Value") });
         JTable table = new JTable(model);
+
+        table.setFont(new Font("Serif", Font.BOLD, 12));
+        table.setBackground(Color.blue);
         JScrollPane listScrollPane = new JScrollPane(table);
         add(listScrollPane);
 
