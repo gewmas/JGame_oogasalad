@@ -107,7 +107,7 @@ public class BasicInfoTab extends Tab {
         return mainPanel;
     }
 
-    public void load (Parser p) {
+    public void loadJSON (Parser p) {
         try { 
  
             myGameName.setText(p.getString("name"));          
@@ -117,6 +117,8 @@ public class BasicInfoTab extends Tab {
             myWindowHeight.setText(String.valueOf(p.getInt("heightOfWindow")));
             myTilesPerRow.setText(String.valueOf(p.getInt("tilesPerRow")));
             myDifficultyScale.setText(String.valueOf(p.getInt("difficultyScale")));
+            mySplashImage = p.getString("splashImage");
+            mySplashImageLabel.setText(mySplashImage);
         }
 
         catch (NumberFormatException n) {
