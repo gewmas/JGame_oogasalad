@@ -1,5 +1,7 @@
 package gameAuthoring;
 
+import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -13,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -30,10 +33,9 @@ public class BasicInfoTab extends Tab {
     private JTextField myWindowHeight;
     private JTextField myTilesPerRow;
     private JTextField myDifficultyScale;
-    
+
     private JLabel mySplashImageLabel;
     private String mySplashImage;
-    
 
     public BasicInfoTab (GameData gameData) {
         super(gameData);
@@ -53,14 +55,13 @@ public class BasicInfoTab extends Tab {
         JLabel height = new JLabel("Window Height");
         JLabel tiles = new JLabel("Tiles Per Row");
         JLabel difficultyScale = new JLabel("Difficulty Scale");
-        
-        
+
         title.setFont(new Font("Arial", Font.BOLD, 30));
         mainPanel.add(title, "span 2");
 
         JButton setSplashImageButton = new JButton("Choose Splash Image");
         setSplashImageButton.addMouseListener(setSplashImageListener());
-        
+
         mySplashImageLabel = new JLabel();
 
         JButton setInfoButton = new JButton("Set Info");
@@ -80,8 +81,6 @@ public class BasicInfoTab extends Tab {
         myTilesPerRow.setPreferredSize(new Dimension(200, 30));
         myDifficultyScale = new JTextField();
         myDifficultyScale.setPreferredSize(new Dimension(200, 30));
-        
-
 
         subPanel.add(gameName);
         subPanel.add(myGameName);
@@ -97,8 +96,7 @@ public class BasicInfoTab extends Tab {
         subPanel.add(myTilesPerRow);
         subPanel.add(difficultyScale);
         subPanel.add(myDifficultyScale);
-        
-        
+
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
         subPanel.add(setInfoButton);
@@ -109,18 +107,54 @@ public class BasicInfoTab extends Tab {
         return mainPanel;
     }
 
+    public void load (Parser p) {
+        try { 
+ 
+            myGameName.setText(p.getString("name"));          
+            myGold.setText(String.valueOf(p.getInt("gold")));
+            myLives.setText(String.valueOf(p.getInt("numberOfLives")));
+            myWindowWidth.setText(String.valueOf(p.getInt("widthOfWindow")));
+            myWindowHeight.setText(String.valueOf(p.getInt("heightOfWindow")));
+            myTilesPerRow.setText(String.valueOf(p.getInt("tilesPerRow")));
+            myDifficultyScale.setText(String.valueOf(p.getInt("difficultyScale")));
+        }
+
+        catch (NumberFormatException n) {
+            JOptionPane.showMessageDialog(null,
+                                          "File invalid!");
+        }
+    }
+
     public MouseAdapter setInfoListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                myGameData.setGameName(myGameName.getText());
-                myGameData.setGold(Integer.parseInt(myGold.getText()));
-                myGameData.setLives(Integer.parseInt(myLives.getText()));
-                myGameData.setWindowWidth(Integer.parseInt(myWindowWidth.getText()));
-                myGameData.setWindowHeight(Integer.parseInt(myWindowHeight.getText()));
-                myGameData.setTilesPerRow(Integer.parseInt(myTilesPerRow.getText()));
-                myGameData.setDifficultyScale(Float.parseFloat(myDifficultyScale.getText()));
-                myGameData.setSplashImage(mySplashImage);
+                int gold = Integer.parseInt(myGold.getText());
+                int lives = Integer.parseInt(myLives.getText());
+                int width = Integer.parseInt(myWindowWidth.getText());
+                int height = Integer.parseInt(myWindowHeight.getText());
+                int tiles = Integer.parseInt(myTilesPerRow.getText());
+                float difficultyScale = Float.parseFloat(myDifficultyScale.getText());
+                String name = myGameName.getText();
+
+                // TODO: Set more specific constraints
+                if (gold > 0 && lives > 0 && width > 0 && height > 0 && tiles > 0 &&
+                    difficultyScale > 1 && mySplashImage != null && name != null) {
+                    myGameData.setGold(gold);
+                    myGameData.setLives(lives);
+                    myGameData.setWindowWidth(width);
+                    myGameData.setWindowHeight(height);
+                    myGameData.setTilesPerRow(tiles);
+                    myGameData.setDifficultyScale(difficultyScale);
+                    myGameData.setSplashImage(mySplashImage);
+                    myGameData.setGameName(name);
+                }
+
+                else {
+                    JOptionPane.showMessageDialog(null,
+                                                  "One or more fields invalid! Please try again.");
+                }
+
             }
         };
         return listener;
@@ -133,8 +167,10 @@ public class BasicInfoTab extends Tab {
             public void mouseClicked (MouseEvent e) {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
-                        mySplashImage = INPUT_CHOOSER.getSelectedFile().toString().replace(System.getProperties().getProperty("user.dir"), "");
-                        mySplashImageLabel.setText(mySplashImage);
+                    mySplashImage =
+                            INPUT_CHOOSER.getSelectedFile().toString()
+                                    .replace(System.getProperties().getProperty("user.dir"), "");
+                    mySplashImageLabel.setText(mySplashImage);
                 }
 
             }

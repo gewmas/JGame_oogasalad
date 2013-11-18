@@ -101,7 +101,7 @@ public class MapDesignTab extends Tab {
                 if (myGrid.isValidPathHelper()) {
                     JOptionPane.showMessageDialog(null, "Valid path! Map Written");
                     myGameData.setBackgroundImage(myBackgroundImage);
-                    myGameData.setMap(myPathImage, myGrid.getPathStart(), myGrid.getPathEnd(), myGrid.getPathCoordinates()); 
+                    myGameData.setMap(myPathImage, myGrid.getPathCoordinates()); 
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "Invalid path! Please fix path and try again");
