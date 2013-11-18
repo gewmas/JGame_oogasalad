@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -59,6 +60,12 @@ public class EnemyDesignTab extends Tab {
         JLabel enemyNameLabel = new JLabel(enemyName);
         myScrollPanel.add(enemyNameLabel);
         myScrollPanel.add(enemyIcon);
+    }
+
+    @Override
+    public void loadJSON (Parser p) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

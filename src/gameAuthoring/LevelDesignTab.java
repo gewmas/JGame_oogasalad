@@ -1,6 +1,7 @@
 package gameAuthoring;
 
 import gameAuthoring.JSONObjects.LevelJSONObject;
+import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -88,6 +89,12 @@ public class LevelDesignTab extends Tab {
 
     public int getLevel () {
         return numLevels;
+    }
+
+    @Override
+    public void loadJSON (Parser p) {
+        // TODO Auto-generated method stub
+        
     }
 
 }

@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.PointJSONObject;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -11,6 +12,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -78,7 +80,16 @@ public class MapDesignTab extends Tab {
         myBackgroundImage = p.getString("BGImage");
         JSONObject map = p.getJSONObject("map");
         myPathImage = (String) map.get("pathImage");
+        myGrid.setImageSource(new File(System.getProperties().getProperty("user.dir") + myPathImage));
         JSONArray pathPoints = (JSONArray) map.get("Path");
+        myGrid.reset();
+        
+        for (int i=0; i < pathPoints.length(); i++){
+            JSONObject point = (JSONObject) pathPoints.get(i);
+            int x = (int) point.get("x");
+            int y = (int) point.get("y");
+            myGrid.toggleGridButton(x, y);
+        }
         
         
         File f = new File(System.getProperties().getProperty("user.dir") + myPathImage);

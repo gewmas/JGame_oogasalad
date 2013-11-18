@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -66,5 +67,11 @@ public class TowerDesignTab extends Tab {
         myScrollPanel.add(towerNameLabel);
         myScrollPanel.add(towerIcon);
 
+    }
+
+    @Override
+    public void loadJSON (Parser p) {
+        // TODO Auto-generated method stub
+        
     }
 }
