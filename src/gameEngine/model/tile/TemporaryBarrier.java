@@ -1,5 +1,6 @@
 package gameEngine.model.tile;
 
+import java.util.Map;
 import jgame.JGObject;
 import gameEngine.Constant.Constant;
 import gameEngine.model.purchase.PurchaseInfo;
@@ -79,6 +80,12 @@ public class TemporaryBarrier extends JGObject implements PurchaseInfo{
     @Override
     public String getImage () {
         return image;
+    }
+
+    @Override
+    public Map<String, String> getInfo () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

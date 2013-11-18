@@ -2,12 +2,16 @@ package gameEngine.view.gameFrame.store;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.HashMap;
+import java.util.Map;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -19,8 +23,9 @@ import javax.swing.border.Border;
  */
 public class StoreInfoPanel extends Panel {
 
- 
     private JTextPane text;
+    private DefaultTableModel model;
+
     public StoreInfoPanel () {
         super();
 
@@ -39,12 +44,18 @@ public class StoreInfoPanel extends Panel {
     private void initializeContents () {
 
         text = new JTextPane();
-        
-        text.setPreferredSize(new Dimension(300,100));
-        text.setContentType( "text/html" ); 
-        
-        JScrollPane listScrollPane = new JScrollPane(text);
-//        listScrollPane.setSize(10, 10);
+
+        text.setPreferredSize(new Dimension(300, 100));
+        text.setContentType("text/html");
+        model =
+                new DefaultTableModel(null,
+                                      new Object[] {
+                                                    StyleConstants.resourceBundle
+                                                            .getString("Attribute"),
+                                                    StyleConstants.resourceBundle
+                                                            .getString("Value") });
+        JTable table = new JTable(model);
+        JScrollPane listScrollPane = new JScrollPane(table);
         add(listScrollPane);
 
     }
@@ -52,12 +63,19 @@ public class StoreInfoPanel extends Panel {
     /**
      * A method that is called by the Mediator to
      * update the information this panel displays
-     * @param displayInformation TODO
+     * 
+     * @param towerDisplayInfo TODO
      */
-    public void displayTowerInfo (String displayInformation) {
-
-        text.setText(displayInformation);
-        
+    public void displayTowerInfo (Map<String, String> towerDisplayInfo) {
+        clearDisplay();
+        for (String key : towerDisplayInfo.keySet()) {
+            model.addRow(new String[] { key, towerDisplayInfo.get(key) });
+        }
+        model.fireTableDataChanged();
     }
 
+    public void clearDisplay () {
+        model.getDataVector().removeAllElements();
+        model.fireTableDataChanged();
+    }
 }

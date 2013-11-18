@@ -1,5 +1,7 @@
 package gameEngine.view.initialization;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
 import gameEngine.view.Button;
@@ -23,15 +25,11 @@ public class FileSelectorButton extends Button {
     public FileSelectorButton (View view) {
         super(StyleConstants.resourceBundle.getString("SelectFile"));
         this.view = view;
+        addMouseAdapter();
 
     }
 
-    @Override
-    /** Populates a File Chooser
-     * and sends string name of selected file to the controller
-     *
-     */
-    protected void mouseClickAction () {
+    protected void selectFile () {
         JFileChooser chooser =
                 new JFileChooser(System.getProperties().getProperty("user.dir"));
 
@@ -40,6 +38,16 @@ public class FileSelectorButton extends Button {
             File file = new File(chooser.getSelectedFile().toString());
             view.newGame(file);
         }
+
+    }
+
+    private void addMouseAdapter(){
+        addMouseListener(new MouseAdapter() { 
+            public void mouseClicked(MouseEvent me) { 
+                selectFile();
+            } 
+         
+          }); 
 
     }
 
