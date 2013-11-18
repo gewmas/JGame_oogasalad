@@ -71,6 +71,9 @@ public class Game extends StdGame {
     
     public void startInGame() {
         view.startModel();
+        mediator.openStore();
+        mediator.updateStoreStatus();
+        
     }
 
     public void doFrameInGame () {
