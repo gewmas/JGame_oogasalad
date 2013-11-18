@@ -25,7 +25,6 @@ public class StoreItemButton extends Button implements TowerInfoFields{
     private Boolean active;
     private Boolean storeOpen;
     private String towerDisplayInfo;
-    private Boolean selected;
 
     /**
      * @param tower the tower info data structure of the tower the button represents
@@ -44,8 +43,6 @@ public class StoreItemButton extends Button implements TowerInfoFields{
         setToolTipText(tower.getItemName());
         this.towerDisplayInfo = formatTowerDisplayInformation();
         setOpaque(true);
-        this.selected = false;
-
     }
     private String formatTowerDisplayInformation(){
         String ret = "<html><ul>";
@@ -96,12 +93,9 @@ public class StoreItemButton extends Button implements TowerInfoFields{
      * 
      */
     protected void mouseClickAction () {
-        if (active && !selected) {
-            
-            selected = true;
+        if (active) {
+            mediator.placeTower(towerInfo);
         }
-       
-        System.out.println(selected);
     }
 
     public void toggleButtonActivation (int moneySupply) {
@@ -112,8 +106,5 @@ public class StoreItemButton extends Button implements TowerInfoFields{
         active = moneySupply >= towerInfo.getCost();
         setEnabled(active);
 
-    }
-    public void setSelected(Boolean selection){
-        this.selected = selection;
     }
 }
