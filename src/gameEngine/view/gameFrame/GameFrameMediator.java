@@ -1,5 +1,6 @@
 package gameEngine.view.gameFrame;
 
+import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.gameFrame.store.StoreInfoPanel;
 import gameEngine.view.gameFrame.store.StoreOptionsPanel;
@@ -60,10 +61,10 @@ public class GameFrameMediator {
     /**
      * Used by display information about a tower
      * on the Tower Info Panel
-     * @param towerInformation TODO
+     * @param towerDisplayInfo TODO
      */
-    public void displayTowerInfo (String towerInformation) {
-        towerInfoPanel.displayTowerInfo(towerInformation);
+    public void displayTowerInfo (Map<String, String> towerDisplayInfo) {
+        towerInfoPanel.displayTowerInfo(towerDisplayInfo);
     }
 
     /**
@@ -100,5 +101,8 @@ public class GameFrameMediator {
     public void addTowerInfoPanel (StoreInfoPanel towerInfoPanel) {
         this.towerInfoPanel = towerInfoPanel;
     }
-
+    
+    public void clearDisplay(){
+        this.towerInfoPanel.clearDisplay();
+    }
 }
