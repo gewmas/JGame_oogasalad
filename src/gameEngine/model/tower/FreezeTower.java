@@ -1,5 +1,8 @@
 package gameEngine.model.tower;
 
+import gameEngine.model.Detector;
+import gameEngine.model.enemy.Enemy;
+
 /**
  * 
  * @author Yuhua
@@ -10,6 +13,9 @@ package gameEngine.model.tower;
  */
 public class FreezeTower extends Tower {
 
+	private Detector<Enemy> detector;
+	private double slowFactor;
+	
     public FreezeTower (String name,
                         boolean unique_id,
                         double x,
@@ -17,7 +23,8 @@ public class FreezeTower extends Tower {
                         int collisionid,
                         String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
-        // TODO Auto-generated constructor stub
+
+        this.detector = new Detector<Enemy>(this.eng, Enemy.class);
     }
 
     @Override
@@ -28,10 +35,26 @@ public class FreezeTower extends Tower {
 
     @Override
     public void upgrade () {
-        // TODO Auto-generated method stub
-
+    	
+    }
+    
+    @Override
+	public void downgrade(){
+    	
     }
 
+    @Override
+   	public void upgrade(double factor) {
+   		// TODO Auto-generated method stub
+   		
+   	}
+
+   	@Override
+   	public void downgrade(double factor) {
+   		// TODO Auto-generated method stub
+   		
+   	}
+    
     @Override
     public void setAttackMode (int attackMode) {
         // TODO Auto-generated method stub
