@@ -2,7 +2,7 @@ package gameEngine.view.gameFrame;
 
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.tower.TowerInfo;
+import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.View;
 
@@ -15,8 +15,8 @@ public class CanvasPanel extends Panel {
         this.add(game);
     }
 
-    public void placeTower (TowerInfo towerInfo) {
-        game.placeTower(towerInfo.getTowerName());
+    public void placeTower (PurchaseInfo towerInfo) {
+        game.placeTower(towerInfo);
     }
 
     public void endGame () {

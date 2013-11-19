@@ -20,7 +20,7 @@ import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.store.StorePanel;
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.tower.TowerInfo;
+import gameEngine.model.purchase.PurchaseInfo;
 
 
 /**
@@ -98,9 +98,8 @@ public class GameFrame extends Frame {
     /**
      * Changes the default cursor to the image of the tower to be placed
      */
-    public void placeTower (TowerInfo towerInfo) {
+    public void placeTower (PurchaseInfo towerInfo) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        System.out.println(towerInfo.getImage());
         Image image = toolkit.getImage("resources/img/"+towerInfo.getImage()+".png");
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
         setCursor(c);
@@ -118,7 +117,8 @@ public class GameFrame extends Frame {
         return true;
     }
 
-    public void purchaseTower () {
+    public void restoreDefaultCursor () {
+        System.out.println("Restore");
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 

@@ -8,23 +8,23 @@ import gameEngine.model.enemy.Enemy;
  * 
  * @author Yuhua
  *
- * BoostTower will boost several properties of Tower in range by boostFactor
- * Reverse back when the BoostTower is sold
+ * Freeze Tower would slow down or other functionall enemies in range by slowFactor
+ * The enemies get back normal speed when out of range
+ * 
  */
+public class MagicTower extends Tower {
 
-public class BoostTower extends Tower {
+    private Detector<Enemy> detector;
+    private double magicFactor;
 
-    private Detector<DefaultTower> detector;
-    private double boostFactor;
-
-    public BoostTower (double damage,
+    public MagicTower (double damage,
                        double attackSpeed,
                        double range,
                        double cost,
                        double recyclePrice,
                        String description,
                        
-                       double boostFactor,
+                       double magicFactor,
 
                        String name,
                        boolean unique_id,
@@ -34,15 +34,15 @@ public class BoostTower extends Tower {
                        String image) {
         super(name, unique_id, x, y, collisionid, image);
 
-        this.detector = new Detector<DefaultTower>(this.eng, DefaultTower.class);
-        this.boostFactor = boostFactor;
+        this.detector = new Detector<Enemy>(this.eng, Enemy.class);
+        this.magicFactor = magicFactor;
         
         addDescription();
     }
 
     public void addDescription(){
         super.addDescription();
-        info.put("Boost Factor", String.valueOf(boostFactor));
+        info.put("Magic Factor", String.valueOf(magicFactor));
     }
 
     @Override
@@ -53,22 +53,24 @@ public class BoostTower extends Tower {
 
     @Override
     public void upgrade () {
-        boostFactor += 1.0;
+
     }
 
     @Override
     public void downgrade(){
-        boostFactor -= 1.0;
+
     }
 
     @Override
     public void upgrade(double factor) {
-        boostFactor *= factor;
+        // TODO Auto-generated method stub
+
     }
 
     @Override
     public void downgrade(double factor) {
-        boostFactor /= factor;
+        // TODO Auto-generated method stub
+
     }
 
     @Override
@@ -82,7 +84,5 @@ public class BoostTower extends Tower {
         // TODO Auto-generated method stub
         return null;
     }
-
-
 
 }

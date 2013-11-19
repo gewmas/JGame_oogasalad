@@ -3,10 +3,10 @@ package gameEngine.model.enemy;
 import java.util.LinkedList;
 import gameEngine.Constant.Constant;
 import gameEngine.model.bullet.Bullet;
+import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import jgame.JGObject;
 import gameEngine.model.Model;
-import gameEngine.model.Tile;
 
 
 /**
@@ -38,7 +38,7 @@ public class Enemy extends JGObject {
                   int collisionid,
                   String image,
                   Model model) {
-        super(id, unique_id, model.getPathList().get(0).getCenterX(), model.getPathList().get(0).getCenterX(), collisionid, image);
+        super(id, unique_id, model.getPathList().get(0).getX(), model.getPathList().get(0).getY(), collisionid, image);
 
         this.model = model;
         this.id = id;
@@ -52,8 +52,8 @@ public class Enemy extends JGObject {
         this.path = model.getPathList();
         this.pathIndex = 0;
 
-        this.x = path.get(0).getCenterX();
-        this.y = path.get(0).getCenterY();
+        this.x = path.get(0).getX();
+        this.y = path.get(0).getY();
 
         //Yuhua change it
         //        this.x = x;
@@ -77,11 +77,11 @@ public class Enemy extends JGObject {
 
     public boolean reachedPoint () {
         if (yMovement == 0) {
-            double x1 = path.get(pathIndex - 1).getCenterX();
+            double x1 = path.get(pathIndex - 1).getX();
             if (Math.abs(x1 - x) > pathStep) { return true; }
         }
         else {
-            double y1 = path.get(pathIndex - 1).getCenterY();
+            double y1 = path.get(pathIndex - 1).getY();
             if (Math.abs(y1 - y) > pathStep) { return true; }
         }
 
@@ -105,7 +105,7 @@ public class Enemy extends JGObject {
                 if (life <= 0) {
                     // level.getGameInfo().addGold((int)gold);
                     // level.getEnemies().remove(this);
-
+                    model.getGameInfo().addGold((int)gold);
                     remove();
                 }
             }
@@ -128,8 +128,8 @@ public class Enemy extends JGObject {
             reachedGoal();
             return;
         }
-        double x1 = path.get(pathIndex).getCenterX();
-        double y1 = path.get(pathIndex).getCenterY();
+        double x1 = path.get(pathIndex).getX();
+        double y1 = path.get(pathIndex).getY();
         if (Math.abs(x - x1) < Math.abs(y - y1)) {
             if ((y - y1) > 0) {
                 this.yMovement = -1;
@@ -152,11 +152,11 @@ public class Enemy extends JGObject {
     }
 
     public void calculatePathStep () {
-        double x1 = path.get(pathIndex).getCenterX();
-        double y1 = path.get(pathIndex).getCenterY();
+        double x1 = path.get(pathIndex).getX();
+        double y1 = path.get(pathIndex).getY();
 
-        double x2 = path.get((pathIndex + 1)).getCenterX();
-        double y2 = path.get((pathIndex + 1)).getCenterY();
+        double x2 = path.get((pathIndex + 1)).getX();
+        double y2 = path.get((pathIndex + 1)).getY();
 
         if (x1 == x2) {
             // Y direction distance

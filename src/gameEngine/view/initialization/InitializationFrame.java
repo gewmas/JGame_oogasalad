@@ -2,7 +2,6 @@ package gameEngine.view.initialization;
 
 import gameEngine.view.Frame;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrame;
 
 
 /**
@@ -19,9 +18,12 @@ public class InitializationFrame extends Frame {
      */
     public InitializationFrame (View view) {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        setLocationRelativeTo(null);
         getContentPane().add(new InitializationPanel(this, view));
 
+    }
+
+    public void showFrame () {
         pack();
         setVisible(true);
     }

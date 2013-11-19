@@ -6,6 +6,8 @@ import gameEngine.model.GameInfo;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +27,7 @@ public class TowerWarehouse extends Warehouse {
     private JSONArray jsonArray;
     Map<String, TowerFactory> towers;
 
-    public TowerWarehouse (Parser parser) {
+    public TowerWarehouse (Parser parser) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
         jsonArray = parser.getJSONArray("towerType");
         towers = new HashMap<String, TowerFactory>();
 
@@ -33,13 +35,28 @@ public class TowerWarehouse extends Warehouse {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject currTower = jsonArray.getJSONObject(i);
             String name = currTower.getString("id");
-
-            /*
+            TowerFactory towerFactory = null;
+            
+            /**
              * Now it create DefaultTowerFactory no matter what
              * Later should create different TowerFactory according to the Json File
+             * 
+             * reflection - http://stackoverflow.com/questions/6310730/using-reflection-java-reflection-constructor-newinstance
              */
-            TowerFactory towerFactory = (TowerFactory) new DefaultTowerFactory(currTower);
-
+            Class<?> fooClass = null;
+            try {
+                fooClass = Class.forName("gameEngine.factory.towerfactory."+name+"Factory");
+            }
+            catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            Constructor<?>[] fooCtrs = fooClass.getConstructors();
+            Class<?>[] types = fooCtrs[0].getParameterTypes();
+            Object[] params = new Object[types.length];
+            params[0] = types[0].cast(currTower);
+            towerFactory = (TowerFactory)fooCtrs[0].newInstance(params);
+         
+            
             towers.put(name, towerFactory);
         }
     }

@@ -2,9 +2,9 @@ package gameEngine.view.gameFrame;
 
 import gameEngine.Constant.Constant;
 import gameEngine.controller.Controller;
-import gameEngine.model.Tile;
+import gameEngine.model.purchase.PurchaseInfo;
+import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
-import gameEngine.model.tower.TowerInfo;
 import gameEngine.view.View;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -95,12 +95,14 @@ public class Game extends StdGame {
             JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
             if (purchasing) {
                 if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)){
+                    towerToPurchase=null;
                     purchasing = false;
+                    mediator.exitPurchase();
                 }
                 System.out.format("Buying tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }
             else {
-                TowerInfo tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
+                PurchaseInfo tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
                 if (tower==null) {
                     System.out.println("No tower here");
                 } else {
@@ -128,11 +130,19 @@ public class Game extends StdGame {
     /**
      * Indicates that the user wants to buy a tower
      */
-    public void placeTower (String tower) {
+    public void placeTower (PurchaseInfo purchaseInfo) {
         // setBGColor(JGColor.red);
-        System.out.println("User wants to purchase " + tower);
+        if (purchaseInfo.getItemName().equals(towerToPurchase)){
+            mediator.exitPurchase();
+            System.out.println("Tower cancelled");
+            towerToPurchase=null;
+            purchasing=false;
+            return;
+        }
+        mediator.setCursorImage(purchaseInfo);
+        System.out.println("User wants to purchase " + purchaseInfo.getItemName());
         purchasing = true;
-        towerToPurchase = tower;
+        towerToPurchase = purchaseInfo.getItemName();
     }
 
 }

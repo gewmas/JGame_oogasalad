@@ -1,5 +1,7 @@
 package gameEngine.view.initialization;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import gameEngine.view.Button;
 import gameEngine.view.StyleConstants;
@@ -17,15 +19,19 @@ public class CancelButton extends Button {
     public CancelButton (JFrame frame) {
         super(StyleConstants.resourceBundle.getString("Cancel"));
         this.frame = frame;
+        addMouseAdapter();
 
     }
 
-    @Override
-    /**
-     * Closes initialization Frame when button is clicked
-     */
-    protected void mouseClickAction () {
-        frame.dispose();
+
+    private void addMouseAdapter(){
+        addMouseListener(new MouseAdapter() { 
+            public void mouseClicked(MouseEvent me) { 
+                frame.dispose();
+            } 
+         
+          }); 
+
     }
 
 }

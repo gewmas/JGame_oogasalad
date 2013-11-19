@@ -1,7 +1,7 @@
 package gameEngine.view.gameFrame.store;
 
 
-import gameEngine.model.tower.TowerInfo;
+import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
@@ -85,8 +85,8 @@ public abstract class StoreOptionsPanel extends Panel {
      * @param view facilitates communication between view and model
      */
     private  void addStoreInventory (JPanel optionsPanel, GameFrameMediator mediator) {
-        List<TowerInfo> towerInformation = getItems();
-        for (TowerInfo tower : towerInformation ) {
+        List<PurchaseInfo> towerInformation = getItems();
+        for (PurchaseInfo tower : towerInformation ) {
             StoreItemButton towerButton = new StoreItemButton(tower, mediator, view);
             optionsPanel.add(towerButton);
             storeItems.add(towerButton);
@@ -94,7 +94,7 @@ public abstract class StoreOptionsPanel extends Panel {
         }
     }
 
-    protected abstract List<TowerInfo> getItems();
+    protected abstract List<PurchaseInfo> getItems();
 
     /**
      * Used to update the status of each TowerStoreButton.
@@ -106,6 +106,13 @@ public abstract class StoreOptionsPanel extends Panel {
         for (StoreItemButton button : storeItems) {
             button.toggleButtonActivation(view.getMoney());
         }
+    }
+
+    public void exitPurchase () {
+        for (StoreItemButton button : storeItems) {
+            button.setSelected(false);
+        }
+        
     }
 
 }

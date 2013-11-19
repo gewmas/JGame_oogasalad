@@ -1,4 +1,6 @@
-package gameEngine.model.tower;
+package gameEngine.model.purchase;
+
+import java.util.Map;
 
 /**
  * @author Jiaran and Yuhua all tower and tower factory
@@ -7,22 +9,23 @@ package gameEngine.model.tower;
  * towerfactory.
  *
  */
-public interface TowerInfo {
+public interface PurchaseInfo {
 
-    public String getTowerName ();
-
-    public double getX ();
-
-    public double getY ();
-
+    public Map<String, String> getInfo();
+    
+    
+    /**
+     * @author Yuhua 
+     * All methods below would be substituted by the getInfo Map above
+     */
+    public String getItemName ();
+//    public double getX ();
+//    public double getY ();
     public double getDamage ();
-
     public double getAttackSpeed ();
-    public int getAttackMode();
+//    public int getAttackMode();
     public double getRange ();
-
     public int getCost ();
-
     public double getRecyclePrice ();
     public String getDescription();
     public String getImage ();
