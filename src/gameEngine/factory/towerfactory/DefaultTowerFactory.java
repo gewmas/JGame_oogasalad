@@ -2,7 +2,6 @@
 package gameEngine.factory.towerfactory;
 
 import gameEngine.Constant.Constant;
-import gameEngine.model.buff.IBuffable;
 import gameEngine.model.tower.DefaultTower;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
