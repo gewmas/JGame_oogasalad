@@ -1,5 +1,9 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.PointJSONObject;
+import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -8,8 +12,11 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -30,7 +37,6 @@ public class MapDesignTab extends Tab {
     private JButton myCurrentPathImage;
     private String myBackgroundImage;
     private String myPathImage;
-    
 
     public MapDesignTab (GameData gameData) {
         super(gameData);
@@ -70,6 +76,34 @@ public class MapDesignTab extends Tab {
         return mainPanel;
     }
 
+    public void loadJSON (Parser p) {
+        myBackgroundImage = p.getString("BGImage");
+        JSONObject map = p.getJSONObject("map");
+        myPathImage = (String) map.get("pathImage");
+        myGrid.setImageSource(new File(System.getProperties().getProperty("user.dir") + myPathImage));
+        JSONArray pathPoints = (JSONArray) map.get("Path");
+        myGrid.reset();
+        
+        for (int i=0; i < pathPoints.length(); i++){
+            JSONObject point = (JSONObject) pathPoints.get(i);
+            int x = (int) point.get("x");
+            int y = (int) point.get("y");
+            myGrid.toggleGridButton(x, y);
+        }
+        
+        
+        File f = new File(System.getProperties().getProperty("user.dir") + myPathImage);
+
+        try {
+            myCurrentPathImage.setIcon(new ImageIcon(ImageIO.read(f)));
+        }
+        catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
     private MouseAdapter createPathListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
@@ -81,7 +115,9 @@ public class MapDesignTab extends Tab {
                     myGrid.setImageSource(imgSource);
                     Image path;
                     try {
-                        myPathImage = imgSource.toString().replace(System.getProperties().getProperty("user.dir"), "");
+                        myPathImage =
+                                imgSource.toString().replace(System.getProperties()
+                                        .getProperty("user.dir") + "/", "");
                         path = ImageIO.read(imgSource);
                         myCurrentPathImage.setIcon(new ImageIcon(path));
                     }
@@ -100,10 +136,12 @@ public class MapDesignTab extends Tab {
             public void mouseClicked (MouseEvent e) {
                 if (myGrid.isValidPathHelper()) {
                     JOptionPane.showMessageDialog(null, "Valid path! Map Written");
-                    myGameData.setMap(myBackgroundImage, myPathImage, myGrid.getPathStart(), myGrid.getPathEnd(), myGrid.getPathCoordinates()); 
+                    myGameData.setBackgroundImage(myBackgroundImage);
+                    myGameData.setMap(myPathImage, myGrid.getPathCoordinates());
                 }
                 else {
-                    JOptionPane.showMessageDialog(null, "Invalid path! Please fix path and try again");
+                    JOptionPane.showMessageDialog(null,
+                                                  "Invalid path! Please fix path and try again");
                 }
             }
         };
@@ -117,14 +155,14 @@ public class MapDesignTab extends Tab {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     File imgSource = INPUT_CHOOSER.getSelectedFile();
-                    myBackgroundImage = imgSource.toString().replace(System.getProperties().getProperty("user.dir"), "");                
+                    myBackgroundImage =
+                            imgSource.toString().replace(System.getProperties()
+                                    .getProperty("user.dir") + "/", "");
                     myGrid.setBackgroundImageSource(imgSource);
                 }
             }
         };
         return listener;
     }
-    
-
 
 }

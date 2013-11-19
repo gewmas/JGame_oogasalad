@@ -1,0 +1,168 @@
+{
+   "enemyType": [
+      {
+         "id": "Rawr",
+         "life": 3,
+         "speed": 10,
+         "image": "resources/img/enemy.png",
+         "gold": 50
+      },
+      {
+         "id": "Boo",
+         "life": 5,
+         "speed": 5,
+         "image": "resources/img/mana.jpg",
+         "gold": 15
+      }
+   ],
+   "numberOfLives": 10,
+   "tilesPerRow": 15,
+   "difficultyScale": 1.5,
+   "BGImage": "resources/img/space_background.jpg",
+   "widthOfWindow": 500,
+   "levels": 2,
+   "name": "Duvall Destroys Lives",
+   "map": {
+      "startPath": {
+         "y": 0,
+         "x": 0
+      },
+      "pathImage": "resources/img/dirt_tile.jpg",
+      "endPath": {
+         "y": 4,
+         "x": 4
+      },
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 1,
+            "x": 0
+         },
+         {
+            "y": 1,
+            "x": 1
+         },
+         {
+            "y": 2,
+            "x": 1
+         },
+         {
+            "y": 2,
+            "x": 2
+         },
+         {
+            "y": 3,
+            "x": 2
+         },
+         {
+            "y": 3,
+            "x": 3
+         },
+         {
+            "y": 4,
+            "x": 3
+         }
+      ]
+   },
+   "splashImage": "resources/img/bg.jpg",
+   "levelData": [
+      {
+         "level": 1,
+         "enemiesOfWave": [
+            {
+               "enemies": [
+                  {
+                     "id": "Boo",
+                     "quantity": 10
+                  },
+                  {
+                     "id": "Rawr",
+                     "quantity": 5
+                  }
+               ],
+               "wave": 1
+            },
+            {
+               "enemies": [
+                  {
+                     "id": "Rawr",
+                     "quantity": 10
+                  },
+                  {
+                     "id": "Boo",
+                     "quantity": 4
+                  }
+               ],
+               "wave": 2
+            }
+         ],
+         "numberWaves": 2
+      },
+      {
+         "level": 2,
+         "enemiesOfWave": [
+            {
+               "enemies": [
+                  {
+                     "id": "Rawr",
+                     "quantity": 5
+                  },
+                  {
+                     "id": "Boo",
+                     "quantity": 5
+                  }
+               ],
+               "wave": 1
+            },
+            {
+               "enemies": [
+                  {
+                     "id": "Boo",
+                     "quantity": 15
+                  },
+                  {
+                     "id": "Rawr",
+                     "quantity": 15
+                  }
+               ],
+               "wave": 2
+            }
+         ],
+         "numberWaves": 2
+      }
+   ],
+   "gold": 10,
+   "heightOfWindow": 500,
+   "towerType": [
+      {
+         "id": "What",
+         "range": 5,
+         "damage": 10,
+         "attackSpeed": 10,
+         "image": "resources/img/tower1.png",
+         "recyclePrice": 50,
+         "cost": 100
+      },
+      {
+         "id": "Is",
+         "range": 10,
+         "damage": 5,
+         "attackSpeed": 10,
+         "image": "resources/img/tower2.png",
+         "recyclePrice": 25,
+         "cost": 50
+      },
+      {
+         "id": "This",
+         "range": 5,
+         "damage": 5,
+         "attackSpeed": 5,
+         "image": "resources/img/tower3.png",
+         "recyclePrice": 5,
+         "cost": 5
+      }
+   ]
+}

@@ -37,29 +37,9 @@ public class GridButton extends JButton {
     private void addPathListener (final GridButton gButton) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {            
+            public void mouseClicked (MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    isPath = !isPath;
-                    if (isPath) {
-                        myGrid.addCoordinate(myCoordinate);
-                        try {
-                            if (myImgSource == null) {
-                                JOptionPane.showMessageDialog(null, "No image defined");
-                            }
-                            else {
-                                Image path = ImageIO.read(myImgSource);
-                                gButton.setIcon(new ImageIcon(path));
-                                gButton.setPreferredSize(new Dimension(50, 50));
-                            }
-                        }
-                        catch (IOException ex) {
-                            System.out.println("Image not found");
-                        }
-                    }
-                    else {
-                        myGrid.removeCoordinate(myCoordinate);
-                        gButton.setIcon(null);
-                    }
+                    toggle();
                 }
                 if (SwingUtilities.isRightMouseButton(e)) {
                     String[] options = { "Set as start", "Set as end" };
@@ -84,6 +64,38 @@ public class GridButton extends JButton {
         gButton.addMouseListener(listener);
     }
     
+    public void toggle(){
+        isPath = !isPath;
+        if (isPath) {
+            myGrid.addCoordinate(myCoordinate);
+            try {
+                if (myImgSource == null) {
+                    JOptionPane.showMessageDialog(null, "No image defined");
+                }
+                else {
+                    Image path = ImageIO.read(myImgSource);
+                    this.setIcon(new ImageIcon(path));
+                    this.setPreferredSize(new Dimension(50, 50));
+                }
+            }
+            catch (IOException ex) {
+                System.out.println("Image not found");
+            }
+        }
+        else {
+            myGrid.removeCoordinate(myCoordinate);
+            this.setIcon(null);
+        }
+    
+    }
+    
+    public void setPathStatusFalse () {
+        isPath = false;
+    }
+
+    public void setPathStatusTrue () {
+        isPath = true;
+    }
 
     public boolean isPath () {
         return isPath;

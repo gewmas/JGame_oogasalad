@@ -1,9 +1,10 @@
 package gameAuthoring;
 
+import gameEngine.parser.Parser;
 import javax.swing.JPanel;
 
 
-public class Tab {
+public abstract class Tab {
 
     protected GameData myGameData;
 
@@ -19,4 +20,8 @@ public class Tab {
     public GameData getGameData () {
         return myGameData;
     }
+    
+    public abstract void loadJSON(Parser p);
+        
+    
 }
