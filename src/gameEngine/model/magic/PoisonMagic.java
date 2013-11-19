@@ -10,7 +10,7 @@ public class PoisonMagic extends Magic {
     private long myTime;
 
     public PoisonMagic (int expire, IMagicable target, double attack,int ID,int CID) {
-        super(expire, target, NAME, CID, NAME, ID);
+        super(expire, target, NAME, CID, null, ID);
         myPoisonStrength = attack;
     }
 

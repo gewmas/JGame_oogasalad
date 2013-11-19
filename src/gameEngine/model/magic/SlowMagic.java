@@ -8,7 +8,7 @@ public class SlowMagic extends Magic {
 
     
     public SlowMagic (int expire, IMagicable target, double strength,int ID,int CID) {
-        super(expire, target, NAME, CID, NAME, ID);
+        super(expire, target, NAME, CID, null, ID);
         mySlowStrength = strength;
     }
 

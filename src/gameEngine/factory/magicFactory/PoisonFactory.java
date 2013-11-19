@@ -7,7 +7,7 @@ public class PoisonFactory implements IMagicFactory {
     public static final int ID = 2;
     public static final int CID = 0;
     private double myPosionStrength=0.5;
-    private int myExpire=5;
+    private int myExpire=60;
 
     @Override
     public void createMagicInstance (IMagicable target) {

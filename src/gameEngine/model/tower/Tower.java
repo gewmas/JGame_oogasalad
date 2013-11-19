@@ -117,5 +117,4 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
         return image;
     }
     
-    
 }

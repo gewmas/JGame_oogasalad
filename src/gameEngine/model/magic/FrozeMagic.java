@@ -1,12 +1,13 @@
 package gameEngine.model.magic;
 
+
 public class FrozeMagic extends Magic {
 
     public static final String NAME="FrozeMagic";
     private static final double FROZESPEEDCHANGE=1;
     
     public FrozeMagic ( int expire,IMagicable target,int ID, int CID) {
-        super(expire,target,NAME,ID,NAME,CID);
+        super(expire,target,NAME,CID,"bullet",ID);
     }
 
     @Override
@@ -21,7 +22,6 @@ public class FrozeMagic extends Magic {
 
     @Override
     public void move (IMagicable target) {
-        
+       
     }
-
 }
