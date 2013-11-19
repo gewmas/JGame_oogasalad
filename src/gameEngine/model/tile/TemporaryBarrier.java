@@ -31,15 +31,15 @@ public class TemporaryBarrier extends JGObject implements PurchaseInfo{
         return barrierName;
     }
 
-    @Override
-    public double getX () {
-        return tile.getCenterX();
-    }
-
-    @Override
-    public double getY () {
-        return tile.getCenterY();
-    }
+//    @Override
+//    public double getX () {
+//        return tile.getCenterX();
+//    }
+//
+//    @Override
+//    public double getY () {
+//        return tile.getCenterY();
+//    }
 
     @Override
     public double getDamage () {
@@ -51,10 +51,11 @@ public class TemporaryBarrier extends JGObject implements PurchaseInfo{
         return 0;
     }
 
-    @Override
-    public int getAttackMode () {
-        return 0;
-    }
+//   Yuhua delete Attack Mode as a public API
+//    @Override
+//    public int getAttackMode () {
+//        return 0;
+//    }
 
     @Override
     public double getRange () {
