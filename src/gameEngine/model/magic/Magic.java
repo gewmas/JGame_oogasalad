@@ -22,7 +22,8 @@ public abstract class Magic extends JGObject {
 
         myMagicId = magicId;
         myTarget = target;
-
+        
+        myTarget.changeCurrentMagics(myTarget.getCurrentMagics()|myMagicId);
         magicOn(myTarget);
     }
 

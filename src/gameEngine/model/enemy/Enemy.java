@@ -3,6 +3,7 @@ package gameEngine.model.enemy;
 import java.util.LinkedList;
 import gameEngine.Constant.Constant;
 import gameEngine.model.bullet.Bullet;
+import gameEngine.model.magic.IMagicable;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import jgame.JGObject;
@@ -11,10 +12,10 @@ import gameEngine.model.Model;
 
 /**
  * 
- * @author Fabio, Yuhua
+ * @author Fabio, Yuhua, wenxin
  * 
  */
-public class Enemy extends JGObject {
+public class Enemy extends JGObject implements IMagicable{
 
     String id;
     String image;
@@ -28,6 +29,13 @@ public class Enemy extends JGObject {
     int pathIndex;
     double pathStep;
     LinkedList<Tile> path;
+    
+    int currentMagics;
+    
+    final double maxLife;
+    final double maxSpeed;
+    
+    
 
     public Enemy (
                   double gold,
@@ -48,13 +56,16 @@ public class Enemy extends JGObject {
 
         this.gold = gold;
         this.life = life;
+        this.maxLife=life;
         this.speed = speed;
+        this.maxSpeed=speed;
         this.path = model.getPathList();
         this.pathIndex = 0;
 
         this.x = path.get(0).getX();
         this.y = path.get(0).getY();
 
+        this.currentMagics=0;
         //Yuhua change it
         //        this.x = x;
         //        this.y = y;
@@ -180,4 +191,39 @@ public class Enemy extends JGObject {
         return Math.sqrt(Math.pow(x - tower.getX(), 2) + Math.pow(y - tower.getY(), 2));
     }
 
+    
+    /**
+     * @author wenxin
+     * For the IMagicable interface implement
+     */
+    @Override
+    public double getX () {
+        return x;
+    }
+
+    @Override
+    public double getY () {
+        return y;
+    }
+
+
+    @Override
+    public int getCurrentMagics () {
+        return currentMagics;
+    }
+
+    @Override
+    public void changeCurrentMagics (int magic) {
+             currentMagics=magic;        
+    }
+
+    @Override
+    public void changeLife (double lifePercent) {
+            life=life+life*lifePercent;      
+    }
+
+    @Override
+    public void changeSpeed (double speedPercent) {
+        speed=speed+speed*speedPercent;   
+    }
 }
