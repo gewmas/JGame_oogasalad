@@ -59,6 +59,7 @@ public class Controller {
         try {
             towerinfo=model.getTowerInfo(x,y);
         } catch (Exception e) {
+            e.printStackTrace();
             towerinfo=null;
         }
         return towerinfo;
