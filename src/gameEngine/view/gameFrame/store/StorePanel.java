@@ -30,10 +30,10 @@ public class StorePanel extends Panel {
         StoreInfoPanel towerInfoPanel = new StoreInfoPanel();
         mediator.addTowerInfoPanel(towerInfoPanel);
         JTabbedPane storeTabbedPane = new JTabbedPane();
-        
+
         towerStoreOptions = new TowerOptionsPanel(mediator, engineView);
-        objectsStoreOptions =  new TowerOptionsPanel(mediator, engineView);
-        storeTabbedPane.addTab("Towers",towerStoreOptions);
+        objectsStoreOptions = new TowerOptionsPanel(mediator, engineView);
+        storeTabbedPane.addTab("Towers", towerStoreOptions);
         storeTabbedPane.addTab("Objects", objectsStoreOptions);
         mediator.addTowersOptionPanel(towerStoreOptions);
         add(towerInfoPanel, BorderLayout.CENTER);

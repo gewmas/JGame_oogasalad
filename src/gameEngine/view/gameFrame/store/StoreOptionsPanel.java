@@ -107,8 +107,7 @@ public abstract class StoreOptionsPanel extends Panel {
         for (StoreItemButton button : storeItems) {
             button.toggleButtonActivation(view.getMoney());
         }
-      
-       
+
     }
 
     public void exitPurchase () {

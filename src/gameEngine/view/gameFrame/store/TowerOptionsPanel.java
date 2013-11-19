@@ -5,11 +5,12 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrameMediator;
 
-public class TowerOptionsPanel extends StoreOptionsPanel{
+
+public class TowerOptionsPanel extends StoreOptionsPanel {
 
     protected TowerOptionsPanel (GameFrameMediator mediator, View engineView) {
         super(mediator, engineView);
-        
+
     }
 
     @Override
@@ -17,6 +18,5 @@ public class TowerOptionsPanel extends StoreOptionsPanel{
         // TODO Auto-generated method stub
         return view.getTowers();
     }
-  
 
 }
