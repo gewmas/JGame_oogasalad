@@ -38,7 +38,11 @@ public class GameFrameMediator {
      * Destroys the jgame instance so that it can be reloaded
      */
 
-    public void endGame () {
+    public void quitGame () {
+        canvasPanel.quitGame();
+    }
+    
+    public void endGame(){
         canvasPanel.endGame();
     }
 
@@ -105,9 +109,8 @@ public class GameFrameMediator {
     public void clearDisplay(){
         this.towerInfoPanel.clearDisplay();
     }
-
+    
     public void openStore () {
       storeOptions.addStoreInventory();
-        
     }
 }

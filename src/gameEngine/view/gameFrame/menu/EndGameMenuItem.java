@@ -7,18 +7,18 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 
-public class RestartGameMenuItem extends AbstractAction {
+public class EndGameMenuItem extends AbstractAction {
     private View view;
 
-    public RestartGameMenuItem (View view) {
+    public EndGameMenuItem (View view) {
 
-        super(StyleConstants.resourceBundle.getString("RestartGameFileMenu"));
+        super(StyleConstants.resourceBundle.getString("EndGameFileMenu"));
         this.view = view;
     }
 
     @Override
     public void actionPerformed (ActionEvent e) {
-        // controller.restart();
+        view.endGame();
 
     }
 

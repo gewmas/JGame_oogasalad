@@ -151,5 +151,17 @@ public class Game extends StdGame {
         purchasing = true;
         towerToPurchase = purchaseInfo.getItemName();
     }
+    
+    public void endGame(){
+        //view.startModel();
+        removeGameObjects();
+        gameOver();
+        removeGameObjects();
+    }
+    
+    public void removeGameObjects(){
+        this.removeAllTimers();
+        removeObjects(null,0);
+    }
 
 }
