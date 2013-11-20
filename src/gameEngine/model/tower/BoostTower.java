@@ -26,13 +26,14 @@ public class BoostTower extends Tower {
                        
                        double boostFactor,
 
-                       String name,
+                       String type,
+                       String id,
                        boolean unique_id,
                        double x,
                        double y,
                        int collisionid,
                        String image) {
-        super(name, unique_id, x, y, collisionid, image);
+        super(type, id, unique_id, x, y, collisionid, image);
 
         this.detector = new Detector<DefaultTower>(this.eng, DefaultTower.class);
         this.boostFactor = boostFactor;
