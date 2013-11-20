@@ -2,7 +2,7 @@ package gameEngine.view.gameFrame;
 
 import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.gameFrame.store.StoreInfoPanel;
+import gameEngine.view.gameFrame.store.InfoDisplayPanel;
 import gameEngine.view.gameFrame.store.StoreOptionsPanel;
 
 
@@ -28,7 +28,7 @@ public class GameFrameMediator {
     private StoreOptionsPanel storeOptions;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
-    private StoreInfoPanel towerInfoPanel;
+    private InfoDisplayPanel towerInfoPanel;
 
     public void addTowersOptionPanel (StoreOptionsPanel storeOptions) {
         this.storeOptions = storeOptions;
@@ -64,7 +64,7 @@ public class GameFrameMediator {
      * @param towerDisplayInfo TODO
      */
     public void displayTowerInfo (Map<String, String> towerDisplayInfo) {
-        towerInfoPanel.displayTowerInfo(towerDisplayInfo);
+        towerInfoPanel.displayInformation(towerDisplayInfo);
     }
 
     /**
@@ -98,7 +98,7 @@ public class GameFrameMediator {
 
     }
 
-    public void addTowerInfoPanel (StoreInfoPanel towerInfoPanel) {
+    public void addTowerInfoPanel (InfoDisplayPanel towerInfoPanel) {
         this.towerInfoPanel = towerInfoPanel;
     }
     

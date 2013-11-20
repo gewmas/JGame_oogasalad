@@ -3,6 +3,7 @@ package gameEngine.view.gameFrame.store;
 import java.awt.BorderLayout;
 import javax.swing.JTabbedPane;
 import gameEngine.view.Panel;
+import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrameMediator;
 
@@ -27,13 +28,14 @@ public class StorePanel extends Panel {
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
 
-        StoreInfoPanel towerInfoPanel = new StoreInfoPanel();
+        InfoDisplayPanel towerInfoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
+                .getString("ItemInfo"));
         mediator.addTowerInfoPanel(towerInfoPanel);
         JTabbedPane storeTabbedPane = new JTabbedPane();
-        
+
         towerStoreOptions = new TowerOptionsPanel(mediator, engineView);
-        objectsStoreOptions =  new TowerOptionsPanel(mediator, engineView);
-        storeTabbedPane.addTab("Towers",towerStoreOptions);
+        objectsStoreOptions = new TowerOptionsPanel(mediator, engineView);
+        storeTabbedPane.addTab("Towers", towerStoreOptions);
         storeTabbedPane.addTab("Objects", objectsStoreOptions);
         mediator.addTowersOptionPanel(towerStoreOptions);
         add(towerInfoPanel, BorderLayout.CENTER);
