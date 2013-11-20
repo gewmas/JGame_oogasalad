@@ -101,7 +101,7 @@
 	},
 	{
 	 "type": "BoostTower",
-	 "id" : "BoostTower1",
+	 "id" : "BoostTower",
 	 "image": "tower1",
 	 "damage": 1,
 	 "attackSpeed": 0.8,
