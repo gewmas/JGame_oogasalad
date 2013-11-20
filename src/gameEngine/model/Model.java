@@ -61,7 +61,7 @@ public class Model {
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
         barriers = gridFactory.getBarrierList();
-//        temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
+        temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
 
@@ -118,6 +118,7 @@ public class Model {
     public PurchaseInfo getTowerInfo (int x, int y) {
         return (PurchaseInfo)checkTowerAtXY(x, y);
     }
+    
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact
     public boolean purchaseTower (int x, int y, String name) {
@@ -126,6 +127,17 @@ public class Model {
             System.out.println(currentTile.isEmpty());
             currentTile.setTower();
             return towerWarehouse
+                .create((int) currentTile.getX(), (int) currentTile.getY(), name, gameInfo);
+            
+        }
+        return false;
+    }
+    
+    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+        Tile currentTile = getTile(x, y);
+        if (currentTile.isEmpty()) {
+            currentTile.setTemporaryBarrier();
+            return temporaryBarrierWarehouse
                 .create((int) currentTile.getX(), (int) currentTile.getY(), name, gameInfo);
             
         }
