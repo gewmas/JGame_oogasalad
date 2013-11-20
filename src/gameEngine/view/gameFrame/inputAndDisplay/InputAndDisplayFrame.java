@@ -33,7 +33,7 @@ public class InputAndDisplayFrame extends JFrame {
         MigLayout layout = new MigLayout(LAYOUT_WRAP_SETTINGS);
         JPanel main = new JPanel(layout);
         main.add(new InputPanel(inputSender), INPUT_PANEL_POSITION);
-        this.displayPanel = new InfoDisplayPanel(displayName);
+        this.displayPanel = new InfoDisplayPanel(displayName,"Cheat code","Behavior");
         main.add(displayPanel, DISPLAY_PANEL_POSITION);
         add(main);
     }
