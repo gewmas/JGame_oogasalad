@@ -63,7 +63,8 @@
 
 "towerType": [
 	{
-	 "id": "DefaultTower",
+	 "type": "DefaultTower",
+	 "id" : "DefaultTower1",
 	 "image": "tower1",
 	 "damage": 3,
 	 "attackSpeed": 0.8,
@@ -74,7 +75,20 @@
 	 "description": "Default tower will shoot enemy, Surprise!",
 	},
 	{
-	 "id": "MultipleShootingTower",
+	 "type": "DefaultTower",
+	 "id" : "DefaultTower2",
+	 "image": "tower1",
+	 "damage": 3,
+	 "attackSpeed": 0.8,
+	 "attackMode": 1,
+	 "range": 100,	
+	 "cost": 100, 
+	 "recyclePrice":  50,
+	 "description": "Default tower will shoot enemy, Surprise!",
+	},
+	{
+	 "type": "MultipleShootingTower",
+	 "id" : "MultipleShootingTower1",
 	 "image": "tower1",
 	 "damage": 1,
 	 "attackSpeed": 3.5,
@@ -86,7 +100,8 @@
 	 "description": "MultipleShooting tower will shoot multiple bullets at one time.",
 	},
 	{
-	 "id": "BoostTower",
+	 "type": "BoostTower",
+	 "id" : "BoostTower1",
 	 "image": "tower1",
 	 "damage": 1,
 	 "attackSpeed": 0.8,
@@ -97,7 +112,8 @@
 	 "boostFactor": 2.0,
 	},
 	{
-	 "id": "MagicTower",
+	 "type": "MagicTower",
+	 "id": "MagicTower1",
 	 "image": "tower1",
 	 "damage": 1,
 	 "attackSpeed": 0.8,
