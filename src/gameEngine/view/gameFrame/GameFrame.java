@@ -7,15 +7,21 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import gameEngine.view.Frame;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
+import gameEngine.view.gameFrame.cheatCode.CheatCodeFrame;
 import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.store.StorePanel;
 import gameEngine.controller.Controller;
@@ -34,23 +40,41 @@ public class GameFrame extends Frame {
 
     private Controller controller;
     private GameFrameMediator mediator;
-    private View engineView;
+    private View view;
     private Panel storePanel;
+    private CheatCodeFrame cheatCodeFrame;
 
     /**
      * @param controller facilitates communication between view and model
-     * @param engineView
+     * @param view
      */
-    public GameFrame (Controller controller, View engineView, GameFrameMediator mediator) {
+    public GameFrame (Controller controller, View view, GameFrameMediator mediator) {
         super();
         this.mediator = mediator;
         this.controller = controller;
-        this.engineView = engineView;
-
+        this.view = view;
+        this.cheatCodeFrame = new CheatCodeFrame(view);
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         mediator.addGameFrame(this);
+        this.setFocusable(true);
+
+        this.addKeyListener(new KeyListener() {
+            public void keyPressed (KeyEvent e) {
+
+                if (e.isControlDown() && e.getKeyChar() != 't' && e.getKeyCode() == 84) {
+                    cheatCodeFrame.showFrame();
+                }
+            }
+
+            public void keyReleased (KeyEvent e) {
+            }
+
+            public void keyTyped (KeyEvent e) {
+            }
+        });
+
     }
 
     /**
@@ -73,7 +97,7 @@ public class GameFrame extends Frame {
     }
 
     public void createGame () {
-        CanvasPanel canvasPanel = new CanvasPanel(engineView, mediator);
+        CanvasPanel canvasPanel = new CanvasPanel(view, mediator);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addGame(canvasPanel);
     }
@@ -84,14 +108,14 @@ public class GameFrame extends Frame {
     // }
 
     public void createMenu () {
-        setJMenuBar(new Menu(engineView));
+        setJMenuBar(new Menu(view));
     }
 
     /**
      * Create the store of Towers
      */
     private void createStore () {
-        storePanel = new StorePanel(mediator, engineView);
+        storePanel = new StorePanel(mediator, view);
         this.add(storePanel, BorderLayout.EAST);
     }
 
@@ -100,15 +124,15 @@ public class GameFrame extends Frame {
      */
     public void placeTower (PurchaseInfo towerInfo) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage("resources/img/"+towerInfo.getImage()+".png");
+        Image image = toolkit.getImage("resources/img/" + towerInfo.getImage() + ".png");
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
         setCursor(c);
     }
 
     public boolean newGame (File file) {
         try {
-            engineView.newGame(file);
-            engineView.loadNewGame();
+            view.newGame(file);
+            view.loadNewGame();
         }
         catch (Exception e) {
             e.printStackTrace();

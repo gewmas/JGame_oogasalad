@@ -74,7 +74,8 @@ public class Controller {
     public PurchaseInfo getTemporaryBarrierInfo (int x, int y) {
         PurchaseInfo barrierInfo;
         try {
-            barrierInfo=model.getBarrierInfo(x,y);
+//            barrierInfo=model.getBarrierInfo(x,y);
+            barrierInfo=null;
         } catch (Exception e) {
             barrierInfo=null;
         }

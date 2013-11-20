@@ -109,4 +109,9 @@ public class View {
     public List<PurchaseInfo> getTowers () {
         return controller.getTowerFactory();
     }
+
+    public boolean activateCheat (String cheat) {
+       return controller.activateCheat(cheat);
+        
+    }
 }
