@@ -28,7 +28,7 @@ public class StorePanel extends Panel {
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
 
-        InfoPanel towerInfoPanel = new InfoPanel(StyleConstants.resourceBundle
+        InfoDisplayPanel towerInfoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
                 .getString("ItemInfo"));
         mediator.addTowerInfoPanel(towerInfoPanel);
         JTabbedPane storeTabbedPane = new JTabbedPane();

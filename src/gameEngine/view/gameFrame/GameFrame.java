@@ -21,7 +21,8 @@ import gameEngine.view.Frame;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.cheatCode.CheatCodeFrame;
+import gameEngine.view.gameFrame.inputAndDisplay.InputAndDisplayFrame;
+import gameEngine.view.gameFrame.inputAndDisplay.InputSender;
 import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.store.StorePanel;
 import gameEngine.controller.Controller;
@@ -42,18 +43,23 @@ public class GameFrame extends Frame {
     private GameFrameMediator mediator;
     private View view;
     private Panel storePanel;
-    private CheatCodeFrame cheatCodeFrame;
+    private InputAndDisplayFrame cheatCodeFrame;
 
     /**
      * @param controller facilitates communication between view and model
      * @param view
      */
-    public GameFrame (Controller controller, View view, GameFrameMediator mediator) {
+    public GameFrame (Controller controller, final View view, GameFrameMediator mediator) {
         super();
         this.mediator = mediator;
         this.controller = controller;
         this.view = view;
-        this.cheatCodeFrame = new CheatCodeFrame(view);
+        this.cheatCodeFrame = new InputAndDisplayFrame("Cheat Sheet",new InputSender(){
+            @Override
+            public  void execute(String cheat) {
+                view.activateCheat(cheat);
+            }
+        });
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -145,5 +151,7 @@ public class GameFrame extends Frame {
         System.out.println("Restore");
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
+    
+    
 
 }

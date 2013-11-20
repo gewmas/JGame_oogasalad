@@ -22,13 +22,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Lalita Maraj
  * 
  */
-public class InfoPanel extends Panel {
+public class InfoDisplayPanel extends Panel {
 
     private DefaultTableModel model;
     private Font KEYFONT = new Font("Helvetica", 1, 12);
     private Font VALUEFONT = new Font("Helvetica", 0, 12);
 
-    public InfoPanel (String name) {
+    public InfoDisplayPanel (String name) {
         super();
 
         Border valuePanelBorder =
