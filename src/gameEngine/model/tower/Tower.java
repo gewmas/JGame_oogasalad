@@ -13,7 +13,9 @@ import jgame.JGObject;
  */
 
 public abstract class Tower extends JGObject implements PurchaseInfo{
-    String towerName;
+    String type;
+    String id;
+    
     String image;
 
     double damage;
@@ -31,16 +33,17 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
 
     Map<String, String> info;
 
-    public Tower (String name,
+    public Tower (String type,
+                  String id,
                   boolean unique_id,
                   double x,
                   double y,
                   int collisionid,
                   String gfxname) {
-        super(name, unique_id, x, y, collisionid, gfxname);
+        super(id, unique_id, x, y, collisionid, gfxname);
 
-
-        this.towerName = name;        
+        this.type = type;
+        this.id = id;        
         this.image = gfxname;
         
         //add tower description
@@ -48,7 +51,8 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
     }
     
     public void addDescription(){
-        info.put("Tower Name", towerName);
+        info.put("Tower Type", type);
+        info.put("Tower ID", id);
         info.put("Image", image);
         info.put("Damage", String.valueOf(damage));
         info.put("Attack Speed", String.valueOf(attackSpeed));
@@ -86,7 +90,7 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
 
     @Deprecated
     public String getItemName(){
-        return towerName;
+        return id;
     }
 
     @Deprecated

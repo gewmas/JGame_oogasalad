@@ -192,4 +192,14 @@ public class Model {
         return gameInfo;
     }
 
+    public boolean activateCheat (String code) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }
