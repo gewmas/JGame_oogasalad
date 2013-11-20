@@ -38,6 +38,10 @@ public class Tile {
     public void setTower () {
         hasTower = true;
     }
+    
+    public void removeTower() {
+        hasTower = false;
+    }
 
     public boolean hasPath () {
         return hasPath;
@@ -87,9 +91,13 @@ public class Tile {
         return barrierImage;
     }
     
-    public void setBarrier(String imgPath) {
+    public void setBarrier (String imgPath) {
         hasBarrier = true;
         barrierImage = imgPath;
     }
-
+    
+    public void removeBarrier () {
+        hasBarrier = false;
+        barrierImage = "";
+    }
 }

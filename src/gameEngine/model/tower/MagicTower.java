@@ -14,18 +14,35 @@ import gameEngine.model.enemy.Enemy;
  */
 public class MagicTower extends Tower {
 
-	private Detector<Enemy> detector;
-	private double slowFactor;
-	
-    public MagicTower (String name,
-                        boolean unique_id,
-                        double x,
-                        double y,
-                        int collisionid,
-                        String gfxname) {
-        super(name, unique_id, x, y, collisionid, gfxname);
+    private Detector<Enemy> detector;
+    private double magicFactor;
+
+    public MagicTower (double damage,
+                       double attackSpeed,
+                       double range,
+                       double cost,
+                       double recyclePrice,
+                       String description,
+                       
+                       double magicFactor,
+
+                       String name,
+                       boolean unique_id,
+                       double x,
+                       double y,
+                       int collisionid,
+                       String image) {
+        super(name, unique_id, x, y, collisionid, image);
 
         this.detector = new Detector<Enemy>(this.eng, Enemy.class);
+        this.magicFactor = magicFactor;
+        
+        addDescription();
+    }
+
+    public void addDescription(){
+        super.addDescription();
+        info.put("Magic Factor", String.valueOf(magicFactor));
     }
 
     @Override
@@ -36,26 +53,26 @@ public class MagicTower extends Tower {
 
     @Override
     public void upgrade () {
-    	
-    }
-    
-    @Override
-	public void downgrade(){
-    	
+
     }
 
     @Override
-   	public void upgrade(double factor) {
-   		// TODO Auto-generated method stub
-   		
-   	}
+    public void downgrade(){
 
-   	@Override
-   	public void downgrade(double factor) {
-   		// TODO Auto-generated method stub
-   		
-   	}
-    
+    }
+
+    @Override
+    public void upgrade(double factor) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void downgrade(double factor) {
+        // TODO Auto-generated method stub
+
+    }
+
     @Override
     public void setAttackMode (int attackMode) {
         // TODO Auto-generated method stub

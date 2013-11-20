@@ -19,15 +19,6 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
     double damage;
     double attackSpeed;
 
-    /**
-     * AttackMode include 
-     * 0 - shoot the closest enemy
-     * 1 - shoot the farthest enemy
-     * 2 - shoot weakest enemy with least life
-     * 3 - shoot strongest enemy with most life
-     */
-    int attackMode;
-
     double range;
 
     double x;
@@ -52,8 +43,21 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
         this.towerName = name;        
         this.image = gfxname;
         
+        //add tower description
         this.info = new HashMap<String, String>();
-        
+    }
+    
+    public void addDescription(){
+        info.put("Tower Name", towerName);
+        info.put("Image", image);
+        info.put("Damage", String.valueOf(damage));
+        info.put("Attack Speed", String.valueOf(attackSpeed));
+        info.put("Range", String.valueOf(range));
+        info.put("X", String.valueOf(x));
+        info.put("Y", String.valueOf(y));
+        info.put("Cost", String.valueOf(cost));
+        info.put("Sell Price", String.valueOf(recyclePrice));
+        info.put("Description", String.valueOf(description));
     }
 
     /**
@@ -94,9 +98,9 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
         return attackSpeed;
     }
 
-    public int getAttackMode() {
-        return attackMode;
-    }
+//    public int getAttackMode() {
+//        return attackMode;
+//    }
 
     public double getRange (){
         return range;
