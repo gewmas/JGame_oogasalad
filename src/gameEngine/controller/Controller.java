@@ -149,6 +149,19 @@ public class Controller {
         return model.setTowerAttackMode(x, y, attackMode);
     }
     
+    /**
+     * @author Fabio
+     * 
+     * Activate input cheat
+     * Succeed, return true
+     * No such cheat, return false
+     * 
+     * @param code
+     * @return bool
+     */
+    public boolean activateCheat(String code) {
+        return model.activateCheat(code);
+    }
     
 
     /**
