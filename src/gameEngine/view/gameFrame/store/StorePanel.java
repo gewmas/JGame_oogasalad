@@ -10,9 +10,9 @@ import gameEngine.view.gameFrame.GameFrameMediator;
 
 /**
  * @author Lalita Maraj
- *         Panel to hold the store used to purchase towers
- *         Contains the option to select towers and panel that displays
- *         tower information
+ *         Panel to hold the store used to purchase items
+ *         Contains the option to select items and panel that displays
+ *         item information
  */
 public class StorePanel extends Panel {
     private StoreOptionsPanel towerStoreOptions;
@@ -28,17 +28,20 @@ public class StorePanel extends Panel {
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
 
-        InfoDisplayPanel towerInfoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
+        InfoDisplayPanel infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
                 .getString("ItemInfo"));
-        mediator.addTowerInfoPanel(towerInfoPanel);
+        mediator.addInfoPanel(infoPanel);
         JTabbedPane storeTabbedPane = new JTabbedPane();
 
+        // TO BE CHANGED
         towerStoreOptions = new TowerOptionsPanel(mediator, engineView);
         objectsStoreOptions = new TowerOptionsPanel(mediator, engineView);
+        // TO BE CHANGED
+
         storeTabbedPane.addTab("Towers", towerStoreOptions);
         storeTabbedPane.addTab("Objects", objectsStoreOptions);
         mediator.addTowersOptionPanel(towerStoreOptions);
-        add(towerInfoPanel, BorderLayout.CENTER);
+        add(infoPanel, BorderLayout.CENTER);
         add(storeTabbedPane, BorderLayout.PAGE_START);
 
     }

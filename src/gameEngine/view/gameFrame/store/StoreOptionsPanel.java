@@ -59,8 +59,6 @@ public abstract class StoreOptionsPanel extends Panel {
 
         options = new JPanel(new MigLayout(LAYOUT_WRAP));
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        // addStoreInventory(options, mediator);
-
         JScrollPane scrollPane = new JScrollPane(options);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -87,8 +85,33 @@ public abstract class StoreOptionsPanel extends Panel {
      */
     public void addStoreInventory () {
         List<PurchaseInfo> towerInformation = getItems();
-        for (PurchaseInfo tower : towerInformation) {
-            StoreItemButton towerButton = new StoreItemButton(tower, mediator);
+        StoreButtonAction hoverExitAction = new StoreButtonAction() {
+
+            @Override
+            public void executeAction () {
+                mediator.clearDisplay();
+
+            }
+
+        };
+        for (final PurchaseInfo tower : towerInformation) {
+            StoreButtonAction clickAction = new StoreButtonAction() {
+
+                @Override
+                public void executeAction () {
+                    mediator.placeTower(tower);
+
+                }
+
+            };
+            StoreButtonAction hoverAction = new StoreButtonAction() {
+                @Override
+                public void executeAction () {
+                    mediator.displayTowerInfo(tower.getInfo());
+                }
+            };
+            StoreItemButton towerButton =
+                    new StoreItemButton(tower, hoverExitAction, hoverAction, clickAction);
             options.add(towerButton);
             storeItems.add(towerButton);
         }
@@ -107,14 +130,6 @@ public abstract class StoreOptionsPanel extends Panel {
         for (StoreItemButton button : storeItems) {
             button.toggleButtonActivation(view.getMoney());
         }
-
-    }
-
-    public void exitPurchase () {
-        for (StoreItemButton button : storeItems) {
-            button.setSelected(false);
-        }
-
     }
 
 }

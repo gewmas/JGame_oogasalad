@@ -3,78 +3,57 @@ package gameEngine.view.gameFrame.store;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.ImageIcon;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Button;
-import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrameMediator;
 
 
 /**
- * A button that represents a tower that a user can purchase.
- * When hovered over, the tower information is displayed on the GUI
+ * A button that represents an item that a user can purchase.
+ * When hovered over, the item information is displayed on the GUI
  * 
  * @author Lalita Maraj
  * 
  */
 public class StoreItemButton extends Button {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private static final Color HOVER_BUTTON_COLOR = Color.BLUE;
     private static final Color HOVER_TEXT_COLOR = Color.RED;
     private static final Color HOVER_EXIT_TEXT_COLOR = Color.BLACK;
-    private GameFrameMediator mediator;
-    private PurchaseInfo towerInfo;
     private Boolean active;
-    private Boolean storeOpen;
-    private Map<String, String> towerDisplayInfo;
+    private int cost;
 
     /**
-     * @param tower the tower info data structure of the tower the button represents
-     * @param mediator facilitates communication between view components
-     * @param view facilitates communication between view and controller
+     * @param itemPurchaseInfo information about item buttom represents
+     * @param hoverExitAction defines behavior when button is exited
+     * @param hoverAction defines behavior when button is hovered over
+     * @param clickAction defines behavior when button is clicked
      */
-    public StoreItemButton (PurchaseInfo tower, GameFrameMediator mediator) {
+    public StoreItemButton (PurchaseInfo itemPurchaseInfo, StoreButtonAction hoverExitAction,
+                            StoreButtonAction hoverAction,
+                            StoreButtonAction clickAction) {
         super("");
-        storeOpen = false;
         active = false;
         this.setEnabled(false);
-        ImageIcon icon = new ImageIcon("resources/img/" + tower.getImage() + ".png");
+        ImageIcon icon = new ImageIcon("resources/img/" + itemPurchaseInfo.getImage() + ".png");
         this.setIcon(icon);
-        this.mediator = mediator;
-        this.towerInfo = tower;
-        setToolTipText(tower.getItemName());
-
+        this.cost = itemPurchaseInfo.getCost();
+        setToolTipText(itemPurchaseInfo.getItemName());
         setOpaque(true);
-        towerDisplayInfo = new HashMap();
-        formatTowerDisplayInformation();
-        this.addMouseAdapter();
-    }
-
-    private void formatTowerDisplayInformation () {
-        towerDisplayInfo.put("Tower", towerInfo.getItemName());
-        towerDisplayInfo.put("Cost", Double.toString(towerInfo.getCost()));
-        towerDisplayInfo.put("Description", towerInfo.getDescription());
-        towerDisplayInfo.put("Damage", Double.toString(towerInfo.getDamage()));
-        towerDisplayInfo.put("Attack Speed", Double.toString(towerInfo.getAttackSpeed()));
-//        towerDisplayInfo.put("Attack Mode", Double.toString(towerInfo.getAttackMode()));
-        towerDisplayInfo.put("Range", Double.toString(towerInfo.getRange()));
-        towerDisplayInfo.put("Recycle Price", Double.toString(towerInfo.getRecyclePrice()));
-
+        this.addMouseAdapter(hoverAction, hoverExitAction, clickAction);
     }
 
     /**
-     * When the button is hovered over, the tower information
+     * When the button is hovered over, the item information
      * is displayed and the button's foreground and background colors are changed.
      */
     private void highlightButton () {
-        if (storeOpen) {
-            this.setBackground(HOVER_BUTTON_COLOR);
-            this.setForeground(HOVER_TEXT_COLOR);
-
-            mediator.displayTowerInfo(towerDisplayInfo);
-        }
+        this.setBackground(HOVER_BUTTON_COLOR);
+        this.setForeground(HOVER_TEXT_COLOR);
     }
 
     /**
@@ -87,43 +66,45 @@ public class StoreItemButton extends Button {
         this.setBackground(null);
         this.setForeground(HOVER_EXIT_TEXT_COLOR);
 
-        mediator.clearDisplay();
-
     }
 
     /**
-     * Defines the behavior that will occur when the button
-     * is exited. When button is clicked, that allowers users to place a tower.
+     * Sets button to enables/disabled depending on
+     * whether user has enough money to purchase item
      * 
+     * @param moneySupply user's money supply
      */
-    private void placeTower () {
-        if (active) {
-            mediator.placeTower(towerInfo);
-        }
-    }
-
     public void toggleButtonActivation (int moneySupply) {
-        if (storeOpen == false) {
-            storeOpen = true;
-        }
-
-        active = moneySupply >= towerInfo.getCost();
+        active = moneySupply >= cost;
         setEnabled(active);
-
     }
 
-    private void addMouseAdapter () {
+    /**
+     * Adds a mouse adapter to button
+     * 
+     * @param hoverExitAction defines behavior when button is exited
+     * @param hoverAction defines behavior when button is hovered over
+     * @param clickAction defines behavior when button is clicked
+     */
+    void addMouseAdapter (final StoreButtonAction hoverAction,
+                          final StoreButtonAction hoverExitAction,
+                          final StoreButtonAction clickAction) {
         addMouseListener(new MouseAdapter() {
             public void mouseClicked (MouseEvent me) {
-                placeTower();
+                if (active) {
+                    clickAction.executeAction();
+                }
+
             }
 
             public void mouseExited (MouseEvent me) {
                 unHighlightButton();
+                // hoverExitAction.executeAction();
             }
 
             public void mouseEntered (MouseEvent me) {
                 highlightButton();
+                // hoverAction.executeAction();
             }
         });
 

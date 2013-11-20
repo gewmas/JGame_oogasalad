@@ -15,15 +15,19 @@ import javax.swing.table.DefaultTableModel;
 
 
 /**
-
+ * 
  * @author Lalita Maraj
- *  Panel that displays information as key 
- * value pairs in a table
+ *         Panel that displays information as key
+ *         value pairs in a table
  * 
  * 
  */
 public class InfoDisplayPanel extends Panel {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private static final int DISPLAY_HEIGHT = 150;
     private static final int DISPLAY_WIDTH = 200;
     private DefaultTableModel model;
@@ -37,28 +41,30 @@ public class InfoDisplayPanel extends Panel {
                 BorderFactory.createTitledBorder(name);
         setBorder(valuePanelBorder);
 
-        initializeContents("","");
+        initializeContents("", "");
 
     }
-    public InfoDisplayPanel (String name,String keyName, String valueName) {
+
+    public InfoDisplayPanel (String name, String keyName, String valueName) {
         super();
 
         Border valuePanelBorder =
                 BorderFactory.createTitledBorder(name);
         setBorder(valuePanelBorder);
 
-        initializeContents(keyName,valueName);
+        initializeContents(keyName, valueName);
 
     }
 
     /**
      * Initlizes JList contents and adds
-     * @param column2Name  name of row
+     * 
+     * @param column2Name name of row
      * @param keyName name of column
      */
     private void initializeContents (String keyName, String valueName) {
 
-        model = new DefaultTableModel(null,new Object[] {keyName, valueName});
+        model = new DefaultTableModel(null, new Object[] { keyName, valueName });
         JTable table = new JTable(model);
         setTableFontAndStyle(table);
         JScrollPane listScrollPane = new JScrollPane(table);
@@ -66,8 +72,9 @@ public class InfoDisplayPanel extends Panel {
         add(listScrollPane);
 
     }
+
     private void setTableFontAndStyle (JTable table) {
-     // taken from http://stackoverflow.com/questions/16113950/jtable-change-column-font
+        // taken from http://stackoverflow.com/questions/16113950/jtable-change-column-font
         table.setFont(VALUEFONT);
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
 
@@ -98,6 +105,7 @@ public class InfoDisplayPanel extends Panel {
 
     /**
      * A method that is used to update the display's information
+     * 
      * @param information information to be displayed
      */
     public void displayInformation (Map<String, String> information) {

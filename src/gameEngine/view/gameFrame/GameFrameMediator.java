@@ -73,7 +73,7 @@ public class GameFrameMediator {
      */
     
     public void exitPurchase(){
-        storeOptions.exitPurchase();
+       
         restoreDefaultCursor();
     }
     
@@ -98,7 +98,7 @@ public class GameFrameMediator {
 
     }
 
-    public void addTowerInfoPanel (InfoDisplayPanel towerInfoPanel) {
+    public void addInfoPanel (InfoDisplayPanel towerInfoPanel) {
         this.towerInfoPanel = towerInfoPanel;
     }
     
