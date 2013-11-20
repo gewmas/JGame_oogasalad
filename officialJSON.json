@@ -97,6 +97,7 @@
 	 "image": "tower1",
 	 "damage": 1,
 	 "attackSpeed": 0.8,
+	 "attackMode": 2,
 	 "range": 100,	
 	 "cost": 100, 
 	 "recyclePrice":  50,
