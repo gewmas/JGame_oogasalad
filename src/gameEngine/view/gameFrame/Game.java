@@ -154,6 +154,7 @@ public class Game extends StdGame {
     
     public void endGame(){
         //view.startModel();
+        removeGameObjects();
         gameOver();
         removeGameObjects();
     }
