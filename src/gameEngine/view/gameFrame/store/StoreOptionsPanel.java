@@ -88,7 +88,7 @@ public abstract class StoreOptionsPanel extends Panel {
     public void addStoreInventory () {
         List<PurchaseInfo> towerInformation = getItems();
         for (PurchaseInfo tower : towerInformation) {
-            StoreItemButton towerButton = new StoreItemButton(tower, mediator, view);
+            StoreItemButton towerButton = new StoreItemButton(tower, mediator);
             options.add(towerButton);
             storeItems.add(towerButton);
         }

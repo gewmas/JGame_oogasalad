@@ -35,7 +35,7 @@ public class StoreItemButton extends Button {
      * @param mediator facilitates communication between view components
      * @param view facilitates communication between view and controller
      */
-    public StoreItemButton (PurchaseInfo tower, GameFrameMediator mediator, View view) {
+    public StoreItemButton (PurchaseInfo tower, GameFrameMediator mediator) {
         super("");
         storeOpen = false;
         active = false;
