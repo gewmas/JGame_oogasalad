@@ -12,15 +12,25 @@ import gameEngine.view.Button;
 import gameEngine.view.Panel;
 
 
+/**
+ * @author lalitamaraj
+ *         Panel used to receive user input and execute
+ *         user defined behavior on text input
+ *         by calling the submit method on inputSender
+ */
 public class InputPanel extends Panel {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private static final int TEXTBOX_HEIGHT = 50;
     private static final int TEXTBOX_WIDTH = 200;
     private static final String SUBMIT_BUTTON_POSITION = "span 1";
     private static final String TEXT_BOX_POSITION = "span 3";
     private static final String LAYOUT_WRAP_SETTING = "wrap 4";
 
-    public InputPanel (final InputSender inputSender) {
+    protected InputPanel (final InputSender inputSender) {
         super();
         MigLayout layout = new MigLayout(LAYOUT_WRAP_SETTING);
         this.setLayout(layout);
@@ -36,8 +46,8 @@ public class InputPanel extends Panel {
 
         submit.addMouseListener(new MouseAdapter() {
             public void mouseClicked (MouseEvent me) {
-                inputSender.execute(input.getText());
-                inputSender.execute(input.getText().trim());
+                inputSender.submit(input.getText());
+                inputSender.submit(input.getText().trim());
                 input.setText("");
             }
 

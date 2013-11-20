@@ -1,9 +1,18 @@
 package gameEngine.view.gameFrame.inputAndDisplay;
 
-public class InputSender {
+/**
+ * @author lalitamaraj
+ *         An interface to be used with the InputAndDisplayFrame
+ *         that executes behavior on the textInput a user enters
+ *         in the textBox
+ */
+public interface InputSender {
 
-    public void execute (String cheat) {
-        // Default is to send it to nothing
+    /**
+     * Method to execute behavior on the text input from textbox
+     * 
+     * @param textInput input from textbox
+     */
+    public void submit (String textInput);
 
-    }
 }

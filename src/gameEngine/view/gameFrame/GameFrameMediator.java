@@ -64,7 +64,7 @@ public class GameFrameMediator {
      * @param towerDisplayInfo TODO
      */
     public void displayTowerInfo (Map<String, String> towerDisplayInfo) {
-        towerInfoPanel.displayTowerInfo(towerDisplayInfo);
+        towerInfoPanel.displayInformation(towerDisplayInfo);
     }
 
     /**

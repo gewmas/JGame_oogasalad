@@ -56,10 +56,11 @@ public class GameFrame extends Frame {
         this.view = view;
         this.cheatCodeFrame = new InputAndDisplayFrame("Cheat Sheet",new InputSender(){
             @Override
-            public  void execute(String cheat) {
+            public  void submit(String cheat) {
                 view.activateCheat(cheat);
             }
         });
+    
         setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

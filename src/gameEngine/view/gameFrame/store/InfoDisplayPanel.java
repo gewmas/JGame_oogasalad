@@ -84,7 +84,7 @@ public class InfoDisplayPanel extends Panel {
      * 
      * @param towerDisplayInfo TODO
      */
-    public void displayTowerInfo (Map<String, String> towerDisplayInfo) {
+    public void displayInformation (Map<String, String> towerDisplayInfo) {
         clearDisplay();
         for (String key : towerDisplayInfo.keySet()) {
             model.addRow(new String[] { key, towerDisplayInfo.get(key) });
