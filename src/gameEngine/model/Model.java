@@ -67,10 +67,11 @@ public class Model {
     }
 
     public void startGame () {
-        Wave w = new Wave("1", 10, 500, 1000, enemyWarehouse);
+        Wave w = new Wave("1", 10, 500, 10000, enemyWarehouse);
+        Wave w1 = new Wave("1", 10, 500, 1000, enemyWarehouse);
         rule.addWave(w);
+        rule.addWave(w1);
         rule.ruleStart();
-
     }
 
     //Yuhua change it
@@ -114,7 +115,6 @@ public class Model {
     // now it is not functional because no myEng, we need discussion on this.
     public PurchaseInfo getTowerInfo (int x, int y) {
         return (PurchaseInfo)checkTowerAtXY(x, y);
-
     }
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact
@@ -189,6 +189,39 @@ public class Model {
 
     public GameInfo getGameInfo() {
         return gameInfo;
+    }
+    
+    
+    /**
+     * @author Fabio
+     * 
+     * Activate input cheat
+     * Succeed, return true
+     * No such cheat, return false
+     * 
+     * @param code
+     * @return bool
+     */
+    public boolean activateCheat(String code) {
+
+        String[] cheatArgs = code.split(" ");
+        String cmd = cheatArgs[0];
+        if(cmd == "add_gold") {
+            int amt = Integer.parseInt(cheatArgs[1]);
+            gameInfo.addGold(amt);
+        } else if(cmd == "add_lives") {
+            int amt = Integer.parseInt(cheatArgs[1]);
+            gameInfo.addLife(amt);
+        } else if(cmd == "kill_all") {
+            //TODO
+        } else if(cmd == "win_game") {
+            //TODO
+        } else if (cmd == "lose_game") {
+            //TODO
+        } else {
+            return false;
+        }
+        return true;
     }
 
 }

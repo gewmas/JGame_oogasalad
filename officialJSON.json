@@ -38,6 +38,25 @@
            ]
 },
 
+"temporaryBarrierType":[
+	{
+	 "id": "Lake",
+	 "image": "lake1",
+	 "damage": 100,
+	 "cost": 200,
+	 "expire": 20,
+	 "description": "Buy a puddle of water to drown your enemies!  The sun is hot, so let's hope it doesn't evaporate too quickly"
+	},  
+	{
+	 "id": "Fire",
+	 "image": "fire1",
+	 "damage": 100,
+	 "cost": 100,
+	 "expire": 10,
+	 "description": "Buy a flame to burn your enemies!  The fire won't burn forever"
+	},
+],
+
 "towerType": [
 	{
 	 "id": "DefaultTower",
