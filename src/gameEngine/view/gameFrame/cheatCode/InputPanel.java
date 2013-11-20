@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame.cheatCode;
 
 
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
@@ -24,11 +25,12 @@ public class InputPanel extends Panel {
         setBorder(valuePanelBorder);
         Button submit = new Button("Submit");
         final JTextArea input = new JTextArea("WIN DA GAME BRO");
+        input.setPreferredSize(new Dimension(200,50));
         this.add(new JScrollPane(input), "span 3");
         this.add(submit, "span 1");
         submit.addMouseListener(new MouseAdapter() {
             public void mouseClicked (MouseEvent me) {
-                inputSender.execute(input.getText());
+                inputSender.execute(input.getText().trim());
                 input.setText("");
             }
 

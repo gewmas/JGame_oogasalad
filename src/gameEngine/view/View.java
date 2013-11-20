@@ -48,8 +48,8 @@ public class View {
     public void startJGame () {
         gameFrame.showGame();
     }
-    
-    public void startModel(){
+
+    public void startModel () {
         controller.startGame();
     }
 
@@ -59,7 +59,7 @@ public class View {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-//            e.printStackTrace();
+            // e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }
@@ -111,7 +111,7 @@ public class View {
     }
 
     public boolean activateCheat (String cheat) {
-       return controller.activateCheat(cheat);
-        
+        return controller.activateCheat(cheat);
+
     }
 }
