@@ -58,7 +58,7 @@ public class StoreItemButton extends Button {
         towerDisplayInfo.put("Description", towerInfo.getDescription());
         towerDisplayInfo.put("Damage", Double.toString(towerInfo.getDamage()));
         towerDisplayInfo.put("Attack Speed", Double.toString(towerInfo.getAttackSpeed()));
-        towerDisplayInfo.put("Attack Mode", Double.toString(towerInfo.getAttackMode()));
+//        towerDisplayInfo.put("Attack Mode", Double.toString(towerInfo.getAttackMode()));
         towerDisplayInfo.put("Range", Double.toString(towerInfo.getRange()));
         towerDisplayInfo.put("Recycle Price", Double.toString(towerInfo.getRecyclePrice()));
 

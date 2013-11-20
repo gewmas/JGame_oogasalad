@@ -1,8 +1,11 @@
 package gameEngine.model.tile;
 
+import java.util.HashMap;
 import java.util.Map;
 import jgame.JGObject;
 import gameEngine.Constant.Constant;
+import gameEngine.model.bullet.Bullet;
+import gameEngine.model.enemy.Enemy;
 import gameEngine.model.purchase.PurchaseInfo;
 
 /**
@@ -10,82 +13,32 @@ import gameEngine.model.purchase.PurchaseInfo;
  * @author: Harris Osserman
  */
 
-public class TemporaryBarrier extends JGObject implements PurchaseInfo{
+public class TemporaryBarrier extends JGObject {
     private String barrierName, image;
-    private double damage, attackSpeed, range, x, y, cost, recyclePrice;
-    private static final String DESCRIPTION = "Buy a puddle of water to drown your enemies!  The sun is hot, so let's hope it doesn't evaporate too quickly";
-    private static final int COST = 10;
-    private Tile tile;
+    private double x, y, damage;
+    private String description;
+    private int cost, expire;
+    private HashMap<String, String> info;
+    private double currentTime, endTime;
 
     
-    public TemporaryBarrier(String name, boolean unique_id, String gfxname, Tile tile) {
-        super(name, unique_id, tile.getCenterX(), tile.getCenterY(), Constant.BULLET_CID, gfxname);
-        
-        this.tile = tile;
+    public TemporaryBarrier(String name, String gfxname, double damage, int cost, int expire, String description, double x, double y) {
+        super(name, true, x, y, Constant.BULLET_CID, gfxname);
+        this.description = description;
         this.barrierName = name;        
         this.image = gfxname;
+        this.expire = expire;
+        this.cost = cost;
+        this.damage = damage;
+        this.currentTime = System.currentTimeMillis();
+        this.endTime = this.currentTime + 1000 * this.expire;
     }
-        
+    
     @Override
-    public String getItemName () {
-        return barrierName;
-    }
-
-    @Override
-    public double getX () {
-        return tile.getCenterX();
-    }
-
-    @Override
-    public double getY () {
-        return tile.getCenterY();
-    }
-
-    @Override
-    public double getDamage () {
-        return 0;
-    }
-
-    @Override
-    public double getAttackSpeed () {
-        return 0;
-    }
-
-    @Override
-    public int getAttackMode () {
-        return 0;
-    }
-
-    @Override
-    public double getRange () {
-        return 0;
-    }
-
-    @Override
-    public int getCost () {
-        return COST;
-    }
-
-    @Override
-    public double getRecyclePrice () {
-        //FIGURE OUT WHAT RECYCLE PRICE MEANS
-        return 0;
-    }
-
-    @Override
-    public String getDescription () {
-        return DESCRIPTION;
-    }
-
-    @Override
-    public String getImage () {
-        return image;
-    }
-
-    @Override
-    public Map<String, String> getInfo () {
-        // TODO Auto-generated method stub
-        return null;
+    public void move () {
+        if(System.currentTimeMillis() >= endTime) {
+            this.remove();
+        }
     }
 
 }

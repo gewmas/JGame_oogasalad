@@ -14,51 +14,68 @@ import gameEngine.model.enemy.Enemy;
 
 public class BoostTower extends Tower {
 
-	private Detector<DefaultTower> detector;
-	private double boostFactor;
+    private Detector<DefaultTower> detector;
+    private double boostFactor;
 
-	public BoostTower (String name,
-			boolean unique_id,
-			double x,
-			double y,
-			int collisionid,
-			String gfxname) {
-		super(name, unique_id, x, y, collisionid, gfxname);
+    public BoostTower (double damage,
+                       double attackSpeed,
+                       double range,
+                       double cost,
+                       double recyclePrice,
+                       String description,
+                       
+                       double boostFactor,
 
-		this.detector = new Detector<DefaultTower>(this.eng, DefaultTower.class);
-	}
+                       String name,
+                       boolean unique_id,
+                       double x,
+                       double y,
+                       int collisionid,
+                       String image) {
+        super(name, unique_id, x, y, collisionid, image);
 
-	@Override
-	public void sell () {
-		// TODO Auto-generated method stub
+        this.detector = new Detector<DefaultTower>(this.eng, DefaultTower.class);
+        this.boostFactor = boostFactor;
+        
+        addDescription();
+    }
 
-	}
+    public void addDescription(){
+        super.addDescription();
+        info.put("Boost Factor", String.valueOf(boostFactor));
+    }
 
-	@Override
-	public void upgrade () {
-		boostFactor += 1.0;
-	}
+    @Override
+    public void sell () {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void downgrade(){
-		boostFactor -= 1.0;
-	}
+    }
 
-	@Override
-	public void upgrade(double factor) {
-		boostFactor *= factor;
-	}
+    @Override
+    public void upgrade () {
+        boostFactor += 1.0;
+    }
 
-	@Override
-	public void downgrade(double factor) {
-		boostFactor /= factor;
-	}
+    @Override
+    public void downgrade(){
+        boostFactor -= 1.0;
+    }
 
-	@Override
-	public void setAttackMode (int attackMode) {
-		// TODO Auto-generated method stub
+    @Override
+    public void upgrade(double factor) {
+        boostFactor *= factor;
+    }
 
-	}
+    @Override
+    public void downgrade(double factor) {
+        boostFactor /= factor;
+    }
+
+    @Override
+    public void setAttackMode (int attackMode) {
+        // TODO Auto-generated method stub
+
+    }
 
     @Override
     public Map<String, String> getInfo () {
