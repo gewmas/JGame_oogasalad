@@ -109,4 +109,10 @@ public class View {
     public List<PurchaseInfo> getTowers () {
         return controller.getTowerFactory();
     }
+
+    public void restartGame () {
+        mediator.restartGame();
+        //controller.startGame();
+        // TODO Auto-generated method stub        
+    }
 }

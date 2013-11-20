@@ -148,5 +148,15 @@ public class Game extends StdGame {
         purchasing = true;
         towerToPurchase = purchaseInfo.getItemName();
     }
+    
+    public void restartGame(){
+        //view.startModel();
+        gameOver();
+        endGame();
+    }
+    
+    public void endGame(){
+        removeObjects(null,0);
+    }
 
 }

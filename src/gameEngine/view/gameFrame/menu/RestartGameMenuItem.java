@@ -12,13 +12,13 @@ public class RestartGameMenuItem extends AbstractAction {
 
     public RestartGameMenuItem (View view) {
 
-        super(StyleConstants.resourceBundle.getString("RestartGameFileMenu"));
+        super(StyleConstants.resourceBundle.getString("EndGameFileMenu"));
         this.view = view;
     }
 
     @Override
     public void actionPerformed (ActionEvent e) {
-        // controller.restart();
+        view.restartGame();
 
     }
 

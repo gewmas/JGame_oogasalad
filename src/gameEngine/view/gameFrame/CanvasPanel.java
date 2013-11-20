@@ -23,4 +23,8 @@ public class CanvasPanel extends Panel {
         game.destroy();
     }
 
+    public void restartGame () {
+        game.restartGame();
+    }
+
 }
