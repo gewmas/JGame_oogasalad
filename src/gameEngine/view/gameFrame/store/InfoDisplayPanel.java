@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Map;
 import gameEngine.view.Panel;
-import gameEngine.view.StyleConstants;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,14 +15,21 @@ import javax.swing.table.DefaultTableModel;
 
 
 /**
- * Panel that displays tower informations
- * when user hovers over a tower option
  * 
  * @author Lalita Maraj
+ *         Panel that displays information as key
+ *         value pairs in a table
+ * 
  * 
  */
 public class InfoDisplayPanel extends Panel {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    private static final int DISPLAY_HEIGHT = 150;
+    private static final int DISPLAY_WIDTH = 200;
     private DefaultTableModel model;
     private Font KEYFONT = new Font("Helvetica", 1, 12);
     private Font VALUEFONT = new Font("Helvetica", 0, 12);
@@ -35,24 +41,47 @@ public class InfoDisplayPanel extends Panel {
                 BorderFactory.createTitledBorder(name);
         setBorder(valuePanelBorder);
 
-        initializeContents();
+        initializeContents("", "");
+
+    }
+
+    public InfoDisplayPanel (String name, String keyName, String valueName) {
+        super();
+
+        Border valuePanelBorder =
+                BorderFactory.createTitledBorder(name);
+        setBorder(valuePanelBorder);
+
+        initializeContents(keyName, valueName);
 
     }
 
     /**
      * Initlizes JList contents and adds
+     * 
+     * @param column2Name name of row
+     * @param keyName name of column
      */
-    private void initializeContents () {
+    private void initializeContents (String keyName, String valueName) {
 
-        model =
-                new DefaultTableModel(null,
-                                      new Object[] { "", "" });
+        model = new DefaultTableModel(null, new Object[] { keyName, valueName });
         JTable table = new JTable(model);
+        setTableFontAndStyle(table);
+        JScrollPane listScrollPane = new JScrollPane(table);
+        listScrollPane.setPreferredSize(new Dimension(DISPLAY_WIDTH, DISPLAY_HEIGHT));
+        add(listScrollPane);
 
-        table.setFont(VALUEFONT);
+    }
 
+    private void setTableFontAndStyle (JTable table) {
         // taken from http://stackoverflow.com/questions/16113950/jtable-change-column-font
+        table.setFont(VALUEFONT);
         DefaultTableCellRenderer r = new DefaultTableCellRenderer() {
+
+            /**
+             * 
+             */
+            private static final long serialVersionUID = 1L;
 
             @Override
             public Component getTableCellRendererComponent (JTable table,
@@ -72,22 +101,17 @@ public class InfoDisplayPanel extends Panel {
 
         table.getColumnModel().getColumn(0).setCellRenderer(r);
         model.fireTableDataChanged();
-        JScrollPane listScrollPane = new JScrollPane(table);
-        listScrollPane.setPreferredSize(new Dimension(200, 150));
-        add(listScrollPane);
-
     }
 
     /**
-     * A method that is called by the Mediator to
-     * update the information this panel displays
+     * A method that is used to update the display's information
      * 
-     * @param towerDisplayInfo TODO
+     * @param information information to be displayed
      */
-    public void displayInformation (Map<String, String> towerDisplayInfo) {
+    public void displayInformation (Map<String, String> information) {
         clearDisplay();
-        for (String key : towerDisplayInfo.keySet()) {
-            model.addRow(new String[] { key, towerDisplayInfo.get(key) });
+        for (String key : information.keySet()) {
+            model.addRow(new String[] { key, information.get(key) });
         }
         model.fireTableDataChanged();
     }

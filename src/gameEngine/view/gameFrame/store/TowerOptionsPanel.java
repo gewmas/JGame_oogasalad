@@ -8,8 +8,13 @@ import gameEngine.view.gameFrame.GameFrameMediator;
 
 public class TowerOptionsPanel extends StoreOptionsPanel {
 
-    protected TowerOptionsPanel (GameFrameMediator mediator, View engineView) {
-        super(mediator, engineView);
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
+    protected TowerOptionsPanel (GameFrameMediator mediator, View view) {
+        super(mediator, view);
 
     }
 
