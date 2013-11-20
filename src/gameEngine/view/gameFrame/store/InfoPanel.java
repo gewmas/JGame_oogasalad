@@ -22,18 +22,17 @@ import javax.swing.table.DefaultTableModel;
  * @author Lalita Maraj
  * 
  */
-public class StoreInfoPanel extends Panel {
+public class InfoPanel extends Panel {
 
     private DefaultTableModel model;
     private Font KEYFONT = new Font("Helvetica", 1, 12);
     private Font VALUEFONT = new Font("Helvetica", 0, 12);
 
-    public StoreInfoPanel () {
+    public InfoPanel (String name) {
         super();
 
         Border valuePanelBorder =
-                BorderFactory.createTitledBorder(StyleConstants.resourceBundle
-                        .getString("ItemInfo"));
+                BorderFactory.createTitledBorder(name);
         setBorder(valuePanelBorder);
 
         initializeContents();
