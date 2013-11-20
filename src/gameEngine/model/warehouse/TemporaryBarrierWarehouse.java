@@ -24,12 +24,10 @@ import java.util.Map.Entry;
 
 public class TemporaryBarrierWarehouse extends Warehouse{
     private JSONArray jsonArray;
-    private Model model;
     private Map<String, TemporaryBarrierFactory> temporaryBarrierFactories;
 
-    public TemporaryBarrierWarehouse (Parser parser, Model model) {
+    public TemporaryBarrierWarehouse (Parser parser) {
         this.jsonArray = parser.getJSONArray("temporaryBarrierType");
-        this.model = model;
         temporaryBarrierFactories = new HashMap<String, TemporaryBarrierFactory>();
 
         //loop through all kinds of temporary barriers

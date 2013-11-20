@@ -1,4 +1,4 @@
-package gameEngine.model.tile;
+package gameEngine.model.temporaryBarrier;
 
 import java.util.HashMap;
 import java.util.Map;
