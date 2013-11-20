@@ -67,8 +67,10 @@ public class Model {
     }
 
     public void startGame () {
-        Wave w = new Wave("1", 10, 500, 1000, enemyWarehouse);
+        Wave w = new Wave("1", 10, 500, 10000, enemyWarehouse);
+        Wave w1 = new Wave("1", 10, 500, 1000, enemyWarehouse);
         rule.addWave(w);
+        rule.addWave(w1);
         rule.ruleStart();
 
     }
