@@ -65,54 +65,63 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
      */
     public abstract void sell();
     public abstract void upgrade();
-    public abstract void downgrade(); 
-    public abstract void upgrade(double factor);
-    public abstract void downgrade(double factor); //when sell BoostTower, downgrade Tower in range
-    public abstract void setAttackMode (int attackMode);
+    public abstract void downgrade(); //when sell BoostTower, downgrade Tower in range
     
     /**
      * TowerInfo Getter Method
      */
+    public Map<String, String> getInfo () {
+        return info;
+    }
     
+    @Deprecated
     public double getX () {
         return x;
     }
 
+    @Deprecated
     public double getY () {
         return y;
     }
 
+    @Deprecated
     public String getItemName(){
         return towerName;
     }
 
+    @Deprecated
     public String getDescription () {
         return description;
     }
 
+    @Deprecated
     public double getDamage (){
         return damage;
     }
 
+    @Deprecated
     public double getAttackSpeed (){
         return attackSpeed;
     }
 
+//    @Deprecated
 //    public int getAttackMode() {
 //        return attackMode;
 //    }
 
+    @Deprecated
     public double getRange (){
         return range;
     }
+    @Deprecated
     public double getRecyclePrice (){
         return recyclePrice;
     }
-
+    @Deprecated
     public int getCost () {
         return (int)cost;
     }
-
+    @Deprecated
     public String getImage () {
         return image;
     }

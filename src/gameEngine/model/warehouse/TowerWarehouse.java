@@ -34,7 +34,8 @@ public class TowerWarehouse extends Warehouse {
         // loop through all kinds
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject currTower = jsonArray.getJSONObject(i);
-            String name = currTower.getString("id");
+            String id = currTower.getString("id");
+            String type = currTower.getString("type");
             TowerFactory towerFactory = null;
             
             /**
@@ -45,7 +46,7 @@ public class TowerWarehouse extends Warehouse {
              */
             Class<?> fooClass = null;
             try {
-                fooClass = Class.forName("gameEngine.factory.towerfactory."+name+"Factory");
+                fooClass = Class.forName("gameEngine.factory.towerfactory."+type+"Factory");
             }
             catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -57,7 +58,7 @@ public class TowerWarehouse extends Warehouse {
             towerFactory = (TowerFactory)fooCtrs[0].newInstance(params);
          
             
-            towers.put(name, towerFactory);
+            towers.put(id, towerFactory);
         }
     }
 

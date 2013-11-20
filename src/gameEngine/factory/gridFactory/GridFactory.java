@@ -86,7 +86,7 @@ public class GridFactory {
                         tile.setOnPath(pathImage);
                         pathCoordinates.put(new Coordinate(k, m), tile);
                     } else if(barrierCoordinates.keySet().contains(new Coordinate(k, m))) {
-                        tile.setBarrier(barrierImages.get(new Coordinate(k, m)));
+                        tile.setStaticBarrier(barrierImages.get(new Coordinate(k, m)));
                         barrierCoordinates.put(new Coordinate(k, m), tile);
                     }
                 }

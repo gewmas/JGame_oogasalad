@@ -2,8 +2,6 @@ package gameEngine.model.tower;
 
 public class MultipleShootingTower extends DefaultTower {
 
-    
-    
     public MultipleShootingTower (double damage,
                                   double attackSpeed,
                                   int attackMode,
@@ -31,6 +29,18 @@ public class MultipleShootingTower extends DefaultTower {
         super.addDescription();
         
         info.put("Attack Amount", String.valueOf(attackAmount));
+    }
+    
+    @Override
+    public void upgrade () {
+        super.upgrade();
+        this.attackAmount++;
+    }
+
+    @Override
+    public void downgrade(){
+        super.downgrade();
+        this.attackAmount--;
     }
 
 }
