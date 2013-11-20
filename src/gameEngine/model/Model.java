@@ -6,6 +6,7 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
+import gameEngine.model.warehouse.TemporaryBarrierWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
@@ -30,6 +31,7 @@ public class Model {
     private GameInfo gameInfo;
     private TowerWarehouse towerWarehouse;
     private EnemyWarehouse enemyWarehouse;
+    private TemporaryBarrierWarehouse temporaryBarrierWarehouse;
     private GridFactory gridFactory;
     private LinkedList<Tile> path;
     private JGEngineInterface myEng;
@@ -59,7 +61,7 @@ public class Model {
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
         barriers = gridFactory.getBarrierList();
-
+//        temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
 

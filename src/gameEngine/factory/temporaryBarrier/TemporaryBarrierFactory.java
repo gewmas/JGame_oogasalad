@@ -2,7 +2,7 @@ package gameEngine.factory.temporaryBarrier;
 
 import gameEngine.model.Model;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.model.tile.TemporaryBarrier;
+import gameEngine.model.temporaryBarrier.TemporaryBarrier;
 import gameEngine.model.tile.Tile;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
