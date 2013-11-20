@@ -14,16 +14,16 @@ import javax.swing.AbstractAction;
  */
 @SuppressWarnings("serial")
 class NewGameMenuItem extends AbstractAction {
-    private View engineView;
+    private View view;
 
     public NewGameMenuItem (View engineView) {
         super(StyleConstants.resourceBundle.getString("NewGameFileMenu"));
-        this.engineView = engineView;
+        this.view = engineView;
     }
 
     @Override
     public void actionPerformed (ActionEvent e) {
-        engineView.selectNewGame();
+        view.selectNewGame();
 
     }
 

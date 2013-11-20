@@ -71,6 +71,9 @@ public class Game extends StdGame {
     
     public void startInGame() {
         view.startModel();
+        mediator.openStore();
+        mediator.updateStoreStatus();
+        
     }
 
     public void doFrameInGame () {
@@ -149,13 +152,14 @@ public class Game extends StdGame {
         towerToPurchase = purchaseInfo.getItemName();
     }
     
-    public void restartGame(){
+    public void endGame(){
         //view.startModel();
         gameOver();
-        endGame();
+        removeGameObjects();
     }
     
-    public void endGame(){
+    public void removeGameObjects(){
+        this.removeAllTimers();
         removeObjects(null,0);
     }
 

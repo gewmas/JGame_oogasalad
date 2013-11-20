@@ -69,6 +69,24 @@
 }
 ],
 
+"temporaryBarrierType":[
+	{
+	 "id": "1",
+	 "image": "lake1",
+	 "damage": 100,
+	 "range": 100,	
+	 "cost": 100,
+	 "expire": 20
+	},  
+	{
+	 "id": "2",
+	 "image": "fire1",
+	 "damage": 100,
+	 "range": 100,	
+	 "cost": 100,
+	 "expire": 10
+	},
+],
 "levelData":[
 	{	
 	"level":1,

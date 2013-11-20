@@ -1,16 +1,16 @@
 package gameEngine.view.gameFrame.menu;
 
-import gameEngine.controller.Controller;
+
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 
-public class RestartGameMenuItem extends AbstractAction {
+public class EndGameMenuItem extends AbstractAction {
     private View view;
 
-    public RestartGameMenuItem (View view) {
+    public EndGameMenuItem (View view) {
 
         super(StyleConstants.resourceBundle.getString("EndGameFileMenu"));
         this.view = view;
@@ -18,7 +18,7 @@ public class RestartGameMenuItem extends AbstractAction {
 
     @Override
     public void actionPerformed (ActionEvent e) {
-        view.restartGame();
+        view.endGame();
 
     }
 

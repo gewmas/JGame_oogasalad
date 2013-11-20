@@ -58,18 +58,17 @@ public class StoreItemButton extends Button {
         towerDisplayInfo.put("Description", towerInfo.getDescription());
         towerDisplayInfo.put("Damage", Double.toString(towerInfo.getDamage()));
         towerDisplayInfo.put("Attack Speed", Double.toString(towerInfo.getAttackSpeed()));
-        towerDisplayInfo.put("Attack Mode", Double.toString(towerInfo.getAttackMode()));
+//        towerDisplayInfo.put("Attack Mode", Double.toString(towerInfo.getAttackMode()));
         towerDisplayInfo.put("Range", Double.toString(towerInfo.getRange()));
         towerDisplayInfo.put("Recycle Price", Double.toString(towerInfo.getRecyclePrice()));
 
     }
 
- 
     /**
-     * When the button is hovered over, the tower information 
+     * When the button is hovered over, the tower information
      * is displayed and the button's foreground and background colors are changed.
      */
-    private  void highlightButton () {
+    private void highlightButton () {
         if (storeOpen) {
             this.setBackground(HOVER_BUTTON_COLOR);
             this.setForeground(HOVER_TEXT_COLOR);
@@ -97,7 +96,7 @@ public class StoreItemButton extends Button {
      * is exited. When button is clicked, that allowers users to place a tower.
      * 
      */
-    private void placeTower() {
+    private void placeTower () {
         if (active) {
             mediator.placeTower(towerInfo);
         }
@@ -112,18 +111,21 @@ public class StoreItemButton extends Button {
         setEnabled(active);
 
     }
-    private void addMouseAdapter(){
-        addMouseListener(new MouseAdapter() { 
-            public void mouseClicked(MouseEvent me) { 
+
+    private void addMouseAdapter () {
+        addMouseListener(new MouseAdapter() {
+            public void mouseClicked (MouseEvent me) {
                 placeTower();
-            } 
-            public void mouseExited(MouseEvent me){
+            }
+
+            public void mouseExited (MouseEvent me) {
                 unHighlightButton();
             }
-            public void mouseEntered(MouseEvent me){
+
+            public void mouseEntered (MouseEvent me) {
                 highlightButton();
             }
-          }); 
+        });
 
     }
 }

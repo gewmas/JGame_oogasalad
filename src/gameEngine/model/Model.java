@@ -6,6 +6,7 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
+import gameEngine.model.warehouse.TemporaryBarrierWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
@@ -30,6 +31,7 @@ public class Model {
     private GameInfo gameInfo;
     private TowerWarehouse towerWarehouse;
     private EnemyWarehouse enemyWarehouse;
+    private TemporaryBarrierWarehouse temporaryBarrierWarehouse;
     private GridFactory gridFactory;
     private LinkedList<Tile> path;
     private JGEngineInterface myEng;
@@ -39,7 +41,13 @@ public class Model {
 
     public Model () {
         rule = new Rule();
+        
     }
+    
+    public void setJGEngie(JGEngineInterface eng){
+        myEng=eng;
+    }
+    
 
     public void newGame (File jsonFile) throws Exception {
         // For test convenience
@@ -53,7 +61,7 @@ public class Model {
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
         barriers = gridFactory.getBarrierList();
-
+//        temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
 
@@ -61,10 +69,11 @@ public class Model {
     }
 
     public void startGame () {
-        Wave w = new Wave("1", 10, 500, 1000, enemyWarehouse);
+        Wave w = new Wave("1", 10, 500, 10000, enemyWarehouse);
+        Wave w1 = new Wave("1", 10, 500, 1000, enemyWarehouse);
         rule.addWave(w);
+        rule.addWave(w1);
         rule.ruleStart();
-
     }
 
     //Yuhua change it
@@ -98,7 +107,7 @@ public class Model {
 
     //Refractor method to check whether Tower exist at (x, y)
     public Tower checkTowerAtXY(int x, int y){
-        int detectRange = 10;
+        int detectRange = 100;
         Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
         return d.getOneTargetInRange(x, y, detectRange);
     }
@@ -108,14 +117,17 @@ public class Model {
     // now it is not functional because no myEng, we need discussion on this.
     public PurchaseInfo getTowerInfo (int x, int y) {
         return (PurchaseInfo)checkTowerAtXY(x, y);
-
     }
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact
     public boolean purchaseTower (int x, int y, String name) {
         Tile currentTile = getTile(x, y);
-        if(currentTile.isEmpty()&&!currentTile.hasPath()){
-            return towerWarehouse.create(x, y, name, gameInfo);
+        if (currentTile.isEmpty() && !currentTile.hasPath()) {
+            System.out.println(currentTile.isEmpty());
+            currentTile.setTower();
+            return towerWarehouse
+                .create((int) currentTile.getX(), (int) currentTile.getY(), name, gameInfo);
+            
         }
         return false;
     }
@@ -179,6 +191,39 @@ public class Model {
 
     public GameInfo getGameInfo() {
         return gameInfo;
+    }
+    
+    
+    /**
+     * @author Fabio
+     * 
+     * Activate input cheat
+     * Succeed, return true
+     * No such cheat, return false
+     * 
+     * @param code
+     * @return bool
+     */
+    public boolean activateCheat(String code) {
+
+        String[] cheatArgs = code.split(" ");
+        String cmd = cheatArgs[0];
+        if(cmd == "add_gold") {
+            int amt = Integer.parseInt(cheatArgs[1]);
+            gameInfo.addGold(amt);
+        } else if(cmd == "add_lives") {
+            int amt = Integer.parseInt(cheatArgs[1]);
+            gameInfo.addLife(amt);
+        } else if(cmd == "kill_all") {
+            //TODO
+        } else if(cmd == "win_game") {
+            //TODO
+        } else if (cmd == "lose_game") {
+            //TODO
+        } else {
+            return false;
+        }
+        return true;
     }
 
 }

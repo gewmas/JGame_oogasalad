@@ -34,7 +34,7 @@ public class View {
     }
 
     public void selectNewGame () {
-        mediator.endGame();
+        mediator.quitGame();
         gameFrame.dispose();
         gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame.setVisible(true);
@@ -48,8 +48,8 @@ public class View {
     public void startJGame () {
         gameFrame.showGame();
     }
-    
-    public void startModel(){
+
+    public void startModel () {
         controller.startGame();
     }
 
@@ -59,7 +59,7 @@ public class View {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-//            e.printStackTrace();
+            // e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }
@@ -109,10 +109,16 @@ public class View {
     public List<PurchaseInfo> getTowers () {
         return controller.getTowerFactory();
     }
+    
+    public void quitGame(){
+        mediator.quitGame();
+    }
 
-    public void restartGame () {
-        mediator.restartGame();
+    public void endGame () {
+        mediator.endGame();
         //controller.startGame();
-        // TODO Auto-generated method stub        
+    }
+    public boolean activateCheat (String cheat) {
+        return controller.activateCheat(cheat);
     }
 }
