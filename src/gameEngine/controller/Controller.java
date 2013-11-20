@@ -95,9 +95,9 @@ public class Controller {
      * Sends a call to the model to purchase temporary barrier at position x,y
      * If position is invalid, do nothing for now
      */
-//    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
-//        return model.purchaseTemporaryBarrier(x, y, name);
-//    }
+    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+        return model.purchaseTemporaryBarrier(x, y, name);
+    }
     
     /**
      * @author Yuhua

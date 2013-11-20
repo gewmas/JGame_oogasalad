@@ -38,6 +38,7 @@ public class BoostTower extends Tower {
         this.boostFactor = boostFactor;
         
         addDescription();
+        addBoostEffect();
     }
 
     public void addDescription(){
@@ -45,10 +46,14 @@ public class BoostTower extends Tower {
         info.put("Boost Factor", String.valueOf(boostFactor));
     }
 
+    //create magic to towers in range
+    public void addBoostEffect(){
+        
+    }
+    
     @Override
     public void sell () {
-        // TODO Auto-generated method stub
-
+        remove();
     }
 
     @Override
@@ -61,28 +66,12 @@ public class BoostTower extends Tower {
         boostFactor -= 1.0;
     }
 
-    @Override
-    public void upgrade(double factor) {
+    //IMagicable Interface Method
+    public void magicUpgrade(double factor) {
         boostFactor *= factor;
     }
 
-    @Override
-    public void downgrade(double factor) {
+    public void magicDowngrade(double factor) {
         boostFactor /= factor;
     }
-
-    @Override
-    public void setAttackMode (int attackMode) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Map<String, String> getInfo () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-
 }
