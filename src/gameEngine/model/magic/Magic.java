@@ -35,7 +35,7 @@ public abstract class Magic extends JGObject {
     }
 
     public void move () {
-        if (((myTarget.getCurrentMagics() & myMagicId) == 0) || myTarget == null) {
+        if (!myTarget.isAlive()) {
             remove();
             return;
         }

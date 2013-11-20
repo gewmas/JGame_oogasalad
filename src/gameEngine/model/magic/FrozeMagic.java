@@ -7,7 +7,7 @@ public class FrozeMagic extends Magic {
     private static final double FROZESPEEDCHANGE=1;
     
     public FrozeMagic ( int expire,IMagicable target,int ID, int CID) {
-        super(expire,target,NAME,CID,"bullet",ID);
+        super(expire,target,NAME,CID,NAME,ID);
     }
 
     @Override

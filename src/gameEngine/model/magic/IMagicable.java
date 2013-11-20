@@ -9,8 +9,10 @@ public interface IMagicable {
     public void changeCurrentMagics(int magic);
     public void changeLife(double lifePercent);
     public void changeSpeed(double speedPercent);
+    public boolean isAlive ();
 //    public int getImmuneMagics();
 //    public int getAttackMagics();
 //    public void changeAttack(double attackPercent);
 //    public void changeAttackSpeed(double offSet);
+
 }
