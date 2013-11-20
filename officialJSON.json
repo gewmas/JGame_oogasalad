@@ -35,7 +35,11 @@
                { "x": 12, "y": 5 },
                { "x": 13, "y": 5 },
                { "x": 14, "y": 5 }
-           ]
+           ], 
+        "Barriers":[
+        	{ "x": 5, "y": 2, "image": "rock.jpg" },
+        	{ "x": 6, "y": 2, "image": "tree.jpg" }
+        ]
 },
 
 "temporaryBarrierType":[
