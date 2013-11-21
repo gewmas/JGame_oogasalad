@@ -42,15 +42,10 @@ public class Model {
         
     }
     
-    public void setJGEngie(JGEngineInterface eng){
-        myEng=eng;
-    }
-    
 
-    public void newGame (File jsonFile) throws Exception {
-        // For test convenience
-        //        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
-
+    public void newGame (File jsonFile, JGEngineInterface eng) throws Exception {
+        this.myEng = eng; //For Detector use
+        
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
 
