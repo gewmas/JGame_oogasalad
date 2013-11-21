@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame;
 
 import java.util.Map;
+import jgame.impl.JGEngineInterface;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.gameFrame.store.InfoDisplayPanel;
 import gameEngine.view.gameFrame.store.StoreOptionsPanel;

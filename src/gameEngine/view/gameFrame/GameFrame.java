@@ -81,7 +81,6 @@ public class GameFrame extends Frame {
             public void keyTyped (KeyEvent e) {
             }
         });
-
     }
 
     /**

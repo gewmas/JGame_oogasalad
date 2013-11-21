@@ -109,6 +109,7 @@ public class InfoDisplayPanel extends Panel {
      * @param information information to be displayed
      */
     public void displayInformation (Map<String, String> information) {
+        System.out.println("Updating information");
         clearDisplay();
         for (String key : information.keySet()) {
             model.addRow(new String[] { key, information.get(key) });

@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
+import jgame.impl.JGEngineInterface;
 import gameEngine.controller.Controller;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -65,6 +66,10 @@ public class View {
         }
     }
 
+    public void sendEngine(JGEngineInterface engine){
+        controller.setJGEngine(engine);
+    }
+    
     /**
      * Tells the controller to send tower purchase instructions to the model
      * and then reset the cursor
