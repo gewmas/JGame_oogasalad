@@ -7,6 +7,7 @@ import gameEngine.view.View;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import jgame.impl.JGEngineInterface;
 
 
 public class Controller {
@@ -26,8 +27,8 @@ public class Controller {
 
     public void newGame (File jsonFile) throws Exception {
         model.newGame(jsonFile); // will throw exception if fail
-        view.startGame();
-        startGame();
+        view.startJGame();
+//        startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
         // view.showGame();
@@ -37,6 +38,14 @@ public class Controller {
         model.startGame();
     }
 
+    /**
+     * For Detector in Model to detect JGObjects in range
+     * @param eng
+     */
+    public void setJGEngine(JGEngineInterface eng){
+        model.setJGEngine(eng);
+    }
+    
     /**
      * @author Yuhua
      * Tower Related Method
@@ -59,7 +68,7 @@ public class Controller {
         try {
             towerinfo=model.getTowerInfo(x,y);
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             towerinfo=null;
         }
         return towerinfo;
@@ -71,6 +80,7 @@ public class Controller {
      * Sends a call to the model to update the monitored barrier stats to the barrier
      * at x,y. If the position is invalid, do nothing
      */
+
 //    public PurchaseInfo getTemporaryBarrierInfo (int x, int y) {
 //        PurchaseInfo barrierInfo;
 //        try {
@@ -80,6 +90,7 @@ public class Controller {
 //        }
 //        return barrierInfo;
 //    }
+
     
     /**
      * Sends a call to the model to purchase tower tower at position x,y
@@ -93,9 +104,10 @@ public class Controller {
      * Sends a call to the model to purchase temporary barrier at position x,y
      * If position is invalid, do nothing for now
      */
-//    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
-//        return model.purchaseTemporaryBarrier(x, y, name);
-//    }
+    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+        //return model.purchaseTemporaryBarrier(x, y, name);
+        return false;
+    }
     
     /**
      * @author Yuhua
@@ -160,7 +172,8 @@ public class Controller {
      * @return bool
      */
     public boolean activateCheat(String code) {
-        return model.activateCheat(code);
+        //return model.activateCheat(code);
+        return false;
     }
     
 

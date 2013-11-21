@@ -1,10 +1,5 @@
 package gameEngine.model.tower;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
 import gameEngine.Constant.Constant;
 import gameEngine.model.Detector;
 import gameEngine.model.bullet.Bullet;
@@ -13,25 +8,30 @@ import gameEngine.model.enemy.comparator.FurthestDistanceEnemyComparator;
 import gameEngine.model.enemy.comparator.ShortestDistanceEnemyComparator;
 import gameEngine.model.enemy.comparator.StrongestEnemyComparator;
 import gameEngine.model.enemy.comparator.WeakestEnemyComparator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 import jgame.JGObject;
+
 
 /**
  * 
  * @author Yuhua
- *
- * DefaultTower can attack enemy, those who also enemies should extends DefaultTower
- * Like MultipleShootTower which shoot multiple Bullet at one time
- * However, Tower like BoostTower and FreezeTower would not extends DefaultTower 
- * because they will not shoot, but change properties
+ * 
+ *         DefaultTower can attack enemy, those who also enemies should extends DefaultTower
+ *         Like MultipleShootTower which shoot multiple Bullet at one time
+ *         However, Tower like BoostTower and FreezeTower would not extends DefaultTower
+ *         because they will not shoot, but change properties
  * 
  */
+
 public class DefaultTower extends Tower {
 
     long prevTime;
     private Detector<Enemy> detector;
 
     /**
-     * AttackMode include 
+     * AttackMode include
      * 0 - shoot the closest enemy
      * 1 - shoot the farthest enemy
      * 2 - shoot weakest enemy with least life
@@ -39,10 +39,9 @@ public class DefaultTower extends Tower {
      */
     int attackMode;
 
-    //Number of shooting at one time
+    // Number of shooting at one time
     int attackAmount;
     List<Enemy> targetEnemies;
-
 
     public DefaultTower (
                          double damage,
@@ -53,6 +52,7 @@ public class DefaultTower extends Tower {
                          double recyclePrice,
                          String description,
 
+                         String type,
                          String id,
                          boolean unique_id,
                          double x,
@@ -60,32 +60,21 @@ public class DefaultTower extends Tower {
                          int collisionid,
                          String image) {
 
-        super(id, unique_id, x, y, collisionid, image);
+        super(type, id, damage, attackSpeed, range, cost, recyclePrice, description,
+              unique_id, x, y, collisionid, image);
 
-        this.damage = damage;
-        this.attackSpeed = attackSpeed;
         this.attackMode = attackMode;
         this.attackAmount = 1;
-        
-        this.range = range;
-        this.cost = cost;
-        this.recyclePrice = recyclePrice;
-
-        this.x = x;
-        this.y = y;
 
         this.prevTime = System.currentTimeMillis();
         this.detector = new Detector<Enemy>(this.eng, Enemy.class);
-
-        this.description = description;
-
 
         addDescription();
 
         targetEnemies = new ArrayList<Enemy>();
     }
 
-    public void addDescription(){
+    public void addDescription () {
         super.addDescription();
         info.put("Attack Mode", String.valueOf(attackMode));
     }
@@ -101,17 +90,17 @@ public class DefaultTower extends Tower {
             targetEnemies.clear();
             getEnemyInRange();
 
-            //            System.out.println(targetEnemies.size());
-            for(Enemy targetEnemy : targetEnemies){
+            // System.out.println(targetEnemies.size());
+            for (Enemy targetEnemy : targetEnemies) {
                 new Bullet(targetEnemy, damage, "bullet", true, x, y, Constant.BULLET_CID, "bullet");
             }
             prevTime = System.currentTimeMillis();
         }
     }
 
-    public void getEnemyInRange(){
+    public void getEnemyInRange () {
         List<Enemy> enemies = detector.getTargetsInRange((int) x, (int) y, (int) range);
-        if(enemies.isEmpty())return; //No enemy in range
+        if (enemies.isEmpty()) return; // No enemy in range
 
         List<Enemy> enemiesInRange = new ArrayList<Enemy>();
         for (Enemy e : enemies) {
@@ -122,51 +111,51 @@ public class DefaultTower extends Tower {
             }
         }
 
-        if(enemiesInRange.isEmpty())return; //No enemy in range, double check
+        if (enemiesInRange.isEmpty()) return; // No enemy in range, double check
 
-        if(attackMode == 0){
+        if (attackMode == 0) {
             getClosestEnemy(enemiesInRange);
-        }else if(attackMode == 1){
+        }
+        else if (attackMode == 1) {
             getFurtherestEnemy(enemiesInRange);
-        }else if(attackMode == 2){
+        }
+        else if (attackMode == 2) {
             getWeakestEnemy(enemiesInRange);
-        }else if(attackMode == 3){
+        }
+        else if (attackMode == 3) {
             getStrongestEnemy(enemiesInRange);
         }
 
-        //if can't find one, but there is enemy in range
-        //assign one
-        //    	if(targetEnemies.isEmpty() && !enemiesInRange.isEmpty()){
-        //    	    targetEnemies.add(enemiesInRange.get(0));
-        //    	}
+        // if can't find one, but there is enemy in range
+        // assign one
+        // if(targetEnemies.isEmpty() && !enemiesInRange.isEmpty()){
+        // targetEnemies.add(enemiesInRange.get(0));
+        // }
     }
 
-
-
-    //Implement AttackMode
-    public void getClosestEnemy(List<Enemy> enemiesInRange){
+    // Implement AttackMode
+    public void getClosestEnemy (List<Enemy> enemiesInRange) {
         ShortestDistanceEnemyComparator comparator = new ShortestDistanceEnemyComparator(this);
         PriorityQueue<Enemy> queue = new PriorityQueue<Enemy>(attackAmount, comparator);
 
         UpdateTargetEnemies(queue, enemiesInRange);
     }
 
-    public void getFurtherestEnemy(List<Enemy> enemiesInRange){
+    public void getFurtherestEnemy (List<Enemy> enemiesInRange) {
         FurthestDistanceEnemyComparator comparator = new FurthestDistanceEnemyComparator(this);
         PriorityQueue<Enemy> queue = new PriorityQueue<Enemy>(attackAmount, comparator);
 
         UpdateTargetEnemies(queue, enemiesInRange);
     }
 
-
-    public void getWeakestEnemy(List<Enemy> enemiesInRange){
+    public void getWeakestEnemy (List<Enemy> enemiesInRange) {
         WeakestEnemyComparator comparator = new WeakestEnemyComparator();
         PriorityQueue<Enemy> queue = new PriorityQueue<Enemy>(attackAmount, comparator);
 
         UpdateTargetEnemies(queue, enemiesInRange);
     }
 
-    public void getStrongestEnemy(List<Enemy> enemiesInRange){
+    public void getStrongestEnemy (List<Enemy> enemiesInRange) {
         StrongestEnemyComparator comparator = new StrongestEnemyComparator();
         PriorityQueue<Enemy> queue = new PriorityQueue<Enemy>(attackAmount, comparator);
 
@@ -174,12 +163,12 @@ public class DefaultTower extends Tower {
     }
 
     private void UpdateTargetEnemies (PriorityQueue<Enemy> queue, List<Enemy> enemiesInRange) {
-        for(Enemy e : enemiesInRange){
+        for (Enemy e : enemiesInRange) {
             queue.add(e);
         }
 
-        //        System.out.println("Queue size" + queue.size());
-        for(int i = 0; i < attackAmount && !queue.isEmpty(); i++){
+        // System.out.println("Queue size" + queue.size());
+        for (int i = 0; i < attackAmount && !queue.isEmpty(); i++) {
             targetEnemies.add(queue.remove());
         }
     }
@@ -199,41 +188,17 @@ public class DefaultTower extends Tower {
     @Override
     public void upgrade () {
         damage++;
-        attackSpeed+=1;
+        attackSpeed += 1;
     }
 
     @Override
-    public void downgrade(){
+    public void downgrade () {
         damage--;
-        attackSpeed-=1;
-    }
-
-    @Override
-    public void upgrade(double factor) {
-        damage *= factor;
-        attackSpeed *= factor;
-    }
-
-    @Override
-    public void downgrade(double factor) {
-        damage /= factor;
-        attackSpeed /= factor;
-    }
-
-    @Override
-    public void setAttackMode (int attackMode) {
-        this.attackMode = attackMode;
-    }
-
-    @Override
-    public Map<String, String> getInfo () {
-        // TODO Auto-generated method stub
-        return null;
+        attackSpeed -= 1;
     }
 
     public int getAttackMode () {
-        // TODO Auto-generated method stub
-        return 0;
+        return attackMode;
     }
 
 }

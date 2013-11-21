@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
+import jgame.impl.JGEngineInterface;
 import gameEngine.controller.Controller;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -34,7 +35,7 @@ public class View {
     }
 
     public void selectNewGame () {
-        mediator.endGame();
+        mediator.quitGame();
         gameFrame.dispose();
         gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame.setVisible(true);
@@ -45,8 +46,12 @@ public class View {
         initializationFrame.setVisible(false);
     }
 
-    public void startGame () {
+    public void startJGame () {
         gameFrame.showGame();
+    }
+
+    public void startModel () {
+        controller.startGame();
     }
 
     public void newGame (File file) {
@@ -55,12 +60,16 @@ public class View {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }
     }
 
+    public void sendEngine(JGEngineInterface engine){
+        controller.setJGEngine(engine);
+    }
+    
     /**
      * Tells the controller to send tower purchase instructions to the model
      * and then reset the cursor
@@ -104,5 +113,17 @@ public class View {
 
     public List<PurchaseInfo> getTowers () {
         return controller.getTowerFactory();
+    }
+    
+    public void quitGame(){
+        mediator.quitGame();
+    }
+
+    public void endGame () {
+        mediator.endGame();
+        //controller.startGame();
+    }
+    public boolean activateCheat (String cheat) {
+        return controller.activateCheat(cheat);
     }
 }
