@@ -7,7 +7,6 @@ import gameEngine.view.View;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
-import jgame.impl.JGEngineInterface;
 
 
 public class Controller {
@@ -39,14 +38,6 @@ public class Controller {
     }
 
     /**
-     * For Detector in Model to detect JGObjects in range
-     * @param eng
-     */
-    public void setJGEngine(JGEngineInterface eng){
-        model.setJGEngine(eng);
-    }
-    
-    /**
      * @author Yuhua
      * Tower Related Method
      */
@@ -68,7 +59,7 @@ public class Controller {
         try {
             towerinfo=model.getTowerInfo(x,y);
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
             towerinfo=null;
         }
         return towerinfo;
@@ -104,10 +95,9 @@ public class Controller {
      * Sends a call to the model to purchase temporary barrier at position x,y
      * If position is invalid, do nothing for now
      */
-    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
-        //return model.purchaseTemporaryBarrier(x, y, name);
-        return false;
-    }
+//    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+//        return model.purchaseTemporaryBarrier(x, y, name);
+//    }
     
     /**
      * @author Yuhua
@@ -172,8 +162,7 @@ public class Controller {
      * @return bool
      */
     public boolean activateCheat(String code) {
-        //return model.activateCheat(code);
-        return false;
+        return model.activateCheat(code);
     }
     
 

@@ -6,14 +6,12 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import jgame.Highscore;
 import jgame.JGColor;
-import jgame.JGObject;
 import jgame.JGPoint;
 import jgame.platform.JGEngine;
 import jgame.platform.StdGame;
@@ -33,8 +31,6 @@ public class Game extends StdGame {
     private boolean purchasing;
     private String towerToPurchase;
     private GameFrameMediator mediator;
-    private FrameRateSlider frameRateSlider;
-    private JGObject frameRateBar;
 
     public Game (View view, GameFrameMediator mediator) {
         this.view = view;
@@ -58,8 +54,6 @@ public class Game extends StdGame {
         score = view.getMoney();
         String bgImage = "space_background.jpg";
         defineImage("background", "bg", 256, bgImage, "-");
-        defineImage("RESERVEDslider_bar","sb",256,"slider_bar.png","-");
-        defineImage("RESERVEDslider_toggle","sb",256,"slider_toggle.png","-");
         setBGImage("background");
         purchasing = false;
         setHighscores(10, new Highscore(0, "aaa"), 3);
@@ -73,10 +67,6 @@ public class Game extends StdGame {
             setTile(tilePos.x, tilePos.y, "#" + String.valueOf(tileCount));
             tileCount++;
         }
-        frameRateBar=new JGObject("zfrzsliderbar", true, pfWidth()/2-84, pfHeight()-30, 256, "RESERVEDslider_bar");
-        frameRateSlider=new FrameRateSlider("frslider", true, pfWidth()/2, pfHeight()-40,256,"RESERVEDslider_toggle");
-        frameRateBar.resume_in_view=false;
-        toggleFrameRateBar();
     }
     
     public void startInGame() {
@@ -98,10 +88,6 @@ public class Game extends StdGame {
             clearKey(KeyEsc);
             lives = 0;
         }
-        if (getKey('F')){
-            clearKey('F');
-            toggleFrameRateBar();
-        }
     }
 
     /**
@@ -120,17 +106,16 @@ public class Game extends StdGame {
                     purchasing = false;
                     mediator.exitPurchase();
                 }
-                System.out.format("Buying %s at: %d,%d\n",towerToPurchase, mousePosition.x, mousePosition.y);
+                System.out.format("Buying tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }
             else {
-                PurchaseInfo tower=view.getTowerInfo(mousePosition.x, mousePosition.y);
+                PurchaseInfo tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
                 if (tower==null) {
                     System.out.println("No tower here");
                 } else {
-                    mediator.displayTowerInfo(tower.getInfo());
-                    System.out.println("Checking tower");
+                    mediator.displayTowerInfo(null);
                 }
-                System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);
+                System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
             }
         }
     }
@@ -154,8 +139,7 @@ public class Game extends StdGame {
      */
     public void placeTower (PurchaseInfo purchaseInfo) {
         // setBGColor(JGColor.red);
-        String towerName=purchaseInfo.getInfo().get("Tower ID");
-        if (towerName==null || towerName.equals(towerToPurchase)){
+        if (purchaseInfo.getItemName().equals(towerToPurchase)){
             mediator.exitPurchase();
             System.out.println("Tower cancelled");
             towerToPurchase=null;
@@ -165,29 +149,7 @@ public class Game extends StdGame {
         mediator.setCursorImage(purchaseInfo);
         System.out.println("User wants to purchase " + purchaseInfo.getItemName());
         purchasing = true;
-        towerToPurchase = towerName;
-    }
-    
-    public void endGame(){
-        //view.startModel();
-        removeGameObjects();
-        gameOver();
-        removeGameObjects();
-    }
-    
-    public void removeGameObjects(){
-        this.removeAllTimers();
-        removeObjects(null,0);
-    }
-    
-    public void toggleFrameRateBar(){
-        if (frameRateSlider.is_suspended){
-            frameRateSlider.resume();
-            frameRateBar.resume();
-        } else {
-            frameRateSlider.suspend();
-            frameRateBar.suspend();
-        }
+        towerToPurchase = purchaseInfo.getItemName();
     }
 
 }

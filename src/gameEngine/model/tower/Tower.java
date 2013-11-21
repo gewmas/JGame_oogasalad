@@ -13,8 +13,7 @@ import jgame.JGObject;
  */
 
 public abstract class Tower extends JGObject implements PurchaseInfo{
-    String type;
-    String id; 
+    String towerName;
     String image;
 
     double damage;
@@ -26,54 +25,30 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
     double y;
 
     double cost;
-    double upgradePrice;
     double recyclePrice;
 
     String description;
 
     Map<String, String> info;
 
-    public Tower (String type,
-                  String id,
-                  
-                  double damage,
-                  double attackSpeed,
-                  double range,
-                  double cost,
-                  double recyclePrice,
-                  String description,
-                  
+    public Tower (String name,
                   boolean unique_id,
                   double x,
                   double y,
                   int collisionid,
                   String gfxname) {
-        super(id, unique_id, x, y, collisionid, gfxname);
+        super(name, unique_id, x, y, collisionid, gfxname);
 
-        this.type = type;
-        this.id = id;        
+
+        this.towerName = name;        
         this.image = gfxname;
-        
-        this.damage = damage;
-        this.attackSpeed = attackSpeed;
-        
-        this.range = range;
-        this.cost = cost;
-        this.upgradePrice = cost/3;
-        this.recyclePrice = recyclePrice;
-
-        this.description = description;
-        
-        this.x = x;
-        this.y = y;
         
         //add tower description
         this.info = new HashMap<String, String>();
     }
     
     public void addDescription(){
-        info.put("Tower Type", type);
-        info.put("Tower ID", id);
+        info.put("Tower Name", towerName);
         info.put("Image", image);
         info.put("Damage", String.valueOf(damage));
         info.put("Attack Speed", String.valueOf(attackSpeed));
@@ -82,7 +57,6 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
         info.put("Y", String.valueOf(y));
         info.put("Cost", String.valueOf(cost));
         info.put("Sell Price", String.valueOf(recyclePrice));
-        info.put("Upgrade Price", String.valueOf(upgradePrice));
         info.put("Description", String.valueOf(description));
     }
 
@@ -91,64 +65,54 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
      */
     public abstract void sell();
     public abstract void upgrade();
-    public abstract void downgrade(); //when sell BoostTower, downgrade Tower in range
-    public void setAttackMode(int mode){} //not all tower need this, serve as public interface
+    public abstract void downgrade(); 
+    public abstract void upgrade(double factor);
+    public abstract void downgrade(double factor); //when sell BoostTower, downgrade Tower in range
+    public abstract void setAttackMode (int attackMode);
     
     /**
      * TowerInfo Getter Method
      */
-    public Map<String, String> getInfo () {
-        return info;
-    }
     
-    @Deprecated
     public double getX () {
         return x;
     }
 
-    @Deprecated
     public double getY () {
         return y;
     }
 
-    @Deprecated
     public String getItemName(){
-        return id;
+        return towerName;
     }
 
-    @Deprecated
     public String getDescription () {
         return description;
     }
 
-    @Deprecated
     public double getDamage (){
         return damage;
     }
 
-    @Deprecated
     public double getAttackSpeed (){
         return attackSpeed;
     }
 
-//    @Deprecated
 //    public int getAttackMode() {
 //        return attackMode;
 //    }
 
-    @Deprecated
     public double getRange (){
         return range;
     }
-    @Deprecated
     public double getRecyclePrice (){
         return recyclePrice;
     }
-    @Deprecated
+
     public int getCost () {
         return (int)cost;
     }
-    @Deprecated
+
     public String getImage () {
         return image;
     }

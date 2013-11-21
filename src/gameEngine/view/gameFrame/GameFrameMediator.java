@@ -1,10 +1,8 @@
 package gameEngine.view.gameFrame;
 
 import java.util.Map;
-import jgame.impl.JGEngineInterface;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.gameFrame.store.InfoDisplayPanel;
-import gameEngine.view.gameFrame.store.StoreOptionsPanel;
+import gameEngine.view.gameFrame.store.StorePanel;
 
 
 /**
@@ -24,26 +22,21 @@ import gameEngine.view.gameFrame.store.StoreOptionsPanel;
  * @author Lalita Maraj
  * 
  */
-public class GameFrameMediator {
+public class GameFrameMediator  implements PuchaseInitiator, ItemPurchaser{
 
-    private StoreOptionsPanel storeOptions;
+    private StorePanel storePanel;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
-    private InfoDisplayPanel towerInfoPanel;
 
-    public void addTowersOptionPanel (StoreOptionsPanel storeOptions) {
-        this.storeOptions = storeOptions;
+    public void addStorePanel (StorePanel storePanel) {
+        this.storePanel = storePanel;
     }
 
     /**
      * Destroys the jgame instance so that it can be reloaded
      */
 
-    public void quitGame () {
-        canvasPanel.quitGame();
-    }
-    
-    public void endGame(){
+    public void endGame () {
         canvasPanel.endGame();
     }
 
@@ -53,10 +46,8 @@ public class GameFrameMediator {
      * 
      * @param towername
      */
-    public void placeTower (PurchaseInfo towerInfo) {
-
+    public void placeItem (PurchaseInfo towerInfo) {
         canvasPanel.placeTower(towerInfo);
-       
     }
     
     public void setCursorImage(PurchaseInfo towerInfo){
@@ -69,7 +60,7 @@ public class GameFrameMediator {
      * @param towerDisplayInfo TODO
      */
     public void displayTowerInfo (Map<String, String> towerDisplayInfo) {
-        towerInfoPanel.displayInformation(towerDisplayInfo);
+        storePanel.displayInformation(towerDisplayInfo);
     }
 
     /**
@@ -90,7 +81,7 @@ public class GameFrameMediator {
      * Updates the enabled status of store items.
      */
     public void updateStoreStatus () {
-        storeOptions.updateStoreStatus();
+        storePanel.updateStoreStatus();
     }
 
     public void addGameFrame (GameFrame gameFrame) {
@@ -103,15 +94,13 @@ public class GameFrameMediator {
 
     }
 
-    public void addInfoPanel (InfoDisplayPanel towerInfoPanel) {
-        this.towerInfoPanel = towerInfoPanel;
-    }
     
     public void clearDisplay(){
-        this.towerInfoPanel.clearDisplay();
+        storePanel.clearDisplay();
     }
-    
+
     public void openStore () {
-      storeOptions.addStoreInventory();
+        storePanel.addStoreInventory();
+        
     }
 }

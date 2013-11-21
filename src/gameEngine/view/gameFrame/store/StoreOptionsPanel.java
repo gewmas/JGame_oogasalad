@@ -4,7 +4,7 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrameMediator;
+import gameEngine.view.gameFrame.PuchaseInitiator;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,28 +24,31 @@ import net.miginfocom.swing.MigLayout;
  * @author Lalita Maraj
  */
 @SuppressWarnings("serial")
-public abstract class StoreOptionsPanel extends Panel {
+public  class StoreOptionsPanel extends Panel {
 
     private static final String LAYOUT_WRAP = "wrap 4";
     private static final int PANEL_WIDTH = 250;
     private static final int PANEL_HEIGHT = 200;
-    protected List<StoreItemButton> storeItems;
-    protected View view;
+    
+    private List<StoreItemButton> storeItems;
+    private View view;
     private JPanel options;
-    private GameFrameMediator mediator;
+    private PuchaseInitiator itemPlacer;
+    private InfoDisplayPanel infoPanel;
 
     /**
-     * @param mediator facilitates communication between view components
+     * @param itemPlacer facilitates communication between view components
      * @param engineView facilitates communication between view and controller
      */
-    protected StoreOptionsPanel (GameFrameMediator mediator, View engineView) {
+    protected StoreOptionsPanel (PuchaseInitiator itemPlacer, View engineView , InfoDisplayPanel infoPanel) {
 
         super();
         this.view = engineView;
         this.storeItems = new ArrayList<StoreItemButton>();
-        this.mediator = mediator;
+        this.itemPlacer = itemPlacer;
+        this.infoPanel = infoPanel;
         setUIStyle();
-        createOptionsScrollPanel(mediator);
+        createOptionsScrollPanel();
 
     }
 
@@ -53,9 +56,9 @@ public abstract class StoreOptionsPanel extends Panel {
      * Creates the scroll panel that will hold the
      * inventory of towers a user can purchase
      * 
-     * @param mediator facilitates communication between view components
+     * @param mediator2 facilitates communication between view components
      */
-    private void createOptionsScrollPanel (GameFrameMediator mediator) {
+    private void createOptionsScrollPanel () {
 
         options = new JPanel(new MigLayout(LAYOUT_WRAP));
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -80,16 +83,16 @@ public abstract class StoreOptionsPanel extends Panel {
      * Adds buttons based on the defined towers specified by Model
      * 
      * @param optionsPanel panel buttons are added to
-     * @param mediator facilitates communication between view components
+     * @param itemPlacer facilitates communication between view components
      * @param view facilitates communication between view and model
      */
     public void addStoreInventory () {
-        List<PurchaseInfo> towerInformation = getItems();
+        List<PurchaseInfo> towerInformation =  view.getTowers();
         StoreButtonAction hoverExitAction = new StoreButtonAction() {
 
             @Override
             public void executeAction () {
-                mediator.clearDisplay();
+               infoPanel.clearDisplay();
 
             }
 
@@ -99,7 +102,7 @@ public abstract class StoreOptionsPanel extends Panel {
 
                 @Override
                 public void executeAction () {
-                    mediator.placeTower(tower);
+                    itemPlacer.placeItem(tower);
 
                 }
 
@@ -107,8 +110,8 @@ public abstract class StoreOptionsPanel extends Panel {
             StoreButtonAction hoverAction = new StoreButtonAction() {
                 @Override
                 public void executeAction () {
-                    mediator.displayTowerInfo(tower.getInfo());
-                    System.out.println("Checking store");
+          
+                    infoPanel.displayInformation(tower.getInfo());
                 }
             };
             StoreItemButton towerButton =
@@ -119,7 +122,7 @@ public abstract class StoreOptionsPanel extends Panel {
         this.revalidate();
     }
 
-    protected abstract List<PurchaseInfo> getItems ();
+    
 
     /**
      * Used to update the status of each TowerStoreButton.
@@ -133,4 +136,5 @@ public abstract class StoreOptionsPanel extends Panel {
         }
     }
 
+   
 }

@@ -12,15 +12,14 @@ import jgame.JGObject;
  */
 public class Tile {
 
-    private boolean hasPath, hasTower, hasStaticBarrier, hasTemporaryBarrier;
+    private boolean hasPath, hasTower, hasBarrier;
     private double xPos, yPos, centerX, centerY, endX, endY;
     private String pathImage, barrierImage;
 
     public Tile (double x, double y, double endX, double endY) {
         hasPath = false;
         hasTower = false;
-        hasStaticBarrier = false;
-        hasTemporaryBarrier = false;
+        hasBarrier = false;
         xPos = x;
         yPos = y;
         this.endX = endX;
@@ -52,12 +51,12 @@ public class Tile {
         return hasTower;
     }
     
-    public boolean hasStaticBarrier () {
-        return hasStaticBarrier;
+    public boolean hasBarrier () {
+        return hasBarrier;
     }
 
     public boolean isEmpty () {
-        return (!hasPath) && (!hasTower) && (!hasStaticBarrier) && (!hasTemporaryBarrier);
+        return (!hasPath) && (!hasTower) && (!hasBarrier);
     }
 
     public double getX () {
@@ -92,17 +91,13 @@ public class Tile {
         return barrierImage;
     }
     
-    public void setStaticBarrier (String img) {
-        hasStaticBarrier = true;
-        barrierImage = "";
+    public void setBarrier (String imgPath) {
+        hasBarrier = true;
+        barrierImage = imgPath;
     }
     
-    public void setTemporaryBarrier() {
-        hasTemporaryBarrier = true;
-    }
-    
-    public void removeTemporaryBarrier () {
-        hasTemporaryBarrier = false;
+    public void removeBarrier () {
+        hasBarrier = false;
         barrierImage = "";
     }
 }

@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
-import jgame.impl.JGEngineInterface;
 import gameEngine.controller.Controller;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -35,7 +34,7 @@ public class View {
     }
 
     public void selectNewGame () {
-        mediator.quitGame();
+        mediator.endGame();
         gameFrame.dispose();
         gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame.setVisible(true);
@@ -66,10 +65,6 @@ public class View {
         }
     }
 
-    public void sendEngine(JGEngineInterface engine){
-        controller.setJGEngine(engine);
-    }
-    
     /**
      * Tells the controller to send tower purchase instructions to the model
      * and then reset the cursor
@@ -114,16 +109,9 @@ public class View {
     public List<PurchaseInfo> getTowers () {
         return controller.getTowerFactory();
     }
-    
-    public void quitGame(){
-        mediator.quitGame();
-    }
 
-    public void endGame () {
-        mediator.endGame();
-        //controller.startGame();
-    }
     public boolean activateCheat (String cheat) {
         return controller.activateCheat(cheat);
+
     }
 }

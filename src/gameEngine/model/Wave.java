@@ -15,20 +15,17 @@ public class Wave implements ActionListener {
     private String myEnemyType = null;
     private int myNumberOfEnemies = 0;
     private Timer myTimer = null;
-    private long myIntervalInMilliSecond = 0;
+    private long myIntervalInMilliSecond = 10000;
     // for test. Real Enemy Factory needs to be implemented.This wave can
     // require different factory by myEnemyType
     private EnemyWarehouse myEnemyWarehouse = null;
 
-    public Wave (String type, int num, double period, long interval, EnemyWarehouse ew) {
-        if(period>=60){
-            period=60;
-        }
-        mySpawnPeriodInMilliSecond = (int)(period*1000);
+    public Wave (String type, int num, int period, long interval, EnemyWarehouse ew) {
+        mySpawnPeriodInMilliSecond = period;
         myEnemyType = type;
         myNumberOfEnemies = num;
         myEnemyWarehouse = ew;
-        myIntervalInMilliSecond = interval*1000+myNumberOfEnemies*mySpawnPeriodInMilliSecond;
+        myIntervalInMilliSecond = interval;
         myTimer = new Timer(mySpawnPeriodInMilliSecond, this);
 
     }
@@ -43,7 +40,6 @@ public class Wave implements ActionListener {
             if (myEnemyWarehouse == null)
                 // must be something is wrong
                 return;
-            
             myEnemyWarehouse.create(myEnemyType);
             myNumberOfEnemies--;
         }

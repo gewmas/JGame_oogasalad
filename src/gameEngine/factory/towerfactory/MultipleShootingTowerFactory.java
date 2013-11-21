@@ -25,8 +25,7 @@ public class MultipleShootingTowerFactory extends DefaultTowerFactory {
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new MultipleShootingTower(damage, attackSpeed, attackMode, attackAmount, range, cost, recyclePrice, description, 
-                                                  type, id, true,
+                (Tower) new MultipleShootingTower(damage, attackSpeed, attackMode, attackAmount, range, cost, recyclePrice, description, towerName, true,
                                          x, y, Constant.TOWER_CID, image);
         return tower;
     }
