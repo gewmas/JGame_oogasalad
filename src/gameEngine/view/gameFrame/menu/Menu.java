@@ -17,7 +17,7 @@ public class Menu extends JMenuBar {
        
         JMenu menuitem = new JMenu("File");
         menuitem.add(new NewGameMenuItem(view));
-        menuitem.add(new RestartGameMenuItem(view));
+        menuitem.add(new EndGameMenuItem(view));
        
         add(menuitem);
 

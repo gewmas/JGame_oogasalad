@@ -6,7 +6,6 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
-import gameEngine.model.warehouse.TemporaryBarrierWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
@@ -31,7 +30,6 @@ public class Model {
     private GameInfo gameInfo;
     private TowerWarehouse towerWarehouse;
     private EnemyWarehouse enemyWarehouse;
-    private TemporaryBarrierWarehouse temporaryBarrierWarehouse;
     private GridFactory gridFactory;
     private LinkedList<Tile> path;
     private JGEngineInterface myEng;
@@ -44,15 +42,8 @@ public class Model {
         
     }
     
-    public void setJGEngie(JGEngineInterface eng){
-        myEng=eng;
-    }
-    
 
-    public void newGame (File jsonFile) throws Exception {
-        // For test convenience
-        //        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
-
+    public void newGame (File jsonFile) throws Exception {        
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
 
@@ -61,7 +52,7 @@ public class Model {
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
         barriers = gridFactory.getBarrierList();
-//        temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
+
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
 
@@ -69,11 +60,12 @@ public class Model {
     }
 
     public void startGame () {
-        Wave w = new Wave("1", 10, 500, 10000, enemyWarehouse);
-        Wave w1 = new Wave("1", 10, 500, 1000, enemyWarehouse);
+        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
+        Wave w1 = new Wave("1", 10, 0.5, 0, enemyWarehouse);
         rule.addWave(w);
         rule.addWave(w1);
         rule.ruleStart();
+
     }
 
     //Yuhua change it
@@ -105,6 +97,11 @@ public class Model {
         return result;
     }
 
+    //For detector use
+    public void setJGEngine(JGEngineInterface eng){
+        this.myEng = eng;
+    }
+    
     //Refractor method to check whether Tower exist at (x, y)
     public Tower checkTowerAtXY(int x, int y){
         int detectRange = 100;
@@ -136,8 +133,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-
-            return true;
+            tower.sell();
         }
 
         return false;
@@ -147,8 +143,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-
-            return true;
+            tower.upgrade();
         }
 
         return false;
@@ -158,7 +153,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-
+            tower.setAttackMode(attackMode);
             return true;
         }
 
@@ -192,7 +187,11 @@ public class Model {
     public GameInfo getGameInfo() {
         return gameInfo;
     }
-    
+
+    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+        // TODO Auto-generated method stub
+        return false;
+    }
     
     /**
      * @author Fabio
@@ -211,19 +210,20 @@ public class Model {
         if(cmd == "add_gold") {
             int amt = Integer.parseInt(cheatArgs[1]);
             gameInfo.addGold(amt);
-        } else if(cmd == "add_lives") {
+        } else if(cmd.equals("add_lives")) {
             int amt = Integer.parseInt(cheatArgs[1]);
             gameInfo.addLife(amt);
-        } else if(cmd == "kill_all") {
+        } else if(cmd.equals("kill_all")) {
             //TODO
-        } else if(cmd == "win_game") {
+        } else if(cmd.equals("win_game")) {
             //TODO
-        } else if (cmd == "lose_game") {
+        } else if (cmd.equals("lose_game")) {
             //TODO
         } else {
             return false;
         }
         return true;
     }
+
 
 }

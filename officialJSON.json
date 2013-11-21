@@ -2,7 +2,7 @@
 "name": "Tower Destruction II",
 "spashImage" :  "game-bg.png",
 "BGImage" :  "resources/space_background.jpg",
-"gold" : 200,
+"gold" : 200000,
 "numberOfLives" : 100,
 "levels": 5,
 "widthOfWindow": 600,
@@ -34,8 +34,17 @@
                { "x": 11, "y": 5 },
                { "x": 12, "y": 5 },
                { "x": 13, "y": 5 },
-               { "x": 14, "y": 5 }
-           ]
+               { "x": 14, "y": 5 },
+	       { "x": 15, "y": 5 },
+               { "x": 16, "y": 5 },
+               { "x": 17, "y": 5 },
+               { "x": 18, "y": 5 },
+               { "x": 19, "y": 5 }
+           ], 
+        "Barriers":[
+        	{ "x": 5, "y": 2, "image": "rock.jpg" },
+        	{ "x": 6, "y": 2, "image": "tree.jpg" }
+        ]
 },
 
 "temporaryBarrierType":[
@@ -59,19 +68,33 @@
 
 "towerType": [
 	{
-	 "id": "DefaultTower",
+	 "type": "DefaultTower",
+	 "id" : "DefaultTower1",
 	 "image": "tower1",
 	 "damage": 3,
 	 "attackSpeed": 0.8,
 	 "attackMode": 1,
 	 "range": 100,	
-	 "cost": 100, 
+	 "cost": 50, 
 	 "recyclePrice":  50,
 	 "description": "Default tower will shoot enemy, Surprise!",
 	},
 	{
-	 "id": "MultipleShootingTower",
+	 "type": "DefaultTower",
+	 "id" : "DefaultTower2",
 	 "image": "tower1",
+	 "damage": 3,
+	 "attackSpeed": 0.8,
+	 "attackMode": 1,
+	 "range": 100,	
+	 "cost": 10, 
+	 "recyclePrice":  50,
+	 "description": "Default tower will shoot enemy, Surprise!",
+	},
+	{
+	 "type": "MultipleShootingTower",
+	 "id" : "MultipleShootingTower1",
+	 "image": "MultipleShootingTower",
 	 "damage": 1,
 	 "attackSpeed": 3.5,
 	 "attackMode": 2,
@@ -82,8 +105,9 @@
 	 "description": "MultipleShooting tower will shoot multiple bullets at one time.",
 	},
 	{
-	 "id": "BoostTower",
-	 "image": "tower1",
+	 "type": "BoostTower",
+	 "id" : "BoostTower",
+	 "image": "BoostTower",
 	 "damage": 1,
 	 "attackSpeed": 0.8,
 	 "range": 100,	
@@ -93,10 +117,12 @@
 	 "boostFactor": 2.0,
 	},
 	{
-	 "id": "MagicTower",
-	 "image": "tower1",
+	 "type": "MagicTower",
+	 "id": "MagicTower1",
+	 "image": "MagicTower",
 	 "damage": 1,
 	 "attackSpeed": 0.8,
+	 "attackMode": 2,
 	 "range": 100,	
 	 "cost": 100, 
 	 "recyclePrice":  50,
