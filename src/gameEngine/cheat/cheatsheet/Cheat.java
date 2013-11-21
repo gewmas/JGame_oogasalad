@@ -10,6 +10,6 @@ public class Cheat {
      * lose_game
      */
     
-    public 
+    //public 
 
 }
