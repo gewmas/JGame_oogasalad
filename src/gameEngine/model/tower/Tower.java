@@ -2,6 +2,7 @@ package gameEngine.model.tower;
 
 import java.util.HashMap;
 import java.util.Map;
+import gameEngine.model.magic.ITMagicable;
 import gameEngine.model.purchase.PurchaseInfo;
 import jgame.JGObject;
 
@@ -12,7 +13,7 @@ import jgame.JGObject;
  *         Tower will shoot the Enemy within shooting range with Bullet
  */
 
-public abstract class Tower extends JGObject implements PurchaseInfo{
+public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicable{
     String type;
     String id; 
     String image;

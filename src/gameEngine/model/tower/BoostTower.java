@@ -1,8 +1,11 @@
 package gameEngine.model.tower;
 
+import java.util.List;
 import java.util.Map;
+import gameEngine.factory.magicFactory.TBoostFactory;
 import gameEngine.model.Detector;
 import gameEngine.model.enemy.Enemy;
+import gameEngine.model.magic.IMagicable;
 
 /**
  * 
@@ -12,9 +15,9 @@ import gameEngine.model.enemy.Enemy;
  * Reverse back when the BoostTower is sold
  */
 
-public class BoostTower extends Tower {
+public class BoostTower extends Tower implements IMagicable{
 
-    private Detector<DefaultTower> detector;
+    private Detector<Tower> detector;
     private double boostFactor;
 
     public BoostTower (double damage,
@@ -36,7 +39,7 @@ public class BoostTower extends Tower {
         super(type, id, damage, attackSpeed, range, cost, recyclePrice, description,
               unique_id, x, y, collisionid, image);
 
-        this.detector = new Detector<DefaultTower>(this.eng, DefaultTower.class);
+        this.detector = new Detector<Tower>(this.eng, Tower.class);
         this.boostFactor = boostFactor;
         
         addDescription();
@@ -50,7 +53,11 @@ public class BoostTower extends Tower {
 
     //create magic to towers in range
     public void addBoostEffect(){
-        
+        TBoostFactory tBoostFactory = new TBoostFactory(boostFactor);
+        List<Tower> towers = detector.getTargetsInRange((int)x, (int)y, (int)range);
+        for(Tower target : towers){
+            tBoostFactory.createMagicInstance(target, this);
+        }
     }
     
     @Override
@@ -69,11 +76,15 @@ public class BoostTower extends Tower {
     }
 
     //IMagicable Interface Method
-    public void magicUpgrade(double factor) {
+    @Override
+    public void upgrade (double factor) {
         boostFactor *= factor;
     }
-
-    public void magicDowngrade(double factor) {
+    
+    @Override
+    public void downgrade (double factor) {
         boostFactor /= factor;
     }
+
+    
 }

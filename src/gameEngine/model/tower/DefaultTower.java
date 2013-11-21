@@ -185,6 +185,10 @@ public class DefaultTower extends Tower {
         this.remove();
     }
 
+    public int getAttackMode () {
+        return attackMode;
+    }
+    
     @Override
     public void upgrade () {
         damage++;
@@ -196,9 +200,19 @@ public class DefaultTower extends Tower {
         damage--;
         attackSpeed -= 1;
     }
-
-    public int getAttackMode () {
-        return attackMode;
+    
+    @Override
+    public void upgrade (double factor) {
+        damage *= factor;
+        attackSpeed *= factor;
     }
+    
+    @Override
+    public void downgrade (double factor) {
+        damage /= factor;
+        attackSpeed /= factor;
+    }
+
+    
 
 }
