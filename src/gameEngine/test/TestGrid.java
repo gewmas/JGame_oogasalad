@@ -51,7 +51,8 @@ public class TestGrid extends JGEngine {
         setFrameRate(60, 2);
         Model model = new Model();
         try {
-            model.newGame(new File("officialJSON.json"));
+            //Yuhua, change of newGame signature
+//            model.newGame(new File("officialJSON.json", ));
         }
         catch (Exception e) {
             // TODO Auto-generated catch block

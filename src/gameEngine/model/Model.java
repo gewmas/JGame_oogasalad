@@ -42,15 +42,8 @@ public class Model {
         
     }
     
-    public void setJGEngie(JGEngineInterface eng){
-        myEng=eng;
-    }
-    
 
-    public void newGame (File jsonFile) throws Exception {
-        // For test convenience
-        //        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
-
+    public void newGame (File jsonFile) throws Exception {        
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
 
@@ -104,6 +97,11 @@ public class Model {
         return result;
     }
 
+    //For detector use
+    public void setJGEngine(JGEngineInterface eng){
+        this.myEng = eng;
+    }
+    
     //Refractor method to check whether Tower exist at (x, y)
     public Tower checkTowerAtXY(int x, int y){
         int detectRange = 100;
@@ -135,8 +133,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-
-            return true;
+            tower.sell();
         }
 
         return false;
@@ -146,8 +143,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-
-            return true;
+            tower.upgrade();
         }
 
         return false;
@@ -157,7 +153,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-
+            tower.setAttackMode(attackMode);
             return true;
         }
 
@@ -192,14 +188,42 @@ public class Model {
         return gameInfo;
     }
 
-    public boolean activateCheat (String code) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     public boolean purchaseTemporaryBarrier (int x, int y, String name) {
         // TODO Auto-generated method stub
         return false;
     }
+    
+    /**
+     * @author Fabio
+     * 
+     * Activate input cheat
+     * Succeed, return true
+     * No such cheat, return false
+     * 
+     * @param code
+     * @return bool
+     */
+    public boolean activateCheat(String code) {
+
+        String[] cheatArgs = code.split(" ");
+        String cmd = cheatArgs[0];
+        if(cmd == "add_gold") {
+            int amt = Integer.parseInt(cheatArgs[1]);
+            gameInfo.addGold(amt);
+        } else if(cmd.equals("add_lives")) {
+            int amt = Integer.parseInt(cheatArgs[1]);
+            gameInfo.addLife(amt);
+        } else if(cmd.equals("kill_all")) {
+            //TODO
+        } else if(cmd.equals("win_game")) {
+            //TODO
+        } else if (cmd.equals("lose_game")) {
+            //TODO
+        } else {
+            return false;
+        }
+        return true;
+    }
+
 
 }

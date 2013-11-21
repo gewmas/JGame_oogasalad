@@ -7,6 +7,7 @@ import gameEngine.view.View;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import jgame.impl.JGEngineInterface;
 
 
 public class Controller {
@@ -37,6 +38,14 @@ public class Controller {
         model.startGame();
     }
 
+    /**
+     * For Detector in Model to detect JGObjects in range
+     * @param eng
+     */
+    public void setJGEngine(JGEngineInterface eng){
+        model.setJGEngine(eng);
+    }
+    
     /**
      * @author Yuhua
      * Tower Related Method
