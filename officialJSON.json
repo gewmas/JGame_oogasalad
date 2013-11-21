@@ -101,8 +101,8 @@
 	},
 	{
 	 "type": "BoostTower",
-	 "id" : "BoostTower1",
-	 "image": "tower1",
+	 "id" : "BoostTower",
+	 "image": "BoostTower",
 	 "damage": 1,
 	 "attackSpeed": 0.8,
 	 "range": 100,	
@@ -114,7 +114,7 @@
 	{
 	 "type": "MagicTower",
 	 "id": "MagicTower1",
-	 "image": "tower1",
+	 "image": "MagicTower",
 	 "damage": 1,
 	 "attackSpeed": 0.8,
 	 "attackMode": 2,
