@@ -14,8 +14,7 @@ import jgame.JGObject;
 
 public abstract class Tower extends JGObject implements PurchaseInfo{
     String type;
-    String id;
-    
+    String id; 
     String image;
 
     double damage;
@@ -27,6 +26,7 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
     double y;
 
     double cost;
+    double upgradePrice;
     double recyclePrice;
 
     String description;
@@ -35,6 +35,14 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
 
     public Tower (String type,
                   String id,
+                  
+                  double damage,
+                  double attackSpeed,
+                  double range,
+                  double cost,
+                  double recyclePrice,
+                  String description,
+                  
                   boolean unique_id,
                   double x,
                   double y,
@@ -45,6 +53,19 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
         this.type = type;
         this.id = id;        
         this.image = gfxname;
+        
+        this.damage = damage;
+        this.attackSpeed = attackSpeed;
+        
+        this.range = range;
+        this.cost = cost;
+        this.upgradePrice = cost/3;
+        this.recyclePrice = recyclePrice;
+
+        this.description = description;
+        
+        this.x = x;
+        this.y = y;
         
         //add tower description
         this.info = new HashMap<String, String>();
@@ -61,6 +82,7 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
         info.put("Y", String.valueOf(y));
         info.put("Cost", String.valueOf(cost));
         info.put("Sell Price", String.valueOf(recyclePrice));
+        info.put("Upgrade Price", String.valueOf(upgradePrice));
         info.put("Description", String.valueOf(description));
     }
 
@@ -70,6 +92,7 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
     public abstract void sell();
     public abstract void upgrade();
     public abstract void downgrade(); //when sell BoostTower, downgrade Tower in range
+    public void setAttackMode(int mode){} //not all tower need this, serve as public interface
     
     /**
      * TowerInfo Getter Method

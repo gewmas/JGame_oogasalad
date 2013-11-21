@@ -7,6 +7,7 @@ import gameEngine.view.View;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import jgame.impl.JGEngineInterface;
 
 
 public class Controller {
@@ -24,8 +25,8 @@ public class Controller {
         model = new Model();
     }
 
-    public void newGame (File jsonFile) throws Exception {
-        model.newGame(jsonFile); // will throw exception if fail
+    public void newGame (File jsonFile, JGEngineInterface eng) throws Exception {
+        model.newGame(jsonFile, eng); // will throw exception if fail
         view.startJGame();
 //        startGame();
         // Model parses jsonFile and passes gameData to view
