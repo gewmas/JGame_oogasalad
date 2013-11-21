@@ -2,7 +2,7 @@ package gameEngine.view.gameFrame;
 
 import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.gameFrame.store.StoreInfoPanel;
+import gameEngine.view.gameFrame.store.InfoDisplayPanel;
 import gameEngine.view.gameFrame.store.StoreOptionsPanel;
 
 
@@ -28,7 +28,7 @@ public class GameFrameMediator {
     private StoreOptionsPanel storeOptions;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
-    private StoreInfoPanel towerInfoPanel;
+    private InfoDisplayPanel towerInfoPanel;
 
     public void addTowersOptionPanel (StoreOptionsPanel storeOptions) {
         this.storeOptions = storeOptions;
@@ -38,7 +38,11 @@ public class GameFrameMediator {
      * Destroys the jgame instance so that it can be reloaded
      */
 
-    public void endGame () {
+    public void quitGame () {
+        canvasPanel.quitGame();
+    }
+    
+    public void endGame(){
         canvasPanel.endGame();
     }
 
@@ -64,7 +68,7 @@ public class GameFrameMediator {
      * @param towerDisplayInfo TODO
      */
     public void displayTowerInfo (Map<String, String> towerDisplayInfo) {
-        towerInfoPanel.displayTowerInfo(towerDisplayInfo);
+        towerInfoPanel.displayInformation(towerDisplayInfo);
     }
 
     /**
@@ -73,7 +77,7 @@ public class GameFrameMediator {
      */
     
     public void exitPurchase(){
-        storeOptions.exitPurchase();
+       
         restoreDefaultCursor();
     }
     
@@ -98,11 +102,15 @@ public class GameFrameMediator {
 
     }
 
-    public void addTowerInfoPanel (StoreInfoPanel towerInfoPanel) {
+    public void addInfoPanel (InfoDisplayPanel towerInfoPanel) {
         this.towerInfoPanel = towerInfoPanel;
     }
     
     public void clearDisplay(){
         this.towerInfoPanel.clearDisplay();
+    }
+    
+    public void openStore () {
+      storeOptions.addStoreInventory();
     }
 }

@@ -71,6 +71,9 @@ public class Game extends StdGame {
     
     public void startInGame() {
         view.startModel();
+        mediator.openStore();
+        mediator.updateStoreStatus();
+        
     }
 
     public void doFrameInGame () {
@@ -103,7 +106,7 @@ public class Game extends StdGame {
                     purchasing = false;
                     mediator.exitPurchase();
                 }
-                System.out.format("Buying tower at: %d,%d\n", mousePosition.x, mousePosition.y);
+                System.out.format("Buying %s at: %d,%d\n",towerToPurchase, mousePosition.x, mousePosition.y);
             }
             else {
                 PurchaseInfo tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
@@ -136,7 +139,8 @@ public class Game extends StdGame {
      */
     public void placeTower (PurchaseInfo purchaseInfo) {
         // setBGColor(JGColor.red);
-        if (purchaseInfo.getItemName().equals(towerToPurchase)){
+        String towerName=purchaseInfo.getInfo().get("Tower ID");
+        if (towerName==null || towerName.equals(towerToPurchase)){
             mediator.exitPurchase();
             System.out.println("Tower cancelled");
             towerToPurchase=null;
@@ -146,7 +150,19 @@ public class Game extends StdGame {
         mediator.setCursorImage(purchaseInfo);
         System.out.println("User wants to purchase " + purchaseInfo.getItemName());
         purchasing = true;
-        towerToPurchase = purchaseInfo.getItemName();
+        towerToPurchase = towerName;
+    }
+    
+    public void endGame(){
+        //view.startModel();
+        removeGameObjects();
+        gameOver();
+        removeGameObjects();
+    }
+    
+    public void removeGameObjects(){
+        this.removeAllTimers();
+        removeObjects(null,0);
     }
 
 }

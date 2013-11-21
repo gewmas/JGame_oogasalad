@@ -355,7 +355,8 @@ public class EngineLogic {
                     pkgname_path += tok + "/";
                 }
             }
-            return "/" + pkgname_path + filename;
+            //System.out.println(pkgname_path);
+            return "/resources/img/"/*"/" + pkgname_path*/ + filename;
         }
     }
 
@@ -459,6 +460,8 @@ public class EngineLogic {
         int lnr = 1;
         int nr_lines = 0;
         filename = getAbsolutePath(eng, filename);
+        System.out.println(getClass().getName());
+        System.out.println(filename);
         try {
             InputStream instr = getClass().getResourceAsStream(filename);
             if (instr == null) eng.exitEngine("Cannot open `" + filename + "'.");
