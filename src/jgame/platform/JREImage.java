@@ -64,7 +64,6 @@ class JREImage implements JGImage {
      * Throws JGError when there was an error.
      */
     public JGImage loadImage (String imgfile) {
-        System.out.println(imgfile);
         Image img = (Image) loadedimages.get(imgfile);
         if (img == null) {
             URL imgurl = getClass().getResource(imgfile);

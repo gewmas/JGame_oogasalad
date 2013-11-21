@@ -109,13 +109,13 @@ public class Game extends StdGame {
                 System.out.format("Buying %s at: %d,%d\n",towerToPurchase, mousePosition.x, mousePosition.y);
             }
             else {
-                PurchaseInfo tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
+                PurchaseInfo tower=view.getTowerInfo(mousePosition.x, mousePosition.y);
                 if (tower==null) {
                     System.out.println("No tower here");
                 } else {
-                    mediator.displayTowerInfo(null);
+                    mediator.displayTowerInfo(tower.getInfo());
                 }
-                System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
+                System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }
         }
     }

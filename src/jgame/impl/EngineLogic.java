@@ -333,6 +333,9 @@ public class EngineLogic {
      * name of this class (and converting the "." to "/". A
      * relative path is a path without "/" or an URL protocol at the beginning.
      * Absolute paths are not changed.
+     * 
+     * Edited by Alex Zhu 11/20/13
+     * Now returns the path /resources/img/filename
      */
     public String getAbsolutePath (Object pkg_obj, String filename) {
         if (filename.indexOf("/") == 0
@@ -355,7 +358,6 @@ public class EngineLogic {
                     pkgname_path += tok + "/";
                 }
             }
-            //System.out.println(pkgname_path);
             return "/resources/img/"/*"/" + pkgname_path*/ + filename;
         }
     }
@@ -460,8 +462,6 @@ public class EngineLogic {
         int lnr = 1;
         int nr_lines = 0;
         filename = getAbsolutePath(eng, filename);
-        System.out.println(getClass().getName());
-        System.out.println(filename);
         try {
             InputStream instr = getClass().getResourceAsStream(filename);
             if (instr == null) eng.exitEngine("Cannot open `" + filename + "'.");
@@ -646,7 +646,6 @@ public class EngineLogic {
             boolean rot90 = img_op.indexOf("r") >= 0;
             boolean rot180 = img_op.indexOf("u") >= 0;
             boolean rot270 = img_op.indexOf("l") >= 0;
-            // System.out.println("img_op "+img_op+ " "+flipx+" "+flipy);
             if (flipx || flipy) img = img.flip(flipx, flipy);
             if (rot90) {
                 img = img.rotate(90);
