@@ -34,28 +34,96 @@
                { "x": 11, "y": 5 },
                { "x": 12, "y": 5 },
                { "x": 13, "y": 5 },
-               { "x": 14, "y": 5 },
-               { "x": 15, "y": 5 },
-               { "x": 16, "y": 5 },
-               { "x": 17, "y": 5 },
-               { "x": 18, "y": 5 },
-               { "x": 19, "y": 5 }
-           ]
+               { "x": 14, "y": 5 }
+           ], 
+        "Barriers":[
+        	{ "x": 5, "y": 2, "image": "rock.jpg" },
+        	{ "x": 6, "y": 2, "image": "tree.jpg" }
+        ]
 },
+
+"temporaryBarrierType":[
+	{
+	 "id": "Lake",
+	 "image": "lake1",
+	 "damage": 100,
+	 "cost": 200,
+	 "expire": 20,
+	 "description": "Buy a puddle of water to drown your enemies!  The sun is hot, so let's hope it doesn't evaporate too quickly"
+	},  
+	{
+	 "id": "Fire",
+	 "image": "fire1",
+	 "damage": 100,
+	 "cost": 100,
+	 "expire": 10,
+	 "description": "Buy a flame to burn your enemies!  The fire won't burn forever"
+	},
+],
 
 "towerType": [
 	{
-	 "id": "DefaultTower",
+	 "type": "DefaultTower",
+	 "id" : "DefaultTower1",
 	 "image": "tower1",
-	 "x": 32,
-	 "y": 32,
-	 "damage": 1,
+	 "damage": 3,
 	 "attackSpeed": 0.8,
 	 "attackMode": 1,
 	 "range": 100,	
+	 "cost": 50, 
+	 "recyclePrice":  50,
+	 "description": "Default tower will shoot enemy, Surprise!",
+	},
+	{
+	 "type": "DefaultTower",
+	 "id" : "DefaultTower2",
+	 "image": "tower1",
+	 "damage": 3,
+	 "attackSpeed": 0.8,
+	 "attackMode": 1,
+	 "range": 100,	
+	 "cost": 10, 
+	 "recyclePrice":  50,
+	 "description": "Default tower will shoot enemy, Surprise!",
+	},
+	{
+	 "type": "MultipleShootingTower",
+	 "id" : "MultipleShootingTower1",
+	 "image": "tower1",
+	 "damage": 1,
+	 "attackSpeed": 3.5,
+	 "attackMode": 2,
+	 "attackAmount": 5,
+	 "range": 80,	
 	 "cost": 100, 
 	 "recyclePrice":  50,
-	} 
+	 "description": "MultipleShooting tower will shoot multiple bullets at one time.",
+	},
+	{
+	 "type": "BoostTower",
+	 "id" : "BoostTower1",
+	 "image": "tower1",
+	 "damage": 1,
+	 "attackSpeed": 0.8,
+	 "range": 100,	
+	 "cost": 100, 
+	 "recyclePrice":  50,
+	 "description": "Boost tower will strength towers in adjacency.",
+	 "boostFactor": 2.0,
+	},
+	{
+	 "type": "MagicTower",
+	 "id": "MagicTower1",
+	 "image": "tower1",
+	 "damage": 1,
+	 "attackSpeed": 0.8,
+	 "attackMode": 2,
+	 "range": 100,	
+	 "cost": 100, 
+	 "recyclePrice":  50,
+	 "description": "Magic tower will shoot a magic bullet to affect the enemy.",
+	 "magicFactor": 2.0,
+	}
 ],
 
 "enemyType":[
@@ -119,4 +187,3 @@
 ]  
 
 }
-

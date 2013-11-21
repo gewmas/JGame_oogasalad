@@ -39,7 +39,13 @@ public class Model {
 
     public Model () {
         rule = new Rule();
+        
     }
+    
+    public void setJGEngie(JGEngineInterface eng){
+        myEng=eng;
+    }
+    
 
     public void newGame (File jsonFile) throws Exception {
         // For test convenience
@@ -61,8 +67,10 @@ public class Model {
     }
 
     public void startGame () {
-        Wave w = new Wave("1", 10, 500, 1000, enemyWarehouse);
+        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
+        Wave w1 = new Wave("1", 10, 0.5, 0, enemyWarehouse);
         rule.addWave(w);
+        rule.addWave(w1);
         rule.ruleStart();
 
     }
@@ -98,7 +106,7 @@ public class Model {
 
     //Refractor method to check whether Tower exist at (x, y)
     public Tower checkTowerAtXY(int x, int y){
-        int detectRange = 10;
+        int detectRange = 100;
         Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
         return d.getOneTargetInRange(x, y, detectRange);
     }
@@ -108,14 +116,17 @@ public class Model {
     // now it is not functional because no myEng, we need discussion on this.
     public PurchaseInfo getTowerInfo (int x, int y) {
         return (PurchaseInfo)checkTowerAtXY(x, y);
-
     }
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact
     public boolean purchaseTower (int x, int y, String name) {
         Tile currentTile = getTile(x, y);
-        if(currentTile.isEmpty()&&!currentTile.hasPath()){
-            return towerWarehouse.create(x, y, name, gameInfo);
+        if (currentTile.isEmpty() && !currentTile.hasPath()) {
+            System.out.println(currentTile.isEmpty());
+            currentTile.setTower();
+            return towerWarehouse
+                .create((int) currentTile.getX(), (int) currentTile.getY(), name, gameInfo);
+            
         }
         return false;
     }
@@ -179,6 +190,16 @@ public class Model {
 
     public GameInfo getGameInfo() {
         return gameInfo;
+    }
+
+    public boolean activateCheat (String code) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

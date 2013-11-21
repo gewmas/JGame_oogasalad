@@ -1,5 +1,7 @@
 package gameEngine.model.tower;
 
+import java.util.HashMap;
+import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
 import jgame.JGObject;
 
@@ -11,20 +13,13 @@ import jgame.JGObject;
  */
 
 public abstract class Tower extends JGObject implements PurchaseInfo{
-    String towerName;
+    String type;
+    String id;
+    
     String image;
 
     double damage;
     double attackSpeed;
-
-    /**
-     * AttackMode include 
-     * 0 - shoot the closest enemy
-     * 1 - shoot the farthest enemy
-     * 2 - shoot weakest enemy with least life
-     * 3 - shoot strongest enemy with most life
-     */
-    int attackMode;
 
     double range;
 
@@ -36,20 +31,37 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
 
     String description;
 
+    Map<String, String> info;
 
-
-    public Tower (String name,
+    public Tower (String type,
+                  String id,
                   boolean unique_id,
                   double x,
                   double y,
                   int collisionid,
                   String gfxname) {
-        super(name, unique_id, x, y, collisionid, gfxname);
+        super(id, unique_id, x, y, collisionid, gfxname);
 
-
-        this.towerName = name;        
+        this.type = type;
+        this.id = id;        
         this.image = gfxname;
         
+        //add tower description
+        this.info = new HashMap<String, String>();
+    }
+    
+    public void addDescription(){
+        info.put("Tower Type", type);
+        info.put("Tower ID", id);
+        info.put("Image", image);
+        info.put("Damage", String.valueOf(damage));
+        info.put("Attack Speed", String.valueOf(attackSpeed));
+        info.put("Range", String.valueOf(range));
+        info.put("X", String.valueOf(x));
+        info.put("Y", String.valueOf(y));
+        info.put("Cost", String.valueOf(cost));
+        info.put("Sell Price", String.valueOf(recyclePrice));
+        info.put("Description", String.valueOf(description));
     }
 
     /**
@@ -57,63 +69,63 @@ public abstract class Tower extends JGObject implements PurchaseInfo{
      */
     public abstract void sell();
     public abstract void upgrade();
-    public abstract void downgrade(); 
-    public abstract void upgrade(double factor);
-    public abstract void downgrade(double factor); //when sell BoostTower, downgrade Tower in range
-    public abstract void setAttackMode (int attackMode);
+    public abstract void downgrade(); //when sell BoostTower, downgrade Tower in range
     
     /**
      * TowerInfo Getter Method
      */
-    @Override
+    public Map<String, String> getInfo () {
+        return info;
+    }
+    
+    @Deprecated
     public double getX () {
         return x;
     }
 
-    @Override
+    @Deprecated
     public double getY () {
         return y;
     }
 
-    @Override
+    @Deprecated
     public String getItemName(){
-        return towerName;
+        return id;
     }
 
-    @Override
+    @Deprecated
     public String getDescription () {
         return description;
     }
 
-    @Override
+    @Deprecated
     public double getDamage (){
         return damage;
     }
 
-    @Override
+    @Deprecated
     public double getAttackSpeed (){
         return attackSpeed;
     }
 
-    public int getAttackMode() {
-        return attackMode;
-    }
+//    @Deprecated
+//    public int getAttackMode() {
+//        return attackMode;
+//    }
 
-    @Override
+    @Deprecated
     public double getRange (){
         return range;
     }
-    @Override
+    @Deprecated
     public double getRecyclePrice (){
         return recyclePrice;
     }
-
-    @Override
+    @Deprecated
     public int getCost () {
         return (int)cost;
     }
-
-    @Override
+    @Deprecated
     public String getImage () {
         return image;
     }

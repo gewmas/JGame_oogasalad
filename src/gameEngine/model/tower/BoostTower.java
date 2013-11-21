@@ -1,5 +1,6 @@
 package gameEngine.model.tower;
 
+import java.util.Map;
 import gameEngine.model.Detector;
 import gameEngine.model.enemy.Enemy;
 
@@ -13,52 +14,65 @@ import gameEngine.model.enemy.Enemy;
 
 public class BoostTower extends Tower {
 
-	private Detector<DefaultTower> detector;
-	private double boostFactor;
+    private Detector<DefaultTower> detector;
+    private double boostFactor;
 
-	public BoostTower (String name,
-			boolean unique_id,
-			double x,
-			double y,
-			int collisionid,
-			String gfxname) {
-		super(name, unique_id, x, y, collisionid, gfxname);
+    public BoostTower (double damage,
+                       double attackSpeed,
+                       double range,
+                       double cost,
+                       double recyclePrice,
+                       String description,
+                       
+                       double boostFactor,
 
-		this.detector = new Detector<DefaultTower>(this.eng, DefaultTower.class);
-	}
+                       String type,
+                       String id,
+                       boolean unique_id,
+                       double x,
+                       double y,
+                       int collisionid,
+                       String image) {
+        super(type, id, unique_id, x, y, collisionid, image);
 
-	@Override
-	public void sell () {
-		// TODO Auto-generated method stub
+        this.detector = new Detector<DefaultTower>(this.eng, DefaultTower.class);
+        this.boostFactor = boostFactor;
+        
+        addDescription();
+        addBoostEffect();
+    }
 
-	}
+    public void addDescription(){
+        super.addDescription();
+        info.put("Boost Factor", String.valueOf(boostFactor));
+    }
 
-	@Override
-	public void upgrade () {
-		boostFactor += 1.0;
-	}
+    //create magic to towers in range
+    public void addBoostEffect(){
+        
+    }
+    
+    @Override
+    public void sell () {
+        remove();
+    }
 
-	@Override
-	public void downgrade(){
-		boostFactor -= 1.0;
-	}
+    @Override
+    public void upgrade () {
+        boostFactor += 1.0;
+    }
 
-	@Override
-	public void upgrade(double factor) {
-		boostFactor *= factor;
-	}
+    @Override
+    public void downgrade(){
+        boostFactor -= 1.0;
+    }
 
-	@Override
-	public void downgrade(double factor) {
-		boostFactor /= factor;
-	}
+    //IMagicable Interface Method
+    public void magicUpgrade(double factor) {
+        boostFactor *= factor;
+    }
 
-	@Override
-	public void setAttackMode (int attackMode) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-
+    public void magicDowngrade(double factor) {
+        boostFactor /= factor;
+    }
 }
