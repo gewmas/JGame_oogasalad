@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import gameEngine.Constant.Constant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.bullet.Bullet;
-import gameEngine.model.magic.IMagicable;
+import gameEngine.model.magic.IEMagicable;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import jgame.JGObject;
@@ -16,7 +16,7 @@ import gameEngine.model.Model;
  * @author Fabio, Yuhua, wenxin
  * 
  */
-public class Enemy extends JGObject implements IMagicable {
+public class Enemy extends JGObject implements IEMagicable {
 
     String id;
     String image;
@@ -124,7 +124,7 @@ public class Enemy extends JGObject implements IMagicable {
                  * @author wenxin
                  * below command deal with creation of magics;
                  */
-                MagicsFactory.getInstance().createMagics(this, bullet.getCurrentMagic(), currentMagics);
+                MagicsFactory.getInstance().createEnemyMagics(this, bullet.getCurrentMagic(), currentMagics);
             }
 
         }

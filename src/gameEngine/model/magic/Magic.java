@@ -8,43 +8,42 @@ import jgame.JGObject;
  */
 
 public abstract class Magic extends JGObject {
-    private IMagicable myTarget;
-    private int myMagicId;
-
+    IMagicable myTarget;
+    int myCurrMagicIds;
     public Magic (int expire,
                  IMagicable target,
                  String name,
                  int collisionid,
-                 String gfxname, 
-                 int magicId
+                 String gfxname,
+                 int magicIds
                  ) {
-        super(name, true, target.getX(), target.getY(), collisionid, gfxname, expire);
-
-        myMagicId = magicId;
+        super(name, true,target.getX(),target.getY(), collisionid, gfxname, expire);
         myTarget = target;
-       
-        myTarget.changeCurrentMagics(myTarget.getCurrentMagics()|myMagicId);
-        
-        magicOn(myTarget);
+        myCurrMagicIds=magicIds;      
     }
 
     public void remove () {
-        magicOff(myTarget);
-        myTarget.changeCurrentMagics(myTarget.getCurrentMagics() & (~myMagicId));
+        magicOff();
         super.remove();
     }
 
-    public void move () {
+    public void move() {
         if (!myTarget.isAlive()) {
             remove();
             return;
         }
-        move(myTarget);
+        moveNextStep();
+    }
+    
+    protected void moveNextStep (){
+        this.x=myTarget.getX();
+        this.y=myTarget.getY();
     }
 
-    public abstract void magicOn (IMagicable target);
+    public abstract void magicOn ();
 
-    public abstract void magicOff (IMagicable target);
+    public abstract void magicOff ();
+    
 
-    public abstract void move (IMagicable target);
+
 }

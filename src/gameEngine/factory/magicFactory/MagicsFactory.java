@@ -1,5 +1,6 @@
 package gameEngine.factory.magicFactory;
 
+import gameEngine.model.magic.IEMagicable;
 import gameEngine.model.magic.IMagicable;
 import java.util.HashMap;
 
@@ -11,12 +12,11 @@ public class MagicsFactory {
 
     private static MagicsFactory myMagicFactory;
     private HashMap<Integer, IMagicFactory> myFactoryMap = new HashMap<Integer, IMagicFactory>();
-
+    
+    
     private MagicsFactory () {
-
-        myFactoryMap.put(PoisonFactory.ID, new PoisonFactory());
-        myFactoryMap.put(SlowFactory.ID, new SlowFactory());
-        myFactoryMap.put(FrozeFactory.ID, new FrozeFactory());
+        myFactoryMap.put(EFrozeFactory.ID, new EFrozeFactory());
+        myFactoryMap.put(TBoostFactory.ID, new TBoostFactory());
     }
 
     public static MagicsFactory getInstance () {
@@ -32,9 +32,15 @@ public class MagicsFactory {
      * @param newMagicIds
      * @param currentMagicIds
      */
-    public void createMagics (IMagicable target, int newMagicIds, int currentMagicIds) {
-        int addNewMagicIds = (~currentMagicIds) & newMagicIds;
-        createMagics(target, addNewMagicIds);
+    public void createEnemyMagics (IEMagicable target, int newMagicIds, int currentMagicIds) {
+        newMagicIds = (~currentMagicIds) & newMagicIds;
+        for (int i = 0; newMagicIds > 0; i++) {
+            IMagicFactory factory = myFactoryMap.get((int)Math.pow(2, i));
+            if (factory != null) {
+                factory.createMagicInstance(target,null);
+            }
+            newMagicIds = newMagicIds >> 1;
+        }
     }
 
     /**
@@ -44,11 +50,11 @@ public class MagicsFactory {
      * @param newMagicIds
      */
 
-    public void createMagics (IMagicable target, int newMagicIds) {
+    public void createTowerMagics (IEMagicable target,IMagicable sender ,int newMagicIds) {
         for (int i = 0; newMagicIds > 0; i++) {
             IMagicFactory factory = myFactoryMap.get((int)Math.pow(2, i));
             if (factory != null) {
-                factory.createMagicInstance(target);
+                factory.createMagicInstance(target,sender);
             }
             newMagicIds = newMagicIds >> 1;
         }

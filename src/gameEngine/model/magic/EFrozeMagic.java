@@ -1,27 +1,26 @@
 package gameEngine.model.magic;
 
 
-public class FrozeMagic extends Magic {
+public class EFrozeMagic extends EMagic {
 
     public static final String NAME="FrozeMagic";
     private static final double FROZESPEEDCHANGE=1;
     
-    public FrozeMagic ( int expire,IMagicable target,int ID, int CID) {
+    public EFrozeMagic ( int expire,IEMagicable target,int ID, int CID) {
         super(expire,target,NAME,CID,NAME,ID);
+        magicOn();
     }
 
     @Override
-    public void magicOn (IMagicable target) {
+    void magicOnAction (IEMagicable target) {
         target.changeSpeed(-FROZESPEEDCHANGE);
     }
 
     @Override
-    public void magicOff (IMagicable target) {
+    void magicOffAction (IEMagicable target) {
         target.changeSpeed(FROZESPEEDCHANGE);
     }
 
-    @Override
-    public void move (IMagicable target) {
-       
-    }
+
+
 }
