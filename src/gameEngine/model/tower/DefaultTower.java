@@ -62,24 +62,19 @@ public class DefaultTower extends Tower{
                          int collisionid,
                          String image) {
 
-        super(type, id, unique_id, x, y, collisionid, image);
+        super(type, id, damage, attackSpeed, range, cost, recyclePrice, description,
+              unique_id, x, y, collisionid, image);
 
-        this.damage = damage;
-        this.attackSpeed = attackSpeed;
+        
         this.attackMode = attackMode;
         this.attackAmount = 1;
         
-        this.range = range;
-        this.cost = cost;
-        this.recyclePrice = recyclePrice;
-
-        this.x = x;
-        this.y = y;
+        
 
         this.prevTime = System.currentTimeMillis();
         this.detector = new Detector<Enemy>(this.eng, Enemy.class);
 
-        this.description = description;
+        
 
 
         addDescription();

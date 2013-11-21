@@ -135,8 +135,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-
-            return true;
+            tower.sell();
         }
 
         return false;
@@ -146,8 +145,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-
-            return true;
+            tower.upgrade();
         }
 
         return false;
@@ -157,7 +155,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-
+            tower.setAttackMode(attackMode);
             return true;
         }
 
