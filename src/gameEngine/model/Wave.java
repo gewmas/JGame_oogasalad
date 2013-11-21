@@ -16,8 +16,6 @@ public class Wave implements ActionListener {
     private int myNumberOfEnemies = 0;
     private Timer myTimer = null;
     private long myIntervalInMilliSecond = 0;
-    // for test. Real Enemy Factory needs to be implemented.This wave can
-    // require different factory by myEnemyType
     private EnemyWarehouse myEnemyWarehouse = null;
 
     public Wave (String type, int num, double period, long interval, EnemyWarehouse ew) {

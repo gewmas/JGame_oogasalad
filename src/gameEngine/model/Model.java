@@ -38,7 +38,7 @@ public class Model {
     private ArrayList<Tile> barriers;
 
     public Model () {
-        rule = new Rule();
+       
         
     }
     
@@ -55,15 +55,16 @@ public class Model {
 
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
-
+        rule = new Rule(1, enemyWarehouse);
+        rule.readWaveFromJSon(parser.getJSONArray("wave"));
         gameInfo = new GameInfo(parser);
     }
 
     public void startGame () {
-        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
-        Wave w1 = new Wave("1", 10, 0.5, 0, enemyWarehouse);
-        rule.addWave(w);
-        rule.addWave(w1);
+//        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
+//        Wave w1 = new Wave("2", 10, 0.5, 0, enemyWarehouse);
+//        rule.addWave(w);
+//        rule.addWave(w1);
         rule.ruleStart();
 
     }
