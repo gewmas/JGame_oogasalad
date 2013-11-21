@@ -55,7 +55,7 @@ public class View {
 
     public void newGame (File file) {
         try {
-            controller.newGame(file);
+            controller.newGame(file,mediator.getEngine());
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
