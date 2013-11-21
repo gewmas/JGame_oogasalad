@@ -2,7 +2,7 @@
 "name": "Tower Destruction II",
 "spashImage" :  "game-bg.png",
 "BGImage" :  "resources/space_background.jpg",
-"gold" : 200,
+"gold" : 200000,
 "numberOfLives" : 100,
 "levels": 5,
 "widthOfWindow": 600,
@@ -34,7 +34,12 @@
                { "x": 11, "y": 5 },
                { "x": 12, "y": 5 },
                { "x": 13, "y": 5 },
-               { "x": 14, "y": 5 }
+               { "x": 14, "y": 5 },
+	       { "x": 15, "y": 5 },
+               { "x": 16, "y": 5 },
+               { "x": 17, "y": 5 },
+               { "x": 18, "y": 5 },
+               { "x": 19, "y": 5 }
            ], 
         "Barriers":[
         	{ "x": 5, "y": 2, "image": "rock.jpg" },
@@ -89,7 +94,7 @@
 	{
 	 "type": "MultipleShootingTower",
 	 "id" : "MultipleShootingTower1",
-	 "image": "tower1",
+	 "image": "MultipleShootingTower",
 	 "damage": 1,
 	 "attackSpeed": 3.5,
 	 "attackMode": 2,
