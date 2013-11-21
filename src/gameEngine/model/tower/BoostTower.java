@@ -2,6 +2,7 @@ package gameEngine.model.tower;
 
 import java.util.List;
 import java.util.Map;
+import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.factory.magicFactory.TBoostFactory;
 import gameEngine.model.Detector;
 import gameEngine.model.enemy.Enemy;
@@ -53,10 +54,9 @@ public class BoostTower extends Tower implements IMagicable{
 
     //create magic to towers in range
     public void addBoostEffect(){
-        TBoostFactory tBoostFactory = new TBoostFactory(boostFactor);
         List<Tower> towers = detector.getTargetsInRange((int)x, (int)y, (int)range);
         for(Tower target : towers){
-            tBoostFactory.createMagicInstance(target, this);
+            MagicsFactory.getInstance().createTowerMagics(target, this, 2);
         }
     }
     

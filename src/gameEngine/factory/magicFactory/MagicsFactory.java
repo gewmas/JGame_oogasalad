@@ -2,6 +2,7 @@ package gameEngine.factory.magicFactory;
 
 import gameEngine.model.magic.IEMagicable;
 import gameEngine.model.magic.IMagicable;
+import gameEngine.model.magic.ITMagicable;
 import java.util.HashMap;
 
 
@@ -34,12 +35,15 @@ public class MagicsFactory {
      */
     public void createEnemyMagics (IEMagicable target, int newMagicIds, int currentMagicIds) {
         newMagicIds = (~currentMagicIds) & newMagicIds;
+        int temp=newMagicIds;
+        int mask=1;
         for (int i = 0; newMagicIds > 0; i++) {
-            IMagicFactory factory = myFactoryMap.get((int)Math.pow(2, i));
+            IMagicFactory factory = myFactoryMap.get(temp&mask);
             if (factory != null) {
                 factory.createMagicInstance(target,null);
             }
             newMagicIds = newMagicIds >> 1;
+            mask=mask<<1;
         }
     }
 
@@ -50,13 +54,16 @@ public class MagicsFactory {
      * @param newMagicIds
      */
 
-    public void createTowerMagics (IEMagicable target,IMagicable sender ,int newMagicIds) {
+    public void createTowerMagics (ITMagicable target,IMagicable sender ,int newMagicIds) {
+        int temp=newMagicIds;
+        int mask=1;
         for (int i = 0; newMagicIds > 0; i++) {
-            IMagicFactory factory = myFactoryMap.get((int)Math.pow(2, i));
+            IMagicFactory factory = myFactoryMap.get(temp&mask);
             if (factory != null) {
                 factory.createMagicInstance(target,sender);
             }
             newMagicIds = newMagicIds >> 1;
+            mask=mask<<1;
         }
     }
 }
