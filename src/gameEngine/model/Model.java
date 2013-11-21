@@ -104,7 +104,7 @@ public class Model {
     
     //Refractor method to check whether Tower exist at (x, y)
     public Tower checkTowerAtXY(int x, int y){
-        int detectRange = 100;
+        int detectRange = 10;
         Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
         return d.getOneTargetInRange(x, y, detectRange);
     }

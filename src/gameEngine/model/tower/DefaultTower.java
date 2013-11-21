@@ -40,7 +40,9 @@ public class DefaultTower extends Tower {
     int attackMode;
 
     // Number of shooting at one time
-    int attackAmount;
+    int attackAmount; //MultipleShootingTower
+    int currentMagic; //MagicTower
+    
     List<Enemy> targetEnemies;
 
     public DefaultTower (
@@ -65,6 +67,7 @@ public class DefaultTower extends Tower {
 
         this.attackMode = attackMode;
         this.attackAmount = 1;
+        this.currentMagic = 0;
 
         this.prevTime = System.currentTimeMillis();
         this.detector = new Detector<Enemy>(this.eng, Enemy.class);
@@ -92,7 +95,7 @@ public class DefaultTower extends Tower {
 
             // System.out.println(targetEnemies.size());
             for (Enemy targetEnemy : targetEnemies) {
-                new Bullet(targetEnemy, damage, "bullet", true, x, y, Constant.BULLET_CID, "bullet");
+                new Bullet(targetEnemy, damage, currentMagic,"bullet", true, x, y, Constant.BULLET_CID, "bullet");
             }
             prevTime = System.currentTimeMillis();
         }
@@ -203,14 +206,18 @@ public class DefaultTower extends Tower {
     
     @Override
     public void upgrade (double factor) {
+        
         damage *= factor;
         attackSpeed *= factor;
+        super.updateDescription();
     }
     
     @Override
     public void downgrade (double factor) {
+        
         damage /= factor;
         attackSpeed /= factor;
+        super.updateDescription();
     }
 
     

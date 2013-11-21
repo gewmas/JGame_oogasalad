@@ -128,6 +128,7 @@
 	 "recyclePrice":  50,
 	 "description": "Magic tower will shoot a magic bullet to affect the enemy.",
 	 "magicFactor": 2.0,
+	 "magic" : 1,
 	}
 ],
 

@@ -60,7 +60,7 @@ public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicabl
         
         this.range = range;
         this.cost = cost;
-        this.upgradePrice = cost/3;
+        this.upgradePrice = (int)cost/3;
         this.recyclePrice = recyclePrice;
 
         this.description = description;
@@ -73,6 +73,21 @@ public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicabl
     }
     
     public void addDescription(){
+        info.put("Tower Type", type);
+        info.put("Tower ID", id);
+        info.put("Image", image);
+        info.put("Damage", String.valueOf(damage));
+        info.put("Attack Speed", String.valueOf(attackSpeed));
+        info.put("Range", String.valueOf(range));
+        info.put("X", String.valueOf(x));
+        info.put("Y", String.valueOf(y));
+        info.put("Cost", String.valueOf(cost));
+        info.put("Sell Price", String.valueOf(recyclePrice));
+        info.put("Upgrade Price", String.valueOf(upgradePrice));
+        info.put("Description", String.valueOf(description));
+    }
+    
+    public void updateDescription(){
         info.put("Tower Type", type);
         info.put("Tower ID", id);
         info.put("Image", image);

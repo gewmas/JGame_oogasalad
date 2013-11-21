@@ -14,13 +14,15 @@ import jgame.JGObject;
 public class Bullet extends JGObject {
 
     Enemy targetEnemy;
-    int currentMagic = 1;
+    int currentMagic;
 
     double damage;
 
     public Bullet (
                    Enemy targetEnemy,
                    double damage,
+                   
+                   int magic,
 
                    String name,
                    boolean unique_id,
@@ -32,6 +34,7 @@ public class Bullet extends JGObject {
 
         this.targetEnemy = targetEnemy;
         this.damage = 1;
+        this.currentMagic = magic;
     }
 
     @Override
