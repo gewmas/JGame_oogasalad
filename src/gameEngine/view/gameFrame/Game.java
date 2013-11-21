@@ -128,6 +128,7 @@ public class Game extends StdGame {
                     System.out.println("No tower here");
                 } else {
                     mediator.displayTowerInfo(tower.getInfo());
+                    System.out.println("Checking tower");
                 }
                 System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }

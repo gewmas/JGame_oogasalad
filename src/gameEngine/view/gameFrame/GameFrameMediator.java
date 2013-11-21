@@ -114,8 +114,4 @@ public class GameFrameMediator {
     public void openStore () {
       storeOptions.addStoreInventory();
     }
-
-    public JGEngineInterface getEngine () {
-        return canvasPanel.getEngine();
-    }
 }

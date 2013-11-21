@@ -108,6 +108,7 @@ public abstract class StoreOptionsPanel extends Panel {
                 @Override
                 public void executeAction () {
                     mediator.displayTowerInfo(tower.getInfo());
+                    System.out.println("Checking store");
                 }
             };
             StoreItemButton towerButton =
