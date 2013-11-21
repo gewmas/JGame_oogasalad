@@ -35,6 +35,7 @@ public class GameFrameMediator {
         this.storeOptions = storeOptions;
     }
 
+ 
     /**
      * Destroys the jgame instance so that it can be reloaded
      */
