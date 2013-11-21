@@ -9,7 +9,9 @@ import java.util.Map;
 
 public abstract class TowerFactory implements PurchaseInfo {
 
-    String towerName;
+    String type;
+    String id;
+    
     String description;
     String image;
 
@@ -27,7 +29,8 @@ public abstract class TowerFactory implements PurchaseInfo {
     Map<String, String> info;
 
     public TowerFactory (JSONObject currTower) {
-        towerName = currTower.getString("id");
+        type = currTower.getString("type");
+        id = currTower.getString("id");
         image = currTower.getString("image");
         damage = currTower.getDouble("damage");
         attackSpeed = currTower.getDouble("attackSpeed");
@@ -40,7 +43,8 @@ public abstract class TowerFactory implements PurchaseInfo {
     }
 
     public void addDescription () {
-        info.put("Tower Name", towerName);
+        info.put("Tower Type", type);
+        info.put("Tower ID", id);
         info.put("Image", image);
         info.put("Damage", String.valueOf(damage));
         info.put("Attack Speed", String.valueOf(attackSpeed));
@@ -54,49 +58,54 @@ public abstract class TowerFactory implements PurchaseInfo {
 
     public abstract Tower create (int x, int y);
 
+    /**
+     * Implement PurchaseInfo
+     */
     @Override
+    public Map<String, String> getInfo () {
+        return info;
+    }
+    
+    @Deprecated
     public String getItemName () {
-        return towerName;
+        return id;
     }
 
-    @Override
+    @Deprecated
     public String getImage () {
         return image;
     }
 
-    @Override
+    @Deprecated
     public int getCost () {
         return (int) cost;
     }
 
-    @Override
+    @Deprecated
     public String getDescription () {
         return description;
     }
 
-    @Override
+    @Deprecated
     public double getDamage () {
         return damage;
     }
 
-    @Override
+    @Deprecated
     public double getAttackSpeed () {
         return attackSpeed;
     }
 
-    @Override
+    @Deprecated
     public double getRange () {
         return range;
     }
 
-    @Override
+    @Deprecated
     public double getRecyclePrice () {
         return recyclePrice;
     }
 
-    @Override
-    public Map<String, String> getInfo () {
-        return null;
-    }
+    
 
 }

@@ -28,7 +28,7 @@ public class MagicTowerFactory extends DefaultTowerFactory {
     public Tower create (int x, int y) {
         Tower tower =
                 (Tower) new MagicTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, magicFactor, 
-                                       towerName, true, x, y, Constant.TOWER_CID, image);
+                                       type, id, true, x, y, Constant.TOWER_CID, image);
         return tower;
     }
 

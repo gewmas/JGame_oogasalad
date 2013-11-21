@@ -11,13 +11,15 @@ public class MultipleShootingTower extends DefaultTower {
                                   double recyclePrice,
                                   String description,
                                   
+                                  String type,
                                   String id,
                                   boolean unique_id,
                                   double x,
                                   double y,
                                   int collisionid,
                                   String image) {
-        super(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, id, unique_id, x, y,
+        super(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, 
+              type, id, unique_id, x, y,
               collisionid, image);
         
         this.attackAmount = attackAmount;

@@ -54,6 +54,7 @@ public class DefaultTower extends Tower{
                          double recyclePrice,
                          String description,
 
+                         String type,
                          String id,
                          boolean unique_id,
                          double x,
@@ -61,7 +62,7 @@ public class DefaultTower extends Tower{
                          int collisionid,
                          String image) {
 
-        super(id, unique_id, x, y, collisionid, image);
+        super(type, id, unique_id, x, y, collisionid, image);
 
         this.damage = damage;
         this.attackSpeed = attackSpeed;
