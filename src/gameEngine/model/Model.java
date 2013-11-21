@@ -188,14 +188,42 @@ public class Model {
         return gameInfo;
     }
 
-    public boolean activateCheat (String code) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     public boolean purchaseTemporaryBarrier (int x, int y, String name) {
         // TODO Auto-generated method stub
         return false;
     }
+    
+    /**
+     * @author Fabio
+     * 
+     * Activate input cheat
+     * Succeed, return true
+     * No such cheat, return false
+     * 
+     * @param code
+     * @return bool
+     */
+    public boolean activateCheat(String code) {
+
+        String[] cheatArgs = code.split(" ");
+        String cmd = cheatArgs[0];
+        if(cmd == "add_gold") {
+            int amt = Integer.parseInt(cheatArgs[1]);
+            gameInfo.addGold(amt);
+        } else if(cmd.equals("add_lives")) {
+            int amt = Integer.parseInt(cheatArgs[1]);
+            gameInfo.addLife(amt);
+        } else if(cmd.equals("kill_all")) {
+            //TODO
+        } else if(cmd.equals("win_game")) {
+            //TODO
+        } else if (cmd.equals("lose_game")) {
+            //TODO
+        } else {
+            return false;
+        }
+        return true;
+    }
+
 
 }
