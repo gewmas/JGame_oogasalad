@@ -43,9 +43,7 @@ public class Model {
     }
     
 
-    public void newGame (File jsonFile, JGEngineInterface eng) throws Exception {
-        this.myEng = eng; //For Detector use
-        
+    public void newGame (File jsonFile) throws Exception {        
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
 
@@ -99,6 +97,11 @@ public class Model {
         return result;
     }
 
+    //For detector use
+    public void setJGEngine(JGEngineInterface eng){
+        this.myEng = eng;
+    }
+    
     //Refractor method to check whether Tower exist at (x, y)
     public Tower checkTowerAtXY(int x, int y){
         int detectRange = 100;

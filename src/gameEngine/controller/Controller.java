@@ -25,8 +25,8 @@ public class Controller {
         model = new Model();
     }
 
-    public void newGame (File jsonFile, JGEngineInterface eng) throws Exception {
-        model.newGame(jsonFile, eng); // will throw exception if fail
+    public void newGame (File jsonFile) throws Exception {
+        model.newGame(jsonFile); // will throw exception if fail
         view.startJGame();
 //        startGame();
         // Model parses jsonFile and passes gameData to view
@@ -38,6 +38,14 @@ public class Controller {
         model.startGame();
     }
 
+    /**
+     * For Detector in Model to detect JGObjects in range
+     * @param eng
+     */
+    public void setJGEngine(JGEngineInterface eng){
+        model.setJGEngine(eng);
+    }
+    
     /**
      * @author Yuhua
      * Tower Related Method
