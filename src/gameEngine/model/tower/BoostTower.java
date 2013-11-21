@@ -26,18 +26,21 @@ public class BoostTower extends Tower {
                        
                        double boostFactor,
 
-                       String name,
+                       String type,
+                       String id,
                        boolean unique_id,
                        double x,
                        double y,
                        int collisionid,
                        String image) {
-        super(name, unique_id, x, y, collisionid, image);
+        super(type, id, damage, attackSpeed, range, cost, recyclePrice, description,
+              unique_id, x, y, collisionid, image);
 
         this.detector = new Detector<DefaultTower>(this.eng, DefaultTower.class);
         this.boostFactor = boostFactor;
         
         addDescription();
+        addBoostEffect();
     }
 
     public void addDescription(){
@@ -45,10 +48,14 @@ public class BoostTower extends Tower {
         info.put("Boost Factor", String.valueOf(boostFactor));
     }
 
+    //create magic to towers in range
+    public void addBoostEffect(){
+        
+    }
+    
     @Override
     public void sell () {
-        // TODO Auto-generated method stub
-
+        remove();
     }
 
     @Override
@@ -61,28 +68,12 @@ public class BoostTower extends Tower {
         boostFactor -= 1.0;
     }
 
-    @Override
-    public void upgrade(double factor) {
+    //IMagicable Interface Method
+    public void magicUpgrade(double factor) {
         boostFactor *= factor;
     }
 
-    @Override
-    public void downgrade(double factor) {
+    public void magicDowngrade(double factor) {
         boostFactor /= factor;
     }
-
-    @Override
-    public void setAttackMode (int attackMode) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Map<String, String> getInfo () {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-
 }

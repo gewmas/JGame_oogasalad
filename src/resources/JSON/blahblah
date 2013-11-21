@@ -1,0 +1,84 @@
+{
+   "numberOfLives": 1,
+   "enemyType": [{
+      "id": "sdafsdf",
+      "life": 1,
+      "speed": 1,
+      "image": "\\resources\\img\\mana.jpg",
+      "gold": 1
+   }],
+   "tilesPerRow": 1,
+   "difficultyScale": 1,
+   "widthOfWindow": 1,
+   "levels": 1,
+   "name": "klasjd;faksfd",
+   "map": {
+      "startPath": {
+         "y": 0,
+         "x": 0
+      },
+      "pathImage": "\\resources\\img\\dirt_tile.jpg",
+      "endPath": {
+         "y": 4,
+         "x": 4
+      },
+      "BGImage": "\\resources\\img\\bg.jpg",
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 1,
+            "x": 0
+         },
+         {
+            "y": 1,
+            "x": 1
+         },
+         {
+            "y": 2,
+            "x": 1
+         },
+         {
+            "y": 2,
+            "x": 2
+         },
+         {
+            "y": 3,
+            "x": 2
+         },
+         {
+            "y": 3,
+            "x": 3
+         },
+         {
+            "y": 3,
+            "x": 4
+         }
+      ]
+   },
+   "splashImage": "\\resources\\img\\bg.jpg",
+   "levelData": [{
+      "level": 0,
+      "enemiesOfWave": [{
+         "enemies": [{
+            "id": "sdafsdf",
+            "quantity": 3
+         }],
+         "wave": 1
+      }],
+      "numberWaves": 1
+   }],
+   "gold": 1,
+   "heightOfWindow": 1,
+   "towerType": [{
+      "id": "kd;jslkfj",
+      "range": 1,
+      "damage": 1,
+      "attackSpeed": 1,
+      "image": "\\resources\\img\\heal.jpg",
+      "recyclePrice": 1,
+      "cost": 1
+   }]
+}

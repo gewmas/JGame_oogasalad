@@ -1,8 +1,10 @@
 package gameEngine.view.gameFrame;
 
 import java.util.Map;
+import jgame.impl.JGEngineInterface;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.gameFrame.store.StorePanel;
+import gameEngine.view.gameFrame.store.InfoDisplayPanel;
+import gameEngine.view.gameFrame.store.StoreOptionsPanel;
 
 
 /**
@@ -22,21 +24,26 @@ import gameEngine.view.gameFrame.store.StorePanel;
  * @author Lalita Maraj
  * 
  */
-public class GameFrameMediator  implements PuchaseSimulator, ItemPurchaser,  StoreUpdater{
+public class GameFrameMediator {
 
-    private StorePanel storePanel;
+    private StoreOptionsPanel storeOptions;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
+    private InfoDisplayPanel towerInfoPanel;
 
-    public void addStorePanel (StorePanel storePanel) {
-        this.storePanel = storePanel;
+    public void addTowersOptionPanel (StoreOptionsPanel storeOptions) {
+        this.storeOptions = storeOptions;
     }
 
     /**
      * Destroys the jgame instance so that it can be reloaded
      */
 
-    public void endGame () {
+    public void quitGame () {
+        canvasPanel.quitGame();
+    }
+    
+    public void endGame(){
         canvasPanel.endGame();
     }
 
@@ -46,11 +53,13 @@ public class GameFrameMediator  implements PuchaseSimulator, ItemPurchaser,  Sto
      * 
      * @param towername
      */
-    public void placeItem (PurchaseInfo towerInfo) {
+    public void placeTower (PurchaseInfo towerInfo) {
+
         canvasPanel.placeTower(towerInfo);
+       
     }
     
-    public void beginPurchase(PurchaseInfo towerInfo){
+    public void setCursorImage(PurchaseInfo towerInfo){
         gameFrame.placeTower(towerInfo);
     }
 
@@ -60,7 +69,7 @@ public class GameFrameMediator  implements PuchaseSimulator, ItemPurchaser,  Sto
      * @param towerDisplayInfo TODO
      */
     public void displayTowerInfo (Map<String, String> towerDisplayInfo) {
-        storePanel.displayInformation(towerDisplayInfo);
+        towerInfoPanel.displayInformation(towerDisplayInfo);
     }
 
     /**
@@ -81,7 +90,7 @@ public class GameFrameMediator  implements PuchaseSimulator, ItemPurchaser,  Sto
      * Updates the enabled status of store items.
      */
     public void updateStoreStatus () {
-        storePanel.updateStoreStatus();
+        storeOptions.updateStoreStatus();
     }
 
     public void addGameFrame (GameFrame gameFrame) {
@@ -94,15 +103,15 @@ public class GameFrameMediator  implements PuchaseSimulator, ItemPurchaser,  Sto
 
     }
 
+    public void addInfoPanel (InfoDisplayPanel towerInfoPanel) {
+        this.towerInfoPanel = towerInfoPanel;
+    }
     
     public void clearDisplay(){
-        storePanel.clearDisplay();
+        this.towerInfoPanel.clearDisplay();
     }
-
-
+    
     public void openStore () {
-        storePanel.addStoreInventory();
-        
+      storeOptions.addStoreInventory();
     }
-
 }

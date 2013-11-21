@@ -34,7 +34,7 @@ public class DefaultTowerFactory extends TowerFactory {
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new DefaultTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, towerName, true,
+                (Tower) new DefaultTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, type, id, true,
                                          x, y, Constant.TOWER_CID, image);
         return tower;
     }

@@ -68,7 +68,7 @@ public class Controller {
         try {
             towerinfo=model.getTowerInfo(x,y);
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             towerinfo=null;
         }
         return towerinfo;
@@ -104,9 +104,10 @@ public class Controller {
      * Sends a call to the model to purchase temporary barrier at position x,y
      * If position is invalid, do nothing for now
      */
-//    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
-//        return model.purchaseTemporaryBarrier(x, y, name);
-//    }
+    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+        //return model.purchaseTemporaryBarrier(x, y, name);
+        return false;
+    }
     
     /**
      * @author Yuhua
@@ -171,7 +172,8 @@ public class Controller {
      * @return bool
      */
     public boolean activateCheat(String code) {
-        return model.activateCheat(code);
+        //return model.activateCheat(code);
+        return false;
     }
     
 
