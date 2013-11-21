@@ -35,7 +35,7 @@ public class View {
     }
 
     public void selectNewGame () {
-        mediator.quitGame();
+        mediator.endGame();
         gameFrame.dispose();
         gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame.setVisible(true);
@@ -114,16 +114,9 @@ public class View {
     public List<PurchaseInfo> getTowers () {
         return controller.getTowerFactory();
     }
-    
-    public void quitGame(){
-        mediator.quitGame();
-    }
 
-    public void endGame () {
-        mediator.endGame();
-        //controller.startGame();
-    }
     public boolean activateCheat (String cheat) {
         return controller.activateCheat(cheat);
+
     }
 }

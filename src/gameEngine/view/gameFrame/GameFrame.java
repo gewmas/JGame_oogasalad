@@ -37,12 +37,12 @@ import gameEngine.model.purchase.PurchaseInfo;
  * @author Lalita Maraj Alex Zhu
  * 
  */
-public class GameFrame extends Frame {
+public class GameFrame extends Frame  {
 
     private Controller controller;
     private GameFrameMediator mediator;
     private View view;
-    private Panel storePanel;
+    private StorePanel storePanel;
     private InputAndDisplayFrame cheatCodeFrame;
 
     /**
@@ -81,23 +81,24 @@ public class GameFrame extends Frame {
             public void keyTyped (KeyEvent e) {
             }
         });
+
+        createStore ();
+        createMenu();
+
     }
 
     /**
      * Setting the Look and Feel of the UI
      */
     private void setUIStyle () {
-        Font f = new Font(StyleConstants.BUTTON_FONT, StyleConstants.BUTTON_FONT_STYLE,
+        Font font = new Font(StyleConstants.BUTTON_FONT, StyleConstants.BUTTON_FONT_STYLE,
                           StyleConstants.BUTTON_FONT_SIZE);
-        UIManager.put(StyleConstants.BUTTON_FONT_KEY, f);
+        UIManager.put(StyleConstants.BUTTON_FONT_KEY, font);
 
     }
 
     public void showGame () {
         createGame();
-        createStore();
-        // createStats();
-        createMenu();
         pack();
         setVisible(true);
     }
@@ -108,20 +109,17 @@ public class GameFrame extends Frame {
         mediator.addGame(canvasPanel);
     }
 
-    // public void createStats(){
-    // Panel statsPanel = new StatsPanel();
-    // add(statsPanel, BorderLayout.SOUTH);
-    // }
 
     public void createMenu () {
         setJMenuBar(new Menu(view));
     }
 
     /**
-     * Create the store of Towers
+     * Create the store 
      */
     private void createStore () {
         storePanel = new StorePanel(mediator, view);
+        mediator.addStorePanel(storePanel);
         this.add(storePanel, BorderLayout.EAST);
     }
 

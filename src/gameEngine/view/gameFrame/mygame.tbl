@@ -15,14 +15,9 @@
 
 icons_map		icons16x23.gif		0	0	16	23	0	0
 
-tower	-	0	tower.png		-
-tower1	-	0	tower.png		-
-tower2	tr	0	icons_map	1		-
-
-BoostTower	-	0	BoostTower.png	-
-MagicTower	-	0	MagicTower.png	-
-MultipleShootingTower	-	0	MultipleShootingTower.png	-
-
+tower		-	0	tower.png		-
+tower1		-	0	tower.png		-
+tower2				tr	0	icons_map	1		-
 
 enemy	-	0	player.png	-
 enemy1	-	0	player.png	-

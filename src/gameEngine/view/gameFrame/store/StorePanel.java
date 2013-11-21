@@ -1,11 +1,12 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.BorderLayout;
+import java.util.Map;
 import javax.swing.JTabbedPane;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrameMediator;
+import gameEngine.view.gameFrame.PuchaseSimulator;
 
 
 /**
@@ -15,35 +16,59 @@ import gameEngine.view.gameFrame.GameFrameMediator;
  *         item information
  */
 public class StorePanel extends Panel {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private StoreOptionsPanel towerStoreOptions;
     private StoreOptionsPanel objectsStoreOptions;
-
+    private InfoDisplayPanel infoPanel;
     /**
      * @param mediator facilitates communication between view components
      * @param engineView facilitates communication between view and controller
      */
 
-    public StorePanel (GameFrameMediator mediator, View engineView) {
+    public StorePanel (PuchaseSimulator mediator, View engineView) {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
 
-        InfoDisplayPanel infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
+       infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
                 .getString("ItemInfo"));
-        mediator.addInfoPanel(infoPanel);
+      
         JTabbedPane storeTabbedPane = new JTabbedPane();
 
         // TO BE CHANGED
-        towerStoreOptions = new TowerOptionsPanel(mediator, engineView);
-        objectsStoreOptions = new TowerOptionsPanel(mediator, engineView);
+        towerStoreOptions = new StoreOptionsPanel(mediator, engineView,infoPanel);
+        objectsStoreOptions = new StoreOptionsPanel(mediator, engineView,infoPanel);
         // TO BE CHANGED
 
         storeTabbedPane.addTab("Towers", towerStoreOptions);
         storeTabbedPane.addTab("Objects", objectsStoreOptions);
-        mediator.addTowersOptionPanel(towerStoreOptions);
+       
         add(infoPanel, BorderLayout.CENTER);
         add(storeTabbedPane, BorderLayout.PAGE_START);
 
+    }
+
+    public void updateStoreStatus () {
+        towerStoreOptions.updateStoreStatus();
+        
+    }
+
+    public void clearDisplay () {
+        infoPanel.clearDisplay();
+        
+    }
+
+    public void addStoreInventory () {
+        towerStoreOptions.addStoreInventory();
+        
+    }
+
+    public void displayInformation (Map<String, String> information) {
+       infoPanel.displayInformation(information);
+        
     }
 
 }

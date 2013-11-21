@@ -12,14 +12,13 @@ import gameEngine.model.enemy.Enemy;
  * The enemies get back normal speed when out of range
  * 
  */
-public class MagicTower extends DefaultTower {
+public class MagicTower extends Tower {
 
     private Detector<Enemy> detector;
     private double magicFactor;
 
     public MagicTower (double damage,
                        double attackSpeed,
-                       int attackMode,
                        double range,
                        double cost,
                        double recyclePrice,
@@ -27,16 +26,13 @@ public class MagicTower extends DefaultTower {
                        
                        double magicFactor,
 
-                       String type,
-                       String id,
+                       String name,
                        boolean unique_id,
                        double x,
                        double y,
                        int collisionid,
                        String image) {
-        super(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, 
-              type, id, unique_id, x, y,
-              collisionid, image);
+        super(name, unique_id, x, y, collisionid, image);
 
         this.detector = new Detector<Enemy>(this.eng, Enemy.class);
         this.magicFactor = magicFactor;
@@ -49,17 +45,44 @@ public class MagicTower extends DefaultTower {
         info.put("Magic Factor", String.valueOf(magicFactor));
     }
 
-    
+    @Override
+    public void sell () {
+        // TODO Auto-generated method stub
+
+    }
+
     @Override
     public void upgrade () {
-        super.upgrade();
-        this.magicFactor += 1.0;
+
     }
 
     @Override
     public void downgrade(){
-        super.downgrade();
-        this.magicFactor -= 1.0;
+
+    }
+
+    @Override
+    public void upgrade(double factor) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void downgrade(double factor) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void setAttackMode (int attackMode) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public Map<String, String> getInfo () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

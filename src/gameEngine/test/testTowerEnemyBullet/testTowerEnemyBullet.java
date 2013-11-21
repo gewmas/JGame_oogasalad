@@ -57,9 +57,8 @@ public class testTowerEnemyBullet extends JGEngine {
 
         Model model = new Model();
         try {
-            //Yuhua, change of newGame signature
-//            model.newGame(new File(System.getProperty("user.dir") +
-//                                   "/src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
+            model.newGame(new File(System.getProperty("user.dir") +
+                                   "/src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
         }
         catch (Exception e) {
             // TODO Auto-generated catch block

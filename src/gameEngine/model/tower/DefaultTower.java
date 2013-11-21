@@ -26,7 +26,7 @@ import jgame.JGObject;
  * because they will not shoot, but change properties
  * 
  */
-public class DefaultTower extends Tower{
+public class DefaultTower extends Tower implements IBuffable{
 
     long prevTime;
     private Detector<Enemy> detector;
@@ -54,7 +54,6 @@ public class DefaultTower extends Tower{
                          double recyclePrice,
                          String description,
 
-                         String type,
                          String id,
                          boolean unique_id,
                          double x,
@@ -62,19 +61,24 @@ public class DefaultTower extends Tower{
                          int collisionid,
                          String image) {
 
-        super(type, id, damage, attackSpeed, range, cost, recyclePrice, description,
-              unique_id, x, y, collisionid, image);
+        super(id, unique_id, x, y, collisionid, image);
 
-        
+        this.damage = damage;
+        this.attackSpeed = attackSpeed;
         this.attackMode = attackMode;
         this.attackAmount = 1;
         
-        
+        this.range = range;
+        this.cost = cost;
+        this.recyclePrice = recyclePrice;
+
+        this.x = x;
+        this.y = y;
 
         this.prevTime = System.currentTimeMillis();
         this.detector = new Detector<Enemy>(this.eng, Enemy.class);
 
-        
+        this.description = description;
 
 
         addDescription();
@@ -205,8 +209,73 @@ public class DefaultTower extends Tower{
         attackSpeed-=1;
     }
 
+    @Override
+    public void upgrade(double factor) {
+        damage *= factor;
+        attackSpeed *= factor;
+    }
+
+    @Override
+    public void downgrade(double factor) {
+        damage /= factor;
+        attackSpeed /= factor;
+    }
+
+    @Override
+    public void setAttackMode (int attackMode) {
+        this.attackMode = attackMode;
+    }
+
+    @Override
+    public Map<String, String> getInfo () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int getImmuneBuffs () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getAttackBuffs () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getCurrentBuffs () {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void changeCurrentBuffs (int buff) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void changeLife (double lifePercent) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void changeSpeed (double speedPercent) {
+        this.attackSpeed *= speedPercent;
+    }
+
+    @Override
+    public void changeAttack (double attackPercent) {
+        // TODO Auto-generated method stub
+
+    }
+
     public int getAttackMode () {
-        return attackMode;
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }

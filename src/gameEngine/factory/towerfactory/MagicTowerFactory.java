@@ -6,7 +6,7 @@ import gameEngine.model.tower.MultipleShootingTower;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
-public class MagicTowerFactory extends DefaultTowerFactory {
+public class MagicTowerFactory extends TowerFactory {
 
     double magicFactor;
     
@@ -27,8 +27,8 @@ public class MagicTowerFactory extends DefaultTowerFactory {
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new MagicTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, magicFactor, 
-                                       type, id, true, x, y, Constant.TOWER_CID, image);
+                (Tower) new MagicTower(damage, attackSpeed, range, cost, recyclePrice, description, magicFactor, 
+                                       towerName, true, x, y, Constant.TOWER_CID, image);
         return tower;
     }
 

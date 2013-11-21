@@ -6,6 +6,7 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
+import gameEngine.model.warehouse.TemporaryBarrierWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
@@ -30,6 +31,7 @@ public class Model {
     private GameInfo gameInfo;
     private TowerWarehouse towerWarehouse;
     private EnemyWarehouse enemyWarehouse;
+    private TemporaryBarrierWarehouse temporaryBarrierWarehouse;
     private GridFactory gridFactory;
     private LinkedList<Tile> path;
     private JGEngineInterface myEng;
@@ -42,8 +44,17 @@ public class Model {
         
     }
     
+    public void setJGEngie(JGEngineInterface eng){
+        myEng=eng;
+    }
+    
 
-    public void newGame (File jsonFile) throws Exception {        
+    public void newGame (File jsonFile) throws Exception {
+        // For test convenience
+        //        jsonFile = new File(System.getProperty("user.dir") + "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
+
+      
+
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
 
@@ -52,7 +63,7 @@ public class Model {
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
         barriers = gridFactory.getBarrierList();
-
+//        temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
 
@@ -60,12 +71,11 @@ public class Model {
     }
 
     public void startGame () {
-        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
-        Wave w1 = new Wave("1", 10, 0.5, 0, enemyWarehouse);
+        Wave w = new Wave("1", 10, 500, 10000, enemyWarehouse);
+        Wave w1 = new Wave("1", 10, 500, 1000, enemyWarehouse);
         rule.addWave(w);
         rule.addWave(w1);
         rule.ruleStart();
-
     }
 
     //Yuhua change it
@@ -133,7 +143,8 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-            tower.sell();
+
+            return true;
         }
 
         return false;
@@ -143,7 +154,8 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-            tower.upgrade();
+
+            return true;
         }
 
         return false;
@@ -153,7 +165,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-            tower.setAttackMode(attackMode);
+
             return true;
         }
 
@@ -188,9 +200,11 @@ public class Model {
         return gameInfo;
     }
 
+
     public boolean purchaseTemporaryBarrier (int x, int y, String name) {
         // TODO Auto-generated method stub
         return false;
+
     }
     
     /**
