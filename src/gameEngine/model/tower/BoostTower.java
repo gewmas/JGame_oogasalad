@@ -1,12 +1,8 @@
 package gameEngine.model.tower;
 
-import java.util.List;
-import java.util.Map;
 import gameEngine.factory.magicFactory.MagicsFactory;
-import gameEngine.factory.magicFactory.TBoostFactory;
 import gameEngine.model.Detector;
-import gameEngine.model.enemy.Enemy;
-import gameEngine.model.magic.IMagicable;
+import java.util.List;
 
 /**
  * 
@@ -16,7 +12,7 @@ import gameEngine.model.magic.IMagicable;
  * Reverse back when the BoostTower is sold
  */
 
-public class BoostTower extends Tower implements IMagicable{
+public class BoostTower extends Tower{
 
     private Detector<Tower> detector;
     private double boostFactor;
@@ -56,8 +52,14 @@ public class BoostTower extends Tower implements IMagicable{
     public void addBoostEffect(){
         List<Tower> towers = detector.getTargetsInRange((int)x, (int)y, (int)range);
         for(Tower target : towers){
-            MagicsFactory.getInstance().createTowerMagics(target, this, 2);
+            MagicsFactory.getInstance().createMagics(target, this, 2,target.getCurrentMagics());
         }
+    }
+    
+    //wenxin shi every frame check weather there is new tower added into
+    public void move(){
+        super.move();
+        addBoostEffect();
     }
     
     @Override

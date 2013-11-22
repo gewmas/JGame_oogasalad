@@ -29,6 +29,8 @@ public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicabl
     double cost;
     double upgradePrice;
     double recyclePrice;
+    
+    int currentMagic=0;
 
     String description;
 
@@ -167,6 +169,13 @@ public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicabl
     @Deprecated
     public String getImage () {
         return image;
+    }
+    
+    public int getCurrentMagics(){
+        return currentMagic;
+    }
+    public void setCurrentMagic(int magic){
+        currentMagic=magic;
     }
     
 }

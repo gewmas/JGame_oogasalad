@@ -9,17 +9,20 @@ import jgame.JGObject;
 
 public abstract class Magic extends JGObject {
     IMagicable myTarget;
-    int myCurrMagicIds;
+    int myMagicId;
+    IMagicable mySender;
     public Magic (int expire,
                  IMagicable target,
+                 IMagicable sender,
                  String name,
                  int collisionid,
                  String gfxname,
-                 int magicIds
+                 int magicId
                  ) {
         super(name, true,target.getX(),target.getY(), collisionid, gfxname, expire);
         myTarget = target;
-        myCurrMagicIds=magicIds;      
+        mySender=sender;
+        myMagicId=magicId;      
     }
 
     public void remove () {
@@ -28,7 +31,7 @@ public abstract class Magic extends JGObject {
     }
 
     public void move() {
-        if (!myTarget.isAlive()) {
+        if (removeCondition()) {
             remove();
             return;
         }
@@ -39,11 +42,20 @@ public abstract class Magic extends JGObject {
         this.x=myTarget.getX();
         this.y=myTarget.getY();
     }
-
-    public abstract void magicOn ();
-
-    public abstract void magicOff ();
     
+    public void magicOn () {
+        myTarget.setCurrentMagic(myTarget.getCurrentMagics()|myMagicId);
+        magicOnAction();
+        
+    }
 
-
+    public void magicOff () {
+        myTarget.setCurrentMagic(myTarget.getCurrentMagics()&(~myMagicId));
+        magicOffAction();
+    }
+    
+    abstract boolean removeCondition();
+    abstract void magicOnAction();
+    abstract void magicOffAction();
+    
 }

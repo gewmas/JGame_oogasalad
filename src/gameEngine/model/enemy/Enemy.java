@@ -1,14 +1,14 @@
 package gameEngine.model.enemy;
 
-import java.util.LinkedList;
 import gameEngine.Constant.Constant;
 import gameEngine.factory.magicFactory.MagicsFactory;
+import gameEngine.model.Model;
 import gameEngine.model.bullet.Bullet;
 import gameEngine.model.magic.IEMagicable;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
+import java.util.LinkedList;
 import jgame.JGObject;
-import gameEngine.model.Model;
 
 
 /**
@@ -31,7 +31,7 @@ public class Enemy extends JGObject implements IEMagicable {
     double pathStep;
     LinkedList<Tile> path;
 
-   //wenxin add this attribution for magic.
+    // wenxin add this attribution for magic.
     int currentMagics = 0;
 
     final double originalLife;
@@ -122,9 +122,10 @@ public class Enemy extends JGObject implements IEMagicable {
                 }
                 /**
                  * @author wenxin
-                 * below command deal with creation of magics;
+                 *         below command deal with creation of magics;
                  */
-                MagicsFactory.getInstance().createEnemyMagics(this, bullet.getCurrentMagic(), currentMagics);
+                MagicsFactory.getInstance().createMagics(this, null, bullet.getCurrentMagic(),
+                                                         currentMagics);
             }
 
         }
@@ -214,7 +215,7 @@ public class Enemy extends JGObject implements IEMagicable {
     }
 
     @Override
-    public void changeCurrentMagics (int magic) {
+    public void setCurrentMagic (int magic) {
         currentMagics = magic;
     }
 

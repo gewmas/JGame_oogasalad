@@ -1,8 +1,6 @@
 package gameEngine.factory.magicFactory;
 
-import gameEngine.model.magic.IEMagicable;
 import gameEngine.model.magic.IMagicable;
-import gameEngine.model.magic.ITMagicable;
 import java.util.HashMap;
 
 
@@ -33,31 +31,11 @@ public class MagicsFactory {
      * @param newMagicIds
      * @param currentMagicIds
      */
-    public void createEnemyMagics (IEMagicable target, int newMagicIds, int currentMagicIds) {
+    public void createMagics (IMagicable target, IMagicable sender,int newMagicIds, int currentMagicIds) {
         newMagicIds = (~currentMagicIds) & newMagicIds;
         int temp=newMagicIds;
         int mask=1;
-        for (int i = 0; newMagicIds > 0; i++) {
-            IMagicFactory factory = myFactoryMap.get(temp&mask);
-            if (factory != null) {
-                factory.createMagicInstance(target,null);
-            }
-            newMagicIds = newMagicIds >> 1;
-            mask=mask<<1;
-        }
-    }
-
-    /**
-     * This method is for generating the same magic can overlap
-     * 
-     * @param target
-     * @param newMagicIds
-     */
-
-    public void createTowerMagics (ITMagicable target,IMagicable sender ,int newMagicIds) {
-        int temp=newMagicIds;
-        int mask=1;
-        for (int i = 0; newMagicIds > 0; i++) {
+        while(newMagicIds > 0) {
             IMagicFactory factory = myFactoryMap.get(temp&mask);
             if (factory != null) {
                 factory.createMagicInstance(target,sender);
