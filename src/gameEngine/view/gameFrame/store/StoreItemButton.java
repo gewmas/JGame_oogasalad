@@ -99,7 +99,7 @@ public class StoreItemButton extends Button {
 
             public void mouseExited (MouseEvent me) {
                 unHighlightButton();
-                 hoverExitAction.executeAction();
+//                 hoverExitAction.executeAction();
             }
 
             public void mouseEntered (MouseEvent me) {
