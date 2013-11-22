@@ -9,6 +9,7 @@ import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Collection;
 import javax.swing.JFileChooser;
@@ -22,7 +23,7 @@ import javax.swing.JFileChooser;
 public class GameData {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");
-    
+
     private String myGameName;
     private int myGold;
     private int myLives;
@@ -131,10 +132,10 @@ public class GameData {
         container.put("enemyType", myEnemyList);
         container.put("levelData", myLevelList);
     }
-    
-//    public Parser getParser(){
-//        return myParser;
-//    }
+
+    // public Parser getParser(){
+    // return myParser;
+    // }
 
     public void writeToFile () {
         addDataToContainer();
@@ -153,9 +154,45 @@ public class GameData {
             }
 
         }
-
+        System.out.println(container.toString(3));
     }
 
+    /**
+     * @author Lalita Maraj
+     *         This method is used to create a temporary file so that a user can simmulate
+     *         a game based on the parameters the game designer specified
+     *         without the hassel of saving, then loading a file
+     */
+    public void createSimmulationFile () {
+        if (isComplete()) {
+            File file = new File("tmp.JSON");
+            PrintStream out;
+            try {
+                file.createNewFile();
+                out = new PrintStream(file);
+                out.println(container.toString(3));
+                out.close();
+            }
+            catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            catch (IOException e) {
 
+                e.printStackTrace();
+            }
 
+        }
+    }
+
+    /**
+     * Method to check if the gameData is completely
+     * filled out.
+     * 
+     * @return boolean that indicates if gameData is complete
+     * @author Lalita Maraj
+     */
+    private boolean isComplete () {
+        // TODO Auto-generated method stub
+        return true;
+    }
 }
