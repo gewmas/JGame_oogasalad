@@ -3,6 +3,7 @@ package gameEngine.view;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import jgame.impl.JGEngineInterface;
 import gameEngine.controller.Controller;
@@ -111,8 +112,12 @@ public class View {
         return controller.getLives();
     }
 
+    public Map<String, List<PurchaseInfo>> getInventory () {
+        return controller.getInventory();
+    }
+    
     public List<PurchaseInfo> getTowers () {
-        return controller.getTowerFactory();
+        return controller.getTowers();
     }
     
     public void quitGame(){
