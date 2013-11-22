@@ -28,7 +28,7 @@ public class BoostTowerFactory extends TowerFactory {
     public Tower create (int x, int y) {
         Tower tower =
                 (Tower) new BoostTower(damage, attackSpeed, range, cost, recyclePrice, description, boostFactor, 
-                                       towerName, true, x, y, Constant.TOWER_CID, image);
+                                       type, id, true, x, y, Constant.TOWER_CID, image);
         return tower;
     }
 

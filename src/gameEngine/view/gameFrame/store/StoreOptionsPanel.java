@@ -1,6 +1,5 @@
 package gameEngine.view.gameFrame.store;
 
-
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
@@ -32,6 +31,8 @@ public abstract class StoreOptionsPanel extends Panel {
     private static final int PANEL_HEIGHT = 200;
     protected List<StoreItemButton> storeItems;
     protected View view;
+    private JPanel options;
+    private GameFrameMediator mediator;
 
     /**
      * @param mediator facilitates communication between view components
@@ -42,7 +43,7 @@ public abstract class StoreOptionsPanel extends Panel {
         super();
         this.view = engineView;
         this.storeItems = new ArrayList<StoreItemButton>();
-
+        this.mediator = mediator;
         setUIStyle();
         createOptionsScrollPanel(mediator);
 
@@ -56,10 +57,8 @@ public abstract class StoreOptionsPanel extends Panel {
      */
     private void createOptionsScrollPanel (GameFrameMediator mediator) {
 
-        JPanel options = new JPanel(new MigLayout(LAYOUT_WRAP));
+        options = new JPanel(new MigLayout(LAYOUT_WRAP));
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
-        addStoreInventory(options, mediator);
-
         JScrollPane scrollPane = new JScrollPane(options);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -84,17 +83,43 @@ public abstract class StoreOptionsPanel extends Panel {
      * @param mediator facilitates communication between view components
      * @param view facilitates communication between view and model
      */
-    private  void addStoreInventory (JPanel optionsPanel, GameFrameMediator mediator) {
+    public void addStoreInventory () {
         List<PurchaseInfo> towerInformation = getItems();
-        for (PurchaseInfo tower : towerInformation ) {
-            StoreItemButton towerButton = new StoreItemButton(tower, mediator, view);
-            optionsPanel.add(towerButton);
-            storeItems.add(towerButton);
+        StoreButtonAction hoverExitAction = new StoreButtonAction() {
 
+            @Override
+            public void executeAction () {
+                mediator.clearDisplay();
+
+            }
+
+        };
+        for (final PurchaseInfo tower : towerInformation) {
+            StoreButtonAction clickAction = new StoreButtonAction() {
+
+                @Override
+                public void executeAction () {
+                    mediator.placeTower(tower);
+
+                }
+
+            };
+            StoreButtonAction hoverAction = new StoreButtonAction() {
+                @Override
+                public void executeAction () {
+                    mediator.displayTowerInfo(tower.getInfo());
+                    System.out.println("Checking store");
+                }
+            };
+            StoreItemButton towerButton =
+                    new StoreItemButton(tower, hoverExitAction, hoverAction, clickAction);
+            options.add(towerButton);
+            storeItems.add(towerButton);
         }
+        this.revalidate();
     }
 
-    protected abstract List<PurchaseInfo> getItems();
+    protected abstract List<PurchaseInfo> getItems ();
 
     /**
      * Used to update the status of each TowerStoreButton.
@@ -106,13 +131,6 @@ public abstract class StoreOptionsPanel extends Panel {
         for (StoreItemButton button : storeItems) {
             button.toggleButtonActivation(view.getMoney());
         }
-    }
-
-    public void exitPurchase () {
-        for (StoreItemButton button : storeItems) {
-            button.setSelected(false);
-        }
-        
     }
 
 }

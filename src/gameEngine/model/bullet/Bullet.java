@@ -1,6 +1,5 @@
 package gameEngine.model.bullet;
 
-import gameEngine.Constant.Constant;
 import gameEngine.model.enemy.Enemy;
 import jgame.JGObject;
 
@@ -15,12 +14,15 @@ import jgame.JGObject;
 public class Bullet extends JGObject {
 
     Enemy targetEnemy;
+    int currentMagic;
 
     double damage;
 
     public Bullet (
                    Enemy targetEnemy,
                    double damage,
+                   
+                   int magic,
 
                    String name,
                    boolean unique_id,
@@ -31,14 +33,15 @@ public class Bullet extends JGObject {
         super(name, unique_id, x, y, collisionid, gfxname);
 
         this.targetEnemy = targetEnemy;
-        this.damage = damage;
+        this.damage = 1;
+        this.currentMagic = magic;
     }
 
     @Override
     public void move () {
-    	//if target enemy destroy other bullets, remove
-    	if(!targetEnemy.isAlive()) remove();
-    	
+        // if target enemy destroy other bullets, remove
+        if (!targetEnemy.isAlive()) remove();
+
         double dx = targetEnemy.x - x;
         double dy = targetEnemy.y - y;
         double ds = Math.sqrt(dx * dx + dy * dy);
@@ -49,8 +52,8 @@ public class Bullet extends JGObject {
 
     @Override
     public void hit (JGObject obj) {
-        //Bullet can only kill target Enemy
-        if(obj == targetEnemy){
+        // Bullet can only kill target Enemy
+        if (obj == targetEnemy) {
             remove();
         }
     }
@@ -62,4 +65,13 @@ public class Bullet extends JGObject {
     public Enemy getTargetEnemy () {
         return targetEnemy;
     }
+
+    public int getCurrentMagic () {
+        return currentMagic;
+    }
+
+    public void setCurrentMagic (int magic) {
+        currentMagic = magic;
+    }
+
 }

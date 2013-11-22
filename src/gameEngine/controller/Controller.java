@@ -7,6 +7,8 @@ import gameEngine.view.View;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
+import jgame.impl.JGEngineInterface;
 
 
 public class Controller {
@@ -26,8 +28,8 @@ public class Controller {
 
     public void newGame (File jsonFile) throws Exception {
         model.newGame(jsonFile); // will throw exception if fail
-        view.startGame();
-        startGame();
+        view.startJGame();
+//        startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
         // view.showGame();
@@ -38,16 +40,28 @@ public class Controller {
     }
 
     /**
+     * For Detector in Model to detect JGObjects in range
+     * @param eng
+     */
+    public void setJGEngine(JGEngineInterface eng){
+        model.setJGEngine(eng);
+    }
+    
+    /**
      * @author Yuhua
      * Tower Related Method
      */
     
     /**
-     * Get All kinds of TowerFactory
+     * Get All kinds of TowerFactory, and Barriers
      * However, can only return the basic property of the TowerFactory
      */
-    public List<PurchaseInfo> getTowerFactory () {
-        return model.getAllTowerInfo();  
+    public Map<String, List<PurchaseInfo>> getInventory () {
+        return model.getInventory();  
+    }
+    
+    public List<PurchaseInfo> getTowers () {
+        return model.getInventory().get("Tower");  
     }
 
     /**
@@ -59,11 +73,29 @@ public class Controller {
         try {
             towerinfo=model.getTowerInfo(x,y);
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             towerinfo=null;
         }
         return towerinfo;
     }
+    
+    /**
+     * @author Harris Osserman
+     * 
+     * Sends a call to the model to update the monitored barrier stats to the barrier
+     * at x,y. If the position is invalid, do nothing
+     */
+
+//    public PurchaseInfo getTemporaryBarrierInfo (int x, int y) {
+//        PurchaseInfo barrierInfo;
+//        try {
+//            barrierInfo=model.getBarrierInfo(x,y);
+//        } catch (Exception e) {
+//            barrierInfo=null;
+//        }
+//        return barrierInfo;
+//    }
+
     
     /**
      * Sends a call to the model to purchase tower tower at position x,y
@@ -71,6 +103,15 @@ public class Controller {
      */
     public boolean purchaseTower (int x, int y, String name) {
         return model.purchaseTower(x, y, name);
+    }
+    
+    /**
+     * Sends a call to the model to purchase temporary barrier at position x,y
+     * If position is invalid, do nothing for now
+     */
+    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+        //return model.purchaseTemporaryBarrier(x, y, name);
+        return false;
     }
     
     /**
@@ -125,6 +166,19 @@ public class Controller {
         return model.setTowerAttackMode(x, y, attackMode);
     }
     
+    /**
+     * @author Fabio
+     * 
+     * Activate input cheat
+     * Succeed, return true
+     * No such cheat, return false
+     * 
+     * @param code
+     * @return bool
+     */
+    public boolean activateCheat(String code) {
+        return model.activateCheat(code);
+    }
     
 
     /**
@@ -158,9 +212,5 @@ public class Controller {
     public List<Tile> getPath () {
         return model.getPathList();
     }
-
-    // public String getPathImage(){
-    // }
-
 
 }
