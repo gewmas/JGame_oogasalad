@@ -59,7 +59,7 @@ public class Model {
         rule.readWaveFromJSon(parser.getJSONArray("wave"));
         gameInfo = new GameInfo(parser);
     }
-
+    // Jiaran: now we can just read waves from JSon.
     public void startGame () {
 //        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
 //        Wave w1 = new Wave("2", 10, 0.5, 0, enemyWarehouse);
