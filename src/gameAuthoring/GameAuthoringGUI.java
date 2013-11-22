@@ -14,7 +14,7 @@ public class GameAuthoringGUI {
     private EnemyDesignTab myEnemyDesignTab;
     private LevelDesignTab myLevelDesignTab;
     private MiscellaneousTab myMiscellaneousTab;
-    private SimmulateTab mySimmulationTab;
+    private SimmulationTab mySimmulationTab;
     
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
@@ -30,7 +30,7 @@ public class GameAuthoringGUI {
         myEnemyDesignTab = new EnemyDesignTab(gameData);
         myLevelDesignTab = new LevelDesignTab(gameData);
         myMiscellaneousTab = new MiscellaneousTab(gameData);
-        mySimmulationTab = new SimmulateTab(gameData);
+        mySimmulationTab = new SimmulationTab(gameData);
         mainPane.addTab("Basic Info", myBasicInfoTab.getTab());
         mainPane.addTab("Map Design", myMapDesignTab.getTab());
         mainPane.addTab("Tower Design", myTowerDesignTab.getTab());
@@ -44,6 +44,7 @@ public class GameAuthoringGUI {
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+        
     }
 
     public static void main (String[] arg) {
