@@ -52,6 +52,7 @@ public class Enemy extends JGObject implements IEMagicable {
         this.model = model;
         this.id = id;
         this.image = image;
+        this.setGraphic(image);
         this.xMovement = 1;
         this.yMovement = 0;
 

@@ -60,7 +60,7 @@ public class View {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-            // e.printStackTrace();
+             e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }

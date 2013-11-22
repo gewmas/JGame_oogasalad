@@ -41,6 +41,7 @@ public class BoostTower extends Tower{
         
         addDescription();
         addBoostEffect();
+        
     }
 
     public void addDescription(){

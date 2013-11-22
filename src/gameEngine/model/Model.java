@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import jgame.JGObject;
 import jgame.impl.JGEngineInterface;
 
 
@@ -101,6 +102,8 @@ public class Model {
     //For detector use
     public void setJGEngine(JGEngineInterface eng){
         this.myEng = eng;
+        Resources r = new Resources(myEng);
+        r.register(parser);
     }
     
     //Refractor method to check whether Tower exist at (x, y)
