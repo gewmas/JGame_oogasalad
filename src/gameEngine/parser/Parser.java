@@ -45,5 +45,9 @@ public class Parser {
         return jsonObject.getJSONArray(key);
     }
     
+    public double getDouble(String key){
+        return (double) jsonObject.get(key);
+    }
+    
 
 }

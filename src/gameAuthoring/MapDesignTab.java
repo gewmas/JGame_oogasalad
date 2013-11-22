@@ -81,18 +81,22 @@ public class MapDesignTab extends Tab {
         myBackgroundImage = p.getString("BGImage");
         JSONObject map = p.getJSONObject("map");
         myPathImage = (String) map.get("pathImage");
-        myGrid.setImageSource(new File(System.getProperties().getProperty("user.dir") + "/" + myPathImage));
+        myGrid.setImageSource(new File(System.getProperties().getProperty("user.dir") + "/" +
+                                       myPathImage));
         JSONArray pathPoints = (JSONArray) map.get("Path");
         myGrid.reset();
-        
-        for (int i=0; i < pathPoints.length(); i++){
+
+        for (int i = 0; i < pathPoints.length(); i++) {
             JSONObject point = (JSONObject) pathPoints.get(i);
+
             int x = (int) point.get("x");
             int y = (int) point.get("y");
             myGrid.toggleGridButton(x, y);
+
+            if (i == 0) myGrid.setPathStart(new Point2D.Double(x, y));
+            if (i == pathPoints.length() - 1) myGrid.setPathEnd(new Point2D.Double(x, y));
         }
-        
-        
+
         File f = new File(System.getProperties().getProperty("user.dir") + "/" + myPathImage);
 
         try {
@@ -102,6 +106,8 @@ public class MapDesignTab extends Tab {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
+        setData();
 
     }
 
@@ -135,18 +141,22 @@ public class MapDesignTab extends Tab {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                if (myGrid.isValidPathHelper()) {
-                    JOptionPane.showMessageDialog(null, "Valid path! Map Written");
-                    myGameData.setBackgroundImage(myBackgroundImage);
-                    myGameData.setMap(myPathImage, myGrid.getPathCoordinates());
-                }
-                else {
-                    JOptionPane.showMessageDialog(null,
-                                                  "Invalid path! Please fix path and try again");
-                }
+                setData();
             }
         };
         return listener;
+    }
+    
+    private void setData(){
+        if (myGrid.isValidPathHelper()) {
+            JOptionPane.showMessageDialog(null, "Valid path! Map Written");
+            myGameData.setBackgroundImage(myBackgroundImage);
+            myGameData.setMap(myPathImage, myGrid.getPathCoordinates());
+        }
+        else {
+            JOptionPane.showMessageDialog(null,
+                                          "Invalid path! Please fix path and try again");
+        }
     }
 
     private MouseAdapter createGridBackgroundListener (final Grid grid) {
