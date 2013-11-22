@@ -4,7 +4,6 @@ import gameAuthoring.JSONObjects.EnemyJSONObject;
 import gameAuthoring.JSONObjects.LevelJSONObject;
 import gameAuthoring.JSONObjects.MapJSONObject;
 import gameAuthoring.JSONObjects.TowerJSONObject;
-import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.geom.Point2D;
@@ -12,10 +11,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Collection;
-import java.util.Scanner;
 import javax.swing.JFileChooser;
 
-
+/**
+ * Class that stores all the game data before it is written to JSON.
+ * 
+ * @author susanzhang93
+ *
+ */
 public class GameData {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");

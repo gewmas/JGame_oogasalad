@@ -45,8 +45,5 @@ public class Parser {
         return jsonObject.getJSONArray(key);
     }
     
-    public JSONObject getJSONObject(){
-        return jsonObject;
-    }
 
 }

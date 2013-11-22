@@ -80,7 +80,7 @@ public class MapDesignTab extends Tab {
         myBackgroundImage = p.getString("BGImage");
         JSONObject map = p.getJSONObject("map");
         myPathImage = (String) map.get("pathImage");
-        myGrid.setImageSource(new File(System.getProperties().getProperty("user.dir") + myPathImage));
+        myGrid.setImageSource(new File(System.getProperties().getProperty("user.dir") + "/" + myPathImage));
         JSONArray pathPoints = (JSONArray) map.get("Path");
         myGrid.reset();
         
@@ -92,7 +92,7 @@ public class MapDesignTab extends Tab {
         }
         
         
-        File f = new File(System.getProperties().getProperty("user.dir") + myPathImage);
+        File f = new File(System.getProperties().getProperty("user.dir") + "/" + myPathImage);
 
         try {
             myCurrentPathImage.setIcon(new ImageIcon(ImageIO.read(f)));
