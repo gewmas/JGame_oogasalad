@@ -47,6 +47,24 @@
         ]
 },
 
+"resources":
+{
+  	   
+	  "image":[ 
+               { "id": "1", "url": "mr1.png" },
+               { "id": "2", "url": "mr2.png" },
+               { "id": "3", "url": "mr3.png" },
+               { "id": "4", "url": "mr4.png" }
+               
+             
+           ], 
+        "audio":[
+        	{ "id": "alarm", "url": "alarm.wav" },
+        ],
+	 "animation":[
+        	{ "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
+        ]
+},
 "temporaryBarrierType":[
 	{
 	 "id": "Lake",
@@ -143,52 +161,24 @@
 {
 	"id": "2",
 	"gold": 10,
-	"image": "enemy2",
+	"image": "runRight",
 	"life": 3,
 	"speed": 0.1,
 }
 ],
 
-"levelData":[
+"wave":[
 	{	
-	"level":1,
-	"numberWaves": 2,
-	"enemiesOfWave" : [ 
-			{
-			"wave":1, 
-		    "enemies": 
-			    [
-					{"id": "ID" ,"quantity": 10},
-				]	
-			},
-			{
-			"wave":2, 
-		    "enemies": 
-			    [
-					{"id": "ID1" ,"quantity": 15},
-				]	
-			}
-		]
+		"type": "1",
+		"number":5,
+		"period" :0.5,
+		"interval": 7,
 	},
 	{	
-	"level":2,
-	"numberWaves": 2,
-	"enemiesOfWave" : [ 
-			{
-			"wave":1, 
-		    "enemies": 
-			    [
-					{"id":2,"quantity":10}
-				]	
-			},
-			{
-			"wave":1, 
-		    "enemies": 
-			    [
-					{"id":2,"quantity":20}
-				]	
-			}
-		]
+		"type": "2",
+		"number":1,
+		"period" :0.5,
+		"interval": 3,
 	}
 ]  
 
