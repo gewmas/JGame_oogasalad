@@ -172,8 +172,7 @@ public class Controller {
      * @return bool
      */
     public boolean activateCheat(String code) {
-        //return model.activateCheat(code);
-        return false;
+        return model.activateCheat(code);
     }
     
 
