@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.JSONObjects.PointJSONObject;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;

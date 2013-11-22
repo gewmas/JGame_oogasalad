@@ -4,7 +4,7 @@ import java.awt.geom.Point2D;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 /**
- * Class that represents a point JSONObject
+ * JSONObject that represents the information contained in a point 
  *
  */
 public class PointJSONObject extends JSONObject {

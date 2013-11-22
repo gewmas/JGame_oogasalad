@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;

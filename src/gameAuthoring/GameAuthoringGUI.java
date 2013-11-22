@@ -1,9 +1,9 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.menuBar.MenuBar;
 import java.awt.Dimension;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 

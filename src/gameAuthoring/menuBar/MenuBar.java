@@ -1,8 +1,8 @@
 package gameAuthoring.menuBar;
 
 import gameAuthoring.BasicInfoTab;
-import gameAuthoring.GameData;
 import gameAuthoring.MapDesignTab;
+import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.event.ActionEvent;

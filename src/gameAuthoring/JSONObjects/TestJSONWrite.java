@@ -1,6 +1,5 @@
 package gameAuthoring.JSONObjects;
 
-import gameAuthoring.GameData;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.io.FileWriter;
@@ -20,7 +19,7 @@ public class TestJSONWrite {
     public void testWrite () {
         writer = new PrintWriter(System.out);
 
-        JSONObject container = new JSONObject();
+        GameData container = new GameData();
 
         EnemyJSONObject testEnemy = new EnemyJSONObject("test", 1, "imgsrc", 2, 3);
         EnemyJSONObject testEnemy2 = new EnemyJSONObject("test2", 1, "imgsrc2", 2, 3);

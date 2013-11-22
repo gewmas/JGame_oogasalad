@@ -7,7 +7,7 @@ import gameEngine.parser.JSONLibrary.JSONObject;
 
 
 /**
- * Class that represents JSONObject for game map. Consists of path image and in order list of points
+ * JSONObject that stores game map data. Consists of path image and in order list of points
  * of path
  * 
  */
@@ -18,7 +18,7 @@ public class MapJSONObject extends JSONObject {
      * Constructor of MapJSONObject. 
      * 
      * @param pathImage Path image name
-     * @param pathPoints Collection of points in path in orfer of path traversal
+     * @param pathPoints Collection of points in path in order of enemy traversal
      */
     public MapJSONObject (String pathImage, Collection<Point2D> pathPoints) {
 
