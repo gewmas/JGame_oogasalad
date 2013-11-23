@@ -1,7 +1,7 @@
 package gameEngine.view.gameFrame.inputAndDisplay;
 
 import java.util.Map;
-import gameEngine.view.gameFrame.store.InfoDisplayPanel;
+import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
