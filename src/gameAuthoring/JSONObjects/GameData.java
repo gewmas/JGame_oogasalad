@@ -84,7 +84,7 @@ public class GameData extends JSONObject {
     }
 
     /**
-     * Sets splash image 
+     * Sets splash image
      * 
      * @param splashImage Name of splash image
      */
@@ -133,7 +133,7 @@ public class GameData extends JSONObject {
         this.put("tilesPerRow", myTilesPerRow);
     }
 
-    //TODO: Determine if this is necessary
+    // TODO: Determine if this is necessary
     /**
      * Sets difficulty scale of game
      * 
@@ -155,15 +155,19 @@ public class GameData extends JSONObject {
      * @param cost Tower cost (gold)
      * @param recyclePrice Quantity of gold gained when tower is sold
      */
-    public void addTower (String name, String imagePath,
+    public void addTower (String type,
+                          String name,
+                          String imagePath,
                           int damage,
                           int attackSpeed,
+                          int attackMode,
                           int range,
                           int cost,
-                          int recyclePrice) {
+                          int recyclePrice,
+                          String description) {
 
-        myTowerList.put(new TowerJSONObject(name, imagePath, damage, attackSpeed, range, cost,
-                                            recyclePrice));
+        myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed, attackMode,
+                                            range, cost, recyclePrice, description));
 
     }
 
@@ -210,7 +214,10 @@ public class GameData extends JSONObject {
         this.put("map", myMap);
     }
 
-    private void addDataTothis () {
+    /**
+     * Adds enemy, tower, and level lists to GameData
+     */
+    private void addListData () {
         this.put("levels", myLevelList.length());
         this.put("towerType", myTowerList);
         this.put("enemyType", myEnemyList);
@@ -221,7 +228,7 @@ public class GameData extends JSONObject {
      * Opens file chooser dialogue to save current state of GameData object into a file
      */
     public void writeToFile () {
-        addDataTothis();
+        addListData();
 
         int result = INPUT_CHOOSER.showSaveDialog(null);
 
@@ -237,7 +244,7 @@ public class GameData extends JSONObject {
             }
 
         }
-        //System.out.println(this.toString(3));
+        // System.out.println(this.toString(3));
     }
 
     /**
