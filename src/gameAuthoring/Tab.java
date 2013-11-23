@@ -2,11 +2,11 @@ package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
-import javax.swing.JComponent;
+import java.util.Observable;
 import javax.swing.JPanel;
 
 
-public abstract class Tab extends JComponent {
+public abstract class Tab extends Observable {
 
     protected GameData myGameData;
 

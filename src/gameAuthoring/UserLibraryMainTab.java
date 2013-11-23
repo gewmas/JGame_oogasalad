@@ -11,5 +11,4 @@ public class UserLibraryMainTab extends JTabbedPane {
         this.add("Image Library", new UserImagesTab().getTab());
         this.add("Sound Library", new UserSoundsTab().getTab());
     }
-
 }

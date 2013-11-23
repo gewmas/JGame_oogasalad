@@ -1,13 +1,21 @@
 package gameAuthoring;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import java.util.Observable;
+import java.util.Observer;
+import javax.swing.JScrollPane;
 
 
-public class UserImagesTab extends JTabbedPane {
+public class UserImagesTab implements Observer {
 
-    public JPanel getTab () {
-        JPanel mainPanel = new JPanel();
+    public JScrollPane getTab () {
+        JScrollPane mainPanel = new JScrollPane();
         return mainPanel;
     }
+
+    @Override
+    public void update (Observable arg0, Object arg1) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

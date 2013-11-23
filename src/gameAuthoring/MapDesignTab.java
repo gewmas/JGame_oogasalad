@@ -5,7 +5,6 @@ import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -44,8 +43,6 @@ public class MapDesignTab extends Tab {
     public JPanel getTab () {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         JPanel gridPanel = new JPanel(new BorderLayout());
-        mainPanel.setPreferredSize(new Dimension(500, 500));
-        gridPanel.setPreferredSize(new Dimension(500, 500));
         myGrid = new Grid(20, 20);
         JLabel title = new JLabel("Map Design");
         title.setFont(new Font("Arial", Font.BOLD, 30));
