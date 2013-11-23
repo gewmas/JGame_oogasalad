@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.menuBar.MenuBar;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
@@ -17,6 +18,7 @@ public class GameAuthoringGUI {
     private EnemyDesignTab myEnemyDesignTab;
     private LevelDesignTab myLevelDesignTab;
     private MiscellaneousTab myMiscellaneousTab;
+    private SimmulationTab mySimmulationTab;
 
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
@@ -37,12 +39,14 @@ public class GameAuthoringGUI {
         Border b = BorderFactory.createLoweredBevelBorder();
         imageLibrary.setBorder(b);
         imageLibrary.setPreferredSize(new Dimension(300, 500));
+        mySimmulationTab = new SimmulationTab(gameData);
         mainPane.addTab("Basic Info", myBasicInfoTab.getTab());
         mainPane.addTab("Map Design", myMapDesignTab.getTab());
         mainPane.addTab("Tower Design", myTowerDesignTab.getTab());
         mainPane.addTab("Enemy Design", myEnemyDesignTab.getTab());
         mainPane.addTab("Level Design", myLevelDesignTab.getTab());
         mainPane.addTab("Miscellaneous", myMiscellaneousTab.getTab());
+        mainPane.addTab("Simmulate", mySimmulationTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab);
         mainPanel.add(mainPane);
         mainPanel.add(imageLibrary);
@@ -51,6 +55,7 @@ public class GameAuthoringGUI {
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
+
     }
 
     public static void main (String[] arg) {

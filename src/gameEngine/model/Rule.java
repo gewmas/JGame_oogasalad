@@ -1,5 +1,11 @@
 package gameEngine.model;
 
+import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.warehouse.EnemyWarehouse;
+import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -19,10 +25,13 @@ public class Rule {
     private Timer myTimer = new Timer();
     // user can set how much time for the user to get familiar with the game.
     private long myInitialDelayInMilliseconds = 2000;
+    private EnemyWarehouse myEnemyWarehouse=null;
 
-    public Rule (long delay) {
+    public Rule (long delay, EnemyWarehouse e) {
         myInitialDelayInMilliseconds = delay;
+        myEnemyWarehouse=e;
     }
+    
 
     public Rule () {
 
@@ -49,6 +58,17 @@ public class Rule {
             // else deal with end game;
         }
 
+    }
+    
+    public void readWaveFromJSon (JSONArray jsonArray) {
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject oneWave = jsonArray.getJSONObject(i);
+            String type = oneWave.getString("type");
+            int number = oneWave.getInt("number");
+            double period = oneWave.getDouble("period");
+            long interval = oneWave.getLong("interval");
+            addWave(new Wave(type, number, period, interval, myEnemyWarehouse));
+        }
     }
 
 }

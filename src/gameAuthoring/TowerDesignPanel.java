@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -10,10 +11,13 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -36,24 +40,30 @@ public class TowerDesignPanel extends JPanel {
     private File myImageSource;
 
     private JLabel myTowerImage;
+    
+    private String[] towerTypes = {"DefaultTower", "MultipleShootingTower", "BoostTower", "MagicTower"};
+    
 
     public TowerDesignPanel (TowerDesignTab towerDesignTab) {
         FileNameExtensionFilter filter =
                 new FileNameExtensionFilter(
-                                            "JPG & GIF Images", "jpg", "gif");
+                                            "JPG & GIF Images", "jpg", "gif", "png");
         INPUT_CHOOSER.setFileFilter(filter);
-
         myTowerDesignTab = towerDesignTab;
+        
+        JLabel type = new JLabel("Type");
         JLabel name = new JLabel("Name");
         JLabel damage = new JLabel("Damage");
         JLabel attackspeed = new JLabel("Attack Speed");
         JLabel range = new JLabel("Range");
         JLabel cost = new JLabel("Cost");
         JLabel recyclePrice = new JLabel("Recycle Price");
+        JLabel description = new JLabel("Description");
         myTowerImage = new JLabel();
         JButton towerImageChooser = new JButton("Choose tower image");
         towerImageChooser.addMouseListener(createPathListener());
 
+        JComboBox<String> myTypeOptions = new JComboBox<String>(towerTypes);
         myNameField = new JTextField();
         myNameField.setPreferredSize(new Dimension(200, 30));
         myDamageField = new JTextField();
@@ -66,11 +76,17 @@ public class TowerDesignPanel extends JPanel {
         myCostField.setPreferredSize(new Dimension(200, 30));
         myRecyclePriceField = new JTextField();
         myRecyclePriceField.setPreferredSize(new Dimension(200, 30));
+        
+        JTextArea descriptionText = new JTextArea(5, 16);
+        descriptionText.setLineWrap(true);
+        JScrollPane scrollPane = new JScrollPane(descriptionText); 
 
         JButton createTowerButton = new JButton("Create Tower");
         createTowerButton.addMouseListener(createTowerButtonListener(this));
 
         this.setLayout(new MigLayout("wrap 2"));
+        this.add(type);
+        this.add(myTypeOptions);
         this.add(name);
         this.add(myNameField);
         this.add(damage);
@@ -83,6 +99,8 @@ public class TowerDesignPanel extends JPanel {
         this.add(myCostField);
         this.add(recyclePrice);
         this.add(myRecyclePriceField);
+        this.add(description);
+        this.add(scrollPane);
         this.add(towerImageChooser, "aligny center");
         this.add(myTowerImage);
         this.add(createTowerButton);
@@ -118,46 +136,46 @@ public class TowerDesignPanel extends JPanel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 GameData myGameData = myTowerDesignTab.getGameData();
-                try
-                {
-                    int damage = Integer.parseInt(myDamageField.getText());
-                    int attackSpeed = Integer.parseInt(myAttackSpeedField.getText());
-                    int range = Integer.parseInt(myRangeField.getText());
-                    int cost = Integer.parseInt(myCostField.getText());
-                    int recyclePrice = Integer.parseInt(myRecyclePriceField.getText());
-                    if (damage < 0 || attackSpeed < 0 || range < 0 || cost < 0 || recyclePrice < 0) {
-                        JOptionPane
-                                .showMessageDialog(null,
-                                                   "Cannot have negative values for gold, life, or speed");
-                    }
-                    else {
-                        myGameData
-                                .addTower(myNameField.getText(),
-                                          myImageSource.toString()
-                                                  .replace(System.getProperties()
-                                                          .getProperty("user.dir"),
-                                                           ""),
-                                          Integer.parseInt(myDamageField.getText()),
-                                          Integer.parseInt(myAttackSpeedField.getText()),
-                                          Integer.parseInt(myRangeField.getText()),
-                                          Integer.parseInt(myCostField.getText()),
-                                          Integer.parseInt(myRecyclePriceField.getText()));
-
-                        myTowerDesignTab.addTower(myImageSource, myNameField.getText());
-                        myNameField.setText("");
-                        myDamageField.setText("");
-                        myAttackSpeedField.setText("");
-                        myRangeField.setText("");
-                        myCostField.setText("");
-                        myRecyclePriceField.setText("");
-                        myTowerImage.setIcon(null);
-                    }
-                }
-                catch (NumberFormatException n) {
-                    JOptionPane
-                            .showMessageDialog(null,
-                                               "Invalid input");
-                }
+//                try
+//                {
+//                    int damage = Integer.parseInt(myDamageField.getText());
+//                    int attackSpeed = Integer.parseInt(myAttackSpeedField.getText());
+//                    int range = Integer.parseInt(myRangeField.getText());
+//                    int cost = Integer.parseInt(myCostField.getText());
+//                    int recyclePrice = Integer.parseInt(myRecyclePriceField.getText());
+//                    if (damage < 0 || attackSpeed < 0 || range < 0 || cost < 0 || recyclePrice < 0) {
+//                        JOptionPane
+//                                .showMessageDialog(null,
+//                                                   "Cannot have negative values for gold, life, or speed");
+//                    }
+//                    else {
+//                        myGameData
+//                                .addTower(myNameField.getText(),
+//                                          myImageSource.toString()
+//                                                  .replace(System.getProperties()
+//                                                          .getProperty("user.dir") + "/",
+//                                                           ""),
+//                                          Integer.parseInt(myDamageField.getText()),
+//                                          Integer.parseInt(myAttackSpeedField.getText()),
+//                                          Integer.parseInt(myRangeField.getText()),
+//                                          Integer.parseInt(myCostField.getText()),
+//                                          Integer.parseInt(myRecyclePriceField.getText()));
+//
+//                        myTowerDesignTab.addTower(myImageSource, myNameField.getText());
+//                        myNameField.setText("");
+//                        myDamageField.setText("");
+//                        myAttackSpeedField.setText("");
+//                        myRangeField.setText("");
+//                        myCostField.setText("");
+//                        myRecyclePriceField.setText("");
+//                        myTowerImage.setIcon(null);
+//                    }
+//                }
+//                catch (NumberFormatException n) {
+//                    JOptionPane
+//                            .showMessageDialog(null,
+//                                               "Invalid input");
+//                }
             }
         };
         return listener;

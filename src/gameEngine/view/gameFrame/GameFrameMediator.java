@@ -1,9 +1,10 @@
 package gameEngine.view.gameFrame;
 
-import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.tower.TowerInfo;
-import gameEngine.view.gameFrame.store.TowerInfoPanel;
-import gameEngine.view.gameFrame.store.TowersOptionPanel;
+import java.util.Map;
+import jgame.impl.JGEngineInterface;
+import gameEngine.model.purchase.PurchaseInfo;
+import gameEngine.view.gameFrame.store.InfoDisplayPanel;
+import gameEngine.view.gameFrame.store.StoreOptionsPanel;
 
 
 /**
@@ -25,12 +26,12 @@ import gameEngine.view.gameFrame.store.TowersOptionPanel;
  */
 public class GameFrameMediator {
 
-    private TowersOptionPanel storeOptions;
+    private StoreOptionsPanel storeOptions;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
-    private TowerInfoPanel towerInfoPanel;
+    private InfoDisplayPanel towerInfoPanel;
 
-    public void addTowersOptionPanel (TowersOptionPanel storeOptions) {
+    public void addTowersOptionPanel (StoreOptionsPanel storeOptions) {
         this.storeOptions = storeOptions;
     }
 
@@ -38,7 +39,11 @@ public class GameFrameMediator {
      * Destroys the jgame instance so that it can be reloaded
      */
 
-    public void endGame () {
+    public void quitGame () {
+        canvasPanel.quitGame();
+    }
+    
+    public void endGame(){
         canvasPanel.endGame();
     }
 
@@ -48,30 +53,39 @@ public class GameFrameMediator {
      * 
      * @param towername
      */
-    public void placeTower (TowerInfo towerInfo) {
+    public void placeTower (PurchaseInfo towerInfo) {
 
         canvasPanel.placeTower(towerInfo);
+       
+    }
+    
+    public void setCursorImage(PurchaseInfo towerInfo){
         gameFrame.placeTower(towerInfo);
     }
 
     /**
      * Used by display information about a tower
      * on the Tower Info Panel
-     * 
-     * @param tower
+     * @param towerDisplayInfo TODO
      */
-    public void displayTowerInfo (TowerInfo tower) {
-        towerInfoPanel.displayTowerInfo(tower);
+    public void displayTowerInfo (Map<String, String> towerDisplayInfo) {
+        towerInfoPanel.displayInformation(towerDisplayInfo);
     }
 
     /**
      * Executes the actions on the view components
      * that are impacted by the purchase of a tower
      */
-    public void purchaseTower () {
-        gameFrame.purchaseTower();
+    
+    public void exitPurchase(){
+       
+        restoreDefaultCursor();
     }
-
+    
+    public void restoreDefaultCursor() {
+        gameFrame.restoreDefaultCursor();
+    }
+    
     /**
      * Updates the enabled status of store items.
      */
@@ -89,8 +103,15 @@ public class GameFrameMediator {
 
     }
 
-    public void addTowerInfoPanel (TowerInfoPanel towerInfoPanel) {
+    public void addInfoPanel (InfoDisplayPanel towerInfoPanel) {
         this.towerInfoPanel = towerInfoPanel;
     }
-
+    
+    public void clearDisplay(){
+        this.towerInfoPanel.clearDisplay();
+    }
+    
+    public void openStore () {
+      storeOptions.addStoreInventory();
+    }
 }

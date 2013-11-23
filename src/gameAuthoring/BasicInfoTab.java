@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;
@@ -109,16 +110,17 @@ public class BasicInfoTab extends Tab {
 
     public void loadJSON (Parser p) {
         try { 
- 
             myGameName.setText(p.getString("name"));          
             myGold.setText(String.valueOf(p.getInt("gold")));
             myLives.setText(String.valueOf(p.getInt("numberOfLives")));
             myWindowWidth.setText(String.valueOf(p.getInt("widthOfWindow")));
             myWindowHeight.setText(String.valueOf(p.getInt("heightOfWindow")));
             myTilesPerRow.setText(String.valueOf(p.getInt("tilesPerRow")));
-            myDifficultyScale.setText(String.valueOf(p.getInt("difficultyScale")));
+            myDifficultyScale.setText(String.valueOf(p.getDouble("difficultyScale")));
             mySplashImage = p.getString("splashImage");
             mySplashImageLabel.setText(mySplashImage);
+            
+            setData();
         }
 
         catch (NumberFormatException n) {
@@ -130,39 +132,42 @@ public class BasicInfoTab extends Tab {
     public MouseAdapter setInfoListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {
-                int gold = Integer.parseInt(myGold.getText());
-                int lives = Integer.parseInt(myLives.getText());
-                int width = Integer.parseInt(myWindowWidth.getText());
-                int height = Integer.parseInt(myWindowHeight.getText());
-                int tiles = Integer.parseInt(myTilesPerRow.getText());
-                float difficultyScale = Float.parseFloat(myDifficultyScale.getText());
-                String name = myGameName.getText();
-
-                // TODO: Set more specific constraints
-                if (gold > 0 && lives > 0 && width > 0 && height > 0 && tiles > 0 &&
-                    difficultyScale > 1 && mySplashImage != null && name != null) {
-                    myGameData.setGold(gold);
-                    myGameData.setLives(lives);
-                    myGameData.setWindowWidth(width);
-                    myGameData.setWindowHeight(height);
-                    myGameData.setTilesPerRow(tiles);
-                    myGameData.setDifficultyScale(difficultyScale);
-                    myGameData.setSplashImage(mySplashImage);
-                    myGameData.setGameName(name);
-                }
-
-                else {
-                    JOptionPane.showMessageDialog(null,
-                                                  "One or more fields invalid! Please try again.");
-                }
-
+            public void mouseClicked (MouseEvent e) {          
+                setData();
             }
         };
         return listener;
 
     }
 
+    private void setData(){
+        int gold = Integer.parseInt(myGold.getText());
+        int lives = Integer.parseInt(myLives.getText());
+        int width = Integer.parseInt(myWindowWidth.getText());
+        int height = Integer.parseInt(myWindowHeight.getText());
+        int tiles = Integer.parseInt(myTilesPerRow.getText());
+        float difficultyScale = Float.parseFloat(myDifficultyScale.getText());
+        String name = myGameName.getText();
+
+
+        if (gold > 0 && lives > 0 && width > 0 && height > 0 && tiles > 0 &&
+            difficultyScale > 1 && mySplashImage != null && name != null) {
+            myGameData.setGold(gold);
+            myGameData.setLives(lives);
+            myGameData.setWindowWidth(width);
+            myGameData.setWindowHeight(height);
+            myGameData.setTilesPerRow(tiles);
+            myGameData.setDifficultyScale(difficultyScale);
+            myGameData.setSplashImage(mySplashImage);
+            myGameData.setGameName(name);
+        }
+        
+        else {
+            JOptionPane.showMessageDialog(null,
+                                          "One or more fields invalid! Please try again.");
+        }
+    }
+    
     public MouseAdapter setSplashImageListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
@@ -171,7 +176,7 @@ public class BasicInfoTab extends Tab {
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     mySplashImage =
                             INPUT_CHOOSER.getSelectedFile().toString()
-                                    .replace(System.getProperties().getProperty("user.dir"), "");
+                                    .replace(System.getProperties().getProperty("user.dir") + "/", "");
                     mySplashImageLabel.setText(mySplashImage);
                 }
 

@@ -1,18 +1,21 @@
 package gameEngine.model;
 
-import gameEngine.factory.GridFactory;
+import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.purchase.PurchaseInfo;
+import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
-import gameEngine.model.tower.TowerInfo;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
-import java.awt.Dimension;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import jgame.JGObject;
 import jgame.impl.JGEngineInterface;
 
 
@@ -21,10 +24,10 @@ public class Model {
     /**
      * @author Yuhua
      * 
-     *         warehouse - store different kinds of tower, enemy warehouse
+     * warehouse - store different kinds of tower, enemy warehouse
      * 
      */
-
+    
     private Scanner scanner;
     private Parser parser;
     private GameInfo gameInfo;
@@ -34,108 +37,210 @@ public class Model {
     private LinkedList<Tile> path;
     private JGEngineInterface myEng;
     private Rule rule; // how each waves created, ruleStart, ruleStop
-
-    // private Rule rule;
+    private ArrayList<ArrayList<Tile>> grid;
+    private ArrayList<Tile> barriers;
 
     public Model () {
-        rule = new Rule();
+       
+        
     }
+    
 
-    public void newGame (File jsonFile) throws Exception {
-        // For test convenience
-        // jsonFile = new File(System.getProperty("user.dir") +
-        // "/src/gameEngine/test/testTowerEnemyBullet/mygame.json");
-
+    public void newGame (File jsonFile) throws Exception {        
         scanner = new Scanner(jsonFile);
         parser = new Parser(scanner);
 
         gridFactory = new GridFactory(parser);
         gridFactory.initialize();
         path = gridFactory.getPathList();
-
-        // 2 create factory by
+        grid = gridFactory.getGridList();
+        barriers = gridFactory.getBarrierList();
 
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
-        
+        rule = new Rule(1, enemyWarehouse);
+        rule.readWaveFromJSon(parser.getJSONArray("wave"));
         gameInfo = new GameInfo(parser);
-
-
     }
-
+    // Jiaran: now we can just read waves from JSon.
     public void startGame () {
-        towerWarehouse.create("DefaultTower"); // test, should be called within Rule
-
-        Wave w = new Wave("1", 10, 500, 1000, enemyWarehouse);
-        rule.addWave(w);
+//        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
+//        Wave w1 = new Wave("2", 10, 0.5, 0, enemyWarehouse);
+//        rule.addWave(w);
+//        rule.addWave(w1);
         rule.ruleStart();
 
     }
 
     //Yuhua change it
-//    public List<Tile> getPathList () {
+    //    public List<Tile> getPathList () {
     public LinkedList<Tile> getPathList () {
         return path;
     }
+    
+    public ArrayList<Tile> getBarrierList () {
+        return barriers;
+    }
+
+    /**
+     * @author Yuhua
+     * Tower Related Method
+     */
 
     /**
      * return all kinds of TowerFactory
      */
     //edit by Jiaran to hold encapsulation by passing TowerInfo.
-    public List<TowerInfo> getAllTowerInfo () {
-        List<TowerInfo> result= new ArrayList<TowerInfo>();
+    public Map<String, List<PurchaseInfo>> getInventory () {
+        Map<String, List<PurchaseInfo>> result = new HashMap<String, List<PurchaseInfo>>();
+        
+        //Tower Inventory
+        List<PurchaseInfo> towerInventory= new ArrayList<PurchaseInfo>();
         List<TowerFactory> factoryList=towerWarehouse.getTowerFactory();
         for(int i=0; i< factoryList.size();i++){
-            result.add((TowerInfo)(factoryList.get(i)));
-            
+            towerInventory.add((PurchaseInfo)(factoryList.get(i)));
+
         }
+        result.put("Tower", towerInventory);
+        
+        /**
+         * Barrier Inventory
+         * 
+         * @author Harris
+         */
+        
         return result;
     }
+
+    //For detector use
+    public void setJGEngine(JGEngineInterface eng){
+        this.myEng = eng;
+        Resources r = new Resources(myEng);
+        r.register(parser);
+    }
     
+    //Refractor method to check whether Tower exist at (x, y)
+    public Tower checkTowerAtXY(int x, int y){
+        int detectRange = 10;
+        Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
+        return d.getOneTargetInRange(x, y, detectRange);
+    }
+
     //Jiaran: Im thinking maybe this should return a TowerInfo instead of Tower
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
-    public TowerInfo getTowerInfo (int x, int y) {
-        Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
-        return (TowerInfo)d.getOneTargetInRange(x, y, 10);
-
+    public PurchaseInfo getTowerInfo (int x, int y) {
+        return (PurchaseInfo)checkTowerAtXY(x, y);
     }
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact
     public boolean purchaseTower (int x, int y, String name) {
-        //TODO Should check (x,y) valid first
-        
-        return towerWarehouse.create(x, y, name, gameInfo);
+        Tile currentTile = getTile(x, y);
+        if (currentTile.isEmpty() && !currentTile.hasPath()) {
+            System.out.println(currentTile.isEmpty());
+            currentTile.setTower();
+            return towerWarehouse
+                .create((int) currentTile.getX(), (int) currentTile.getY(), name, gameInfo);
+            
+        }
+        return false;
     }
 
-   
+    public boolean sellTower(int x, int y){
+        Tower tower = checkTowerAtXY(x, y);
 
-    /*
+        if(tower != null){
+            tower.sell();
+        }
+
+        return false;
+    }
+
+    public boolean upgradeTower(int x, int y){
+        Tower tower = checkTowerAtXY(x, y);
+
+        if(tower != null){
+            tower.upgrade();
+        }
+
+        return false;
+    }
+
+    public boolean setTowerAttackMode(int x, int y, int attackMode){
+        Tower tower = checkTowerAtXY(x, y);
+
+        if(tower != null){
+            tower.setAttackMode(attackMode);
+            return true;
+        }
+
+        return false;
+    }
+
+    public Tile getTile(int x, int y) {
+        for(int k=0; k<grid.size(); k++) {
+            ArrayList<Tile> tempArray = grid.get(k);
+            for(int m=0; m<tempArray.size(); m++) {
+                Tile tile = tempArray.get(m);
+                if(tile.getX() <= x && tile.getEndX() >= x && tile.getY() <= y && tile.getEndY() >= y) {
+                    return tile;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @author Jiaran
      * GameInfo getter method
-     */
-    public int getMoney () {
-        return gameInfo.getGold();
-    }
+     * deleted by Jiaran based on Duvall's suggestion. Delete this when
+     * every on is aware
+     **/
 
-    public int getLife () {
-        return gameInfo.getLife();
-    }
-    
-    public String getBGImage () {
-        return gameInfo.getBGImage();
-    }
-    
-    
-    public Dimension getGameSize () {
-             return gameInfo.getDimension();
-     }
-    
     /*
      * Model Getter methods
      */
-    
+
     public GameInfo getGameInfo() {
         return gameInfo;
     }
+
+    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+    
+    /**
+     * @author Fabio
+     * 
+     * Activate input cheat
+     * Succeed, return true
+     * No such cheat, return false
+     * 
+     * @param code
+     * @return bool
+     */
+    public boolean activateCheat(String code) {
+
+        String[] cheatArgs = code.split(" ");
+        String cmd = cheatArgs[0];
+        if(cmd == "add_gold") {
+            int amt = Integer.parseInt(cheatArgs[1]);
+            gameInfo.addGold(amt);
+        } else if(cmd.equals("add_lives")) {
+            int amt = Integer.parseInt(cheatArgs[1]);
+            gameInfo.addLife(amt);
+        } else if(cmd.equals("kill_all")) {
+            //TODO
+        } else if(cmd.equals("win_game")) {
+            //TODO
+        } else if (cmd.equals("lose_game")) {
+            //TODO
+        } else {
+            return false;
+        }
+        return true;
+    }
+
 
 }

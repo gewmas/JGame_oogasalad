@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -113,7 +114,7 @@ public class EnemyDesignPanel extends JPanel {
                                           gold,
                                           myImageSource.toString()
                                                   .replace(System.getProperties()
-                                                          .getProperty("user.dir"),
+                                                          .getProperty("user.dir") + "/",
                                                            ""),
                                           life,
                                           speed);
