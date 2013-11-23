@@ -10,7 +10,9 @@ import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import jgame.Highscore;
 import jgame.JGColor;
 import jgame.JGObject;
@@ -25,7 +27,8 @@ import jgame.platform.StdGame;
  *         graphics rendering
  */
 public class Game extends StdGame {
-
+    private static final String[] INFO_TO_DISPLAY={"Tower Type","Damage","Attack Speed","Range","Sell Price","Upgrade Price","Description"};
+    
     private int WIDTH = 600;
     private int HEIGHT = 600;
 
@@ -35,6 +38,7 @@ public class Game extends StdGame {
     private GameFrameMediator mediator;
     private FrameRateSlider frameRateSlider;
     private JGObject frameRateBar;
+    private Map<String,String> printValues;
 
     public Game (View view, GameFrameMediator mediator) {
         this.view = view;
@@ -77,6 +81,10 @@ public class Game extends StdGame {
         frameRateSlider=new FrameRateSlider("frslider", true, pfWidth()/2, pfHeight()-40,256,"RESERVEDslider_toggle");
         frameRateBar.resume_in_view=false;
         toggleFrameRateBar();
+        printValues=new LinkedHashMap<String,String>();
+        for (String str:INFO_TO_DISPLAY){
+            printValues.put(str,"black");
+        }
     }
     
     public void startInGame() {
@@ -127,7 +135,7 @@ public class Game extends StdGame {
                 if (tower==null) {
                     System.out.println("No tower here");
                 } else {
-                    mediator.displayTowerInfo(tower.getInfo());
+                    mediator.displayTowerInfo(tower.getInfo(),printValues);
                     System.out.println("Checking tower");
                 }
                 System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);
