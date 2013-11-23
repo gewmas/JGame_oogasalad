@@ -1,6 +1,5 @@
 package gameAuthoring;
 
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -26,7 +25,6 @@ public class GridButton extends JButton {
         myCoordinate = new Point2D.Double(x, y);
         myGrid = grid;
         isPath = false;
-        this.setPreferredSize(new Dimension(50, 50));
         addPathListener(this);
     }
 
@@ -38,9 +36,6 @@ public class GridButton extends JButton {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                if (SwingUtilities.isLeftMouseButton(e)) {
-                    toggle();
-                }
                 if (SwingUtilities.isRightMouseButton(e)) {
                     String[] options = { "Set as start", "Set as end" };
                     String choice =
@@ -60,11 +55,18 @@ public class GridButton extends JButton {
                     }
                 }
             }
+
+            @Override
+            public void mouseEntered (MouseEvent e) {
+                if (myImgSource != null) {
+                    toggle();
+                }
+            }
         };
         gButton.addMouseListener(listener);
     }
-    
-    public void toggle(){
+
+    public void toggle () {
         isPath = !isPath;
         if (isPath) {
             myGrid.addCoordinate(myCoordinate);
@@ -74,8 +76,9 @@ public class GridButton extends JButton {
                 }
                 else {
                     Image path = ImageIO.read(myImgSource);
-                    this.setIcon(new ImageIcon(path));
-                    this.setPreferredSize(new Dimension(50, 50));
+                    Image resized = path.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+                    ImageIcon icon = new ImageIcon(resized);
+                    this.setIcon(icon);
                 }
             }
             catch (IOException ex) {
@@ -86,9 +89,9 @@ public class GridButton extends JButton {
             myGrid.removeCoordinate(myCoordinate);
             this.setIcon(null);
         }
-    
+
     }
-    
+
     public void setPathStatusFalse () {
         isPath = false;
     }

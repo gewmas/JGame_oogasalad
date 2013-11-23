@@ -1,6 +1,7 @@
 package gameAuthoring;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -29,6 +30,7 @@ public class Grid extends JPanel {
     public Grid (int width, int height) {
         this.setLayout(new GridLayout(width, height));
         this.setBackground(Color.blue);
+        this.setPreferredSize(new Dimension(500, 500));
         myWidth = width;
         myHeight = height;
         myGrid = new GridButton[width][height];
