@@ -1,7 +1,11 @@
 package gameEngine.view.gameFrame.store;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JTabbedPane;
+import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
@@ -15,50 +19,51 @@ import gameEngine.view.gameFrame.GameFrameMediator;
  *         item information
  */
 public class StorePanel extends Panel {
-    private StoreOptionsPanel towerStoreOptions;
-    private StoreOptionsPanel objectsStoreOptions;
-    private JTabbedPane storeTabbedPane;
 
+    private JTabbedPane storeTabbedPane;
+    private View view;
+    private GameFrameMediator mediator;
+    private List<StoreOptionsPanel> storeCategories;
     /**
      * @param mediator facilitates communication between view components
-     * @param engineView facilitates communication between view and controller
+     * @param view facilitates communication between view and controller
      */
 
-    public StorePanel (GameFrameMediator mediator, View engineView) {
+    public StorePanel (GameFrameMediator mediator, View view) {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
-
+        this.view  = view;
+        this.mediator = mediator;
+        storeCategories = new ArrayList();
         InfoDisplayPanel infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
                 .getString("ItemInfo"));
         mediator.addInfoPanel(infoPanel);
          storeTabbedPane = new JTabbedPane();
 
-        // TO BE CHANGED
-        towerStoreOptions = new TowerOptionsPanel(mediator, engineView);
-        objectsStoreOptions = new TowerOptionsPanel(mediator, engineView);
-        // TO BE CHANGED
-
-        storeTabbedPane.addTab("Towers", towerStoreOptions);
-        storeTabbedPane.addTab("Objects", objectsStoreOptions);
-       
         add(infoPanel, BorderLayout.CENTER);
         add(storeTabbedPane, BorderLayout.PAGE_START);
 
     }
 
     public void addStoreInventory () {
-        towerStoreOptions.addStoreInventory();
+        Map<String, List<PurchaseInfo>> storeInventory = view.getInventory();
+       for (String item:  storeInventory.keySet()){
+           StoreOptionsPanel storeCategory =new StoreOptionsPanel(mediator,view,storeInventory.get(item));
+           storeTabbedPane.addTab(item,storeCategory );
+           storeCategories.add(storeCategory);
+       }
         
     }
 
     public void updateStoreStatus () {
-        towerStoreOptions.updateStoreStatus();
-        
+       for (StoreOptionsPanel options: storeCategories){
+           options.updateStoreStatus();
+       }
     }
 
     public void closeStore () {
-       towerStoreOptions.closeStore();
+      
        storeTabbedPane.removeAll();
        this.revalidate();
        this.repaint();
