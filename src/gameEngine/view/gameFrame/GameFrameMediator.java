@@ -2,8 +2,8 @@ package gameEngine.view.gameFrame;
 
 import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.gameFrame.store.InfoDisplayPanel;
-import gameEngine.view.gameFrame.store.StorePanel;
+import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
+import gameEngine.view.gameFrame.tools.store.StorePanel;
 
 
 /**

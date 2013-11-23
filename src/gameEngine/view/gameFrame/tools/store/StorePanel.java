@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.store;
+package gameEngine.view.gameFrame.tools.store;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.swing.JTabbedPane;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
-import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrameMediator;
 
@@ -24,6 +23,7 @@ public class StorePanel extends Panel {
     private View view;
     private GameFrameMediator mediator;
     private List<StoreOptionsPanel> storeCategories;
+
     /**
      * @param mediator facilitates communication between view components
      * @param view facilitates communication between view and controller
@@ -33,42 +33,39 @@ public class StorePanel extends Panel {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
-        this.view  = view;
+        this.view = view;
         this.mediator = mediator;
         storeCategories = new ArrayList();
-        InfoDisplayPanel infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
-                .getString("ItemInfo"));
-        mediator.addInfoPanel(infoPanel);
-         storeTabbedPane = new JTabbedPane();
 
-        add(infoPanel, BorderLayout.CENTER);
+        storeTabbedPane = new JTabbedPane();
+
         add(storeTabbedPane, BorderLayout.PAGE_START);
 
     }
 
     public void addStoreInventory () {
         Map<String, List<PurchaseInfo>> storeInventory = view.getInventory();
-       for (String item:  storeInventory.keySet()){
-           StoreOptionsPanel storeCategory =new StoreOptionsPanel(mediator,view,storeInventory.get(item));
-           storeTabbedPane.addTab(item,storeCategory );
-           storeCategories.add(storeCategory);
-       }
-        
+        for (String item : storeInventory.keySet()) {
+            StoreOptionsPanel storeCategory =
+                    new StoreOptionsPanel(mediator, view, storeInventory.get(item));
+            storeTabbedPane.addTab(item, storeCategory);
+            storeCategories.add(storeCategory);
+        }
+
     }
 
     public void updateStoreStatus () {
-       for (StoreOptionsPanel options: storeCategories){
-           options.updateStoreStatus();
-       }
+        for (StoreOptionsPanel options : storeCategories) {
+            options.updateStoreStatus();
+        }
     }
 
     public void closeStore () {
-      
-       storeTabbedPane.removeAll();
-       this.revalidate();
-       this.repaint();
-      
-        
+
+        storeTabbedPane.removeAll();
+        this.revalidate();
+        this.repaint();
+
     }
 
 }
