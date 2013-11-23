@@ -33,6 +33,7 @@ public class GameInfo {
 //      right now I just put the 20*20 dimension
         myDimension = new Dimension(20, 20);
         myBGImage = parser.getString("BGImage");
+        myName = parser.getString("name");
         // myTowerInfo = new ArrayList<TowerInfo>();
         
     //    System.out.println(myGold+";"+myLife+";"+myWave+";"+x+";"+y+";"+myBGImage);
@@ -101,6 +102,11 @@ public class GameInfo {
 
     public String getBGImage () {
         return myBGImage;
+    }
+
+
+    public String getMyName () {
+        return myName;
     }
 
 

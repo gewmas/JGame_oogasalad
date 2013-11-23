@@ -3,6 +3,7 @@ package gameEngine.view;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import jgame.impl.JGEngineInterface;
 import gameEngine.controller.Controller;
@@ -60,7 +61,7 @@ public class View {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-            // e.printStackTrace();
+             e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }
@@ -111,8 +112,12 @@ public class View {
         return controller.getLives();
     }
 
+    public Map<String, List<PurchaseInfo>> getInventory () {
+        return controller.getInventory();
+    }
+    
     public List<PurchaseInfo> getTowers () {
-        return controller.getTowerFactory();
+        return controller.getTowers();
     }
     
     public void quitGame(){
@@ -125,5 +130,9 @@ public class View {
     }
     public boolean activateCheat (String cheat) {
         return controller.activateCheat(cheat);
+    }
+    
+    public String getGameTitle(){
+        return controller.getGameTitle();
     }
 }

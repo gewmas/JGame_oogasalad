@@ -1,20 +1,22 @@
 package gameEngine.model.enemy;
 
-import java.util.LinkedList;
 import gameEngine.Constant.Constant;
+import gameEngine.factory.magicFactory.MagicsFactory;
+import gameEngine.model.Model;
 import gameEngine.model.bullet.Bullet;
+import gameEngine.model.magic.IEMagicable;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
+import java.util.LinkedList;
 import jgame.JGObject;
-import gameEngine.model.Model;
 
 
 /**
  * 
- * @author Fabio, Yuhua
+ * @author Fabio, Yuhua, wenxin
  * 
  */
-public class Enemy extends JGObject {
+public class Enemy extends JGObject implements IEMagicable {
 
     String id;
     String image;
@@ -29,6 +31,12 @@ public class Enemy extends JGObject {
     double pathStep;
     LinkedList<Tile> path;
 
+    // wenxin add this attribution for magic.
+    int currentMagics = 0;
+
+    final double originalLife;
+    final double orignalSpeed;
+
     public Enemy (
                   double gold,
                   double life,
@@ -38,27 +46,31 @@ public class Enemy extends JGObject {
                   int collisionid,
                   String image,
                   Model model) {
-        super(id, unique_id, model.getPathList().get(0).getX(), model.getPathList().get(0).getY(), collisionid, image);
+        super(id, unique_id, model.getPathList().get(0).getX(), model.getPathList().get(0).getY(),
+              collisionid, image);
 
         this.model = model;
         this.id = id;
         this.image = image;
+        this.setGraphic(image);
         this.xMovement = 1;
         this.yMovement = 0;
 
         this.gold = gold;
         this.life = life;
+        this.originalLife = life;
         this.speed = speed;
+        this.orignalSpeed = speed;
         this.path = model.getPathList();
         this.pathIndex = 0;
 
         this.x = path.get(0).getX();
         this.y = path.get(0).getY();
 
-        //Yuhua change it
-        //        this.x = x;
-        //        this.y = y;
-
+        this.currentMagics = 0;
+        // Yuhua change it
+        // this.x = x;
+        // this.y = y;
 
         calculatePathStep();
         calculateNewDirection();
@@ -92,39 +104,43 @@ public class Enemy extends JGObject {
     public void hit (JGObject obj) {
         // hit the target enemy, destroy that enemy
         // System.out.println("Bullet Hit");
-       
+
         if (obj.colid == Constant.BULLET_CID) {
-            Bullet bullet = (Bullet)obj;
-            if(this == bullet.getTargetEnemy()){
+            Bullet bullet = (Bullet) obj;
+            if (this == bullet.getTargetEnemy()) {
                 /**
                  * @author Yuhua
-                 * bullet can only hurt target enemy
-                 * no obj.remove(), let bullet kill itself
+                 *         bullet can only hurt target enemy
+                 *         no obj.remove(), let bullet kill itself
                  */
+
                 life -= ((Bullet) obj).getDamage();
                 if (life <= 0) {
                     // level.getGameInfo().addGold((int)gold);
                     // level.getEnemies().remove(this);
-                    model.getGameInfo().addGold((int)gold);
+                    model.getGameInfo().addGold((int) gold);
                     remove();
                 }
+                /**
+                 * @author wenxin
+                 *         below command deal with creation of magics;
+                 */
+                MagicsFactory.getInstance().createMagics(this, null, bullet.getCurrentMagic(),
+                                                         currentMagics);
             }
- 
+
         }
     }
 
-
-    public void reachedGoal() {
+    public void reachedGoal () {
         model.getGameInfo().loseLife();
         remove();
     }
 
-
-
     public void calculateNewDirection () {
 
         pathIndex = pathIndex + 1;
-        if(pathIndex == path.size()) {
+        if (pathIndex == path.size()) {
             reachedGoal();
             return;
         }
@@ -168,16 +184,49 @@ public class Enemy extends JGObject {
         }
     }
 
-    public double getLife() {
+    public double getLife () {
         return life;
     }
-    
+
     /**
      * @author Yuhua
-     * For comparator to compare shortest/furthest enemy
+     *         For comparator to compare shortest/furthest enemy
      */
-    public double getDistanceFromTower(Tower tower){
+    public double getDistanceFromTower (Tower tower) {
         return Math.sqrt(Math.pow(x - tower.getX(), 2) + Math.pow(y - tower.getY(), 2));
     }
 
+    /**
+     * @author wenxin
+     *         For the IMagicable interface implement
+     */
+    @Override
+    public double getX () {
+        return x;
+    }
+
+    @Override
+    public double getY () {
+        return y;
+    }
+
+    @Override
+    public int getCurrentMagics () {
+        return currentMagics;
+    }
+
+    @Override
+    public void setCurrentMagic (int magic) {
+        currentMagics = magic;
+    }
+
+    @Override
+    public void changeLife (double lifePercent) {
+        life = life + originalLife * lifePercent;
+    }
+
+    @Override
+    public void changeSpeed (double speedPercent) {
+        speed = speed + orignalSpeed * speedPercent;
+    }
 }

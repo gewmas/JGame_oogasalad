@@ -26,6 +26,7 @@ public class MagicTower extends DefaultTower {
                        String description,
                        
                        double magicFactor,
+                       int magic,
 
                        String type,
                        String id,
@@ -40,6 +41,7 @@ public class MagicTower extends DefaultTower {
 
         this.detector = new Detector<Enemy>(this.eng, Enemy.class);
         this.magicFactor = magicFactor;
+        this.currentMagic = magic;
         
         addDescription();
     }
