@@ -116,10 +116,6 @@ public class View {
         return controller.getInventory();
     }
 
-    public List<PurchaseInfo> getTowers () {
-        return controller.getTowers();
-    }
-
     public void quitGame () {
         mediator.quitGame();
     }

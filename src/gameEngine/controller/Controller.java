@@ -60,9 +60,6 @@ public class Controller {
         return model.getInventory();  
     }
     
-    public List<PurchaseInfo> getTowers () {
-        return model.getInventory().get("Tower");  
-    }
 
     /**
      * Sends a call to the model to update the monitored tower stats to the tower
