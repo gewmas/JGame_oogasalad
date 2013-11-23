@@ -115,4 +115,10 @@ public class GameFrameMediator {
     public void openStore () {
       storeOptions.addStoreInventory();
     }
+
+
+    public void displayTowerInfo (Map<String, String> information, Map<String, String> display) {
+        this.towerInfoPanel.displayInformation(information, display);
+        
+    }
 }
