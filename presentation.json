@@ -2,7 +2,7 @@
 "name": "Tower Destruction II",
 "spashImage" :  "game-bg.png",
 "BGImage" :  "resources/space_background.jpg",
-"gold" : 400,
+"gold" : 200,
 "numberOfLives" : 10,
 "levels": 2,
 "widthOfWindow": 600,
@@ -35,7 +35,7 @@
                { "x": 12, "y": 5 },
                { "x": 13, "y": 5 },
                { "x": 14, "y": 5 },
-	       { "x": 15, "y": 5 },
+	       	   { "x": 15, "y": 5 },
                { "x": 16, "y": 5 },
                { "x": 17, "y": 5 },
                { "x": 18, "y": 5 },
@@ -155,30 +155,42 @@
 	"id": "1",
 	"gold": 5,
 	"image": "enemy1",
-	"life": 2,
+	"life": 10,
 	"speed": 0.5,
 }, 
 {
 	"id": "2",
 	"gold": 10,
 	"image": "runRight",
-	"life": 3,
-	"speed": 0.1,
+	"life": 15,
+	"speed": 1,
 }
 ],
 
 "wave":[
 	{	
 		"type": "1",
-		"number":5,
-		"period" :0.5,
+		"number":20,
+		"period" :2,
 		"interval": 7,
 	},
 	{	
+		"type": "1",
+		"number":30,
+		"period" :1,
+		"interval": 5,
+	},
+	{	
 		"type": "2",
-		"number":1,
-		"period" :0.5,
-		"interval": 3,
+		"number":3,
+		"period" :4,
+		"interval": 5,
+	},
+	{	
+		"type": "2",
+		"number":10,
+		"period" :3,
+		"interval": 5,
 	}
 ]  
 
