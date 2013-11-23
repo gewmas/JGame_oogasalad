@@ -7,6 +7,7 @@ import gameEngine.view.View;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import jgame.impl.JGEngineInterface;
 
 
@@ -52,11 +53,15 @@ public class Controller {
      */
     
     /**
-     * Get All kinds of TowerFactory
+     * Get All kinds of TowerFactory, and Barriers
      * However, can only return the basic property of the TowerFactory
      */
-    public List<PurchaseInfo> getTowerFactory () {
-        return model.getAllTowerInfo();  
+    public Map<String, List<PurchaseInfo>> getInventory () {
+        return model.getInventory();  
+    }
+    
+    public List<PurchaseInfo> getTowers () {
+        return model.getInventory().get("Tower");  
     }
 
     /**

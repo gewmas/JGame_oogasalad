@@ -79,14 +79,17 @@ public class BoostTower extends Tower{
     }
 
     //IMagicable Interface Method
+    //BoostTower can't be boosted by other BoostTower
     @Override
     public void upgrade (double factor) {
-        boostFactor *= factor;
+//        boostFactor *= factor;
+//        super.updateDescription();
     }
     
     @Override
     public void downgrade (double factor) {
-        boostFactor /= factor;
+//        boostFactor /= factor;
+//        super.updateDescription();
     }
 
     

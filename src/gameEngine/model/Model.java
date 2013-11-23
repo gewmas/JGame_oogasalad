@@ -10,8 +10,10 @@ import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import jgame.JGObject;
 import jgame.impl.JGEngineInterface;
@@ -89,13 +91,24 @@ public class Model {
      * return all kinds of TowerFactory
      */
     //edit by Jiaran to hold encapsulation by passing TowerInfo.
-    public List<PurchaseInfo> getAllTowerInfo () {
-        List<PurchaseInfo> result= new ArrayList<PurchaseInfo>();
+    public Map<String, List<PurchaseInfo>> getInventory () {
+        Map<String, List<PurchaseInfo>> result = new HashMap<String, List<PurchaseInfo>>();
+        
+        //Tower Inventory
+        List<PurchaseInfo> towerInventory= new ArrayList<PurchaseInfo>();
         List<TowerFactory> factoryList=towerWarehouse.getTowerFactory();
         for(int i=0; i< factoryList.size();i++){
-            result.add((PurchaseInfo)(factoryList.get(i)));
+            towerInventory.add((PurchaseInfo)(factoryList.get(i)));
 
         }
+        result.put("Tower", towerInventory);
+        
+        /**
+         * Barrier Inventory
+         * 
+         * @author Harris
+         */
+        
         return result;
     }
 
