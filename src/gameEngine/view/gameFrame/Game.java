@@ -60,8 +60,6 @@ public class Game extends StdGame {
         initial_lives = view.getLives();
         lives = view.getLives();
         score = view.getMoney();
-        String bgImage = "space_background.jpg";
-        defineImage("background", "bg", 256, bgImage, "-");
         defineImage("RESERVEDslider_bar","sb",256,"slider_bar.png","-");
         defineImage("RESERVEDslider_toggle","sb",256,"slider_toggle.png","-");
         String background=view.getBGImage();
@@ -124,7 +122,6 @@ public class Game extends StdGame {
         if (getMouseButton(1) && getMouseInside()) {
             clearMouseButton(1);
             JGPoint mousePosition = getMousePos();
-            JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
             if (purchasing) {
                 if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)){
                     towerToPurchase=null;
