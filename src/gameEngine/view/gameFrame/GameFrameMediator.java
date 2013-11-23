@@ -5,6 +5,7 @@ import jgame.impl.JGEngineInterface;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.gameFrame.store.InfoDisplayPanel;
 import gameEngine.view.gameFrame.store.StoreOptionsPanel;
+import gameEngine.view.gameFrame.store.StorePanel;
 
 
 /**
@@ -26,14 +27,15 @@ import gameEngine.view.gameFrame.store.StoreOptionsPanel;
  */
 public class GameFrameMediator {
 
-    private StoreOptionsPanel storeOptions;
+//    private StoreOptionsPanel storeOptions;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
     private InfoDisplayPanel towerInfoPanel;
+    private StorePanel store;
 
-    public void addTowersOptionPanel (StoreOptionsPanel storeOptions) {
-        this.storeOptions = storeOptions;
-    }
+//    public void addTowersOptionPanel (StoreOptionsPanel storeOptions) {
+//        this.storeOptions = storeOptions;
+//    }
 
  
     /**
@@ -45,6 +47,7 @@ public class GameFrameMediator {
     }
     
     public void endGame(){
+        this.clearDisplay();
         canvasPanel.endGame();
     }
 
@@ -91,7 +94,7 @@ public class GameFrameMediator {
      * Updates the enabled status of store items.
      */
     public void updateStoreStatus () {
-        storeOptions.updateStoreStatus();
+        store.updateStoreStatus();
     }
 
     public void addGameFrame (GameFrame gameFrame) {
@@ -113,12 +116,19 @@ public class GameFrameMediator {
     }
     
     public void openStore () {
-      storeOptions.addStoreInventory();
+      store.addStoreInventory();
     }
 
-
+    public void closeStore(){
+        store.closeStore();
+    }
     public void displayTowerInfo (Map<String, String> information, Map<String, String> display) {
         this.towerInfoPanel.displayInformation(information, display);
+        
+    }
+
+    public void addStore (StorePanel storePanel) {
+        this.store = storePanel;
         
     }
 }

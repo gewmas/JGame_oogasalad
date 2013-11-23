@@ -61,16 +61,16 @@ public class View {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-             e.printStackTrace();
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }
     }
 
-    public void sendEngine(JGEngineInterface engine){
+    public void sendEngine (JGEngineInterface engine) {
         controller.setJGEngine(engine);
     }
-    
+
     /**
      * Tells the controller to send tower purchase instructions to the model
      * and then reset the cursor
@@ -115,24 +115,26 @@ public class View {
     public Map<String, List<PurchaseInfo>> getInventory () {
         return controller.getInventory();
     }
-    
+
     public List<PurchaseInfo> getTowers () {
         return controller.getTowers();
     }
-    
-    public void quitGame(){
+
+    public void quitGame () {
         mediator.quitGame();
     }
 
     public void endGame () {
         mediator.endGame();
-        //controller.startGame();
+        mediator.closeStore();
+        // controller.startGame();
     }
+
     public boolean activateCheat (String cheat) {
         return controller.activateCheat(cheat);
     }
-    
-    public String getGameTitle(){
+
+    public String getGameTitle () {
         return controller.getGameTitle();
     }
 }
