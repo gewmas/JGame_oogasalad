@@ -131,4 +131,8 @@ public class View {
     public boolean activateCheat (String cheat) {
         return controller.activateCheat(cheat);
     }
+    
+    public String getGameTitle(){
+        return controller.getGameTitle();
+    }
 }
