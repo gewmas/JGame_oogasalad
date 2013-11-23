@@ -10,9 +10,12 @@ import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import jgame.JGObject;
 import jgame.impl.JGEngineInterface;
 
 
@@ -38,7 +41,7 @@ public class Model {
     private ArrayList<Tile> barriers;
 
     public Model () {
-        rule = new Rule();
+       
         
     }
     
@@ -55,15 +58,16 @@ public class Model {
 
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
-
+        rule = new Rule(1, enemyWarehouse);
+        rule.readWaveFromJSon(parser.getJSONArray("wave"));
         gameInfo = new GameInfo(parser);
     }
-
+    // Jiaran: now we can just read waves from JSon.
     public void startGame () {
-        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
-        Wave w1 = new Wave("1", 10, 0.5, 0, enemyWarehouse);
-        rule.addWave(w);
-        rule.addWave(w1);
+//        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
+//        Wave w1 = new Wave("2", 10, 0.5, 0, enemyWarehouse);
+//        rule.addWave(w);
+//        rule.addWave(w1);
         rule.ruleStart();
 
     }
@@ -87,24 +91,37 @@ public class Model {
      * return all kinds of TowerFactory
      */
     //edit by Jiaran to hold encapsulation by passing TowerInfo.
-    public List<PurchaseInfo> getAllTowerInfo () {
-        List<PurchaseInfo> result= new ArrayList<PurchaseInfo>();
+    public Map<String, List<PurchaseInfo>> getInventory () {
+        Map<String, List<PurchaseInfo>> result = new HashMap<String, List<PurchaseInfo>>();
+        
+        //Tower Inventory
+        List<PurchaseInfo> towerInventory= new ArrayList<PurchaseInfo>();
         List<TowerFactory> factoryList=towerWarehouse.getTowerFactory();
         for(int i=0; i< factoryList.size();i++){
-            result.add((PurchaseInfo)(factoryList.get(i)));
+            towerInventory.add((PurchaseInfo)(factoryList.get(i)));
 
         }
+        result.put("Tower", towerInventory);
+        
+        /**
+         * Barrier Inventory
+         * 
+         * @author Harris
+         */
+        
         return result;
     }
 
     //For detector use
     public void setJGEngine(JGEngineInterface eng){
         this.myEng = eng;
+        Resources r = new Resources(myEng);
+        r.register(parser);
     }
     
     //Refractor method to check whether Tower exist at (x, y)
     public Tower checkTowerAtXY(int x, int y){
-        int detectRange = 100;
+        int detectRange = 10;
         Detector<Tower> d= new Detector<Tower>(myEng,Tower.class);
         return d.getOneTargetInRange(x, y, detectRange);
     }

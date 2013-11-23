@@ -9,11 +9,13 @@ import gameEngine.parser.JSONLibrary.JSONObject;
 public class MagicTowerFactory extends DefaultTowerFactory {
 
     double magicFactor;
+    int magic;
     
     public MagicTowerFactory (JSONObject currTower) {
         super(currTower);
         
         this.magicFactor = currTower.getDouble("magicFactor");
+        this.magic = currTower.getInt("magic");
         
         addDescription();
     }
@@ -27,7 +29,7 @@ public class MagicTowerFactory extends DefaultTowerFactory {
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new MagicTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, magicFactor, 
+                (Tower) new MagicTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, magicFactor, magic, 
                                        type, id, true, x, y, Constant.TOWER_CID, image);
         return tower;
     }
