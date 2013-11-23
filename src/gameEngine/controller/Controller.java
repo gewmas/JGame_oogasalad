@@ -203,6 +203,13 @@ public class Controller {
     public int getLives () {
         return model.getGameInfo().getLife();
     }
+    
+    /**
+     * Return the game title
+     */
+    public String getGameTitle () {
+        return model.getGameInfo().getMyName();
+    }
 
     public List<Tile> getPath () {
         return model.getPathList();
