@@ -15,4 +15,8 @@ public class Frame extends JFrame {
         super();
     }
 
+    public void showFrame(){
+        this.pack();
+        this.setVisible(true);
+    }
 }

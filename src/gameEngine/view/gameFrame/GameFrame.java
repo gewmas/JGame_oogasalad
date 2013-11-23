@@ -25,6 +25,7 @@ import gameEngine.view.gameFrame.inputAndDisplay.InputAndDisplayFrame;
 import gameEngine.view.gameFrame.inputAndDisplay.InputSender;
 import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.store.StorePanel;
+import gameEngine.view.gameFrame.store.ToolsFrame;
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.purchase.PurchaseInfo;
@@ -121,9 +122,11 @@ public class GameFrame extends Frame {
      * Create the store of Towers
      */
     private void createStore () {
-        storePanel = new StorePanel(mediator, view);
-        mediator.addStore(storePanel);
-        this.add(storePanel, BorderLayout.EAST);
+//        storePanel = new StorePanel(mediator, view);
+//        mediator.addStore(storePanel);
+//        this.add(storePanel, BorderLayout.EAST);
+        Frame tools = new ToolsFrame(mediator,view);
+        tools.showFrame();
     }
 
     /**
