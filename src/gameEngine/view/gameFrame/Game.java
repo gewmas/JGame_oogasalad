@@ -87,6 +87,7 @@ public class Game extends StdGame {
         for (String str:INFO_TO_DISPLAY){
             printValues.put(str,"black");
         }
+        this.game_title=view.getGameTitle();
     }
     
     public void startInGame() {
