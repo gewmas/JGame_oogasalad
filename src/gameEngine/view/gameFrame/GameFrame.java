@@ -42,7 +42,7 @@ public class GameFrame extends Frame {
     private Controller controller;
     private GameFrameMediator mediator;
     private View view;
-    private Panel storePanel;
+    private StorePanel storePanel;
     private InputAndDisplayFrame cheatCodeFrame;
 
     /**
@@ -122,6 +122,7 @@ public class GameFrame extends Frame {
      */
     private void createStore () {
         storePanel = new StorePanel(mediator, view);
+        mediator.addStore(storePanel);
         this.add(storePanel, BorderLayout.EAST);
     }
 

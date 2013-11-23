@@ -133,4 +133,12 @@ public abstract class StoreOptionsPanel extends Panel {
         }
     }
 
+    public void closeStore () {
+        storeItems = null;
+        
+       
+       
+        
+    }
+
 }

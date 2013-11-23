@@ -17,6 +17,7 @@ import gameEngine.view.gameFrame.GameFrameMediator;
 public class StorePanel extends Panel {
     private StoreOptionsPanel towerStoreOptions;
     private StoreOptionsPanel objectsStoreOptions;
+    private JTabbedPane storeTabbedPane;
 
     /**
      * @param mediator facilitates communication between view components
@@ -31,7 +32,7 @@ public class StorePanel extends Panel {
         InfoDisplayPanel infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
                 .getString("ItemInfo"));
         mediator.addInfoPanel(infoPanel);
-        JTabbedPane storeTabbedPane = new JTabbedPane();
+         storeTabbedPane = new JTabbedPane();
 
         // TO BE CHANGED
         towerStoreOptions = new TowerOptionsPanel(mediator, engineView);
@@ -40,10 +41,29 @@ public class StorePanel extends Panel {
 
         storeTabbedPane.addTab("Towers", towerStoreOptions);
         storeTabbedPane.addTab("Objects", objectsStoreOptions);
-        mediator.addTowersOptionPanel(towerStoreOptions);
+       
         add(infoPanel, BorderLayout.CENTER);
         add(storeTabbedPane, BorderLayout.PAGE_START);
 
+    }
+
+    public void addStoreInventory () {
+        towerStoreOptions.addStoreInventory();
+        
+    }
+
+    public void updateStoreStatus () {
+        towerStoreOptions.updateStoreStatus();
+        
+    }
+
+    public void closeStore () {
+       towerStoreOptions.closeStore();
+       storeTabbedPane.removeAll();
+       this.revalidate();
+       this.repaint();
+      
+        
     }
 
 }
