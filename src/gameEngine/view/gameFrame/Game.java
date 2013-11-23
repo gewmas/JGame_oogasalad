@@ -64,9 +64,9 @@ public class Game extends StdGame {
         defineImage("background", "bg", 256, bgImage, "-");
         defineImage("RESERVEDslider_bar","sb",256,"slider_bar.png","-");
         defineImage("RESERVEDslider_toggle","sb",256,"slider_toggle.png","-");
+        String background=view.getBGImage();
         
-        
-        setBGImage("background");
+        setBGImage(background);
         purchasing = false;
         setHighscores(10, new Highscore(0, "aaa"), 3);
         startgame_ingame = true;
