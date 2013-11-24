@@ -49,19 +49,32 @@ public class MagicTower extends DefaultTower {
     public void addDescription(){
         super.addDescription();
         info.put("Magic Factor", String.valueOf(magicFactor));
+
+        info.put("Upgrade Magic Factor", String.valueOf(magicFactor*upgradeFactor));
+
     }
 
     
     @Override
     public void upgrade () {
-        super.upgrade();
-        this.magicFactor += 1.0;
+        upgrade(upgradeFactor);
     }
 
     @Override
     public void downgrade(){
-        super.downgrade();
-        this.magicFactor -= 1.0;
+        downgrade(upgradeFactor);
+    }
+    
+    @Override
+    public void upgrade (double factor) {
+        this.magicFactor *= factor;
+        super.upgrade(factor);
+    }
+    
+    @Override
+    public void downgrade (double factor) {
+        this.magicFactor /= factor;
+        super.downgrade(factor);
     }
 
 }

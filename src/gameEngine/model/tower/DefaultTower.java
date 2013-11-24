@@ -194,14 +194,12 @@ public class DefaultTower extends Tower {
     
     @Override
     public void upgrade () {
-        damage++;
-        attackSpeed += 1;
+        upgrade(upgradeFactor);
     }
 
     @Override
     public void downgrade () {
-        damage--;
-        attackSpeed -= 1;
+        downgrade(upgradeFactor);
     }
     
     @Override

@@ -2,6 +2,7 @@ package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -22,6 +23,13 @@ import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * Subclass of Tab that contains Swing components to input or load basic game information such as
+ * game name, starting quantity of gold, splash image, etc.
+ * 
+ * 
+ * 
+ */
 public class BasicInfoTab extends Tab {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");

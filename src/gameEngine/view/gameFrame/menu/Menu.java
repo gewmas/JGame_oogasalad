@@ -1,8 +1,6 @@
 package gameEngine.view.gameFrame.menu;
 
 
-import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrameMediator;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
@@ -13,11 +11,11 @@ import javax.swing.JMenuBar;
  */
 public class Menu extends JMenuBar {
 
-    public Menu (View view) {
+    public Menu (MenuActions menuOptions) {
        
         JMenu menuitem = new JMenu("File");
-        menuitem.add(new NewGameMenuItem(view));
-        menuitem.add(new EndGameMenuItem(view));
+        menuitem.add(new NewGameMenuItem( menuOptions));
+        menuitem.add(new EndGameMenuItem( menuOptions));
        
         add(menuitem);
 
