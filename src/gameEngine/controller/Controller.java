@@ -80,24 +80,6 @@ public class Controller {
     }
     
     /**
-     * @author Harris Osserman
-     * 
-     * Sends a call to the model to update the monitored barrier stats to the barrier
-     * at x,y. If the position is invalid, do nothing
-     */
-
-//    public PurchaseInfo getTemporaryBarrierInfo (int x, int y) {
-//        PurchaseInfo barrierInfo;
-//        try {
-//            barrierInfo=model.getBarrierInfo(x,y);
-//        } catch (Exception e) {
-//            barrierInfo=null;
-//        }
-//        return barrierInfo;
-//    }
-
-    
-    /**
      * Sends a call to the model to purchase tower tower at position x,y
      * If position is invalid, do nothing for now
      */
@@ -106,12 +88,12 @@ public class Controller {
     }
     
     /**
+     * @author Harris
      * Sends a call to the model to purchase temporary barrier at position x,y
      * If position is invalid, do nothing for now
      */
     public boolean purchaseTemporaryBarrier (int x, int y, String name) {
-        //return model.purchaseTemporaryBarrier(x, y, name);
-        return false;
+        return model.purchaseTemporaryBarrier(x, y, name);
     }
     
     /**
