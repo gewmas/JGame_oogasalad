@@ -85,8 +85,6 @@ public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicabl
         info.put("Damage", String.valueOf(damage));
         info.put("Attack Speed", String.valueOf(attackSpeed));
         info.put("Range", String.valueOf(range));
-        info.put("X", String.valueOf(x));
-        info.put("Y", String.valueOf(y));
         info.put("Cost", String.valueOf(cost));
         info.put("Sell Price", String.valueOf(recyclePrice));
         info.put("Description", String.valueOf(description));
