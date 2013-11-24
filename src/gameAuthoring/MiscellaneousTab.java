@@ -35,7 +35,7 @@ public class MiscellaneousTab extends Tab {
 
     @Override
     public JPanel getTab () {
-        JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
+        JPanel mainPanel = new GradientPanel(new MigLayout("wrap 2"));
         JLabel title = new JLabel("Miscellaneous");
         title.setFont(Constants.defaultTitleFont);
         mainPanel.add(title, "span 2");
@@ -68,7 +68,7 @@ public class MiscellaneousTab extends Tab {
         mainPanel.add(poisonImage);
         mainPanel.add(flameImageButton);
         mainPanel.add(flameImage);
-
+        mainPanel.setOpaque(false);
         return mainPanel;
     }
 

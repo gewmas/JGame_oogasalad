@@ -2,7 +2,6 @@ package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -49,9 +48,9 @@ public class BasicInfoTab extends Tab {
     // TO DO: Get rid of magic number
     @Override
     public JPanel getTab () {
-        JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
+        JPanel mainPanel = new GradientPanel(new MigLayout("wrap 2"));
         JPanel subPanel = new JPanel(new MigLayout("wrap 2"));
-
+        subPanel.setOpaque(false);
         JLabel gameName = new JLabel("Game Name");
         gameName.setFont(Constants.defaultBodyFont);
 
@@ -123,7 +122,7 @@ public class BasicInfoTab extends Tab {
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
         subPanel.add(setInfoButton);
-        Border b = BorderFactory.createLoweredBevelBorder();
+        Border b = BorderFactory.createLineBorder(Color.black, 1);
         subPanel.setBorder(b);
         mainPanel.add(subPanel, "align center");
 

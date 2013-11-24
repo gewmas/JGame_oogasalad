@@ -1,6 +1,7 @@
 package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -83,8 +84,9 @@ public class EnemyDesignPanel extends JPanel {
         this.add(enemyImageChooser);
         this.add(myEnemyImage);
         this.add(createEnemyButton);
-        Border b = BorderFactory.createLoweredBevelBorder();
+        Border b = BorderFactory.createLineBorder(Color.black, 1);
         this.setBorder(b);
+        this.setOpaque(false);
     }
 
     public MouseAdapter createPathListener () {

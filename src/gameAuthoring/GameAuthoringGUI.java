@@ -2,13 +2,17 @@ package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.menuBar.MenuBar;
-import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,64 +20,36 @@ import javax.swing.JTabbedPane;
 import net.miginfocom.swing.MigLayout;
 
 
-public class GameAuthoringGUI {
+public class GameAuthoringGUI implements Observer {
+
+    protected JFrame myFrame;
+    protected JPanel myMainPanel;
     private BasicInfoTab myBasicInfoTab;
     private MapDesignTab myMapDesignTab;
     private TowerDesignTab myTowerDesignTab;
     private EnemyDesignTab myEnemyDesignTab;
     private LevelDesignTab myLevelDesignTab;
     private MiscellaneousTab myMiscellaneousTab;
+    private SimulationTab mySimulationTab;
     private UserLibraryMainTab myUserLibraryPanel;
+    private Image currentImage;
 
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
         GameData gameData = new GameData();
-        JFrame frame = new JFrame();
-        JLabel title = new JLabel("G a m e   D e s i g n   E n v i r o n m e n t");
-        title.setFont(new Font("Calibri", Font.ITALIC, 50));
-        title.setForeground(new Color(120, 120, 120));
-        frame.setPreferredSize(new Dimension(1200, 900));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel mainPanel = new JPanel(new MigLayout("wrap 2")) {
-            @Override
-            protected void paintComponent (Graphics grphcs) {
-                super.paintComponent(grphcs);
-                grphcs.setColor(Color.red);
-                Graphics2D g2d = (Graphics2D) grphcs;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                                     RenderingHints.VALUE_ANTIALIAS_ON);
-
-                GradientPaint gp =
-                        new GradientPaint(0, 0,
-                                          getBackground().brighter().brighter(), 0, getHeight(),
-                                          getBackground().darker().darker().darker());
-
-                g2d.setPaint(gp);
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-                super.paintComponent(grphcs);
-                // Image img = null;
-                // try {
-                // img = ImageIO.read(this.getClass().getResource("frame.png"));
-                // }
-                // catch (IOException e) {
-                // e.printStackTrace();
-                // }
-                // int h = img.getHeight(null);
-                // int w = img.getWidth(null);
-                //
-                // if (w > this.getWidth() || w < this.getWidth()) {
-                // img = img.getScaledInstance(getWidth(), -1, Image.SCALE_DEFAULT);
-                // h = img.getHeight(null);
-                // }
-                // if (h > this.getHeight() || h < this.getHeight()) {
-                // img = img.getScaledInstance(-1, getHeight(), Image.SCALE_DEFAULT);
-                // }
-                // int x = (getWidth() - img.getWidth(null)) / 2;
-                // int y = (getHeight() - img.getHeight(null)) / 2;
-                // grphcs.drawImage(img, x, y, null);
-            }
-        };
-        mainPanel.setOpaque(false);
+        myFrame = new JFrame();
+        JLabel title = new JLabel();
+        Image titleImage;
+        try {
+            titleImage = ImageIO.read(this.getClass().getResource("title.png"));
+            title.setIcon(new ImageIcon(titleImage));
+        }
+        catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        myFrame.setPreferredSize(new Dimension(1200, 1000));
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myMainPanel = new ImagePanel(new MigLayout("wrap 2"));
         JTabbedPane gameDesignTab = new JTabbedPane();
         gameDesignTab.setPreferredSize(new Dimension(750, 650));
         myBasicInfoTab = new BasicInfoTab(gameData);
@@ -82,7 +58,9 @@ public class GameAuthoringGUI {
         myEnemyDesignTab = new EnemyDesignTab(gameData);
         myLevelDesignTab = new LevelDesignTab(gameData);
         myMiscellaneousTab = new MiscellaneousTab(gameData);
-        myUserLibraryPanel = new UserLibraryMainTab();
+        mySimulationTab = new SimulationTab(gameData);
+        myUserLibraryPanel = new UserLibraryMainTab(this);
+
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
         gameDesignTab.addTab("Map Design", myMapDesignTab.getTab());
@@ -90,19 +68,34 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
         gameDesignTab.addTab("Level Design", myLevelDesignTab.getTab());
         gameDesignTab.addTab("Miscellaneous", myMiscellaneousTab.getTab());
+        gameDesignTab.addTab("Simulate", mySimulationTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab);
-        mainPanel.add(title, "span 2, align right");
-        mainPanel.add(gameDesignTab, "gap 50 20 30 40");
-        mainPanel.add(myUserLibraryPanel);
-        frame.setJMenuBar(menu);
-        frame.setContentPane(mainPanel);
-        frame.pack();
-        frame.setLocationByPlatform(true);
-        frame.setVisible(true);
-
+        myMainPanel.add(title, "span 2, align left, gap 0 0 30 0");
+        myMainPanel.add(gameDesignTab, "gap 50 20 30 40");
+        myMainPanel.add(myUserLibraryPanel);
+        myFrame.setJMenuBar(menu);
+        myFrame.setContentPane(myMainPanel);
+        myFrame.pack();
+        myFrame.setLocationByPlatform(true);
+        myFrame.setVisible(true);
+        myFrame.setResizable(false);
     }
 
     public static void main (String[] arg) {
         GameAuthoringGUI gameAuthoringGUI = new GameAuthoringGUI();
+    }
+
+    @Override
+    public void update (Observable arg0, Object arg1) {
+        if (arg1 instanceof Image) {
+            Image image = (Image) arg1;
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Cursor c = toolkit.createCustomCursor(image, new Point(myMainPanel.getX(),
+                                                                   myMainPanel.getY()), "img");
+            myMainPanel.setCursor(c);
+        }
+        if (arg1 instanceof Integer) {
+            myMainPanel.setCursor(Cursor.getDefaultCursor());
+        }
     }
 }

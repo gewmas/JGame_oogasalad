@@ -36,7 +36,7 @@ public class LevelDesignTab extends Tab {
 
     @Override
     public JPanel getTab () {
-        myMainPanel = new JPanel(new MigLayout("wrap 1"));
+        myMainPanel = new GradientPanel(new MigLayout("wrap 1"));
         myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
         JLabel title = new JLabel("Level Design");
         title.setFont(new Font("Calibri", Font.PLAIN, 30));
@@ -49,7 +49,6 @@ public class LevelDesignTab extends Tab {
         myCreatedLevels.setBorder(b);
         myCreatedLevels.setPreferredSize(new Dimension(440, 300));
         myMainPanel.add(myCreatedLevels);
-
         return myMainPanel;
     }
 

@@ -19,10 +19,13 @@ import net.miginfocom.swing.MigLayout;
 
 public class UserSoundsTab implements Observer {
 
-    private JPanel myMainPanel = new JPanel(new MigLayout("wrap 1"));
+    private JPanel myMainPanel = new GradientPanel(new MigLayout("wrap 1"));
 
     public JScrollPane getTab () {
+        myMainPanel.setOpaque(false);
         JScrollPane scrollPane = new JScrollPane(myMainPanel);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setOpaque(false);
         addSound("test1");
         addSound("test2");
         return scrollPane;
@@ -59,7 +62,6 @@ public class UserSoundsTab implements Observer {
             clip.start();
         }
         catch (Exception ex) {
-            System.out.println("Error with playing sound.");
             ex.printStackTrace();
         }
     }

@@ -35,6 +35,7 @@ public class LevelDesignPanel extends JPanel {
         this.setBorder(b);
         this.add(createLevelPanel());
         this.add(myCreatedWaves);
+        this.setOpaque(false);
     }
 
     private JPanel createLevelPanel () {

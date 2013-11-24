@@ -42,7 +42,7 @@ public class MapDesignTab extends Tab {
     // TODO: Get rid of magic number
     @Override
     public JPanel getTab () {
-        JPanel mainPanel = new JPanel(new GridBagLayout());
+        JPanel mainPanel = new GradientPanel(new GridBagLayout());
         JPanel gridPanel = new JPanel(new BorderLayout());
         myGrid = new Grid(20, 20);
         JLabel title = new JLabel("Map Design");
@@ -93,7 +93,6 @@ public class MapDesignTab extends Tab {
         c.gridx = 0;
         c.gridy = 4;
         mainPanel.add(checkPath, c);
-
         Border b = BorderFactory.createLoweredBevelBorder();
         gridPanel.setBorder(b);
         return mainPanel;
