@@ -2,7 +2,6 @@ package gameEngine.factory.towerfactory;
 
 import gameEngine.Constant.Constant;
 import gameEngine.model.tower.MagicTower;
-import gameEngine.model.tower.MultipleShootingTower;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
@@ -14,8 +13,8 @@ public class MagicTowerFactory extends DefaultTowerFactory {
     public MagicTowerFactory (JSONObject currTower) {
         super(currTower);
         
-        this.magicFactor = currTower.getDouble("magicFactor");
-        this.magic = currTower.getInt("magic");
+        this.magicFactor = currTower.getDouble(Constant.TOWER_MAGIC_FACTOR);
+        this.magic = currTower.getInt(Constant.TOWER_MAGIC);
         
         addDescription();
     }
@@ -29,7 +28,7 @@ public class MagicTowerFactory extends DefaultTowerFactory {
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new MagicTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, magicFactor, magic, 
+                (Tower) new MagicTower(damage, attackSpeed, attackMode, range, cost, sellPrice, description, magicFactor, magic, 
                                        type, id, true, x, y, Constant.TOWER_CID, image,
                                        purchaseInfo);
         return tower;

@@ -14,7 +14,7 @@ public class BoostTowerFactory extends TowerFactory {
     public BoostTowerFactory (JSONObject currTower) {
         super(currTower);
         
-        this.boostFactor = currTower.getDouble("boostFactor");
+        this.boostFactor = currTower.getDouble(Constant.TOWER_BOOST_FACTOR);
         
         addDescription();
     }
@@ -27,7 +27,7 @@ public class BoostTowerFactory extends TowerFactory {
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new BoostTower(damage, attackSpeed, range, cost, recyclePrice, description, boostFactor, 
+                (Tower) new BoostTower(damage, attackSpeed, range, cost, sellPrice, description, boostFactor, 
                                        type, id, true, x, y, Constant.TOWER_CID, image,
                                        purchaseInfo);
         return tower;

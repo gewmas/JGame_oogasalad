@@ -12,7 +12,7 @@ public class MultipleShootingTowerFactory extends DefaultTowerFactory {
     public MultipleShootingTowerFactory (JSONObject currTower) {
         super(currTower);
         
-        this.attackAmount = currTower.getInt("attackAmount");
+        this.attackAmount = currTower.getInt(Constant.TOWER_ATTACK_AMOUNT);
         
         addDescription();
     }
@@ -25,7 +25,7 @@ public class MultipleShootingTowerFactory extends DefaultTowerFactory {
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new MultipleShootingTower(damage, attackSpeed, attackMode, attackAmount, range, cost, recyclePrice, description, 
+                (Tower) new MultipleShootingTower(damage, attackSpeed, attackMode, attackAmount, range, cost, sellPrice, description, 
                                                   type, id, true,
                                          x, y, Constant.TOWER_CID, image,
                                          purchaseInfo);

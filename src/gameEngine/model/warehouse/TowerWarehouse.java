@@ -1,5 +1,6 @@
 package gameEngine.model.warehouse;
 
+import gameEngine.Constant.Constant;
 import gameEngine.factory.towerfactory.DefaultTowerFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.GameInfo;
@@ -28,14 +29,14 @@ public class TowerWarehouse extends Warehouse {
     Map<String, TowerFactory> towers;
 
     public TowerWarehouse (Parser parser) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-        jsonArray = parser.getJSONArray("towerType");
+        jsonArray = parser.getJSONArray(Constant.TOWER_TYPE);
         towers = new HashMap<String, TowerFactory>();
 
         // loop through all kinds
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject currTower = jsonArray.getJSONObject(i);
-            String id = currTower.getString("id");
-            String type = currTower.getString("type");
+            String name = currTower.getString(Constant.PURCHASE_INFO_NAME);
+            String type = currTower.getString(Constant.PURCHASE_INFO_TYPE);
             TowerFactory towerFactory = null;
             
             /**
@@ -58,7 +59,7 @@ public class TowerWarehouse extends Warehouse {
             towerFactory = (TowerFactory)fooCtrs[0].newInstance(params);
          
             
-            towers.put(id, towerFactory);
+            towers.put(name, towerFactory);
         }
     }
 
