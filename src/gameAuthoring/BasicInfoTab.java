@@ -2,17 +2,11 @@ package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
-import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -23,6 +17,13 @@ import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * Subclass of Tab that contains Swing components to input or load basic game information such as
+ * game name, starting quantity of gold, splash image, etc.
+ * 
+ * 
+ * 
+ */
 public class BasicInfoTab extends Tab {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
@@ -109,8 +110,8 @@ public class BasicInfoTab extends Tab {
     }
 
     public void loadJSON (Parser p) {
-        try { 
-            myGameName.setText(p.getString("name"));          
+        try {
+            myGameName.setText(p.getString("name"));
             myGold.setText(String.valueOf(p.getInt("gold")));
             myLives.setText(String.valueOf(p.getInt("numberOfLives")));
             myWindowWidth.setText(String.valueOf(p.getInt("widthOfWindow")));
@@ -119,7 +120,7 @@ public class BasicInfoTab extends Tab {
             myDifficultyScale.setText(String.valueOf(p.getDouble("difficultyScale")));
             mySplashImage = p.getString("splashImage");
             mySplashImageLabel.setText(mySplashImage);
-            
+
             setData();
         }
 
@@ -132,7 +133,7 @@ public class BasicInfoTab extends Tab {
     public MouseAdapter setInfoListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
-            public void mouseClicked (MouseEvent e) {          
+            public void mouseClicked (MouseEvent e) {
                 setData();
             }
         };
@@ -140,7 +141,7 @@ public class BasicInfoTab extends Tab {
 
     }
 
-    private void setData(){
+    private void setData () {
         int gold = Integer.parseInt(myGold.getText());
         int lives = Integer.parseInt(myLives.getText());
         int width = Integer.parseInt(myWindowWidth.getText());
@@ -148,7 +149,6 @@ public class BasicInfoTab extends Tab {
         int tiles = Integer.parseInt(myTilesPerRow.getText());
         float difficultyScale = Float.parseFloat(myDifficultyScale.getText());
         String name = myGameName.getText();
-
 
         if (gold > 0 && lives > 0 && width > 0 && height > 0 && tiles > 0 &&
             difficultyScale > 1 && mySplashImage != null && name != null) {
@@ -161,13 +161,13 @@ public class BasicInfoTab extends Tab {
             myGameData.setSplashImage(mySplashImage);
             myGameData.setGameName(name);
         }
-        
+
         else {
             JOptionPane.showMessageDialog(null,
                                           "One or more fields invalid! Please try again.");
         }
     }
-    
+
     public MouseAdapter setSplashImageListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
@@ -175,8 +175,11 @@ public class BasicInfoTab extends Tab {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     mySplashImage =
-                            INPUT_CHOOSER.getSelectedFile().toString()
-                                    .replace(System.getProperties().getProperty("user.dir") + "/", "");
+                            INPUT_CHOOSER
+                                    .getSelectedFile()
+                                    .toString()
+                                    .replace(System.getProperties().getProperty("user.dir") + "/",
+                                             "");
                     mySplashImageLabel.setText(mySplashImage);
                 }
 
