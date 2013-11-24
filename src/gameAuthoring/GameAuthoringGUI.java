@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
@@ -24,6 +25,7 @@ public class GameAuthoringGUI implements Observer {
 
     protected JFrame myFrame;
     protected JPanel myMainPanel;
+    static File mySelectedImage = null;
     private BasicInfoTab myBasicInfoTab;
     private MapDesignTab myMapDesignTab;
     private TowerDesignTab myTowerDesignTab;
@@ -87,12 +89,20 @@ public class GameAuthoringGUI implements Observer {
 
     @Override
     public void update (Observable arg0, Object arg1) {
-        if (arg1 instanceof Image) {
-            Image image = (Image) arg1;
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Cursor c = toolkit.createCustomCursor(image, new Point(myMainPanel.getX(),
-                                                                   myMainPanel.getY()), "img");
-            myMainPanel.setCursor(c);
+        if (arg1 instanceof File) {
+            File imageFile = (File) arg1;
+            mySelectedImage = imageFile;
+            Image image;
+            try {
+                image = ImageIO.read(imageFile);
+                Toolkit toolkit = Toolkit.getDefaultToolkit();
+                Cursor c = toolkit.createCustomCursor(image, new Point(myMainPanel.getX(),
+                                                                       myMainPanel.getY()), "img");
+                myMainPanel.setCursor(c);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (arg1 instanceof Integer) {
             myMainPanel.setCursor(Cursor.getDefaultCursor());

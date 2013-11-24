@@ -70,19 +70,19 @@ public class TowerDesignPanel extends JPanel {
         recyclePrice.setFont(Constants.defaultBodyFont);
         JLabel description = new JLabel("Description");
         description.setFont(Constants.defaultBodyFont);
-        myTowerImage = new JLabel();
 
         // JButton towerImageChooser = new JButton("Choose tower image");
         // towerImageChooser.setFont(Constants.defaultBodyFont);
         // towerImageChooser.addMouseListener(createPathListener());
 
-        JLabel towerImageChooser = new JLabel("Chooser tower image");
+        JLabel towerImageChooser = new JLabel("Choose image");
         towerImageChooser.setFont(Constants.defaultBodyFont);
 
-        JLabel towerImage = new JLabel();
-        towerImage.setPreferredSize(new Dimension(50, 50));
+        myTowerImage = new JLabel();
+        myTowerImage.setPreferredSize(new Dimension(50, 50));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
-        towerImage.setBorder(border);
+        myTowerImage.setBorder(border);
+        myTowerImage.addMouseListener(createTowerImageListener());
 
         JComboBox<String> myTypeOptions = new JComboBox<String>(TOWER_TYPES);
         myTypeOptions.setFont(Constants.defaultBodyFont);
@@ -107,7 +107,7 @@ public class TowerDesignPanel extends JPanel {
 
         myRecyclePriceField.setFont(Constants.defaultBodyFont);
 
-        myDescriptionField = new JTextArea(5, 16);
+        myDescriptionField = new JTextArea(5, 18);
 
         myDescriptionField.setLineWrap(true);
         JScrollPane scrollPane = new JScrollPane(myDescriptionField);
@@ -134,31 +134,29 @@ public class TowerDesignPanel extends JPanel {
         this.add(description);
         this.add(scrollPane);
         this.add(towerImageChooser);
-        this.add(towerImage, "gap 10 10 10 10");
+        this.add(myTowerImage, "gap 0 0 10 10");
         // this.add(myTowerImage);
-        // this.add(createTowerButton);
+        this.add(createTowerButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         this.setBorder(b);
         this.setOpaque(false);
         this.setPreferredSize(new Dimension(380, 500));
     }
 
-    public MouseAdapter createPathListener () {
+    public MouseAdapter createTowerImageListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                int loadObject = INPUT_CHOOSER.showOpenDialog(null);
-                if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    File imgSource = INPUT_CHOOSER.getSelectedFile();
-                    myImageSource = imgSource;
-                    Image tower;
-                    try {
-                        tower = ImageIO.read(imgSource);
-                        myTowerImage.setIcon(new ImageIcon(tower));
-                    }
-                    catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+                File imgSource = GameAuthoringGUI.mySelectedImage;
+                myImageSource = imgSource;
+                Image tower;
+                try {
+                    tower = ImageIO.read(imgSource);
+                    tower = tower.getScaledInstance(50, 50, Image.SCALE_FAST);
+                    myTowerImage.setIcon(new ImageIcon(tower));
+                }
+                catch (IOException e1) {
+                    e1.printStackTrace();
                 }
             }
         };

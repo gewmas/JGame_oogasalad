@@ -44,9 +44,10 @@ public class UserImagesTab extends Observable {
                     Image image;
                     try {
                         image = ImageIO.read(imgSource);
-                        ImageLabel imageLabel = new ImageLabel(image);
+                        ImageLabel imageLabel = new ImageLabel(imgSource);
                         imageLabel.addMouseListener(addIconListener(userImagesTab, imageLabel));
                         mySubPanel.add(imageLabel);
+                        mySubPanel.revalidate();
                     }
                     catch (IOException e1) {
                         e1.printStackTrace();
@@ -67,7 +68,7 @@ public class UserImagesTab extends Observable {
                 imageSelected = !imageSelected;
                 if (imageSelected) {
                     userImagesTab.setChanged();
-                    userImagesTab.notifyObservers(image.getImagePath());
+                    userImagesTab.notifyObservers(image.getImageFile());
                     userImagesTab.clearChanged();
                 }
                 else {

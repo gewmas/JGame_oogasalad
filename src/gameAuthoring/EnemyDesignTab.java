@@ -40,7 +40,7 @@ public class EnemyDesignTab extends Tab {
         myScrollPanel = new JPanel(new MigLayout("wrap 4"));
         myScrollPanel.setOpaque(false);
         EnemyDesignPanel enemyDesignPanel = new EnemyDesignPanel(this);
-        myMainPanel.add(enemyDesignPanel, "span 2");
+        myMainPanel.add(enemyDesignPanel);
         myCreatedEnemies = new JScrollPane(myScrollPanel);
         myCreatedEnemies.getViewport().setOpaque(false);
         myCreatedEnemies.setOpaque(false);
