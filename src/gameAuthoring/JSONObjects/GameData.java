@@ -35,6 +35,7 @@ public class GameData extends JSONObject {
     JSONArray myTowerList = new JSONArray();
     JSONArray myEnemyList = new JSONArray();
     JSONArray myLevelList = new JSONArray();
+    JSONArray myBarrierList = new JSONArray();
 
     MapJSONObject myMap;
 
@@ -172,6 +173,27 @@ public class GameData extends JSONObject {
     }
 
     /**
+     * Adds barrier to myBarrierList JSONArray
+     * 
+     * @param name Barrier name
+     * @param image Barrier image
+     * @param damage Barrier damage
+     * @param cost Cost of barrier in gold
+     * @param expire Time barrier is active in game
+     * @param description Description of barrier
+     */
+    public void addBarrier (String name,
+                            String image,
+                            int damage,
+                            int cost,
+                            int expire,
+                            String description) {
+        
+        myBarrierList.put(new BarrierJSONObject(name, image, damage, cost, expire, description));
+        
+    }
+
+    /**
      * Add a level to myLevelList JSONArray
      * 
      * @param level LevelJSONObject to be added
@@ -218,10 +240,10 @@ public class GameData extends JSONObject {
      * Adds enemy, tower, and level lists to GameData
      */
     private void addListData () {
-        this.put("levels", myLevelList.length());
         this.put("towerType", myTowerList);
         this.put("enemyType", myEnemyList);
         this.put("levelData", myLevelList);
+        this.put("temporaryBarrierType", myBarrierList);
     }
 
     /**
@@ -244,7 +266,6 @@ public class GameData extends JSONObject {
             }
 
         }
-        // System.out.println(this.toString(3));
     }
 
     /**
@@ -252,7 +273,7 @@ public class GameData extends JSONObject {
      *         This method is used to create a temporary file so that a user can simmulate
      *         a game based on the parameters the game designer specified
      *         without the hassel of saving, then loading a file
-     * @return 
+     * @return
      */
     public File createSimmulationFile () {
         if (isComplete()) {
