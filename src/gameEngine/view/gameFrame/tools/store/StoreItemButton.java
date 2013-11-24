@@ -39,10 +39,10 @@ public class StoreItemButton extends Button {
         super("");
         active = false;
         this.setEnabled(false);
-        ImageIcon icon = new ImageIcon("src/resources/img/" + itemPurchaseInfo.getImage() + ".png");
+        ImageIcon icon = new ImageIcon("src/resources/img/" + itemPurchaseInfo.getInfo().get("Image") + ".png");
         this.setIcon(icon);
-        this.cost = itemPurchaseInfo.getCost();
-        setToolTipText(itemPurchaseInfo.getItemName());
+        this.cost = Integer.parseInt(itemPurchaseInfo.getInfo().get("Cost"));
+        setToolTipText(itemPurchaseInfo.getInfo().get("Name"));
         setOpaque(true);
         this.addMouseAdapter(hoverAction, hoverExitAction, clickAction);
     }
