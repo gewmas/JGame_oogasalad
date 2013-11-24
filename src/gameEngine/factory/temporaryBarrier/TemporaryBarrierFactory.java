@@ -43,54 +43,21 @@ public abstract class TemporaryBarrierFactory implements PurchaseInfo{
 
     public abstract TemporaryBarrier create (int x, int y);
         
-    public int getExpire() {
-        return expire;
-    }
-    
-    @Override
-    public String getItemName () {
-        return barrierName;
-    }
-    
-    @Override
-    public double getDamage () {
-        return damage;
-    }
-    
-    @Override
-    public double getAttackSpeed () {
-        return 0;
-    }
-    
-    @Override
-    public double getRange () {
-        return 0;
-    }
-    
-    @Override
-    public int getCost () {
-        return cost;
-    }
-    
-    @Override
-    public double getRecyclePrice () {
-        //You can't recycle a temporary barrier (ex. a puddle of water or a ball of fire)
-        return 0;
-    }
-    
-    @Override
-    public String getDescription () {
-        return description;
-    }
-    
-    @Override
-    public String getImage () {
-        return image;
-    }
-    
     @Override
     public Map<String, String> getInfo () {
         return info;
+    }
+    
+    @Override
+    public String getObjectType () {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getName () {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
