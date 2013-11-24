@@ -3,16 +3,11 @@ package gameAuthoring;
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -24,7 +19,7 @@ import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 
 
-public class EnemyDesignTab extends Tab implements Observer {
+public class EnemyDesignTab extends Tab {
 
     private JScrollPane myCreatedEnemies;
     private JPanel myScrollPanel;
@@ -78,17 +73,6 @@ public class EnemyDesignTab extends Tab implements Observer {
     public void loadJSON (Parser p) {
         // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public void update (Observable arg0, Object arg1) {
-        if (arg1 instanceof Image) {
-            Image image = (Image) arg1;
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Cursor c = toolkit.createCustomCursor(image, new Point(myMainPanel.getX(),
-                                                                   myMainPanel.getY()), "img");
-            myMainPanel.setCursor(c);
-        }
     }
 
 }

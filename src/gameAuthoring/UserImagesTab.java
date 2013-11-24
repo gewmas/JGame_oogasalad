@@ -59,14 +59,25 @@ public class UserImagesTab extends Observable {
 
     public MouseAdapter addIconListener (final UserImagesTab userImagesTab, final ImageLabel image) {
         MouseAdapter listener = new MouseAdapter() {
+
+            private boolean imageSelected = false;
+
             @Override
             public void mouseClicked (MouseEvent e) {
-                userImagesTab.setChanged();
-                userImagesTab.notifyObservers(image.getImagePath());
-                userImagesTab.clearChanged();
+                imageSelected = !imageSelected;
+                if (imageSelected) {
+                    userImagesTab.setChanged();
+                    userImagesTab.notifyObservers(image.getImagePath());
+                    userImagesTab.clearChanged();
+                }
+                else {
+                    System.out.println("Set back to default cursor");
+                    userImagesTab.setChanged();
+                    userImagesTab.notifyObservers(0);
+                    userImagesTab.clearChanged();
+                }
             }
         };
         return listener;
     }
-
 }
