@@ -1,5 +1,6 @@
 package gameEngine.model.tower;
 
+import gameEngine.Constant.Constant;
 import gameEngine.model.purchase.PurchaseInfo;
 
 public class MultipleShootingTower extends DefaultTower {
@@ -35,9 +36,9 @@ public class MultipleShootingTower extends DefaultTower {
     public void addDescription(){
         super.addDescription();
         
-        purchaseInfo.addToMap("Attack Amount", String.valueOf(attackAmount));
+        purchaseInfo.addToMap(Constant.TOWER_ATTACK_AMOUNT, String.valueOf(attackAmount));
 
-        purchaseInfo.addToMap("Upgrade Attack Amount", String.valueOf(attackAmount*upgradeFactor));
+        purchaseInfo.addToMap(Constant.TOWER_UPGRADE_ATTACK_AMOUNT, String.valueOf(attackAmount*upgradeFactor));
     }
     
     @Override

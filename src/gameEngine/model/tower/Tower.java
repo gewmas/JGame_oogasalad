@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import gameEngine.Constant.Constant;
 import gameEngine.model.magic.ITMagicable;
 import gameEngine.model.purchase.PurchaseInfo;
 import jgame.JGObject;
@@ -80,15 +81,15 @@ public abstract class Tower extends JGObject implements ITMagicable{
     }
     
     public void addDescription(){
-        purchaseInfo.addToMap("Damage", String.valueOf(damage));
-        purchaseInfo.addToMap("Attack Speed", String.valueOf(attackSpeed));
-        purchaseInfo.addToMap("Range", String.valueOf(range));
-        purchaseInfo.addToMap("Sell Price", String.valueOf(recyclePrice));
-        purchaseInfo.addToMap("Description", String.valueOf(description));
+        purchaseInfo.addToMap(Constant.TOWER_DAMAGE, String.valueOf(damage));
+        purchaseInfo.addToMap(Constant.TOWER_ATTACK_SPEED, String.valueOf(attackSpeed));
+        purchaseInfo.addToMap(Constant.TOWER_RANGE, String.valueOf(range));
+        purchaseInfo.addToMap(Constant.TOWER_SELL_PRICE, String.valueOf(recyclePrice));
+        purchaseInfo.addToMap(Constant.PURCHASE_INFO_DESCRIPTION, String.valueOf(description));
 
-        purchaseInfo.addToMap("Upgrade Price", String.valueOf(upgradePrice));
-        purchaseInfo.addToMap("Upgrade Damage", String.valueOf(damage*upgradeFactor));
-        purchaseInfo.addToMap("Upgrade Attack Speed", String.valueOf(attackSpeed*upgradeFactor));        
+        purchaseInfo.addToMap(Constant.TOWER_UPGRADE_PRICE, String.valueOf(upgradePrice));
+        purchaseInfo.addToMap(Constant.TOWER_UPGRADE_DAMAGE, String.valueOf((int)damage*upgradeFactor));
+        purchaseInfo.addToMap(Constant.TOWER_UPGRADE_ATTACK_SPEED, String.valueOf(attackSpeed*upgradeFactor));        
     }
     
   

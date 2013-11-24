@@ -1,6 +1,7 @@
 package gameEngine.model.tower;
 
 import java.util.Map;
+import gameEngine.Constant.Constant;
 import gameEngine.model.Detector;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.model.purchase.PurchaseInfo;
@@ -52,9 +53,8 @@ public class MagicTower extends DefaultTower {
 
     public void addDescription(){
         super.addDescription();
-        purchaseInfo.addToMap("Magic Factor", String.valueOf(magicFactor));
-
-        purchaseInfo.addToMap("Upgrade Magic Factor", String.valueOf(magicFactor*upgradeFactor));
+        purchaseInfo.addToMap(Constant.TOWER_MAGIC_FACTOR, String.valueOf(magicFactor));
+        purchaseInfo.addToMap(Constant.TOWER_UPGRADE_MAGIC_FACTOR, String.valueOf(magicFactor*upgradeFactor));
 
     }
 

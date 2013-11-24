@@ -1,5 +1,6 @@
 package gameEngine.factory.towerfactory;
 
+import gameEngine.Constant.Constant;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -42,15 +43,10 @@ public abstract class TowerFactory {
     }
 
     public void addDescription () {
-//        purchaseInfo.addToMap("Tower Type", type);
-//        purchaseInfo.addToMap("Tower Name", id);
-//        purchaseInfo.addToMap("Image", image);
-        purchaseInfo.addToMap("Damage", String.valueOf(damage));
-        purchaseInfo.addToMap("Attack Speed", String.valueOf(attackSpeed));
-        purchaseInfo.addToMap("Range", String.valueOf(range));
-//        purchaseInfo.addToMap("Cost", String.valueOf(cost));
-        purchaseInfo.addToMap("Sell Price", String.valueOf(recyclePrice));
-//        purchaseInfo.addToMap("Description", String.valueOf(description));
+        purchaseInfo.addToMap(Constant.TOWER_DAMAGE, String.valueOf(damage));
+        purchaseInfo.addToMap(Constant.TOWER_ATTACK_SPEED, String.valueOf(attackSpeed));
+        purchaseInfo.addToMap(Constant.TOWER_RANGE, String.valueOf(range));
+        purchaseInfo.addToMap(Constant.TOWER_SELL_PRICE, String.valueOf(recyclePrice));
     }
 
     public abstract Tower create (int x, int y);

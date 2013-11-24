@@ -23,7 +23,7 @@ public class MagicTowerFactory extends DefaultTowerFactory {
 
     public void addDescription(){
         super.addDescription();
-        purchaseInfo.addToMap("Magic Factor", String.valueOf(magicFactor));
+        purchaseInfo.addToMap(Constant.TOWER_MAGIC_FACTOR, String.valueOf(magicFactor));
     }
     
     @Override
