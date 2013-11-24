@@ -96,23 +96,7 @@ public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicabl
         info.put("Upgrade Attack Speed", String.valueOf(attackSpeed*upgradeFactor));        
     }
     
-    public void updateDescription(){
-        info.put("Tower Type", type);
-        info.put("Tower Name", id);
-        info.put("Image", image);
-        info.put("Damage", String.valueOf(damage));
-        info.put("Attack Speed", String.valueOf(attackSpeed));
-        info.put("Range", String.valueOf(range));
-        info.put("X", String.valueOf(x));
-        info.put("Y", String.valueOf(y));
-        info.put("Cost", String.valueOf(cost));
-        info.put("Sell Price", String.valueOf(recyclePrice));
-        info.put("Description", String.valueOf(description));
-
-        info.put("Upgrade Price", String.valueOf(upgradePrice));
-        info.put("Upgrade Damage", String.valueOf(damage*upgradeFactor));
-        info.put("Upgrade Attack Speed", String.valueOf(attackSpeed*upgradeFactor));   
-    }
+  
 
     /**
      * Tower Function Method

@@ -207,7 +207,7 @@ public class DefaultTower extends Tower {
         
         damage *= factor;
         attackSpeed *= factor;
-        super.updateDescription();
+        super.addDescription();
     }
     
     @Override
@@ -215,7 +215,7 @@ public class DefaultTower extends Tower {
         
         damage /= factor;
         attackSpeed /= factor;
-        super.updateDescription();
+        super.addDescription();
     }
 
     
