@@ -8,6 +8,7 @@ package gameEngine.Constant;
  *         These constants should include all the CIDs of JGObject.
  */
 public class Constant {
+    public static final int PIXELSPERTILE=20;
     public static final int ENEMY_CID = 1;
     public static final int TOWER_CID = 2;
     public static final int BULLET_CID = 4;

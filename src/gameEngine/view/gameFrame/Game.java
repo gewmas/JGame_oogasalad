@@ -103,6 +103,7 @@ public class Game extends StdGame {
             clearKey('F');
             toggleFrameRateBar();
         }
+        if (lives<=0) endGame();
     }
 
     /**
