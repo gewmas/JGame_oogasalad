@@ -162,7 +162,7 @@ public class Game extends StdGame {
      */
     public void placeTower (PurchaseInfo purchaseInfo) {
         // setBGColor(JGColor.red);
-        String towerName=purchaseInfo.getInfo().get("Tower ID");
+        String towerName=purchaseInfo.getInfo().get("Tower Name");
         if (towerName==null || towerName.equals(towerToPurchase)){
             mediator.exitPurchase();
             System.out.println("Tower cancelled");

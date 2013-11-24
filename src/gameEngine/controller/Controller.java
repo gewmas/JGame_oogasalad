@@ -26,6 +26,9 @@ public class Controller {
         model = new Model();
     }
 
+    public void promptForFile(){
+        view.promptForFile();
+    }
     public void newGame (File jsonFile) throws Exception {
         model.newGame(jsonFile); // will throw exception if fail
         view.startJGame();
@@ -60,9 +63,6 @@ public class Controller {
         return model.getInventory();  
     }
     
-    public List<PurchaseInfo> getTowers () {
-        return model.getInventory().get("Tower");  
-    }
 
     /**
      * Sends a call to the model to update the monitored tower stats to the tower
@@ -80,24 +80,6 @@ public class Controller {
     }
     
     /**
-     * @author Harris Osserman
-     * 
-     * Sends a call to the model to update the monitored barrier stats to the barrier
-     * at x,y. If the position is invalid, do nothing
-     */
-
-//    public PurchaseInfo getTemporaryBarrierInfo (int x, int y) {
-//        PurchaseInfo barrierInfo;
-//        try {
-//            barrierInfo=model.getBarrierInfo(x,y);
-//        } catch (Exception e) {
-//            barrierInfo=null;
-//        }
-//        return barrierInfo;
-//    }
-
-    
-    /**
      * Sends a call to the model to purchase tower tower at position x,y
      * If position is invalid, do nothing for now
      */
@@ -106,12 +88,12 @@ public class Controller {
     }
     
     /**
+     * @author Harris
      * Sends a call to the model to purchase temporary barrier at position x,y
      * If position is invalid, do nothing for now
      */
     public boolean purchaseTemporaryBarrier (int x, int y, String name) {
-        //return model.purchaseTemporaryBarrier(x, y, name);
-        return false;
+        return model.purchaseTemporaryBarrier(x, y, name);
     }
     
     /**
