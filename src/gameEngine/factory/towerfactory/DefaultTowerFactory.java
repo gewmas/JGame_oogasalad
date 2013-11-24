@@ -27,14 +27,15 @@ public class DefaultTowerFactory extends TowerFactory {
 
     public void addDescription(){
         super.addDescription();
-        info.put("Attack Mode", String.valueOf(attackMode));
+        purchaseInfo.addToMap("Attack Mode", String.valueOf(attackMode));
     }
     
     @Override
     public Tower create (int x, int y) {
         Tower tower =
                 (Tower) new DefaultTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, type, id, true,
-                                         x, y, Constant.TOWER_CID, image);
+                                         x, y, Constant.TOWER_CID, image,
+                                         purchaseInfo);
         return tower;
     }
 

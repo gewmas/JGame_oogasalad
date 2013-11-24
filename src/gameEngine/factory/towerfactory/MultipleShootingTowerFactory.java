@@ -19,7 +19,7 @@ public class MultipleShootingTowerFactory extends DefaultTowerFactory {
 
     public void addDescription(){
         super.addDescription();
-        info.put("Attack Amount", String.valueOf(attackAmount));
+        purchaseInfo.addToMap("Attack Amount", String.valueOf(attackAmount));
     }
     
     @Override
@@ -27,7 +27,8 @@ public class MultipleShootingTowerFactory extends DefaultTowerFactory {
         Tower tower =
                 (Tower) new MultipleShootingTower(damage, attackSpeed, attackMode, attackAmount, range, cost, recyclePrice, description, 
                                                   type, id, true,
-                                         x, y, Constant.TOWER_CID, image);
+                                         x, y, Constant.TOWER_CID, image,
+                                         purchaseInfo);
         return tower;
     }
 }

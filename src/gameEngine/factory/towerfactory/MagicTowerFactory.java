@@ -23,14 +23,15 @@ public class MagicTowerFactory extends DefaultTowerFactory {
 
     public void addDescription(){
         super.addDescription();
-        info.put("Magic Factor", String.valueOf(magicFactor));
+        purchaseInfo.addToMap("Magic Factor", String.valueOf(magicFactor));
     }
     
     @Override
     public Tower create (int x, int y) {
         Tower tower =
                 (Tower) new MagicTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, magicFactor, magic, 
-                                       type, id, true, x, y, Constant.TOWER_CID, image);
+                                       type, id, true, x, y, Constant.TOWER_CID, image,
+                                       purchaseInfo);
         return tower;
     }
 

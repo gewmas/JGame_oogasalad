@@ -2,6 +2,7 @@ package gameEngine.model.tower;
 
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Detector;
+import gameEngine.model.purchase.PurchaseInfo;
 import java.util.List;
 
 /**
@@ -32,9 +33,12 @@ public class BoostTower extends Tower{
                        double x,
                        double y,
                        int collisionid,
-                       String image) {
+                       String image,
+                       
+                       PurchaseInfo purchaseInfo) {
         super(type, id, damage, attackSpeed, range, cost, recyclePrice, description,
-              unique_id, x, y, collisionid, image);
+              unique_id, x, y, collisionid, image,
+              purchaseInfo);
 
         this.detector = new Detector<Tower>(this.eng, Tower.class);
         this.boostFactor = boostFactor;
@@ -46,9 +50,9 @@ public class BoostTower extends Tower{
 
     public void addDescription(){
         super.addDescription();
-        info.put("Boost Factor", String.valueOf(boostFactor));
+        purchaseInfo.addToMap("Boost Factor", String.valueOf(boostFactor));
 
-        info.put("Upgrade Boost Factor", String.valueOf(boostFactor*upgradeFactor));
+        purchaseInfo.addToMap("Upgrade Boost Factor", String.valueOf(boostFactor*upgradeFactor));
     }
 
     //create magic to towers in range
@@ -85,13 +89,13 @@ public class BoostTower extends Tower{
     @Override
     public void upgrade (double factor) {
         boostFactor *= factor;
-        super.updateDescription();
+        super.addDescription();
     }
     
     @Override
     public void downgrade (double factor) {
         boostFactor /= factor;
-        super.updateDescription();
+        super.addDescription();
     }
 
     

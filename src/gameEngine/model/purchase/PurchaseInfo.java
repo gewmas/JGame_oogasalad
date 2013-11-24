@@ -1,32 +1,46 @@
 package gameEngine.model.purchase;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @author Jiaran and Yuhua all tower and tower factory
+ * @author Jiaran, Yuhua, Harris all tower and tower factory
  * implements TowerInfo so that front end people can 
  * get tower info properly without exposing tower and 
  * towerfactory.
  *
  */
-public interface PurchaseInfo {
-
-    public Map<String, String> getInfo();
+public class PurchaseInfo {
+    private String name, image, type;
+    private String description;
+    private int cost;
+    private Map<String, String> info;
     
+    public PurchaseInfo(String type, String name, String image, String description, int cost) {
+        this.type = type;
+        this.name = name;
+        this.image = image;
+        this.description = description;
+        this.cost = cost;
+        info = new LinkedHashMap<String, String>();
+        createMap();
+    }
     
-    /**
-     * @author Yuhua 
-     * All methods below would be substituted by the getInfo Map above
-     */
-    public String getItemName ();
-//    public double getX ();
-//    public double getY ();
-    public double getDamage ();
-    public double getAttackSpeed ();
-//    public int getAttackMode();
-    public double getRange ();
-    public int getCost ();
-    public double getRecyclePrice ();
-    public String getDescription();
-    public String getImage ();
+    public void createMap() {
+        addToMap("Type", type);
+        addToMap("Name", name);
+        addToMap("Description", description);
+        addToMap("Cost", ((Integer)cost).toString());
+        addToMap("Image", image);
+    }
+    
+    public void addToMap(String key, String value) {
+        info.put(key, value);
+    }
+    
+    public Map<String, String> getInfo() {
+        return info;
+    }
+    
 }

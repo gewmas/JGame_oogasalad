@@ -8,6 +8,7 @@ import gameEngine.model.enemy.comparator.FurthestDistanceEnemyComparator;
 import gameEngine.model.enemy.comparator.ShortestDistanceEnemyComparator;
 import gameEngine.model.enemy.comparator.StrongestEnemyComparator;
 import gameEngine.model.enemy.comparator.WeakestEnemyComparator;
+import gameEngine.model.purchase.PurchaseInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -60,10 +61,13 @@ public class DefaultTower extends Tower {
                          double x,
                          double y,
                          int collisionid,
-                         String image) {
+                         String image,
+                         
+                         PurchaseInfo purchaseInfo) {
 
         super(type, id, damage, attackSpeed, range, cost, recyclePrice, description,
-              unique_id, x, y, collisionid, image);
+              unique_id, x, y, collisionid, image, 
+              purchaseInfo);
 
         this.attackMode = attackMode;
         this.attackAmount = 1;
@@ -79,7 +83,7 @@ public class DefaultTower extends Tower {
 
     public void addDescription () {
         super.addDescription();
-        info.put("Attack Mode", String.valueOf(attackMode));
+        purchaseInfo.addToMap("Attack Mode", String.valueOf(attackMode));
     }
 
     @Override
@@ -207,7 +211,7 @@ public class DefaultTower extends Tower {
         
         damage *= factor;
         attackSpeed *= factor;
-        super.updateDescription();
+        super.addDescription();
     }
     
     @Override
@@ -215,7 +219,7 @@ public class DefaultTower extends Tower {
         
         damage /= factor;
         attackSpeed /= factor;
-        super.updateDescription();
+        super.addDescription();
     }
 
     
