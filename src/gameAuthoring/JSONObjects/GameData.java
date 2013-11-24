@@ -252,8 +252,9 @@ public class GameData extends JSONObject {
      *         This method is used to create a temporary file so that a user can simmulate
      *         a game based on the parameters the game designer specified
      *         without the hassel of saving, then loading a file
+     * @return 
      */
-    public void createSimmulationFile () {
+    public File createSimmulationFile () {
         if (isComplete()) {
             File file = new File("tmp.JSON");
             PrintStream out;
@@ -262,6 +263,7 @@ public class GameData extends JSONObject {
                 out = new PrintStream(file);
                 out.println(this.toString(3));
                 out.close();
+                return file;
             }
             catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -272,6 +274,7 @@ public class GameData extends JSONObject {
             }
 
         }
+        return null;
     }
 
     /**
