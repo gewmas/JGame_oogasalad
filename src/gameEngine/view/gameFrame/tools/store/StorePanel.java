@@ -9,6 +9,7 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrameMediator;
+import gameEngine.view.gameFrame.Utilities;
 
 
 /**
@@ -22,6 +23,7 @@ public class StorePanel extends Panel {
     private JTabbedPane storeTabbedPane;
     private View view;
     private GameFrameMediator mediator;
+    private Utilities utilities;
     private List<StoreOptionsPanel> storeCategories;
 
     /**
@@ -29,10 +31,11 @@ public class StorePanel extends Panel {
      * @param view facilitates communication between view and controller
      */
 
-    public StorePanel (GameFrameMediator mediator, View view) {
+    public StorePanel (GameFrameMediator mediator, View view, Utilities utilities) {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
+        this.utilities = utilities;
         this.view = view;
         this.mediator = mediator;
         storeCategories = new ArrayList();
@@ -47,7 +50,7 @@ public class StorePanel extends Panel {
         Map<String, List<PurchaseInfo>> storeInventory = view.getInventory();
         for (String item : storeInventory.keySet()) {
             StoreOptionsPanel storeCategory =
-                    new StoreOptionsPanel(mediator, view, storeInventory.get(item));
+                    new StoreOptionsPanel(mediator, view, storeInventory.get(item),utilities);
             storeTabbedPane.addTab(item, storeCategory);
             storeCategories.add(storeCategory);
         }

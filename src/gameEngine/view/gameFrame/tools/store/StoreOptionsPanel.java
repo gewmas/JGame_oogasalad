@@ -5,6 +5,7 @@ import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrameMediator;
+import gameEngine.view.gameFrame.Utilities;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,19 +33,22 @@ public  class StoreOptionsPanel extends Panel {
     protected List<StoreItemButton> storeItems;
     protected View view;
     private GameFrameMediator mediator;
+    private Utilities utilities;
 
     /**
      * @param mediator facilitates communication between view components
      * @param engineView facilitates communication between view and controller
+     * @param utilities 
      */
     protected StoreOptionsPanel (GameFrameMediator mediator,
                                  View engineView,
-                                 List<PurchaseInfo> towerInformation) {
+                                 List<PurchaseInfo> towerInformation, Utilities utilities) {
 
         super();
         this.view = engineView;
         this.storeItems = new ArrayList<StoreItemButton>();
         this.mediator = mediator;
+        this.utilities = utilities;
         setUIStyle();
         JPanel options = createOptionsScrollPanel(mediator);
         addStoreInventory (options, towerInformation);
@@ -93,7 +97,7 @@ public  class StoreOptionsPanel extends Panel {
 
             @Override
             public void executeAction () {
-                mediator.clearDisplay();
+                utilities.clearDisplay();
 
             }
 
@@ -111,7 +115,8 @@ public  class StoreOptionsPanel extends Panel {
             StoreButtonAction hoverAction = new StoreButtonAction() {
                 @Override
                 public void executeAction () {
-                    mediator.displayTowerInfo(storeItem.getInfo());
+                   utilities.displayInformation(storeItem.getInfo());
+                
                 }
             };
             StoreItemButton towerButton =

@@ -25,17 +25,12 @@ import gameEngine.view.gameFrame.tools.store.StorePanel;
  */
 public class GameFrameMediator {
 
-//    private StoreOptionsPanel storeOptions;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
     private InfoDisplayPanel towerInfoPanel;
-    private StorePanel store;
+    private StorePanel storePanel;
 
-//    public void addTowersOptionPanel (StoreOptionsPanel storeOptions) {
-//        this.storeOptions = storeOptions;
-//    }
 
- 
     /**
      * Destroys the jgame instance so that it can be reloaded
      */
@@ -92,7 +87,7 @@ public class GameFrameMediator {
      * Updates the enabled status of store items.
      */
     public void updateStoreStatus () {
-        store.updateStoreStatus();
+        storePanel.updateStoreStatus();
     }
 
     public void addGameFrame (GameFrame gameFrame) {
@@ -114,11 +109,11 @@ public class GameFrameMediator {
     }
     
     public void openStore () {
-      store.addStoreInventory();
+      storePanel.addStoreInventory();
     }
 
     public void closeStore(){
-        store.closeStore();
+        storePanel.closeStore();
     }
     public void displayTowerInfo (Map<String, String> information, Map<String, String> display) {
         this.towerInfoPanel.displayInformation(information, display);
@@ -126,7 +121,7 @@ public class GameFrameMediator {
     }
 
     public void addStore (StorePanel storePanel) {
-        this.store = storePanel;
+        this.storePanel = storePanel;
         
     }
 }

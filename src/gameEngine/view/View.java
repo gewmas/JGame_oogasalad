@@ -11,6 +11,7 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.GameFrameMediator;
+import gameEngine.view.gameFrame.menu.MenuActions;
 import gameEngine.view.initialization.InitializationFrame;
 
 
@@ -21,7 +22,7 @@ import gameEngine.view.initialization.InitializationFrame;
  * @author Lalita Maraj, Alex Zhu
  * 
  */
-public class View {
+public class View implements MenuActions {
     private GameFrame gameFrame;
     private InitializationFrame initializationFrame;
     private Controller controller;
@@ -42,10 +43,7 @@ public class View {
         initializationFrame.setVisible(true);
     }
 
-    public void loadNewGame () {
-        gameFrame.showGame();
-        initializationFrame.setVisible(false);
-    }
+
 
     public void startJGame () {
         gameFrame.showGame();
