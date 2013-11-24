@@ -11,15 +11,15 @@ import gameEngine.view.View;
 public class CanvasPanel extends Panel {
     Game game;
 
-    public CanvasPanel (View view, GameFrameMediator mediator) {
-        game = new Game(view, mediator);
+    public CanvasPanel (View view, GameFrameMediator mediator, ItemPurchaser itemPurchaser) {
+        game = new Game(view, mediator,itemPurchaser);
         this.add(game);
         view.sendEngine(game);
     }
-
-    public void placeTower (PurchaseInfo towerInfo) {
-        game.placeTower(towerInfo);
-    }
+//
+//    public void placeTower (PurchaseInfo towerInfo) {
+//        game.placeTower(towerInfo);
+//    }
 
     public void quitGame () {
         game.destroy();
