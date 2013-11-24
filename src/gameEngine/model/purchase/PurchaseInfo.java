@@ -14,8 +14,9 @@ import java.util.Map;
 public class PurchaseInfo {
     private String name, image, type;
     private String description;
-    private Integer cost;
+    private int cost;
     private Map<String, String> info;
+    
     public PurchaseInfo(String type, String name, String image, String description, int cost) {
         this.type = type;
         this.name = name;
@@ -30,7 +31,7 @@ public class PurchaseInfo {
         addToMap("Type", type);
         addToMap("Name", name);
         addToMap("Description", description);
-        addToMap("Cost", cost.toString());
+        addToMap("Cost", String.valueOf(cost));
         addToMap("Image", image);
     }
     

@@ -15,30 +15,30 @@ import jgame.JGObject;
  *         Tower will shoot the Enemy within shooting range with Bullet
  */
 
-public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicable{
-    String type;
-    String id; 
-    String image;
+public abstract class Tower extends JGObject implements ITMagicable{
+    private String type;
+    private String id; 
+    private String image;
 
-    double damage;
-    double attackSpeed;
+    protected double damage;
+    protected double attackSpeed;
 
-    double range;
+    protected double range;
 
-    double x;
-    double y;
+    protected double x;
+    protected double y;
 
-    double cost;
-    double upgradePrice;
-    double recyclePrice;
+    protected double cost;
+    protected double upgradePrice;
+    protected double recyclePrice;
     
-    double upgradeFactor = 1.2;
+    protected double upgradeFactor = 1.2;
     
-    int currentMagic=0;
+    protected int currentMagic=0;
 
-    String description;
+    private String description;
 
-    Map<String, String> info;
+    private PurchaseInfo purchaseInfo;
 
     public Tower (String type,
                   String id,
@@ -74,8 +74,7 @@ public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicabl
         this.x = x;
         this.y = y;
         
-        //add tower description
-        this.info = new LinkedHashMap<String, String>();
+        this.purchaseInfo = new PurchaseInfo(type, id, image, description, cost);
     }
     
     public void addDescription(){
@@ -85,8 +84,6 @@ public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicabl
         info.put("Damage", String.valueOf(damage));
         info.put("Attack Speed", String.valueOf(attackSpeed));
         info.put("Range", String.valueOf(range));
-        info.put("X", String.valueOf(x));
-        info.put("Y", String.valueOf(y));
         info.put("Cost", String.valueOf(cost));
         info.put("Sell Price", String.valueOf(recyclePrice));
         info.put("Description", String.valueOf(description));
@@ -110,7 +107,7 @@ public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicabl
      * TowerInfo Getter Method
      */
     public Map<String, String> getInfo () {
-        return info;
+        return purchaseInfo.getInfo();
     }
     
     @Deprecated
