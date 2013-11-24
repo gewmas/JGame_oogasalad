@@ -62,7 +62,6 @@ public class UserSoundsTab implements Observer {
             clip.start();
         }
         catch (Exception ex) {
-            System.out.println("Error with playing sound.");
             ex.printStackTrace();
         }
     }
