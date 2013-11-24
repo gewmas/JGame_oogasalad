@@ -1,5 +1,6 @@
 package gameEngine.model.tower;
 
+import gameEngine.Constant.Constant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Detector;
 import gameEngine.model.purchase.PurchaseInfo;
@@ -50,9 +51,9 @@ public class BoostTower extends Tower{
 
     public void addDescription(){
         super.addDescription();
-        purchaseInfo.addToMap("Boost Factor", String.valueOf(boostFactor));
-
-        purchaseInfo.addToMap("Upgrade Boost Factor", String.valueOf(boostFactor*upgradeFactor));
+        purchaseInfo.addToMap(Constant.TOWER_BOOST_FACTOR, String.valueOf(boostFactor));
+        
+        purchaseInfo.addToMap(Constant.TOWER_UPGRADE_BOOST_FACTOR, String.valueOf(boostFactor*upgradeFactor));
     }
 
     //create magic to towers in range

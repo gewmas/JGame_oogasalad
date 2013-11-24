@@ -21,7 +21,7 @@ public class BoostTowerFactory extends TowerFactory {
 
     public void addDescription(){
         super.addDescription();
-        purchaseInfo.addToMap("Boost Factor", String.valueOf(boostFactor));
+        purchaseInfo.addToMap(Constant.TOWER_BOOST_FACTOR, String.valueOf(boostFactor));
     }
     
     @Override

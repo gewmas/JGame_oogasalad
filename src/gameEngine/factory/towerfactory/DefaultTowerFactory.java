@@ -27,7 +27,7 @@ public class DefaultTowerFactory extends TowerFactory {
 
     public void addDescription(){
         super.addDescription();
-        purchaseInfo.addToMap("Attack Mode", String.valueOf(attackMode));
+        purchaseInfo.addToMap(Constant.TOWER_ATTACK_MODE, String.valueOf(attackMode));
     }
     
     @Override

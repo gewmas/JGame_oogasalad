@@ -19,7 +19,7 @@ public class MultipleShootingTowerFactory extends DefaultTowerFactory {
 
     public void addDescription(){
         super.addDescription();
-        purchaseInfo.addToMap("Attack Amount", String.valueOf(attackAmount));
+        purchaseInfo.addToMap(Constant.TOWER_ATTACK_AMOUNT, String.valueOf(attackAmount));
     }
     
     @Override
