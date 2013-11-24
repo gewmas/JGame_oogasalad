@@ -26,6 +26,9 @@ public class Controller {
         model = new Model();
     }
 
+    public void promptForFile(){
+        view.promptForFile();
+    }
     public void newGame (File jsonFile) throws Exception {
         model.newGame(jsonFile); // will throw exception if fail
         view.startJGame();
