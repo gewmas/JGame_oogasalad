@@ -63,13 +63,7 @@ public class MenuBar extends JMenuBar {
 
             }
         });
-        menu.add(new AbstractAction("Simulate") {
-            @Override
-            public void actionPerformed (ActionEvent e) {
-                
 
-            }
-        });
         return menu;
     }
 }
