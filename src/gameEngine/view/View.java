@@ -33,7 +33,13 @@ public class View implements MenuActions {
         mediator = new GameFrameMediator();
         gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame = new InitializationFrame(this);
+       
+
+    }
+
+    public void promptForFile () {
         initializationFrame.showFrame();
+
     }
 
     public void selectNewGame () {
@@ -42,8 +48,6 @@ public class View implements MenuActions {
         gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame.setVisible(true);
     }
-
-
 
     public void startJGame () {
         gameFrame.showGame();
@@ -131,4 +135,5 @@ public class View implements MenuActions {
     public String getGameTitle () {
         return controller.getGameTitle();
     }
+
 }
