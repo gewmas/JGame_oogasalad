@@ -1,0 +1,206 @@
+{
+"name": "Tower Destruction II",
+"spashImage" :  "game-bg.png",
+"BGImage" :  "space_background",
+"gold" : 200,
+"numberOfLives" : 10,
+"levels": 2,
+"widthOfWindow": 600,
+"heightOfWindow": 600,
+"tilesPerRow": 20,
+"difficultyScale": 1.5,
+"map":
+{
+  	  "pathImage":  "path.jpg", 
+	  "Path":[ 
+               { "x": 0, "y": 10 },
+               { "x": 1, "y": 10 },
+               { "x": 2, "y": 10 },
+               { "x": 3, "y": 10 },
+               { "x": 3, "y": 9 },
+               { "x": 3, "y": 8 },
+               { "x": 3, "y": 7 },
+               { "x": 4, "y": 7 },
+               { "x": 5, "y": 7 },
+               { "x": 6, "y": 7 },
+               { "x": 6, "y": 8 },
+               { "x": 6, "y": 9 },
+               { "x": 6, "y": 10 },
+               { "x": 6, "y": 11 },
+               { "x": 6, "y": 12 },
+               { "x": 7, "y": 12 },
+               { "x": 8, "y": 12 },
+               { "x": 9, "y": 12 },
+               { "x": 9, "y": 11 },
+               { "x": 9, "y": 10 },
+               { "x": 9, "y": 9 },
+               { "x": 9, "y": 8 },
+	       	   { "x": 10, "y": 8 },
+               { "x": 11, "y": 8 },
+               { "x": 12, "y": 8 },
+               { "x": 13, "y": 8 },
+               { "x": 14, "y": 8 },
+               { "x": 14, "y": 9 },
+               { "x": 14, "y": 10 },
+               { "x": 14, "y": 11 },
+               { "x": 15, "y": 11 },
+               { "x": 16, "y": 11 },
+               { "x": 17, "y": 11 },
+               { "x": 18, "y": 11 },
+               { "x": 19, "y": 11 },
+
+           ], 
+        "Barriers":[
+        	{ "x": 5, "y": 2, "image": "rock.jpg" },
+        	{ "x": 6, "y": 2, "image": "tree.jpg" }
+        ]
+},
+
+"resources":
+{
+  	   
+	  "image":[ 
+               { "id": "1", "url": "mr1.png" },
+               { "id": "2", "url": "mr2.png" },
+               { "id": "3", "url": "mr3.png" },
+               { "id": "4", "url": "mr4.png" }
+               
+             
+           ], 
+        "audio":[
+        	{ "id": "alarm", "url": "alarm.wav" },
+        ],
+	 "animation":[
+        	{ "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
+        ]
+},
+"temporaryBarrierType":[
+	{
+	 "id": "Lake",
+	 "image": "lake1",
+	 "damage": 100,
+	 "cost": 200,
+	 "expire": 20,
+	 "description": "Buy a puddle of water to drown your enemies!  The sun is hot, so let's hope it doesn't evaporate too quickly"
+	},  
+	{
+	 "id": "Fire",
+	 "image": "fire1",
+	 "damage": 100,
+	 "cost": 100,
+	 "expire": 10,
+	 "description": "Buy a flame to burn your enemies!  The fire won't burn forever"
+	},
+],
+
+"towerType": [
+	{
+	 "type": "DefaultTower",
+	 "id" : "DefaultTower1",
+	 "image": "tower1",
+	 "damage": 3,
+	 "attackSpeed": 0.8,
+	 "attackMode": 1,
+	 "range": 100,	
+	 "cost": 50, 
+	 "recyclePrice":  50,
+	 "description": "Default tower will shoot enemy, Surprise!",
+	},
+	{
+	 "type": "DefaultTower",
+	 "id" : "DefaultTower2",
+	 "image": "tower1",
+	 "damage": 3,
+	 "attackSpeed": 0.8,
+	 "attackMode": 1,
+	 "range": 100,	
+	 "cost": 10, 
+	 "recyclePrice":  50,
+	 "description": "Default tower will shoot enemy, Surprise!",
+	},
+	{
+	 "type": "MultipleShootingTower",
+	 "id" : "MultipleShootingTower1",
+	 "image": "MultipleShootingTower",
+	 "damage": 1,
+	 "attackSpeed": 3.5,
+	 "attackMode": 2,
+	 "attackAmount": 5,
+	 "range": 80,	
+	 "cost": 100, 
+	 "recyclePrice":  50,
+	 "description": "MultipleShooting tower will shoot multiple bullets at one time.",
+	},
+	{
+	 "type": "BoostTower",
+	 "id" : "BoostTower",
+	 "image": "BoostTower",
+	 "damage": 1,
+	 "attackSpeed": 0.8,
+	 "range": 100,	
+	 "cost": 100, 
+	 "recyclePrice":  50,
+	 "description": "Boost tower will strength towers in adjacency.",
+	 "boostFactor": 2.0,
+	},
+	{
+	 "type": "MagicTower",
+	 "id": "MagicTower1",
+	 "image": "MagicTower",
+	 "damage": 1,
+	 "attackSpeed": 0.8,
+	 "attackMode": 2,
+	 "range": 100,	
+	 "cost": 100, 
+	 "recyclePrice":  50,
+	 "description": "Magic tower will shoot a magic bullet to affect the enemy.",
+	 "magicFactor": 2.0,
+	 "magic" : 1,
+	}
+],
+
+"enemyType":[
+{
+	"id": "1",
+	"gold": 5,
+	"image": "enemy1",
+	"life": 10,
+	"speed": 0.5,
+}, 
+{
+	"id": "2",
+	"gold": 10,
+	"image": "runRight",
+	"life": 15,
+	"speed": 1,
+}
+],
+
+"wave":[
+	{	
+		"type": "1",
+		"number":20,
+		"period" :2,
+		"interval": 7,
+	},
+	{	
+		"type": "1",
+		"number":30,
+		"period" :1,
+		"interval": 5,
+	},
+	{	
+		"type": "2",
+		"number":3,
+		"period" :4,
+		"interval": 5,
+	},
+	{	
+		"type": "2",
+		"number":10,
+		"period" :3,
+		"interval": 5,
+	}
+]  
+
+}

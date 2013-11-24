@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import jgame.platform.JGEngine;
-import gameEngine.model.Tile;
+import gameEngine.model.tile.Tile;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -86,7 +86,7 @@ public class GridFactory {
                         tile.setOnPath(pathImage);
                         pathCoordinates.put(new Coordinate(k, m), tile);
                     } else if(barrierCoordinates.keySet().contains(new Coordinate(k, m))) {
-                        tile.setBarrier(barrierImages.get(new Coordinate(k, m)));
+                        tile.setStaticBarrier(barrierImages.get(new Coordinate(k, m)));
                         barrierCoordinates.put(new Coordinate(k, m), tile);
                     }
                 }

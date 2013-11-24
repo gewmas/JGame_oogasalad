@@ -1,16 +1,17 @@
 package gameEngine.view;
 
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import jgame.impl.JGEngineInterface;
 import gameEngine.controller.Controller;
-import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.Tile;
-import gameEngine.model.tower.Tower;
-import gameEngine.model.tower.TowerInfo;
+import gameEngine.model.purchase.PurchaseInfo;
+import gameEngine.model.tile.Tile;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.GameFrameMediator;
+import gameEngine.view.gameFrame.menu.MenuActions;
 import gameEngine.view.initialization.InitializationFrame;
 
 
@@ -21,9 +22,9 @@ import gameEngine.view.initialization.InitializationFrame;
  * @author Lalita Maraj, Alex Zhu
  * 
  */
-public class View {
+public class View implements MenuActions {
     private GameFrame gameFrame;
-    private Frame initializationFrame;
+    private InitializationFrame initializationFrame;
     private Controller controller;
     private GameFrameMediator mediator;
 
@@ -32,33 +33,44 @@ public class View {
         mediator = new GameFrameMediator();
         gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame = new InitializationFrame(this);
+       
+
+    }
+
+    public void promptForFile () {
+        initializationFrame.showFrame();
+
     }
 
     public void selectNewGame () {
-        mediator.endGame();
+        mediator.quitGame();
         gameFrame.dispose();
         gameFrame = new GameFrame(controller, this, mediator);
-        initializationFrame = new InitializationFrame(this);
+        initializationFrame.setVisible(true);
     }
 
-    public void loadNewGame () {
+    public void startJGame () {
         gameFrame.showGame();
-        initializationFrame.dispose();
     }
 
-    public void startGame () {
-        gameFrame.showGame();
+    public void startModel () {
+        controller.startGame();
     }
 
     public void newGame (File file) {
         try {
             controller.newGame(file);
-            initializationFrame.dispose();
+            initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                                          StyleConstants.resourceBundle.getString("FileReadError"));
         }
+    }
+
+    public void sendEngine (JGEngineInterface engine) {
+        controller.setJGEngine(engine);
     }
 
     /**
@@ -66,17 +78,13 @@ public class View {
      * and then reset the cursor
      */
     public boolean buyTower (int x, int y, String tower) {
-        if (controller.purchaseTower(x, y, tower)) {
-            gameFrame.purchaseTower();
-            return true;
-        }
-        return false;
+        return (controller.purchaseTower(x, y, tower));
     }
 
     /**
      * Requests tower information for the tower at the given location
      */
-    public TowerInfo getTowerInfo (int x, int y) {
+    public PurchaseInfo getTowerInfo (int x, int y) {
         return controller.getTowerInfo(x, y);
     }
 
@@ -106,7 +114,26 @@ public class View {
         return controller.getLives();
     }
 
-    public List<TowerInfo> getTowers () {
-        return controller.getTowerFactory();
+    public Map<String, List<PurchaseInfo>> getInventory () {
+        return controller.getInventory();
     }
+
+    public void quitGame () {
+        mediator.quitGame();
+    }
+
+    public void endGame () {
+        mediator.endGame();
+        mediator.closeStore();
+        // controller.startGame();
+    }
+
+    public boolean activateCheat (String cheat) {
+        return controller.activateCheat(cheat);
+    }
+
+    public String getGameTitle () {
+        return controller.getGameTitle();
+    }
+
 }

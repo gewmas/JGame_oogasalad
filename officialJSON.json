@@ -1,0 +1,185 @@
+{
+"name": "Tower Destruction II",
+"spashImage" :  "game-bg.png",
+"BGImage" :  "space_background",
+"gold" : 200000,
+"numberOfLives" : 100,
+"levels": 5,
+"widthOfWindow": 600,
+"heightOfWindow": 600,
+"tilesPerRow": 20,
+"difficultyScale": 1.5,
+"map":
+{
+  	  "pathImage":  "path.jpg", 
+	  "Path":[ 
+               { "x": 0, "y": 0 },
+               { "x": 0, "y": 1 },
+               { "x": 1, "y": 1 },
+               { "x": 1, "y": 2 },
+               { "x": 2, "y": 2 },
+               { "x": 2, "y": 1 },
+               { "x": 3, "y": 1 },
+               { "x": 3, "y": 2 },
+               { "x": 3, "y": 3 },
+               { "x": 4, "y": 3 },
+               { "x": 5, "y": 3 },
+               { "x": 5, "y": 4 },
+               { "x": 5, "y": 5 },
+               { "x": 6, "y": 5 },
+               { "x": 7, "y": 5 },
+               { "x": 8, "y": 5 },
+               { "x": 9, "y": 5 },
+               { "x": 10, "y": 5 },
+               { "x": 11, "y": 5 },
+               { "x": 12, "y": 5 },
+               { "x": 13, "y": 5 },
+               { "x": 14, "y": 5 },
+	       { "x": 15, "y": 5 },
+               { "x": 16, "y": 5 },
+               { "x": 17, "y": 5 },
+               { "x": 18, "y": 5 },
+               { "x": 19, "y": 5 }
+           ], 
+        "Barriers":[
+        	{ "x": 5, "y": 2, "image": "rock.jpg" },
+        	{ "x": 6, "y": 2, "image": "tree.jpg" }
+        ]
+},
+
+"resources":
+{
+  	   
+	  "image":[ 
+               { "id": "1", "url": "mr1.png" },
+               { "id": "2", "url": "mr2.png" },
+               { "id": "3", "url": "mr3.png" },
+               { "id": "4", "url": "mr4.png" }
+               
+             
+           ], 
+        "audio":[
+        	{ "id": "alarm", "url": "alarm.wav" },
+        ],
+	 "animation":[
+        	{ "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
+        ]
+},
+"temporaryBarrierType":[
+	{
+	 "id": "Lake",
+	 "image": "lake1",
+	 "damage": 100,
+	 "cost": 200,
+	 "expire": 20,
+	 "description": "Buy a puddle of water to drown your enemies!  The sun is hot, so let's hope it doesn't evaporate too quickly"
+	},  
+	{
+	 "id": "Fire",
+	 "image": "fire1",
+	 "damage": 100,
+	 "cost": 100,
+	 "expire": 10,
+	 "description": "Buy a flame to burn your enemies!  The fire won't burn forever"
+	},
+],
+
+"towerType": [
+	{
+	 "type": "DefaultTower",
+	 "id" : "Default Tower",
+	 "image": "tower1",
+	 "damage": 1,
+	 "attackSpeed": 0.5,
+	 "attackMode": 1,
+	 "range": 50,	
+	 "cost": 50, 
+	 "recyclePrice":  50,
+	 "description": "Default tower will shoot enemy, Surprise!",
+	},
+	{
+	 "type": "DefaultTower",
+	 "id" : "Stronger Default Tower",
+	 "image": "tower1",
+	 "damage": 3,
+	 "attackSpeed": 0.8,
+	 "attackMode": 1,
+	 "range": 100,	
+	 "cost": 10, 
+	 "recyclePrice":  50,
+	 "description": "Default tower will shoot enemy, Surprise!",
+	},
+	{
+	 "type": "MultipleShootingTower",
+	 "id" : "Multiple Shooting Tower",
+	 "image": "MultipleShootingTower",
+	 "damage": 3,
+	 "attackSpeed": 3.0,
+	 "attackMode": 2,
+	 "attackAmount": 5,
+	 "range": 80,	
+	 "cost": 300, 
+	 "recyclePrice":  50,
+	 "description": "MultipleShooting tower will shoot multiple bullets at one time.",
+	},
+	{
+	 "type": "BoostTower",
+	 "id" : "Boost Tower",
+	 "image": "BoostTower",
+	 "damage": 1,
+	 "attackSpeed": 0.8,
+	 "range": 80,	
+	 "cost": 500, 
+	 "recyclePrice":  50,
+	 "description": "Boost tower will strength towers in adjacency.",
+	 "boostFactor": 3.0,
+	},
+	{
+	 "type": "MagicTower",
+	 "id": "Frozen Magic Tower",
+	 "image": "MagicTower",
+	 "damage": 1,
+	 "attackSpeed": 0.8,
+	 "attackMode": 2,
+	 "range": 100,	
+	 "cost": 100, 
+	 "recyclePrice":  50,
+	 "description": "Magic tower will shoot a magic bullet to affect the enemy.",
+	 "magicFactor": 2.0,
+	 "magic" : 1,
+	}
+],
+
+"enemyType":[
+{
+	"id": "1",
+	"gold": 5,
+	"image": "enemy1",
+	"life": 2,
+	"speed": 0.5,
+}, 
+{
+	"id": "2",
+	"gold": 10,
+	"image": "runRight",
+	"life": 3,
+	"speed": 0.1,
+}
+],
+
+"wave":[
+	{	
+		"type": "1",
+		"number":5,
+		"period" :0.5,
+		"interval": 7,
+	},
+	{	
+		"type": "2",
+		"number":1,
+		"period" :0.5,
+		"interval": 3,
+	}
+]  
+
+}

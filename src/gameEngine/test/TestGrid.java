@@ -5,10 +5,10 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import gameEngine.model.Tile;
 import gameEngine.Constant.Constant;
 import gameEngine.factory.Factory;
 import gameEngine.model.Model;
+import gameEngine.model.tile.Tile;
 import gameEngine.parser.Parser;
 import jgame.JGColor;
 import jgame.JGPoint;
@@ -51,7 +51,8 @@ public class TestGrid extends JGEngine {
         setFrameRate(60, 2);
         Model model = new Model();
         try {
-            model.newGame(new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
+            //Yuhua, change of newGame signature
+//            model.newGame(new File("officialJSON.json", ));
         }
         catch (Exception e) {
             // TODO Auto-generated catch block
@@ -67,8 +68,8 @@ public class TestGrid extends JGEngine {
         System.out.println("tile is on path? " + model.getTile(405,  165).hasPath());//should be on path
         System.out.println("tile is on path? " + model.getTile(405,  305).hasPath());//should not be on path
         
-        System.out.println("tile has barrier? " + model.getTile(160, 90).hasBarrier());//should have barrier
-        System.out.println("tile has barrier? " + model.getTile(405,  305).hasBarrier());//should not have barrier
+        System.out.println("tile has barrier? " + model.getTile(160, 90).hasStaticBarrier());//should have barrier
+        System.out.println("tile has barrier? " + model.getTile(405,  305).hasStaticBarrier());//should not have barrier
     }
 
     @Override
