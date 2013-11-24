@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.store;
+package gameEngine.view.gameFrame.tools.store;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -99,12 +99,12 @@ public class StoreItemButton extends Button {
 
             public void mouseExited (MouseEvent me) {
                 unHighlightButton();
-                // hoverExitAction.executeAction();
+//                 hoverExitAction.executeAction();
             }
 
             public void mouseEntered (MouseEvent me) {
                 highlightButton();
-                // hoverAction.executeAction();
+                 hoverAction.executeAction();
             }
         });
 

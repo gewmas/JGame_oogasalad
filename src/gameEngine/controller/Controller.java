@@ -26,6 +26,9 @@ public class Controller {
         model = new Model();
     }
 
+    public void promptForFile(){
+        view.promptForFile();
+    }
     public void newGame (File jsonFile) throws Exception {
         model.newGame(jsonFile); // will throw exception if fail
         view.startJGame();
@@ -60,9 +63,6 @@ public class Controller {
         return model.getInventory();  
     }
     
-    public List<PurchaseInfo> getTowers () {
-        return model.getInventory().get("Tower");  
-    }
 
     /**
      * Sends a call to the model to update the monitored tower stats to the tower
@@ -207,6 +207,13 @@ public class Controller {
      */
     public int getLives () {
         return model.getGameInfo().getLife();
+    }
+    
+    /**
+     * Return the game title
+     */
+    public String getGameTitle () {
+        return model.getGameInfo().getMyName();
     }
 
     public List<Tile> getPath () {

@@ -90,6 +90,12 @@ public abstract class StdGame extends JGEngine {
      */
     public boolean accel_set_zero_menu = false;
 
+    /**
+     * Added by Alex Zhu, sets the game title
+     */
+    
+    public String game_title="Game";
+    
     /** Key for starting the game, JRE default is space, MIDP default is "*" */
     public int key_startgame = ' ';
     /** Key for invoking the game settings window, default = enter. */
@@ -881,10 +887,11 @@ public abstract class StdGame extends JGEngine {
     /**
      * Default displays class name as title, and "press [key_startgame] to
      * start" below it.
+     * 
+     * Edited by Alex Zhu 11/23/13, displays a settable name
      */
     public void paintFrameTitle () {
-        drawString(getClass().getName().substring(getClass().getName()
-                .lastIndexOf('.') + 1),
+        drawString(game_title,
                    viewWidth() / 2, viewHeight() / 3, 0, title_font, title_color);
         drawString("Press " + getKeyDesc(key_startgame) + " to start",
                    viewWidth() / 2, 6 * viewHeight() / 10, 0, title_font, title_color);
