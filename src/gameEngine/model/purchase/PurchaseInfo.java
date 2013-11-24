@@ -11,7 +11,7 @@ import java.util.Map;
  * towerfactory.
  *
  */
-public abstract class PurchaseInfo {
+public class PurchaseInfo {
     private String name, image, type;
     private String description;
     private Integer cost;
