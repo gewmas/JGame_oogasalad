@@ -33,7 +33,6 @@ public  class StoreOptionsPanel extends Panel {
     private static final int PANEL_HEIGHT = 200;
     protected List<StoreItemButton> storeItems;
     protected View view;
-
     private Utilities utilities;
     private ItemPurchaser itemPurchaser;
 
