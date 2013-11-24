@@ -19,17 +19,19 @@ import javax.swing.JPanel;
 public class Grid extends JPanel {
 
     private GridButton[][] myGrid;
-    boolean[][] myPath;
     private Point2D myStart;
     private Point2D myEnd;
     private Collection<Point2D> myPathCoordinates = new ArrayList<Point2D>();
     private File myBackgroundImage;
+    private int myWidth;
+    private int myHeight;
 
     public Grid (int width, int height) {
         this.setLayout(new GridLayout(width, height));
         this.setBackground(Color.blue);
+        myWidth = width;
+        myHeight = height;
         myGrid = new GridButton[width][height];
-        myPath = new boolean[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 GridButton gButton = new GridButton(x, y, this);
@@ -37,8 +39,16 @@ public class Grid extends JPanel {
                 gButton.setOpaque(false);
                 gButton.setContentAreaFilled(false);
                 gButton.setBorderPainted(true);
-                myPath[x][y] = false;
                 this.add(myGrid[x][y]);
+            }
+        }
+    }
+
+    public void reset () {
+        for (int i = 0; i < myWidth; i++) {
+            for (int j = 0; j < myHeight; j++) {
+                myGrid[i][j].setPathStatusFalse();
+                myGrid[i][j].setIcon(null);
             }
         }
     }
@@ -85,18 +95,22 @@ public class Grid extends JPanel {
     public Point2D getPathStart () {
         return myStart;
     }
-    
+
     public void setPathEnd (Point2D end) {
         myEnd = end;
         System.out.println(myEnd.toString());
     }
-    
+
     public Point2D getPathEnd () {
         return myEnd;
     }
-    
-    public Collection<Point2D> getPathCoordinates(){
+
+    public Collection<Point2D> getPathCoordinates () {
         return myPathCoordinates;
+    }
+
+    public void toggleGridButton (int x, int y) {
+        myGrid[x][y].toggle();
     }
 
     public boolean isValidPathHelper () {
@@ -106,12 +120,14 @@ public class Grid extends JPanel {
         }
 
         myPathCoordinates.clear();
-        for (int i = 0; i < myPath[0].length; i++) {
-            for (int j = 0; j < myPath.length; j++) {
-                System.out.print(myGrid[i][j].isPath() ? '.' : 'x');
-            }
-            System.out.println();
-        }
+        /*
+         * for (int i = 0; i < myPath[0].length; i++) {
+         * for (int j = 0; j < myPath.length; j++) {
+         * System.out.print(myGrid[i][j].isPath() ? '.' : 'x');
+         * }
+         * System.out.println();
+         * }
+         */
         return isValidPath((int) myStart.getX(), (int) myStart.getY(), (int) myEnd.getX(),
                            (int) myEnd.getY());
     }
@@ -119,19 +135,18 @@ public class Grid extends JPanel {
     public boolean isValidPath (int startX, int startY, int endX, int endY) {
         if (startX < 0 || startX >= myGrid.length || startY < 0 || startY >= myGrid[0].length) { return false; }
         if (!myGrid[startX][startY].isPath()) { return false; }
+        if (!myPathCoordinates.contains(myGrid[startX][startY].getCoordinate())) {
+            myPathCoordinates.add(myGrid[startX][startY].getCoordinate());
+        }
+        else {
+            return false;
+        }
+
         if (startX == endX && startY == endY) {
-            System.out.println("path complete");
             for (Point2D point : myPathCoordinates) {
                 System.out.println(point.toString());
             }
             return true;
-        }
-        if (!myPathCoordinates.contains(myGrid[startX][startY].getCoordinate())) {
-            myPathCoordinates.add(myGrid[startX][startY].getCoordinate());
-        }
-
-        else {
-            return false;
         }
 
         return (isValidPath(startX + 1, startY, endX, endY) || isValidPath(startX, startY + 1,
