@@ -80,6 +80,11 @@ public class Controller {
         return towerinfo;
     }
     
+    /**
+     * @author Harris
+     * A more generic way to purchase an object
+     * GUI uses this when object is purchased
+     **/
     public boolean purchaseObject(int x, int y, PurchaseInfo purchaseInfo) {
         if(purchaseInfo.getInfo().get(TYPE).equals(TOWER)) {
             return purchaseTower(x, y, purchaseInfo.getInfo().get(NAME));
