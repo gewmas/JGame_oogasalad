@@ -1,8 +1,10 @@
 package gameEngine.model.tower;
 
 import java.util.Map;
+import gameEngine.Constant.Constant;
 import gameEngine.model.Detector;
 import gameEngine.model.enemy.Enemy;
+import gameEngine.model.purchase.PurchaseInfo;
 
 /**
  * 
@@ -34,10 +36,13 @@ public class MagicTower extends DefaultTower {
                        double x,
                        double y,
                        int collisionid,
-                       String image) {
+                       String image,
+                       
+                       PurchaseInfo purchaseInfo) {
         super(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, 
               type, id, unique_id, x, y,
-              collisionid, image);
+              collisionid, image,
+              purchaseInfo);
 
         this.detector = new Detector<Enemy>(this.eng, Enemy.class);
         this.magicFactor = magicFactor;
@@ -48,9 +53,8 @@ public class MagicTower extends DefaultTower {
 
     public void addDescription(){
         super.addDescription();
-        info.put("Magic Factor", String.valueOf(magicFactor));
-
-        info.put("Upgrade Magic Factor", String.valueOf(magicFactor*upgradeFactor));
+        purchaseInfo.addToMap(Constant.TOWER_MAGIC_FACTOR, String.valueOf(magicFactor));
+        purchaseInfo.addToMap(Constant.TOWER_UPGRADE_MAGIC_FACTOR, String.valueOf(magicFactor*upgradeFactor));
 
     }
 

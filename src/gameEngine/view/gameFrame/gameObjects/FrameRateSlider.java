@@ -9,7 +9,7 @@ import jgame.JGObject;
  */
 public class FrameRateSlider extends JGObject {
 
-    protected double initial_x;
+    protected double initial_x,initial_y;
     
     public FrameRateSlider (String name,
                             boolean unique_id,
@@ -19,12 +19,13 @@ public class FrameRateSlider extends JGObject {
                             String gfxname) {
         super(name, unique_id, x, y, collisionid, gfxname);
         initial_x=x;
+        initial_y=y;
         this.resume_in_view=false;
     }
     
     @Override
     public void move(){
-        if (this.eng.getMouseButton(1)){
+        if (this.eng.getMouseButton(1) && eng.getMouseY() > initial_y){
             if (Math.abs(this.eng.getMouseX()-initial_x)<=100){
                 this.setPos(this.eng.getMouseX(),y);
             }

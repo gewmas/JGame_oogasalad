@@ -21,14 +21,15 @@ public class BoostTowerFactory extends TowerFactory {
 
     public void addDescription(){
         super.addDescription();
-        info.put("Boost Factor", String.valueOf(boostFactor));
+        purchaseInfo.addToMap(Constant.TOWER_BOOST_FACTOR, String.valueOf(boostFactor));
     }
     
     @Override
     public Tower create (int x, int y) {
         Tower tower =
                 (Tower) new BoostTower(damage, attackSpeed, range, cost, recyclePrice, description, boostFactor, 
-                                       type, id, true, x, y, Constant.TOWER_CID, image);
+                                       type, id, true, x, y, Constant.TOWER_CID, image,
+                                       purchaseInfo);
         return tower;
     }
 

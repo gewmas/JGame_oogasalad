@@ -1,23 +1,16 @@
 package gameEngine.view.gameFrame;
 
 import gameEngine.Constant.Constant;
-import gameEngine.controller.Controller;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
-import gameEngine.model.tower.Tower;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
 import java.awt.Dimension;
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import jgame.Highscore;
 import jgame.JGColor;
 import jgame.JGObject;
 import jgame.JGPoint;
-import jgame.platform.JGEngine;
 import jgame.platform.StdGame;
 
 
@@ -27,22 +20,24 @@ import jgame.platform.StdGame;
  *         graphics rendering
  */
 public class Game extends StdGame {
-    private static final String[] INFO_TO_DISPLAY={"Tower Type","Damage","Attack Speed","Range","Sell Price","Upgrade Price","Description"};
     
     private int WIDTH = 600;
     private int HEIGHT = 600;
 
     private View view;
     private boolean purchasing;
-    private String towerToPurchase;
+    private PurchaseInfo towerToPurchase;
     private GameFrameMediator mediator;
     private FrameRateSlider frameRateSlider;
     private JGObject frameRateBar;
-    private Map<String,String> printValues;
+    private String towerToPurchaseName;
+    private ItemPurchaser itemPurchaser;
+    
 
-    public Game (View view, GameFrameMediator mediator) {
+    public Game (View view, GameFrameMediator mediator, ItemPurchaser itemPurchaser) {
         this.view = view;
         this.mediator = mediator;
+        this.itemPurchaser = itemPurchaser;
         initEngineComponent(WIDTH, HEIGHT);
     }
 
@@ -60,8 +55,6 @@ public class Game extends StdGame {
         initial_lives = view.getLives();
         lives = view.getLives();
         score = view.getMoney();
-        String bgImage = "space_background.jpg";
-        defineImage("background", "bg", 256, bgImage, "-");
         defineImage("RESERVEDslider_bar","sb",256,"slider_bar.png","-");
         defineImage("RESERVEDslider_toggle","sb",256,"slider_toggle.png","-");
         String background=view.getBGImage();
@@ -83,10 +76,7 @@ public class Game extends StdGame {
         frameRateSlider=new FrameRateSlider("frslider", true, pfWidth()/2, pfHeight()-40,256,"RESERVEDslider_toggle");
         frameRateBar.resume_in_view=false;
         toggleFrameRateBar();
-        printValues=new LinkedHashMap<String,String>();
-        for (String str:INFO_TO_DISPLAY){
-            printValues.put(str,"black");
-        }
+  
         this.game_title=view.getGameTitle();
     }
     
@@ -124,25 +114,20 @@ public class Game extends StdGame {
         if (getMouseButton(1) && getMouseInside()) {
             clearMouseButton(1);
             JGPoint mousePosition = getMousePos();
-            JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
-            if (purchasing) {
-                if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)){
-                    towerToPurchase=null;
-                    purchasing = false;
-                    mediator.exitPurchase();
-                }
+            //if (purchasing) {
+                itemPurchaser.checkAndPlaceTower(mousePosition);
                 System.out.format("Buying %s at: %d,%d\n",towerToPurchase, mousePosition.x, mousePosition.y);
-            }
-            else {
+            //}
+            //else {
                 PurchaseInfo tower=view.getTowerInfo(mousePosition.x, mousePosition.y);
                 if (tower==null) {
                     System.out.println("No tower here");
                 } else {
-                    mediator.displayTowerInfo(tower.getInfo(),printValues);
+                    mediator.displayTowerInfo(tower.getInfo());
                     System.out.println("Checking tower");
                 }
                 System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);
-            }
+            //}
         }
     }
 
@@ -158,25 +143,6 @@ public class Game extends StdGame {
     public void paintFrame () {
         super.paintFrame();
         // drawString("Money " + String.valueOf(sc), pfWidth() - 10, 10, 1);
-    }
-
-    /**
-     * Indicates that the user wants to buy a tower
-     */
-    public void placeTower (PurchaseInfo purchaseInfo) {
-        // setBGColor(JGColor.red);
-        String towerName=purchaseInfo.getInfo().get("Tower Name");
-        if (towerName==null || towerName.equals(towerToPurchase)){
-            mediator.exitPurchase();
-            System.out.println("Tower cancelled");
-            towerToPurchase=null;
-            purchasing=false;
-            return;
-        }
-        mediator.setCursorImage(purchaseInfo);
-        System.out.println("User wants to purchase " + purchaseInfo.getItemName());
-        purchasing = true;
-        towerToPurchase = towerName;
     }
     
     public void endGame(){

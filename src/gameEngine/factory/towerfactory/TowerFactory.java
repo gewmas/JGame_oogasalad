@@ -1,5 +1,6 @@
 package gameEngine.factory.towerfactory;
 
+import gameEngine.Constant.Constant;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -9,23 +10,23 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-public abstract class TowerFactory implements PurchaseInfo {
+public abstract class TowerFactory {
 
-    String type;
-    String id;
+    protected String type;
+    protected String id;
     
-    String description;
-    String image;
+    protected String description;
+    protected String image;
 
-    double damage;
-    double attackSpeed;
+    protected double damage;
+    protected double attackSpeed;
 
-    double range;
+    protected double range;
 
-    double cost;
-    double recyclePrice;
+    protected double cost;
+    protected double recyclePrice;
 
-    Map<String, String> info;
+    protected PurchaseInfo purchaseInfo;
 
     public TowerFactory (JSONObject currTower) {
         type = currTower.getString("type");
@@ -38,19 +39,14 @@ public abstract class TowerFactory implements PurchaseInfo {
         recyclePrice = currTower.getDouble("recyclePrice");
         description = currTower.getString("description");
 
-        info = new LinkedHashMap<String, String>();
+        this.purchaseInfo = new PurchaseInfo(type, id, image, description,(int)cost);
     }
 
     public void addDescription () {
-        info.put("Tower Type", type);
-        info.put("Tower Name", id);
-        info.put("Image", image);
-        info.put("Damage", String.valueOf(damage));
-        info.put("Attack Speed", String.valueOf(attackSpeed));
-        info.put("Range", String.valueOf(range));
-        info.put("Cost", String.valueOf(cost));
-        info.put("Sell Price", String.valueOf(recyclePrice));
-        info.put("Description", String.valueOf(description));
+        purchaseInfo.addToMap(Constant.TOWER_DAMAGE, String.valueOf(damage));
+        purchaseInfo.addToMap(Constant.TOWER_ATTACK_SPEED, String.valueOf(attackSpeed));
+        purchaseInfo.addToMap(Constant.TOWER_RANGE, String.valueOf(range));
+        purchaseInfo.addToMap(Constant.TOWER_SELL_PRICE, String.valueOf(recyclePrice));
     }
 
     public abstract Tower create (int x, int y);
@@ -58,9 +54,8 @@ public abstract class TowerFactory implements PurchaseInfo {
     /**
      * Implement PurchaseInfo
      */
-    @Override
-    public Map<String, String> getInfo () {
-        return info;
+    public PurchaseInfo getPurchaseInfo () {
+        return purchaseInfo;
     }
     
     @Deprecated

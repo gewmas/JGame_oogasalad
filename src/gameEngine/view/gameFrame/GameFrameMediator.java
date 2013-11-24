@@ -48,13 +48,13 @@ public class GameFrameMediator {
      * Notifies all colleagues that need to be updated
      * when a user is trying to purchase a tower
      * 
-     * @param towername
-     */
-    public void placeTower (PurchaseInfo towerInfo) {
-
-        canvasPanel.placeTower(towerInfo);
-       
-    }
+//     * @param towername
+//     */
+//    public void placeTower (PurchaseInfo towerInfo) {
+//
+//        canvasPanel.placeTower(towerInfo);
+//       
+//    }
     
     public void setCursorImage(PurchaseInfo towerInfo){
         gameFrame.placeTower(towerInfo);

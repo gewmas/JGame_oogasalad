@@ -5,6 +5,7 @@ import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Model;
 import gameEngine.model.bullet.Bullet;
 import gameEngine.model.magic.IEMagicable;
+import gameEngine.model.temporaryBarrier.TemporaryBarrier;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import java.util.LinkedList;
@@ -111,6 +112,13 @@ public class Enemy extends JGObject implements IEMagicable {
 
         return false;
     }
+    
+    public void lifeLessThanZero() {
+        if(life <= 0) {
+            model.getGameInfo().addGold((int)gold);
+            remove();
+        }
+    }
 
     @Override
     public void hit (JGObject obj) {
@@ -118,29 +126,33 @@ public class Enemy extends JGObject implements IEMagicable {
         // System.out.println("Bullet Hit");
 
         if (obj.colid == Constant.BULLET_CID) {
-            Bullet bullet = (Bullet) obj;
-            if (this == bullet.getTargetEnemy()) {
+            if(obj instanceof TemporaryBarrier) {
                 /**
-                 * @author Yuhua
-                 *         bullet can only hurt target enemy
-                 *         no obj.remove(), let bullet kill itself
+                 * @author Harris
+                 * For killing enemies with temporary barriers
                  */
+                life--;
+                lifeLessThanZero();
+   
+            } else {
+                Bullet bullet = (Bullet) obj;
+                if (this == bullet.getTargetEnemy()) {
+                    /**
+                     * @author Yuhua
+                     *         bullet can only hurt target enemy
+                     *         no obj.remove(), let bullet kill itself
+                     */
 
-                life -= ((Bullet) obj).getDamage();
-                if (life <= 0) {
-                    // level.getGameInfo().addGold((int)gold);
-                    // level.getEnemies().remove(this);
-                    model.getGameInfo().addGold((int) gold);
-                    remove();
+                    life -= ((Bullet) obj).getDamage();
+                    lifeLessThanZero();
+                    /**
+                     * @author wenxin
+                     *         below command deal with creation of magics;
+                     */
+                    MagicsFactory.getInstance().createMagics(this, null, bullet.getCurrentMagic(),
+                                                             currentMagics);
                 }
-                /**
-                 * @author wenxin
-                 *         below command deal with creation of magics;
-                 */
-                MagicsFactory.getInstance().createMagics(this, null, bullet.getCurrentMagic(),
-                                                         currentMagics);
             }
-
         }
     }
 
