@@ -31,8 +31,6 @@ public class PurchaseInfo {
         addToMap("Type", type);
         addToMap("Name", name);
         addToMap("Description", description);
-//        int temp = (Integer)cost;
-//        String tempS = ((Integer)cost).toString();
         addToMap("Cost", ((Integer)cost).toString());
         addToMap("Image", image);
     }

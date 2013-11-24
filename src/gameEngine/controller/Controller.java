@@ -15,9 +15,10 @@ public class Controller {
 
     Model model;
     View view;
-
-
     Dimension gameSize;
+    private static final String TOWER = "Tower";
+    private static final String NAME = "Name";
+    private static final String TYPE  = "Type";
 
     public Controller () {
 
@@ -77,6 +78,14 @@ public class Controller {
             towerinfo=null;
         }
         return towerinfo;
+    }
+    
+    public boolean purchaseObject(int x, int y, PurchaseInfo purchaseInfo) {
+        if(purchaseInfo.getInfo().get(TYPE).equals(TOWER)) {
+            return purchaseTower(x, y, purchaseInfo.getInfo().get(NAME));
+        } 
+        return purchaseTemporaryBarrier(x, y, purchaseInfo.getInfo().get(NAME));
+        
     }
     
     /**
