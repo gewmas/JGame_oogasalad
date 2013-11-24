@@ -1,6 +1,7 @@
 package gameAuthoring.menuBar;
 
 import java.io.File;
+import javax.swing.JOptionPane;
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.controller.Controller;
 
@@ -15,8 +16,8 @@ public class Simulator {
                 controller.newGame(file);
             }
             catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null,
+                        "Ooops our bad. We messed up and can't simmulate your file!");
             }
         }
         
