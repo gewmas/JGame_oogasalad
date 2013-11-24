@@ -6,9 +6,9 @@ import gameEngine.parser.JSONLibrary.JSONObject;
  * Class that contains the data necessary for temporary barrier game object
  *
  */
-public class BarrierJSONObject extends JSONObject{
+public class TemporaryBarrierJSONObject extends JSONObject{
 
-    public BarrierJSONObject (String id, String image, int damage, int cost, int expire, String description) {
+    public TemporaryBarrierJSONObject (String id, String image, int damage, int cost, int expire, String description) {
         super();
         this.put("id", id);
         this.put("image", image);

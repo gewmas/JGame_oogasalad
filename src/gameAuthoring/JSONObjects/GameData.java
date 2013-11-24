@@ -36,6 +36,7 @@ public class GameData extends JSONObject {
     JSONArray myEnemyList = new JSONArray();
     JSONArray myLevelList = new JSONArray();
     JSONArray myBarrierList = new JSONArray();
+    JSONArray myWaveList = new JSONArray();
 
     MapJSONObject myMap;
 
@@ -171,6 +172,18 @@ public class GameData extends JSONObject {
                                             range, cost, recyclePrice, description));
 
     }
+    
+    /**
+     * Adds wave to myWaveList JSONArray
+     * 
+     * @param type
+     * @param number
+     * @param period
+     * @param interval
+     */
+    public void addWave(String type, int number, double period, int interval){
+        myWaveList.put(new WaveJSONObject(type, number, period, interval));
+    }
 
     /**
      * Adds barrier to myBarrierList JSONArray
@@ -189,7 +202,7 @@ public class GameData extends JSONObject {
                             int expire,
                             String description) {
         
-        myBarrierList.put(new BarrierJSONObject(name, image, damage, cost, expire, description));
+        myBarrierList.put(new TemporaryBarrierJSONObject(name, image, damage, cost, expire, description));
         
     }
 
@@ -211,7 +224,7 @@ public class GameData extends JSONObject {
      * @param life Number enemy lives (hits enemy can endure)
      * @param speed Enemy speed
      */
-    public void addEnemy (String name, int gold, String image, int life, int speed) {
+    public void addEnemy (String name, int gold, String image, int life, double speed) {
         myEnemyList.put(new EnemyJSONObject(name, gold, image, life, speed));
     }
 
@@ -235,15 +248,20 @@ public class GameData extends JSONObject {
         myMap = new MapJSONObject(pathImage, pointList);
         this.put("map", myMap);
     }
+    
+    public void addBarrier(int x, int y, String imageName){
+        myMap.addBarrier(x, y, imageName);
+    }
 
     /**
      * Adds enemy, tower, and level lists to GameData
      */
-    private void addListData () {
+    protected void addListData () {
         this.put("towerType", myTowerList);
         this.put("enemyType", myEnemyList);
         this.put("levelData", myLevelList);
         this.put("temporaryBarrierType", myBarrierList);
+        this.put("wave", myWaveList);
     }
 
     /**
