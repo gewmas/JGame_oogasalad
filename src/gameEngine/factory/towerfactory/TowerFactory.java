@@ -42,15 +42,15 @@ public abstract class TowerFactory {
     }
 
     public void addDescription () {
-        purchaseInfo.addToMap("Tower Type", type);
-        purchaseInfo.addToMap("Tower Name", id);
-        purchaseInfo.addToMap("Image", image);
+//        purchaseInfo.addToMap("Tower Type", type);
+//        purchaseInfo.addToMap("Tower Name", id);
+//        purchaseInfo.addToMap("Image", image);
         purchaseInfo.addToMap("Damage", String.valueOf(damage));
         purchaseInfo.addToMap("Attack Speed", String.valueOf(attackSpeed));
         purchaseInfo.addToMap("Range", String.valueOf(range));
-        purchaseInfo.addToMap("Cost", String.valueOf(cost));
+//        purchaseInfo.addToMap("Cost", String.valueOf(cost));
         purchaseInfo.addToMap("Sell Price", String.valueOf(recyclePrice));
-        purchaseInfo.addToMap("Description", String.valueOf(description));
+//        purchaseInfo.addToMap("Description", String.valueOf(description));
     }
 
     public abstract Tower create (int x, int y);

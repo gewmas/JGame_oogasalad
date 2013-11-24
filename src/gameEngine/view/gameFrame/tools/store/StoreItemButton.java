@@ -41,7 +41,8 @@ public class StoreItemButton extends Button {
         this.setEnabled(false);
         ImageIcon icon = new ImageIcon("src/resources/img/" + itemPurchaseInfo.getInfo().get("Image") + ".png");
         this.setIcon(icon);
-        this.cost = Integer.parseInt(itemPurchaseInfo.getInfo().get("Cost"));
+        String tempInt = itemPurchaseInfo.getInfo().get("Cost");
+        this.cost = (int) Double.parseDouble(tempInt);
         setToolTipText(itemPurchaseInfo.getInfo().get("Name"));
         setOpaque(true);
         this.addMouseAdapter(hoverAction, hoverExitAction, clickAction);
