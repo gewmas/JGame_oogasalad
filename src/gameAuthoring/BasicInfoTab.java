@@ -2,6 +2,8 @@ package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
+
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -49,24 +51,43 @@ public class BasicInfoTab extends Tab {
     public JPanel getTab () {
         JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
         JPanel subPanel = new JPanel(new MigLayout("wrap 2"));
-        JLabel gameName = new JLabel("Game Name");
-        JLabel gold = new JLabel("Starting Gold");
-        JLabel lives = new JLabel("Starting Lives");
-        JLabel title = new JLabel("Basic Game Info");
-        JLabel width = new JLabel("Window Width");
-        JLabel height = new JLabel("Window Height");
-        JLabel tiles = new JLabel("Tiles Per Row");
-        JLabel difficultyScale = new JLabel("Difficulty Scale");
 
-        title.setFont(new Font("Arial", Font.BOLD, 30));
+        JLabel gameName = new JLabel("Game Name");
+        gameName.setFont(Constants.defaultBodyFont);
+
+        JLabel gold = new JLabel("Starting Gold");
+        gold.setFont(Constants.defaultBodyFont);
+
+        JLabel lives = new JLabel("Starting Lives");
+        lives.setFont(Constants.defaultBodyFont);
+
+        JLabel title = new JLabel("Basic Game Info");
+        title.setFont(Constants.defaultBodyFont);
+
+        JLabel width = new JLabel("Window Width");
+        width.setFont(Constants.defaultBodyFont);
+
+        JLabel height = new JLabel("Window Height");
+        height.setFont(Constants.defaultBodyFont);
+
+        JLabel tiles = new JLabel("Tiles Per Row");
+        tiles.setFont(Constants.defaultBodyFont);
+
+        JLabel difficultyScale = new JLabel("Difficulty Scale");
+        difficultyScale.setFont(Constants.defaultBodyFont);
+
+        title.setFont(Constants.defaultTitleFont);
+        title.setForeground(new Color(80, 80, 80));
         mainPanel.add(title, "span 2");
 
         JButton setSplashImageButton = new JButton("Choose Splash Image");
+        setSplashImageButton.setFont(new Font("Calibri", Font.PLAIN, 14));
         setSplashImageButton.addMouseListener(setSplashImageListener());
 
         mySplashImageLabel = new JLabel();
 
         JButton setInfoButton = new JButton("Set Info");
+        setInfoButton.setFont(new Font("Calibri", Font.PLAIN, 14));
         setInfoButton.addMouseListener(setInfoListener());
 
         myGameName = new JTextField();

@@ -29,7 +29,7 @@ public class Grid extends JPanel {
 
     public Grid (int width, int height) {
         this.setLayout(new GridLayout(width, height));
-        this.setBackground(Color.blue);
+        this.setBackground(Color.gray);
         this.setPreferredSize(new Dimension(500, 500));
         myWidth = width;
         myHeight = height;
@@ -169,7 +169,6 @@ public class Grid extends JPanel {
                 img = ImageIO.read(myBackgroundImage);
             }
             catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             int h = img.getHeight(null);

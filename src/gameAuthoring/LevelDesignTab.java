@@ -3,6 +3,7 @@ package gameAuthoring;
 import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.JSONObjects.LevelJSONObject;
 import gameEngine.parser.Parser;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -38,7 +39,8 @@ public class LevelDesignTab extends Tab {
         myMainPanel = new JPanel(new MigLayout("wrap 1"));
         myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
         JLabel title = new JLabel("Level Design");
-        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setFont(new Font("Calibri", Font.PLAIN, 30));
+        title.setForeground(new Color(80, 80, 80));
         myMainPanel.add(title);
         myLevelDesignPanel = new LevelDesignPanel(this);
         myMainPanel.add(myLevelDesignPanel);
@@ -95,7 +97,7 @@ public class LevelDesignTab extends Tab {
     @Override
     public void loadJSON (Parser p) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

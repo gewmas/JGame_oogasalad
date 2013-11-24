@@ -5,7 +5,7 @@ import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -44,18 +44,24 @@ public class MapDesignTab extends Tab {
     public JPanel getTab () {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         JPanel gridPanel = new JPanel(new BorderLayout());
-        mainPanel.setPreferredSize(new Dimension(500, 500));
-        gridPanel.setPreferredSize(new Dimension(500, 500));
         myGrid = new Grid(20, 20);
         JLabel title = new JLabel("Map Design");
-        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setFont(new Font("Calibri", Font.PLAIN, 30));
+        title.setForeground(new Color(80, 80, 80));
         // JLabel label = new JLabel("Current path image");
+
         myCurrentPathImage = new JButton("Choose path image");
+        myCurrentPathImage.setFont(Constants.mapFont);
         myCurrentPathImage.addMouseListener(createPathListener());
+
         JButton checkPath = new JButton("Create Map");
+        checkPath.setFont(Constants.mapFont);
         checkPath.addMouseListener(createPathCheckListener());
+
         JButton setBackground = new JButton("Set background image");
+        setBackground.setFont(Constants.mapFont);
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
+
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;

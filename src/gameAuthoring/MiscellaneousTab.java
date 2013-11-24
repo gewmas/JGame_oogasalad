@@ -3,7 +3,6 @@ package gameAuthoring;
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -38,14 +37,18 @@ public class MiscellaneousTab extends Tab {
     public JPanel getTab () {
         JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
         JLabel title = new JLabel("Miscellaneous");
-        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setFont(Constants.defaultTitleFont);
         mainPanel.add(title, "span 2");
         mainPanel.setPreferredSize(new Dimension(500, 500));
 
         JButton bulletImageButton = new JButton("Select image for bullet");
+        bulletImageButton.setFont(Constants.defaultBodyFont);
         JButton speedImageButton = new JButton("Select image for slow down buff");
+        speedImageButton.setFont(Constants.defaultBodyFont);
         JButton poisonImageButton = new JButton("Select image for poison buff");
+        poisonImageButton.setFont(Constants.defaultBodyFont);
         JButton flameImageButton = new JButton("Select image for flame buff");
+        flameImageButton.setFont(Constants.defaultBodyFont);
 
         JLabel bulletImage = new JLabel();
         JLabel speedImage = new JLabel();
@@ -95,7 +98,7 @@ public class MiscellaneousTab extends Tab {
     @Override
     public void loadJSON (Parser p) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }
