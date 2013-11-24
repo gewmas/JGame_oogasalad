@@ -5,6 +5,7 @@ import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrameMediator;
+import gameEngine.view.gameFrame.ItemPurchaser;
 import gameEngine.view.gameFrame.Utilities;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -32,25 +33,27 @@ public  class StoreOptionsPanel extends Panel {
     private static final int PANEL_HEIGHT = 200;
     protected List<StoreItemButton> storeItems;
     protected View view;
-    private GameFrameMediator mediator;
+
     private Utilities utilities;
+    private ItemPurchaser itemPurchaser;
 
     /**
      * @param mediator facilitates communication between view components
      * @param engineView facilitates communication between view and controller
      * @param utilities 
+     * @param itemPurchaser 
      */
-    protected StoreOptionsPanel (GameFrameMediator mediator,
+    protected StoreOptionsPanel (
                                  View engineView,
-                                 List<PurchaseInfo> towerInformation, Utilities utilities) {
+                                 List<PurchaseInfo> towerInformation, Utilities utilities, ItemPurchaser itemPurchaser) {
 
         super();
         this.view = engineView;
         this.storeItems = new ArrayList<StoreItemButton>();
-        this.mediator = mediator;
         this.utilities = utilities;
+        this.itemPurchaser = itemPurchaser;
         setUIStyle();
-        JPanel options = createOptionsScrollPanel(mediator);
+        JPanel options = createOptionsScrollPanel();
         addStoreInventory (options, towerInformation);
     }
 
@@ -61,7 +64,7 @@ public  class StoreOptionsPanel extends Panel {
      * @param mediator facilitates communication between view components
      * @return 
      */
-    private JPanel createOptionsScrollPanel (GameFrameMediator mediator) {
+    private JPanel createOptionsScrollPanel () {
 
         JPanel options = new JPanel(new MigLayout(LAYOUT_WRAP));
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
@@ -107,7 +110,7 @@ public  class StoreOptionsPanel extends Panel {
 
                 @Override
                 public void executeAction () {
-                    mediator.placeTower(storeItem);
+                    itemPurchaser.placeTower(storeItem);
 
                 }
 
