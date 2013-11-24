@@ -8,7 +8,6 @@ import javax.swing.JTabbedPane;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrameMediator;
 import gameEngine.view.gameFrame.ItemPurchaser;
 import gameEngine.view.gameFrame.Utilities;
 
@@ -23,7 +22,6 @@ public class StorePanel extends Panel {
 
     private JTabbedPane storeTabbedPane;
     private View view;
-
     private Utilities utilities;
     private List<StoreOptionsPanel> storeCategories;
     private ItemPurchaser itemPurchaser;
