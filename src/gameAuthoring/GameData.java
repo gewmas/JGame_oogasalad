@@ -4,6 +4,7 @@ import gameAuthoring.JSONObjects.EnemyJSONObject;
 import gameAuthoring.JSONObjects.LevelJSONObject;
 import gameAuthoring.JSONObjects.MapJSONObject;
 import gameAuthoring.JSONObjects.TowerJSONObject;
+import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.geom.Point2D;
@@ -11,18 +12,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Collection;
+import java.util.Scanner;
 import javax.swing.JFileChooser;
 
 
 public class GameData {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");
-
+    
     private String myGameName;
     private int myGold;
     private int myLives;
 
     private String mySplashImage;
+    private String myBackgroundImage;
     private int myWindowWidth;
     private int myWindowHeight;
     private int myTilesPerRow;
@@ -37,6 +40,10 @@ public class GameData {
 
     public GameData () {
         container = new JSONObject();
+    }
+
+    public Object get (String objectName) {
+        return container.get(objectName);
     }
 
     public void setGameName (String gameName) {
@@ -57,6 +64,11 @@ public class GameData {
     protected void setSplashImage (String splashImage) {
         mySplashImage = splashImage;
         container.put("splashImage", mySplashImage);
+    }
+
+    protected void setBackgroundImage (String backgroundImage) {
+        myBackgroundImage = backgroundImage;
+        container.put("BGImage", myBackgroundImage);
     }
 
     protected void setWindowWidth (int windowWidth) {
@@ -104,17 +116,9 @@ public class GameData {
         return myEnemyList;
     }
 
-    protected void setMap (String bgImage,
-                           String pathImage,
-                           Point2D start,
-                           Point2D end,
+    protected void setMap (String pathImage,
                            Collection<Point2D> pointList) {
-        myMap = new MapJSONObject(bgImage,
-                                  pathImage,
-                                  start,
-                                  end,
-                                  pointList);
-
+        myMap = new MapJSONObject(pathImage, pointList);
         container.put("map", myMap);
     }
 
@@ -124,6 +128,10 @@ public class GameData {
         container.put("enemyType", myEnemyList);
         container.put("levelData", myLevelList);
     }
+    
+//    public Parser getParser(){
+//        return myParser;
+//    }
 
     public void writeToFile () {
         addDataToContainer();
@@ -144,5 +152,7 @@ public class GameData {
         }
 
     }
+
+
 
 }

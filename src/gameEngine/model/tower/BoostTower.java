@@ -85,13 +85,13 @@ public class BoostTower extends Tower{
     @Override
     public void upgrade (double factor) {
         boostFactor *= factor;
-        super.updateDescription();
+        super.addDescription();
     }
     
     @Override
     public void downgrade (double factor) {
         boostFactor /= factor;
-        super.updateDescription();
+        super.addDescription();
     }
 
     

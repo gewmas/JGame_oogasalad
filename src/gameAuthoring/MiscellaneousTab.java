@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -88,6 +89,12 @@ public class MiscellaneousTab extends Tab {
             }
         };
         return listener;
+    }
+
+    @Override
+    public void loadJSON (Parser p) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
