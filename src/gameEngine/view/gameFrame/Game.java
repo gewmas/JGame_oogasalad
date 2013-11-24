@@ -114,11 +114,11 @@ public class Game extends StdGame {
         if (getMouseButton(1) && getMouseInside()) {
             clearMouseButton(1);
             JGPoint mousePosition = getMousePos();
-            if (purchasing) {
+            //if (purchasing) {
                 itemPurchaser.checkAndPlaceTower(mousePosition);
                 System.out.format("Buying %s at: %d,%d\n",towerToPurchase, mousePosition.x, mousePosition.y);
-            }
-            else {
+            //}
+            //else {
                 PurchaseInfo tower=view.getTowerInfo(mousePosition.x, mousePosition.y);
                 if (tower==null) {
                     System.out.println("No tower here");
@@ -127,15 +127,7 @@ public class Game extends StdGame {
                     System.out.println("Checking tower");
                 }
                 System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);
-            }
-        }
-    }
-
-    private void checkAndPlaceTower (JGPoint mousePosition) {
-        if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)){
-            towerToPurchase=null;
-            purchasing = false;
-            mediator.exitPurchase();
+            //}
         }
     }
 
@@ -152,27 +144,6 @@ public class Game extends StdGame {
         super.paintFrame();
         // drawString("Money " + String.valueOf(sc), pfWidth() - 10, 10, 1);
     }
-
-//    /**
-//     * Indicates that the user wants to buy a tower
-//     */
-//    public void placeTower (PurchaseInfo purchaseInfo) {
-//        // setBGColor(JGColor.red);
-//        String towerName=purchaseInfo.getInfo().get("Name");
-//       
-//        System.out.println(towerName);
-//        if ( towerName.equals(towerToPurchaseName)){
-//            mediator.exitPurchase();
-//            System.out.println("Tower cancelled");
-//            towerToPurchase=null;
-//            purchasing=false;
-//            return;
-//        }
-//        mediator.setCursorImage(purchaseInfo);
-//        purchasing = true;
-//        towerToPurchase = purchaseInfo;
-//        towerToPurchaseName = purchaseInfo.getInfo().get("Name");
-//    }
     
     public void endGame(){
         //view.startModel();

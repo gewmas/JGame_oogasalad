@@ -25,7 +25,7 @@ public class ItemPurchaser {
      * Indicates that the user wants to buy a tower
      */
     public void placeTower (PurchaseInfo purchaseInfo) {
-        if (purchasing) {
+        //if (purchasing) {
             // setBGColor(JGColor.red);
             String towerName = purchaseInfo.getInfo().get("Name");
 
@@ -41,14 +41,16 @@ public class ItemPurchaser {
             purchasing = true;
             towerToPurchase = purchaseInfo;
             towerToPurchaseName = purchaseInfo.getInfo().get("Name");
-        }
+        //}
     }
 
     public void checkAndPlaceTower (JGPoint mousePosition) {
-        if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)) {
-            towerToPurchase = null;
-            purchasing = false;
-            utilities.restoreDefaultCursor();
+        if (purchasing) {
+            if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)) {
+                towerToPurchase = null;
+                purchasing = false;
+                utilities.restoreDefaultCursor();
+            }
         }
     }
     
