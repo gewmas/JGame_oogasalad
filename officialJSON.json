@@ -113,7 +113,7 @@
 	 "type": "MultipleShootingTower",
 	 "id" : "Multiple Shooting Tower",
 	 "image": "MultipleShootingTower",
-	 "damage": 1,
+	 "damage": 3,
 	 "attackSpeed": 3.0,
 	 "attackMode": 2,
 	 "attackAmount": 5,

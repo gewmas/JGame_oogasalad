@@ -47,6 +47,8 @@ public class BoostTower extends Tower{
     public void addDescription(){
         super.addDescription();
         info.put("Boost Factor", String.valueOf(boostFactor));
+
+        info.put("Upgrade Boost Factor", String.valueOf(boostFactor*upgradeFactor));
     }
 
     //create magic to towers in range
@@ -70,26 +72,26 @@ public class BoostTower extends Tower{
 
     @Override
     public void upgrade () {
-        boostFactor += 1.0;
+        upgrade(upgradeFactor);
     }
 
     @Override
     public void downgrade(){
-        boostFactor -= 1.0;
+        downgrade(upgradeFactor);
     }
 
     //IMagicable Interface Method
     //BoostTower can't be boosted by other BoostTower
     @Override
     public void upgrade (double factor) {
-//        boostFactor *= factor;
-//        super.updateDescription();
+        boostFactor *= factor;
+        super.updateDescription();
     }
     
     @Override
     public void downgrade (double factor) {
-//        boostFactor /= factor;
-//        super.updateDescription();
+        boostFactor /= factor;
+        super.updateDescription();
     }
 
     

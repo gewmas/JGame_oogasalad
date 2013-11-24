@@ -31,18 +31,30 @@ public class MultipleShootingTower extends DefaultTower {
         super.addDescription();
         
         info.put("Attack Amount", String.valueOf(attackAmount));
+
+        info.put("Upgrade Attack Amount", String.valueOf(attackAmount*upgradeFactor));
     }
     
     @Override
     public void upgrade () {
-        super.upgrade();
-        this.attackAmount++;
+        upgrade(upgradeFactor);
     }
 
     @Override
     public void downgrade(){
-        super.downgrade();
-        this.attackAmount--;
+        downgrade(upgradeFactor);
+    }
+    
+    @Override
+    public void upgrade (double factor) {
+        this.attackAmount *= factor;
+        super.upgrade(factor);
+    }
+    
+    @Override
+    public void downgrade (double factor) {
+        this.attackAmount /= factor;
+        super.downgrade(factor);
     }
 
 }
