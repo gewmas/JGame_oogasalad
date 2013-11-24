@@ -2,16 +2,12 @@ package gameEngine.view.gameFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import gameEngine.view.Frame;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
@@ -36,7 +32,9 @@ public class GameFrame extends Frame {
     private GameFrameMediator mediator;
     private View view;
     private InputAndDisplayFrame cheatCodeFrame;
-
+    private StorePanel storePanel;
+    private InfoDisplayPanel infoPanel;
+    private Utilities utilities;
     /**
      * @param controller facilitates communication between view and model
      * @param view
@@ -53,39 +51,22 @@ public class GameFrame extends Frame {
             }
         });
 
-        setUIStyle();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         mediator.addGameFrame(this);
         this.setFocusable(true);
-
-        this.addKeyListener(new KeyListener() {
-            public void keyPressed (KeyEvent e) {
-
-                if (e.isControlDown() && e.getKeyChar() != 't' && e.getKeyCode() == 84) {
-                    cheatCodeFrame.showFrame();
-                }
-            }
-
-            public void keyReleased (KeyEvent e) {
-            }
-
-            public void keyTyped (KeyEvent e) {
-            }
-        });
+        infoPanel = addInfoDisplay();
+        utilities  = new Utilities(infoPanel,this);
+        
+        storePanel = addStorePanel(utilities);
+        
+      
     }
 
-    /**
-     * Setting the Look and Feel of the UI
-     */
-    private void setUIStyle () {
-        Font f = new Font(StyleConstants.BUTTON_FONT, StyleConstants.BUTTON_FONT_STYLE,
-                          StyleConstants.BUTTON_FONT_SIZE);
-        UIManager.put(StyleConstants.BUTTON_FONT_KEY, f);
 
-    }
 
     public void showGame () {
+        
         createGame();
         addGameTools();
         createMenu();
@@ -110,15 +91,22 @@ public class GameFrame extends Frame {
         JPanel tools = new JPanel();
         BorderLayout borderLayout = new BorderLayout();
         tools.setLayout(borderLayout);
+        tools.add(infoPanel, BorderLayout.CENTER);
+        tools.add(storePanel, BorderLayout.PAGE_START);
+        this.add(tools, BorderLayout.EAST);
+    }
+
+    private StorePanel addStorePanel (Utilities utilities) {
+        StorePanel storePanel = new StorePanel(mediator, view,utilities);
+        mediator.addStore(storePanel);
+        return storePanel;
+    }
+
+    private InfoDisplayPanel addInfoDisplay () {
         InfoDisplayPanel infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
                 .getString("ItemInfo"));
         mediator.addInfoPanel(infoPanel);
-        tools.add(infoPanel, BorderLayout.CENTER);
-        mediator.addInfoPanel(infoPanel);
-        StorePanel storePanel = new StorePanel(mediator, view);
-        mediator.addStore(storePanel);
-        tools.add(storePanel, BorderLayout.PAGE_START);
-        this.add(tools, BorderLayout.EAST);
+        return infoPanel;
     }
 
     /**
@@ -144,7 +132,6 @@ public class GameFrame extends Frame {
     }
 
     public void restoreDefaultCursor () {
-        System.out.println("Restore");
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 
