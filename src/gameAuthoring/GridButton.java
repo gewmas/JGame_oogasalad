@@ -68,6 +68,7 @@ public class GridButton extends JButton {
             public void mouseEntered (MouseEvent e) {
                 if (myImgSource != null) {
                     toggle();
+                    System.out.println(myCoordinate);
                 }
             }
         };
