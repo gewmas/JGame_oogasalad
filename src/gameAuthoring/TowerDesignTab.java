@@ -51,7 +51,7 @@ public class TowerDesignTab extends Tab {
                 .createTitledBorder(b, "Created Towers",
                                     TitledBorder.CENTER,
                                     TitledBorder.TOP,
-                                    new Font("Arial", Font.BOLD, 16)));
+                                    new Font("Calibri", Font.PLAIN, 20)));
         mainPanel.add(myCreatedTowers);
         return mainPanel;
     }

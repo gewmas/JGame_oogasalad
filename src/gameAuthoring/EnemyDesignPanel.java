@@ -37,23 +37,38 @@ public class EnemyDesignPanel extends JPanel {
     public EnemyDesignPanel (EnemyDesignTab enemyDesignTab) {
         myEnemyDesignTab = enemyDesignTab;
         JLabel name = new JLabel("Name");
+        name.setFont(Constants.defaultBodyFont);
         JLabel gold = new JLabel("Worth in Gold");
+        gold.setFont(Constants.defaultBodyFont);
         JLabel lives = new JLabel("Number of Lives");
+        lives.setFont(Constants.defaultBodyFont);
         JLabel speed = new JLabel("Speed");
+        speed.setFont(Constants.defaultBodyFont);
 
         myNameField = new JTextField();
+        myNameField.setFont(Constants.defaultBodyFont);
         myNameField.setPreferredSize(new Dimension(200, 30));
+
         myGoldField = new JTextField();
         myGoldField.setPreferredSize(new Dimension(200, 30));
+        myGoldField.setFont(Constants.defaultBodyFont);
+
         myLifeField = new JTextField();
         myLifeField.setPreferredSize(new Dimension(200, 30));
+        myLifeField.setFont(Constants.defaultBodyFont);
+
         mySpeedField = new JTextField();
         mySpeedField.setPreferredSize(new Dimension(200, 30));
+        mySpeedField.setFont(Constants.defaultBodyFont);
+
         myEnemyImage = new JLabel();
 
         JButton enemyImageChooser = new JButton("Choose enemy image");
+        enemyImageChooser.setFont(Constants.defaultBodyFont);
         enemyImageChooser.addMouseListener(createPathListener());
+
         JButton createEnemyButton = new JButton("Create Enemy");
+        createEnemyButton.setFont(Constants.defaultBodyFont);
         createEnemyButton.addMouseListener(createEnemyButtonListener(this));
 
         this.setLayout(new MigLayout("wrap 2"));

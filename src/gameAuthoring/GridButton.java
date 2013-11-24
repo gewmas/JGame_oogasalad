@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -7,6 +8,7 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -25,6 +27,7 @@ public class GridButton extends JButton {
         myCoordinate = new Point2D.Double(x, y);
         myGrid = grid;
         isPath = false;
+        this.setBorder(BorderFactory.createLineBorder(Color.white, 1));
         addPathListener(this);
     }
 

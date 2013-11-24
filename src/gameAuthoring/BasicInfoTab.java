@@ -43,24 +43,32 @@ public class BasicInfoTab extends Tab {
     public JPanel getTab () {
         JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
         JPanel subPanel = new JPanel(new MigLayout("wrap 2"));
-        JLabel gameName = new JLabel("Game Name");
-        gameName.setFont(new Font("Calibri", Font.PLAIN, 14));
-        JLabel gold = new JLabel("Starting Gold");
-        gold.setFont(new Font("Calibri", Font.PLAIN, 14));
-        JLabel lives = new JLabel("Starting Lives");
-        lives.setFont(new Font("Calibri", Font.PLAIN, 14));
-        JLabel title = new JLabel("Basic Game Info");
-        title.setFont(new Font("Calibri", Font.PLAIN, 14));
-        JLabel width = new JLabel("Window Width");
-        width.setFont(new Font("Calibri", Font.PLAIN, 14));
-        JLabel height = new JLabel("Window Height");
-        height.setFont(new Font("Calibri", Font.PLAIN, 14));
-        JLabel tiles = new JLabel("Tiles Per Row");
-        tiles.setFont(new Font("Calibri", Font.PLAIN, 14));
-        JLabel difficultyScale = new JLabel("Difficulty Scale");
-        difficultyScale.setFont(new Font("Calibri", Font.PLAIN, 14));
 
-        title.setFont(new Font("Calibri", Font.PLAIN, 30));
+        JLabel gameName = new JLabel("Game Name");
+        gameName.setFont(Constants.defaultBodyFont);
+
+        JLabel gold = new JLabel("Starting Gold");
+        gold.setFont(Constants.defaultBodyFont);
+
+        JLabel lives = new JLabel("Starting Lives");
+        lives.setFont(Constants.defaultBodyFont);
+
+        JLabel title = new JLabel("Basic Game Info");
+        title.setFont(Constants.defaultBodyFont);
+
+        JLabel width = new JLabel("Window Width");
+        width.setFont(Constants.defaultBodyFont);
+
+        JLabel height = new JLabel("Window Height");
+        height.setFont(Constants.defaultBodyFont);
+
+        JLabel tiles = new JLabel("Tiles Per Row");
+        tiles.setFont(Constants.defaultBodyFont);
+
+        JLabel difficultyScale = new JLabel("Difficulty Scale");
+        difficultyScale.setFont(Constants.defaultBodyFont);
+
+        title.setFont(Constants.defaultTitleFont);
         title.setForeground(new Color(80, 80, 80));
         mainPanel.add(title, "span 2");
 

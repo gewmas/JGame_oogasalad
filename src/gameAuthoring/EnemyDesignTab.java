@@ -46,7 +46,7 @@ public class EnemyDesignTab extends Tab {
                 .createTitledBorder(b, "Created Enemies",
                                     TitledBorder.CENTER,
                                     TitledBorder.TOP,
-                                    new Font("Arial", Font.BOLD, 16)));
+                                    new Font("Calibri", Font.PLAIN, 20)));
         mainPanel.add(myCreatedEnemies, "aligny center");
         return mainPanel;
     }
