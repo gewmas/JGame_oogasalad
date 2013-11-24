@@ -1,5 +1,9 @@
 package gameEngine.view.gameFrame;
 
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
@@ -29,12 +33,16 @@ public class Utilities {
         
     }
     
-    public void setCursorImage(PurchaseInfo towerInfo){
-        gameFrame.placeTower(towerInfo);
+    public void setCursorImage(PurchaseInfo itemInformation){
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage("resources/img/" + itemInformation.getImage() + ".png");
+        Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
+        gameFrame.setCursor(c);
+        
     }
     
     public void restoreDefaultCursor() {
-        gameFrame.restoreDefaultCursor();
+        gameFrame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
     
 }

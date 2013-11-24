@@ -5,7 +5,6 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import gameEngine.view.Frame;
@@ -119,17 +118,6 @@ public class GameFrame extends Frame {
         setCursor(c);
     }
 
-    public boolean newGame (File file) {
-        try {
-            view.newGame(file);
-            view.loadNewGame();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return true;
-    }
 
     public void restoreDefaultCursor () {
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
