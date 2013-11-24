@@ -38,7 +38,7 @@ public abstract class Tower extends JGObject implements ITMagicable{
 
     private String description;
 
-    private PurchaseInfo purchaseInfo;
+    protected PurchaseInfo purchaseInfo;
 
     public Tower (String type,
                   String id,
@@ -54,7 +54,9 @@ public abstract class Tower extends JGObject implements ITMagicable{
                   double x,
                   double y,
                   int collisionid,
-                  String gfxname) {
+                  String gfxname,
+                  
+                  PurchaseInfo purchaseInfo) {
         super(id, unique_id, x, y, collisionid, gfxname);
 
         this.type = type;
@@ -74,23 +76,19 @@ public abstract class Tower extends JGObject implements ITMagicable{
         this.x = x;
         this.y = y;
         
-        this.purchaseInfo = new PurchaseInfo(type, id, image, description, cost);
+        this.purchaseInfo = purchaseInfo;
     }
     
     public void addDescription(){
-        info.put("Tower Type", type);
-        info.put("Tower Name", id);
-        info.put("Image", image);
-        info.put("Damage", String.valueOf(damage));
-        info.put("Attack Speed", String.valueOf(attackSpeed));
-        info.put("Range", String.valueOf(range));
-        info.put("Cost", String.valueOf(cost));
-        info.put("Sell Price", String.valueOf(recyclePrice));
-        info.put("Description", String.valueOf(description));
+        purchaseInfo.addToMap("Damage", String.valueOf(damage));
+        purchaseInfo.addToMap("Attack Speed", String.valueOf(attackSpeed));
+        purchaseInfo.addToMap("Range", String.valueOf(range));
+        purchaseInfo.addToMap("Sell Price", String.valueOf(recyclePrice));
+        purchaseInfo.addToMap("Description", String.valueOf(description));
 
-        info.put("Upgrade Price", String.valueOf(upgradePrice));
-        info.put("Upgrade Damage", String.valueOf(damage*upgradeFactor));
-        info.put("Upgrade Attack Speed", String.valueOf(attackSpeed*upgradeFactor));        
+        purchaseInfo.addToMap("Upgrade Price", String.valueOf(upgradePrice));
+        purchaseInfo.addToMap("Upgrade Damage", String.valueOf(damage*upgradeFactor));
+        purchaseInfo.addToMap("Upgrade Attack Speed", String.valueOf(attackSpeed*upgradeFactor));        
     }
     
   
@@ -106,8 +104,8 @@ public abstract class Tower extends JGObject implements ITMagicable{
     /**
      * TowerInfo Getter Method
      */
-    public Map<String, String> getInfo () {
-        return purchaseInfo.getInfo();
+    public PurchaseInfo getPurchaseInfo () {
+        return purchaseInfo;
     }
     
     @Deprecated
