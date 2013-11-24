@@ -162,7 +162,6 @@ public class Game extends StdGame {
             return;
         }
         mediator.setCursorImage(purchaseInfo);
-        System.out.println("User wants to purchase " + purchaseInfo.getItemName());
         purchasing = true;
         towerToPurchase = towerName;
     }
