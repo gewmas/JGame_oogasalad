@@ -11,6 +11,7 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.GameFrameMediator;
+import gameEngine.view.gameFrame.menu.MenuActions;
 import gameEngine.view.initialization.InitializationFrame;
 
 
@@ -21,7 +22,7 @@ import gameEngine.view.initialization.InitializationFrame;
  * @author Lalita Maraj, Alex Zhu
  * 
  */
-public class View {
+public class View implements MenuActions {
     private GameFrame gameFrame;
     private InitializationFrame initializationFrame;
     private Controller controller;
@@ -32,7 +33,13 @@ public class View {
         mediator = new GameFrameMediator();
         gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame = new InitializationFrame(this);
+       
+
+    }
+
+    public void promptForFile () {
         initializationFrame.showFrame();
+
     }
 
     public void selectNewGame () {
@@ -40,11 +47,6 @@ public class View {
         gameFrame.dispose();
         gameFrame = new GameFrame(controller, this, mediator);
         initializationFrame.setVisible(true);
-    }
-
-    public void loadNewGame () {
-        gameFrame.showGame();
-        initializationFrame.setVisible(false);
     }
 
     public void startJGame () {
@@ -61,16 +63,16 @@ public class View {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-             e.printStackTrace();
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }
     }
 
-    public void sendEngine(JGEngineInterface engine){
+    public void sendEngine (JGEngineInterface engine) {
         controller.setJGEngine(engine);
     }
-    
+
     /**
      * Tells the controller to send tower purchase instructions to the model
      * and then reset the cursor
@@ -115,24 +117,23 @@ public class View {
     public Map<String, List<PurchaseInfo>> getInventory () {
         return controller.getInventory();
     }
-    
-    public List<PurchaseInfo> getTowers () {
-        return controller.getTowers();
-    }
-    
-    public void quitGame(){
+
+    public void quitGame () {
         mediator.quitGame();
     }
 
     public void endGame () {
         mediator.endGame();
-        //controller.startGame();
+        mediator.closeStore();
+        // controller.startGame();
     }
+
     public boolean activateCheat (String cheat) {
         return controller.activateCheat(cheat);
     }
-    
-    public String getGameTitle(){
+
+    public String getGameTitle () {
         return controller.getGameTitle();
     }
+
 }

@@ -1,10 +1,9 @@
 package gameEngine.view.gameFrame;
 
 import java.util.Map;
-import jgame.impl.JGEngineInterface;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.gameFrame.store.InfoDisplayPanel;
-import gameEngine.view.gameFrame.store.StoreOptionsPanel;
+import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
+import gameEngine.view.gameFrame.tools.store.StorePanel;
 
 
 /**
@@ -26,16 +25,12 @@ import gameEngine.view.gameFrame.store.StoreOptionsPanel;
  */
 public class GameFrameMediator {
 
-    private StoreOptionsPanel storeOptions;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
     private InfoDisplayPanel towerInfoPanel;
+    private StorePanel storePanel;
 
-    public void addTowersOptionPanel (StoreOptionsPanel storeOptions) {
-        this.storeOptions = storeOptions;
-    }
 
- 
     /**
      * Destroys the jgame instance so that it can be reloaded
      */
@@ -45,6 +40,7 @@ public class GameFrameMediator {
     }
     
     public void endGame(){
+        this.clearDisplay();
         canvasPanel.endGame();
     }
 
@@ -91,7 +87,7 @@ public class GameFrameMediator {
      * Updates the enabled status of store items.
      */
     public void updateStoreStatus () {
-        storeOptions.updateStoreStatus();
+        storePanel.updateStoreStatus();
     }
 
     public void addGameFrame (GameFrame gameFrame) {
@@ -113,12 +109,19 @@ public class GameFrameMediator {
     }
     
     public void openStore () {
-      storeOptions.addStoreInventory();
+      storePanel.addStoreInventory();
     }
 
-
+    public void closeStore(){
+        storePanel.closeStore();
+    }
     public void displayTowerInfo (Map<String, String> information, Map<String, String> display) {
         this.towerInfoPanel.displayInformation(information, display);
+        
+    }
+
+    public void addStore (StorePanel storePanel) {
+        this.storePanel = storePanel;
         
     }
 }
