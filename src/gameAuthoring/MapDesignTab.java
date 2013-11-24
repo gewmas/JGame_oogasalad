@@ -86,8 +86,8 @@ public class MapDesignTab extends Tab {
         
         for (int i=0; i < pathPoints.length(); i++){
             JSONObject point = (JSONObject) pathPoints.get(i);
-            int x = (int) point.get("x");
-            int y = (int) point.get("y");
+            int x = (Integer) point.get("x");
+            int y = (Integer) point.get("y");
             myGrid.toggleGridButton(x, y);
         }
         
