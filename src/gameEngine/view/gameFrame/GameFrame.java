@@ -31,8 +31,7 @@ public class GameFrame extends Frame {
     private GameFrameMediator mediator;
     private View view;
     private InputAndDisplayFrame cheatCodeFrame;
-    private StorePanel storePanel;
-    private InfoDisplayPanel infoPanel;
+
     private Utilities utilities;
     /**
      * @param controller facilitates communication between view and model
@@ -43,23 +42,27 @@ public class GameFrame extends Frame {
         this.mediator = mediator;
 
         this.view = view;
-        this.cheatCodeFrame = new InputAndDisplayFrame("Cheat Sheet", new InputSender() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mediator.addGameFrame(this);
+        this.cheatCodeFrame = addCheatCodeFrame(view);
+        InfoDisplayPanel infoPanel = addInfoDisplay();
+        utilities  = new Utilities(infoPanel,this);
+        StorePanel storePanel = addStorePanel(utilities);
+        addGameTools(infoPanel, storePanel);
+        
+        setJMenuBar(new Menu(view));
+      
+    }
+
+
+
+    private InputAndDisplayFrame addCheatCodeFrame (final View view) {
+        return new InputAndDisplayFrame("Cheat Sheet", new InputSender() {
             @Override
             public void submit (String cheat) {
                 view.activateCheat(cheat);
             }
         });
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        mediator.addGameFrame(this);
-        this.setFocusable(true);
-        infoPanel = addInfoDisplay();
-        utilities  = new Utilities(infoPanel,this);
-        
-        storePanel = addStorePanel(utilities);
-        
-      
     }
 
 
@@ -67,8 +70,6 @@ public class GameFrame extends Frame {
     public void showGame () {
         
         createGame();
-        addGameTools();
-        createMenu();
         pack();
         setVisible(true);
     }
@@ -79,14 +80,12 @@ public class GameFrame extends Frame {
         mediator.addGame(canvasPanel);
     }
 
-    public void createMenu () {
-        setJMenuBar(new Menu(view));
-    }
-
     /**
      * Create the store of Towers
+     * @param storePanel2 
+     * @param infoPanel2 
      */
-    private void addGameTools () {
+    private void addGameTools (InfoDisplayPanel infoPanel, StorePanel storePanel) {
         JPanel tools = new JPanel();
         BorderLayout borderLayout = new BorderLayout();
         tools.setLayout(borderLayout);
