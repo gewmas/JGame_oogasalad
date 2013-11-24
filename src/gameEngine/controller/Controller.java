@@ -16,7 +16,7 @@ public class Controller {
     Model model;
     View view;
     Dimension gameSize;
-    private static final String TOWER = "Tower";
+    private static final String TEMPORARY_BARRIER = "Temporary Barrier";
     private static final String NAME = "Name";
     private static final String TYPE  = "Type";
 
@@ -86,10 +86,11 @@ public class Controller {
      * GUI uses this when object is purchased
      **/
     public boolean purchaseObject(int x, int y, PurchaseInfo purchaseInfo) {
-        if(purchaseInfo.getInfo().get(TYPE).equals(TOWER)) {
-            return purchaseTower(x, y, purchaseInfo.getInfo().get(NAME));
+        if(purchaseInfo.getInfo().get(TYPE).equals(TEMPORARY_BARRIER)) {
+            return purchaseTemporaryBarrier(x, y, purchaseInfo.getInfo().get(NAME));
         } 
-        return purchaseTemporaryBarrier(x, y, purchaseInfo.getInfo().get(NAME));
+        return purchaseTower(x, y, purchaseInfo.getInfo().get(NAME));
+
         
     }
     

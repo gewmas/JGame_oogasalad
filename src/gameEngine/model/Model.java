@@ -212,7 +212,7 @@ public class Model {
      **/
     public boolean purchaseTemporaryBarrier (int x, int y, String name) {
         Tile currentTile = getTile(x, y);
-        if (currentTile.isEmpty() && !currentTile.hasPath()) {
+        if (currentTile.hasPath()) {
             currentTile.setTemporaryBarrier();
             return temporaryBarrierWarehouse
                 .create((int) currentTile.getX(), (int) currentTile.getY(), name, gameInfo);
