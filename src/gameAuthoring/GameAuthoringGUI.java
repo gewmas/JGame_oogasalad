@@ -23,7 +23,6 @@ public class GameAuthoringGUI {
     private EnemyDesignTab myEnemyDesignTab;
     private LevelDesignTab myLevelDesignTab;
     private MiscellaneousTab myMiscellaneousTab;
-    private SimmulationTab mySimmulationTab;
     private UserLibraryMainTab myUserLibraryPanel;
 
     // TO DO: Get rid of magic numbers
@@ -83,7 +82,6 @@ public class GameAuthoringGUI {
         myEnemyDesignTab = new EnemyDesignTab(gameData);
         myLevelDesignTab = new LevelDesignTab(gameData);
         myMiscellaneousTab = new MiscellaneousTab(gameData);
-        mySimmulationTab = new SimmulationTab(gameData);
         myUserLibraryPanel = new UserLibraryMainTab();
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -92,7 +90,6 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
         gameDesignTab.addTab("Level Design", myLevelDesignTab.getTab());
         gameDesignTab.addTab("Miscellaneous", myMiscellaneousTab.getTab());
-        gameDesignTab.addTab("Simmulate", mySimmulationTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab);
         mainPanel.add(title, "span 2, align right");
         mainPanel.add(gameDesignTab, "gap 50 20 30 40");
