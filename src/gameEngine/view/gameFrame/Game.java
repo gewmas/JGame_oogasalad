@@ -26,10 +26,11 @@ public class Game extends StdGame {
 
     private View view;
     private boolean purchasing;
-    private String towerToPurchase;
+    private PurchaseInfo towerToPurchase;
     private GameFrameMediator mediator;
     private FrameRateSlider frameRateSlider;
     private JGObject frameRateBar;
+    private String towerToPurchaseName;
 
     public Game (View view, GameFrameMediator mediator) {
         this.view = view;
@@ -154,7 +155,9 @@ public class Game extends StdGame {
     public void placeTower (PurchaseInfo purchaseInfo) {
         // setBGColor(JGColor.red);
         String towerName=purchaseInfo.getInfo().get("Name");
-        if (towerName==null || towerName.equals(towerToPurchase)){
+       
+        System.out.println(towerName);
+        if ( towerName.equals(towerToPurchaseName)){
             mediator.exitPurchase();
             System.out.println("Tower cancelled");
             towerToPurchase=null;
@@ -163,7 +166,8 @@ public class Game extends StdGame {
         }
         mediator.setCursorImage(purchaseInfo);
         purchasing = true;
-        towerToPurchase = towerName;
+        towerToPurchase = purchaseInfo;
+        towerToPurchaseName = purchaseInfo.getInfo().get("Name");
     }
     
     public void endGame(){
