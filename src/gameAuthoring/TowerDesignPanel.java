@@ -1,6 +1,7 @@
 package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -120,9 +121,9 @@ public class TowerDesignPanel extends JPanel {
         this.add(towerImageChooser, "aligny center");
         this.add(myTowerImage);
         this.add(createTowerButton);
-        Border b = BorderFactory.createLoweredBevelBorder();
+        Border b = BorderFactory.createLineBorder(Color.black, 1);
         this.setBorder(b);
-
+        this.setOpaque(false);
     }
 
     public MouseAdapter createPathListener () {

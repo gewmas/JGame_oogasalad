@@ -2,13 +2,13 @@ package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.menuBar.MenuBar;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.Image;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,48 +30,40 @@ public class GameAuthoringGUI {
     public GameAuthoringGUI () {
         GameData gameData = new GameData();
         JFrame frame = new JFrame();
-        JLabel title = new JLabel("G a m e   D e s i g n   E n v i r o n m e n t");
-        title.setFont(new Font("Calibri", Font.ITALIC, 50));
-        title.setForeground(new Color(120, 120, 120));
-        frame.setPreferredSize(new Dimension(1200, 900));
+        JLabel title = new JLabel();
+        Image titleImage;
+        try {
+            titleImage = ImageIO.read(this.getClass().getResource("title.png"));
+            title.setIcon(new ImageIcon(titleImage));
+        }
+        catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        frame.setPreferredSize(new Dimension(1200, 1000));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel mainPanel = new JPanel(new MigLayout("wrap 2")) {
             @Override
             protected void paintComponent (Graphics grphcs) {
-                super.paintComponent(grphcs);
-                grphcs.setColor(Color.red);
-                Graphics2D g2d = (Graphics2D) grphcs;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                                     RenderingHints.VALUE_ANTIALIAS_ON);
+                Image img = null;
+                try {
+                    img = ImageIO.read(this.getClass().getResource("texture0.jpg"));
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+                int h = img.getHeight(null);
+                int w = img.getWidth(null);
 
-                GradientPaint gp =
-                        new GradientPaint(0, 0,
-                                          getBackground().brighter().brighter(), 0, getHeight(),
-                                          getBackground().darker().darker().darker());
-
-                g2d.setPaint(gp);
-                g2d.fillRect(0, 0, getWidth(), getHeight());
-                super.paintComponent(grphcs);
-                // Image img = null;
-                // try {
-                // img = ImageIO.read(this.getClass().getResource("frame.png"));
-                // }
-                // catch (IOException e) {
-                // e.printStackTrace();
-                // }
-                // int h = img.getHeight(null);
-                // int w = img.getWidth(null);
-                //
-                // if (w > this.getWidth() || w < this.getWidth()) {
-                // img = img.getScaledInstance(getWidth(), -1, Image.SCALE_DEFAULT);
-                // h = img.getHeight(null);
-                // }
-                // if (h > this.getHeight() || h < this.getHeight()) {
-                // img = img.getScaledInstance(-1, getHeight(), Image.SCALE_DEFAULT);
-                // }
-                // int x = (getWidth() - img.getWidth(null)) / 2;
-                // int y = (getHeight() - img.getHeight(null)) / 2;
-                // grphcs.drawImage(img, x, y, null);
+                if (w > this.getWidth() || w < this.getWidth()) {
+                    img = img.getScaledInstance(getWidth(), -1, Image.SCALE_DEFAULT);
+                    h = img.getHeight(null);
+                }
+                if (h > this.getHeight() || h < this.getHeight()) {
+                    img = img.getScaledInstance(-1, getHeight(), Image.SCALE_DEFAULT);
+                }
+                int x = (getWidth() - img.getWidth(null)) / 2;
+                int y = (getHeight() - img.getHeight(null)) / 2;
+                grphcs.drawImage(img, x, y, null);
             }
         };
         mainPanel.setOpaque(false);
@@ -94,7 +86,7 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Miscellaneous", myMiscellaneousTab.getTab());
         gameDesignTab.addTab("Simmulate", mySimmulationTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab);
-        mainPanel.add(title, "span 2, align right");
+        mainPanel.add(title, "span 2, align left, gap 0 0 30 0");
         mainPanel.add(gameDesignTab, "gap 50 20 30 40");
         mainPanel.add(myUserLibraryPanel);
         frame.setJMenuBar(menu);
@@ -102,7 +94,7 @@ public class GameAuthoringGUI {
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
-
+        frame.setResizable(false);
     }
 
     public static void main (String[] arg) {
