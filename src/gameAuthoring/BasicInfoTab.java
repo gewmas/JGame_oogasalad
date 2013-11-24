@@ -2,6 +2,7 @@ package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -43,23 +44,34 @@ public class BasicInfoTab extends Tab {
         JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
         JPanel subPanel = new JPanel(new MigLayout("wrap 2"));
         JLabel gameName = new JLabel("Game Name");
+        gameName.setFont(new Font("Calibri", Font.PLAIN, 14));
         JLabel gold = new JLabel("Starting Gold");
+        gold.setFont(new Font("Calibri", Font.PLAIN, 14));
         JLabel lives = new JLabel("Starting Lives");
+        lives.setFont(new Font("Calibri", Font.PLAIN, 14));
         JLabel title = new JLabel("Basic Game Info");
+        title.setFont(new Font("Calibri", Font.PLAIN, 14));
         JLabel width = new JLabel("Window Width");
+        width.setFont(new Font("Calibri", Font.PLAIN, 14));
         JLabel height = new JLabel("Window Height");
+        height.setFont(new Font("Calibri", Font.PLAIN, 14));
         JLabel tiles = new JLabel("Tiles Per Row");
+        tiles.setFont(new Font("Calibri", Font.PLAIN, 14));
         JLabel difficultyScale = new JLabel("Difficulty Scale");
+        difficultyScale.setFont(new Font("Calibri", Font.PLAIN, 14));
 
-        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setFont(new Font("Calibri", Font.PLAIN, 30));
+        title.setForeground(new Color(80, 80, 80));
         mainPanel.add(title, "span 2");
 
         JButton setSplashImageButton = new JButton("Choose Splash Image");
+        setSplashImageButton.setFont(new Font("Calibri", Font.PLAIN, 14));
         setSplashImageButton.addMouseListener(setSplashImageListener());
 
         mySplashImageLabel = new JLabel();
 
         JButton setInfoButton = new JButton("Set Info");
+        setInfoButton.setFont(new Font("Calibri", Font.PLAIN, 14));
         setInfoButton.addMouseListener(setInfoListener());
 
         myGameName = new JTextField();

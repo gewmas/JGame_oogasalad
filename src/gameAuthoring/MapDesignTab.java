@@ -5,6 +5,7 @@ import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -45,7 +46,8 @@ public class MapDesignTab extends Tab {
         JPanel gridPanel = new JPanel(new BorderLayout());
         myGrid = new Grid(20, 20);
         JLabel title = new JLabel("Map Design");
-        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setFont(new Font("Calibri", Font.PLAIN, 30));
+        title.setForeground(new Color(80, 80, 80));
         // JLabel label = new JLabel("Current path image");
         myCurrentPathImage = new JButton("Choose path image");
         myCurrentPathImage.addMouseListener(createPathListener());

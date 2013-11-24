@@ -2,6 +2,7 @@ package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -32,7 +33,8 @@ public class EnemyDesignTab extends Tab {
         JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
         mainPanel.setPreferredSize(new Dimension(500, 500));
         JLabel title = new JLabel("Enemy Design");
-        title.setFont(new Font("Arial", Font.BOLD, 30));
+        title.setFont(new Font("Calibri", Font.PLAIN, 30));
+        title.setForeground(new Color(80, 80, 80));
         mainPanel.add(title, "span 2");
         myScrollPanel = new JPanel(new MigLayout("wrap 4"));
         EnemyDesignPanel enemyDesignPanel = new EnemyDesignPanel(this);
@@ -66,7 +68,7 @@ public class EnemyDesignTab extends Tab {
     @Override
     public void loadJSON (Parser p) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }

@@ -95,7 +95,7 @@ public class MiscellaneousTab extends Tab {
     @Override
     public void loadJSON (Parser p) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }
