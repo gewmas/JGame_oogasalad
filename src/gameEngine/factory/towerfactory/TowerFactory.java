@@ -4,7 +4,9 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 
 public abstract class TowerFactory implements PurchaseInfo {
@@ -14,9 +16,6 @@ public abstract class TowerFactory implements PurchaseInfo {
     
     String description;
     String image;
-
-    double x;
-    double y;
 
     double damage;
     double attackSpeed;
@@ -39,18 +38,16 @@ public abstract class TowerFactory implements PurchaseInfo {
         recyclePrice = currTower.getDouble("recyclePrice");
         description = currTower.getString("description");
 
-        info = new HashMap<String, String>();
+        info = new LinkedHashMap<String, String>();
     }
 
     public void addDescription () {
         info.put("Tower Type", type);
-        info.put("Tower ID", id);
+        info.put("Tower Name", id);
         info.put("Image", image);
         info.put("Damage", String.valueOf(damage));
         info.put("Attack Speed", String.valueOf(attackSpeed));
         info.put("Range", String.valueOf(range));
-        info.put("X", String.valueOf(x));
-        info.put("Y", String.valueOf(y));
         info.put("Cost", String.valueOf(cost));
         info.put("Sell Price", String.valueOf(recyclePrice));
         info.put("Description", String.valueOf(description));
