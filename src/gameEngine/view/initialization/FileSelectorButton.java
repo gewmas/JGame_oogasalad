@@ -36,6 +36,7 @@ public class FileSelectorButton extends Button {
         int selected = chooser.showOpenDialog(null);
         if (selected == JFileChooser.APPROVE_OPTION) {
             File file = new File(chooser.getSelectedFile().toString());
+            System.out.println(file.getAbsolutePath());
             view.newGame(file);
         }
 

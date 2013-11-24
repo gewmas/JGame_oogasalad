@@ -30,7 +30,6 @@ public class GameAuthoringGUI implements Observer {
     private EnemyDesignTab myEnemyDesignTab;
     private LevelDesignTab myLevelDesignTab;
     private MiscellaneousTab myMiscellaneousTab;
-    private SimulationTab mySimulationTab;
     private UserLibraryMainTab myUserLibraryPanel;
     private Image currentImage;
 
@@ -58,7 +57,6 @@ public class GameAuthoringGUI implements Observer {
         myEnemyDesignTab = new EnemyDesignTab(gameData);
         myLevelDesignTab = new LevelDesignTab(gameData);
         myMiscellaneousTab = new MiscellaneousTab(gameData);
-        mySimulationTab = new SimulationTab(gameData);
         myUserLibraryPanel = new UserLibraryMainTab(this);
 
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
@@ -68,7 +66,6 @@ public class GameAuthoringGUI implements Observer {
         gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
         gameDesignTab.addTab("Level Design", myLevelDesignTab.getTab());
         gameDesignTab.addTab("Miscellaneous", myMiscellaneousTab.getTab());
-        gameDesignTab.addTab("Simulate", mySimulationTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab);
         myMainPanel.add(title, "span 2, align left, gap 0 0 30 0");
         myMainPanel.add(gameDesignTab, "gap 50 20 30 40");
