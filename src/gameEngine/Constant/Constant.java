@@ -3,7 +3,7 @@ package gameEngine.Constant;
 
 
 /**
- * @author Jiaran
+ * @author Jiaran, Yuhua
  *         Stores all the constant value of game engine.
  *         These constants should include all the CIDs of JGObject.
  */

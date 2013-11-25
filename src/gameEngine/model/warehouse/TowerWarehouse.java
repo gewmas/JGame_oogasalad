@@ -1,7 +1,6 @@
 package gameEngine.model.warehouse;
 
 import gameEngine.Constant.Constant;
-import gameEngine.factory.towerfactory.DefaultTowerFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.GameInfo;
 import gameEngine.parser.Parser;

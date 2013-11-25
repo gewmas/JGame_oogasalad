@@ -51,7 +51,7 @@ public class DefaultTower extends Tower {
                          double attackSpeed,
                          int attackMode,
                          double range,
-                         double cost,
+                         int cost,
                          double recyclePrice,
                          String description,
 
@@ -221,7 +221,4 @@ public class DefaultTower extends Tower {
         attackSpeed /= factor;
         super.addDescription();
     }
-
-    
-
 }

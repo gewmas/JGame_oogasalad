@@ -4,17 +4,13 @@ import gameEngine.Constant.Constant;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
 
 
 public abstract class TowerFactory {
 
     protected String type;
     protected String id;
-    
+
     protected String description;
     protected String image;
 
@@ -23,7 +19,7 @@ public abstract class TowerFactory {
 
     protected double range;
 
-    protected double cost;
+    protected int cost;
     protected double sellPrice;
 
     protected PurchaseInfo purchaseInfo;
@@ -35,11 +31,11 @@ public abstract class TowerFactory {
         damage = currTower.getDouble(Constant.TOWER_DAMAGE);
         attackSpeed = currTower.getDouble(Constant.TOWER_ATTACK_SPEED);
         range = currTower.getDouble(Constant.TOWER_RANGE);
-        cost = currTower.getDouble(Constant.PURCHASE_INFO_COST);
+        cost = currTower.getInt(Constant.PURCHASE_INFO_COST);
         sellPrice = currTower.getDouble(Constant.TOWER_SELL_PRICE);
         description = currTower.getString(Constant.PURCHASE_INFO_DESCRIPTION);
 
-        this.purchaseInfo = new PurchaseInfo(type, id, image, description,(int)cost);
+        purchaseInfo = new PurchaseInfo(type, id, image, description, cost);
     }
 
     public void addDescription () {
@@ -57,47 +53,10 @@ public abstract class TowerFactory {
     public PurchaseInfo getPurchaseInfo () {
         return purchaseInfo;
     }
-    
-    @Deprecated
-    public String getItemName () {
-        return id;
-    }
 
-    @Deprecated
-    public String getImage () {
-        return image;
-    }
-
-    @Deprecated
     public int getCost () {
-        return (int) cost;
+        return cost;
     }
 
-    @Deprecated
-    public String getDescription () {
-        return description;
-    }
-
-    @Deprecated
-    public double getDamage () {
-        return damage;
-    }
-
-    @Deprecated
-    public double getAttackSpeed () {
-        return attackSpeed;
-    }
-
-    @Deprecated
-    public double getRange () {
-        return range;
-    }
-
-    @Deprecated
-    public double getRecyclePrice () {
-        return sellPrice;
-    }
-
-    
 
 }

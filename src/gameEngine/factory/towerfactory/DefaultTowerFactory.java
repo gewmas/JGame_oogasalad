@@ -39,8 +39,4 @@ public class DefaultTowerFactory extends TowerFactory {
         return tower;
     }
 
-    
-    
-  
-
 }

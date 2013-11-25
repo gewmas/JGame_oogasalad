@@ -10,7 +10,7 @@ public class MultipleShootingTower extends DefaultTower {
                                   int attackMode,
                                   int attackAmount,
                                   double range,
-                                  double cost,
+                                  int cost,
                                   double recyclePrice,
                                   String description,
                                   
@@ -37,7 +37,6 @@ public class MultipleShootingTower extends DefaultTower {
         super.addDescription();
         
         purchaseInfo.addToMap(Constant.TOWER_ATTACK_AMOUNT, String.valueOf(attackAmount));
-
         purchaseInfo.addToMap(Constant.TOWER_UPGRADE_ATTACK_AMOUNT, String.valueOf(attackAmount*upgradeFactor));
     }
     
