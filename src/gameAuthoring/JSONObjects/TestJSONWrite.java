@@ -1,12 +1,11 @@
 package gameAuthoring.JSONObjects;
 
-import gameAuthoring.GameData;
-import gameEngine.parser.JSONLibrary.JSONArray;
-import gameEngine.parser.JSONLibrary.JSONObject;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.awt.List;
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 public class TestJSONWrite {
@@ -18,22 +17,30 @@ public class TestJSONWrite {
     }
 
     public void testWrite () {
-        writer = new PrintWriter(System.out);
 
-        JSONObject container = new JSONObject();
+        GameData game = new GameData();
+        //Testing map writing
+        Collection<Point2D> pathList = new ArrayList<Point2D>();
+        pathList.add(new Point2D.Double(0, 0));
+        pathList.add(new Point2D.Double(0, 1));
+        pathList.add(new Point2D.Double(1, 1));
+        
+        game.setMap("path.jpg", pathList);
+        
+        game.addBarrier(5, 2, "rock.jpg");
+        
+        //Testing wave writing
+//        game.addWave("1", 5, 0.5, 7);
+//        game.addWave("2", 1, 0.5, 3);
 
-        EnemyJSONObject testEnemy = new EnemyJSONObject("test", 1, "imgsrc", 2, 3);
-        EnemyJSONObject testEnemy2 = new EnemyJSONObject("test2", 1, "imgsrc2", 2, 3);
 
-        JSONArray list = new JSONArray();
+        // Testing enemy writing
+//        game.addEnemy("1", 5, "enemy1", 2, 0.5);
+//        game.addEnemy("2", 10, "runRight", 3, 0.1);
 
-        list.put(testEnemy);
-        list.put(testEnemy2);
-        container.put("enemyType", list);
+        game.addListData();
+        System.out.println(game.toString(1));
 
-        System.out.println(container.toString(1));
-
-        testEnemy.write(writer);
     }
 
     public static void main (String[] args) {

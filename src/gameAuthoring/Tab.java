@@ -1,10 +1,12 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
+import java.util.Observable;
 import javax.swing.JPanel;
 
 
-public abstract class Tab {
+public abstract class Tab extends Observable {
 
     protected GameData myGameData;
 
@@ -20,8 +22,7 @@ public abstract class Tab {
     public GameData getGameData () {
         return myGameData;
     }
-    
-    public abstract void loadJSON(Parser p);
-        
-    
+
+    public abstract void loadJSON (Parser p);
+
 }
