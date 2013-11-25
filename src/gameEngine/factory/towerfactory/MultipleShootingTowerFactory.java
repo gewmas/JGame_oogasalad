@@ -1,6 +1,6 @@
 package gameEngine.factory.towerfactory;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.tower.MultipleShootingTower;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -12,7 +12,7 @@ public class MultipleShootingTowerFactory extends DefaultTowerFactory {
     public MultipleShootingTowerFactory (JSONObject currTower) {
         super(currTower);
 
-        attackAmount = currTower.getInt(Constant.TOWER_ATTACK_AMOUNT);
+        attackAmount = currTower.getInt(GameEngineConstant.TOWER_ATTACK_AMOUNT);
 
         addDescription();
     }
@@ -20,7 +20,7 @@ public class MultipleShootingTowerFactory extends DefaultTowerFactory {
     @Override
     public void addDescription () {
         super.addDescription();
-        purchaseInfo.addToMap(Constant.TOWER_ATTACK_AMOUNT, String.valueOf(attackAmount));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_AMOUNT, String.valueOf(attackAmount));
     }
 
     @Override
@@ -29,7 +29,7 @@ public class MultipleShootingTowerFactory extends DefaultTowerFactory {
                 new MultipleShootingTower(damage, attackSpeed, attackMode, attackAmount, range,
                                           cost, sellPrice, description,
                                           type, id, true,
-                                          x, y, Constant.TOWER_CID, image,
+                                          x, y, GameEngineConstant.TOWER_CID, image,
                                           purchaseInfo);
         return tower;
     }

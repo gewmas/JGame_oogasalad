@@ -1,6 +1,6 @@
 package gameEngine.view.gameFrame;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
@@ -89,8 +89,8 @@ public class Game extends StdGame {
 
     public void doFrameInGame () {
         moveObjects();
-        checkCollision(Constant.BULLET_CID, Constant.ENEMY_CID);
-        checkCollision(Constant.ENEMY_CID, Constant.BULLET_CID);
+        checkCollision(GameEngineConstant.BULLET_CID, GameEngineConstant.ENEMY_CID);
+        checkCollision(GameEngineConstant.ENEMY_CID, GameEngineConstant.BULLET_CID);
         checkCollision(0, 0);
         checkUserInteractions();
         updateGameStats();

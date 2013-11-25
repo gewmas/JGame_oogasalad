@@ -1,6 +1,6 @@
 package gameEngine.model.tower;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.purchase.PurchaseInfo;
 
 
@@ -50,8 +50,8 @@ public class MagicTower extends DefaultTower {
     @Override
     public void addDescription () {
         super.addDescription();
-        purchaseInfo.addToMap(Constant.TOWER_MAGIC_FACTOR, String.valueOf(magicFactor));
-        purchaseInfo.addToMap(Constant.TOWER_UPGRADE_MAGIC_FACTOR,
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_MAGIC_FACTOR, String.valueOf(magicFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_MAGIC_FACTOR,
                               String.valueOf(magicFactor * upgradeFactor));
     }
 

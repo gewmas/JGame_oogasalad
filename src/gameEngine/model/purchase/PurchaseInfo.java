@@ -1,6 +1,6 @@
 package gameEngine.model.purchase;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,11 +29,11 @@ public class PurchaseInfo {
     }
     
     public void createMap() {
-        addToMap(Constant.PURCHASE_INFO_TYPE, type);
-        addToMap(Constant.PURCHASE_INFO_NAME, name);
-        addToMap(Constant.PURCHASE_INFO_DESCRIPTION, description);
-        addToMap(Constant.PURCHASE_INFO_COST, ((Integer)cost).toString());
-        addToMap(Constant.PURCHASE_INFO_IMAGE, image);
+        addToMap(GameEngineConstant.PURCHASE_INFO_TYPE, type);
+        addToMap(GameEngineConstant.PURCHASE_INFO_NAME, name);
+        addToMap(GameEngineConstant.PURCHASE_INFO_DESCRIPTION, description);
+        addToMap(GameEngineConstant.PURCHASE_INFO_COST, ((Integer)cost).toString());
+        addToMap(GameEngineConstant.PURCHASE_INFO_IMAGE, image);
     }
     
     public void addToMap(String key, String value) {

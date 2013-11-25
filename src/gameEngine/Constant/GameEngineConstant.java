@@ -1,4 +1,4 @@
-package gameEngine.Constant;
+package gameEngine.constant;
 
 
 
@@ -7,7 +7,7 @@ package gameEngine.Constant;
  *         Stores all the constant value of game engine.
  *         These constants should include all the CIDs of JGObject.
  */
-public class Constant {
+public class GameEngineConstant {
     public static final int PIXELSPERTILE=20;
     public static final int ENEMY_CID = 1;
     public static final int TOWER_CID = 2;

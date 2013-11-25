@@ -1,6 +1,6 @@
 package gameEngine.factory.temporaryBarrier;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.temporaryBarrier.TemporaryBarrier;
 import gameEngine.model.tower.DefaultTower;
 import gameEngine.model.tower.Tower;
