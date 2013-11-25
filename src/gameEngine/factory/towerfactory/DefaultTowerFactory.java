@@ -1,7 +1,7 @@
 
 package gameEngine.factory.towerfactory;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.tower.DefaultTower;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -20,27 +20,26 @@ public class DefaultTowerFactory extends TowerFactory {
     public DefaultTowerFactory (JSONObject currTower) {
         super(currTower);
         
-        this.attackMode = currTower.getInt("attackMode");
+        this.attackMode = currTower.getInt(GameEngineConstant.TOWER_ATTACK_MODE);
         
         addDescription();
     }
 
     public void addDescription(){
         super.addDescription();
-        purchaseInfo.addToMap(Constant.TOWER_ATTACK_MODE, String.valueOf(attackMode));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_MODE, String.valueOf(attackMode));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_DAMAGE, String.valueOf(damage));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_SPEED, String.valueOf(attackSpeed));
+
     }
     
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new DefaultTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, type, id, true,
-                                         x, y, Constant.TOWER_CID, image,
+                (Tower) new DefaultTower(damage, attackSpeed, attackMode, range, cost, sellPrice, description, type, id, true,
+                                         x, y, GameEngineConstant.TOWER_CID, image,
                                          purchaseInfo);
         return tower;
     }
-
-    
-    
-  
 
 }

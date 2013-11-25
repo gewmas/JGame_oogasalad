@@ -39,7 +39,7 @@ public class StoreItemButton extends Button {
         super("");
         active = false;
         this.setEnabled(false);
-        ImageIcon icon = new ImageIcon("src/resources/img/" + itemPurchaseInfo.getInfo().get("Image") + ".png");
+        ImageIcon icon = new ImageIcon("src/resources/img/" + itemPurchaseInfo.getInfo().get("Image").trim() + ".png");
         this.setIcon(icon);
         String tempInt = itemPurchaseInfo.getInfo().get("Cost");
         this.cost = (int) Double.parseDouble(tempInt);
