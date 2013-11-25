@@ -1,6 +1,6 @@
 {
 "name": "Tower Destruction II",
-"spashImage" :  "game-bg.png",
+"splashImage" :  "game-bg.png",
 "BGImage" :  "space_background",
 "gold" : 200000,
 "numberOfLives" : 100,

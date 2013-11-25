@@ -56,8 +56,8 @@ public class MenuBar extends JMenuBar {
                     try {
                         Scanner s = new Scanner(INPUT_CHOOSER.getSelectedFile());
                         myParser = new Parser(s);
-                        //myBasicInfoTab.loadJSON(myParser);
-                        //myMapDesignTab.loadJSON(myParser);
+                        myBasicInfoTab.loadJSON(myParser);
+                        myMapDesignTab.loadJSON(myParser);
                         myWaveDesignTab.loadJSON(myParser);
                     }
                     catch (FileNotFoundException e1) {
