@@ -20,6 +20,7 @@ public abstract class Magic extends JGObject {
                  int magicId
                  ) {
         super(name, true,target.getX(),target.getY(), collisionid, gfxname, expire);
+
         myTarget = target;
         mySender=sender;
         myMagicId=magicId;      
@@ -55,7 +56,7 @@ public abstract class Magic extends JGObject {
     }
     
     abstract boolean removeCondition();
-    abstract void magicOnAction();
-    abstract void magicOffAction();
+    public void magicOnAction(){};
+    public void magicOffAction(){};
     
 }

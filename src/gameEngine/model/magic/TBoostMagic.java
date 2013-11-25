@@ -9,12 +9,11 @@ public class TBoostMagic extends Magic{
         myFactor=factor;
         magicOn();
     }
-    @Override
-    void magicOnAction () {
+    
+   public void magicOnAction () {
         ((ITMagicable)myTarget).downgrade(myFactor);
     }
-    @Override
-    void magicOffAction () {
+    public void magicOffAction () {
         ((ITMagicable)myTarget).upgrade(myFactor);
     }
     @Override

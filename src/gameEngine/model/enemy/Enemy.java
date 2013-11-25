@@ -251,6 +251,6 @@ public class Enemy extends JGObject implements IEMagicable {
 
     @Override
     public void changeSpeed (double speedPercent) {
-        speed = speed + orignalSpeed * speedPercent;
+        speed = speed + orignalSpeed * speedPercent;   
     }
 }

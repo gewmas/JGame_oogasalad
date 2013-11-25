@@ -15,8 +15,9 @@ public class MagicsFactory {
     
     
     private MagicsFactory () {
-        myFactoryMap.put(EFrozeFactory.ID, new EFrozeFactory());
-        myFactoryMap.put(TBoostFactory.ID, new TBoostFactory());
+        myFactoryMap.put(GameEngineConstant.FROZEMAGIC_ID, new EFrozeFactory());
+        myFactoryMap.put(GameEngineConstant.BOOSTMAGIC_ID, new TBoostFactory());
+        myFactoryMap.put(GameEngineConstant.SPEEDUPMAGIC_ID, new ESpeedUpFactory());
     }
 
     public static MagicsFactory getInstance () {
@@ -36,6 +37,7 @@ public class MagicsFactory {
         if(currMagicIds!=GameEngineConstant.OVERLAPMAGIC_ID){
             magicIdToCreate = (~currMagicIds) & magicIdToCreate;
         }
+        
         int temp=magicIdToCreate;
         int mask=1;
         while(magicIdToCreate > 0) {

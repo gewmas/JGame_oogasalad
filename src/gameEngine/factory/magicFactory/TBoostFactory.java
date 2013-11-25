@@ -19,6 +19,6 @@ public class TBoostFactory implements IMagicFactory{
     
     @Override
     public void createMagicInstance (IMagicable target,IMagicable sender) {
-        new TBoostMagic(target,sender,factor,ID,CID);
+        new TBoostMagic(target,sender,factor,GameEngineConstant.BOOSTMAGIC_ID,GameEngineConstant.NORMALMAGIC_CID);
     }
 }
