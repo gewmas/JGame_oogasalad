@@ -14,8 +14,8 @@ public abstract class Magic extends JGObject {
     int myMagicId;
     IMagicable mySender;
     
-    private double pathX;
-    private double pathY;
+    double pathX;
+    double pathY;
     public Magic (int expire,
                  IMagicable target,
                  IMagicable sender,
