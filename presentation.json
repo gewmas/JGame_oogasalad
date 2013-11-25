@@ -1,7 +1,7 @@
 {
 "name": "Tower Destruction II",
 "spashImage" :  "game-bg.png",
-"BGImage" :  "space_background",
+"BGImage" :  "woods_background",
 "gold" : 2000,
 "numberOfLives" : 10,
 "levels": 2,
@@ -11,7 +11,7 @@
 "difficultyScale": 1.5,
 "map":
 {
-  	  "pathImage":  "path.jpg", 
+  	  "pathImage":  "path.png", 
 	  "Path": [
          {
             "y": 0,
@@ -359,19 +359,26 @@
 "resources":
 {
   	   
-	  "image":[ 
+     "image":[ 
                { "id": "1", "url": "mr1.png" },
                { "id": "2", "url": "mr2.png" },
                { "id": "3", "url": "mr3.png" },
-               { "id": "4", "url": "mr4.png" }
+               { "id": "4", "url": "mr4.png" },
+      { "id": "d1", "url": "d1.png" },
+               { "id": "d2", "url": "d2.png" },
+               { "id": "d3", "url": "d3.png" },
+               { "id": "d4", "url": "d4.png" },
+      {"id": "haste", "url":"haste.png"},
                
              
            ], 
         "audio":[
-        	{ "id": "alarm", "url": "alarm.wav" },
+         { "id": "alarm", "url": "alarm.wav" },
+      { "id": "haste", "url": "haste.wav" },
         ],
-	 "animation":[
-        	{ "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
+    "animation":[
+         { "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
+      { "id": "drunRight", "sheet": [{"id":"d1"},{"id":"d2"},{"id":"d3"},{"id":"d4"}] },
         ]
 },
 "temporaryBarrierType":[
@@ -455,7 +462,7 @@
 	 "Sell Price":  50,
 	 "Description": "Magic tower will shoot a magic bullet to affect the enemy.",
 	 "Magic Factor": 2.0,
-	 "Magic" : 4,
+	 "Magic" : 1,
 	}
 ],
 
@@ -463,20 +470,46 @@
 {
 	"id": "1",
 	"gold": 5,
-	"image": "enemy1",
+	"image": "runRight",
 	"life": 10,
 	"speed": 0.5,
+   "skill": "",
 }, 
 {
 	"id": "2",
 	"gold": 10,
-	"image": "runRight",
+	"image": "drunRight",
 	"life": 15,
 	"speed": 1,
+   "skill": "haste",
 }
 ],
 
 "wave":[
+   {  
+      "type": "1",
+      "number":1,
+      "period" :2,
+      "interval": 5,
+   },
+   {  
+      "type": "1",
+      "number":1,
+      "period" :2,
+      "interval": 0,
+   },
+   {  
+      "type": "2",
+      "number":1,
+      "period" :2,
+      "interval": 0,
+   },
+   {  
+      "type": "1",
+      "number":1,
+      "period" :2,
+      "interval": 0,
+   },
 	{	
 		"type": "1",
 		"number":20,
