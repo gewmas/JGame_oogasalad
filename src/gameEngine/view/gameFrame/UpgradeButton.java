@@ -51,6 +51,8 @@ public class UpgradeButton extends JButton {
     private Map<String,String> normalValuesToDisplay;
     private View view;
     private int towerX, towerY;
+    private Map<String,String> information;
+    private boolean isActive;
     
     public UpgradeButton(Utilities utility, View viewer){
         super("Upgrade");
@@ -76,8 +78,11 @@ public class UpgradeButton extends JButton {
             }
             @Override
             public void mouseClicked(MouseEvent e){
-                view.upgradeTower(towerX,towerY);
-                utilities.updateDisplay(upgradedValuesToDisplay);
+                if (isActive){
+                    view.upgradeTower(towerX,towerY);
+                    utilities.updateDisplay(upgradedValuesToDisplay);
+                }
+                checkActive();
             }
         });
         this.setPreferredSize(new Dimension(BUTTON_WIDTH,BUTTON_HEIGHT));
@@ -86,8 +91,15 @@ public class UpgradeButton extends JButton {
         towerY=-1;
     }
 
-    public void setTowerPosition (int mouseX, int mouseY) {
+    public void checkActive(){
+        isActive=view.getMoney() >= Double.parseDouble(information.get(GameEngineConstant.TOWER_UPGRADE_PRICE));
+        setEnabled(isActive);
+    }
+    
+    public void setTowerPosition (Map<String, String> information,int mouseX, int mouseY) {
         towerX=mouseX;
         towerY=mouseY;
+        this.information=information;
+        checkActive();
     }
 }

@@ -39,10 +39,10 @@ public class Utilities {
         
     }
     
-    public void displayCheckedInformation (Map<String, String> information, Map<String, String> display, int mouseX, int mouseY) {
+    public void displayCheckedInformation (Map<String, String> information, Map<String, String> display,int mouseX, int mouseY) {
         this.display.displayInformation(information, display);
         upgradeButton.setVisible(true);
-        upgradeButton.setTowerPosition(mouseX,mouseY);        
+        upgradeButton.setTowerPosition(information,mouseX,mouseY);        
     }
     
     public void updateDisplay (Map<String,String> toDisplay) {
