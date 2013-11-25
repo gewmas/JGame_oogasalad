@@ -22,7 +22,7 @@ public class Resources {
         register(parser,"image");
         register(parser,"audio");
         register(parser,"animation");
-        myEngine.playAudio("alarm");
+        
     }
     
     private void register(Parser parser, String category){
