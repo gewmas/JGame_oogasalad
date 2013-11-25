@@ -1,7 +1,8 @@
 package gameEngine.model.tower;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.Detector;
+import gameEngine.model.GameInfo;
 import gameEngine.model.bullet.Bullet;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.model.enemy.comparator.FurthestDistanceEnemyComparator;
@@ -51,7 +52,7 @@ public class DefaultTower extends Tower {
                          double attackSpeed,
                          int attackMode,
                          double range,
-                         double cost,
+                         int cost,
                          double recyclePrice,
                          String description,
 
@@ -83,7 +84,13 @@ public class DefaultTower extends Tower {
 
     public void addDescription () {
         super.addDescription();
-        purchaseInfo.addToMap("Attack Mode", String.valueOf(attackMode));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_MODE, String.valueOf(attackMode));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_DAMAGE, df.format(damage));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_SPEED, df.format(attackSpeed));
+
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_DAMAGE, df.format(damage * upgradeFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_ATTACK_SPEED, df.format(attackSpeed * upgradeFactor));
+
     }
 
     @Override
@@ -99,7 +106,7 @@ public class DefaultTower extends Tower {
 
             // System.out.println(targetEnemies.size());
             for (Enemy targetEnemy : targetEnemies) {
-                new Bullet(targetEnemy, damage, currentMagic,"bullet", true, x, y, Constant.BULLET_CID, "bullet");
+                new Bullet(targetEnemy, damage, currentMagic,"bullet", true, x, y, GameEngineConstant.BULLET_CID, "bullet");
             }
             prevTime = System.currentTimeMillis();
         }
@@ -184,44 +191,32 @@ public class DefaultTower extends Tower {
     public void hit (JGObject obj) {
 
     }
-
-    @Override
-    public void sell () {
-        // level.getGameInfo().addGold((int)recyclePrice);
-        // level.getTowers().remove(this);
-        this.remove();
-    }
-
-    public int getAttackMode () {
-        return attackMode;
-    }
     
     @Override
-    public void upgrade () {
+    public void upgrade (GameInfo gameInfo) {
         upgrade(upgradeFactor);
+        gameInfo.loseGold(upgradePrice);
     }
 
-    @Override
     public void downgrade () {
         downgrade(upgradeFactor);
     }
     
     @Override
     public void upgrade (double factor) {
-        
         damage *= factor;
         attackSpeed *= factor;
-        super.addDescription();
+        addDescription();
     }
     
     @Override
     public void downgrade (double factor) {
-        
         damage /= factor;
         attackSpeed /= factor;
-        super.addDescription();
+        addDescription();        
     }
-
     
-
+    public int getAttackMode () {
+        return attackMode;
+    }
 }

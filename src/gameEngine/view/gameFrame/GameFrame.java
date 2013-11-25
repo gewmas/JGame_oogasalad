@@ -47,15 +47,13 @@ public class GameFrame extends Frame {
         mediator.addGameFrame(this);
         this.cheatCodeFrame = addCheatCodeFrame(view);
         InfoDisplayPanel infoPanel = addInfoDisplay();
-        utilities  = new Utilities(infoPanel,this);
+        utilities  = new Utilities(infoPanel,this,view);
         itemPurchaser = new ItemPurchaser(view,utilities);
         StorePanel storePanel = addStorePanel(utilities,itemPurchaser);
         addGameTools(infoPanel, storePanel);
-        setJMenuBar(new Menu(view));
         
+        setJMenuBar(new Menu(view));
     }
-
-
 
     private InputAndDisplayFrame addCheatCodeFrame (final View view) {
         return new InputAndDisplayFrame("Cheat Sheet", new InputSender() {
@@ -76,9 +74,10 @@ public class GameFrame extends Frame {
     }
 
     public void createGame () {
-        CanvasPanel canvasPanel = new CanvasPanel(view, mediator,itemPurchaser);
+        CanvasPanel canvasPanel = new CanvasPanel(view, mediator,itemPurchaser, utilities);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addGame(canvasPanel);
+        utilities.createRangeDisplay();
     }
 
     /**
@@ -93,6 +92,7 @@ public class GameFrame extends Frame {
         tools.add(infoPanel, BorderLayout.CENTER);
         tools.add(storePanel, BorderLayout.PAGE_START);
         this.add(tools, BorderLayout.EAST);
+        //this.add(new UpgradeButton(mediator),BorderLayout.);
     }
 
     private StorePanel addStorePanel (Utilities utilities, ItemPurchaser itemPurchaser) {
