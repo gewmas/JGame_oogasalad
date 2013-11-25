@@ -12,12 +12,18 @@ public class MagicsFactory {
 
     private static MagicsFactory myMagicFactory;
     private HashMap<Integer, IMagicFactory> myFactoryMap = new HashMap<Integer, IMagicFactory>();
-    
+    private HashMap<String, Integer> myTranlateMap=new HashMap<String,Integer>();
     
     private MagicsFactory () {
         myFactoryMap.put(GameEngineConstant.FROZEMAGIC_ID, new EFrozeFactory());
         myFactoryMap.put(GameEngineConstant.BOOSTMAGIC_ID, new TBoostFactory());
         myFactoryMap.put(GameEngineConstant.SPEEDUPMAGIC_ID, new ESpeedUpFactory());
+        
+        
+        
+        myTranlateMap.put("FrozeMagic", GameEngineConstant.FROZEMAGIC_ID);
+        myTranlateMap.put("BoostMagic", GameEngineConstant.FROZEMAGIC_ID);
+        myTranlateMap.put("FrozeMagic", GameEngineConstant.FROZEMAGIC_ID);
     }
 
     public static MagicsFactory getInstance () {
