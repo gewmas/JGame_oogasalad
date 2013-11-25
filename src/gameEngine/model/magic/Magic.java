@@ -1,6 +1,8 @@
 package gameEngine.model.magic;
 
+import gameEngine.constant.GameEngineConstant;
 import jgame.JGObject;
+import jgame.JGRectangle;
 
 
 /*
@@ -11,6 +13,9 @@ public abstract class Magic extends JGObject {
     IMagicable myTarget;
     int myMagicId;
     IMagicable mySender;
+    
+    private double pathX;
+    private double pathY;
     public Magic (int expire,
                  IMagicable target,
                  IMagicable sender,
@@ -23,7 +28,7 @@ public abstract class Magic extends JGObject {
 
         myTarget = target;
         mySender=sender;
-        myMagicId=magicId;      
+        myMagicId=magicId;  
     }
 
     public void remove () {
@@ -40,8 +45,13 @@ public abstract class Magic extends JGObject {
     }
     
     protected void moveNextStep (){
-        this.x=myTarget.getX();
-        this.y=myTarget.getY();
+        JGRectangle box=this.getImageBBox();
+        
+        pathX=myTarget.getX();
+        pathY=myTarget.getY();
+        
+        this.x=pathX-(box.width-GameEngineConstant.PIXELSPERTILE)/2;
+        this.y=pathY-(box.height-GameEngineConstant.PIXELSPERTILE);
     }
     
     public void magicOn () {

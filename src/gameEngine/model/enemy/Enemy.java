@@ -224,14 +224,22 @@ public class Enemy extends JGObject implements IEMagicable {
      * @author wenxin
      *         For the IMagicable interface implement
      */
+    public double getCenterX(){
+        
+        return x+this.getImageBBox().width/2;
+    }
+    public double getCenterY(){
+        return y+this.getImageBBox().height/2;
+    }
+    
     @Override
     public double getX () {
-        return x;
+        return pathX;
     }
 
     @Override
     public double getY () {
-        return y;
+        return pathY;
     }
 
     @Override
