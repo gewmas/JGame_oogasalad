@@ -55,7 +55,7 @@ public class UpgradeButton extends JButton {
     private boolean isActive;
     
     public UpgradeButton(Utilities utility, View viewer){
-        super("Upgrade");
+        super(NAME);
         this.utilities=utility;
         this.view=viewer;
         normalValuesToDisplay=new LinkedHashMap<String,String>();
