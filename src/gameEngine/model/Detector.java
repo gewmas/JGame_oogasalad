@@ -1,6 +1,6 @@
 package gameEngine.model;
 
-import gameEngine.constant.GameEngineConstant;
+import gameEngine.Constant.Constant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -37,7 +37,7 @@ public class Detector<T extends JGObject> {
     // cid and prefix should get from a Constant class.
     @SuppressWarnings("unchecked")
     public List<T> getTargetsInRange (int centerx, int centery, int range) {
-        Vector<JGObject> v = getObjects(centerx, centery, range, GameEngineConstant.query(myType), null);
+        Vector<JGObject> v = getObjects(centerx, centery, range, Constant.query(myType), null);
         List<T> result = new ArrayList<T>();
         for (int i = 0; i < v.size(); i++) {
             result.add((T) v.get(i));
@@ -47,7 +47,7 @@ public class Detector<T extends JGObject> {
 
     @SuppressWarnings("unchecked")
     public T getOneTargetInRange (int centerx, int centery, int range) {
-        Vector<JGObject> v = getObjects(centerx, centery, range, GameEngineConstant.query(myType), null);
+        Vector<JGObject> v = getObjects(centerx, centery, range, Constant.query(myType), null);
         T result = (T) v.get(0);
         return result;
     }

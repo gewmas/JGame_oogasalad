@@ -1,9 +1,8 @@
 package gameEngine.model.tower;
 
-import gameEngine.constant.GameEngineConstant;
+import gameEngine.Constant.Constant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Detector;
-import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class BoostTower extends Tower{
     public BoostTower (double damage,
                        double attackSpeed,
                        double range,
-                       int cost,
+                       double cost,
                        double recyclePrice,
                        String description,
                        
@@ -52,9 +51,9 @@ public class BoostTower extends Tower{
 
     public void addDescription(){
         super.addDescription();
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_BOOST_FACTOR, df.format(boostFactor));
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_BOOST_FACTOR, df.format(boostFactor*upgradeFactor));
+        purchaseInfo.addToMap(Constant.TOWER_BOOST_FACTOR, String.valueOf(boostFactor));
         
+        purchaseInfo.addToMap(Constant.TOWER_UPGRADE_BOOST_FACTOR, String.valueOf(boostFactor*upgradeFactor));
     }
 
     //create magic to towers in range
@@ -71,14 +70,17 @@ public class BoostTower extends Tower{
         addBoostEffect();
     }
     
- 
-
     @Override
-    public void upgrade (GameInfo gameInfo) {
-        upgrade(upgradeFactor);
-        gameInfo.loseGold(upgradePrice);
+    public void sell () {
+        remove();
     }
 
+    @Override
+    public void upgrade () {
+        upgrade(upgradeFactor);
+    }
+
+    @Override
     public void downgrade(){
         downgrade(upgradeFactor);
     }
@@ -88,13 +90,13 @@ public class BoostTower extends Tower{
     @Override
     public void upgrade (double factor) {
         boostFactor *= factor;
-        addDescription();
+        super.addDescription();
     }
     
     @Override
     public void downgrade (double factor) {
         boostFactor /= factor;
-        addDescription();
+        super.addDescription();
     }
 
     

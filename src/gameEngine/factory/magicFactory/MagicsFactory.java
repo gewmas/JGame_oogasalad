@@ -1,6 +1,5 @@
 package gameEngine.factory.magicFactory;
 
-import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.magic.IMagicable;
 import java.util.HashMap;
 
@@ -29,21 +28,19 @@ public class MagicsFactory {
      * This method is for the same magic can't overlap
      * 
      * @param target
-     * @param magicIdToCreate
-     * @param currentMagicIds,if the magic can overlap then make the currentMagicIds be Constant.OVERLAPMAGIC_ID
+     * @param newMagicIds
+     * @param currentMagicIds
      */
-    public void createMagics (IMagicable target, IMagicable sender,int magicIdToCreate, int currMagicIds) {
-        if(currMagicIds!=GameEngineConstant.OVERLAPMAGIC_ID){
-            magicIdToCreate = (~currMagicIds) & magicIdToCreate;
-        }
-        int temp=magicIdToCreate;
+    public void createMagics (IMagicable target, IMagicable sender,int newMagicIds, int currentMagicIds) {
+        newMagicIds = (~currentMagicIds) & newMagicIds;
+        int temp=newMagicIds;
         int mask=1;
-        while(magicIdToCreate > 0) {
+        while(newMagicIds > 0) {
             IMagicFactory factory = myFactoryMap.get(temp&mask);
             if (factory != null) {
                 factory.createMagicInstance(target,sender);
             }
-            magicIdToCreate = magicIdToCreate >> 1;
+            newMagicIds = newMagicIds >> 1;
             mask=mask<<1;
         }
     }

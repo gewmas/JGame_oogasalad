@@ -1,14 +1,13 @@
-package gameEngine.constant;
+package gameEngine.Constant;
 
 
 
 /**
- * @author Jiaran, Yuhua
+ * @author Jiaran
  *         Stores all the constant value of game engine.
  *         These constants should include all the CIDs of JGObject.
  */
-public class GameEngineConstant {
-    public static final int PIXELSPERTILE=20;
+public class Constant {
     public static final int ENEMY_CID = 1;
     public static final int TOWER_CID = 2;
     public static final int BULLET_CID = 4;
@@ -16,10 +15,6 @@ public class GameEngineConstant {
     
     public static final int FROZEMAGIC_ID=1;
     public static final int BOOSTMAGIC_ID=2;
-    public static final int OVERLAPMAGIC_ID=-1;
-    
-    //JSON TYPE
-    public static final String TOWER_TYPE = "Tower";
     
     //Share Constant between Tower and Barrier
     public static final String PURCHASE_INFO_TYPE = "Type";
@@ -35,7 +30,6 @@ public class GameEngineConstant {
     public static final String TOWER_ATTACK_AMOUNT = "Attack Amount";
     public static final String TOWER_BOOST_FACTOR = "Boost Factor";
     public static final String TOWER_MAGIC_FACTOR = "Magic Factor";
-    public static final String TOWER_MAGIC = "Magic";    
     public static final String TOWER_ATTACK_MODE = "Attack Mode";
     //Tower Upgrade Constant
     public static final String TOWER_UPGRADE_PRICE = "Upgrade Price";

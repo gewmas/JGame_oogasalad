@@ -1,6 +1,6 @@
 package gameEngine.model.enemy;
 
-import gameEngine.constant.GameEngineConstant;
+import gameEngine.Constant.Constant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Model;
 import gameEngine.model.bullet.Bullet;
@@ -10,7 +10,6 @@ import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import java.util.LinkedList;
 import jgame.JGObject;
-import jgame.JGRectangle;
 
 
 /**
@@ -32,9 +31,6 @@ public class Enemy extends JGObject implements IEMagicable {
     int pathIndex;
     double pathStep;
     LinkedList<Tile> path;
-    
-    double pathX;
-    double pathY;
 
     // wenxin add this attribution for magic.
     int currentMagics = 0;
@@ -71,10 +67,6 @@ public class Enemy extends JGObject implements IEMagicable {
 
         this.x = path.get(0).getX();
         this.y = path.get(0).getY();
-        
-        pathX=x;
-        pathY=y;
-
 
         this.currentMagics = 0;
         // Yuhua change it
@@ -92,22 +84,18 @@ public class Enemy extends JGObject implements IEMagicable {
             // System.out.println("Reached point!");
             calculateNewDirection();
         }
-        pathX += xMovement * speed;
-        pathY += yMovement * speed;
-        JGRectangle box=this.getImageBBox();
-
-        this.x=pathX-(box.width-GameEngineConstant.PIXELSPERTILE)/2;
-        this.y=pathY-(box.height-GameEngineConstant.PIXELSPERTILE);
+        x += xMovement * speed;
+        y += yMovement * speed;
     }
 
     public boolean reachedPoint () {
         if (yMovement == 0) {
             double x1 = path.get(pathIndex - 1).getX();
-            if (Math.abs(x1 - pathX) > pathStep) { return true; }
+            if (Math.abs(x1 - x) > pathStep) { return true; }
         }
         else {
             double y1 = path.get(pathIndex - 1).getY();
-            if (Math.abs(y1 - pathY) > pathStep) { return true; }
+            if (Math.abs(y1 - y) > pathStep) { return true; }
         }
 
         return false;
@@ -125,7 +113,7 @@ public class Enemy extends JGObject implements IEMagicable {
         // hit the target enemy, destroy that enemy
         // System.out.println("Bullet Hit");
 
-        if (obj.colid == GameEngineConstant.BULLET_CID) {
+        if (obj.colid == Constant.BULLET_CID) {
             if(obj instanceof TemporaryBarrier) {
                 /**
                  * @author Harris
@@ -170,8 +158,8 @@ public class Enemy extends JGObject implements IEMagicable {
         }
         double x1 = path.get(pathIndex).getX();
         double y1 = path.get(pathIndex).getY();
-        if (Math.abs(pathX - x1) < Math.abs(pathY - y1)) {
-            if ((pathY - y1) > 0) {
+        if (Math.abs(x - x1) < Math.abs(y - y1)) {
+            if ((y - y1) > 0) {
                 this.yMovement = -1;
             }
             else {
@@ -181,7 +169,7 @@ public class Enemy extends JGObject implements IEMagicable {
 
         }
         else {
-            if ((pathX - x1) > 0) {
+            if ((x - x1) > 0) {
                 this.xMovement = -1;
             }
             else {
@@ -217,7 +205,7 @@ public class Enemy extends JGObject implements IEMagicable {
      *         For comparator to compare shortest/furthest enemy
      */
     public double getDistanceFromTower (Tower tower) {
-        return Math.sqrt(Math.pow(pathX - tower.getX(), 2) + Math.pow(pathY - tower.getY(), 2));
+        return Math.sqrt(Math.pow(x - tower.getX(), 2) + Math.pow(y - tower.getY(), 2));
     }
 
     /**

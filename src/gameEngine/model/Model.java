@@ -151,7 +151,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-            tower.sell(gameInfo);
+            tower.sell();
         }
 
         return false;
@@ -161,7 +161,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-            tower.upgrade(gameInfo);
+            tower.upgrade();
         }
 
         return false;

@@ -1,15 +1,12 @@
 package gameEngine.view.gameFrame;
 
-import gameEngine.constant.GameEngineConstant;
+import gameEngine.Constant.Constant;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
-import gameEngine.view.gameFrame.gameObjects.RangeDisplay;
 import java.awt.Dimension;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import jgame.Highscore;
 import jgame.JGColor;
 import jgame.JGObject;
@@ -23,35 +20,24 @@ import jgame.platform.StdGame;
  *         graphics rendering
  */
 public class Game extends StdGame {
-    private static final String[] DISPLAY_KEYS={GameEngineConstant.PURCHASE_INFO_NAME,
-                                                GameEngineConstant.TOWER_DAMAGE,
-                                                GameEngineConstant.TOWER_ATTACK_SPEED,
-                                                GameEngineConstant.TOWER_ATTACK_AMOUNT,
-                                                GameEngineConstant.TOWER_RANGE,
-                                                GameEngineConstant.TOWER_MAGIC,
-                                                GameEngineConstant.TOWER_MAGIC_FACTOR,
-                                                GameEngineConstant.TOWER_BOOST_FACTOR,
-                                                GameEngineConstant.TOWER_SELL_PRICE,
-                                                GameEngineConstant.TOWER_UPGRADE_PRICE,
-                                                GameEngineConstant.PURCHASE_INFO_DESCRIPTION};
     
     private int WIDTH = 600;
     private int HEIGHT = 600;
 
     private View view;
+    private boolean purchasing;
     private PurchaseInfo towerToPurchase;
-    private Utilities utilities;
     private GameFrameMediator mediator;
     private FrameRateSlider frameRateSlider;
     private JGObject frameRateBar;
+    private String towerToPurchaseName;
     private ItemPurchaser itemPurchaser;
-    private Map<String,String> valuesToDisplay;
+    
 
-    public Game (View view, GameFrameMediator mediator, ItemPurchaser itemPurchaser, Utilities utilities) {
+    public Game (View view, GameFrameMediator mediator, ItemPurchaser itemPurchaser) {
         this.view = view;
         this.mediator = mediator;
         this.itemPurchaser = itemPurchaser;
-        this.utilities=utilities;
         initEngineComponent(WIDTH, HEIGHT);
     }
 
@@ -74,6 +60,7 @@ public class Game extends StdGame {
         String background=view.getBGImage();
         
         setBGImage(background);
+        purchasing = false;
         setHighscores(10, new Highscore(0, "aaa"), 3);
         startgame_ingame = true;
         List<Tile> pathList = view.getPath();
@@ -91,25 +78,19 @@ public class Game extends StdGame {
         toggleFrameRateBar();
   
         this.game_title=view.getGameTitle();
-        
-        valuesToDisplay=new LinkedHashMap<String,String>();
-        for (String str:DISPLAY_KEYS){
-            valuesToDisplay.put(str, "black");
-        }
     }
     
     public void startInGame() {
         view.startModel();
         mediator.openStore();
-        mediator.openInfoPanel();
         mediator.updateStoreStatus();
         
     }
 
     public void doFrameInGame () {
         moveObjects();
-        checkCollision(GameEngineConstant.BULLET_CID, GameEngineConstant.ENEMY_CID);
-        checkCollision(GameEngineConstant.ENEMY_CID, GameEngineConstant.BULLET_CID);
+        checkCollision(Constant.BULLET_CID, Constant.ENEMY_CID);
+        checkCollision(Constant.ENEMY_CID, Constant.BULLET_CID);
         checkCollision(0, 0);
         checkUserInteractions();
         updateGameStats();
@@ -122,7 +103,6 @@ public class Game extends StdGame {
             clearKey('F');
             toggleFrameRateBar();
         }
-        if (lives<=0) endGame();
     }
 
     /**
@@ -136,18 +116,17 @@ public class Game extends StdGame {
             JGPoint mousePosition = getMousePos();
             //if (purchasing) {
                 itemPurchaser.checkAndPlaceTower(mousePosition);
-                System.out.format("Buying at: %d,%d\n",mousePosition.x, mousePosition.y);
+                System.out.format("Buying %s at: %d,%d\n",towerToPurchase, mousePosition.x, mousePosition.y);
             //}
             //else {
                 PurchaseInfo tower=view.getTowerInfo(mousePosition.x, mousePosition.y);
                 if (tower==null) {
                     System.out.println("No tower here");
                 } else {
-                    utilities.displayCheckedInformation(tower.getInfo(),valuesToDisplay,mousePosition.x,mousePosition.y);
-                    JGPoint tileCoords=this.getTileCoord(getTileIndex(mousePosition.x, mousePosition.y));
+                    mediator.displayTowerInfo(tower.getInfo());
                     System.out.println("Checking tower");
                 }
-                //System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);
+                System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             //}
         }
     }

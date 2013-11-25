@@ -11,8 +11,8 @@ import gameEngine.view.View;
 public class CanvasPanel extends Panel {
     Game game;
 
-    public CanvasPanel (View view, GameFrameMediator mediator, ItemPurchaser itemPurchaser, Utilities utilities) {
-        game = new Game(view, mediator,itemPurchaser, utilities);
+    public CanvasPanel (View view, GameFrameMediator mediator, ItemPurchaser itemPurchaser) {
+        game = new Game(view, mediator,itemPurchaser);
         this.add(game);
         view.sendEngine(game);
     }

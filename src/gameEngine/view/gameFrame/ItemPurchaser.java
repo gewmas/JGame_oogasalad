@@ -34,7 +34,6 @@ public class ItemPurchaser {
                 utilities.restoreDefaultCursor();
                 System.out.println("Tower cancelled");
                 towerToPurchase = null;
-                towerToPurchaseName=null;
                 purchasing = false;
                 return;
             }
@@ -49,11 +48,9 @@ public class ItemPurchaser {
         if (purchasing) {
             if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)) {
                 towerToPurchase = null;
-                towerToPurchaseName=null;
                 purchasing = false;
                 utilities.restoreDefaultCursor();
             }
-            System.out.println(towerToPurchase);
         }
     }
     
