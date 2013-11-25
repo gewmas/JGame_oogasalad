@@ -16,6 +16,7 @@ public class Constant {
     
     public static final int FROZEMAGIC_ID=1;
     public static final int BOOSTMAGIC_ID=2;
+    public static final int OVERLAPMAGIC_ID=-1;
     
     //Share Constant between Tower and Barrier
     public static final String PURCHASE_INFO_TYPE = "Type";
