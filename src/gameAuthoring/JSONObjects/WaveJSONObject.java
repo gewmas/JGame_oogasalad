@@ -13,10 +13,10 @@ public class WaveJSONObject extends JSONObject {
     /**
      * Constructor for WaveJSONObject
      * 
-     * @param type
-     * @param number
-     * @param period 
-     * @param interval
+     * @param type Enemy type
+     * @param number Number of enemies
+     * @param period Duration of wave
+     * @param interval 
      */
     public WaveJSONObject(String type, int number, double period, int interval){
        super();

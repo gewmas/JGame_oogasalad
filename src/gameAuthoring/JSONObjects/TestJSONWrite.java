@@ -19,26 +19,38 @@ public class TestJSONWrite {
     public void testWrite () {
 
         GameData game = new GameData();
-        //Testing map writing
-        Collection<Point2D> pathList = new ArrayList<Point2D>();
-        pathList.add(new Point2D.Double(0, 0));
-        pathList.add(new Point2D.Double(0, 1));
-        pathList.add(new Point2D.Double(1, 1));
-        
-        game.setMap("path.jpg", pathList);
-        
-        game.addBarrier(5, 2, "rock.jpg");
-        
-        //Testing wave writing
-//        game.addWave("1", 5, 0.5, 7);
-//        game.addWave("2", 1, 0.5, 3);
 
+        // Testing tower writing
+        game.addTower(new TowerJSONObject("MultipleShootingTower", 
+                                          "Multiple Shooting Tower",
+                                          "MultipleShootingTower", 
+                                          3, 
+                                          3.0,
+                                          2,
+                                          5, 
+                                          80, 
+                                          300, 
+                                          50, 
+                                          "Test"));
+
+        // Testing map writing
+        // Collection<Point2D> pathList = new ArrayList<Point2D>();
+        // pathList.add(new Point2D.Double(0, 0));
+        // pathList.add(new Point2D.Double(0, 1));
+        // pathList.add(new Point2D.Double(1, 1));
+        //
+        // game.setMap("path.jpg", pathList);
+        //
+        // game.addBarrier(5, 2, "rock.jpg");
+
+        // Testing wave writing
+        // game.addWave("1", 5, 0.5, 7);
+        // game.addWave("2", 1, 0.5, 3);
 
         // Testing enemy writing
-//        game.addEnemy("1", 5, "enemy1", 2, 0.5);
-//        game.addEnemy("2", 10, "runRight", 3, 0.1);
+        // game.addEnemy("1", 5, "enemy1", 2, 0.5);
+        // game.addEnemy("2", 10, "runRight", 3, 0.1);
 
-        game.addListData();
         System.out.println(game.toString(1));
 
     }

@@ -45,6 +45,11 @@ public class GameData extends JSONObject {
      */
     public GameData () {
         super();
+        this.put("towerType", myTowerList);
+        this.put("enemyType", myEnemyList);
+        //this.put("levelData", myLevelList);
+        this.put("temporaryBarrierType", myBarrierList);
+        this.put("wave", myWaveList);
     }
 
     /**
@@ -173,6 +178,10 @@ public class GameData extends JSONObject {
 
     }
     
+    public void addTower(TowerJSONObject t){
+        myTowerList.put(t);
+    }
+    
     /**
      * Adds wave to myWaveList JSONArray
      * 
@@ -253,22 +262,11 @@ public class GameData extends JSONObject {
         myMap.addBarrier(x, y, imageName);
     }
 
-    /**
-     * Adds enemy, tower, and level lists to GameData
-     */
-    protected void addListData () {
-        this.put("towerType", myTowerList);
-        this.put("enemyType", myEnemyList);
-        this.put("levelData", myLevelList);
-        this.put("temporaryBarrierType", myBarrierList);
-        this.put("wave", myWaveList);
-    }
 
     /**
      * Opens file chooser dialogue to save current state of GameData object into a file
      */
     public void writeToFile () {
-        addListData();
 
         int result = INPUT_CHOOSER.showSaveDialog(null);
 
