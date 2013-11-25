@@ -2,7 +2,7 @@
 "name": "Tower Destruction II",
 "spashImage" :  "game-bg.png",
 "BGImage" :  "space_background",
-"gold" : 200,
+"gold" : 2000,
 "numberOfLives" : 10,
 "levels": 2,
 "widthOfWindow": 600,

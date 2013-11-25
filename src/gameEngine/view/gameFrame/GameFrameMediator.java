@@ -115,13 +115,13 @@ public class GameFrameMediator {
     public void closeStore(){
         storePanel.closeStore();
     }
-    public void displayTowerInfo (Map<String, String> information, Map<String, String> display) {
-        this.towerInfoPanel.displayInformation(information, display);
-        
-    }
 
     public void addStore (StorePanel storePanel) {
         this.storePanel = storePanel;
         
+    }
+
+    public void updateDisplay (Map<String,String> toDisplay) {
+        this.towerInfoPanel.updateInformation(toDisplay);
     }
 }

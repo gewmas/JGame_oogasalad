@@ -28,6 +28,9 @@ public class DefaultTowerFactory extends TowerFactory {
     public void addDescription(){
         super.addDescription();
         purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_MODE, String.valueOf(attackMode));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_DAMAGE, String.valueOf(damage));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_SPEED, String.valueOf(attackSpeed));
+
     }
     
     @Override

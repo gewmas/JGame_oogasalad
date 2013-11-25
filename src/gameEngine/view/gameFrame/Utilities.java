@@ -6,14 +6,21 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
+import gameEngine.view.View;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 
 public class Utilities {
     InfoDisplayPanel display;
     GameFrame gameFrame;
-    public Utilities(InfoDisplayPanel display, GameFrame gameFrame){
+    UpgradeButton upgradeButton;
+    SellButton sellButton;
+    public Utilities(InfoDisplayPanel display, GameFrame gameFrame, View view){
         this.display = display;
         this.gameFrame = gameFrame;
+        this.upgradeButton=new UpgradeButton(this,view);
+        this.sellButton=new SellButton(view);
+        display.add(upgradeButton);
+        display.add(sellButton);
     }
     
     /**
@@ -23,14 +30,28 @@ public class Utilities {
      */
     public void displayInformation (Map<String, String> displayInformation) {
         display.displayInformation(displayInformation);
+        upgradeButton.setVisible(false);
+        sellButton.setVisible(false);
     }
 
     public void clearDisplay(){
         this.display.clearDisplay();
     }
-    public void displayInformation (Map<String, String> information, Map<String, String> displayValues) {
+    public void displayStoreInformation (Map<String, String> information, Map<String, String> displayValues) {
         this.display.displayInformation(information, displayValues);
-        
+        upgradeButton.setVisible(false);
+        sellButton.setVisible(false);
+    }
+    
+    public void displayCheckedInformation (Map<String, String> information, Map<String, String> display,int mouseX, int mouseY) {
+        this.display.displayInformation(information, display);
+        upgradeButton.setVisible(true);
+        sellButton.setVisible(true);
+        upgradeButton.setTowerPosition(information,mouseX,mouseY);        
+    }
+    
+    public void updateDisplay (Map<String,String> toDisplay) {
+        this.display.updateInformation(toDisplay);
     }
     
     public void setCursorImage(PurchaseInfo itemInformation){
