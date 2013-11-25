@@ -14,6 +14,7 @@
 //   rotate ("r" - right, "l" - left, "u" - 180 degrees).
 
 space_background	-	0	space_background.jpg	-
+woods_background	-	0	woods_background.png	-
 icons_map		icons16x23.gif		0	0	16	23	0	0
 
 tower			-	0	tower.png		-
