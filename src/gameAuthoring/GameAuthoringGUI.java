@@ -30,7 +30,7 @@ public class GameAuthoringGUI implements Observer {
     private MapDesignTab myMapDesignTab;
     private TowerDesignTab myTowerDesignTab;
     private EnemyDesignTab myEnemyDesignTab;
-    private LevelDesignTab myLevelDesignTab;
+    private WaveDesignTab myWaveDesignTab;
     private MiscellaneousTab myMiscellaneousTab;
     private UserLibraryMainTab myUserLibraryPanel;
     private Image currentImage;
@@ -57,7 +57,7 @@ public class GameAuthoringGUI implements Observer {
         myMapDesignTab = new MapDesignTab(gameData);
         myTowerDesignTab = new TowerDesignTab(gameData);
         myEnemyDesignTab = new EnemyDesignTab(gameData);
-        myLevelDesignTab = new LevelDesignTab(gameData);
+        myWaveDesignTab = new WaveDesignTab(gameData);
         myMiscellaneousTab = new MiscellaneousTab(gameData);
         myUserLibraryPanel = new UserLibraryMainTab(this);
 
@@ -65,8 +65,8 @@ public class GameAuthoringGUI implements Observer {
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
         gameDesignTab.addTab("Map Design", myMapDesignTab.getTab());
         gameDesignTab.addTab("Tower Design", myTowerDesignTab.getTab());
-        gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
-        gameDesignTab.addTab("Level Design", myLevelDesignTab.getTab());
+        gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab()); 
+        gameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
         gameDesignTab.addTab("Miscellaneous", myMiscellaneousTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab);
         myMainPanel.add(title, "span 2, align left, gap 0 0 30 0");

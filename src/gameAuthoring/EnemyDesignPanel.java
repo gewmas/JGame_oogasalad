@@ -73,7 +73,7 @@ public class EnemyDesignPanel extends JPanel {
 
         JButton createEnemyButton = new JButton("Create Enemy");
         createEnemyButton.setFont(Constants.defaultBodyFont);
-        createEnemyButton.addMouseListener(createEnemyButtonListener(this));
+        createEnemyButton.addMouseListener(createEnemyButtonListener());
 
         this.setLayout(new MigLayout("wrap 2"));
         this.add(name);
@@ -113,7 +113,7 @@ public class EnemyDesignPanel extends JPanel {
         return listener;
     }
 
-    public MouseAdapter createEnemyButtonListener (final EnemyDesignPanel enemyDesignDialog) {
+    public MouseAdapter createEnemyButtonListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
@@ -121,7 +121,7 @@ public class EnemyDesignPanel extends JPanel {
                 try {
                     int gold = Integer.parseInt(myGoldField.getText());
                     int life = Integer.parseInt(myLifeField.getText());
-                    int speed = Integer.parseInt(mySpeedField.getText());
+                    double speed = Double.parseDouble(mySpeedField.getText());
                     if (gold < 0 || life < 0) {
                         JOptionPane
                                 .showMessageDialog(null,
@@ -130,14 +130,17 @@ public class EnemyDesignPanel extends JPanel {
                     else {
                         myGameData
                                 .addEnemy(myNameField.getText(),
-                                          gold,
-                                          myImageSource.toString()
-                                                  .replace(System.getProperties()
-                                                          .getProperty("user.dir") + "/",
-                                                           ""),
+                                          gold, 
+                                          "temp",
                                           life,
                                           speed);
-                        myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
+//                        
+//                        myImageSource.toString()
+//                        .replace(System.getProperties()
+//                                .getProperty("user.dir") + "/",
+//                                 "")
+                                 
+                        //myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
                         myNameField.setText("");
                         myGoldField.setText("");
                         myLifeField.setText("");

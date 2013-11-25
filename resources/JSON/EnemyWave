@@ -1,0 +1,26 @@
+{
+   "temporaryBarrierType": [],
+   "wave": [{
+      "interval": 3,
+      "number": 4,
+      "period": 3,
+      "type": "Bloop"
+   }],
+   "enemyType": [
+      {
+         "id": "Bloop",
+         "life": 1,
+         "speed": 1.5,
+         "image": "temp",
+         "gold": 1
+      },
+      {
+         "id": "Woop",
+         "life": 12,
+         "speed": 1.9,
+         "image": "temp",
+         "gold": 12
+      }
+   ],
+   "towerType": []
+}
