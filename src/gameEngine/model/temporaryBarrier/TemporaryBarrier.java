@@ -3,7 +3,7 @@ package gameEngine.model.temporaryBarrier;
 import java.util.HashMap;
 import java.util.Map;
 import jgame.JGObject;
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.bullet.Bullet;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.model.purchase.PurchaseInfo;
@@ -23,7 +23,7 @@ public class TemporaryBarrier extends JGObject {
 
     
     public TemporaryBarrier(String name, String gfxname, double damage, int cost, int expire, String description, double x, double y) {
-        super(name, true, x, y, Constant.BULLET_CID, gfxname);
+        super(name, true, x, y, GameEngineConstant.BULLET_CID, gfxname);
         this.description = description;
         this.barrierName = name;        
         this.image = gfxname;
