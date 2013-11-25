@@ -84,7 +84,13 @@ public class DefaultTower extends Tower {
 
     public void addDescription () {
         super.addDescription();
-        purchaseInfo.addToMap("Attack Mode", String.valueOf(attackMode));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_MODE, String.valueOf(attackMode));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_DAMAGE, df.format(damage));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_SPEED, df.format(attackSpeed));
+
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_DAMAGE, df.format(damage * upgradeFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_ATTACK_SPEED, df.format(attackSpeed * upgradeFactor));
+
     }
 
     @Override
@@ -200,14 +206,14 @@ public class DefaultTower extends Tower {
     public void upgrade (double factor) {
         damage *= factor;
         attackSpeed *= factor;
-        super.addDescription();
+        addDescription();
     }
     
     @Override
     public void downgrade (double factor) {
         damage /= factor;
         attackSpeed /= factor;
-        super.addDescription();
+        addDescription();        
     }
     
     public int getAttackMode () {

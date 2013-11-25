@@ -39,8 +39,6 @@ public abstract class TowerFactory {
     }
 
     public void addDescription () {
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_DAMAGE, String.valueOf(damage));
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_SPEED, String.valueOf(attackSpeed));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_RANGE, String.valueOf(range));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_SELL_PRICE, String.valueOf(sellPrice));
     }

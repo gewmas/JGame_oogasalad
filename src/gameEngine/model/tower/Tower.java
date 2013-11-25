@@ -83,15 +83,10 @@ public abstract class Tower extends JGObject implements ITMagicable {
 
     public void addDescription () {
         
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_DAMAGE, df.format(damage));
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_SPEED, df.format(attackSpeed));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_RANGE, String.valueOf(range));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_SELL_PRICE, String.valueOf(sellPrice));
         purchaseInfo.addToMap(GameEngineConstant.PURCHASE_INFO_DESCRIPTION, String.valueOf(description));
-
         purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_PRICE, String.valueOf(upgradePrice));
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_DAMAGE, df.format(damage * upgradeFactor));
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_ATTACK_SPEED, df.format(attackSpeed * upgradeFactor));
     }
 
     /**

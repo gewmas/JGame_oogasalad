@@ -52,9 +52,9 @@ public class BoostTower extends Tower{
 
     public void addDescription(){
         super.addDescription();
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_BOOST_FACTOR, String.valueOf(boostFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_BOOST_FACTOR, df.format(boostFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_BOOST_FACTOR, df.format(boostFactor*upgradeFactor));
         
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_BOOST_FACTOR, String.valueOf(boostFactor*upgradeFactor));
     }
 
     //create magic to towers in range
@@ -88,13 +88,13 @@ public class BoostTower extends Tower{
     @Override
     public void upgrade (double factor) {
         boostFactor *= factor;
-        super.addDescription();
+        addDescription();
     }
     
     @Override
     public void downgrade (double factor) {
         boostFactor /= factor;
-        super.addDescription();
+        addDescription();
     }
 
     
