@@ -136,5 +136,9 @@ public class View implements MenuActions {
     public String getGameTitle () {
         return controller.getGameTitle();
     }
+    
+    public boolean upgradeTower(int x, int y){
+        return controller.upgradeTower(x, y);
+    }
 
 }

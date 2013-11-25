@@ -29,6 +29,7 @@ public class GameFrameMediator {
     private CanvasPanel canvasPanel;
     private InfoDisplayPanel towerInfoPanel;
     private StorePanel storePanel;
+    private UpgradeButton upgradeButton;
 
 
     /**
@@ -104,6 +105,10 @@ public class GameFrameMediator {
         this.towerInfoPanel = towerInfoPanel;
     }
     
+    public void addUpgradeButton(UpgradeButton upgradeButton){
+        this.upgradeButton=upgradeButton;
+    }
+    
     public void clearDisplay(){
         this.towerInfoPanel.clearDisplay();
     }
@@ -115,13 +120,18 @@ public class GameFrameMediator {
     public void closeStore(){
         storePanel.closeStore();
     }
-    public void displayTowerInfo (Map<String, String> information, Map<String, String> display) {
+    public void displayTowerInfo (Map<String, String> information, Map<String, String> display, int mouseX, int mouseY) {
         this.towerInfoPanel.displayInformation(information, display);
-        
+        upgradeButton.setVisible(true);
+        upgradeButton.setTowerPosition(mouseX,mouseY);        
     }
 
     public void addStore (StorePanel storePanel) {
         this.storePanel = storePanel;
         
+    }
+
+    public void updateDisplay (Map<String,String> toDisplay) {
+        this.towerInfoPanel.updateInformation(toDisplay);
     }
 }
