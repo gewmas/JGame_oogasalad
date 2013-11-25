@@ -3,6 +3,7 @@ package gameEngine.model.tower;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Detector;
+import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import java.util.List;
 
@@ -70,17 +71,14 @@ public class BoostTower extends Tower{
         addBoostEffect();
     }
     
-    @Override
-    public void sell () {
-        remove();
-    }
+ 
 
     @Override
-    public void upgrade () {
+    public void upgrade (GameInfo gameInfo) {
         upgrade(upgradeFactor);
+        gameInfo.loseGold(upgradePrice);
     }
 
-    @Override
     public void downgrade(){
         downgrade(upgradeFactor);
     }

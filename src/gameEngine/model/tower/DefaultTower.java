@@ -2,6 +2,7 @@ package gameEngine.model.tower;
 
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.Detector;
+import gameEngine.model.GameInfo;
 import gameEngine.model.bullet.Bullet;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.model.enemy.comparator.FurthestDistanceEnemyComparator;
@@ -184,31 +185,19 @@ public class DefaultTower extends Tower {
     public void hit (JGObject obj) {
 
     }
-
-    @Override
-    public void sell () {
-        // level.getGameInfo().addGold((int)recyclePrice);
-        // level.getTowers().remove(this);
-        this.remove();
-    }
-
-    public int getAttackMode () {
-        return attackMode;
-    }
     
     @Override
-    public void upgrade () {
+    public void upgrade (GameInfo gameInfo) {
         upgrade(upgradeFactor);
+        gameInfo.loseGold(upgradePrice);
     }
 
-    @Override
     public void downgrade () {
         downgrade(upgradeFactor);
     }
     
     @Override
     public void upgrade (double factor) {
-        
         damage *= factor;
         attackSpeed *= factor;
         super.addDescription();
@@ -216,9 +205,12 @@ public class DefaultTower extends Tower {
     
     @Override
     public void downgrade (double factor) {
-        
         damage /= factor;
         attackSpeed /= factor;
         super.addDescription();
+    }
+    
+    public int getAttackMode () {
+        return attackMode;
     }
 }

@@ -1,6 +1,7 @@
 package gameEngine.model.tower;
 
 import gameEngine.constant.GameEngineConstant;
+import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 
 public class MultipleShootingTower extends DefaultTower {
@@ -41,8 +42,9 @@ public class MultipleShootingTower extends DefaultTower {
     }
     
     @Override
-    public void upgrade () {
+    public void upgrade (GameInfo gameInfo) {
         upgrade(upgradeFactor);
+        gameInfo.loseGold(upgradePrice);
     }
 
     @Override
