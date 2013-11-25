@@ -13,6 +13,8 @@ import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
 
 public class WaveDesignTab extends Tab{
     private JScrollPane myCreatedWaves;
@@ -59,8 +61,20 @@ public class WaveDesignTab extends Tab{
 
     @Override
     public void loadJSON (Parser p) {
-        // TODO Auto-generated method stub
+        JSONArray waves = p.getJSONArray("wave");
         
+        for (int i = 0; i < waves.length(); i++){
+            JSONObject wave = (JSONObject) waves.get(i);
+            
+            String type = (String) wave.get("type");
+            int number = (int) wave.get("number");
+            double period = (double) wave.get("period");
+            int interval = (int) wave.get("interval");
+            
+            myGameData.addWave(type, number, period, interval);
+            
+            addWave(type, number);
+        }
     }
 
 }

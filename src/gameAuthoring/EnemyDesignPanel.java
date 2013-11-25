@@ -130,17 +130,14 @@ public class EnemyDesignPanel extends JPanel {
                     else {
                         myGameData
                                 .addEnemy(myNameField.getText(),
-                                          gold, 
-                                          "temp",
+                                          gold,
+                                          myImageSource.toString()
+                                                  .replace(System.getProperties()
+                                                          .getProperty("user.dir") + "/",
+                                                           ""),
                                           life,
                                           speed);
-//                        
-//                        myImageSource.toString()
-//                        .replace(System.getProperties()
-//                                .getProperty("user.dir") + "/",
-//                                 "")
-                                 
-                        //myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
+                        myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
                         myNameField.setText("");
                         myGoldField.setText("");
                         myLifeField.setText("");

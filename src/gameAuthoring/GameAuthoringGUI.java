@@ -68,7 +68,7 @@ public class GameAuthoringGUI implements Observer {
         gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab()); 
         gameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
         gameDesignTab.addTab("Miscellaneous", myMiscellaneousTab.getTab());
-        MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab);
+        MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
         myMainPanel.add(title, "span 2, align left, gap 0 0 30 0");
         myMainPanel.add(gameDesignTab, "gap 50 20 30 40");
         myMainPanel.add(myUserLibraryPanel);

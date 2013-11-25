@@ -1,8 +1,6 @@
 package gameAuthoring.JSONObjects;
 
 import java.awt.List;
-import java.awt.geom.Point2D;
-import java.awt.geom.Point2D.Double;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,6 +56,8 @@ public class TestJSONWrite {
     public static void main (String[] args) {
         TestJSONWrite x = new TestJSONWrite();
         x.testWrite();
+
+        
     }
 
 }
