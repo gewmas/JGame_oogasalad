@@ -5,6 +5,7 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
+import gameEngine.view.gameFrame.gameObjects.RangeDisplay;
 import java.awt.Dimension;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -100,6 +101,7 @@ public class Game extends StdGame {
     public void startInGame() {
         view.startModel();
         mediator.openStore();
+        mediator.openInfoPanel();
         mediator.updateStoreStatus();
         
     }
@@ -142,6 +144,7 @@ public class Game extends StdGame {
                     System.out.println("No tower here");
                 } else {
                     utilities.displayCheckedInformation(tower.getInfo(),valuesToDisplay,mousePosition.x,mousePosition.y);
+                    JGPoint tileCoords=this.getTileCoord(getTileIndex(mousePosition.x, mousePosition.y));
                     System.out.println("Checking tower");
                 }
                 //System.out.format("Checking tower at: %d,%d\n", mousePosition.x, mousePosition.y);

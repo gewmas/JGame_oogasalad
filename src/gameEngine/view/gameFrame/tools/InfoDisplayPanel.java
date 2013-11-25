@@ -43,6 +43,7 @@ public class InfoDisplayPanel extends Panel {
         initializeContents("", "");
         this.setPreferredSize(new Dimension(DISPLAY_WIDTH,DISPLAY_HEIGHT));
         displayedInformation=new HashMap<String,String>();
+        this.setVisible(false);
     }
 
     public InfoDisplayPanel (String name, String keyName, String valueName) {

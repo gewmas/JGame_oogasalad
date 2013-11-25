@@ -1,5 +1,6 @@
 package gameEngine.view.gameFrame;
 
+import java.awt.Dimension;
 import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
@@ -123,5 +124,10 @@ public class GameFrameMediator {
 
     public void updateDisplay (Map<String,String> toDisplay) {
         this.towerInfoPanel.updateInformation(toDisplay);
+    }
+
+    public void openInfoPanel () {
+        this.towerInfoPanel.setVisible(true);
+        gameFrame.pack();
     }
 }
