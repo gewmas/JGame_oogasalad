@@ -1,6 +1,6 @@
 package gameEngine.model.tower;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.Detector;
 import gameEngine.model.bullet.Bullet;
 import gameEngine.model.enemy.Enemy;
@@ -51,7 +51,7 @@ public class DefaultTower extends Tower {
                          double attackSpeed,
                          int attackMode,
                          double range,
-                         double cost,
+                         int cost,
                          double recyclePrice,
                          String description,
 
@@ -99,7 +99,7 @@ public class DefaultTower extends Tower {
 
             // System.out.println(targetEnemies.size());
             for (Enemy targetEnemy : targetEnemies) {
-                new Bullet(targetEnemy, damage, currentMagic,"bullet", true, x, y, Constant.BULLET_CID, "bullet");
+                new Bullet(targetEnemy, damage, currentMagic,"bullet", true, x, y, GameEngineConstant.BULLET_CID, "bullet");
             }
             prevTime = System.currentTimeMillis();
         }
@@ -221,7 +221,4 @@ public class DefaultTower extends Tower {
         attackSpeed /= factor;
         super.addDescription();
     }
-
-    
-
 }

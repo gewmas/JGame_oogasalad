@@ -1,6 +1,6 @@
 package gameEngine.model.tower;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Detector;
 import gameEngine.model.purchase.PurchaseInfo;
@@ -22,7 +22,7 @@ public class BoostTower extends Tower{
     public BoostTower (double damage,
                        double attackSpeed,
                        double range,
-                       double cost,
+                       int cost,
                        double recyclePrice,
                        String description,
                        
@@ -51,9 +51,9 @@ public class BoostTower extends Tower{
 
     public void addDescription(){
         super.addDescription();
-        purchaseInfo.addToMap(Constant.TOWER_BOOST_FACTOR, String.valueOf(boostFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_BOOST_FACTOR, String.valueOf(boostFactor));
         
-        purchaseInfo.addToMap(Constant.TOWER_UPGRADE_BOOST_FACTOR, String.valueOf(boostFactor*upgradeFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_BOOST_FACTOR, String.valueOf(boostFactor*upgradeFactor));
     }
 
     //create magic to towers in range

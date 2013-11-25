@@ -1,6 +1,6 @@
 package gameEngine.model.enemy;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Model;
 import gameEngine.model.bullet.Bullet;
@@ -96,8 +96,8 @@ public class Enemy extends JGObject implements IEMagicable {
         pathY += yMovement * speed;
         JGRectangle box=this.getImageBBox();
 
-        this.x=pathX-(box.width-Constant.PIXELSPERTILE)/2;
-        this.y=pathY-(box.height-Constant.PIXELSPERTILE);
+        this.x=pathX-(box.width-GameEngineConstant.PIXELSPERTILE)/2;
+        this.y=pathY-(box.height-GameEngineConstant.PIXELSPERTILE);
     }
 
     public boolean reachedPoint () {
@@ -125,7 +125,7 @@ public class Enemy extends JGObject implements IEMagicable {
         // hit the target enemy, destroy that enemy
         // System.out.println("Bullet Hit");
 
-        if (obj.colid == Constant.BULLET_CID) {
+        if (obj.colid == GameEngineConstant.BULLET_CID) {
             if(obj instanceof TemporaryBarrier) {
                 /**
                  * @author Harris
