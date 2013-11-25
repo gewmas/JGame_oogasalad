@@ -20,7 +20,7 @@ public class DefaultTowerFactory extends TowerFactory {
     public DefaultTowerFactory (JSONObject currTower) {
         super(currTower);
         
-        this.attackMode = currTower.getInt("attackMode");
+        this.attackMode = currTower.getInt(Constant.TOWER_ATTACK_MODE);
         
         addDescription();
     }
@@ -33,14 +33,10 @@ public class DefaultTowerFactory extends TowerFactory {
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new DefaultTower(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, type, id, true,
+                (Tower) new DefaultTower(damage, attackSpeed, attackMode, range, cost, sellPrice, description, type, id, true,
                                          x, y, Constant.TOWER_CID, image,
                                          purchaseInfo);
         return tower;
     }
-
-    
-    
-  
 
 }

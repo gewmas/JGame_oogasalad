@@ -22,7 +22,7 @@ public class BoostTower extends Tower{
     public BoostTower (double damage,
                        double attackSpeed,
                        double range,
-                       double cost,
+                       int cost,
                        double recyclePrice,
                        String description,
                        
