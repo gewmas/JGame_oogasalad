@@ -367,12 +367,14 @@
 		{ "id": "d1", "url": "d1.png" },
                { "id": "d2", "url": "d2.png" },
                { "id": "d3", "url": "d3.png" },
-               { "id": "d4", "url": "d4.png" }
+               { "id": "d4", "url": "d4.png" },
+		{"id": "haste", "url":"haste.png"},
                
              
            ], 
         "audio":[
         	{ "id": "alarm", "url": "alarm.wav" },
+		{ "id": "haste", "url": "haste.wav" },
         ],
 	 "animation":[
         	{ "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
@@ -471,41 +473,44 @@
 	"image": "runRight",
 	"life": 10,
 	"speed": 0.5,
+	"skill": ""
 }, 
 {
 	"id": "2",
 	"gold": 10,
 	"image": "drunRight",
 	"life": 15,
-	"speed": 1,
+	"speed": 0.5,
+	"skill": "haste",
 }
 ],
 
 "wave":[
 	{	
-		"type": "2",
-		"number":20,
+		"type": "1",
+		"number":1,
 		"period" :2,
-		"interval": 7,
+		"interval": 10,
 	},
 	{	
 		"type": "1",
-		"number":30,
-		"period" :1,
-		"interval": 5,
+		"number":1,
+		"period" :2,
+		"interval": 0,
 	},
 	{	
 		"type": "2",
-		"number":3,
-		"period" :4,
-		"interval": 5,
+		"number":1,
+		"period" :2,
+		"interval": 0,
 	},
-	{	
-		"type": "2",
-		"number":10,
-		"period" :3,
-		"interval": 5,
-	}
+{	
+		"type": "1",
+		"number":1,
+		"period" :2,
+		"interval": 0,
+	},
+	
 ]  
 
 }
