@@ -141,4 +141,8 @@ public class View implements MenuActions {
         return controller.upgradeTower(x, y);
     }
 
+    public boolean sellTower (int towerX, int towerY) {
+        return controller.sellTower(towerX, towerY);
+    }
+
 }

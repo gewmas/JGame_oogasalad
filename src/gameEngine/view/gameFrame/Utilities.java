@@ -13,11 +13,14 @@ public class Utilities {
     InfoDisplayPanel display;
     GameFrame gameFrame;
     UpgradeButton upgradeButton;
+    SellButton sellButton;
     public Utilities(InfoDisplayPanel display, GameFrame gameFrame, View view){
         this.display = display;
         this.gameFrame = gameFrame;
         this.upgradeButton=new UpgradeButton(this,view);
+        this.sellButton=new SellButton(view);
         display.add(upgradeButton);
+        display.add(sellButton);
     }
     
     /**
@@ -28,6 +31,7 @@ public class Utilities {
     public void displayInformation (Map<String, String> displayInformation) {
         display.displayInformation(displayInformation);
         upgradeButton.setVisible(false);
+        sellButton.setVisible(false);
     }
 
     public void clearDisplay(){
@@ -36,12 +40,13 @@ public class Utilities {
     public void displayStoreInformation (Map<String, String> information, Map<String, String> displayValues) {
         this.display.displayInformation(information, displayValues);
         upgradeButton.setVisible(false);
-        
+        sellButton.setVisible(false);
     }
     
     public void displayCheckedInformation (Map<String, String> information, Map<String, String> display,int mouseX, int mouseY) {
         this.display.displayInformation(information, display);
         upgradeButton.setVisible(true);
+        sellButton.setVisible(true);
         upgradeButton.setTowerPosition(information,mouseX,mouseY);        
     }
     
