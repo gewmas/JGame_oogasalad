@@ -1,6 +1,6 @@
 package gameEngine.factory.magicFactory;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.magic.IMagicable;
 import java.util.HashMap;
 
@@ -33,7 +33,7 @@ public class MagicsFactory {
      * @param currentMagicIds,if the magic can overlap then make the currentMagicIds be Constant.OVERLAPMAGIC_ID
      */
     public void createMagics (IMagicable target, IMagicable sender,int magicIdToCreate, int currMagicIds) {
-        if(currMagicIds!=Constant.OVERLAPMAGIC_ID){
+        if(currMagicIds!=GameEngineConstant.OVERLAPMAGIC_ID){
             magicIdToCreate = (~currMagicIds) & magicIdToCreate;
         }
         int temp=magicIdToCreate;
