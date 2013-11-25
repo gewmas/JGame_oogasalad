@@ -36,7 +36,7 @@ public class Grid extends JPanel {
         myGrid = new GridButton[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                GridButton gButton = new GridButton(y, x, this);
+                GridButton gButton = new GridButton(x, y, this);
                 myGrid[x][y] = gButton;
                 gButton.setOpaque(false);
                 gButton.setContentAreaFilled(false);
