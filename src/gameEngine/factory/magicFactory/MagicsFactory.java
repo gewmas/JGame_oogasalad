@@ -3,6 +3,7 @@ package gameEngine.factory.magicFactory;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.magic.IMagicable;
 import java.util.HashMap;
+import java.util.List;
 
 
 /*
@@ -23,7 +24,7 @@ public class MagicsFactory {
         
         myTranlateMap.put("FrozeMagic", GameEngineConstant.FROZEMAGIC_ID);
         myTranlateMap.put("BoostMagic", GameEngineConstant.FROZEMAGIC_ID);
-        myTranlateMap.put("FrozeMagic", GameEngineConstant.FROZEMAGIC_ID);
+        myTranlateMap.put("SpeedMagic", GameEngineConstant.SPEEDUPMAGIC_ID);
     }
 
     public static MagicsFactory getInstance () {
@@ -54,5 +55,22 @@ public class MagicsFactory {
             magicIdToCreate = magicIdToCreate >> 1;
             mask=mask<<1;
         }
+    }
+    
+    public void creatMagics(IMagicable target, IMagicable sender,List<String> magicIdToCreate,List<String> currMagicIds){
+        int newMagicIds=0;
+        int currentMagicIds=0;
+        
+        for(String str:magicIdToCreate){
+            newMagicIds+= myTranlateMap.get(str);
+        }
+        
+        for(String str:currMagicIds){
+            currentMagicIds+= myTranlateMap.get(str);
+        }
+        
+        createMagics (target, sender,newMagicIds, currentMagicIds);
+        
+        
     }
 }
