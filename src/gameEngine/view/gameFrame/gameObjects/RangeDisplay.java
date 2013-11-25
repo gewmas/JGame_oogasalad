@@ -2,6 +2,7 @@ package gameEngine.view.gameFrame.gameObjects;
 
 import jgame.JGColor;
 import jgame.JGObject;
+import jgame.JGPoint;
 
 /**
  * 
@@ -22,10 +23,6 @@ public class RangeDisplay extends JGObject {
         this.suspend();
     }
     
-    public void setRange(double range){
-        this.range=range;
-    }
-    
     @Override
     public void move(){
         
@@ -34,6 +31,12 @@ public class RangeDisplay extends JGObject {
     @Override
     public void paint(){
         eng.drawOval(x,y,range,range,false,true,4,JGColor.red);
+    }
+
+    public void setTower (double range,int mouseX, int mouseY) {
+        this.range=range;
+        JGPoint tileCoords=eng.getTileCoord(eng.getTileIndex(mouseX, mouseY));
+        this.setPos(tileCoords.x+tilewidth/2, tileCoords.y+tileheight/2);
     }
 
 }

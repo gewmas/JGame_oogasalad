@@ -77,6 +77,7 @@ public class GameFrame extends Frame {
         CanvasPanel canvasPanel = new CanvasPanel(view, mediator,itemPurchaser, utilities);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addGame(canvasPanel);
+        utilities.createRangeDisplay();
     }
 
     /**

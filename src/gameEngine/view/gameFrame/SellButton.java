@@ -14,19 +14,17 @@ public class SellButton extends JButton {
     
     private View view;
     private int towerX, towerY;
-    private boolean isActive;
+    private Utilities utilities;
     
-    public SellButton(View viewer){
+    public SellButton(Utilities utility,View viewer){
         super(NAME);
         this.view=viewer;
+        this.utilities=utility;
         this.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-                try{
-                    view.sellTower(towerX,towerY);
-                } catch (Exception ex){
-                    
-                }                
+                view.sellTower(towerX,towerY);
+                utilities.clearDisplay();
             }
         });
         this.setPreferredSize(new Dimension(BUTTON_WIDTH,BUTTON_HEIGHT));
