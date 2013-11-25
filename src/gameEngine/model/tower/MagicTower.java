@@ -1,6 +1,7 @@
 package gameEngine.model.tower;
 
 import gameEngine.constant.GameEngineConstant;
+import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 
 
@@ -50,14 +51,15 @@ public class MagicTower extends DefaultTower {
     @Override
     public void addDescription () {
         super.addDescription();
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_MAGIC_FACTOR, String.valueOf(magicFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_MAGIC_FACTOR, df.format(magicFactor));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_MAGIC_FACTOR,
-                              String.valueOf(magicFactor * upgradeFactor));
+                              df.format(magicFactor * upgradeFactor));
     }
 
     @Override
-    public void upgrade () {
+    public void upgrade (GameInfo gameInfo) {
         upgrade(upgradeFactor);
+        gameInfo.loseGold(upgradePrice);
     }
 
     @Override
@@ -69,12 +71,14 @@ public class MagicTower extends DefaultTower {
     public void upgrade (double factor) {
         magicFactor *= factor;
         super.upgrade(factor);
+        addDescription();
     }
 
     @Override
     public void downgrade (double factor) {
         magicFactor /= factor;
         super.downgrade(factor);
+        addDescription();
     }
 
 }
