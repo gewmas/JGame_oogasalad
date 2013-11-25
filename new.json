@@ -367,7 +367,8 @@
 		{ "id": "d1", "url": "d1.png" },
                { "id": "d2", "url": "d2.png" },
                { "id": "d3", "url": "d3.png" },
-               { "id": "d4", "url": "d4.png" }
+               { "id": "d4", "url": "d4.png" },
+		{"id": "haste", "url":"haste.png"},
                
              
            ], 
