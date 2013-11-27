@@ -15,8 +15,8 @@ public class PointJSONObject extends JSONObject {
      * @param point Point2D to be put into object
      */
     public PointJSONObject (Point2D point) {
-        this.put("x", point.getX());
-        this.put("y", point.getY());
+        this.put("x", point.getY());
+        this.put("y", point.getX());
     }
 
 }

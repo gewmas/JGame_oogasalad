@@ -32,10 +32,6 @@ public class BasicInfoTab extends Tab {
     private JTextField myGameName;
     private JTextField myGold;
     private JTextField myLives;
-    private JTextField myWindowWidth;
-    private JTextField myWindowHeight;
-    private JTextField myTilesPerRow;
-    private JTextField myDifficultyScale;
 
     private JLabel mySplashImageLabel;
     private String mySplashImage;
@@ -63,18 +59,6 @@ public class BasicInfoTab extends Tab {
         JLabel title = new JLabel("Basic Game Info");
         title.setFont(Constants.defaultBodyFont);
 
-        JLabel width = new JLabel("Window Width");
-        width.setFont(Constants.defaultBodyFont);
-
-        JLabel height = new JLabel("Window Height");
-        height.setFont(Constants.defaultBodyFont);
-
-        JLabel tiles = new JLabel("Tiles Per Row");
-        tiles.setFont(Constants.defaultBodyFont);
-
-        JLabel difficultyScale = new JLabel("Difficulty Scale");
-        difficultyScale.setFont(Constants.defaultBodyFont);
-
         title.setFont(Constants.defaultTitleFont);
         title.setForeground(new Color(80, 80, 80));
         mainPanel.add(title, "span 2");
@@ -95,14 +79,7 @@ public class BasicInfoTab extends Tab {
         myGold.setPreferredSize(new Dimension(200, 30));
         myLives = new JTextField();
         myLives.setPreferredSize(new Dimension(200, 30));
-        myWindowWidth = new JTextField();
-        myWindowWidth.setPreferredSize(new Dimension(200, 30));
-        myWindowHeight = new JTextField();
-        myWindowHeight.setPreferredSize(new Dimension(200, 30));
-        myTilesPerRow = new JTextField();
-        myTilesPerRow.setPreferredSize(new Dimension(200, 30));
-        myDifficultyScale = new JTextField();
-        myDifficultyScale.setPreferredSize(new Dimension(200, 30));
+
 
         subPanel.add(gameName);
         subPanel.add(myGameName);
@@ -110,14 +87,7 @@ public class BasicInfoTab extends Tab {
         subPanel.add(myGold);
         subPanel.add(lives);
         subPanel.add(myLives);
-        subPanel.add(width);
-        subPanel.add(myWindowWidth);
-        subPanel.add(height);
-        subPanel.add(myWindowHeight);
-        subPanel.add(tiles);
-        subPanel.add(myTilesPerRow);
-        subPanel.add(difficultyScale);
-        subPanel.add(myDifficultyScale);
+        
 
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
@@ -134,10 +104,6 @@ public class BasicInfoTab extends Tab {
             myGameName.setText(p.getString("name"));
             myGold.setText(String.valueOf(p.getInt("gold")));
             myLives.setText(String.valueOf(p.getInt("numberOfLives")));
-            myWindowWidth.setText(String.valueOf(p.getInt("widthOfWindow")));
-            myWindowHeight.setText(String.valueOf(p.getInt("heightOfWindow")));
-            myTilesPerRow.setText(String.valueOf(p.getInt("tilesPerRow")));
-            myDifficultyScale.setText(String.valueOf(p.getDouble("difficultyScale")));
             mySplashImage = p.getString("splashImage");
             mySplashImageLabel.setText(mySplashImage);
 
@@ -164,20 +130,11 @@ public class BasicInfoTab extends Tab {
     private void setData () {
         int gold = Integer.parseInt(myGold.getText());
         int lives = Integer.parseInt(myLives.getText());
-        int width = Integer.parseInt(myWindowWidth.getText());
-        int height = Integer.parseInt(myWindowHeight.getText());
-        int tiles = Integer.parseInt(myTilesPerRow.getText());
-        float difficultyScale = Float.parseFloat(myDifficultyScale.getText());
         String name = myGameName.getText();
 
-        if (gold > 0 && lives > 0 && width > 0 && height > 0 && tiles > 0 &&
-            difficultyScale > 1 && mySplashImage != null && name != null) {
+        if (gold > 0 && lives > 0 && mySplashImage != null && name != null) {
             myGameData.setGold(gold);
             myGameData.setLives(lives);
-            myGameData.setWindowWidth(width);
-            myGameData.setWindowHeight(height);
-            myGameData.setTilesPerRow(tiles);
-            myGameData.setDifficultyScale(difficultyScale);
             myGameData.setSplashImage(mySplashImage);
             myGameData.setGameName(name);
         }

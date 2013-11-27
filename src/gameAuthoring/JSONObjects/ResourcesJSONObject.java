@@ -42,7 +42,11 @@ public class ResourcesJSONObject extends JSONObject{
         
         JSONArray sheet = new JSONArray();
         
-        //sheet.put();
+        //for loop
+        //JSONObject x = new JSONObject();
+        //x.put("id", parameter);
+        //sheet.put(x);
+        //
         animation.put("sheet", sheet);
         myAnimations.put(animation);
     }
