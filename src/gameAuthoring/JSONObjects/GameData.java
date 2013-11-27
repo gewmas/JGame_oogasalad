@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JFileChooser;
 
@@ -28,6 +29,7 @@ public class GameData extends JSONObject {
     JSONArray myWaveList = new JSONArray();
 
     MapJSONObject myMap;
+    ResourcesJSONObject myResources = new ResourcesJSONObject();
 
     /**
      * Constructor for GameData class
@@ -38,6 +40,7 @@ public class GameData extends JSONObject {
         this.put("enemyType", myEnemyList);
         this.put("temporaryBarrierType", myBarrierList);
         this.put("wave", myWaveList);
+        this.put("resources", myResources);
     }
 
     /**
@@ -188,6 +191,22 @@ public class GameData extends JSONObject {
         myMap.addBarrier(x, y, imageName);
     }
 
+    
+    public void addImage(String id, String url){
+       myResources.addImage(id, url);
+     }
+    
+    public void addAudio(String id, String url){
+        myResources.addAudio(id, url);
+      }
+    
+    public void addAnimation(String id, ArrayList<String> imagePaths){
+        myResources.addAnimation(id, imagePaths);
+    }
+    
+    public ResourcesJSONObject getResources(){
+        return myResources;
+    }
 
     /**
      * Opens file chooser dialogue to save current state of GameData object into a file

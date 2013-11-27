@@ -1,5 +1,6 @@
 package gameAuthoring.JSONObjects;
 
+import java.util.ArrayList;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
@@ -35,18 +36,17 @@ public class ResourcesJSONObject extends JSONObject{
         return image;
     }
     
-    //TODO: Finish this
-    public void addAnimation(String id){
+    public void addAnimation(String id, ArrayList<String> imagePaths){
         JSONObject animation = new JSONObject();
         animation.put("id", id);
         
         JSONArray sheet = new JSONArray();
         
-        //for loop
-        //JSONObject x = new JSONObject();
-        //x.put("id", parameter);
-        //sheet.put(x);
-        //
+        for (String s: imagePaths){
+            JSONObject x = new JSONObject();
+            x.put("id", s);
+            sheet.put(x);       
+        }
         animation.put("sheet", sheet);
         myAnimations.put(animation);
     }
