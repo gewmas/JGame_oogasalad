@@ -16,6 +16,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
@@ -31,6 +32,8 @@ public class EnemyDesignPanel extends JPanel {
     private JTextField myGoldField;
     private JTextField myLifeField;
     private JTextField mySpeedField;
+    private JPanel myAnimationPanel;
+    private JScrollPane myAnimationScrollPane;
 
     private JLabel myEnemyImage;
     private File myImageSource;
@@ -62,14 +65,18 @@ public class EnemyDesignPanel extends JPanel {
         mySpeedField.setPreferredSize(new Dimension(200, 30));
         mySpeedField.setFont(Constants.defaultBodyFont);
 
-        JLabel enemyImageChooser = new JLabel("Choose image");
+        JButton enemyImageChooser = new JButton("Add sprite");
         enemyImageChooser.setFont(Constants.defaultBodyFont);
+        enemyImageChooser.addMouseListener(createNewEnemyIconListener());
 
-        myEnemyImage = new JLabel();
-        myEnemyImage.setPreferredSize(new Dimension(50, 50));
-        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
-        myEnemyImage.setBorder(border);
-        myEnemyImage.addMouseListener(createEnemyImageListener());
+        myAnimationPanel = new JPanel();
+        myAnimationPanel.setOpaque(false);
+        myAnimationPanel.setPreferredSize(new Dimension(200, 100));
+        JScrollPane animationScrollPane = new JScrollPane(myAnimationPanel);
+        animationScrollPane.setPreferredSize(new Dimension(200, 80));
+        animationScrollPane.getViewport().setOpaque(false);
+        animationScrollPane.setOpaque(false);
+        animationScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 
         JButton createEnemyButton = new JButton("Create Enemy");
         createEnemyButton.setFont(Constants.defaultBodyFont);
@@ -85,7 +92,7 @@ public class EnemyDesignPanel extends JPanel {
         this.add(speed);
         this.add(mySpeedField);
         this.add(enemyImageChooser);
-        this.add(myEnemyImage, "gap 0 0 10 10");
+        this.add(animationScrollPane);
         this.add(createEnemyButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         this.setPreferredSize(new Dimension(380, 350));
@@ -93,21 +100,38 @@ public class EnemyDesignPanel extends JPanel {
         this.setOpaque(false);
     }
 
-    public MouseAdapter createEnemyImageListener () {
+    public MouseAdapter createEnemyImageListener (final JLabel label) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
                 File imgSource = GameAuthoringGUI.mySelectedImage;
                 myImageSource = imgSource;
-                Image tower;
+                Image enemy;
                 try {
-                    tower = ImageIO.read(imgSource);
-                    tower = tower.getScaledInstance(50, 50, Image.SCALE_FAST);
-                    myEnemyImage.setIcon(new ImageIcon(tower));
+                    enemy = ImageIO.read(imgSource);
+                    enemy = enemy.getScaledInstance(50, 50, Image.SCALE_FAST);
+                    label.setIcon(new ImageIcon(enemy));
                 }
                 catch (IOException e1) {
                     e1.printStackTrace();
                 }
+            }
+        };
+        return listener;
+    }
+
+    public MouseAdapter createNewEnemyIconListener () {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                System.out.println("Clicked");
+                JLabel enemyImage = new JLabel();
+                enemyImage.setPreferredSize(new Dimension(50, 50));
+                enemyImage.addMouseListener(createEnemyImageListener(enemyImage));
+                Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
+                enemyImage.setBorder(border);
+                myAnimationPanel.add(enemyImage);
+                myAnimationPanel.validate();
             }
         };
         return listener;
