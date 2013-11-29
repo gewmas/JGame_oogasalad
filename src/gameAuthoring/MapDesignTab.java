@@ -39,7 +39,6 @@ public class MapDesignTab extends Tab {
         super(gameData);
     }
 
-    // TODO: Get rid of magic number
     @Override
     public JPanel getTab () {
         JPanel mainPanel = new GradientPanel(new MigLayout("wrap 2"));
@@ -58,7 +57,7 @@ public class MapDesignTab extends Tab {
         myCurrentPathImage.setPreferredSize(new Dimension(50, 50));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myCurrentPathImage.setBorder(border);
-        // myCurrentPathImage.addMouseListener(createPathListener());
+        myCurrentPathImage.addMouseListener(createPathListener());
 
         JButton checkPath = new JButton("Create Map");
         checkPath.setFont(Constants.defaultBodyFont);
@@ -114,22 +113,19 @@ public class MapDesignTab extends Tab {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                int loadObject = INPUT_CHOOSER.showOpenDialog(null);
-                if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(INPUT_CHOOSER.getSelectedFile());
-                    File imgSource = INPUT_CHOOSER.getSelectedFile();
-                    myGrid.setImageSource(imgSource);
-                    Image path;
-                    try {
-                        myPathImage =
-                                imgSource.toString().replace(System.getProperties()
-                                        .getProperty("user.dir") + "/", "");
-                        path = ImageIO.read(imgSource);
-                        // myCurrentPathImage.setIcon(new ImageIcon(path));
-                    }
-                    catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+
+                File imgSource = GameAuthoringGUI.mySelectedImage;
+                myGrid.setImageSource(imgSource);
+                Image path;
+                try {
+                    myPathImage =
+                            imgSource.toString().replace(System.getProperties()
+                                    .getProperty("user.dir") + "/", "");
+                    path = ImageIO.read(imgSource).getScaledInstance(50, 50, Image.SCALE_FAST);
+                    myCurrentPathImage.setIcon(new ImageIcon(path));
+                }
+                catch (IOException e1) {
+                    e1.printStackTrace();
                 }
             }
         };

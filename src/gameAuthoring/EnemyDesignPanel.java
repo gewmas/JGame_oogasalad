@@ -69,6 +69,10 @@ public class EnemyDesignPanel extends JPanel {
         enemyImageChooser.setFont(Constants.defaultBodyFont);
         enemyImageChooser.addMouseListener(createNewEnemyIconListener());
 
+        JButton clearButton = new JButton("Clear all sprites");
+        clearButton.setFont(Constants.defaultBodyFont);
+        clearButton.addMouseListener(createClearAnimationsListener());
+
         myAnimationPanel = new JPanel();
         myAnimationPanel.setOpaque(false);
         myAnimationPanel.setPreferredSize(new Dimension(200, 100));
@@ -91,13 +95,29 @@ public class EnemyDesignPanel extends JPanel {
         this.add(myLifeField);
         this.add(speed);
         this.add(mySpeedField);
+        this.add(animationScrollPane, "span 2, gap 0 0 10 10");
         this.add(enemyImageChooser);
-        this.add(animationScrollPane);
+        this.add(clearButton);
         this.add(createEnemyButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         this.setPreferredSize(new Dimension(380, 350));
         this.setBorder(b);
         this.setOpaque(false);
+    }
+
+    public MouseAdapter createClearAnimationsListener () {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                clearAnimationPanel();
+            }
+        };
+        return listener;
+    }
+
+    public void clearAnimationPanel () {
+        myAnimationPanel.removeAll();
+        myAnimationPanel.revalidate();
     }
 
     public MouseAdapter createEnemyImageListener (final JLabel label) {
@@ -166,7 +186,8 @@ public class EnemyDesignPanel extends JPanel {
                         myGoldField.setText("");
                         myLifeField.setText("");
                         mySpeedField.setText("");
-                        myEnemyImage.setIcon(null);
+                        // myEnemyImage.setIcon(null);
+                        clearAnimationPanel();
                     }
                 }
                 catch (NumberFormatException n)

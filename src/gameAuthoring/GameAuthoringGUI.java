@@ -50,7 +50,8 @@ public class GameAuthoringGUI implements Observer {
         }
         myFrame.setPreferredSize(new Dimension(1200, 1000));
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myMainPanel = new ImagePanel(new MigLayout("wrap 2"));
+        myMainPanel = new ImagePanel("texture0.jpg");
+        myMainPanel.setLayout(new MigLayout("wrap 2"));
         JTabbedPane gameDesignTab = new JTabbedPane();
         gameDesignTab.setPreferredSize(new Dimension(750, 650));
         myBasicInfoTab = new BasicInfoTab(gameData);
