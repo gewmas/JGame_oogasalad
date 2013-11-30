@@ -66,7 +66,7 @@ public class Utilities {
     
     public void setCursorImage(PurchaseInfo itemInformation){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage("resources/img/" + itemInformation.getInfo().get("Image") + ".png");
+        Image image = toolkit.getImage("src/resources/img/" + itemInformation.getInfo().get("Image") + ".png");
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
         gameFrame.setCursor(c);
     }

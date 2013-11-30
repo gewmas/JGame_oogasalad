@@ -377,7 +377,7 @@
 "temporaryBarrierType":[
 	{
 	 "id": "Lake",
-	 "image": "tower1",
+	 "image": "barrier1",
 	 "damage": 100,
 	 "cost": 200,
 	 "expire": 20,
@@ -385,7 +385,7 @@
 	},  
 	{
 	 "id": "Fire",
-	 "image": "MultipleShootingTower",
+	 "image": "barrier2",
 	 "damage": 100,
 	 "cost": 100,
 	 "expire": 10,
