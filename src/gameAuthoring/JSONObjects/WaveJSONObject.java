@@ -1,7 +1,5 @@
 package gameAuthoring.JSONObjects;
 
-import java.util.Map;
-import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 /**
@@ -13,21 +11,17 @@ public class WaveJSONObject extends JSONObject {
     /**
      * Constructor for WaveJSONObject
      * 
-     * @param waveNumber Wave ID number
-     * @param enemyMap Map of enemy name to enemy quantity
+     * @param type Enemy type
+     * @param number Number of enemies
+     * @param period Duration of wave
+     * @param interval 
      */
-    public WaveJSONObject (int waveNumber, Map<String, Integer> enemyMap) {
-        this.put("wave", waveNumber);
-        JSONArray waveData = new JSONArray();
-
-        for (String enemy : enemyMap.keySet()) {
-            JSONObject enemyQuantity = new JSONObject();
-            enemyQuantity.put("id", enemy);
-            enemyQuantity.put("quantity", enemyMap.get(enemy));
-            waveData.put(enemyQuantity);
-        }
-
-        this.put("enemies", waveData);
+    public WaveJSONObject(String type, int number, double period, int interval){
+       super();
+       this.put("type", type);
+       this.put("number", number);
+       this.put("period", period);
+       this.put("interval", interval);
     }
 
 }

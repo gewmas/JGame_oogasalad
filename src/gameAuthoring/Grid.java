@@ -120,7 +120,6 @@ public class Grid extends JPanel {
             JOptionPane.showMessageDialog(null, "Start or Endpoint not defined!");
             return false;
         }
-
         myPathCoordinates.clear();
         /*
          * for (int i = 0; i < myPath[0].length; i++) {
@@ -143,14 +142,12 @@ public class Grid extends JPanel {
         else {
             return false;
         }
-
         if (startX == endX && startY == endY) {
             for (Point2D point : myPathCoordinates) {
                 System.out.println(point.toString());
             }
             return true;
         }
-
         return (isValidPath(startX + 1, startY, endX, endY) || isValidPath(startX, startY + 1,
                                                                            endX, endY) ||
                 isValidPath(startX - 1, startY, endX, endY) || isValidPath(startX, startY - 1,

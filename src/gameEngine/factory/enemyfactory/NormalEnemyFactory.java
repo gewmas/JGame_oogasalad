@@ -1,7 +1,7 @@
 package gameEngine.factory.enemyfactory;
 
 import java.util.LinkedList;
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.Model;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.model.tile.Tile;
@@ -22,7 +22,7 @@ public class NormalEnemyFactory implements EnemyFactory {
     private double gold;
     private double life;
     private double speed;
-
+    private String skill;
     public NormalEnemyFactory (JSONObject enemyInfo) {
         this.id = enemyInfo.getString("id");
         this.image = enemyInfo.getString("image");
@@ -30,13 +30,17 @@ public class NormalEnemyFactory implements EnemyFactory {
         this.gold = enemyInfo.getDouble("gold");
         this.life = enemyInfo.getDouble("life");
         this.speed = enemyInfo.getDouble("speed");
+        this.skill= enemyInfo.getString("skill");
 
     }
 
     @Override
     
     public Enemy create (Model model) {
-        return new Enemy(gold, life, speed, id, true, Constant.ENEMY_CID, image, model);
+        Enemy result= new Enemy(gold, life, speed, id, true, GameEngineConstant.ENEMY_CID, image, model);
+        System.out.println(skill);
+        result.setSkill(skill);
+        return result;
     }
 
 }

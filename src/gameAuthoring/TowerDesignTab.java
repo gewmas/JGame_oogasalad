@@ -46,7 +46,7 @@ public class TowerDesignTab extends Tab {
         TowerDesignPanel towerDesignDialog = new TowerDesignPanel(this);
         mainPanel.add(towerDesignDialog);
         myCreatedTowers = new JScrollPane(myScrollPanel);
-        myCreatedTowers.setPreferredSize(new Dimension(380, 400));
+        myCreatedTowers.setPreferredSize(new Dimension(380, 500));
         myCreatedTowers.setOpaque(false);
         myCreatedTowers.getViewport().setOpaque(false);
         Border b = BorderFactory.createLineBorder(Color.black, 1);

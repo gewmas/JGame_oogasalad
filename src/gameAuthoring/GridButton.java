@@ -39,6 +39,11 @@ public class GridButton extends JButton {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    isPath = false;
+                    myGrid.removeCoordinate(myCoordinate);
+                    gButton.setIcon(null);
+                }
                 if (SwingUtilities.isRightMouseButton(e)) {
                     String[] options = { "Set as start", "Set as end" };
                     String choice =
@@ -63,6 +68,7 @@ public class GridButton extends JButton {
             public void mouseEntered (MouseEvent e) {
                 if (myImgSource != null) {
                     toggle();
+                    System.out.println(myCoordinate);
                 }
             }
         };
@@ -70,29 +76,22 @@ public class GridButton extends JButton {
     }
 
     public void toggle () {
-        isPath = !isPath;
-        if (isPath) {
-            myGrid.addCoordinate(myCoordinate);
-            try {
-                if (myImgSource == null) {
-                    JOptionPane.showMessageDialog(null, "No image defined");
-                }
-                else {
-                    Image path = ImageIO.read(myImgSource);
-                    Image resized = path.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
-                    ImageIcon icon = new ImageIcon(resized);
-                    this.setIcon(icon);
-                }
+        isPath = true;
+        myGrid.addCoordinate(myCoordinate);
+        try {
+            if (myImgSource == null) {
+                JOptionPane.showMessageDialog(null, "No image defined");
             }
-            catch (IOException ex) {
-                System.out.println("Image not found");
+            else {
+                Image path = ImageIO.read(myImgSource);
+                Image resized = path.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(resized);
+                this.setIcon(icon);
             }
         }
-        else {
-            myGrid.removeCoordinate(myCoordinate);
-            this.setIcon(null);
+        catch (IOException ex) {
+            System.out.println("Image not found");
         }
-
     }
 
     public void setPathStatusFalse () {

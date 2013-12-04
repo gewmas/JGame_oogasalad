@@ -40,7 +40,7 @@ public class EnemyDesignTab extends Tab {
         myScrollPanel = new JPanel(new MigLayout("wrap 4"));
         myScrollPanel.setOpaque(false);
         EnemyDesignPanel enemyDesignPanel = new EnemyDesignPanel(this);
-        myMainPanel.add(enemyDesignPanel, "span 2");
+        myMainPanel.add(enemyDesignPanel);
         myCreatedEnemies = new JScrollPane(myScrollPanel);
         myCreatedEnemies.getViewport().setOpaque(false);
         myCreatedEnemies.setOpaque(false);
@@ -57,6 +57,7 @@ public class EnemyDesignTab extends Tab {
 
     public void addEnemy (File imgSource, String enemyName) {
         JLabel enemyIcon = new JLabel();
+        enemyIcon.setPreferredSize(new Dimension(50, 50));
         try {
             Image enemyImage = ImageIO.read(imgSource);
             enemyIcon.setIcon(new ImageIcon(enemyImage));
@@ -65,6 +66,7 @@ public class EnemyDesignTab extends Tab {
             e.printStackTrace();
         }
         JLabel enemyNameLabel = new JLabel(enemyName);
+        enemyNameLabel.setFont(Constants.defaultBodyFont);
         myScrollPanel.add(enemyNameLabel);
         myScrollPanel.add(enemyIcon);
     }

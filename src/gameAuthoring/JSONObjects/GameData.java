@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JFileChooser;
 
@@ -21,36 +22,25 @@ public class GameData extends JSONObject {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");
 
-    private String myGameName;
-    private int myGold;
-    private int myLives;
-
-    private String mySplashImage;
-    private String myBackgroundImage;
-    private int myWindowWidth;
-    private int myWindowHeight;
-    private int myTilesPerRow;
-    private double myDifficultyScale;
 
     JSONArray myTowerList = new JSONArray();
     JSONArray myEnemyList = new JSONArray();
-    JSONArray myLevelList = new JSONArray();
+    JSONArray myBarrierList = new JSONArray();
+    JSONArray myWaveList = new JSONArray();
 
     MapJSONObject myMap;
+    ResourcesJSONObject myResources = new ResourcesJSONObject();
 
     /**
      * Constructor for GameData class
      */
     public GameData () {
         super();
-    }
-
-    /**
-     * Returns object mapped to key string. Possibilities of return types include String, int,
-     * double, JSONArray, JSONObject
-     */
-    public Object get (String objectName) {
-        return this.get(objectName);
+        this.put("towerType", myTowerList);
+        this.put("enemyType", myEnemyList);
+        this.put("temporaryBarrierType", myBarrierList);
+        this.put("wave", myWaveList);
+        this.put("resources", myResources);
     }
 
     /**
@@ -59,8 +49,7 @@ public class GameData extends JSONObject {
      * @param gameName Name of game
      */
     public void setGameName (String gameName) {
-        myGameName = gameName;
-        this.put("name", myGameName);
+        this.put("name", gameName);
     }
 
     /**
@@ -69,8 +58,7 @@ public class GameData extends JSONObject {
      * @param gold Quantity of gold
      */
     public void setGold (int gold) {
-        myGold = gold;
-        this.put("gold", myGold);
+        this.put("gold", gold);
     }
 
     /**
@@ -79,8 +67,7 @@ public class GameData extends JSONObject {
      * @param lives
      */
     public void setLives (int lives) {
-        myLives = lives;
-        this.put("numberOfLives", myLives);
+        this.put("numberOfLives", lives);
     }
 
     /**
@@ -89,8 +76,7 @@ public class GameData extends JSONObject {
      * @param splashImage Name of splash image
      */
     public void setSplashImage (String splashImage) {
-        mySplashImage = splashImage;
-        this.put("splashImage", mySplashImage);
+        this.put("splashImage", splashImage);
     }
 
     /**
@@ -99,49 +85,7 @@ public class GameData extends JSONObject {
      * @param backgroundImage
      */
     public void setBackgroundImage (String backgroundImage) {
-        myBackgroundImage = backgroundImage;
-        this.put("BGImage", myBackgroundImage);
-    }
-
-    /**
-     * Sets window width
-     * 
-     * @param windowWidth Width of game window (pixels)
-     */
-    public void setWindowWidth (int windowWidth) {
-        myWindowWidth = windowWidth;
-        this.put("widthOfWindow", myWindowWidth);
-    }
-
-    /**
-     * Sets window height
-     * 
-     * @param windowHeight Height of game window (pixels)
-     */
-    public void setWindowHeight (int windowHeight) {
-        myWindowHeight = windowHeight;
-        this.put("heightOfWindow", myWindowHeight);
-    }
-
-    /**
-     * Sets tiles per row
-     * 
-     * @param tilesPerRow Tiles per row
-     */
-    public void setTilesPerRow (int tilesPerRow) {
-        myTilesPerRow = tilesPerRow;
-        this.put("tilesPerRow", myTilesPerRow);
-    }
-
-    // TODO: Determine if this is necessary
-    /**
-     * Sets difficulty scale of game
-     * 
-     * @param difficultyScale Difficulty scale (float > 1)
-     */
-    public void setDifficultyScale (float difficultyScale) {
-        myDifficultyScale = difficultyScale;
-        this.put("difficultyScale", myDifficultyScale);
+        this.put("BGImage", backgroundImage);
     }
 
     /**
@@ -170,15 +114,44 @@ public class GameData extends JSONObject {
                                             range, cost, recyclePrice, description));
 
     }
+    
+    public void addTower(TowerJSONObject t){
+        myTowerList.put(t);
+    }
+    
+    /**
+     * Adds wave to myWaveList JSONArray
+     * 
+     * @param type
+     * @param number
+     * @param period
+     * @param interval
+     */
+    public void addWave(String type, int number, double period, int interval){
+        myWaveList.put(new WaveJSONObject(type, number, period, interval));
+    }
 
     /**
-     * Add a level to myLevelList JSONArray
+     * Adds barrier to myBarrierList JSONArray
      * 
-     * @param level LevelJSONObject to be added
+     * @param name Barrier name
+     * @param image Barrier image
+     * @param damage Barrier damage
+     * @param cost Cost of barrier in gold
+     * @param expire Time barrier is active in game
+     * @param description Description of barrier
      */
-    public void addLevel (LevelJSONObject level) {
-        myLevelList.put(level);
+    public void addBarrier (String name,
+                            String image,
+                            int damage,
+                            int cost,
+                            int expire,
+                            String description) {
+        
+        myBarrierList.put(new TemporaryBarrierJSONObject(name, image, damage, cost, expire, description));
+        
     }
+
 
     /**
      * Adds an enemy to myEnemyList JSONArray
@@ -189,7 +162,7 @@ public class GameData extends JSONObject {
      * @param life Number enemy lives (hits enemy can endure)
      * @param speed Enemy speed
      */
-    public void addEnemy (String name, int gold, String image, int life, int speed) {
+    public void addEnemy (String name, int gold, String image, int life, double speed) {
         myEnemyList.put(new EnemyJSONObject(name, gold, image, life, speed));
     }
 
@@ -213,22 +186,32 @@ public class GameData extends JSONObject {
         myMap = new MapJSONObject(pathImage, pointList);
         this.put("map", myMap);
     }
+    
+    public void addBarrier(int x, int y, String imageName){
+        myMap.addBarrier(x, y, imageName);
+    }
 
-    /**
-     * Adds enemy, tower, and level lists to GameData
-     */
-    private void addListData () {
-        this.put("levels", myLevelList.length());
-        this.put("towerType", myTowerList);
-        this.put("enemyType", myEnemyList);
-        this.put("levelData", myLevelList);
+    
+    public void addImage(String id, String url){
+       myResources.addImage(id, url);
+     }
+    
+    public void addAudio(String id, String url){
+        myResources.addAudio(id, url);
+      }
+    
+    public void addAnimation(String id, ArrayList<String> imagePaths){
+        myResources.addAnimation(id, imagePaths);
+    }
+    
+    public ResourcesJSONObject getResources(){
+        return myResources;
     }
 
     /**
      * Opens file chooser dialogue to save current state of GameData object into a file
      */
     public void writeToFile () {
-        addListData();
 
         int result = INPUT_CHOOSER.showSaveDialog(null);
 
@@ -244,7 +227,6 @@ public class GameData extends JSONObject {
             }
 
         }
-        // System.out.println(this.toString(3));
     }
 
     /**
@@ -252,7 +234,7 @@ public class GameData extends JSONObject {
      *         This method is used to create a temporary file so that a user can simmulate
      *         a game based on the parameters the game designer specified
      *         without the hassel of saving, then loading a file
-     * @return 
+     * @return
      */
     public File createSimmulationFile () {
         if (isComplete()) {

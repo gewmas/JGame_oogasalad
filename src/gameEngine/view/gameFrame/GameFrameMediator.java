@@ -1,5 +1,6 @@
 package gameEngine.view.gameFrame;
 
+import java.awt.Dimension;
 import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
@@ -48,13 +49,13 @@ public class GameFrameMediator {
      * Notifies all colleagues that need to be updated
      * when a user is trying to purchase a tower
      * 
-     * @param towername
-     */
-    public void placeTower (PurchaseInfo towerInfo) {
-
-        canvasPanel.placeTower(towerInfo);
-       
-    }
+//     * @param towername
+//     */
+//    public void placeTower (PurchaseInfo towerInfo) {
+//
+//        canvasPanel.placeTower(towerInfo);
+//       
+//    }
     
     public void setCursorImage(PurchaseInfo towerInfo){
         gameFrame.placeTower(towerInfo);
@@ -115,13 +116,18 @@ public class GameFrameMediator {
     public void closeStore(){
         storePanel.closeStore();
     }
-    public void displayTowerInfo (Map<String, String> information, Map<String, String> display) {
-        this.towerInfoPanel.displayInformation(information, display);
-        
-    }
 
     public void addStore (StorePanel storePanel) {
         this.storePanel = storePanel;
         
+    }
+
+    public void updateDisplay (Map<String,String> toDisplay) {
+        this.towerInfoPanel.updateInformation(toDisplay);
+    }
+
+    public void openInfoPanel () {
+        this.towerInfoPanel.setVisible(true);
+        gameFrame.pack();
     }
 }

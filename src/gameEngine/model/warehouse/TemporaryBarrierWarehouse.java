@@ -41,8 +41,9 @@ public class TemporaryBarrierWarehouse extends Warehouse{
     
     public boolean create(int x, int y, String name,GameInfo g){
         TemporaryBarrierFactory tbf = temporaryBarrierFactories.get(name);
-        if(tbf.getCost()<=g.getGold()){
-            g.loseGold((int) tbf.getCost());
+        
+        if(Integer.valueOf(tbf.getInfo().get("Cost")) <= g.getGold()){
+            g.loseGold(Integer.parseInt(tbf.getInfo().get("Cost")));
             tbf.create(x, y);
             return true;
         }

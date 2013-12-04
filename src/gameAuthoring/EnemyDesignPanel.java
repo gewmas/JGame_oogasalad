@@ -16,6 +16,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
@@ -31,6 +32,8 @@ public class EnemyDesignPanel extends JPanel {
     private JTextField myGoldField;
     private JTextField myLifeField;
     private JTextField mySpeedField;
+    private JPanel myAnimationPanel;
+    private JScrollPane myAnimationScrollPane;
 
     private JLabel myEnemyImage;
     private File myImageSource;
@@ -62,15 +65,26 @@ public class EnemyDesignPanel extends JPanel {
         mySpeedField.setPreferredSize(new Dimension(200, 30));
         mySpeedField.setFont(Constants.defaultBodyFont);
 
-        myEnemyImage = new JLabel();
-
-        JButton enemyImageChooser = new JButton("Choose enemy image");
+        JButton enemyImageChooser = new JButton("Add sprite");
         enemyImageChooser.setFont(Constants.defaultBodyFont);
-        enemyImageChooser.addMouseListener(createPathListener());
+        enemyImageChooser.addMouseListener(createNewEnemyIconListener());
+
+        JButton clearButton = new JButton("Clear all sprites");
+        clearButton.setFont(Constants.defaultBodyFont);
+        clearButton.addMouseListener(createClearAnimationsListener());
+
+        myAnimationPanel = new JPanel();
+        myAnimationPanel.setOpaque(false);
+        myAnimationPanel.setPreferredSize(new Dimension(200, 100));
+        JScrollPane animationScrollPane = new JScrollPane(myAnimationPanel);
+        animationScrollPane.setPreferredSize(new Dimension(200, 80));
+        animationScrollPane.getViewport().setOpaque(false);
+        animationScrollPane.setOpaque(false);
+        animationScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 
         JButton createEnemyButton = new JButton("Create Enemy");
         createEnemyButton.setFont(Constants.defaultBodyFont);
-        createEnemyButton.addMouseListener(createEnemyButtonListener(this));
+        createEnemyButton.addMouseListener(createEnemyButtonListener());
 
         this.setLayout(new MigLayout("wrap 2"));
         this.add(name);
@@ -81,37 +95,69 @@ public class EnemyDesignPanel extends JPanel {
         this.add(myLifeField);
         this.add(speed);
         this.add(mySpeedField);
+        this.add(animationScrollPane, "span 2, gap 0 0 10 10");
         this.add(enemyImageChooser);
-        this.add(myEnemyImage);
+        this.add(clearButton);
         this.add(createEnemyButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
+        this.setPreferredSize(new Dimension(380, 350));
         this.setBorder(b);
         this.setOpaque(false);
     }
 
-    public MouseAdapter createPathListener () {
+    public MouseAdapter createClearAnimationsListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                int loadObject = INPUT_CHOOSER.showOpenDialog(null);
-                if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    File imgSource = INPUT_CHOOSER.getSelectedFile();
-                    myImageSource = imgSource;
-                    Image tower;
-                    try {
-                        tower = ImageIO.read(imgSource);
-                        myEnemyImage.setIcon(new ImageIcon(tower));
-                    }
-                    catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+                clearAnimationPanel();
+            }
+        };
+        return listener;
+    }
+
+    public void clearAnimationPanel () {
+        myAnimationPanel.removeAll();
+        myAnimationPanel.revalidate();
+    }
+
+    public MouseAdapter createEnemyImageListener (final JLabel label) {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                File imgSource = GameAuthoringGUI.mySelectedImage;
+                myImageSource = imgSource;
+                Image enemy;
+                try {
+                    enemy = ImageIO.read(imgSource);
+                    enemy = enemy.getScaledInstance(50, 50, Image.SCALE_FAST);
+                    label.setIcon(new ImageIcon(enemy));
+                }
+                catch (IOException e1) {
+                    e1.printStackTrace();
                 }
             }
         };
         return listener;
     }
 
-    public MouseAdapter createEnemyButtonListener (final EnemyDesignPanel enemyDesignDialog) {
+    public MouseAdapter createNewEnemyIconListener () {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                System.out.println("Clicked");
+                JLabel enemyImage = new JLabel();
+                enemyImage.setPreferredSize(new Dimension(50, 50));
+                enemyImage.addMouseListener(createEnemyImageListener(enemyImage));
+                Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
+                enemyImage.setBorder(border);
+                myAnimationPanel.add(enemyImage);
+                myAnimationPanel.validate();
+            }
+        };
+        return listener;
+    }
+
+    public MouseAdapter createEnemyButtonListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
@@ -119,7 +165,7 @@ public class EnemyDesignPanel extends JPanel {
                 try {
                     int gold = Integer.parseInt(myGoldField.getText());
                     int life = Integer.parseInt(myLifeField.getText());
-                    int speed = Integer.parseInt(mySpeedField.getText());
+                    double speed = Double.parseDouble(mySpeedField.getText());
                     if (gold < 0 || life < 0) {
                         JOptionPane
                                 .showMessageDialog(null,
@@ -140,7 +186,8 @@ public class EnemyDesignPanel extends JPanel {
                         myGoldField.setText("");
                         myLifeField.setText("");
                         mySpeedField.setText("");
-                        myEnemyImage.setIcon(null);
+                        // myEnemyImage.setIcon(null);
+                        clearAnimationPanel();
                     }
                 }
                 catch (NumberFormatException n)

@@ -1,0 +1,25 @@
+{
+   "temporaryBarrierType": [],
+   "wave": [
+      {
+         "interval": 12,
+         "number": 14,
+         "period": 1,
+         "type": "Blargh"
+      },
+      {
+         "interval": 2,
+         "number": 12,
+         "period": 2.5,
+         "type": "Blargh"
+      }
+   ],
+   "enemyType": [{
+      "id": "Blargh",
+      "life": 1,
+      "speed": 1.5,
+      "image": "",
+      "gold": 1
+   }],
+   "towerType": []
+}

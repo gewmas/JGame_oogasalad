@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
@@ -24,11 +25,12 @@ public class GameAuthoringGUI implements Observer {
 
     protected JFrame myFrame;
     protected JPanel myMainPanel;
+    static File mySelectedImage = null;
     private BasicInfoTab myBasicInfoTab;
     private MapDesignTab myMapDesignTab;
     private TowerDesignTab myTowerDesignTab;
     private EnemyDesignTab myEnemyDesignTab;
-    private LevelDesignTab myLevelDesignTab;
+    private WaveDesignTab myWaveDesignTab;
     private MiscellaneousTab myMiscellaneousTab;
     private UserLibraryMainTab myUserLibraryPanel;
     private Image currentImage;
@@ -48,14 +50,15 @@ public class GameAuthoringGUI implements Observer {
         }
         myFrame.setPreferredSize(new Dimension(1200, 1000));
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myMainPanel = new ImagePanel(new MigLayout("wrap 2"));
+        myMainPanel = new ImagePanel("texture0.jpg");
+        myMainPanel.setLayout(new MigLayout("wrap 2"));
         JTabbedPane gameDesignTab = new JTabbedPane();
         gameDesignTab.setPreferredSize(new Dimension(750, 650));
         myBasicInfoTab = new BasicInfoTab(gameData);
         myMapDesignTab = new MapDesignTab(gameData);
         myTowerDesignTab = new TowerDesignTab(gameData);
         myEnemyDesignTab = new EnemyDesignTab(gameData);
-        myLevelDesignTab = new LevelDesignTab(gameData);
+        myWaveDesignTab = new WaveDesignTab(gameData);
         myMiscellaneousTab = new MiscellaneousTab(gameData);
         myUserLibraryPanel = new UserLibraryMainTab(this);
 
@@ -64,9 +67,9 @@ public class GameAuthoringGUI implements Observer {
         gameDesignTab.addTab("Map Design", myMapDesignTab.getTab());
         gameDesignTab.addTab("Tower Design", myTowerDesignTab.getTab());
         gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
-        gameDesignTab.addTab("Level Design", myLevelDesignTab.getTab());
+        gameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
         gameDesignTab.addTab("Miscellaneous", myMiscellaneousTab.getTab());
-        MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab);
+        MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
         myMainPanel.add(title, "span 2, align left, gap 0 0 30 0");
         myMainPanel.add(gameDesignTab, "gap 50 20 30 40");
         myMainPanel.add(myUserLibraryPanel);
@@ -84,12 +87,20 @@ public class GameAuthoringGUI implements Observer {
 
     @Override
     public void update (Observable arg0, Object arg1) {
-        if (arg1 instanceof Image) {
-            Image image = (Image) arg1;
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Cursor c = toolkit.createCustomCursor(image, new Point(myMainPanel.getX(),
-                                                                   myMainPanel.getY()), "img");
-            myMainPanel.setCursor(c);
+        if (arg1 instanceof File) {
+            File imageFile = (File) arg1;
+            mySelectedImage = imageFile;
+            Image image;
+            try {
+                image = ImageIO.read(imageFile);
+                Toolkit toolkit = Toolkit.getDefaultToolkit();
+                Cursor c = toolkit.createCustomCursor(image, new Point(myMainPanel.getX(),
+                                                                       myMainPanel.getY()), "img");
+                myMainPanel.setCursor(c);
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         if (arg1 instanceof Integer) {
             myMainPanel.setCursor(Cursor.getDefaultCursor());
