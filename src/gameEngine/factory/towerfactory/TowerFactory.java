@@ -1,56 +1,46 @@
 package gameEngine.factory.towerfactory;
 
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
 
 
-public abstract class TowerFactory implements PurchaseInfo {
+public abstract class TowerFactory {
 
-    String type;
-    String id;
-    
-    String description;
-    String image;
+    protected String type;
+    protected String id;
 
-    double damage;
-    double attackSpeed;
+    protected String description;
+    protected String image;
 
-    double range;
+    protected double damage;
+    protected double attackSpeed;
 
-    double cost;
-    double recyclePrice;
+    protected double range;
 
-    Map<String, String> info;
+    protected int cost;
+    protected double sellPrice;
+
+    protected PurchaseInfo purchaseInfo;
 
     public TowerFactory (JSONObject currTower) {
-        type = currTower.getString("type");
-        id = currTower.getString("id");
-        image = currTower.getString("image");
-        damage = currTower.getDouble("damage");
-        attackSpeed = currTower.getDouble("attackSpeed");
-        range = currTower.getDouble("range");
-        cost = currTower.getDouble("cost");
-        recyclePrice = currTower.getDouble("recyclePrice");
-        description = currTower.getString("description");
+        type = currTower.getString(GameEngineConstant.PURCHASE_INFO_TYPE);
+        id = currTower.getString(GameEngineConstant.PURCHASE_INFO_NAME);
+        image = currTower.getString(GameEngineConstant.PURCHASE_INFO_IMAGE);
+        damage = currTower.getDouble(GameEngineConstant.TOWER_DAMAGE);
+        attackSpeed = currTower.getDouble(GameEngineConstant.TOWER_ATTACK_SPEED);
+        range = currTower.getDouble(GameEngineConstant.TOWER_RANGE);
+        cost = currTower.getInt(GameEngineConstant.PURCHASE_INFO_COST);
+        sellPrice = currTower.getDouble(GameEngineConstant.TOWER_SELL_PRICE);
+        description = currTower.getString(GameEngineConstant.PURCHASE_INFO_DESCRIPTION);
 
-        info = new LinkedHashMap<String, String>();
+        purchaseInfo = new PurchaseInfo(type, id, image, description, cost);
     }
 
     public void addDescription () {
-        info.put("Tower Type", type);
-        info.put("Tower Name", id);
-        info.put("Image", image);
-        info.put("Damage", String.valueOf(damage));
-        info.put("Attack Speed", String.valueOf(attackSpeed));
-        info.put("Range", String.valueOf(range));
-        info.put("Cost", String.valueOf(cost));
-        info.put("Sell Price", String.valueOf(recyclePrice));
-        info.put("Description", String.valueOf(description));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_RANGE, String.valueOf(range));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_SELL_PRICE, String.valueOf(sellPrice));
     }
 
     public abstract Tower create (int x, int y);
@@ -58,51 +48,13 @@ public abstract class TowerFactory implements PurchaseInfo {
     /**
      * Implement PurchaseInfo
      */
-    @Override
-    public Map<String, String> getInfo () {
-        return info;
-    }
-    
-    @Deprecated
-    public String getItemName () {
-        return id;
+    public PurchaseInfo getPurchaseInfo () {
+        return purchaseInfo;
     }
 
-    @Deprecated
-    public String getImage () {
-        return image;
-    }
-
-    @Deprecated
     public int getCost () {
-        return (int) cost;
+        return cost;
     }
 
-    @Deprecated
-    public String getDescription () {
-        return description;
-    }
-
-    @Deprecated
-    public double getDamage () {
-        return damage;
-    }
-
-    @Deprecated
-    public double getAttackSpeed () {
-        return attackSpeed;
-    }
-
-    @Deprecated
-    public double getRange () {
-        return range;
-    }
-
-    @Deprecated
-    public double getRecyclePrice () {
-        return recyclePrice;
-    }
-
-    
 
 }

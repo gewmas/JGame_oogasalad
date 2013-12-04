@@ -99,7 +99,7 @@ public class Model {
         List<PurchaseInfo> towerInventory= new ArrayList<PurchaseInfo>();
         List<TowerFactory> factoryList=towerWarehouse.getTowerFactory();
         for(int i=0; i< factoryList.size();i++){
-            towerInventory.add((PurchaseInfo)(factoryList.get(i)));
+            towerInventory.add(factoryList.get(i).getPurchaseInfo());
         }
         result.put("Tower", towerInventory);
                 
@@ -131,7 +131,7 @@ public class Model {
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
     public PurchaseInfo getTowerInfo (int x, int y) {
-        return (PurchaseInfo)checkTowerAtXY(x, y);
+        return checkTowerAtXY(x, y).getPurchaseInfo();
     }
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact
@@ -151,7 +151,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-            tower.sell();
+            tower.sell(gameInfo);
         }
 
         return false;
@@ -161,7 +161,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-            tower.upgrade();
+            tower.upgrade(gameInfo);
         }
 
         return false;
@@ -212,7 +212,7 @@ public class Model {
      **/
     public boolean purchaseTemporaryBarrier (int x, int y, String name) {
         Tile currentTile = getTile(x, y);
-        if (currentTile.isEmpty() && !currentTile.hasPath()) {
+        if (currentTile.hasPath()) {
             currentTile.setTemporaryBarrier();
             return temporaryBarrierWarehouse
                 .create((int) currentTile.getX(), (int) currentTile.getY(), name, gameInfo);

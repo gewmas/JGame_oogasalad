@@ -1,5 +1,7 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -36,23 +38,41 @@ public class EnemyDesignPanel extends JPanel {
     public EnemyDesignPanel (EnemyDesignTab enemyDesignTab) {
         myEnemyDesignTab = enemyDesignTab;
         JLabel name = new JLabel("Name");
+        name.setFont(Constants.defaultBodyFont);
         JLabel gold = new JLabel("Worth in Gold");
+        gold.setFont(Constants.defaultBodyFont);
         JLabel lives = new JLabel("Number of Lives");
+        lives.setFont(Constants.defaultBodyFont);
         JLabel speed = new JLabel("Speed");
+        speed.setFont(Constants.defaultBodyFont);
 
         myNameField = new JTextField();
+        myNameField.setFont(Constants.defaultBodyFont);
         myNameField.setPreferredSize(new Dimension(200, 30));
+
         myGoldField = new JTextField();
         myGoldField.setPreferredSize(new Dimension(200, 30));
+        myGoldField.setFont(Constants.defaultBodyFont);
+
         myLifeField = new JTextField();
         myLifeField.setPreferredSize(new Dimension(200, 30));
+        myLifeField.setFont(Constants.defaultBodyFont);
+
         mySpeedField = new JTextField();
         mySpeedField.setPreferredSize(new Dimension(200, 30));
-        myEnemyImage = new JLabel();
+        mySpeedField.setFont(Constants.defaultBodyFont);
 
-        JButton enemyImageChooser = new JButton("Choose enemy image");
-        enemyImageChooser.addMouseListener(createPathListener());
+        JLabel enemyImageChooser = new JLabel("Choose image");
+        enemyImageChooser.setFont(Constants.defaultBodyFont);
+
+        myEnemyImage = new JLabel();
+        myEnemyImage.setPreferredSize(new Dimension(50, 50));
+        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
+        myEnemyImage.setBorder(border);
+        myEnemyImage.addMouseListener(createEnemyImageListener());
+
         JButton createEnemyButton = new JButton("Create Enemy");
+        createEnemyButton.setFont(Constants.defaultBodyFont);
         createEnemyButton.addMouseListener(createEnemyButtonListener(this));
 
         this.setLayout(new MigLayout("wrap 2"));
@@ -65,28 +85,28 @@ public class EnemyDesignPanel extends JPanel {
         this.add(speed);
         this.add(mySpeedField);
         this.add(enemyImageChooser);
-        this.add(myEnemyImage);
+        this.add(myEnemyImage, "gap 0 0 10 10");
         this.add(createEnemyButton);
-        Border b = BorderFactory.createLoweredBevelBorder();
+        Border b = BorderFactory.createLineBorder(Color.black, 1);
+        this.setPreferredSize(new Dimension(380, 350));
         this.setBorder(b);
+        this.setOpaque(false);
     }
 
-    public MouseAdapter createPathListener () {
+    public MouseAdapter createEnemyImageListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                int loadObject = INPUT_CHOOSER.showOpenDialog(null);
-                if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    File imgSource = INPUT_CHOOSER.getSelectedFile();
-                    myImageSource = imgSource;
-                    Image tower;
-                    try {
-                        tower = ImageIO.read(imgSource);
-                        myEnemyImage.setIcon(new ImageIcon(tower));
-                    }
-                    catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+                File imgSource = GameAuthoringGUI.mySelectedImage;
+                myImageSource = imgSource;
+                Image tower;
+                try {
+                    tower = ImageIO.read(imgSource);
+                    tower = tower.getScaledInstance(50, 50, Image.SCALE_FAST);
+                    myEnemyImage.setIcon(new ImageIcon(tower));
+                }
+                catch (IOException e1) {
+                    e1.printStackTrace();
                 }
             }
         };

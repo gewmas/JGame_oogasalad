@@ -15,9 +15,10 @@ public class Controller {
 
     Model model;
     View view;
-
-
     Dimension gameSize;
+    private static final String TEMPORARY_BARRIER = "Temporary Barrier";
+    private static final String NAME = "Name";
+    private static final String TYPE  = "Type";
 
     public Controller () {
 
@@ -77,6 +78,20 @@ public class Controller {
             towerinfo=null;
         }
         return towerinfo;
+    }
+    
+    /**
+     * @author Harris
+     * A more generic way to purchase an object
+     * GUI uses this when object is purchased
+     **/
+    public boolean purchaseObject(int x, int y, PurchaseInfo purchaseInfo) {
+        if(purchaseInfo.getInfo().get(TYPE).equals(TEMPORARY_BARRIER)) {
+            return purchaseTemporaryBarrier(x, y, purchaseInfo.getInfo().get(NAME));
+        } 
+        return purchaseTower(x, y, purchaseInfo.getInfo().get(NAME));
+
+        
     }
     
     /**

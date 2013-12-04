@@ -1,9 +1,8 @@
 package gameEngine.model.tower;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.text.DecimalFormat;
+import gameEngine.constant.GameEngineConstant;
+import gameEngine.model.GameInfo;
 import gameEngine.model.magic.ITMagicable;
 import gameEngine.model.purchase.PurchaseInfo;
 import jgame.JGObject;
@@ -12,162 +11,124 @@ import jgame.JGObject;
 /**
  * @author Yuhua
  * 
- *         Tower will shoot the Enemy within shooting range with Bullet
+ * Tower will shoot the Enemy within shooting range with Bullet
  */
 
-public abstract class Tower extends JGObject implements PurchaseInfo, ITMagicable{
-    String type;
-    String id; 
-    String image;
+public abstract class Tower extends JGObject implements ITMagicable {
+    //    private String type;
+    //    private String id;
+    //    private String image;
 
-    double damage;
-    double attackSpeed;
+    protected double damage;
+    protected double attackSpeed;
 
-    double range;
+    protected double range;
 
-    double x;
-    double y;
+    protected double x;
+    protected double y;
 
-    double cost;
-    double upgradePrice;
-    double recyclePrice;
-    
-    double upgradeFactor = 1.2;
-    
-    int currentMagic=0;
+    protected int cost;
+    protected int upgradePrice;
+    protected int sellPrice;
 
-    String description;
+    protected double upgradeFactor = 1.2;
 
-    Map<String, String> info;
+    protected int currentMagic = 0;
+
+    private String description;
+
+    protected PurchaseInfo purchaseInfo;
+
+    DecimalFormat df = new DecimalFormat("#.#");
+
 
     public Tower (String type,
                   String id,
-                  
+
                   double damage,
                   double attackSpeed,
                   double range,
-                  double cost,
+                  int cost,
                   double recyclePrice,
                   String description,
-                  
+
                   boolean unique_id,
                   double x,
                   double y,
                   int collisionid,
-                  String gfxname) {
+                  String gfxname,
+
+                  PurchaseInfo purchaseInfo) {
         super(id, unique_id, x, y, collisionid, gfxname);
 
-        this.type = type;
-        this.id = id;        
-        this.image = gfxname;
-        
+        //        this.type = type;
+        //        this.id = id;
+        //        this.image = gfxname;
+
         this.damage = damage;
         this.attackSpeed = attackSpeed;
-        
+
         this.range = range;
         this.cost = cost;
-        this.upgradePrice = (int)cost/3;
-        this.recyclePrice = recyclePrice;
+        this.upgradePrice = cost / 3;
+        this.sellPrice = (int)recyclePrice;
 
         this.description = description;
-        
+
         this.x = x;
         this.y = y;
-        
-        //add tower description
-        this.info = new LinkedHashMap<String, String>();
-    }
-    
-    public void addDescription(){
-        info.put("Tower Type", type);
-        info.put("Tower Name", id);
-        info.put("Image", image);
-        info.put("Damage", String.valueOf(damage));
-        info.put("Attack Speed", String.valueOf(attackSpeed));
-        info.put("Range", String.valueOf(range));
-        info.put("Cost", String.valueOf(cost));
-        info.put("Sell Price", String.valueOf(recyclePrice));
-        info.put("Description", String.valueOf(description));
 
-        info.put("Upgrade Price", String.valueOf(upgradePrice));
-        info.put("Upgrade Damage", String.valueOf(damage*upgradeFactor));
-        info.put("Upgrade Attack Speed", String.valueOf(attackSpeed*upgradeFactor));        
+        this.purchaseInfo = purchaseInfo;
     }
-    
-  
+
+    public void addDescription () {
+        
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_RANGE, String.valueOf(range));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_SELL_PRICE, String.valueOf(sellPrice));
+        purchaseInfo.addToMap(GameEngineConstant.PURCHASE_INFO_DESCRIPTION, String.valueOf(description));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_PRICE, String.valueOf(upgradePrice));
+    }
 
     /**
      * Tower Function Method
      */
-    public abstract void sell();
-    public abstract void upgrade();
-    public abstract void downgrade(); //when sell BoostTower, downgrade Tower in range
-    public void setAttackMode(int mode){} //not all tower need this, serve as public interface
-    
+    public void sell (GameInfo gameInfo){
+        gameInfo.addGold(sellPrice);
+        this.remove();
+    }
+    public abstract void upgrade (GameInfo gameInfo);
+
+    public void setAttackMode (int mode) {
+    } // not all tower need this, serve as public interface
+
     /**
      * TowerInfo Getter Method
      */
-    public Map<String, String> getInfo () {
-        return info;
+    public PurchaseInfo getPurchaseInfo () {
+        return purchaseInfo;
     }
-    
-    @Deprecated
+
+    /**
+     * Magic Method
+     */
+    @Override
     public double getX () {
         return x;
     }
 
-    @Deprecated
+    @Override
     public double getY () {
         return y;
     }
 
-    @Deprecated
-    public String getItemName(){
-        return id;
-    }
-
-    @Deprecated
-    public String getDescription () {
-        return description;
-    }
-
-    @Deprecated
-    public double getDamage (){
-        return damage;
-    }
-
-    @Deprecated
-    public double getAttackSpeed (){
-        return attackSpeed;
-    }
-
-//    @Deprecated
-//    public int getAttackMode() {
-//        return attackMode;
-//    }
-
-    @Deprecated
-    public double getRange (){
-        return range;
-    }
-    @Deprecated
-    public double getRecyclePrice (){
-        return recyclePrice;
-    }
-    @Deprecated
-    public int getCost () {
-        return (int)cost;
-    }
-    @Deprecated
-    public String getImage () {
-        return image;
-    }
-    
-    public int getCurrentMagics(){
+    @Override
+    public int getCurrentMagics () {
         return currentMagic;
     }
-    public void setCurrentMagic(int magic){
-        currentMagic=magic;
+
+    @Override
+    public void setCurrentMagic (int magic) {
+        currentMagic = magic;
     }
-    
+
 }

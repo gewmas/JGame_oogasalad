@@ -22,6 +22,7 @@ public class Resources {
         register(parser,"image");
         register(parser,"audio");
         register(parser,"animation");
+        
     }
     
     private void register(Parser parser, String category){

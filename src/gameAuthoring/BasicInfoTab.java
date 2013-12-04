@@ -1,17 +1,13 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
-import gameEngine.parser.JSONLibrary.JSONObject;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -22,6 +18,13 @@ import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * Subclass of Tab that contains Swing components to input or load basic game information such as
+ * game name, starting quantity of gold, splash image, etc.
+ * 
+ * 
+ * 
+ */
 public class BasicInfoTab extends Tab {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
@@ -45,26 +48,45 @@ public class BasicInfoTab extends Tab {
     // TO DO: Get rid of magic number
     @Override
     public JPanel getTab () {
-        JPanel mainPanel = new JPanel(new MigLayout("wrap 2"));
+        JPanel mainPanel = new GradientPanel(new MigLayout("wrap 2"));
         JPanel subPanel = new JPanel(new MigLayout("wrap 2"));
+        subPanel.setOpaque(false);
         JLabel gameName = new JLabel("Game Name");
-        JLabel gold = new JLabel("Starting Gold");
-        JLabel lives = new JLabel("Starting Lives");
-        JLabel title = new JLabel("Basic Game Info");
-        JLabel width = new JLabel("Window Width");
-        JLabel height = new JLabel("Window Height");
-        JLabel tiles = new JLabel("Tiles Per Row");
-        JLabel difficultyScale = new JLabel("Difficulty Scale");
+        gameName.setFont(Constants.defaultBodyFont);
 
-        title.setFont(new Font("Arial", Font.BOLD, 30));
+        JLabel gold = new JLabel("Starting Gold");
+        gold.setFont(Constants.defaultBodyFont);
+
+        JLabel lives = new JLabel("Starting Lives");
+        lives.setFont(Constants.defaultBodyFont);
+
+        JLabel title = new JLabel("Basic Game Info");
+        title.setFont(Constants.defaultBodyFont);
+
+        JLabel width = new JLabel("Window Width");
+        width.setFont(Constants.defaultBodyFont);
+
+        JLabel height = new JLabel("Window Height");
+        height.setFont(Constants.defaultBodyFont);
+
+        JLabel tiles = new JLabel("Tiles Per Row");
+        tiles.setFont(Constants.defaultBodyFont);
+
+        JLabel difficultyScale = new JLabel("Difficulty Scale");
+        difficultyScale.setFont(Constants.defaultBodyFont);
+
+        title.setFont(Constants.defaultTitleFont);
+        title.setForeground(new Color(80, 80, 80));
         mainPanel.add(title, "span 2");
 
         JButton setSplashImageButton = new JButton("Choose Splash Image");
+        setSplashImageButton.setFont(new Font("Calibri", Font.PLAIN, 14));
         setSplashImageButton.addMouseListener(setSplashImageListener());
 
         mySplashImageLabel = new JLabel();
 
         JButton setInfoButton = new JButton("Set Info");
+        setInfoButton.setFont(new Font("Calibri", Font.PLAIN, 14));
         setInfoButton.addMouseListener(setInfoListener());
 
         myGameName = new JTextField();
@@ -100,7 +122,7 @@ public class BasicInfoTab extends Tab {
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
         subPanel.add(setInfoButton);
-        Border b = BorderFactory.createLoweredBevelBorder();
+        Border b = BorderFactory.createLineBorder(Color.black, 1);
         subPanel.setBorder(b);
         mainPanel.add(subPanel, "align center");
 
@@ -108,17 +130,18 @@ public class BasicInfoTab extends Tab {
     }
 
     public void loadJSON (Parser p) {
-        try { 
- 
-            myGameName.setText(p.getString("name"));          
+        try {
+            myGameName.setText(p.getString("name"));
             myGold.setText(String.valueOf(p.getInt("gold")));
             myLives.setText(String.valueOf(p.getInt("numberOfLives")));
             myWindowWidth.setText(String.valueOf(p.getInt("widthOfWindow")));
             myWindowHeight.setText(String.valueOf(p.getInt("heightOfWindow")));
             myTilesPerRow.setText(String.valueOf(p.getInt("tilesPerRow")));
-            myDifficultyScale.setText(String.valueOf(p.getInt("difficultyScale")));
+            myDifficultyScale.setText(String.valueOf(p.getDouble("difficultyScale")));
             mySplashImage = p.getString("splashImage");
             mySplashImageLabel.setText(mySplashImage);
+
+            setData();
         }
 
         catch (NumberFormatException n) {
@@ -131,36 +154,38 @@ public class BasicInfoTab extends Tab {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                int gold = Integer.parseInt(myGold.getText());
-                int lives = Integer.parseInt(myLives.getText());
-                int width = Integer.parseInt(myWindowWidth.getText());
-                int height = Integer.parseInt(myWindowHeight.getText());
-                int tiles = Integer.parseInt(myTilesPerRow.getText());
-                float difficultyScale = Float.parseFloat(myDifficultyScale.getText());
-                String name = myGameName.getText();
-
-                // TODO: Set more specific constraints
-                if (gold > 0 && lives > 0 && width > 0 && height > 0 && tiles > 0 &&
-                    difficultyScale > 1 && mySplashImage != null && name != null) {
-                    myGameData.setGold(gold);
-                    myGameData.setLives(lives);
-                    myGameData.setWindowWidth(width);
-                    myGameData.setWindowHeight(height);
-                    myGameData.setTilesPerRow(tiles);
-                    myGameData.setDifficultyScale(difficultyScale);
-                    myGameData.setSplashImage(mySplashImage);
-                    myGameData.setGameName(name);
-                }
-
-                else {
-                    JOptionPane.showMessageDialog(null,
-                                                  "One or more fields invalid! Please try again.");
-                }
-
+                setData();
             }
         };
         return listener;
 
+    }
+
+    private void setData () {
+        int gold = Integer.parseInt(myGold.getText());
+        int lives = Integer.parseInt(myLives.getText());
+        int width = Integer.parseInt(myWindowWidth.getText());
+        int height = Integer.parseInt(myWindowHeight.getText());
+        int tiles = Integer.parseInt(myTilesPerRow.getText());
+        float difficultyScale = Float.parseFloat(myDifficultyScale.getText());
+        String name = myGameName.getText();
+
+        if (gold > 0 && lives > 0 && width > 0 && height > 0 && tiles > 0 &&
+            difficultyScale > 1 && mySplashImage != null && name != null) {
+            myGameData.setGold(gold);
+            myGameData.setLives(lives);
+            myGameData.setWindowWidth(width);
+            myGameData.setWindowHeight(height);
+            myGameData.setTilesPerRow(tiles);
+            myGameData.setDifficultyScale(difficultyScale);
+            myGameData.setSplashImage(mySplashImage);
+            myGameData.setGameName(name);
+        }
+
+        else {
+            JOptionPane.showMessageDialog(null,
+                                          "One or more fields invalid! Please try again.");
+        }
     }
 
     public MouseAdapter setSplashImageListener () {
@@ -170,8 +195,11 @@ public class BasicInfoTab extends Tab {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     mySplashImage =
-                            INPUT_CHOOSER.getSelectedFile().toString()
-                                    .replace(System.getProperties().getProperty("user.dir") + "/", "");
+                            INPUT_CHOOSER
+                                    .getSelectedFile()
+                                    .toString()
+                                    .replace(System.getProperties().getProperty("user.dir") + "/",
+                                             "");
                     mySplashImageLabel.setText(mySplashImage);
                 }
 

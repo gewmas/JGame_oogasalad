@@ -1,7 +1,10 @@
 package gameEngine.model.tower;
 
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Detector;
+import gameEngine.model.GameInfo;
+import gameEngine.model.purchase.PurchaseInfo;
 import java.util.List;
 
 /**
@@ -20,7 +23,7 @@ public class BoostTower extends Tower{
     public BoostTower (double damage,
                        double attackSpeed,
                        double range,
-                       double cost,
+                       int cost,
                        double recyclePrice,
                        String description,
                        
@@ -32,9 +35,12 @@ public class BoostTower extends Tower{
                        double x,
                        double y,
                        int collisionid,
-                       String image) {
+                       String image,
+                       
+                       PurchaseInfo purchaseInfo) {
         super(type, id, damage, attackSpeed, range, cost, recyclePrice, description,
-              unique_id, x, y, collisionid, image);
+              unique_id, x, y, collisionid, image,
+              purchaseInfo);
 
         this.detector = new Detector<Tower>(this.eng, Tower.class);
         this.boostFactor = boostFactor;
@@ -46,9 +52,9 @@ public class BoostTower extends Tower{
 
     public void addDescription(){
         super.addDescription();
-        info.put("Boost Factor", String.valueOf(boostFactor));
-
-        info.put("Upgrade Boost Factor", String.valueOf(boostFactor*upgradeFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_BOOST_FACTOR, df.format(boostFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_BOOST_FACTOR, df.format(boostFactor*upgradeFactor));
+        
     }
 
     //create magic to towers in range
@@ -65,17 +71,14 @@ public class BoostTower extends Tower{
         addBoostEffect();
     }
     
-    @Override
-    public void sell () {
-        remove();
-    }
+ 
 
     @Override
-    public void upgrade () {
+    public void upgrade (GameInfo gameInfo) {
         upgrade(upgradeFactor);
+        gameInfo.loseGold(upgradePrice);
     }
 
-    @Override
     public void downgrade(){
         downgrade(upgradeFactor);
     }
@@ -85,13 +88,13 @@ public class BoostTower extends Tower{
     @Override
     public void upgrade (double factor) {
         boostFactor *= factor;
-        super.addDescription();
+        addDescription();
     }
     
     @Override
     public void downgrade (double factor) {
         boostFactor /= factor;
-        super.addDescription();
+        addDescription();
     }
 
     
