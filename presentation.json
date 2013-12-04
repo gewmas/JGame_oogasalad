@@ -1,8 +1,8 @@
 {
 "name": "Tower Destruction II",
 "spashImage" :  "game-bg.png",
-"BGImage" :  "space_background",
-"gold" : 200,
+"BGImage" :  "woods_background",
+"gold" : 500,
 "numberOfLives" : 10,
 "levels": 2,
 "widthOfWindow": 600,
@@ -11,45 +11,345 @@
 "difficultyScale": 1.5,
 "map":
 {
-  	  "pathImage":  "path.jpg", 
-	  "Path":[ 
-               { "x": 0, "y": 10 },
-               { "x": 1, "y": 10 },
-               { "x": 2, "y": 10 },
-               { "x": 3, "y": 10 },
-               { "x": 3, "y": 9 },
-               { "x": 3, "y": 8 },
-               { "x": 3, "y": 7 },
-               { "x": 4, "y": 7 },
-               { "x": 5, "y": 7 },
-               { "x": 6, "y": 7 },
-               { "x": 6, "y": 8 },
-               { "x": 6, "y": 9 },
-               { "x": 6, "y": 10 },
-               { "x": 6, "y": 11 },
-               { "x": 6, "y": 12 },
-               { "x": 7, "y": 12 },
-               { "x": 8, "y": 12 },
-               { "x": 9, "y": 12 },
-               { "x": 9, "y": 11 },
-               { "x": 9, "y": 10 },
-               { "x": 9, "y": 9 },
-               { "x": 9, "y": 8 },
-	       	   { "x": 10, "y": 8 },
-               { "x": 11, "y": 8 },
-               { "x": 12, "y": 8 },
-               { "x": 13, "y": 8 },
-               { "x": 14, "y": 8 },
-               { "x": 14, "y": 9 },
-               { "x": 14, "y": 10 },
-               { "x": 14, "y": 11 },
-               { "x": 15, "y": 11 },
-               { "x": 16, "y": 11 },
-               { "x": 17, "y": 11 },
-               { "x": 18, "y": 11 },
-               { "x": 19, "y": 11 },
-
-           ], 
+  	  "pathImage":  "path.png", 
+	  "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 1,
+            "x": 0
+         },
+         {
+            "y": 2,
+            "x": 0
+         },
+         {
+            "y": 3,
+            "x": 0
+         },
+         {
+            "y": 4,
+            "x": 0
+         },
+         {
+            "y": 5,
+            "x": 0
+         },
+         {
+            "y": 6,
+            "x": 0
+         },
+         {
+            "y": 7,
+            "x": 0
+         },
+         {
+            "y": 8,
+            "x": 0
+         },
+         {
+            "y": 9,
+            "x": 0
+         },
+         {
+            "y": 10,
+            "x": 0
+         },
+         {
+            "y": 11,
+            "x": 0
+         },
+         {
+            "y": 12,
+            "x": 0
+         },
+         {
+            "y": 13,
+            "x": 0
+         },
+         {
+            "y": 14,
+            "x": 0
+         },
+         {
+            "y": 15,
+            "x": 0
+         },
+         {
+            "y": 16,
+            "x": 0
+         },
+         {
+            "y": 17,
+            "x": 0
+         },
+         {
+            "y": 17,
+            "x": 1
+         },
+         {
+            "y": 17,
+            "x": 2
+         },
+         {
+            "y": 16,
+            "x": 2
+         },
+         {
+            "y": 15,
+            "x": 2
+         },
+         {
+            "y": 14,
+            "x": 2
+         },
+         {
+            "y": 13,
+            "x": 2
+         },
+         {
+            "y": 12,
+            "x": 2
+         },
+         {
+            "y": 11,
+            "x": 2
+         },
+         {
+            "y": 10,
+            "x": 2
+         },
+         {
+            "y": 9,
+            "x": 2
+         },
+         {
+            "y": 8,
+            "x": 2
+         },
+         {
+            "y": 8,
+            "x": 3
+         },
+         {
+            "y": 7,
+            "x": 3
+         },
+         {
+            "y": 6,
+            "x": 3
+         },
+         {
+            "y": 5,
+            "x": 3
+         },
+         {
+            "y": 4,
+            "x": 3
+         },
+         {
+            "y": 4,
+            "x": 4
+         },
+         {
+            "y": 4,
+            "x": 5
+         },
+         {
+            "y": 5,
+            "x": 5
+         },
+         {
+            "y": 6,
+            "x": 5
+         },
+         {
+            "y": 7,
+            "x": 5
+         },
+         {
+            "y": 8,
+            "x": 5
+         },
+         {
+            "y": 9,
+            "x": 5
+         },
+         {
+            "y": 10,
+            "x": 5
+         },
+         {
+            "y": 10,
+            "x": 6
+         },
+         {
+            "y": 10,
+            "x": 7
+         },
+         {
+            "y": 9,
+            "x": 7
+         },
+         {
+            "y": 8,
+            "x": 7
+         },
+         {
+            "y": 8,
+            "x": 8
+         },
+         {
+            "y": 8,
+            "x": 9
+         },
+         {
+            "y": 8,
+            "x": 10
+         },
+         {
+            "y": 9,
+            "x": 10
+         },
+         {
+            "y": 10,
+            "x": 10
+         },
+         {
+            "y": 11,
+            "x": 10
+         },
+         {
+            "y": 12,
+            "x": 10
+         },
+         {
+            "y": 12,
+            "x": 11
+         },
+         {
+            "y": 13,
+            "x": 11
+         },
+         {
+            "y": 14,
+            "x": 11
+         },
+         {
+            "y": 15,
+            "x": 11
+         },
+         {
+            "y": 15,
+            "x": 12
+         },
+         {
+            "y": 15,
+            "x": 13
+         },
+         {
+            "y": 15,
+            "x": 14
+         },
+         {
+            "y": 14,
+            "x": 14
+         },
+         {
+            "y": 13,
+            "x": 14
+         },
+         {
+            "y": 13,
+            "x": 15
+         },
+         {
+            "y": 12,
+            "x": 15
+         },
+         {
+            "y": 11,
+            "x": 15
+         },
+         {
+            "y": 10,
+            "x": 15
+         },
+         {
+            "y": 9,
+            "x": 15
+         },
+         {
+            "y": 8,
+            "x": 15
+         },
+         {
+            "y": 8,
+            "x": 14
+         },
+         {
+            "y": 8,
+            "x": 13
+         },
+         {
+            "y": 7,
+            "x": 13
+         },
+         {
+            "y": 6,
+            "x": 13
+         },
+         {
+            "y": 6,
+            "x": 14
+         },
+         {
+            "y": 5,
+            "x": 14
+         },
+         {
+            "y": 4,
+            "x": 14
+         },
+         {
+            "y": 3,
+            "x": 14
+         },
+         {
+            "y": 3,
+            "x": 15
+         },
+         {
+            "y": 2,
+            "x": 15
+         },
+         {
+            "y": 2,
+            "x": 16
+         },
+         {
+            "y": 2,
+            "x": 17
+         },
+         {
+            "y": 2,
+            "x": 18
+         },
+         {
+            "y": 2,
+            "x": 19
+         },
+         {
+            "y": 1,
+            "x": 19
+         },
+         {
+            "y": 0,
+            "x": 19
+         }
+      ], 
         "Barriers":[
         	{ "x": 5, "y": 2, "image": "rock.jpg" },
         	{ "x": 6, "y": 2, "image": "tree.jpg" }
@@ -59,25 +359,32 @@
 "resources":
 {
   	   
-	  "image":[ 
+     "image":[ 
                { "id": "1", "url": "mr1.png" },
                { "id": "2", "url": "mr2.png" },
                { "id": "3", "url": "mr3.png" },
-               { "id": "4", "url": "mr4.png" }
+               { "id": "4", "url": "mr4.png" },
+      { "id": "d1", "url": "d1.png" },
+               { "id": "d2", "url": "d2.png" },
+               { "id": "d3", "url": "d3.png" },
+               { "id": "d4", "url": "d4.png" },
+      {"id": "haste", "url":"haste.png"},
                
              
            ], 
         "audio":[
-        	{ "id": "alarm", "url": "alarm.wav" },
+         { "id": "alarm", "url": "alarm.wav" },
+      { "id": "haste", "url": "haste.wav" },
         ],
-	 "animation":[
-        	{ "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
+    "animation":[
+         { "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
+      { "id": "drunRight", "sheet": [{"id":"d1"},{"id":"d2"},{"id":"d3"},{"id":"d4"}] },
         ]
 },
 "temporaryBarrierType":[
 	{
 	 "id": "Lake",
-	 "image": "lake1",
+	 "image": "barrier1",
 	 "damage": 100,
 	 "cost": 200,
 	 "expire": 20,
@@ -85,7 +392,7 @@
 	},  
 	{
 	 "id": "Fire",
-	 "image": "fire1",
+	 "image": "barrier2",
 	 "damage": 100,
 	 "cost": 100,
 	 "expire": 10,
@@ -93,69 +400,69 @@
 	},
 ],
 
-"towerType": [
+"Tower": [
 	{
-	 "type": "DefaultTower",
-	 "id" : "DefaultTower1",
-	 "image": "tower1",
-	 "damage": 3,
-	 "attackSpeed": 0.8,
-	 "attackMode": 1,
-	 "range": 100,	
-	 "cost": 50, 
-	 "recyclePrice":  50,
-	 "description": "Default tower will shoot enemy, Surprise!",
+	 "Type": "DefaultTower",
+	 "Name" : "DefaultTower1",
+	 "Image": "tower1",
+	 "Damage": 3,
+	 "Attack Speed": 0.8,
+	 "Attack Mode": 1,
+	 "Range": 100,	
+	 "Cost": 50, 
+	 "Sell Price":  50,
+	 "Description": "Default tower will shoot enemy, Surprise!",
 	},
 	{
-	 "type": "DefaultTower",
-	 "id" : "DefaultTower2",
-	 "image": "tower1",
-	 "damage": 3,
-	 "attackSpeed": 0.8,
-	 "attackMode": 1,
-	 "range": 100,	
-	 "cost": 10, 
-	 "recyclePrice":  50,
-	 "description": "Default tower will shoot enemy, Surprise!",
+	 "Type": "DefaultTower",
+	 "Name" : "DefaultTower2",
+	 "Image": "tower1",
+	 "Damage": 3,
+	 "Attack Speed": 0.8,
+	 "Attack Mode": 1,
+	 "Range": 100,	
+	 "Cost": 10, 
+	 "Sell Price":  50,
+	 "Description": "Default tower will shoot enemy, Surprise!",
 	},
 	{
-	 "type": "MultipleShootingTower",
-	 "id" : "MultipleShootingTower1",
-	 "image": "MultipleShootingTower",
-	 "damage": 1,
-	 "attackSpeed": 3.5,
-	 "attackMode": 2,
-	 "attackAmount": 5,
-	 "range": 80,	
-	 "cost": 100, 
-	 "recyclePrice":  50,
-	 "description": "MultipleShooting tower will shoot multiple bullets at one time.",
+	 "Type": "MultipleShootingTower",
+	 "Name" : "MultipleShootingTower1",
+	 "Image": "MultipleShootingTower",
+	 "Damage": 1,
+	 "Attack Speed": 3.5,
+	 "Attack Mode": 2,
+	 "Attack Amount": 5,
+	 "Range": 80,	
+	 "Cost": 100, 
+	 "Sell Price":  50,
+	 "Description": "MultipleShooting tower will shoot multiple bullets at one time.",
 	},
 	{
-	 "type": "BoostTower",
-	 "id" : "BoostTower",
-	 "image": "BoostTower",
-	 "damage": 1,
-	 "attackSpeed": 0.8,
-	 "range": 100,	
-	 "cost": 100, 
-	 "recyclePrice":  50,
-	 "description": "Boost tower will strength towers in adjacency.",
-	 "boostFactor": 2.0,
+	 "Type": "BoostTower",
+	 "Name" : "BoostTower",
+	 "Image": "BoostTower",
+	 "Damage": 1,
+	 "Attack Speed": 0.8,
+	 "Range": 100,	
+	 "Cost": 100, 
+	 "Sell Price":  50,
+	 "Description": "Boost tower will strength towers in adjacency.",
+	 "Boost Factor": 2.0,
 	},
 	{
-	 "type": "MagicTower",
-	 "id": "MagicTower1",
-	 "image": "MagicTower",
-	 "damage": 1,
-	 "attackSpeed": 0.8,
-	 "attackMode": 2,
-	 "range": 100,	
-	 "cost": 100, 
-	 "recyclePrice":  50,
-	 "description": "Magic tower will shoot a magic bullet to affect the enemy.",
-	 "magicFactor": 2.0,
-	 "magic" : 1,
+	 "Type": "MagicTower",
+	 "Name": "MagicTower1",
+	 "Image": "MagicTower",
+	 "Damage": 1,
+	 "Attack Speed": 0.8,
+	 "Attack Mode": 2,
+	 "Range": 100,	
+	 "Cost": 100, 
+	 "Sell Price":  50,
+	 "Description": "Magic tower will shoot a magic bullet to affect the enemy.",
+	 "Magic Factor": 2.0,
+	 "Magic" : 1,
 	}
 ],
 
@@ -163,20 +470,46 @@
 {
 	"id": "1",
 	"gold": 5,
-	"image": "enemy1",
+	"image": "runRight",
 	"life": 10,
 	"speed": 0.5,
+   "skill": "",
 }, 
 {
 	"id": "2",
 	"gold": 10,
-	"image": "runRight",
+	"image": "drunRight",
 	"life": 15,
-	"speed": 1,
+	"speed": 0.5,
+   "skill": "haste",
 }
 ],
 
 "wave":[
+   {  
+      "type": "1",
+      "number":1,
+      "period" :2,
+      "interval": 10,
+   },
+   {  
+      "type": "1",
+      "number":1,
+      "period" :2,
+      "interval": 0,
+   },
+   {  
+      "type": "2",
+      "number":1,
+      "period" :2,
+      "interval": 0,
+   },
+   {  
+      "type": "1",
+      "number":1,
+      "period" :2,
+      "interval": 5,
+   },
 	{	
 		"type": "1",
 		"number":20,

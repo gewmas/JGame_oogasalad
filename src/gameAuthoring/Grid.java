@@ -1,6 +1,7 @@
 package gameAuthoring;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -28,13 +29,14 @@ public class Grid extends JPanel {
 
     public Grid (int width, int height) {
         this.setLayout(new GridLayout(width, height));
-        this.setBackground(Color.blue);
+        this.setBackground(Color.gray);
+        this.setPreferredSize(new Dimension(500, 500));
         myWidth = width;
         myHeight = height;
         myGrid = new GridButton[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                GridButton gButton = new GridButton(x, y, this);
+                GridButton gButton = new GridButton(y, x, this);
                 myGrid[x][y] = gButton;
                 gButton.setOpaque(false);
                 gButton.setContentAreaFilled(false);
@@ -118,7 +120,6 @@ public class Grid extends JPanel {
             JOptionPane.showMessageDialog(null, "Start or Endpoint not defined!");
             return false;
         }
-
         myPathCoordinates.clear();
         /*
          * for (int i = 0; i < myPath[0].length; i++) {
@@ -141,14 +142,12 @@ public class Grid extends JPanel {
         else {
             return false;
         }
-
         if (startX == endX && startY == endY) {
             for (Point2D point : myPathCoordinates) {
                 System.out.println(point.toString());
             }
             return true;
         }
-
         return (isValidPath(startX + 1, startY, endX, endY) || isValidPath(startX, startY + 1,
                                                                            endX, endY) ||
                 isValidPath(startX - 1, startY, endX, endY) || isValidPath(startX, startY - 1,
@@ -167,7 +166,6 @@ public class Grid extends JPanel {
                 img = ImageIO.read(myBackgroundImage);
             }
             catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             int h = img.getHeight(null);

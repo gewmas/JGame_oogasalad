@@ -1,7 +1,9 @@
 package gameEngine.view.gameFrame.tools;
 
 import java.awt.Dimension;
+import java.util.HashMap;
 import java.util.Map;
+import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
@@ -27,6 +29,9 @@ public class InfoDisplayPanel extends Panel {
     private static final int DISPLAY_WIDTH = 300;
 
     private JTextPane text;
+    private Map<String,String> displayedInformation;
+    private int towerX;
+    private int towerY;
 
     public InfoDisplayPanel (String name) {
         super();
@@ -36,7 +41,9 @@ public class InfoDisplayPanel extends Panel {
         setBorder(valuePanelBorder);
 
         initializeContents("", "");
-
+        this.setPreferredSize(new Dimension(DISPLAY_WIDTH,DISPLAY_HEIGHT));
+        displayedInformation=new HashMap<String,String>();
+        this.setVisible(false);
     }
 
     public InfoDisplayPanel (String name, String keyName, String valueName) {
@@ -61,15 +68,16 @@ public class InfoDisplayPanel extends Panel {
         text.setPreferredSize((new Dimension(DISPLAY_WIDTH, DISPLAY_HEIGHT)));
 
         JScrollPane listScrollPane = new JScrollPane(text);
-        listScrollPane.setPreferredSize(new Dimension(DISPLAY_WIDTH, DISPLAY_HEIGHT));
+        listScrollPane.setPreferredSize(new Dimension(DISPLAY_WIDTH-10, DISPLAY_HEIGHT));
         add(listScrollPane);
-
     }
 
     /**
      * A method that is used to update the display's information
      * 
      * @param information information to be displayed
+     * @param mouseY 
+     * @param mouseX 
      */
     public void displayInformation (Map<String, String> information) {
         System.out.println("Updating information");
@@ -77,7 +85,8 @@ public class InfoDisplayPanel extends Panel {
         text.setText("");
         StringBuilder t = new StringBuilder();
         for (String key : information.keySet()) {
-            t.append("<font color=blue> <b>" + key + ":</b></font>  " + information.get(key) +
+            if (!(information.get(key).equals("null")))
+                t.append("<font color=blue> <b>" + key + ":</b></font>  " + information.get(key) +
                      "<br>");
 
         }
@@ -91,20 +100,36 @@ public class InfoDisplayPanel extends Panel {
      * 
      * @param information information to be displayed
      */
-    public void displayInformation (Map<String, String> information, Map<String, String> display) {
+    public void displayInformation (Map<String, String> information, Map<String, String> toDisplay) {
         System.out.println("Updating information");
+        /*clearDisplay();
+        text.setText("");
+        StringBuilder t = new StringBuilder();
+        for (String key : toDisplay.keySet()) {
+            t.append("<font color=blue> <b>" + key + ":</b></font>  <font color=" +
+                     toDisplay.get(key) + ">" + information.get(key) +
+                     "</font><br>");
+
+        }
+        text.setContentType("text/html");
+        text.setText(t.toString());*/
+        displayedInformation=information;
+        updateInformation(toDisplay);
+    }
+    
+    public void updateInformation(Map<String,String> toDisplay){
         clearDisplay();
         text.setText("");
         StringBuilder t = new StringBuilder();
-        for (String key : display.keySet()) {
-            t.append("<font color=blue> <b>" + key + ":</b></font>  <font color=" +
-                     display.get(key) + ">" + information.get(key) +
+        for (String key : toDisplay.keySet()) {
+            if (displayedInformation.get(key)!=null)
+                t.append("<font color=blue> <b>" + key + ":</b></font>  <font color=" +
+                     toDisplay.get(key) + ">" + displayedInformation.get(key) +
                      "</font><br>");
 
         }
         text.setContentType("text/html");
         text.setText(t.toString());
-
     }
 
     public void displayInfo (String message) {
@@ -113,5 +138,9 @@ public class InfoDisplayPanel extends Panel {
 
     public void clearDisplay () {
         text.setText("");
+    }
+
+    public PurchaseInfo getDisplayedTower () {
+        return null;
     }
 }

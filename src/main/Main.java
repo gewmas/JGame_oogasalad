@@ -7,5 +7,4 @@ public class Main {
         Controller controller = new Controller();
         controller.promptForFile();
     }
-    
 }

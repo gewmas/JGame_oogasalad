@@ -30,17 +30,21 @@ public class LevelDesignPanel extends JPanel {
         myScrollPanel = new JPanel(new MigLayout("wrap 2, align center"));
         myCreatedWaves = new JScrollPane(myScrollPanel);
         myCreatedWaves.setPreferredSize(new Dimension(300, 300));
+        myCreatedWaves.setFont(Constants.defaultBodyFont);
         Border b = BorderFactory.createLoweredBevelBorder();
         this.setBorder(b);
         this.add(createLevelPanel());
         this.add(myCreatedWaves);
+        this.setOpaque(false);
     }
 
     private JPanel createLevelPanel () {
         JPanel panel = new JPanel(new MigLayout("wrap 1"));
         JButton createWaveButton = new JButton("Add Wave");
+        createWaveButton.setFont(Constants.defaultBodyFont);
         createWaveButton.addMouseListener(createWaveListener(myLevelDesignTab, this));
         JButton createLevelButton = new JButton("Create Level");
+        createLevelButton.setFont(Constants.defaultBodyFont);
         createLevelButton.addMouseListener(createLevelListener(this));
         panel.add(createWaveButton);
         panel.add(createLevelButton);
