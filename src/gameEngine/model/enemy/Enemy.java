@@ -1,10 +1,12 @@
 package gameEngine.model.enemy;
-
+import gameEngine.model.skill.Skill;
+import gameEngine.model.skill.SkillFactory;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Model;
 import gameEngine.model.bullet.Bullet;
 import gameEngine.model.magic.IEMagicable;
+
 import gameEngine.model.temporaryBarrier.TemporaryBarrier;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
@@ -22,7 +24,7 @@ public class Enemy extends JGObject implements IEMagicable {
 
     String id;
     String image;
-
+    Skill mySkill=null;
     Model model;
     double gold;
     double life;
@@ -87,6 +89,9 @@ public class Enemy extends JGObject implements IEMagicable {
 
     @Override
     public void move () {
+        //update skills
+        if (mySkill != null)
+            mySkill.update((int) this.getCenterX(), (int) this.getCenterY());
         // Should walk along the Path
         if (reachedPoint()) {
             // System.out.println("Reached point!");
@@ -224,14 +229,22 @@ public class Enemy extends JGObject implements IEMagicable {
      * @author wenxin
      *         For the IMagicable interface implement
      */
+    public double getCenterX(){
+        
+        return x+this.getImageBBox().width/2;
+    }
+    public double getCenterY(){
+        return y+this.getImageBBox().height/2;
+    }
+    
     @Override
     public double getX () {
-        return x;
+        return pathX;
     }
 
     @Override
     public double getY () {
-        return y;
+        return pathY;
     }
 
     @Override
@@ -251,6 +264,14 @@ public class Enemy extends JGObject implements IEMagicable {
 
     @Override
     public void changeSpeed (double speedPercent) {
-        speed = speed + orignalSpeed * speedPercent;
+        speed = speed + orignalSpeed * speedPercent;   
+    }
+    
+
+
+
+    public void setSkill(String skill){
+        SkillFactory sf= new SkillFactory(this.eng);
+        mySkill=sf.create(skill);
     }
 }

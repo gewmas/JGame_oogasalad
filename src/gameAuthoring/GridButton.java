@@ -1,6 +1,6 @@
 package gameAuthoring;
 
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -8,6 +8,7 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -26,7 +27,7 @@ public class GridButton extends JButton {
         myCoordinate = new Point2D.Double(x, y);
         myGrid = grid;
         isPath = false;
-        this.setPreferredSize(new Dimension(50, 50));
+        this.setBorder(BorderFactory.createLineBorder(Color.white, 1));
         addPathListener(this);
     }
 
@@ -39,7 +40,9 @@ public class GridButton extends JButton {
             @Override
             public void mouseClicked (MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    toggle();
+                    isPath = false;
+                    myGrid.removeCoordinate(myCoordinate);
+                    gButton.setIcon(null);
                 }
                 if (SwingUtilities.isRightMouseButton(e)) {
                     String[] options = { "Set as start", "Set as end" };
@@ -60,35 +63,37 @@ public class GridButton extends JButton {
                     }
                 }
             }
+
+            @Override
+            public void mouseEntered (MouseEvent e) {
+                if (myImgSource != null) {
+                    toggle();
+                    System.out.println(myCoordinate);
+                }
+            }
         };
         gButton.addMouseListener(listener);
     }
-    
-    public void toggle(){
-        isPath = !isPath;
-        if (isPath) {
-            myGrid.addCoordinate(myCoordinate);
-            try {
-                if (myImgSource == null) {
-                    JOptionPane.showMessageDialog(null, "No image defined");
-                }
-                else {
-                    Image path = ImageIO.read(myImgSource);
-                    this.setIcon(new ImageIcon(path));
-                    this.setPreferredSize(new Dimension(50, 50));
-                }
+
+    public void toggle () {
+        isPath = true;
+        myGrid.addCoordinate(myCoordinate);
+        try {
+            if (myImgSource == null) {
+                JOptionPane.showMessageDialog(null, "No image defined");
             }
-            catch (IOException ex) {
-                System.out.println("Image not found");
+            else {
+                Image path = ImageIO.read(myImgSource);
+                Image resized = path.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(resized);
+                this.setIcon(icon);
             }
         }
-        else {
-            myGrid.removeCoordinate(myCoordinate);
-            this.setIcon(null);
+        catch (IOException ex) {
+            System.out.println("Image not found");
         }
-    
     }
-    
+
     public void setPathStatusFalse () {
         isPath = false;
     }

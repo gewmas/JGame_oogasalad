@@ -3,6 +3,7 @@ package gameEngine.factory.magicFactory;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.magic.IMagicable;
 import java.util.HashMap;
+import java.util.List;
 
 
 /*
@@ -12,11 +13,18 @@ public class MagicsFactory {
 
     private static MagicsFactory myMagicFactory;
     private HashMap<Integer, IMagicFactory> myFactoryMap = new HashMap<Integer, IMagicFactory>();
-    
+    private HashMap<String, Integer> myTranlateMap=new HashMap<String,Integer>();
     
     private MagicsFactory () {
-        myFactoryMap.put(EFrozeFactory.ID, new EFrozeFactory());
-        myFactoryMap.put(TBoostFactory.ID, new TBoostFactory());
+        myFactoryMap.put(GameEngineConstant.FROZEMAGIC_ID, new EFrozeFactory());
+        myFactoryMap.put(GameEngineConstant.BOOSTMAGIC_ID, new TBoostFactory());
+        myFactoryMap.put(GameEngineConstant.SPEEDUPMAGIC_ID, new ESpeedUpFactory());
+        
+        
+        
+        myTranlateMap.put("FrozeMagic", GameEngineConstant.FROZEMAGIC_ID);
+        myTranlateMap.put("BoostMagic", GameEngineConstant.FROZEMAGIC_ID);
+        myTranlateMap.put("SpeedMagic", GameEngineConstant.SPEEDUPMAGIC_ID);
     }
 
     public static MagicsFactory getInstance () {
@@ -36,6 +44,7 @@ public class MagicsFactory {
         if(currMagicIds!=GameEngineConstant.OVERLAPMAGIC_ID){
             magicIdToCreate = (~currMagicIds) & magicIdToCreate;
         }
+        
         int temp=magicIdToCreate;
         int mask=1;
         while(magicIdToCreate > 0) {
@@ -46,5 +55,22 @@ public class MagicsFactory {
             magicIdToCreate = magicIdToCreate >> 1;
             mask=mask<<1;
         }
+    }
+    
+    public void creatMagics(IMagicable target, IMagicable sender,List<String> magicIdToCreate,List<String> currMagicIds){
+        int newMagicIds=0;
+        int currentMagicIds=0;
+        
+        for(String str:magicIdToCreate){
+            newMagicIds+= myTranlateMap.get(str);
+        }
+        
+        for(String str:currMagicIds){
+            currentMagicIds+= myTranlateMap.get(str);
+        }
+        
+        createMagics (target, sender,newMagicIds, currentMagicIds);
+        
+        
     }
 }

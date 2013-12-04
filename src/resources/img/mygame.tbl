@@ -21,6 +21,9 @@ tower			-	0	tower.png		-
 tower1			-	0	tower.png		-
 tower2			tr	0	icons_map	1	-
 
+barrier1			-	0	barrier1.png		-
+barrier2			-	0	barrier2.png		-
+
 BoostTower		-	0	BoostTower.png		-
 MagicTower		-	0	MagicTower.png		-
 MultipleShootingTower	-	0	MultipleShootingTower.png	-
@@ -33,3 +36,5 @@ enemy3			ja	0	icons_map	0		-
 bullet	-	0	bullet.png	-
 FrozeMagic	-	0	FrozeMagic.png	-
 BoostMagic	-	0	BoostMagic.png	-
+SpeedUpMagic	-	0	SpeedUpMagic.png	-
+
