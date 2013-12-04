@@ -91,9 +91,11 @@ public class MapDesignTab extends Tab {
 
         for (int i = 0; i < pathPoints.length(); i++) {
             JSONObject point = (JSONObject) pathPoints.get(i);
+            int x = (Integer) point.get("x");
+            int y = (Integer) point.get("y");
 
-            int x = (int) point.get("y");
-            int y = (int) point.get("x");
+
+
             myGrid.toggleGridButton(x, y);
 
             if (i == 0) myGrid.setPathStart(new Point2D.Double(x, y));

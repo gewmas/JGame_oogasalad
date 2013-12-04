@@ -77,8 +77,9 @@ public class View implements MenuActions {
      * Tells the controller to send tower purchase instructions to the model
      * and then reset the cursor
      */
-    public boolean buyTower (int x, int y, String tower) {
-        return (controller.purchaseTower(x, y, tower));
+    public boolean buyTower (int x, int y, PurchaseInfo itemInformation) {
+        return (controller.purchaseObject(x, y, itemInformation));
+               
     }
 
     /**
@@ -134,6 +135,14 @@ public class View implements MenuActions {
 
     public String getGameTitle () {
         return controller.getGameTitle();
+    }
+    
+    public boolean upgradeTower(int x, int y){
+        return controller.upgradeTower(x, y);
+    }
+
+    public boolean sellTower (int towerX, int towerY) {
+        return controller.sellTower(towerX, towerY);
     }
 
 }

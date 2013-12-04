@@ -1,6 +1,7 @@
 package gameEngine.model.magic;
 
 
+
 public class TBoostMagic extends Magic{
     public static final String NAME="BoostMagic";
     private double myFactor;
@@ -9,17 +10,22 @@ public class TBoostMagic extends Magic{
         myFactor=factor;
         magicOn();
     }
-    @Override
-    void magicOnAction () {
+    
+   public void magicOnAction () {
         ((ITMagicable)myTarget).downgrade(myFactor);
     }
-    @Override
-    void magicOffAction () {
+    public void magicOffAction () {
         ((ITMagicable)myTarget).upgrade(myFactor);
     }
     @Override
     boolean removeCondition () {
         return !myTarget.isAlive()||!mySender.isAlive();
+    }
+    
+    
+    protected void moveNextStep (){                
+        this.x=myTarget.getX();
+        this.y=myTarget.getY();
     }
 
     

@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.Factory;
 import gameEngine.model.Model;
 import gameEngine.model.tile.Tile;
