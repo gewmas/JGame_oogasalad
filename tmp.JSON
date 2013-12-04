@@ -1,7 +1,11 @@
 {
    "resources": {},
    "temporaryBarrierType": [],
+   "name": "dsfds",
    "wave": [],
+   "numberOfLives": 32432,
    "enemyType": [],
+   "splashImage": "resources/img/bg.jpg",
+   "gold": 343,
    "towerType": []
 }

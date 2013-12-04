@@ -1,6 +1,7 @@
 package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.menuBar.Simulator;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -35,7 +36,7 @@ public class BasicInfoTab extends Tab {
 
     private JLabel mySplashImageLabel;
     private String mySplashImage;
-
+    private JButton simulateButton;
     public BasicInfoTab (GameData gameData) {
         super(gameData);
         getTab();
@@ -70,6 +71,10 @@ public class BasicInfoTab extends Tab {
         mySplashImageLabel = new JLabel();
 
         JButton setInfoButton = new JButton("Set Info");
+        simulateButton = new JButton("Simulate");
+        simulateButton.setEnabled(false);
+        simulateButton.setFont(new Font("Calibri", Font.PLAIN, 14));
+        simulateButton.addMouseListener(setSimulateListener());
         setInfoButton.setFont(new Font("Calibri", Font.PLAIN, 14));
         setInfoButton.addMouseListener(setInfoListener());
 
@@ -91,7 +96,9 @@ public class BasicInfoTab extends Tab {
 
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
+        
         subPanel.add(setInfoButton);
+        subPanel.add(simulateButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         subPanel.setBorder(b);
         mainPanel.add(subPanel, "align center");
@@ -121,6 +128,19 @@ public class BasicInfoTab extends Tab {
             @Override
             public void mouseClicked (MouseEvent e) {
                 setData();
+                
+            }
+        };
+        return listener;
+
+    }
+    public MouseAdapter setSimulateListener () {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                Simulator simulator = new Simulator();
+                simulator.simulate(myGameData);
+                
             }
         };
         return listener;
@@ -137,12 +157,17 @@ public class BasicInfoTab extends Tab {
             myGameData.setLives(lives);
             myGameData.setSplashImage(mySplashImage);
             myGameData.setGameName(name);
+            activateSimmulate();
         }
 
         else {
             JOptionPane.showMessageDialog(null,
                                           "One or more fields invalid! Please try again.");
         }
+    }
+
+    private void activateSimmulate () {
+        simulateButton.setEnabled(true);
     }
 
     public MouseAdapter setSplashImageListener () {

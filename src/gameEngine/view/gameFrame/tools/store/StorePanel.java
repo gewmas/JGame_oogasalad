@@ -51,8 +51,7 @@ public class StorePanel extends Panel {
     public void addStoreInventory () {
         Map<String, List<PurchaseInfo>> storeInventory = view.getInventory();
         for (String item : storeInventory.keySet()) {
-            if (storeInventory.get(item).size() !=0) {
-                System.out.println(storeInventory.get(item).size());
+            if (storeInventory.get(item).size() != 0) {
                 StoreOptionsPanel storeCategory =
                         new StoreOptionsPanel(view, storeInventory.get(item), utilities,
                                               itemPurchaser);

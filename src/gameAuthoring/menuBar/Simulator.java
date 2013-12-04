@@ -9,7 +9,7 @@ public class Simulator {
 
     public void simulate(GameData gameData){
         File file = gameData.createSimmulationFile();
-        file = new File("../oogasalad_FooBar/officialJSON.json");
+        file = new File("../oogasalad_FooBar/simmulation.json");
         if (file!= null){
             Controller controller = new Controller();
             try {
