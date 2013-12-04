@@ -1,0 +1,52 @@
+{
+"name": "Tower Destruction II",
+"spashImage" :  "game-bg.png",
+"BGImage" :  "woods_background",
+"gold" : 0,
+"numberOfLives" : 1,
+"levels": 2,
+"widthOfWindow": 600,
+"heightOfWindow": 600,
+"tilesPerRow": 20,
+"difficultyScale": 1.5,
+"map":
+{
+  	  "pathImage":  "", 
+	  "Path": [
+        
+      ]
+    
+},
+
+"resources":
+{
+  	   
+     "image":[ 
+              
+               
+             
+           ], 
+        "audio":[
+        
+        ],
+    "animation":[
+         
+        ]
+},
+"temporaryBarrierType":[
+	
+],
+
+"Tower": [
+	
+],
+
+"enemyType":[
+
+],
+
+"wave":[
+   
+]  
+
+}
