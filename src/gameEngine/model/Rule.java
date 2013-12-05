@@ -1,11 +1,9 @@
 package gameEngine.model;
 
-import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.warehouse.EnemyWarehouse;
-import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
-import java.lang.reflect.Constructor;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -63,12 +61,25 @@ public class Rule {
     public void readWaveFromJSon (JSONArray jsonArray) {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject oneWave = jsonArray.getJSONObject(i);
-            String type = oneWave.getString("type");
-            int number = oneWave.getInt("number");
+            String[] type = translateJSONArray(oneWave.getJSONArray("type"),String.class);
+            Integer[] number = translateJSONArray(oneWave.getJSONArray("number"),Integer.class);
+            
             double period = oneWave.getDouble("period");
             long interval = oneWave.getLong("interval");
+           
             addWave(new Wave(type, number, period, interval, myEnemyWarehouse));
         }
+    }
+    
+   
+    @SuppressWarnings("unchecked")
+    private <T> T[] translateJSONArray(JSONArray array,Class<T> c ) {
+        
+        T[] result= (T[])Array.newInstance(c,array.length());
+        for(int i = 0; i < array.length(); i++){
+            result[i]= (T) array.get(i);
+        }
+        return result;
     }
 
 }

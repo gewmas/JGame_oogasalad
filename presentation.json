@@ -487,53 +487,13 @@
 
 "wave":[
    {  
-      "type": "1",
-      "number":1,
+      "type": [ "1","2","1"],
+      "number": [ 2,1,2],
       "period" :2,
       "interval": 10,
-   },
-   {  
-      "type": "1",
-      "number":1,
-      "period" :2,
-      "interval": 0,
-   },
-   {  
-      "type": "2",
-      "number":1,
-      "period" :2,
-      "interval": 0,
-   },
-   {  
-      "type": "1",
-      "number":1,
-      "period" :2,
-      "interval": 5,
-   },
-	{	
-		"type": "1",
-		"number":20,
-		"period" :2,
-		"interval": 7,
-	},
-	{	
-		"type": "1",
-		"number":30,
-		"period" :1,
-		"interval": 5,
-	},
-	{	
-		"type": "2",
-		"number":3,
-		"period" :4,
-		"interval": 5,
-	},
-	{	
-		"type": "2",
-		"number":10,
-		"period" :3,
-		"interval": 5,
-	}
+     
+   }
+  
 ]  
 
 }

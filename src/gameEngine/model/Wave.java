@@ -12,39 +12,47 @@ import javax.swing.Timer;
  */
 public class Wave implements ActionListener {
     private int mySpawnPeriodInMilliSecond = 0;
-    private String myEnemyType = null;
-    private int myNumberOfEnemies = 0;
+    private String[] myEnemyType = null;
+    private Integer[] myNumberOfEnemies ;
     private Timer myTimer = null;
     private long myIntervalInMilliSecond = 0;
     private EnemyWarehouse myEnemyWarehouse = null;
+    private int myCurrentIndex=0;
 
-    public Wave (String type, int num, double period, long interval, EnemyWarehouse ew) {
+    public Wave (String type[], Integer[] number, double period, long interval, EnemyWarehouse ew) {
         if(period>=60){
             period=60;
         }
         mySpawnPeriodInMilliSecond = (int)(period*1000);
         myEnemyType = type;
-        myNumberOfEnemies = num;
+        myNumberOfEnemies = number;
+        if(myEnemyType.length!=myNumberOfEnemies.length)
+            return;
         myEnemyWarehouse = ew;
-        myIntervalInMilliSecond = interval*1000+myNumberOfEnemies*mySpawnPeriodInMilliSecond;
+        int totalNumber= 0;
+        for(int i=0;i<myNumberOfEnemies.length;i++){
+            totalNumber+= myNumberOfEnemies[i];
+        }
+        myIntervalInMilliSecond = interval*1000+totalNumber*mySpawnPeriodInMilliSecond;
         myTimer = new Timer(mySpawnPeriodInMilliSecond, this);
 
     }
 
     @Override
     public void actionPerformed (ActionEvent e) {
-        if (myNumberOfEnemies <= 0) {
-            myTimer.stop();
-
-        }
-        else {
+        if (myCurrentIndex < myNumberOfEnemies.length) {
             if (myEnemyWarehouse == null)
-                // must be something is wrong
                 return;
+            if (myNumberOfEnemies[myCurrentIndex] <= 0) {
+                myCurrentIndex++;
+            }
+
+            myEnemyWarehouse.create(myEnemyType[myCurrentIndex]);
+            myNumberOfEnemies[myCurrentIndex]--;
             
-            myEnemyWarehouse.create(myEnemyType);
-            myNumberOfEnemies--;
         }
+        else
+            myTimer.stop();
 
     }
 
@@ -55,4 +63,6 @@ public class Wave implements ActionListener {
     public void waveStart () {
         myTimer.start();
     }
+    
+    
 }
