@@ -46,7 +46,7 @@ public class InputPanel extends Panel {
 
         submit.addMouseListener(new MouseAdapter() {
             public void mouseClicked (MouseEvent me) {
-                inputSender.submit(input.getText());
+            
                 inputSender.submit(input.getText().trim());
                 input.setText("");
             }
