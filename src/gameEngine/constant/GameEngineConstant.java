@@ -47,6 +47,10 @@ public class GameEngineConstant {
     public static final String TOWER_UPGRADE_BOOST_FACTOR = "Upgrade Boost Factor";
     public static final String TOWER_UPGRADE_MAGIC_FACTOR = "Upgrade Magic Factor";
     public static final String TOWER_UPGRADE_ATTACK_AMOUNT = "Upgrade Attack Amount";
+    //Grid Constants
+    public static final int GRID_WIDTH = 600;
+    public static final int GRID_HEIGHT = 600;
+    public static final int TILES_PER_ROW = 20;
 
     public static int query (Class T) {
         // System.out.println(T.getName());
