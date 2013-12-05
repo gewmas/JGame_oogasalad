@@ -1,22 +1,24 @@
 package gameEngine.model.magic;
 
 public class TLightMagic extends Magic {
-
-    public TLightMagic (int expire,
-                        IMagicable target,
-                        IMagicable sender,
-                        String name,
-                        int collisionid,
-                        String gfxname,
-                        int magicId) {
-        super(expire, target, sender, name, collisionid, gfxname, magicId);
-        // TODO Auto-generated constructor stub
+    public static final String NAME="LightMagic";
+    private static final double CHANGERANGE=-1;
+    public TLightMagic (int expire,IMagicable target,int ID, int CID) {
+        super(expire,target,null,NAME,CID,NAME,ID);
+        magicOn();
     }
 
     @Override
     boolean removeCondition () {
-        // TODO Auto-generated method stub
-        return false;
+        return !myTarget.isAlive();
+    }
+    
+    public void magicOnAction () {
+       myChangeRecord=((ITMagicable) myTarget).changePercentRange(CHANGERANGE);
+    }
+
+    public void magicOffAction () {
+        ((ITMagicable) myTarget).changeRange(-myChangeRecord);
     }
 
 }

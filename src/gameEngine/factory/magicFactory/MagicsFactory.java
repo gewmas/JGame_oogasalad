@@ -19,12 +19,18 @@ public class MagicsFactory {
         myFactoryMap.put(GameEngineConstant.FROZEMAGIC_ID, new EFrozeFactory());
         myFactoryMap.put(GameEngineConstant.BOOSTMAGIC_ID, new TBoostFactory());
         myFactoryMap.put(GameEngineConstant.HASTEMAGIC_ID, new EHasteFactory());
+        myFactoryMap.put(GameEngineConstant.ARMOURMAGIC_ID, new EArmourFactory());
+        myFactoryMap.put(GameEngineConstant.HEALMAGIC_ID, new EHealFactory());
+        myFactoryMap.put(GameEngineConstant.LIGHTMAGIC_ID, new TLightFactory());
         
         
         
         myTranslateMap.put("FrozeMagic", GameEngineConstant.FROZEMAGIC_ID);
         myTranslateMap.put("BoostMagic", GameEngineConstant.BOOSTMAGIC_ID);
         myTranslateMap.put("HasteMagic", GameEngineConstant.HASTEMAGIC_ID);
+        myTranslateMap.put("ArmourMagic", GameEngineConstant.ARMOURMAGIC_ID);
+        myTranslateMap.put("HealMagic", GameEngineConstant.HEALMAGIC_ID);
+        myTranslateMap.put("LightMagic", GameEngineConstant.LIGHTMAGIC_ID);
     }
 
     public static MagicsFactory getInstance () {

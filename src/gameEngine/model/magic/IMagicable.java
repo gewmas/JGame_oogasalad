@@ -6,4 +6,6 @@ public interface IMagicable {
     public double getY();
     public int getCurrentMagics();
     public void setCurrentMagic(int magic);
+    public double changePercentSpeed(double percent);
+    public double changeSpeed(double offset);
 }

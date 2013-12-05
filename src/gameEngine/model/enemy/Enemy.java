@@ -258,20 +258,36 @@ public class Enemy extends JGObject implements IEMagicable {
     }
 
     @Override
-    public void changeLife (double lifePercent) {
-        life = life + originalLife * lifePercent;
+    public double changeLife (double offset) {
+        life+=offset;
+        return offset;
+    }
+    
+    @Override
+    public double changePercentLife (double percent) {
+        double change=life*percent;
+        life+=change;
+        return change;  
     }
 
     @Override
-    public void changeSpeed (double speedPercent) {
-        speed = speed + orignalSpeed * speedPercent;   
+    public double changePercentSpeed (double percent) {
+        double change=speed*percent;
+        speed+=change;
+        return change;    
     }
     
-
+    @Override
+    public double changeSpeed(double offset){
+       speed+=offset;
+       return offset;
+    }
 
 
     public void setSkill(String skill){
         SkillFactory sf= new SkillFactory(this.eng);
         mySkill=sf.create(skill);
     }
+
+
 }
