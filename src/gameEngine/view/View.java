@@ -26,12 +26,12 @@ public class View implements MenuActions {
     private GameFrame gameFrame;
     private InitializationFrame initializationFrame;
     private Controller controller;
-    private GameFrameMediator mediator;
+
 
     public View (Controller controller) {
         this.controller = controller;
-        mediator = new GameFrameMediator();
-        gameFrame = new GameFrame(controller, this, mediator);
+       
+        gameFrame = new GameFrame(controller, this);
         initializationFrame = new InitializationFrame(this);
 
     }
@@ -42,9 +42,9 @@ public class View implements MenuActions {
     }
 
     public void selectNewGame () {
-        mediator.quitGame();
+        gameFrame.quitGame();
         gameFrame.dispose();
-        gameFrame = new GameFrame(controller, this, mediator);
+        gameFrame = new GameFrame(controller, this);
         initializationFrame.setVisible(true);
     }
 
@@ -120,11 +120,11 @@ public class View implements MenuActions {
 
     @Deprecated
     public void quitGame () {
-        mediator.quitGame();
+        gameFrame.quitGame();
     }
 
     public void endGame () {
-        mediator.endGame();
+        gameFrame.endGame();
 
     }
 
