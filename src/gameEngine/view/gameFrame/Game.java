@@ -39,7 +39,6 @@ public class Game extends StdGame {
     private int HEIGHT = 600;
 
     private View view;
-    private PurchaseInfo towerToPurchase;
     private Utilities utilities;
     private GameFrameMediator mediator;
     private FrameRateSlider frameRateSlider;
@@ -102,7 +101,6 @@ public class Game extends StdGame {
         view.startModel();
         mediator.openStore();
         mediator.openInfoPanel();
-        mediator.updateStoreStatus();
         
     }
 

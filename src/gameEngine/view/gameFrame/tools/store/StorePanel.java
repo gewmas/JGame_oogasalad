@@ -8,6 +8,8 @@ import javax.swing.JTabbedPane;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.View;
+import gameEngine.view.gameFrame.GameInitializable;
+import gameEngine.view.gameFrame.GameUpdatable;
 import gameEngine.view.gameFrame.ItemPurchaser;
 import gameEngine.view.gameFrame.Utilities;
 
@@ -18,7 +20,7 @@ import gameEngine.view.gameFrame.Utilities;
  *         Contains the option to select items and panel that displays
  *         item information
  */
-public class StorePanel extends Panel {
+public class StorePanel extends Panel implements GameUpdatable, GameInitializable{
 
     private JTabbedPane storeTabbedPane;
     private View view;
@@ -48,7 +50,7 @@ public class StorePanel extends Panel {
 
     }
 
-    public void addStoreInventory () {
+    public void openStore () {
         Map<String, List<PurchaseInfo>> storeInventory = view.getInventory();
         for (String item : storeInventory.keySet()) {
             StoreOptionsPanel storeCategory =
@@ -58,8 +60,8 @@ public class StorePanel extends Panel {
         }
 
     }
-
-    public void updateStoreStatus () {
+    
+    public void update () {
         for (StoreOptionsPanel options : storeCategories) {
             options.updateStoreStatus();
         }
@@ -72,5 +74,13 @@ public class StorePanel extends Panel {
         this.repaint();
 
     }
+
+    @Override
+    public void initialize () {
+        openStore ();
+        
+    }
+
+  
 
 }

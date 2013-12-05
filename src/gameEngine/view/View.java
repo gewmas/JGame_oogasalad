@@ -118,15 +118,14 @@ public class View implements MenuActions {
     public Map<String, List<PurchaseInfo>> getInventory () {
         return controller.getInventory();
     }
-
+    @Deprecated
     public void quitGame () {
         mediator.quitGame();
     }
 
     public void endGame () {
         mediator.endGame();
-        mediator.closeStore();
-        // controller.startGame();
+
     }
 
     public boolean activateCheat (String cheat) {
