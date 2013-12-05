@@ -7,6 +7,7 @@ import gameEngine.view.View;
 import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
 import gameEngine.view.gameFrame.gameObjects.RangeDisplay;
 import java.awt.Dimension;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,19 +40,24 @@ public class Game extends StdGame {
     private int HEIGHT = 600;
 
     private View view;
-    private PurchaseInfo towerToPurchase;
     private Utilities utilities;
-    private GameFrameMediator mediator;
+
     private FrameRateSlider frameRateSlider;
     private JGObject frameRateBar;
     private ItemPurchaser itemPurchaser;
     private Map<String,String> valuesToDisplay;
 
-    public Game (View view, GameFrameMediator mediator, ItemPurchaser itemPurchaser, Utilities utilities) {
+    private Collection<GameInitializable> gameInitializerItems;
+
+    private Collection<GameUpdatable> gameUpdatables;
+
+    public Game (View view,ItemPurchaser itemPurchaser, Utilities utilities, Collection<GameInitializable> gameInitializerItems, Collection<GameUpdatable> gameUpdatables) {
         this.view = view;
-        this.mediator = mediator;
+
         this.itemPurchaser = itemPurchaser;
         this.utilities=utilities;
+        this.gameInitializerItems =gameInitializerItems;
+        this.gameUpdatables = gameUpdatables;
         initEngineComponent(WIDTH, HEIGHT);
     }
 
@@ -100,9 +106,10 @@ public class Game extends StdGame {
     
     public void startInGame() {
         view.startModel();
-        mediator.openStore();
-        mediator.openInfoPanel();
-        mediator.updateStoreStatus();
+        for (GameInitializable item: gameInitializerItems){
+            item.initialize();
+        }
+
         
     }
 
@@ -113,7 +120,10 @@ public class Game extends StdGame {
         checkCollision(0, 0);
         checkUserInteractions();
         updateGameStats();
-        mediator.updateStoreStatus();
+        for (GameUpdatable updatable: gameUpdatables){
+            updatable.update();
+        }
+
         if (getKey(KeyEsc)) {
             clearKey(KeyEsc);
             lives = 0;

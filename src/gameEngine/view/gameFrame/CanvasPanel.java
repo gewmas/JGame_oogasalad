@@ -1,5 +1,6 @@
 package gameEngine.view.gameFrame;
 
+import java.util.Collection;
 import jgame.impl.JGEngineInterface;
 import gameEngine.controller.Controller;
 import gameEngine.factory.towerfactory.TowerFactory;
@@ -11,8 +12,8 @@ import gameEngine.view.View;
 public class CanvasPanel extends Panel {
     Game game;
 
-    public CanvasPanel (View view, GameFrameMediator mediator, ItemPurchaser itemPurchaser, Utilities utilities) {
-        game = new Game(view, mediator,itemPurchaser, utilities);
+    public CanvasPanel (View view,  ItemPurchaser itemPurchaser, Utilities utilities, Collection<GameInitializable> gameInitializerItems, Collection<GameUpdatable> gameUpdatables) {
+        game = new Game(view,itemPurchaser, utilities,gameInitializerItems,gameUpdatables);
         this.add(game);
         view.sendEngine(game);
     }

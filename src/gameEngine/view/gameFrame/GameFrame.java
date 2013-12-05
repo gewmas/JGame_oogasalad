@@ -1,10 +1,8 @@
 package gameEngine.view.gameFrame;
 
 import java.awt.BorderLayout;
-import java.awt.Cursor;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import gameEngine.view.Frame;
@@ -16,7 +14,6 @@ import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 import gameEngine.view.gameFrame.tools.store.StorePanel;
 import gameEngine.controller.Controller;
-import gameEngine.model.purchase.PurchaseInfo;
 
 
 /**
@@ -26,14 +23,18 @@ import gameEngine.model.purchase.PurchaseInfo;
  * @author Lalita Maraj Alex Zhu
  * 
  */
-public class GameFrame extends Frame {
+public class GameFrame extends Frame implements GameInitializable {
 
     private GameFrameMediator mediator;
     private View view;
     private InputAndDisplayFrame cheatCodeFrame;
-
+    private StorePanel storePanel;
+    private InfoDisplayPanel infoPanel;
     private Utilities utilities;
     private ItemPurchaser itemPurchaser;
+    private Collection<GameInitializable> gameInitializerItems;
+    private Collection<GameUpdatable> gameUpdatables;
+
     /**
      * @param controller facilitates communication between view and model
      * @param view
@@ -46,12 +47,15 @@ public class GameFrame extends Frame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mediator.addGameFrame(this);
         this.cheatCodeFrame = addCheatCodeFrame(view);
-        InfoDisplayPanel infoPanel = addInfoDisplay();
-        utilities  = new Utilities(infoPanel,this,view);
-        itemPurchaser = new ItemPurchaser(view,utilities);
-        StorePanel storePanel = addStorePanel(utilities,itemPurchaser);
+        infoPanel = addInfoDisplay();
+        utilities = new Utilities(infoPanel, this, view);
+        itemPurchaser = new ItemPurchaser(view, utilities);
+        storePanel = addStorePanel(utilities, itemPurchaser);
+        gameInitializerItems = new ArrayList();
+        gameUpdatables = new ArrayList();
+        gameUpdatables.add(storePanel);
         addGameTools(infoPanel, storePanel);
-        
+
         setJMenuBar(new Menu(view));
     }
 
@@ -64,17 +68,15 @@ public class GameFrame extends Frame {
         });
     }
 
-
-
     public void showGame () {
-        
         createGame();
         pack();
         setVisible(true);
     }
 
     public void createGame () {
-        CanvasPanel canvasPanel = new CanvasPanel(view, mediator,itemPurchaser, utilities);
+        gameInitializerItems.add(this);
+        CanvasPanel canvasPanel = new CanvasPanel(view,itemPurchaser, utilities,gameInitializerItems,gameUpdatables);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addGame(canvasPanel);
         utilities.createRangeDisplay();
@@ -82,8 +84,9 @@ public class GameFrame extends Frame {
 
     /**
      * Create the store of Towers
-     * @param storePanel2 
-     * @param infoPanel2 
+     * 
+     * @param storePanel2
+     * @param infoPanel2
      */
     private void addGameTools (InfoDisplayPanel infoPanel, StorePanel storePanel) {
         JPanel tools = new JPanel();
@@ -91,12 +94,15 @@ public class GameFrame extends Frame {
         tools.setLayout(borderLayout);
         tools.add(infoPanel, BorderLayout.CENTER);
         tools.add(storePanel, BorderLayout.PAGE_START);
+        gameInitializerItems.add(storePanel);
+
         this.add(tools, BorderLayout.EAST);
-        //this.add(new UpgradeButton(mediator),BorderLayout.);
+
+        // this.add(new UpgradeButton(mediator),BorderLayout.);
     }
 
     private StorePanel addStorePanel (Utilities utilities, ItemPurchaser itemPurchaser) {
-        StorePanel storePanel = new StorePanel( view,utilities,itemPurchaser);
+        StorePanel storePanel = new StorePanel(view, utilities, itemPurchaser);
         mediator.addStore(storePanel);
         return storePanel;
     }
@@ -108,19 +114,11 @@ public class GameFrame extends Frame {
         return infoPanel;
     }
 
-    /**
-     * Changes the default cursor to the image of the tower to be placed
-     */
-    public void placeTower (PurchaseInfo towerInfo) {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage("resources/img/" + towerInfo.getInfo().get("Image") + ".png");
-        Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
-        setCursor(c);
-    }
+    @Override
+    public void initialize () {
+        infoPanel.setVisible(true);
+        this.pack();
 
-
-    public void restoreDefaultCursor () {
-        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 
 }
