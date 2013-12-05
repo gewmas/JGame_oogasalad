@@ -268,7 +268,10 @@ public class Enemy extends JGObject implements IEMagicable {
     }
     
 
-
+    public void setLife(int value) {
+        life = value;
+        lifeLessThanZero();
+    }
 
     public void setSkill(String skill){
         SkillFactory sf= new SkillFactory(this.eng);

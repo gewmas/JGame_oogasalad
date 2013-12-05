@@ -35,12 +35,12 @@ public class NormalEnemyFactory implements EnemyFactory {
     }
 
     @Override
-    
     public Enemy create (Model model) {
-        Enemy result= new Enemy(gold, life, speed, id, true, GameEngineConstant.ENEMY_CID, image, model);
+        Enemy enemy = new Enemy(gold, life, speed, id, true, GameEngineConstant.ENEMY_CID, image, model);
+        model.addEnemy(enemy);
         System.out.println(skill);
-        result.setSkill(skill);
-        return result;
+        enemy.setSkill(skill);
+        return enemy;
     }
 
 }
