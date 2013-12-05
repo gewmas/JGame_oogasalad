@@ -86,6 +86,6 @@ public class GameFrameMediator {
     @Deprecated
     public void openInfoPanel () {
         this.towerInfoPanel.setVisible(true);
-//        gameFrame.pack();
+        gameFrame.pack();
     }
 }
