@@ -4,7 +4,7 @@ package gameEngine.view.gameFrame;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 import gameEngine.view.gameFrame.tools.store.StorePanel;
 
-
+@Deprecated
 /**
  * Used to implement the Mediator design pattern. Facilitates
  * communication between view components.
@@ -22,7 +22,7 @@ import gameEngine.view.gameFrame.tools.store.StorePanel;
  * @author Lalita Maraj
  * 
  */
-@Deprecated
+
 public class GameFrameMediator {
 
     private GameFrame gameFrame;
@@ -30,14 +30,15 @@ public class GameFrameMediator {
     private InfoDisplayPanel towerInfoPanel;
     private StorePanel storePanel;
 
+    @Deprecated
     /**
      * Destroys the jgame instance so that it can be reloaded
      */
-
     public void quitGame () {
         canvasPanel.quitGame();
     }
 
+    @Deprecated
     public void endGame () {
         towerInfoPanel.clearDisplay();
         canvasPanel.endGame();
@@ -46,12 +47,12 @@ public class GameFrameMediator {
 
 
 
-
+    @Deprecated
     public void addGameFrame (GameFrame gameFrame) {
         this.gameFrame = gameFrame;
 
     }
-
+    @Deprecated
     public void addGame (CanvasPanel canvasPanel) {
         this.canvasPanel = canvasPanel;
 
@@ -79,6 +80,7 @@ public class GameFrameMediator {
     public void updateStoreStatus () {
         storePanel.update();
     }
+    @Deprecated
     public void addStore (StorePanel storePanel) {
         this.storePanel = storePanel;
 

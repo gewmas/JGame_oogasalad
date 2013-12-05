@@ -25,11 +25,11 @@ import gameEngine.controller.Controller;
  */
 public class GameFrame extends Frame implements GameInitializable {
 
-    private GameFrameMediator mediator;
     private View view;
     private InputAndDisplayFrame cheatCodeFrame;
     private StorePanel storePanel;
     private InfoDisplayPanel infoPanel;
+    private CanvasPanel canvasPanel;
     private Utilities utilities;
     private ItemPurchaser itemPurchaser;
     private Collection<GameInitializable> gameInitializerItems;
@@ -39,13 +39,12 @@ public class GameFrame extends Frame implements GameInitializable {
      * @param controller facilitates communication between view and model
      * @param view
      */
-    public GameFrame (Controller controller, final View view, GameFrameMediator mediator) {
+    public GameFrame (Controller controller, final View view) {
         super();
-        this.mediator = mediator;
 
         this.view = view;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mediator.addGameFrame(this);
+
         this.cheatCodeFrame = addCheatCodeFrame(view);
         infoPanel = addInfoDisplay();
         utilities = new Utilities(infoPanel, this, view);
@@ -76,9 +75,11 @@ public class GameFrame extends Frame implements GameInitializable {
 
     public void createGame () {
         gameInitializerItems.add(this);
-        CanvasPanel canvasPanel = new CanvasPanel(view,itemPurchaser, utilities,gameInitializerItems,gameUpdatables);
+        canvasPanel =
+                new CanvasPanel(view, itemPurchaser, utilities, gameInitializerItems,
+                                gameUpdatables);
         this.add(canvasPanel, BorderLayout.WEST);
-        mediator.addGame(canvasPanel);
+
         utilities.createRangeDisplay();
     }
 
@@ -97,20 +98,17 @@ public class GameFrame extends Frame implements GameInitializable {
         gameInitializerItems.add(storePanel);
 
         this.add(tools, BorderLayout.EAST);
-
-        // this.add(new UpgradeButton(mediator),BorderLayout.);
     }
 
     private StorePanel addStorePanel (Utilities utilities, ItemPurchaser itemPurchaser) {
         StorePanel storePanel = new StorePanel(view, utilities, itemPurchaser);
-        mediator.addStore(storePanel);
+
         return storePanel;
     }
 
     private InfoDisplayPanel addInfoDisplay () {
         InfoDisplayPanel infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
                 .getString("ItemInfo"));
-        mediator.addInfoPanel(infoPanel);
         return infoPanel;
     }
 
@@ -121,4 +119,17 @@ public class GameFrame extends Frame implements GameInitializable {
 
     }
 
+    /**
+     * Destroys the jgame instance so that it can be reloaded
+     */
+
+    public void quitGame () {
+        canvasPanel.quitGame();
+    }
+
+    public void endGame () {
+        infoPanel.clearDisplay();
+        canvasPanel.endGame();
+        storePanel.closeStore();
+    }
 }
