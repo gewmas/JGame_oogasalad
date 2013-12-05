@@ -332,7 +332,7 @@ public abstract class JGEngine extends Applet implements JGEngineInterface {
     void drawObject (Graphics g, JGObject o) {
         if (!o.is_suspended) {
             // o.prepareForFrame();
-            drawImage(g, (int) o.x, (int) o.y, o.getImageName(), true);
+            drawImage(g, (int) o.x, (int) o.y, o.getImageName(), true,o.alpha);
             try {
                 o.paint();
             }
@@ -1676,7 +1676,20 @@ public abstract class JGEngine extends Applet implements JGEngineInterface {
         JREImage img = (JREImage) el.getImage(imgname);
         if (img != null) g.drawImage(img.img, (int) x, (int) y, this);
     }
+    
 
+   
+    void drawImage (Graphics g, double x, double y, String imgname,
+                    boolean pf_relative,float alpha) {
+        if (imgname==null) return;
+        x = el.scaleXPos(x,pf_relative);
+        y = el.scaleYPos(y,pf_relative);       
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        System.out.println("called me");
+        JREImage img = (JREImage) el.getImage(imgname);
+        if (img != null) g.drawImage(img.img, (int) x, (int) y, this);
+    }
     public void drawLine (double x1, double y1, double x2, double y2,
                           double thickness, JGColor color) {
         if (color != null) setColor(color);
@@ -1829,6 +1842,8 @@ public abstract class JGEngine extends Applet implements JGEngineInterface {
                            double alpha, double rot, double scale, boolean pf_relative) {
         if (buf_gfx == null) return;
         drawImage(buf_gfx, x, y, imgname, pf_relative);
+        
+       
     }
 
     /* new versions of drawImage */

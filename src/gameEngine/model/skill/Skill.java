@@ -10,6 +10,7 @@ abstract public class Skill {
     protected int myX;
     protected int myY;
     protected JGEngineInterface myEng;
+    protected String myName;
     // because we can alter game speed, so everything should related
     // frame. That's why I don't use a built-in Timer.
     public Skill(long cd, JGEngineInterface eng){

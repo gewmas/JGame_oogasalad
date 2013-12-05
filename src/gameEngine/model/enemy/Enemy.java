@@ -277,10 +277,18 @@ public class Enemy extends JGObject implements IEMagicable {
         return change;    
     }
     
+
     @Override
     public double changeSpeed(double offset){
        speed+=offset;
        return offset;
+    }
+
+
+
+    public void setLife(int value) {
+        life = value;
+        lifeLessThanZero();
     }
 
 

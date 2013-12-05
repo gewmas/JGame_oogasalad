@@ -3,6 +3,7 @@ package gameEngine.model;
 import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.temporaryBarrier.TemporaryBarrierFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.enemy.Enemy;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
@@ -42,6 +43,7 @@ public class Model {
     private Rule rule; // how each waves created, ruleStart, ruleStop
     private ArrayList<ArrayList<Tile>> grid;
     private ArrayList<Tile> barriers;
+    private ArrayList<Enemy> spawnedEnemies;
 
     public Model () {
          
@@ -56,6 +58,7 @@ public class Model {
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
         barriers = gridFactory.getBarrierList();
+        spawnedEnemies = new ArrayList<Enemy>();
         temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
@@ -231,17 +234,21 @@ public class Model {
      * @return bool
      */
     public boolean activateCheat(String code) {
-
         String[] cheatArgs = code.split(" ");
         String cmd = cheatArgs[0];
-        if(cmd == "add_gold") {
+        if(cmd.equals("add_gold")) {
             int amt = Integer.parseInt(cheatArgs[1]);
             gameInfo.addGold(amt);
         } else if(cmd.equals("add_lives")) {
             int amt = Integer.parseInt(cheatArgs[1]);
             gameInfo.addLife(amt);
         } else if(cmd.equals("kill_all")) {
-            //TODO
+            System.out.println("called kill_all and num emenies is: "+spawnedEnemies.size());
+            for (int j = 0; j < spawnedEnemies.size(); j++) {
+                Enemy enemy = spawnedEnemies.get(j);
+                enemy.setLife(0);
+                spawnedEnemies.remove(j);
+            }
         } else if(cmd.equals("win_game")) {
             //TODO
         } else if (cmd.equals("lose_game")) {
@@ -250,6 +257,10 @@ public class Model {
             return false;
         }
         return true;
+    }
+    
+    public void addEnemy(Enemy enemy) {
+        spawnedEnemies.add(enemy);
     }
 
 

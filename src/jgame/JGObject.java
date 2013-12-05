@@ -51,7 +51,7 @@ public class JGObject {
     static int next_id = 0;
     /** global which might be accessed concurrently */
     static JGEngineInterface default_engine = null;
-
+    public float alpha=0.5f;
     /**
      * The engine's viewWidth and viewHeight, stored in a local variable
      * for extra speed.

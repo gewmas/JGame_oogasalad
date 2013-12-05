@@ -80,7 +80,7 @@ public class GameInfo {
     }
     
     public void addLife (int amt) {
-        myLife = myLife + amt;
+        myLife += amt;
     }
 
     public void loseLife () {
