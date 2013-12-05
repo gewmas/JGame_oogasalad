@@ -6,11 +6,11 @@ import gameEngine.model.magic.IMagicable;
 
 public class EArmourFactory implements IMagicFactory {
     
-    private int myExpire=60;
+    private int myExpire=120;
     
     @Override
     public void createMagicInstance (IMagicable target, IMagicable sender) {
-        new EArmourMagic(myExpire,target,GameEngineConstant.ARMOURMAGIC_ID,GameEngineConstant.ENEMY_CID);  
+        new EArmourMagic(myExpire,target,GameEngineConstant.ARMOURMAGIC_ID,GameEngineConstant.NORMALMAGIC_CID);  
     }
     
 

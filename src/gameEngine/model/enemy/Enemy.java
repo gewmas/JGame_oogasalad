@@ -6,7 +6,7 @@ import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Model;
 import gameEngine.model.bullet.Bullet;
 import gameEngine.model.magic.IEMagicable;
-
+import gameEngine.model.magic.Magic;
 import gameEngine.model.temporaryBarrier.TemporaryBarrier;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
@@ -139,7 +139,8 @@ public class Enemy extends JGObject implements IEMagicable {
                 life--;
                 lifeLessThanZero();
    
-            } else {
+            }
+            else {
                 Bullet bullet = (Bullet) obj;
                 if (this == bullet.getTargetEnemy()) {
                     /**

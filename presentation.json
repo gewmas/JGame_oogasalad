@@ -462,7 +462,7 @@
 	 "Sell Price":  50,
 	 "Description": "Magic tower will shoot a magic bullet to affect the enemy.",
 	 "Magic Factor": 2.0,
-	 "Magic" : 1,
+	 "Magic" : 8,
 	}
 ],
 

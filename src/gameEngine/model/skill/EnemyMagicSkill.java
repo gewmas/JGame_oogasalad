@@ -20,7 +20,7 @@ public class EnemyMagicSkill extends AutoSkill {
         List<Enemy> targets=detector.getTargetsInRange(x, y, 50);
         myEng.playAudio(myName);
         for (int i = 0; i < targets.size(); i++) {
-    //        MagicsFactory.getInstance().createMagics(targets.get(i), null, myName, 0);
+            MagicsFactory.getInstance().createMagics(targets.get(i), null,"HasteMagic");
         }
         
     }

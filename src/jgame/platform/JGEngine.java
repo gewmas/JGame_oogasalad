@@ -1681,12 +1681,13 @@ public abstract class JGEngine extends Applet implements JGEngineInterface {
    
     void drawImage (Graphics g, double x, double y, String imgname,
                     boolean pf_relative,float alpha) {
+
         if (imgname==null) return;
         x = el.scaleXPos(x,pf_relative);
         y = el.scaleYPos(y,pf_relative);       
         Graphics2D g2d = (Graphics2D)g;
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-        System.out.println("called me");
+        //System.out.println("called me");
         JREImage img = (JREImage) el.getImage(imgname);
         if (img != null) g.drawImage(img.img, (int) x, (int) y, this);
     }
