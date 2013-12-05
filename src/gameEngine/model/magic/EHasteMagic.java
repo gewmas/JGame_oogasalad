@@ -1,9 +1,9 @@
 package gameEngine.model.magic;
 
-public class ESpeedUpMagic extends Magic{
+public class EHasteMagic extends Magic{
     public static String NAME="haste";
     private double mySpeedUp;
-    public ESpeedUpMagic (int expire,
+    public EHasteMagic (int expire,
                           IMagicable target,
                           double speedUp,
                           int ID,

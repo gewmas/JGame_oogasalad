@@ -49,8 +49,10 @@ public class GameFrame extends Frame implements GameInitializable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.cheatCodeFrame = addCheatCodeFrame(view);
+
         this.gameKeyActivationItems = new HashMap();
         gameKeyActivationItems.put("C",cheatCodeFrame);
+
         
         infoPanel = addInfoDisplay();
         utilities = new Utilities(infoPanel, this, view);

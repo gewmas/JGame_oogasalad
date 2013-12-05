@@ -231,10 +231,10 @@ public class Model {
      * @return bool
      */
     public boolean activateCheat(String code) {
-
+        System.out.println("called activate cheat");
         String[] cheatArgs = code.split(" ");
         String cmd = cheatArgs[0];
-        if(cmd == "add_gold") {
+        if(cmd.equals("add_gold")) {
             int amt = Integer.parseInt(cheatArgs[1]);
             gameInfo.addGold(amt);
         } else if(cmd.equals("add_lives")) {

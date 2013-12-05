@@ -39,7 +39,7 @@ public class InputPanel extends Panel {
         setBorder(valuePanelBorder);
         setBorder(valuePanelBorder);
         Button submit = new Button("Submit");
-        final JTextArea input = new JTextArea("WIN DA GAME BRO");
+        final JTextArea input = new JTextArea("add_gold");
         input.setPreferredSize(new Dimension(TEXTBOX_WIDTH, TEXTBOX_HEIGHT));
         this.add(new JScrollPane(input), TEXT_BOX_POSITION);
         this.add(submit, SUBMIT_BUTTON_POSITION);
