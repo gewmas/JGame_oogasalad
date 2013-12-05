@@ -3,6 +3,8 @@ package gameEngine.view.gameFrame;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import gameEngine.view.Frame;
@@ -32,6 +34,7 @@ public class GameFrame extends Frame implements GameInitializable {
     private CanvasPanel canvasPanel;
     private Utilities utilities;
     private ItemPurchaser itemPurchaser;
+    private Map<String,KeyActivationItem> gameKeyActivationItems;
     private Collection<GameInitializable> gameInitializerItems;
     private Collection<GameUpdatable> gameUpdatables;
 
@@ -46,6 +49,9 @@ public class GameFrame extends Frame implements GameInitializable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.cheatCodeFrame = addCheatCodeFrame(view);
+        this.gameKeyActivationItems = new HashMap();
+        gameKeyActivationItems.put("C",cheatCodeFrame);
+        
         infoPanel = addInfoDisplay();
         utilities = new Utilities(infoPanel, this, view);
         itemPurchaser = new ItemPurchaser(view, utilities);
@@ -77,7 +83,7 @@ public class GameFrame extends Frame implements GameInitializable {
         gameInitializerItems.add(this);
         canvasPanel =
                 new CanvasPanel(view, itemPurchaser, utilities, gameInitializerItems,
-                                gameUpdatables);
+                                gameUpdatables, gameKeyActivationItems);
         this.add(canvasPanel, BorderLayout.WEST);
 
         utilities.createRangeDisplay();

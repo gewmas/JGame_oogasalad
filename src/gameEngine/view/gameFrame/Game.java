@@ -51,9 +51,11 @@ public class Game extends StdGame {
 
     private Collection<GameUpdatable> gameUpdatables;
 
-    public Game (View view,ItemPurchaser itemPurchaser, Utilities utilities, Collection<GameInitializable> gameInitializerItems, Collection<GameUpdatable> gameUpdatables) {
-        this.view = view;
+    private Map<String, KeyActivationItem> keyActivationItems;
 
+    public Game (View view,ItemPurchaser itemPurchaser, Utilities utilities, Collection<GameInitializable> gameInitializerItems, Collection<GameUpdatable> gameUpdatables,Map<String, KeyActivationItem> keyActivationItems) {
+        this.view = view;
+        this.keyActivationItems =  keyActivationItems;
         this.itemPurchaser = itemPurchaser;
         this.utilities=utilities;
         this.gameInitializerItems =gameInitializerItems;
@@ -123,7 +125,13 @@ public class Game extends StdGame {
         for (GameUpdatable updatable: gameUpdatables){
             updatable.update();
         }
-
+        for (String key: keyActivationItems.keySet()){
+            KeyActivationItem item = keyActivationItems.get(key);
+            if (getKey(key.charAt(0))) {
+                clearKey(key.charAt(0));
+                item.activate();
+            }
+        }
         if (getKey(KeyEsc)) {
             clearKey(KeyEsc);
             lives = 0;
