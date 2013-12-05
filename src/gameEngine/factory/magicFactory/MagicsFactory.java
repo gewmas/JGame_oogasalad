@@ -63,6 +63,11 @@ public class MagicsFactory {
         createMagics (target, sender,newMagicIds, currentMagicIds);     
     }
     
+    public void createMagics(IMagicable target, IMagicable sender,String newMagicNames){
+        int newMagicIds=myTranslateMap.get(newMagicNames);
+        createMagics (target, sender,newMagicIds,0);     
+    }
+    
     public int parserMagicNamesToId(Collection<String> names){
         int newMagicIds=0;
         for(String str:names){
