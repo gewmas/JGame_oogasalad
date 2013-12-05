@@ -22,6 +22,7 @@ import gameEngine.view.gameFrame.tools.store.StorePanel;
  * @author Lalita Maraj
  * 
  */
+@Deprecated
 public class GameFrameMediator {
 
     private GameFrame gameFrame;
@@ -55,7 +56,7 @@ public class GameFrameMediator {
         this.canvasPanel = canvasPanel;
 
     }
-
+    @Deprecated
     public void addInfoPanel (InfoDisplayPanel towerInfoPanel) {
         this.towerInfoPanel = towerInfoPanel;
     }

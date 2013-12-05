@@ -20,7 +20,7 @@ import javax.swing.border.Border;
  * 
  * 
  */
-public class InfoDisplayPanel extends Panel implements GameInitializable {
+public class InfoDisplayPanel extends Panel  {
 
     /**
      * 
@@ -145,10 +145,5 @@ public class InfoDisplayPanel extends Panel implements GameInitializable {
         return null;
     }
 
-    @Override
-    public void initialize () {
-        this.setVisible(true);
-//        gameFrame.pack();
-        
-    }
+
 }

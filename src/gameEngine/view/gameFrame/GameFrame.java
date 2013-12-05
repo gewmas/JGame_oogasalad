@@ -1,7 +1,6 @@
 package gameEngine.view.gameFrame;
 
 import java.awt.BorderLayout;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JFrame;
@@ -24,17 +23,18 @@ import gameEngine.controller.Controller;
  * @author Lalita Maraj Alex Zhu
  * 
  */
-public class GameFrame extends Frame implements GameInitializable{
+public class GameFrame extends Frame implements GameInitializable {
 
     private GameFrameMediator mediator;
     private View view;
     private InputAndDisplayFrame cheatCodeFrame;
     private StorePanel storePanel;
-
+    private InfoDisplayPanel infoPanel;
     private Utilities utilities;
     private ItemPurchaser itemPurchaser;
     private Collection<GameInitializable> gameInitializerItems;
-    private Collection<GameUpdatable> gameUpdatables  ;
+    private Collection<GameUpdatable> gameUpdatables;
+
     /**
      * @param controller facilitates communication between view and model
      * @param view
@@ -47,15 +47,15 @@ public class GameFrame extends Frame implements GameInitializable{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mediator.addGameFrame(this);
         this.cheatCodeFrame = addCheatCodeFrame(view);
-        InfoDisplayPanel infoPanel = addInfoDisplay();
-        utilities  = new Utilities(infoPanel,this,view);
-        itemPurchaser = new ItemPurchaser(view,utilities);
-        storePanel = addStorePanel(utilities,itemPurchaser);
+        infoPanel = addInfoDisplay();
+        utilities = new Utilities(infoPanel, this, view);
+        itemPurchaser = new ItemPurchaser(view, utilities);
+        storePanel = addStorePanel(utilities, itemPurchaser);
         gameInitializerItems = new ArrayList();
         gameUpdatables = new ArrayList();
         gameUpdatables.add(storePanel);
         addGameTools(infoPanel, storePanel);
-        
+
         setJMenuBar(new Menu(view));
     }
 
@@ -68,8 +68,6 @@ public class GameFrame extends Frame implements GameInitializable{
         });
     }
 
-    
-
     public void showGame () {
         createGame();
         pack();
@@ -77,7 +75,8 @@ public class GameFrame extends Frame implements GameInitializable{
     }
 
     public void createGame () {
-        CanvasPanel canvasPanel = new CanvasPanel(view, mediator,itemPurchaser, utilities);
+        gameInitializerItems.add(this);
+        CanvasPanel canvasPanel = new CanvasPanel(view,itemPurchaser, utilities,gameInitializerItems,gameUpdatables);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addGame(canvasPanel);
         utilities.createRangeDisplay();
@@ -85,8 +84,9 @@ public class GameFrame extends Frame implements GameInitializable{
 
     /**
      * Create the store of Towers
-     * @param storePanel2 
-     * @param infoPanel2 
+     * 
+     * @param storePanel2
+     * @param infoPanel2
      */
     private void addGameTools (InfoDisplayPanel infoPanel, StorePanel storePanel) {
         JPanel tools = new JPanel();
@@ -95,14 +95,14 @@ public class GameFrame extends Frame implements GameInitializable{
         tools.add(infoPanel, BorderLayout.CENTER);
         tools.add(storePanel, BorderLayout.PAGE_START);
         gameInitializerItems.add(storePanel);
-        gameInitializerItems.add(infoPanel);
+
         this.add(tools, BorderLayout.EAST);
-        
-        //this.add(new UpgradeButton(mediator),BorderLayout.);
+
+        // this.add(new UpgradeButton(mediator),BorderLayout.);
     }
 
     private StorePanel addStorePanel (Utilities utilities, ItemPurchaser itemPurchaser) {
-        StorePanel storePanel = new StorePanel( view,utilities,itemPurchaser);
+        StorePanel storePanel = new StorePanel(view, utilities, itemPurchaser);
         mediator.addStore(storePanel);
         return storePanel;
     }
@@ -116,11 +116,9 @@ public class GameFrame extends Frame implements GameInitializable{
 
     @Override
     public void initialize () {
+        infoPanel.setVisible(true);
         this.pack();
-        
+
     }
-
-
-
 
 }
