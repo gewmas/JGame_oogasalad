@@ -7,7 +7,7 @@ package gameEngine.model.magic;
 public class EHasteMagic extends Magic{
     public static String NAME="haste";
     private double mySpeedUp;  
-   
+   private double alphIncrement;
     public EHasteMagic (int expire,
                           IMagicable target,
                           double speedUp,
@@ -15,7 +15,7 @@ public class EHasteMagic extends Magic{
                           int CID) {
         super(expire, target, null, NAME, CID, NAME, ID);
         mySpeedUp=speedUp;
-
+        alphIncrement=-alpha*0.8/expire;
         magicOn ();
     }
 
@@ -32,9 +32,8 @@ public class EHasteMagic extends Magic{
         myChangeRecord=((IEMagicable)myTarget).changePercentSpeed(-myChangeRecord);
     }
     
-
-
-
-
-
+    public void move(){
+        super.move();
+        this.alpha+=alphIncrement;      
+    }
 }
