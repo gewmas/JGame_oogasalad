@@ -17,9 +17,9 @@ public class MagicTowerFactory extends DefaultTowerFactory {
         super(currTower);
         
         this.magicFactor = currTower.getDouble(GameEngineConstant.TOWER_MAGIC_FACTOR);
-        //wenxinshi change translate the magic name into magic id
+        //wenxinshi parse the magic id
         JSONArray magicArray=currTower.getJSONArray(GameEngineConstant.TOWER_MAGIC);
-        this.magic=MagicsFactory.getInstance().parserMagicNamesToId(magicArray);
+        this.magic=MagicsFactory.getInstance().parserMagicId(magicArray);
         
         addDescription();
     }

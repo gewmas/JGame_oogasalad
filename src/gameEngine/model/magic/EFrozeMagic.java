@@ -1,6 +1,10 @@
 package gameEngine.model.magic;
 
-
+/**
+ * 
+ * @author wenxin
+ *
+ */
 public class EFrozeMagic extends Magic {
     public static final String NAME="FrozeMagic";
     private static final double FROZESPEEDCHANGE=-0.5;

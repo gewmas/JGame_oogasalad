@@ -1,5 +1,9 @@
 package gameEngine.model.magic;
-
+/**
+ * 
+ * @author wenxin
+ *
+ */
 public class TLightMagic extends Magic {
     public static final String NAME="LightMagic";
     private static final double CHANGERANGE=-1;

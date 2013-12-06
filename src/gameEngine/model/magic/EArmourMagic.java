@@ -3,7 +3,11 @@ package gameEngine.model.magic;
 import gameEngine.model.enemy.Enemy;
 import jgame.JGObject;
 import jgame.JGRectangle;
-
+/**
+ * 
+ * @author wenxin
+ *
+ */
 public class EArmourMagic extends Magic{
     public static final String NAME="ArmourMagic";
     private double myTargetLife;

@@ -72,11 +72,12 @@ public class MagicsFactory {
     }
 
 
-    public int parserMagicNamesToId (JSONArray array) {
+    public int parserMagicId (JSONArray array) {
         int temp = 0;
         for (int i = 0; i < array.length(); i++) {
             temp += myTranslateMap.get(array.get(i));
         }        
+       
         return temp;
     }
 }

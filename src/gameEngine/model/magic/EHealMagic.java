@@ -1,5 +1,9 @@
 package gameEngine.model.magic;
-
+/**
+ * 
+ * @author wenxin
+ *
+ */
 public class EHealMagic extends Magic {
     public static final String NAME = "HealMagic";
 

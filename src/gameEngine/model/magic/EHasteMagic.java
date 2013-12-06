@@ -1,5 +1,9 @@
 package gameEngine.model.magic;
-
+/**
+ * 
+ * @author wenxin
+ *
+ */
 public class EHasteMagic extends Magic{
     public static String NAME="haste";
     private double mySpeedUp;  

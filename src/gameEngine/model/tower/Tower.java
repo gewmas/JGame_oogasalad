@@ -9,7 +9,7 @@ import jgame.JGObject;
 
 
 /**
- * @author Yuhua
+ * @author Yuhua, wenxin shi for magic interface implementation
  * 
  * Tower will shoot the Enemy within shooting range with Bullet
  */

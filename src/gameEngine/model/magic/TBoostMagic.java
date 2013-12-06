@@ -1,6 +1,10 @@
 package gameEngine.model.magic;
 
-
+/**
+ * 
+ * @author wenxin
+ *
+ */
 
 public class TBoostMagic extends Magic{
     public static final String NAME="BoostMagic";
