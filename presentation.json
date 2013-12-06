@@ -489,7 +489,7 @@
 	"image": "drunRight",
 	"life": 15,
 	"speed": 0.5,
-   "skill": "Armor",
+   	"skill": "Light",
 }
 ],
 

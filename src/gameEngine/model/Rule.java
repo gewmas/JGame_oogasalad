@@ -21,6 +21,7 @@ public class Rule {
     private List<Wave> Waves = new ArrayList<Wave>();
     private int myCurrentWaveIndex = 0;
     private Timer myTimer = new Timer();
+    private boolean isAlive=true;;
     // user can set how much time for the user to get familiar with the game.
     private long myInitialDelayInMilliseconds = 2000;
     private EnemyWarehouse myEnemyWarehouse=null;
@@ -45,9 +46,11 @@ public class Rule {
 
     class StartWave extends TimerTask {
 
+       
+
         @Override
         public void run () {
-            if (myCurrentWaveIndex < Waves.size()) {
+            if (myCurrentWaveIndex < Waves.size()&&isAlive) {
                 Wave w = Waves.get(myCurrentWaveIndex);
                 w.waveStart();
                 myTimer.schedule(new StartWave(), w.getInterval());
@@ -80,6 +83,14 @@ public class Rule {
             result[i]= (T) array.get(i);
         }
         return result;
+    }
+    
+    public int getCurrentWaveNum(){
+        return myCurrentWaveIndex;
+    }
+    
+    public void stop(){
+        isAlive= false;
     }
 
 }
