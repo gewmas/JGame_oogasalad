@@ -1,9 +1,12 @@
 package gameEngine.factory.towerfactory;
 
 import gameEngine.constant.GameEngineConstant;
+import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.tower.MagicTower;
 import gameEngine.model.tower.Tower;
+import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
+
 
 public class MagicTowerFactory extends DefaultTowerFactory {
 
@@ -14,7 +17,9 @@ public class MagicTowerFactory extends DefaultTowerFactory {
         super(currTower);
         
         this.magicFactor = currTower.getDouble(GameEngineConstant.TOWER_MAGIC_FACTOR);
-        this.magic = currTower.getInt(GameEngineConstant.TOWER_MAGIC);
+        //wenxinshi change translate the magic name into magic id
+        JSONArray magicArray=currTower.getJSONArray(GameEngineConstant.TOWER_MAGIC);
+        this.magic=MagicsFactory.getInstance().parserMagicNamesToId(magicArray);
         
         addDescription();
     }
