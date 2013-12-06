@@ -26,14 +26,13 @@ public class View implements MenuActions {
     private GameFrame gameFrame;
     private InitializationFrame initializationFrame;
     private Controller controller;
-    private GameFrameMediator mediator;
+
 
     public View (Controller controller) {
         this.controller = controller;
-        mediator = new GameFrameMediator();
-        gameFrame = new GameFrame(controller, this, mediator);
-        initializationFrame = new InitializationFrame(this);
        
+        gameFrame = new GameFrame(controller, this);
+        initializationFrame = new InitializationFrame(this);
 
     }
 
@@ -43,9 +42,9 @@ public class View implements MenuActions {
     }
 
     public void selectNewGame () {
-        mediator.quitGame();
+        gameFrame.quitGame();
         gameFrame.dispose();
-        gameFrame = new GameFrame(controller, this, mediator);
+        gameFrame = new GameFrame(controller, this);
         initializationFrame.setVisible(true);
     }
 
@@ -79,7 +78,7 @@ public class View implements MenuActions {
      */
     public boolean buyTower (int x, int y, PurchaseInfo itemInformation) {
         return (controller.purchaseObject(x, y, itemInformation));
-               
+
     }
 
     /**
@@ -119,14 +118,14 @@ public class View implements MenuActions {
         return controller.getInventory();
     }
 
+    @Deprecated
     public void quitGame () {
-        mediator.quitGame();
+        gameFrame.quitGame();
     }
 
     public void endGame () {
-        mediator.endGame();
-        mediator.closeStore();
-        // controller.startGame();
+        gameFrame.endGame();
+
     }
 
     public boolean activateCheat (String cheat) {
@@ -136,8 +135,8 @@ public class View implements MenuActions {
     public String getGameTitle () {
         return controller.getGameTitle();
     }
-    
-    public boolean upgradeTower(int x, int y){
+
+    public boolean upgradeTower (int x, int y) {
         return controller.upgradeTower(x, y);
     }
 

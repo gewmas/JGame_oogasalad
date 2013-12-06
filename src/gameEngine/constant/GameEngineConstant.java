@@ -16,6 +16,10 @@ public class GameEngineConstant {
     
     public static final int FROZEMAGIC_ID=1;
     public static final int BOOSTMAGIC_ID=2;
+    public static final int HASTEMAGIC_ID=4;
+    public static final int ARMOURMAGIC_ID=8;
+    public static final int HEALMAGIC_ID=16;
+    public static final int LIGHTMAGIC_ID=32;
     public static final int OVERLAPMAGIC_ID=-1;
     
     //JSON TYPE

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
+import gameEngine.view.gameFrame.GameInitializable;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -19,7 +20,7 @@ import javax.swing.border.Border;
  * 
  * 
  */
-public class InfoDisplayPanel extends Panel {
+public class InfoDisplayPanel extends Panel  {
 
     /**
      * 
@@ -143,4 +144,6 @@ public class InfoDisplayPanel extends Panel {
     public PurchaseInfo getDisplayedTower () {
         return null;
     }
+
+
 }

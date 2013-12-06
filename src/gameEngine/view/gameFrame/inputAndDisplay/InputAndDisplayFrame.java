@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame.inputAndDisplay;
 
 import java.util.Map;
+import gameEngine.view.gameFrame.KeyActivationItem;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,7 +17,7 @@ import net.miginfocom.swing.MigLayout;
  *         The text input behavior is defined in the InputSender's submit
  *         method.
  */
-public class InputAndDisplayFrame extends JFrame {
+public class InputAndDisplayFrame extends JFrame implements KeyActivationItem {
 
     /**
      * 
@@ -36,7 +37,7 @@ public class InputAndDisplayFrame extends JFrame {
         add(main);
     }
 
-    public void showFrame () {
+    public void activate () {
         pack();
         setVisible(true);
     }
