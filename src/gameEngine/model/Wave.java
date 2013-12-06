@@ -40,19 +40,18 @@ public class Wave implements ActionListener {
 
     @Override
     public void actionPerformed (ActionEvent e) {
-        if (myCurrentIndex < myNumberOfEnemies.length) {
-            if (myEnemyWarehouse == null)
-                return;
-            if (myNumberOfEnemies[myCurrentIndex] <= 0) {
-                myCurrentIndex++;
-            }
 
+        if (myEnemyWarehouse == null)
+            return;
+        if (myNumberOfEnemies[myCurrentIndex] <= 0) {
+            myCurrentIndex++;
+        }
+        if (myCurrentIndex < myNumberOfEnemies.length) {
             myEnemyWarehouse.create(myEnemyType[myCurrentIndex]);
             myNumberOfEnemies[myCurrentIndex]--;
-            
+
         }
-        else
-            myTimer.stop();
+        else myTimer.stop();
 
     }
 

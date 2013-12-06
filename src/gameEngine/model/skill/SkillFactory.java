@@ -11,13 +11,13 @@ public class SkillFactory {
     public Skill create (String skillType) {
         System.out.println(skillType);
         switch (skillType) {
-            case "haste":
+            case "Haste":
                 return new EnemyMagicSkill(300,myEng, skillType);
-            case "armor":
+            case "Armor":
                 return new EnemyMagicSkill(500,myEng, skillType);
-            case "heal":
+            case "Heal":
                 return new EnemyMagicSkill(500,myEng, skillType);
-            case "storm":
+            case "Storm":
                 return new TowerMagicSkill(1000,myEng,skillType);
             default:
                 return null;
