@@ -16,7 +16,6 @@ public class EFrozeMagic extends Magic {
 
     public void magicOnAction () {
         myChangeRecord=myTarget.changePercentSpeed(FROZESPEEDCHANGE);
-        System.out.println(myChangeRecord);
     }
 
     public void magicOffAction () {
