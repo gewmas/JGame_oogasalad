@@ -5,6 +5,7 @@ import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Model;
 import gameEngine.model.bullet.Bullet;
+import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.magic.IEMagicable;
 import gameEngine.model.magic.Magic;
 import gameEngine.model.temporaryBarrier.TemporaryBarrier;
@@ -121,6 +122,10 @@ public class Enemy extends JGObject implements IEMagicable {
     public void lifeLessThanZero() {
         if(life <= 0) {
             model.getGameInfo().addGold((int)gold);
+            CreateEffect effect=new CreateEffect();
+            effect.blood(this.x, this.y);
+            effect.Dollar(this.x, this.y);
+            
             remove();
         }
     }
