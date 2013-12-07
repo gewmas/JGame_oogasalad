@@ -67,7 +67,6 @@ public class Model {
     }
     // Jiaran: now we can just read waves from JSon.
     public void startGame () {
-
         rule.ruleStart();
 
     }
