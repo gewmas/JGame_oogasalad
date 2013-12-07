@@ -42,8 +42,11 @@ public class MainPanel {
         frame.setContentPane(mainPanel);
         frame.pack();
         frame.setLocationByPlatform(true);
-        frame.setVisible(true);
+        
         frame.setResizable(false);
+    }
+    private void show(){
+        frame.setVisible(true);
     }
     private void close(){
         frame.dispose();
@@ -65,6 +68,7 @@ public class MainPanel {
     }
 
     public static void main (String[] args) {
-        new MainPanel();
+        MainPanel panel = new MainPanel();
+        panel.show();
     }
 }
