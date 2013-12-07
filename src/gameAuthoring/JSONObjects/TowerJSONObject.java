@@ -44,7 +44,7 @@ public class TowerJSONObject extends JSONObject {
         this.put("attackMode", attackMode);
         this.put("range", range);
         this.put("cost", cost);
-        this.put("recyclePrice", recyclePrice);
+        this.put("Sell Price", recyclePrice);
         this.put("description", description);
     }
 
@@ -70,7 +70,7 @@ public class TowerJSONObject extends JSONObject {
         this.put("attackAmount", attackAmount);
         this.put("range", range);
         this.put("cost", cost);
-        this.put("recyclePrice", recyclePrice);
+        this.put("Sell Price", recyclePrice);
         this.put("description", description);
     }
     
@@ -95,7 +95,7 @@ public class TowerJSONObject extends JSONObject {
         this.put("attackMode", attackMode);
         this.put("range", range);
         this.put("cost", cost);
-        this.put("recyclePrice", recyclePrice);
+        this.put("Sell Price", recyclePrice);
         this.put("description", description);
         this.put("boostFactor", boostFactor);
     }

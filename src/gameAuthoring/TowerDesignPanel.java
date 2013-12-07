@@ -29,7 +29,7 @@ import net.miginfocom.swing.MigLayout;
 public class TowerDesignPanel extends JPanel {
 
     Map<String, JPanel> TowerPanelMap;
-    
+
     private TowerDesignTab myTowerDesignTab;
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
@@ -38,11 +38,13 @@ public class TowerDesignPanel extends JPanel {
     private JTextField myNameField;
     private JTextField myDamageField;
     private JTextField myAttackSpeedField;
-    JComboBox<Integer> myAttackModeOptions;
+    private JComboBox<Integer> myAttackModeOptions;
     private JTextField myRangeField;
     private JTextField myCostField;
     private JTextField myRecyclePriceField;
     private JTextArea myDescriptionField;
+    private JButton createTowerButton;
+    private JScrollPane scrollPane;
 
     private File myImageSource;
 
@@ -51,6 +53,8 @@ public class TowerDesignPanel extends JPanel {
     private final static String[] TOWER_TYPES = { "DefaultTower", "MultipleShootingTower",
                                                  "BoostTower", "MagicTower" };
     private final static Integer[] ATTACK_MODES = { 1, 2 };
+
+    JLabel name, damage, attackSpeed, attackMode, range, cost, recyclePrice, description, towerImageChooser;
 
     public TowerDesignPanel (TowerDesignTab towerDesignTab) {
         FileNameExtensionFilter filter =
@@ -61,36 +65,24 @@ public class TowerDesignPanel extends JPanel {
 
         JLabel type = new JLabel("Type");
         type.setFont(Constants.defaultBodyFont);
-        JLabel name = new JLabel("Name");
+
+        // Initializing shared Swing components  
+        name = new JLabel("Name");
         name.setFont(Constants.defaultBodyFont);
-        JLabel damage = new JLabel("Damage");
+        damage = new JLabel("Damage");
         damage.setFont(Constants.defaultBodyFont);
-        JLabel attackSpeed = new JLabel("Attack Speed");
+        attackSpeed = new JLabel("Attack Speed");
         attackSpeed.setFont(Constants.defaultBodyFont);
-        JLabel range = new JLabel("Range");
+        attackMode = new JLabel("Attack Mode");
+        attackMode.setFont(Constants.defaultBodyFont);
+        range = new JLabel("Range");
         range.setFont(Constants.defaultBodyFont);
-        JLabel cost = new JLabel("Cost");
+        cost = new JLabel("Cost");
         cost.setFont(Constants.defaultBodyFont);
-        JLabel recyclePrice = new JLabel("Recycle Price");
+        recyclePrice = new JLabel("Recycle Price");
         recyclePrice.setFont(Constants.defaultBodyFont);
-        JLabel description = new JLabel("Description");
+        description = new JLabel("Description");
         description.setFont(Constants.defaultBodyFont);
-
-        // JButton towerImageChooser = new JButton("Choose tower image");
-        // towerImageChooser.setFont(Constants.defaultBodyFont);
-        // towerImageChooser.addMouseListener(createPathListener());
-
-        JLabel towerImageChooser = new JLabel("Choose image");
-        towerImageChooser.setFont(Constants.defaultBodyFont);
-
-        myTowerImage = new JLabel();
-        myTowerImage.setPreferredSize(new Dimension(50, 50));
-        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
-        myTowerImage.setBorder(border);
-        myTowerImage.addMouseListener(createTowerImageListener());
-
-        JComboBox<String> myTypeOptions = new JComboBox<String>(TOWER_TYPES);
-        myTypeOptions.setFont(Constants.defaultBodyFont);
 
         myNameField = new JTextField();
         myNameField.setPreferredSize(new Dimension(200, 30));
@@ -101,6 +93,8 @@ public class TowerDesignPanel extends JPanel {
         myAttackSpeedField = new JTextField();
         myAttackSpeedField.setPreferredSize(new Dimension(200, 30));
         myAttackSpeedField.setFont(Constants.defaultBodyFont);
+        myAttackModeOptions = new JComboBox<Integer>(ATTACK_MODES);
+        myAttackModeOptions.setFont(Constants.defaultBodyFont);
         myRangeField = new JTextField();
         myRangeField.setPreferredSize(new Dimension(200, 30));
         myRangeField.setFont(Constants.defaultBodyFont);
@@ -109,42 +103,92 @@ public class TowerDesignPanel extends JPanel {
         myCostField.setFont(Constants.defaultBodyFont);
         myRecyclePriceField = new JTextField();
         myRecyclePriceField.setPreferredSize(new Dimension(200, 30));
-
         myRecyclePriceField.setFont(Constants.defaultBodyFont);
-        myDescriptionField = new JTextArea(5, 18);
+        myDescriptionField = new JTextArea(3, 18);
+        
+        towerImageChooser = new JLabel("Choose image");
+        towerImageChooser.setFont(Constants.defaultBodyFont);
+
+        myTowerImage = new JLabel();
+        myTowerImage.setPreferredSize(new Dimension(50, 50));
+        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
+        myTowerImage.setBorder(border);
+        myTowerImage.addMouseListener(createTowerImageListener());
 
         myDescriptionField.setLineWrap(true);
-        JScrollPane scrollPane = new JScrollPane(myDescriptionField);
+        scrollPane = new JScrollPane(myDescriptionField);
 
-        JButton createTowerButton = new JButton("Create Tower");
+        createTowerButton = new JButton("Create Tower");
         createTowerButton.setFont(Constants.defaultBodyFont);
         createTowerButton.addMouseListener(createTowerButtonListener(this));
+        
+        //END
+
+        JComboBox<String> myTypeOptions = new JComboBox<String>(TOWER_TYPES);
+        myTypeOptions.setFont(Constants.defaultBodyFont);
 
         this.setLayout(new MigLayout("wrap 2"));
         this.add(type);
         this.add(myTypeOptions);
-        this.add(name);
-        this.add(myNameField);
-        this.add(damage);
-        this.add(myDamageField);
-        this.add(attackSpeed);
-        this.add(myAttackSpeedField);
-        this.add(range);
-        this.add(myRangeField);
-        this.add(cost);
-        this.add(myCostField);
-        this.add(recyclePrice);
-        this.add(myRecyclePriceField);
-        this.add(description);
-        this.add(scrollPane);
-        this.add(towerImageChooser);
-        this.add(myTowerImage, "gap 0 0 10 10");
-        // this.add(myTowerImage);
-        this.add(createTowerButton);
+
+        this.setLayout(new MigLayout("wrap 1"));
+        this.add(createTowerPanel());
+
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         this.setBorder(b);
         this.setOpaque(false);
         this.setPreferredSize(new Dimension(380, 500));
+    }
+
+    // Methods to create new panels
+    private JPanel createTowerPanel () {
+        JPanel panel = new JPanel();
+
+        panel.setLayout(new MigLayout("wrap 2"));
+
+        // JButton towerImageChooser = new JButton("Choose tower image");
+        // towerImageChooser.setFont(Constants.defaultBodyFont);
+        // towerImageChooser.addMouseListener(createPathListener());
+
+
+        panel.add(name);
+        panel.add(myNameField);
+        panel.add(damage);
+        panel.add(myDamageField);
+        panel.add(attackSpeed);
+        panel.add(myAttackSpeedField);
+        panel.add(attackMode);
+        panel.add(myAttackModeOptions);
+        panel.add(range);
+        panel.add(myRangeField);
+        panel.add(cost);
+        panel.add(myCostField);
+        panel.add(recyclePrice);
+        panel.add(myRecyclePriceField);
+        panel.add(description);
+        panel.add(scrollPane);
+        panel.add(towerImageChooser);
+        panel.add(myTowerImage, "gap 0 0 10 10");
+        // panel.add(myTowerImage);
+        panel.add(createTowerButton);
+
+        return panel;
+
+    }
+
+    private JPanel createMagicTowerPanel () {
+        JPanel panel = new JPanel();
+        return panel;
+    }
+
+    private JPanel createBoostTowerPanel () {
+        JPanel panel = new JPanel();
+        return panel;
+    }
+
+    private JPanel createMultipleShootingTowerPanel () {
+        JPanel panel = new JPanel();
+        return panel;
     }
 
     public MouseAdapter createTowerImageListener () {
