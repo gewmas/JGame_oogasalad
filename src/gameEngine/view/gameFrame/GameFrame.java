@@ -43,7 +43,7 @@ public class GameFrame extends Frame {
         this.mediator = mediator;
 
         this.view = view;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mediator.addGameFrame(this);
         this.cheatCodeFrame = addCheatCodeFrame(view);
         InfoDisplayPanel infoPanel = addInfoDisplay();
