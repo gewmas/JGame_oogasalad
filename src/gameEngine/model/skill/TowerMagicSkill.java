@@ -21,7 +21,7 @@ public class TowerMagicSkill extends AutoSkill {
         
         myEng.playAudio(myName);
         for (int i = 0; i < targets.size()|| i< 2; i++) {
-    //        MagicsFactory.getInstance().createMagics(targets.get(i), null, myName, 0);
+           // MagicsFactory.getInstance().createMagics(targets.get(i), null, myName, 0);
         }
 
     }

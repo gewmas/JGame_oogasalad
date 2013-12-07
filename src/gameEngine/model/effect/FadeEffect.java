@@ -1,25 +1,29 @@
 package gameEngine.model.effect;
 
+import jgame.JGObject;
+
 public class FadeEffect extends Effect {
     private boolean isDown=false; 
-    public FadeEffect (double x, double y, String gfxname, String audio) {
-        super(x, y, gfxname,audio);
-        alpha=0.1f;
+    public FadeEffect (double x, double y, JGObject o) {
+        super(x, y, o);
+        myObject.alpha=0.1f;
     }
 
     public void move () {
 
         if (!isDown) {
-            alpha+=0.05;
-            if (alpha >= 1) {
-                alpha = 1;
+            myObject.alpha+=0.025;
+            if (myObject.alpha >= 1) {
+                myObject.alpha = 1;
                 isDown = true;
             }
         }
         else {
-            alpha-=0.05;
-            if(alpha<=0)
+            myObject.alpha-=0.025;
+            if(myObject.alpha<=0){
+                myObject.remove();
                 remove();
+            }
 
         }
             

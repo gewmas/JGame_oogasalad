@@ -5,7 +5,7 @@ package gameEngine.model.magic;
  *
  */
 public class EHasteMagic extends Magic{
-    public static String NAME="haste";
+    public static String NAME="HasteMagic";
     private double mySpeedUp;  
    private double alphIncrement;
     public EHasteMagic (int expire,

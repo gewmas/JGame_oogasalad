@@ -3,6 +3,7 @@ package gameEngine.model;
 import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.temporaryBarrier.TemporaryBarrierFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -18,7 +19,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import jgame.JGObject;
 import jgame.impl.JGEngineInterface;
 
 
@@ -68,11 +68,11 @@ public class Model {
     }
     // Jiaran: now we can just read waves from JSon.
     public void startGame () {
-//        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
-//        Wave w1 = new Wave("2", 10, 0.5, 0, enemyWarehouse);
-//        rule.addWave(w);
-//        rule.addWave(w1);
+
         rule.ruleStart();
+        CreateEffect c = new CreateEffect();
+        c.Words(300, 300, "WAVE 1");
+        c.blood(200, 200);
 
     }
 

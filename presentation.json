@@ -364,11 +364,11 @@
                { "id": "2", "url": "mr2.png" },
                { "id": "3", "url": "mr3.png" },
                { "id": "4", "url": "mr4.png" },
-      { "id": "d1", "url": "d1.png" },
+      			{ "id": "d1", "url": "d1.png" },
                { "id": "d2", "url": "d2.png" },
                { "id": "d3", "url": "d3.png" },
                { "id": "d4", "url": "d4.png" },
-      {"id": "haste", "url":"haste.png"},
+      
                
              
            ], 
@@ -481,7 +481,7 @@
 	"image": "drunRight",
 	"life": 15,
 	"speed": 0.5,
-   "skill": "Haste",
+   "skill": "Heal",
 },
 {
 	"id": "3",
@@ -489,7 +489,7 @@
 	"image": "drunRight",
 	"life": 15,
 	"speed": 0.5,
-   	"skill": "Light",
+   	"skill": "Armour",
 }
 ],
 

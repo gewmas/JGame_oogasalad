@@ -13,7 +13,7 @@ public class SkillFactory {
         switch (skillType) {
             case "Haste":
                 return new EnemyMagicSkill(300,myEng, skillType);
-            case "Armor":
+            case "Armour":
                 return new EnemyMagicSkill(500,myEng, skillType);
             case "Heal":
                 return new EnemyMagicSkill(500,myEng, skillType);

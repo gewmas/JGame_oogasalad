@@ -55,9 +55,9 @@ public class Rule {
                 myTimer.schedule(new StartWave(), w.getInterval());
                 myCurrentWaveIndex++;
             }
-            else {
+            if (!isAlive)
                 Waves.get(myCurrentWaveIndex).stop();
-            }
+            
 
         }
 
