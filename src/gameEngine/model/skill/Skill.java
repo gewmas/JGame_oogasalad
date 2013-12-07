@@ -2,7 +2,12 @@ package gameEngine.model.skill;
 
 import jgame.impl.JGEngineInterface;
 
-//Jiaran
+
+/**
+ * Skill class allows Enemy or Tower to have different 
+ * @author Jiaran
+ * 
+ */
 abstract public class Skill {
 
     protected long myCoolDown = 0;
@@ -10,6 +15,7 @@ abstract public class Skill {
     protected int myX;
     protected int myY;
     protected JGEngineInterface myEng;
+    protected String myName;
     // because we can alter game speed, so everything should related
     // frame. That's why I don't use a built-in Timer.
     public Skill(long cd, JGEngineInterface eng){

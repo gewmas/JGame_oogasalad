@@ -1,19 +1,18 @@
 package gameEngine.factory.enemyfactory;
 
-import java.util.LinkedList;
+
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.Model;
 import gameEngine.model.enemy.Enemy;
-import gameEngine.model.tile.Tile;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 
 /**
+ * This is a factory that creates Enemy and initialize it according to
+ * the JSON object. It hides the information how the program reads from
+ * JSON and create the enemy.
  * @author Jiaran
- *         NormalEnemyFactory. Each type of enemy should have a certain
- *         factory based on the information read from JSON file.
- *         To add more fancier enemy(eg, boss, or enemy that has different
- *         ability), one can extend from this class.
+ * 
  */
 public class NormalEnemyFactory implements EnemyFactory {
 
@@ -23,6 +22,11 @@ public class NormalEnemyFactory implements EnemyFactory {
     private double life;
     private double speed;
     private String skill;
+    /**
+     * @param enemyInfo: the JSONObject that contains an enemy type information.
+     * This method takes enemy Information and creates a enemy factory with
+     * the parameters specified in the JSON file.
+     */
     public NormalEnemyFactory (JSONObject enemyInfo) {
         this.id = enemyInfo.getString("id");
         this.image = enemyInfo.getString("image");
@@ -34,13 +38,17 @@ public class NormalEnemyFactory implements EnemyFactory {
 
     }
 
+   
+    /**
+     * this is the methods that actually creates one enemy.
+     */
     @Override
-    
     public Enemy create (Model model) {
-        Enemy result= new Enemy(gold, life, speed, id, true, GameEngineConstant.ENEMY_CID, image, model);
+        Enemy enemy = new Enemy(gold, life, speed, id, true, GameEngineConstant.ENEMY_CID, image, model);
+        model.addEnemy(enemy);
         System.out.println(skill);
-        result.setSkill(skill);
-        return result;
+        enemy.setSkill(skill);
+        return enemy;
     }
 
 }
