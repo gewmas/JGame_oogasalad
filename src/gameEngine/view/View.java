@@ -103,11 +103,6 @@ public class View implements MenuActions {
         return controller.getPath();
     }
 
-
-
-
-
-
     public Map<String, List<PurchaseInfo>> getInventory () {
         return controller.getInventory();
     }
