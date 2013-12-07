@@ -1,5 +1,6 @@
 package gameEngine.model;
 
+import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -24,7 +25,7 @@ public class Rule {
     private boolean isAlive = true;;
     private long myInitialDelayInMilliseconds = 2000;
     private EnemyWarehouse myEnemyWarehouse = null;
-
+    private CreateEffect myNotifier= new CreateEffect();
     public Rule (long delay, EnemyWarehouse e) {
         myInitialDelayInMilliseconds = delay;
         myEnemyWarehouse = e;
@@ -52,6 +53,7 @@ public class Rule {
             if (myCurrentWaveIndex < Waves.size() && isAlive) {
                 Wave w = Waves.get(myCurrentWaveIndex);
                 w.waveStart();
+                myNotifier.Words(300, 300, "WAVE "+myCurrentWaveIndex);
                 myTimer.schedule(new StartWave(), w.getInterval());
                 myCurrentWaveIndex++;
             }

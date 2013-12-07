@@ -70,9 +70,6 @@ public class Model {
     public void startGame () {
 
         rule.ruleStart();
-        CreateEffect c = new CreateEffect();
-        c.Words(300, 300, "WAVE 1");
-        c.blood(200, 200);
 
     }
 
