@@ -264,7 +264,7 @@ public class GameData extends JSONObject {
      * @author Lalita Maraj
      */
     private boolean isComplete () {
-        // TODO Auto-generated method stub
-        return true;
+       return (this.has("name") && this.has("splashImage") && this.has("BGImage") && this.has("gold") && this.has("numberOfLives"));
+ 
     }
 }
