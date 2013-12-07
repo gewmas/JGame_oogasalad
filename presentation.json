@@ -481,7 +481,7 @@
 	"image": "drunRight",
 	"life": 15,
 	"speed": 0.5,
-   "skill": "Heal",
+   "skill": "Light",
 },
 {
 	"id": "3",
