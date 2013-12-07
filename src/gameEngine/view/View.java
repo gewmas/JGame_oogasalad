@@ -93,12 +93,6 @@ public class View implements MenuActions {
         return controller.getGameInfo();
     }
 
-    /**
-     * Gets the dimensions of the game on initialization
-     */
-    public Dimension getGameSize () {
-        return controller.getGameSize();
-    }
 
     public List<Tile> getPath () {
         return controller.getPath();
@@ -115,18 +109,13 @@ public class View implements MenuActions {
         return controller.getMoney();
     }
 
-    public int getLives () {
-        return controller.getLives();
-    }
+
 
     public Map<String, List<PurchaseInfo>> getInventory () {
         return controller.getInventory();
     }
 
-    @Deprecated
-    public void quitGame () {
-        gameFrame.quitGame();
-    }
+
 
     public void endGame () {
         gameFrame.endGame();
@@ -137,9 +126,7 @@ public class View implements MenuActions {
         return controller.activateCheat(cheat);
     }
 
-    public String getGameTitle () {
-        return controller.getGameTitle();
-    }
+
 
     public boolean upgradeTower (int x, int y) {
         return controller.upgradeTower(x, y);
