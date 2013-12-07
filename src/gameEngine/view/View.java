@@ -1,6 +1,5 @@
 package gameEngine.view;
 
-import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,6 @@ import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.gameFrame.GameFrame;
-import gameEngine.view.gameFrame.GameFrameMediator;
 import gameEngine.view.gameFrame.menu.MenuActions;
 import gameEngine.view.initialization.InitializationFrame;
 
