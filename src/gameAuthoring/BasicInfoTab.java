@@ -1,6 +1,7 @@
 package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.menuBar.Simulator;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -35,7 +36,7 @@ public class BasicInfoTab extends Tab {
 
     private JLabel mySplashImageLabel;
     private String mySplashImage;
-
+    private JButton simulateButton;
     public BasicInfoTab (GameData gameData) {
         super(gameData);
         getTab();
@@ -48,18 +49,18 @@ public class BasicInfoTab extends Tab {
         JPanel subPanel = new JPanel(new MigLayout("wrap 2"));
         subPanel.setOpaque(false);
         JLabel gameName = new JLabel("Game Name");
-        gameName.setFont(Constants.defaultBodyFont);
+        gameName.setFont(Constants.DEFAULT_BODY_FONT);
 
         JLabel gold = new JLabel("Starting Gold");
-        gold.setFont(Constants.defaultBodyFont);
+        gold.setFont(Constants.DEFAULT_BODY_FONT);
 
         JLabel lives = new JLabel("Starting Lives");
-        lives.setFont(Constants.defaultBodyFont);
+        lives.setFont(Constants.DEFAULT_BODY_FONT);
 
         JLabel title = new JLabel("Basic Game Info");
-        title.setFont(Constants.defaultBodyFont);
+        title.setFont(Constants.DEFAULT_BODY_FONT);
 
-        title.setFont(Constants.defaultTitleFont);
+        title.setFont(Constants.DEFAULT_TITLE_FONT);
         title.setForeground(new Color(80, 80, 80));
         mainPanel.add(title, "span 2");
 
@@ -70,6 +71,10 @@ public class BasicInfoTab extends Tab {
         mySplashImageLabel = new JLabel();
 
         JButton setInfoButton = new JButton("Set Info");
+        simulateButton = new JButton("Simulate");
+        simulateButton.setEnabled(false);
+        simulateButton.setFont(new Font("Calibri", Font.PLAIN, 14));
+        simulateButton.addMouseListener(setSimulateListener());
         setInfoButton.setFont(new Font("Calibri", Font.PLAIN, 14));
         setInfoButton.addMouseListener(setInfoListener());
 
@@ -80,18 +85,18 @@ public class BasicInfoTab extends Tab {
         myLives = new JTextField();
         myLives.setPreferredSize(new Dimension(200, 30));
 
-
         subPanel.add(gameName);
         subPanel.add(myGameName);
         subPanel.add(gold);
         subPanel.add(myGold);
         subPanel.add(lives);
         subPanel.add(myLives);
-        
 
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
+        
         subPanel.add(setInfoButton);
+        subPanel.add(simulateButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         subPanel.setBorder(b);
         mainPanel.add(subPanel, "align center");
@@ -121,6 +126,19 @@ public class BasicInfoTab extends Tab {
             @Override
             public void mouseClicked (MouseEvent e) {
                 setData();
+                
+            }
+        };
+        return listener;
+
+    }
+    public MouseAdapter setSimulateListener () {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                Simulator simulator = new Simulator();
+                simulator.simulate(myGameData);
+                
             }
         };
         return listener;
@@ -137,12 +155,17 @@ public class BasicInfoTab extends Tab {
             myGameData.setLives(lives);
             myGameData.setSplashImage(mySplashImage);
             myGameData.setGameName(name);
+            activateSimmulate();
         }
 
         else {
             JOptionPane.showMessageDialog(null,
                                           "One or more fields invalid! Please try again.");
         }
+    }
+
+    private void activateSimmulate () {
+        simulateButton.setEnabled(true);
     }
 
     public MouseAdapter setSplashImageListener () {

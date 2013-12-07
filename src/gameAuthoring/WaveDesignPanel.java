@@ -39,13 +39,13 @@ public class WaveDesignPanel extends JPanel {
 
         myWaveDesignTab = waveDesignTab;
         JLabel type = new JLabel("Type of Enemy");
-        type.setFont(Constants.defaultBodyFont);
+        type.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel quantity = new JLabel("Quantity of Enemy");
-        quantity.setFont(Constants.defaultBodyFont);
+        quantity.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel period = new JLabel("Period");
-        period.setFont(Constants.defaultBodyFont);
+        period.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel interval = new JLabel("Interval");
-        interval.setFont(Constants.defaultBodyFont);
+        interval.setFont(Constants.DEFAULT_BODY_FONT);
 
         myTypeButton = new JButton(DEFAULT_TYPE_TEXT);
         myTypeButton.addMouseListener(createWaveTypeListener());
@@ -54,25 +54,25 @@ public class WaveDesignPanel extends JPanel {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(myEnemyOptions);  
         myEnemyChooser.setModel(model);  
         
-        myEnemyChooser.setFont(Constants.defaultBodyFont);
+        myEnemyChooser.setFont(Constants.DEFAULT_BODY_FONT);
         myEnemyChooser.addMouseListener(createRevalidationListener());
         myEnemyChooser.addActionListener(createDropdownListener());
 
 
         myNumberField = new JTextField();
         myNumberField.setPreferredSize(new Dimension(200, 30));
-        myNumberField.setFont(Constants.defaultBodyFont);
+        myNumberField.setFont(Constants.DEFAULT_BODY_FONT);
 
         myPeriodField = new JTextField();
         myPeriodField.setPreferredSize(new Dimension(200, 30));
-        myPeriodField.setFont(Constants.defaultBodyFont);
+        myPeriodField.setFont(Constants.DEFAULT_BODY_FONT);
 
         myIntervalField = new JTextField();
         myIntervalField.setPreferredSize(new Dimension(200, 30));
-        myIntervalField.setFont(Constants.defaultBodyFont);
+        myIntervalField.setFont(Constants.DEFAULT_BODY_FONT);
 
         JButton createWaveButton = new JButton("Create Wave");
-        createWaveButton.setFont(Constants.defaultBodyFont);
+        createWaveButton.setFont(Constants.DEFAULT_BODY_FONT);
         createWaveButton.addMouseListener(createWaveButtonListener());
 
         this.setLayout(new MigLayout("wrap 2"));

@@ -37,18 +37,18 @@ public class MiscellaneousTab extends Tab {
     public JPanel getTab () {
         JPanel mainPanel = new GradientPanel(new MigLayout("wrap 2"));
         JLabel title = new JLabel("Miscellaneous");
-        title.setFont(Constants.defaultTitleFont);
+        title.setFont(Constants.DEFAULT_TITLE_FONT);
         mainPanel.add(title, "span 2");
         mainPanel.setPreferredSize(new Dimension(500, 500));
 
         JButton bulletImageButton = new JButton("Select image for bullet");
-        bulletImageButton.setFont(Constants.defaultBodyFont);
+        bulletImageButton.setFont(Constants.DEFAULT_BODY_FONT);
         JButton speedImageButton = new JButton("Select image for slow down buff");
-        speedImageButton.setFont(Constants.defaultBodyFont);
+        speedImageButton.setFont(Constants.DEFAULT_BODY_FONT);
         JButton poisonImageButton = new JButton("Select image for poison buff");
-        poisonImageButton.setFont(Constants.defaultBodyFont);
+        poisonImageButton.setFont(Constants.DEFAULT_BODY_FONT);
         JButton flameImageButton = new JButton("Select image for flame buff");
-        flameImageButton.setFont(Constants.defaultBodyFont);
+        flameImageButton.setFont(Constants.DEFAULT_BODY_FONT);
 
         JLabel bulletImage = new JLabel();
         JLabel speedImage = new JLabel();

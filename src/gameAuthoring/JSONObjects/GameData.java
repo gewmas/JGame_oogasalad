@@ -7,8 +7,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.swing.JFileChooser;
 
 
@@ -197,7 +197,7 @@ public class GameData extends JSONObject {
         myResources.addAudio(id, url);
     }
 
-    public void addAnimation (String id, ArrayList<String> imagePaths) {
+    public void addAnimation (String id, List<String> imagePaths) {
         myResources.addAnimation(id, imagePaths);
     }
 

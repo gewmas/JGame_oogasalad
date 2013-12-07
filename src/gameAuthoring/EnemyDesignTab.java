@@ -66,7 +66,7 @@ public class EnemyDesignTab extends Tab {
             e.printStackTrace();
         }
         JLabel enemyNameLabel = new JLabel(enemyName);
-        enemyNameLabel.setFont(Constants.defaultBodyFont);
+        enemyNameLabel.setFont(Constants.DEFAULT_BODY_FONT);
         myScrollPanel.add(enemyNameLabel);
         myScrollPanel.add(enemyIcon);
     }

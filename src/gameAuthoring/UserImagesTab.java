@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.Observable;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -15,10 +14,11 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 
 
-public class UserImagesTab extends Observable {
+public class UserImagesTab {
 
     private JPanel myMainPanel = new GradientPanel(new MigLayout("wrap 1"));
     private JPanel mySubPanel = new JPanel(new MigLayout("wrap 1"));
+    private int myNumImages = 0;
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
 
@@ -26,7 +26,7 @@ public class UserImagesTab extends Observable {
         myMainPanel.setOpaque(false);
         mySubPanel.setPreferredSize(new Dimension(300, 500));
         JButton uploadImage = new JButton("Load image");
-        uploadImage.setFont(Constants.defaultBodyFont);
+        uploadImage.setFont(Constants.DEFAULT_BODY_FONT);
         uploadImage.addMouseListener(addFileUploadListener(this));
         JScrollPane scrollPane = new JScrollPane(mySubPanel);
         myMainPanel.add(scrollPane);
@@ -44,7 +44,9 @@ public class UserImagesTab extends Observable {
                     Image image;
                     try {
                         image = ImageIO.read(imgSource);
-                        ImageLabel imageLabel = new ImageLabel(imgSource);
+                        myNumImages++;
+                        ImageLabel imageLabel = new ImageLabel(" " + myNumImages);
+                        imageLabel.setLabelIcon(imgSource);
                         imageLabel.addMouseListener(addIconListener(userImagesTab, imageLabel));
                         mySubPanel.add(imageLabel);
                         mySubPanel.revalidate();
@@ -58,24 +60,19 @@ public class UserImagesTab extends Observable {
         return listener;
     }
 
-    public MouseAdapter addIconListener (final UserImagesTab userImagesTab, final ImageLabel image) {
+    public MouseAdapter addIconListener (final UserImagesTab userImagesTab,
+                                         final ImageLabel image) {
         MouseAdapter listener = new MouseAdapter() {
-
             private boolean imageSelected = false;
 
             @Override
             public void mouseClicked (MouseEvent e) {
                 imageSelected = !imageSelected;
                 if (imageSelected) {
-                    userImagesTab.setChanged();
-                    userImagesTab.notifyObservers(image.getImageFile());
-                    userImagesTab.clearChanged();
+                    GameAuthoringGUI.setCursor(image);
                 }
                 else {
-                    System.out.println("Set back to default cursor");
-                    userImagesTab.setChanged();
-                    userImagesTab.notifyObservers(0);
-                    userImagesTab.clearChanged();
+                    GameAuthoringGUI.setCursorNull();
                 }
             }
         };

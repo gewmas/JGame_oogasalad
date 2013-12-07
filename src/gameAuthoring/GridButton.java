@@ -20,6 +20,7 @@ public class GridButton extends JButton {
     private Point2D myCoordinate;
     private JButton myButton;
     private boolean isPath;
+    private String mySelectionMode;
     private Grid myGrid;
     private File myImgSource;
 
@@ -35,14 +36,24 @@ public class GridButton extends JButton {
         myImgSource = imgSource;
     }
 
+    public void setSelectionMode (String mode) {
+        mySelectionMode = mode;
+    }
+
     private void addPathListener (final GridButton gButton) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     isPath = false;
-                    myGrid.removeCoordinate(myCoordinate);
-                    gButton.setIcon(null);
+                    if (mySelectionMode.equals(Constants.PATH_SELECTION_MODE)) {
+                        myGrid.removePathCoordinate(myCoordinate);
+                        gButton.setIcon(null);
+                    }
+                    if (mySelectionMode.equals(Constants.BARRIER_SELECTION_MODE)) {
+                        myGrid.addBarrierCoordinate(myCoordinate);
+                        setImage();
+                    }
                 }
                 if (SwingUtilities.isRightMouseButton(e)) {
                     String[] options = { "Set as start", "Set as end" };
@@ -66,18 +77,17 @@ public class GridButton extends JButton {
 
             @Override
             public void mouseEntered (MouseEvent e) {
-                if (myImgSource != null) {
-                    toggle();
-                    System.out.println(myCoordinate);
+                if (myImgSource != null && mySelectionMode.equals(Constants.PATH_SELECTION_MODE)) {
+                    isPath = true;
+                    myGrid.addPathCoordinate(myCoordinate);
+                    setImage();
                 }
             }
         };
         gButton.addMouseListener(listener);
     }
 
-    public void toggle () {
-        isPath = true;
-        myGrid.addCoordinate(myCoordinate);
+    public void setImage () {
         try {
             if (myImgSource == null) {
                 JOptionPane.showMessageDialog(null, "No image defined");
