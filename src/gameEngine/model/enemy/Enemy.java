@@ -1,13 +1,12 @@
 package gameEngine.model.enemy;
-import gameEngine.model.skill.Skill;
-import gameEngine.model.skill.SkillFactory;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Model;
 import gameEngine.model.bullet.Bullet;
 import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.magic.IEMagicable;
-import gameEngine.model.magic.Magic;
+import gameEngine.model.skill.Skill;
+import gameEngine.model.skill.SkillFactory;
 import gameEngine.model.temporaryBarrier.TemporaryBarrier;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
@@ -123,8 +122,8 @@ public class Enemy extends JGObject implements IEMagicable {
         if(life <= 0) {
             model.getGameInfo().addGold((int)gold);
             CreateEffect effect=new CreateEffect();
-            effect.blood(this.x, this.y);
-            effect.Dollar(this.x, this.y);
+            effect.blood(this.getCenterX(), this.getCenterY());
+            effect.Dollar(this.getCenterX(), this.getCenterY());
             
             remove();
         }
