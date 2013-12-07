@@ -1,5 +1,6 @@
 package gameAuthoring;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +13,21 @@ public class ImageLabel extends JLabel {
 
     private Image myImage;
     private File myImageSource;
+    private String myID;
 
-    public ImageLabel (File imageSource) {
+    public ImageLabel () {
+
+    }
+
+    public ImageLabel (String id) {
+        myID = id;
+    }
+
+    public ImageLabel (int width, int height) {
+        this.setPreferredSize(new Dimension(width, height));
+    }
+
+    public void setLabelIcon (File imageSource) {
         myImageSource = imageSource;
         try {
             myImage = ImageIO.read(imageSource);
@@ -23,7 +37,10 @@ public class ImageLabel extends JLabel {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public String getID () {
+        return myID;
     }
 
     public File getImageFile () {
@@ -32,5 +49,12 @@ public class ImageLabel extends JLabel {
 
     public Image getImage () {
         return myImage;
+    }
+
+    public void transferImageInformation (ImageLabel other) {
+        myImage = other.getImage();
+        myImageSource = other.getImageFile();
+        myID = other.getID();
+        this.setLabelIcon(myImageSource);
     }
 }

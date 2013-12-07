@@ -48,18 +48,18 @@ public class BasicInfoTab extends Tab {
         JPanel subPanel = new JPanel(new MigLayout("wrap 2"));
         subPanel.setOpaque(false);
         JLabel gameName = new JLabel("Game Name");
-        gameName.setFont(Constants.defaultBodyFont);
+        gameName.setFont(Constants.DEFAULT_BODY_FONT);
 
         JLabel gold = new JLabel("Starting Gold");
-        gold.setFont(Constants.defaultBodyFont);
+        gold.setFont(Constants.DEFAULT_BODY_FONT);
 
         JLabel lives = new JLabel("Starting Lives");
-        lives.setFont(Constants.defaultBodyFont);
+        lives.setFont(Constants.DEFAULT_BODY_FONT);
 
         JLabel title = new JLabel("Basic Game Info");
-        title.setFont(Constants.defaultBodyFont);
+        title.setFont(Constants.DEFAULT_BODY_FONT);
 
-        title.setFont(Constants.defaultTitleFont);
+        title.setFont(Constants.DEFAULT_TITLE_FONT);
         title.setForeground(new Color(80, 80, 80));
         mainPanel.add(title, "span 2");
 
@@ -80,14 +80,12 @@ public class BasicInfoTab extends Tab {
         myLives = new JTextField();
         myLives.setPreferredSize(new Dimension(200, 30));
 
-
         subPanel.add(gameName);
         subPanel.add(myGameName);
         subPanel.add(gold);
         subPanel.add(myGold);
         subPanel.add(lives);
         subPanel.add(myLives);
-        
 
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);

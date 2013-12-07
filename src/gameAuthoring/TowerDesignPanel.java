@@ -57,28 +57,28 @@ public class TowerDesignPanel extends JPanel {
         myTowerDesignTab = towerDesignTab;
 
         JLabel type = new JLabel("Type");
-        type.setFont(Constants.defaultBodyFont);
+        type.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel name = new JLabel("Name");
-        name.setFont(Constants.defaultBodyFont);
+        name.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel damage = new JLabel("Damage");
-        damage.setFont(Constants.defaultBodyFont);
+        damage.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel attackSpeed = new JLabel("Attack Speed");
-        attackSpeed.setFont(Constants.defaultBodyFont);
+        attackSpeed.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel range = new JLabel("Range");
-        range.setFont(Constants.defaultBodyFont);
+        range.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel cost = new JLabel("Cost");
-        cost.setFont(Constants.defaultBodyFont);
+        cost.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel recyclePrice = new JLabel("Recycle Price");
-        recyclePrice.setFont(Constants.defaultBodyFont);
+        recyclePrice.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel description = new JLabel("Description");
-        description.setFont(Constants.defaultBodyFont);
+        description.setFont(Constants.DEFAULT_BODY_FONT);
 
         // JButton towerImageChooser = new JButton("Choose tower image");
-        // towerImageChooser.setFont(Constants.defaultBodyFont);
+        // towerImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
         // towerImageChooser.addMouseListener(createPathListener());
 
         JLabel towerImageChooser = new JLabel("Choose image");
-        towerImageChooser.setFont(Constants.defaultBodyFont);
+        towerImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
 
         myTowerImage = new JLabel();
         myTowerImage.setPreferredSize(new Dimension(50, 50));
@@ -87,34 +87,34 @@ public class TowerDesignPanel extends JPanel {
         myTowerImage.addMouseListener(createTowerImageListener());
 
         JComboBox<String> myTypeOptions = new JComboBox<String>(TOWER_TYPES);
-        myTypeOptions.setFont(Constants.defaultBodyFont);
+        myTypeOptions.setFont(Constants.DEFAULT_BODY_FONT);
 
         myNameField = new JTextField();
         myNameField.setPreferredSize(new Dimension(200, 30));
-        myNameField.setFont(Constants.defaultBodyFont);
+        myNameField.setFont(Constants.DEFAULT_BODY_FONT);
         myDamageField = new JTextField();
         myDamageField.setPreferredSize(new Dimension(200, 30));
-        myDamageField.setFont(Constants.defaultBodyFont);
+        myDamageField.setFont(Constants.DEFAULT_BODY_FONT);
         myAttackSpeedField = new JTextField();
         myAttackSpeedField.setPreferredSize(new Dimension(200, 30));
-        myAttackSpeedField.setFont(Constants.defaultBodyFont);
+        myAttackSpeedField.setFont(Constants.DEFAULT_BODY_FONT);
         myRangeField = new JTextField();
         myRangeField.setPreferredSize(new Dimension(200, 30));
-        myRangeField.setFont(Constants.defaultBodyFont);
+        myRangeField.setFont(Constants.DEFAULT_BODY_FONT);
         myCostField = new JTextField();
         myCostField.setPreferredSize(new Dimension(200, 30));
-        myCostField.setFont(Constants.defaultBodyFont);
+        myCostField.setFont(Constants.DEFAULT_BODY_FONT);
         myRecyclePriceField = new JTextField();
         myRecyclePriceField.setPreferredSize(new Dimension(200, 30));
 
-        myRecyclePriceField.setFont(Constants.defaultBodyFont);
+        myRecyclePriceField.setFont(Constants.DEFAULT_BODY_FONT);
         myDescriptionField = new JTextArea(5, 18);
 
         myDescriptionField.setLineWrap(true);
         JScrollPane scrollPane = new JScrollPane(myDescriptionField);
 
         JButton createTowerButton = new JButton("Create Tower");
-        createTowerButton.setFont(Constants.defaultBodyFont);
+        createTowerButton.setFont(Constants.DEFAULT_BODY_FONT);
         createTowerButton.addMouseListener(createTowerButtonListener(this));
 
         this.setLayout(new MigLayout("wrap 2"));

@@ -10,8 +10,6 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -21,10 +19,10 @@ import javax.swing.JTabbedPane;
 import net.miginfocom.swing.MigLayout;
 
 
-public class GameAuthoringGUI implements Observer {
+public class GameAuthoringGUI {
 
     protected JFrame myFrame;
-    protected JPanel myMainPanel;
+    protected static JPanel myMainPanel;
     static File mySelectedImage = null;
     private BasicInfoTab myBasicInfoTab;
     private MapDesignTab myMapDesignTab;
@@ -33,7 +31,7 @@ public class GameAuthoringGUI implements Observer {
     private WaveDesignTab myWaveDesignTab;
     private MiscellaneousTab myMiscellaneousTab;
     private UserLibraryMainTab myUserLibraryPanel;
-    private Image currentImage;
+    private ImageLabel myImageLabel;
 
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
@@ -60,7 +58,7 @@ public class GameAuthoringGUI implements Observer {
         myEnemyDesignTab = new EnemyDesignTab(gameData);
         myWaveDesignTab = new WaveDesignTab(gameData);
         myMiscellaneousTab = new MiscellaneousTab(gameData);
-        myUserLibraryPanel = new UserLibraryMainTab(this);
+        myUserLibraryPanel = new UserLibraryMainTab();
 
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -85,25 +83,23 @@ public class GameAuthoringGUI implements Observer {
         GameAuthoringGUI gameAuthoringGUI = new GameAuthoringGUI();
     }
 
-    @Override
-    public void update (Observable arg0, Object arg1) {
-        if (arg1 instanceof File) {
-            File imageFile = (File) arg1;
-            mySelectedImage = imageFile;
-            Image image;
-            try {
-                image = ImageIO.read(imageFile);
-                Toolkit toolkit = Toolkit.getDefaultToolkit();
-                Cursor c = toolkit.createCustomCursor(image, new Point(myMainPanel.getX(),
-                                                                       myMainPanel.getY()), "img");
-                myMainPanel.setCursor(c);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
+    public static final void setCursor (ImageLabel imageLabel) {
+        File imageFile = imageLabel.getImageFile();
+        mySelectedImage = imageFile;
+        Image image;
+        try {
+            image = ImageIO.read(imageFile);
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Cursor c = toolkit.createCustomCursor(image, new Point(myMainPanel.getX(),
+                                                                   myMainPanel.getY()), "img");
+            myMainPanel.setCursor(c);
         }
-        if (arg1 instanceof Integer) {
-            myMainPanel.setCursor(Cursor.getDefaultCursor());
+        catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    public final static void setCursorNull () {
+        myMainPanel.setCursor(Cursor.getDefaultCursor());
     }
 }
