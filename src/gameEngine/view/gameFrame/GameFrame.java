@@ -34,7 +34,7 @@ public class GameFrame extends Frame implements GameInitializable {
     private CanvasPanel canvasPanel;
     private Utilities utilities;
     private ItemPurchaser itemPurchaser;
-    private Map<String,KeyActivationItem> gameKeyActivationItems;
+    private Map<String, KeyActivationItem> gameKeyActivationItems;
     private Collection<GameInitializable> gameInitializerItems;
     private Collection<GameUpdatable> gameUpdatables;
 
@@ -51,9 +51,8 @@ public class GameFrame extends Frame implements GameInitializable {
         this.cheatCodeFrame = addCheatCodeFrame(view);
 
         this.gameKeyActivationItems = new HashMap();
-        gameKeyActivationItems.put("C",cheatCodeFrame);
+        gameKeyActivationItems.put("C", cheatCodeFrame);
 
-        
         infoPanel = addInfoDisplay();
         utilities = new Utilities(infoPanel, this, view);
         itemPurchaser = new ItemPurchaser(view, utilities);
@@ -94,7 +93,7 @@ public class GameFrame extends Frame implements GameInitializable {
     /**
      * Create the store of Towers
      * 
-     * @param storePanel2
+     * @param storePanel
      * @param infoPanel2
      */
     private void addGameTools (InfoDisplayPanel infoPanel, StorePanel storePanel) {
