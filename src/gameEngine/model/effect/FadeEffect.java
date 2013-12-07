@@ -2,6 +2,11 @@ package gameEngine.model.effect;
 
 import jgame.JGObject;
 
+/**
+ * FadeEffect makes a JGObject to fade and when it is totally transparent,
+ * it is removed.
+ * @author Jiaran
+ */
 public class FadeEffect extends Effect {
     private boolean isDown=false; 
     public FadeEffect (double x, double y, JGObject o) {

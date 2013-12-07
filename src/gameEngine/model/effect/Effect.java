@@ -5,9 +5,20 @@ import jgame.JGPoint;
 
 
 
+/**
+ * Effect Class uses Decoration Pattern to allow user to add certain effect to JGObject
+ * It will simplify huge extension hierarchy.
+ * 
+ * @author Jiaran
+ */
 public class Effect extends JGObject {
     
     protected JGObject myObject= null;
+    /**
+     * @param x: the x coordinate(center point to facilitate the user) where the effect will be presented
+     * @param y: the y coordinate(center point to facilitate the user) where the effect will be presented
+     * @param o: JGObject to be decorated 
+     */
     public Effect (
                    double x,
                    double y,

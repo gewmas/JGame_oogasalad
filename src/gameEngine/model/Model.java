@@ -62,8 +62,7 @@ public class Model {
         temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
-        rule = new Rule(1, enemyWarehouse);
-        rule.readWaveFromJSon(parser.getJSONArray("wave"));
+       
         gameInfo = new GameInfo(parser);
     }
     // Jiaran: now we can just read waves from JSon.
@@ -118,6 +117,8 @@ public class Model {
         this.myEng = eng;
         Resources r = new Resources(myEng);
         r.register(parser);
+        rule = new Rule(1, enemyWarehouse,eng);
+        rule.readWaveFromJSon(parser.getJSONArray("wave"));
     }
     
     //Refractor method to check whether Tower exist at (x, y)
@@ -203,6 +204,11 @@ public class Model {
      */
 
     public GameInfo getGameInfo() {
+        if (rule != null) {
+            gameInfo.SetIsWin(rule.isWin());
+            gameInfo.SetCurrentWaveNumber(rule.getCurrentWaveNum());
+        }
+       
         return gameInfo;
     }
 
@@ -260,5 +266,6 @@ public class Model {
         spawnedEnemies.add(enemy);
     }
 
+    
 
 }

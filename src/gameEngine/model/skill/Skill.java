@@ -2,7 +2,12 @@ package gameEngine.model.skill;
 
 import jgame.impl.JGEngineInterface;
 
-//Jiaran
+
+/**
+ * Skill class allows Enemy or Tower to have different 
+ * @author Jiaran
+ * 
+ */
 abstract public class Skill {
 
     protected long myCoolDown = 0;

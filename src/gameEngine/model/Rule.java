@@ -1,6 +1,7 @@
 package gameEngine.model;
 
 import gameEngine.model.effect.CreateEffect;
+import gameEngine.model.enemy.Enemy;
 import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -9,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import com.sun.corba.se.impl.orbutil.closure.Constant;
+import jgame.impl.JGEngineInterface;
+import gameEngine.constant.*;
 
 
 /**
@@ -25,10 +29,12 @@ public class Rule {
     private boolean isAlive = true;;
     private long myInitialDelayInMilliseconds = 2000;
     private EnemyWarehouse myEnemyWarehouse = null;
+    private JGEngineInterface myEng=null;
     private CreateEffect myNotifier= new CreateEffect();
-    public Rule (long delay, EnemyWarehouse e) {
+    public Rule (long delay, EnemyWarehouse e, JGEngineInterface eng) {
         myInitialDelayInMilliseconds = delay;
         myEnemyWarehouse = e;
+        myEng=eng;
     }
 
     public void addWave (Wave wave) {
@@ -113,6 +119,15 @@ public class Rule {
         return myCurrentWaveIndex;
     }
 
+    public boolean isWin(){
+        if(myCurrentWaveIndex==Waves.size()){
+            if(myEng.countObjects(null,GameEngineConstant.query(Enemy.class)) ==0){
+                return true;
+            }
+            
+        }
+        return false;
+    }
     public void stop () {
         isAlive = false;
     }

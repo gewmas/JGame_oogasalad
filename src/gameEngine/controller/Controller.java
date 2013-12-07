@@ -1,5 +1,6 @@
 package gameEngine.controller;
 
+import gameEngine.model.GameInfo;
 import gameEngine.model.Model;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -181,6 +182,7 @@ public class Controller {
     /**
      * Returns the size of the game in number of tiles
      */
+    @Deprecated
     public Dimension getGameSize () {
         return model.getGameInfo().getDimension();
     }
@@ -188,6 +190,7 @@ public class Controller {
     /**
      * Returns the URL to the game's background image
      */
+    @Deprecated
     public String getBGImage () {
         return model.getGameInfo().getBGImage();
     }
@@ -195,6 +198,7 @@ public class Controller {
     /**
      * Returns the amount of money in the game
      */
+    @Deprecated
     public int getMoney () {
         return model.getGameInfo().getGold();
     }
@@ -202,17 +206,23 @@ public class Controller {
     /**
      * Return the number of lives remaining
      */
+    @Deprecated
     public int getLives () {
+        
         return model.getGameInfo().getLife();
     }
     
     /**
      * Return the game title
      */
+    @Deprecated
     public String getGameTitle () {
         return model.getGameInfo().getMyName();
     }
-
+    
+    public GameInfo getGameInfo(){
+        return model.getGameInfo();
+    }
     public List<Tile> getPath () {
         return model.getPathList();
     }
