@@ -32,6 +32,7 @@ public class MapDesignTab extends Tab {
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
     private Grid myGrid;
     private JLabel myCurrentPathImage;
+    private JLabel myCurrentBoundaryImage;
     private String myBackgroundImage;
     private String myPathImage;
 
@@ -50,14 +51,20 @@ public class MapDesignTab extends Tab {
         title.setFont(new Font("Calibri", Font.PLAIN, 30));
         title.setForeground(new Color(80, 80, 80));
 
-        JLabel label = new JLabel("Path image:");
-        label.setFont(Constants.defaultBodyFont);
+        JLabel pathLabel = new JLabel("Path image:");
+        pathLabel.setFont(Constants.defaultBodyFont);
         myCurrentPathImage = new JLabel();
         myCurrentPathImage.setFont(Constants.defaultBodyFont);
         myCurrentPathImage.setPreferredSize(new Dimension(50, 50));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myCurrentPathImage.setBorder(border);
         myCurrentPathImage.addMouseListener(createPathListener());
+
+        JLabel boundaryLabel = new JLabel("Boundary image:");
+        boundaryLabel.setFont(Constants.defaultBodyFont);
+        myCurrentBoundaryImage = new JLabel();
+        myCurrentBoundaryImage.setPreferredSize(new Dimension(50, 50));
+        myCurrentBoundaryImage.setBorder(border);
 
         JButton checkPath = new JButton("Create Map");
         checkPath.setFont(Constants.defaultBodyFont);
@@ -70,8 +77,10 @@ public class MapDesignTab extends Tab {
         mainPanel.add(title, "span 2");
         gridPanel.add(myGrid, BorderLayout.WEST);
         mainPanel.add(gridPanel);
-        buttonPanel.add(label, "gap 0 0 0 30");
+        buttonPanel.add(pathLabel, "gap 0 0 0 30");
         buttonPanel.add(myCurrentPathImage, "gap 0 0 0 30");
+        buttonPanel.add(boundaryLabel, "gap 0 0 0 30");
+        buttonPanel.add(myCurrentBoundaryImage, "gap 0 0 0 30");
         buttonPanel.add(setBackground, "span 2");
         buttonPanel.add(checkPath);
         mainPanel.add(buttonPanel);
