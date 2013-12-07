@@ -153,4 +153,4 @@ Blood6	-	0	Blood6.png	-
 Blood7	-	0	Blood7.png	-
 BloodEnd	-	0	BloodEnd.png	-
 
-Blood	Blood1;Blood2;Blood3;Blood4;Blood5;Blood6;Blood7;BloodEnd; 0.3	false
+Blood	Blood1;Blood2;Blood3;Blood4;Blood5;Blood6;Blood7;BloodEnd;	0.3	false
