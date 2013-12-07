@@ -1,5 +1,5 @@
 {
-"name": "Tower Destruction II",
+"name": "Hospital Cure",
 "spashImage" :  "game-bg.png",
 "BGImage" :  "woods_background",
 "gold" : 500,
@@ -372,11 +372,11 @@
                { "id": "space_background", "url": "space_background.jpg" },
                { "id": "woods_background", "url": "woods_background.png" },
                
-               { "id": "bullet", "url": "bullet.png" },
+               { "id": "bullet", "url": "bullet0.png" },
                { "id": "barrier1", "url": "barrier1.png" },
                { "id": "barrier2", "url": "barrier2.png" },
       			
-				{ "id": "DefaultTower", "url": "tower1.png" },
+				{ "id": "DefaultTower", "url": "DefaultTower.png" },
       			{ "id": "BoostTower", "url": "BoostTower.png" },
       			{ "id": "MagicTower", "url": "MagicTower.png" },
       			{ "id": "MultipleShootingTower", "url": "MultipleShootingTower.png" },

@@ -40,6 +40,11 @@ public class DefaultTower extends Tower {
      * 3 - shoot strongest enemy with most life
      */
     int attackMode;
+    /**
+     * Specialty is a special skill for current Tower.
+     * The Tower can shoot Bullet with Spcialty and have special effect on Enemy with the same Specialty.
+     */
+    int specialty;
 
     // Number of shooting at one time
     int attackAmount; //MultipleShootingTower
@@ -51,6 +56,7 @@ public class DefaultTower extends Tower {
                          double damage,
                          double attackSpeed,
                          int attackMode,
+                         int specialty,
                          double range,
                          int cost,
                          double recyclePrice,
@@ -71,6 +77,8 @@ public class DefaultTower extends Tower {
               purchaseInfo);
 
         this.attackMode = attackMode;
+        this.specialty = specialty;
+        
         this.attackAmount = 1;
         this.currentMagic = 0;
 
@@ -106,7 +114,7 @@ public class DefaultTower extends Tower {
 
             // System.out.println(targetEnemies.size());
             for (Enemy targetEnemy : targetEnemies) {
-                new Bullet(targetEnemy, damage, currentMagic,"bullet", true, x, y, GameEngineConstant.BULLET_CID, "bullet");
+                new Bullet(targetEnemy, damage, currentMagic, specialty, "bullet", true, x, y, GameEngineConstant.BULLET_CID, "bullet");
             }
             prevTime = System.currentTimeMillis();
         }

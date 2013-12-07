@@ -33,7 +33,7 @@ public class MagicTowerFactory extends DefaultTowerFactory {
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                (Tower) new MagicTower(damage, attackSpeed, attackMode, range, cost, sellPrice, description, magicFactor, magic, 
+                (Tower) new MagicTower(damage, attackSpeed, attackMode, specialty, range, cost, sellPrice, description, magicFactor, magic, 
                                        type, id, true, x, y, GameEngineConstant.TOWER_CID, image,
                                        purchaseInfo);
         return tower;

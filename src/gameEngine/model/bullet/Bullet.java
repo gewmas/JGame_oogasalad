@@ -17,12 +17,14 @@ public class Bullet extends JGObject {
     int currentMagic;
 
     double damage;
+    int specialty;
 
     public Bullet (
                    Enemy targetEnemy,
                    double damage,
                    
                    int magic,
+                   int specialty,
 
                    String name,
                    boolean unique_id,
@@ -35,6 +37,7 @@ public class Bullet extends JGObject {
         this.targetEnemy = targetEnemy;
         this.damage = 1;
         this.currentMagic = magic;
+        this.specialty = specialty;
     }
 
     @Override
@@ -73,5 +76,9 @@ public class Bullet extends JGObject {
     public void setCurrentMagic (int magic) {
         currentMagic = magic;
     }
+
+	public int getSpecialty() {
+		return specialty;
+	}
 
 }
