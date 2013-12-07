@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import jgame.impl.JGEngineInterface;
 import gameEngine.controller.Controller;
+import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.gameFrame.GameFrame;
@@ -86,6 +87,10 @@ public class View implements MenuActions {
      */
     public PurchaseInfo getTowerInfo (int x, int y) {
         return controller.getTowerInfo(x, y);
+    }
+    
+    public GameInfo getGameInfo(){
+        return controller.getGameInfo();
     }
 
     /**
