@@ -15,9 +15,10 @@ public class Controller {
 
     Model model;
     View view;
-
-
     Dimension gameSize;
+    private static final String TEMPORARY_BARRIER = "Temporary Barrier";
+    private static final String NAME = "Name";
+    private static final String TYPE  = "Type";
 
     public Controller () {
 
@@ -80,22 +81,18 @@ public class Controller {
     }
     
     /**
-     * @author Harris Osserman
-     * 
-     * Sends a call to the model to update the monitored barrier stats to the barrier
-     * at x,y. If the position is invalid, do nothing
-     */
+     * @author Harris
+     * A more generic way to purchase an object
+     * GUI uses this when object is purchased
+     **/
+    public boolean purchaseObject(int x, int y, PurchaseInfo purchaseInfo) {
+        if(purchaseInfo.getInfo().get(TYPE).equals(TEMPORARY_BARRIER)) {
+            return purchaseTemporaryBarrier(x, y, purchaseInfo.getInfo().get(NAME));
+        } 
+        return purchaseTower(x, y, purchaseInfo.getInfo().get(NAME));
 
-//    public PurchaseInfo getTemporaryBarrierInfo (int x, int y) {
-//        PurchaseInfo barrierInfo;
-//        try {
-//            barrierInfo=model.getBarrierInfo(x,y);
-//        } catch (Exception e) {
-//            barrierInfo=null;
-//        }
-//        return barrierInfo;
-//    }
-
+        
+    }
     
     /**
      * Sends a call to the model to purchase tower tower at position x,y
@@ -106,12 +103,12 @@ public class Controller {
     }
     
     /**
+     * @author Harris
      * Sends a call to the model to purchase temporary barrier at position x,y
      * If position is invalid, do nothing for now
      */
     public boolean purchaseTemporaryBarrier (int x, int y, String name) {
-        //return model.purchaseTemporaryBarrier(x, y, name);
-        return false;
+        return model.purchaseTemporaryBarrier(x, y, name);
     }
     
     /**

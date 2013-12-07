@@ -1,6 +1,6 @@
 package gameEngine.factory.temporaryBarrier;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.temporaryBarrier.TemporaryBarrier;
 import gameEngine.model.tower.DefaultTower;
 import gameEngine.model.tower.Tower;
@@ -23,8 +23,8 @@ public class DefaultTemporaryBarrierFactory extends TemporaryBarrierFactory {
     @Override
     public TemporaryBarrier create (int x, int y) {
         TemporaryBarrier temporaryBarrier =
-             new TemporaryBarrier(super.getItemName(), super.getImage(), super.getDamage(), super.getCost(), super.getExpire(), 
-                                  super.getDescription(), x, y);
+             new TemporaryBarrier(name, gfxname, damage, cost, expire, 
+                                  description, x, y);
         return temporaryBarrier;
     }
 

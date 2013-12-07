@@ -1,30 +1,30 @@
 package gameEngine.model.tower;
 
-import java.util.Map;
-import gameEngine.model.Detector;
-import gameEngine.model.enemy.Enemy;
+import gameEngine.constant.GameEngineConstant;
+import gameEngine.model.GameInfo;
+import gameEngine.model.purchase.PurchaseInfo;
+
 
 /**
  * 
  * @author Yuhua
- *
- * Freeze Tower would slow down or other functionall enemies in range by slowFactor
- * The enemies get back normal speed when out of range
+ * 
+ *         Freeze Tower would slow down or other functionall enemies in range by slowFactor
+ *         The enemies get back normal speed when out of range
  * 
  */
 public class MagicTower extends DefaultTower {
 
-    private Detector<Enemy> detector;
     private double magicFactor;
 
     public MagicTower (double damage,
                        double attackSpeed,
                        int attackMode,
                        double range,
-                       double cost,
+                       int cost,
                        double recyclePrice,
                        String description,
-                       
+
                        double magicFactor,
                        int magic,
 
@@ -34,47 +34,51 @@ public class MagicTower extends DefaultTower {
                        double x,
                        double y,
                        int collisionid,
-                       String image) {
-        super(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, 
-              type, id, unique_id, x, y,
-              collisionid, image);
+                       String image,
 
-        this.detector = new Detector<Enemy>(this.eng, Enemy.class);
+                       PurchaseInfo purchaseInfo) {
+        super(damage, attackSpeed, attackMode, range, cost, recyclePrice, description,
+              type, id, unique_id, x, y,
+              collisionid, image,
+              purchaseInfo);
+
         this.magicFactor = magicFactor;
-        this.currentMagic = magic;
-        
+        currentMagic = magic;
+
         addDescription();
     }
 
-    public void addDescription(){
+    @Override
+    public void addDescription () {
         super.addDescription();
-        info.put("Magic Factor", String.valueOf(magicFactor));
-
-        info.put("Upgrade Magic Factor", String.valueOf(magicFactor*upgradeFactor));
-
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_MAGIC_FACTOR, df.format(magicFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_MAGIC_FACTOR,
+                              df.format(magicFactor * upgradeFactor));
     }
 
-    
     @Override
-    public void upgrade () {
+    public void upgrade (GameInfo gameInfo) {
         upgrade(upgradeFactor);
+        gameInfo.loseGold(upgradePrice);
     }
 
     @Override
-    public void downgrade(){
+    public void downgrade () {
         downgrade(upgradeFactor);
     }
-    
+
     @Override
     public void upgrade (double factor) {
-        this.magicFactor *= factor;
+        magicFactor *= factor;
         super.upgrade(factor);
+        addDescription();
     }
-    
+
     @Override
     public void downgrade (double factor) {
-        this.magicFactor /= factor;
+        magicFactor /= factor;
         super.downgrade(factor);
+        addDescription();
     }
 
 }

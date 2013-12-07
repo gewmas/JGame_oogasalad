@@ -1,12 +1,12 @@
 package gameEngine.factory.magicFactory;
 
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.magic.IMagicable;
 import gameEngine.model.magic.TBoostMagic;
 
 public class TBoostFactory implements IMagicFactory{
-    public static final int ID=Constant.BOOSTMAGIC_ID;
-    public static final int CID=Constant.NORMALMAGIC_CID;
+    public static final int ID=GameEngineConstant.BOOSTMAGIC_ID;
+    public static final int CID=GameEngineConstant.NORMALMAGIC_CID;
     private double factor;
     
     public TBoostFactory(){
@@ -19,6 +19,6 @@ public class TBoostFactory implements IMagicFactory{
     
     @Override
     public void createMagicInstance (IMagicable target,IMagicable sender) {
-        new TBoostMagic(target,sender,factor,ID,CID);
+        new TBoostMagic(target,sender,factor,GameEngineConstant.BOOSTMAGIC_ID,GameEngineConstant.NORMALMAGIC_CID);
     }
 }

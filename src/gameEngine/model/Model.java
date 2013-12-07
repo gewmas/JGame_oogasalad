@@ -1,11 +1,13 @@
 package gameEngine.model;
 
 import gameEngine.factory.gridFactory.GridFactory;
+import gameEngine.factory.temporaryBarrier.TemporaryBarrierFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
 import gameEngine.model.warehouse.EnemyWarehouse;
+import gameEngine.model.warehouse.TemporaryBarrierWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
 import java.io.File;
@@ -33,6 +35,7 @@ public class Model {
     private GameInfo gameInfo;
     private TowerWarehouse towerWarehouse;
     private EnemyWarehouse enemyWarehouse;
+    private TemporaryBarrierWarehouse temporaryBarrierWarehouse;
     private GridFactory gridFactory;
     private LinkedList<Tile> path;
     private JGEngineInterface myEng;
@@ -41,10 +44,8 @@ public class Model {
     private ArrayList<Tile> barriers;
 
     public Model () {
-       
-        
+         
     }
-    
 
     public void newGame (File jsonFile) throws Exception {        
         scanner = new Scanner(jsonFile);
@@ -55,7 +56,7 @@ public class Model {
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
         barriers = gridFactory.getBarrierList();
-
+        temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
         rule = new Rule(1, enemyWarehouse);
@@ -98,17 +99,17 @@ public class Model {
         List<PurchaseInfo> towerInventory= new ArrayList<PurchaseInfo>();
         List<TowerFactory> factoryList=towerWarehouse.getTowerFactory();
         for(int i=0; i< factoryList.size();i++){
-            towerInventory.add((PurchaseInfo)(factoryList.get(i)));
-
+            towerInventory.add(factoryList.get(i).getPurchaseInfo());
         }
         result.put("Tower", towerInventory);
-        
-        /**
-         * Barrier Inventory
-         * 
-         * @author Harris
-         */
-        
+                
+        //TemporaryBarrier Inventory
+        List<PurchaseInfo> temporaryBarrierInventory = new ArrayList<PurchaseInfo>();
+        List<TemporaryBarrierFactory> barrierFactoryList = temporaryBarrierWarehouse.getTemporaryBarrierFactory();
+        for(int i=0; i< barrierFactoryList.size();i++){
+            temporaryBarrierInventory.add((PurchaseInfo)(barrierFactoryList.get(i)));
+        }
+        result.put("Temporary Barrier", temporaryBarrierInventory);
         return result;
     }
 
@@ -130,7 +131,7 @@ public class Model {
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
     public PurchaseInfo getTowerInfo (int x, int y) {
-        return (PurchaseInfo)checkTowerAtXY(x, y);
+        return checkTowerAtXY(x, y).getPurchaseInfo();
     }
 
     // Jiaran: purchase, get tower info. If something is wrong plz contact
@@ -150,7 +151,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-            tower.sell();
+            tower.sell(gameInfo);
         }
 
         return false;
@@ -160,7 +161,7 @@ public class Model {
         Tower tower = checkTowerAtXY(x, y);
 
         if(tower != null){
-            tower.upgrade();
+            tower.upgrade(gameInfo);
         }
 
         return false;
@@ -205,8 +206,17 @@ public class Model {
         return gameInfo;
     }
 
+    /**
+     * @author Harris
+     * Purchase temporary barrier
+     **/
     public boolean purchaseTemporaryBarrier (int x, int y, String name) {
-        // TODO Auto-generated method stub
+        Tile currentTile = getTile(x, y);
+        if (currentTile.hasPath()) {
+            currentTile.setTemporaryBarrier();
+            return temporaryBarrierWarehouse
+                .create((int) currentTile.getX(), (int) currentTile.getY(), name, gameInfo);
+        }
         return false;
     }
     

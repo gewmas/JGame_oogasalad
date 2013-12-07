@@ -33,6 +33,7 @@ public class GameFrame extends Frame {
     private InputAndDisplayFrame cheatCodeFrame;
 
     private Utilities utilities;
+    private ItemPurchaser itemPurchaser;
     /**
      * @param controller facilitates communication between view and model
      * @param view
@@ -46,15 +47,13 @@ public class GameFrame extends Frame {
         mediator.addGameFrame(this);
         this.cheatCodeFrame = addCheatCodeFrame(view);
         InfoDisplayPanel infoPanel = addInfoDisplay();
-        utilities  = new Utilities(infoPanel,this);
-        StorePanel storePanel = addStorePanel(utilities);
+        utilities  = new Utilities(infoPanel,this,view);
+        itemPurchaser = new ItemPurchaser(view,utilities);
+        StorePanel storePanel = addStorePanel(utilities,itemPurchaser);
         addGameTools(infoPanel, storePanel);
         
         setJMenuBar(new Menu(view));
-      
     }
-
-
 
     private InputAndDisplayFrame addCheatCodeFrame (final View view) {
         return new InputAndDisplayFrame("Cheat Sheet", new InputSender() {
@@ -75,9 +74,10 @@ public class GameFrame extends Frame {
     }
 
     public void createGame () {
-        CanvasPanel canvasPanel = new CanvasPanel(view, mediator);
+        CanvasPanel canvasPanel = new CanvasPanel(view, mediator,itemPurchaser, utilities);
         this.add(canvasPanel, BorderLayout.WEST);
         mediator.addGame(canvasPanel);
+        utilities.createRangeDisplay();
     }
 
     /**
@@ -92,10 +92,11 @@ public class GameFrame extends Frame {
         tools.add(infoPanel, BorderLayout.CENTER);
         tools.add(storePanel, BorderLayout.PAGE_START);
         this.add(tools, BorderLayout.EAST);
+        //this.add(new UpgradeButton(mediator),BorderLayout.);
     }
 
-    private StorePanel addStorePanel (Utilities utilities) {
-        StorePanel storePanel = new StorePanel(mediator, view,utilities);
+    private StorePanel addStorePanel (Utilities utilities, ItemPurchaser itemPurchaser) {
+        StorePanel storePanel = new StorePanel( view,utilities,itemPurchaser);
         mediator.addStore(storePanel);
         return storePanel;
     }
@@ -112,7 +113,7 @@ public class GameFrame extends Frame {
      */
     public void placeTower (PurchaseInfo towerInfo) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage("resources/img/" + towerInfo.getImage() + ".png");
+        Image image = toolkit.getImage("resources/img/" + towerInfo.getInfo().get("Image") + ".png");
         Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
         setCursor(c);
     }
