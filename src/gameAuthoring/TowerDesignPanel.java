@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -27,6 +28,8 @@ import net.miginfocom.swing.MigLayout;
 
 public class TowerDesignPanel extends JPanel {
 
+    Map<String, JPanel> TowerPanelMap;
+    
     private TowerDesignTab myTowerDesignTab;
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");

@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
@@ -34,6 +35,7 @@ public class GameAuthoringGUI implements Observer {
     private MiscellaneousTab myMiscellaneousTab;
     private UserLibraryMainTab myUserLibraryPanel;
     private Image currentImage;
+    
 
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {

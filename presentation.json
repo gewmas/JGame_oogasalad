@@ -4,11 +4,6 @@
 "BGImage" :  "woods_background",
 "gold" : 500,
 "numberOfLives" : 10,
-"levels": 2,
-"widthOfWindow": 600,
-"heightOfWindow": 600,
-"tilesPerRow": 20,
-"difficultyScale": 1.5,
 "map":
 {
   	  "pathImage":  "path.png", 
@@ -364,11 +359,11 @@
                { "id": "2", "url": "mr2.png" },
                { "id": "3", "url": "mr3.png" },
                { "id": "4", "url": "mr4.png" },
-      { "id": "d1", "url": "d1.png" },
+               { "id": "d1", "url": "d1.png" },
                { "id": "d2", "url": "d2.png" },
                { "id": "d3", "url": "d3.png" },
                { "id": "d4", "url": "d4.png" },
-      {"id": "haste", "url":"haste.png"},
+               {"id": "haste", "url":"haste.png"},
                
              
            ], 
@@ -462,7 +457,7 @@
 	 "Sell Price":  50,
 	 "Description": "Magic tower will shoot a magic bullet to affect the enemy.",
 	 "Magic Factor": 2.0,
-	 "Magic" : 1,
+	 "Magic" : "FrozeMagic",
 	}
 ],
 
