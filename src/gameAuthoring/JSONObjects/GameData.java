@@ -21,8 +21,6 @@ import javax.swing.JFileChooser;
 public class GameData extends JSONObject {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");
-
-
     JSONArray myTowerList = new JSONArray();
     JSONArray myEnemyList = new JSONArray();
     JSONArray myBarrierList = new JSONArray();
@@ -114,11 +112,11 @@ public class GameData extends JSONObject {
                                             range, cost, recyclePrice, description));
 
     }
-    
-    public void addTower(TowerJSONObject t){
+
+    public void addTower (TowerJSONObject t) {
         myTowerList.put(t);
     }
-    
+
     /**
      * Adds wave to myWaveList JSONArray
      * 
@@ -127,7 +125,7 @@ public class GameData extends JSONObject {
      * @param period
      * @param interval
      */
-    public void addWave(String type, int number, double period, int interval){
+    public void addWave (String type, int number, double period, int interval) {
         myWaveList.put(new WaveJSONObject(type, number, period, interval));
     }
 
@@ -147,11 +145,11 @@ public class GameData extends JSONObject {
                             int cost,
                             int expire,
                             String description) {
-        
-        myBarrierList.put(new TemporaryBarrierJSONObject(name, image, damage, cost, expire, description));
-        
-    }
 
+        myBarrierList.put(new TemporaryBarrierJSONObject(name, image, damage, cost, expire,
+                                                         description));
+
+    }
 
     /**
      * Adds an enemy to myEnemyList JSONArray
@@ -186,25 +184,24 @@ public class GameData extends JSONObject {
         myMap = new MapJSONObject(pathImage, pointList);
         this.put("map", myMap);
     }
-    
-    public void addBarrier(int x, int y, String imageName){
+
+    public void addBarrier (int x, int y, String imageName) {
         myMap.addBarrier(x, y, imageName);
     }
 
-    
-    public void addImage(String id, String url){
-       myResources.addImage(id, url);
-     }
-    
-    public void addAudio(String id, String url){
+    public void addImage (String id, String url) {
+        myResources.addImage(id, url);
+    }
+
+    public void addAudio (String id, String url) {
         myResources.addAudio(id, url);
-      }
-    
-    public void addAnimation(String id, ArrayList<String> imagePaths){
+    }
+
+    public void addAnimation (String id, ArrayList<String> imagePaths) {
         myResources.addAnimation(id, imagePaths);
     }
-    
-    public ResourcesJSONObject getResources(){
+
+    public ResourcesJSONObject getResources () {
         return myResources;
     }
 
