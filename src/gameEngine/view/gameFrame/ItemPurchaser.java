@@ -45,7 +45,7 @@ public class ItemPurchaser {
         //}
     }
 
-    public void checkAndPlaceTower (JGPoint mousePosition) {
+    public boolean checkAndPlaceTower (JGPoint mousePosition) {
         if (purchasing) {
             if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)) {
                 towerToPurchase = null;
@@ -55,6 +55,8 @@ public class ItemPurchaser {
             }
             System.out.println(towerToPurchase);
         }
+        
+        return purchasing;
     }
     
 }
