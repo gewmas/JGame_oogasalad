@@ -5,7 +5,9 @@ package gameEngine.constant;
 /**
  * @author Jiaran, Yuhua
  *         Stores all the constant value of game engine.
- *         These constants should include all the CIDs of JGObject.
+ *         These constants should include all the CIDs of JGObject and 
+ *         strings used to present different fields in data. This 
+ *         Constant class allows program to avoid magic number.
  */
 public class GameEngineConstant {
     public static final int PIXELSPERTILE=20;

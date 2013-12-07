@@ -9,7 +9,7 @@ import jgame.JGObject;
 
 
 /**
- * @author Yuhua
+ * @author Yuhua, wenxin shi for magic interface implementation
  * 
  * Tower will shoot the Enemy within shooting range with Bullet
  */
@@ -20,10 +20,9 @@ public abstract class Tower extends JGObject implements ITMagicable {
     //    private String image;
 
     protected double damage;
-    protected double attackSpeed;
-
+    protected double attackSpeed;   
     protected double range;
-
+   
     protected double x;
     protected double y;
 
@@ -40,8 +39,7 @@ public abstract class Tower extends JGObject implements ITMagicable {
     protected PurchaseInfo purchaseInfo;
 
     DecimalFormat df = new DecimalFormat("#.#");
-
-
+    
     public Tower (String type,
                   String id,
 
@@ -130,5 +128,36 @@ public abstract class Tower extends JGObject implements ITMagicable {
     public void setCurrentMagic (int magic) {
         currentMagic = magic;
     }
-
+    
+    @Override
+    public double changePercentSpeed(double offset){
+       double change=0;
+        if(offset<1&&offset>-1)
+            change=attackSpeed*offset;
+        else
+            change=offset;
+        attackSpeed+=change;
+        return change;   
+    }
+    
+    @Override
+    public double changeSpeed(double offset){
+        double change=attackSpeed*offset;
+        attackSpeed+=change;
+        return change;
+    }
+    
+    @Override
+    public double changeRange(double offset){
+        range+=offset;
+        return offset;  
+    }
+    
+    @Override
+    public double changePercentRange(double percent){
+        double change=range*percent;
+        range+=change;
+        return change;
+    }
+    
 }

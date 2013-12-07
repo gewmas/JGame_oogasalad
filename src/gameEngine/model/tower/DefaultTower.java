@@ -100,7 +100,7 @@ public class DefaultTower extends Tower {
         // check the time after last shoot
         long deltaTime = (System.currentTimeMillis() - prevTime) / 1000; // convert to second
 
-        if (deltaTime > 1 / attackSpeed) {
+        if (attackSpeed>0&&deltaTime > 1 / attackSpeed) {
             targetEnemies.clear();
             getEnemyInRange();
 

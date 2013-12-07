@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame;
 
 import gameEngine.constant.GameEngineConstant;
+import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
@@ -52,6 +53,8 @@ public class Game extends StdGame {
     private Collection<GameUpdatable> gameUpdatables;
 
     private Map<String, KeyActivationItem> keyActivationItems;
+    
+    private GameInfo gameInfo;
 
     public Game (View view,ItemPurchaser itemPurchaser, Utilities utilities, Collection<GameInitializable> gameInitializerItems, Collection<GameUpdatable> gameUpdatables,Map<String, KeyActivationItem> keyActivationItems) {
         this.view = view;
@@ -65,7 +68,8 @@ public class Game extends StdGame {
 
     @Override
     public void initCanvas () {
-        Dimension size = view.getGameSize();
+        gameInfo=view.getGameInfo();
+        Dimension size = gameInfo.getDimension();//view.getGameSize();
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
     }
@@ -74,12 +78,12 @@ public class Game extends StdGame {
     public void initGame () {
         setFrameRate(30, 2);
         defineMedia("mygame.tbl");
-        initial_lives = view.getLives();
-        lives = view.getLives();
-        score = view.getMoney();
+        initial_lives = gameInfo.getLife();//view.getLives();
+        lives = initial_lives;//view.getLives();
+        score = gameInfo.getGold();//view.getMoney();
         defineImage("RESERVEDslider_bar","sb",256,"slider_bar.png","-");
         defineImage("RESERVEDslider_toggle","sb",256,"slider_toggle.png","-");
-        String background=view.getBGImage();
+        String background=view.getBGImage();//gameInfo.getBGImage();//view.getBGImage();
         
         setBGImage(background);
         setHighscores(10, new Highscore(0, "aaa"), 3);
@@ -98,7 +102,7 @@ public class Game extends StdGame {
         frameRateBar.resume_in_view=false;
         toggleFrameRateBar();
   
-        this.game_title=view.getGameTitle();
+        this.game_title=gameInfo.getMyName();//view.getGameTitle();
         
         valuesToDisplay=new LinkedHashMap<String,String>();
         for (String str:DISPLAY_KEYS){
@@ -174,8 +178,9 @@ public class Game extends StdGame {
      * Updates the number of lives and money remaining in the game
      */
     public void updateGameStats () {
-        lives = view.getLives();
-        score = view.getMoney();
+        gameInfo=view.getGameInfo();
+        lives = gameInfo.getLife();//view.getLives();
+        score = gameInfo.getGold();//view.getMoney();
     }
 
     @Override
