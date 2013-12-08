@@ -203,14 +203,10 @@ public class Game extends StdGame {
      * Call if the user has won the game, will display VICTORY and go
      * to title screen
      */
-<<<<<<< HEAD
-    public void wonGame () {
-        // removeGameObjects();
-=======
+
     public void wonGame(){
         view.stopWaves();
 //        removeGameObjects();
->>>>>>> e55d8a32641e38e830b680c66e8f0369ff1eecc8
         gameWon();
     }
 
@@ -218,14 +214,10 @@ public class Game extends StdGame {
      * Call if the user has lost the game, will display
      * GAME OVER and go to title screen
      */
-<<<<<<< HEAD
-    public void endGame () {
-        // view.startModel();
-=======
+
     public void endGame(){
         view.stopWaves();
         //view.startModel();
->>>>>>> e55d8a32641e38e830b680c66e8f0369ff1eecc8
         gameOver();
     }
 
