@@ -26,7 +26,7 @@ public class MultipleShootingTowerFactory extends DefaultTowerFactory {
     @Override
     public Tower create (int x, int y) {
         Tower tower =
-                new MultipleShootingTower(damage, attackSpeed, attackMode, attackAmount, range,
+                new MultipleShootingTower(damage, attackSpeed, attackMode, specialty, attackAmount, range,
                                           cost, sellPrice, description,
                                           type, id, true,
                                           x, y, GameEngineConstant.TOWER_CID, image,

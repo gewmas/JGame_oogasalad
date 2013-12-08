@@ -1,9 +1,10 @@
 package gameEngine.model;
 
+import gameEngine.cheats.Cheat;
+import gameEngine.cheats.CheatParser;
 import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.temporaryBarrier.TemporaryBarrierFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -44,9 +45,16 @@ public class Model {
     private ArrayList<ArrayList<Tile>> grid;
     private ArrayList<Tile> barriers;
     private ArrayList<Enemy> spawnedEnemies;
+    private CheatParser cheatParser;
+    private boolean isCheatToWin=false;
 
     public Model () {
          
+    }
+
+    // @Author: Fabio
+    public ArrayList<Enemy> getSpawnedEnemies () {
+        return spawnedEnemies;
     }
 
     public void newGame (File jsonFile) throws Exception {        
@@ -62,6 +70,7 @@ public class Model {
         temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
+        cheatParser = new CheatParser(this);
        
         gameInfo = new GameInfo(parser);
     }
@@ -202,14 +211,14 @@ public class Model {
      * deleted by Jiaran based on Duvall's suggestion. Delete this when
      * every on is aware
      **/
-
+    
     /*
      * Model Getter methods
      */
 
     public GameInfo getGameInfo() {
         if (rule != null) {
-            gameInfo.SetIsWin(rule.isWin());
+            gameInfo.SetIsWin(rule.isWin()||isCheatToWin);
            
             gameInfo.SetCurrentWaveNumber(rule.getCurrentWaveNum());
         }
@@ -242,31 +251,11 @@ public class Model {
      * @return bool
      */
     public boolean activateCheat(String code) {
-        String[] cheatArgs = code.split(" ");
-        String cmd = cheatArgs[0];
-        if(cmd.equals("add_gold")) {
-            int amt = Integer.parseInt(cheatArgs[1]);
-            gameInfo.addGold(amt);
-        } else if(cmd.equals("add_lives")) {
-            int amt = Integer.parseInt(cheatArgs[1]);
-            gameInfo.addLife(amt);
-        } else if(cmd.equals("kill_all")) {
-            System.out.println("called kill_all and num emenies is: "+spawnedEnemies.size());
-            for (int j = 0; j < spawnedEnemies.size(); j++) {
-                Enemy enemy = spawnedEnemies.get(j);
-                enemy.setLife(0);
-                spawnedEnemies.remove(j);
-            }
-        } else if(cmd.equals("win_game")) {
-            System.out.println("called");
-            gameInfo.SetIsWin(true);
-            System.out.println("gameInfo isWin is: "+gameInfo.getIsWin());
-        } else if (cmd.equals("lose_game")) {
-            gameInfo.setLife(0);
-        } else {
+        Cheat cheat = cheatParser.parse(code);
+        if(cheat == null) {
             return false;
         }
-        return true;
+        return cheat.execute();
     }
     
     public void addEnemy(Enemy enemy) {
@@ -276,5 +265,7 @@ public class Model {
     public void stopWaves(){
         rule.stop();
     }
+    
+    
 
 }

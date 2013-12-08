@@ -9,6 +9,7 @@ public class MultipleShootingTower extends DefaultTower {
     public MultipleShootingTower (double damage,
                                   double attackSpeed,
                                   int attackMode,
+                                  int specialty,
                                   int attackAmount,
                                   double range,
                                   int cost,
@@ -24,7 +25,7 @@ public class MultipleShootingTower extends DefaultTower {
                                   String image,
 
                                   PurchaseInfo purchaseInfo) {
-        super(damage, attackSpeed, attackMode, range, cost, recyclePrice, description, 
+        super(damage, attackSpeed, attackMode, specialty, range, cost, recyclePrice, description, 
               type, id, unique_id, x, y,
               collisionid, image,
               purchaseInfo);

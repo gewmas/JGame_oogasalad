@@ -20,6 +20,7 @@ public class MagicTower extends DefaultTower {
     public MagicTower (double damage,
                        double attackSpeed,
                        int attackMode,
+                       int specialty,
                        double range,
                        int cost,
                        double recyclePrice,
@@ -37,7 +38,7 @@ public class MagicTower extends DefaultTower {
                        String image,
 
                        PurchaseInfo purchaseInfo) {
-        super(damage, attackSpeed, attackMode, range, cost, recyclePrice, description,
+        super(damage, attackSpeed, attackMode, specialty, range, cost, recyclePrice, description,
               type, id, unique_id, x, y,
               collisionid, image,
               purchaseInfo);
