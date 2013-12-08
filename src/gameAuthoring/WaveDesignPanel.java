@@ -26,11 +26,11 @@ public class WaveDesignPanel extends JPanel {
 
     private JButton myTypeButton;
     JComboBox<String> myEnemyChooser;
-    
+
     private JTextField myNumberField;
     private JTextField myPeriodField;
     private JTextField myIntervalField;
-    
+
     private String[] myEnemyOptions = {};
 
     private final String DEFAULT_TYPE_TEXT = "Select an Enemy Type";
@@ -49,15 +49,14 @@ public class WaveDesignPanel extends JPanel {
 
         myTypeButton = new JButton(DEFAULT_TYPE_TEXT);
         myTypeButton.addMouseListener(createWaveTypeListener());
-        
+
         myEnemyChooser = new JComboBox<String>();
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(myEnemyOptions);  
-        myEnemyChooser.setModel(model);  
-        
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(myEnemyOptions);
+        myEnemyChooser.setModel(model);
+
         myEnemyChooser.setFont(Constants.DEFAULT_BODY_FONT);
         myEnemyChooser.addMouseListener(createRevalidationListener());
         myEnemyChooser.addActionListener(createDropdownListener());
-
 
         myNumberField = new JTextField();
         myNumberField.setPreferredSize(new Dimension(200, 30));
@@ -77,7 +76,7 @@ public class WaveDesignPanel extends JPanel {
 
         this.setLayout(new MigLayout("wrap 2"));
         this.add(type);
-        this.add(myTypeButton);
+        //this.add(myTypeButton);
         this.add(myEnemyChooser);
         this.add(quantity);
         this.add(myNumberField);
@@ -123,63 +122,56 @@ public class WaveDesignPanel extends JPanel {
         return listener;
 
     }
-    
-    public MouseAdapter createRevalidationListener (){
+
+    public MouseAdapter createRevalidationListener () {
         MouseAdapter listener = new MouseAdapter() {
             GameData myGameData = myWaveDesignTab.getGameData();
 
             @Override
             public void mouseClicked (MouseEvent e) {
                 System.out.println("mouse");
-                String[] test = {"blah", "blah", "blah"};
+                String[] test = { "blah", "blah", "blah" };
                 myEnemyChooser = new JComboBox<String>(test);
-                
+
                 myEnemyChooser.revalidate();
-                
+
             }
         };
         return listener;
     }
-    
-    public ActionListener createDropdownListener(){
+
+    public ActionListener createDropdownListener () {
         ActionListener a = new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e) {
-                
+
                 GameData myGameData = myWaveDesignTab.getGameData();
                 JSONArray enemyList = myGameData.getEnemyList();
-                
-                if (enemyList.length() > myEnemyOptions.length){
-                
-                String[] enemyOptions = new String[enemyList.length()];
-                for (int i = 0; i < enemyOptions.length; i++) {
-                    JSONObject enemy = (JSONObject) enemyList.get(i);
-                    enemyOptions[i] = enemy.getString("id");
+
+                if (enemyList.length() > myEnemyOptions.length) {
+                    String[] enemyOptions = new String[enemyList.length()];
+                    for (int i = 0; i < enemyOptions.length; i++) {
+                        JSONObject enemy = (JSONObject) enemyList.get(i);
+                        enemyOptions[i] = enemy.getString("id");
+                    }
+                    
+                    
+
                 }
 
-                
-                }
-                
-                
-                
-               System.out.println("action");
-               String[] test = {"blah1", "blah2", "blah3"};
-               myEnemyChooser.removeAllItems();
-               DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(test);  
-               myEnemyChooser.setModel(model);
-               
-               myEnemyChooser.revalidate();
-               myEnemyChooser.repaint();
+                String[] test = { "blah1", "blah2", "blah3" };
+                myEnemyChooser.removeAllItems();
+                DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(test);
+                myEnemyChooser.setModel(model);
+
+                myEnemyChooser.revalidate();
+                myEnemyChooser.repaint();
             }
 
         };
-        
+
         return a;
     }
-    
- 
- 
-
 
     public MouseAdapter createWaveButtonListener () {
         MouseAdapter listener = new MouseAdapter() {

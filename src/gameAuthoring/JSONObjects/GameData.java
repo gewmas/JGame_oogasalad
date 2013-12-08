@@ -252,6 +252,14 @@ public class GameData extends JSONObject {
     public ResourcesJSONObject getResources () {
         return myResources;
     }
+    
+    public void addBulletImage(String imageID){
+        this.put("bulletImage", imageID);
+    }
+    
+    public void addBGAudio(String audioID){
+        this.put("bgMusic", audioID);
+    }
 
     /**
      * Opens file chooser dialogue to save current state of GameData object into a file

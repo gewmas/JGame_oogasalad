@@ -3,18 +3,13 @@ package gameAuthoring;
 import gameAuthoring.JSONObjects.GameData;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -36,7 +31,6 @@ public class TowerDesignPanel extends JPanel {
     private TowerDesignTab myTowerDesignTab;
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
-
     private JComboBox<String> myTypeOptions;
     private JTextField myNameField;
     private JTextField myDamageField;
@@ -54,8 +48,7 @@ public class TowerDesignPanel extends JPanel {
     private JScrollPane scrollPane;
     private JComboBox<String> magicOptions;
 
-    private File myImageSource;
-    private JLabel myTowerImage;
+    private ImageLabel myTowerImage;
 
     private final static String[] TOWER_TYPES = { "DefaultTower", "MultipleShootingTower",
                                                  "BoostTower", "MagicTower" };
@@ -98,32 +91,31 @@ public class TowerDesignPanel extends JPanel {
         this.setPreferredSize(new Dimension(380, 500));
     }
 
-    private ActionListener createTowerTypeListener (final TowerDesignPanel t) {
-        ActionListener a = new ActionListener() {
+    private ActionListener createTowerTypeListener (final TowerDesignPanel towerPanel) {
+        ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e) {
-                String s = (String) myTypeOptions.getSelectedItem();
-                if (s != null) {
+                String towerType = (String) myTypeOptions.getSelectedItem();
+                if (towerType != null) {
 
-                    System.out.println(s);
-                    t.removeAll();
-
-                    t.add(type);
-                    t.add(myTypeOptions);
+                    System.out.println(towerType);
+                    towerPanel.removeAll();
+                    towerPanel.add(type);
+                    towerPanel.add(myTypeOptions);
 
                     JPanel dataPanel;
 
-                    if (s.equals("MagicTower")) {
+                    if (towerType.equals("MagicTower")) {
                         System.out.println("magic");
                         dataPanel = createMagicTowerPanel();
                     }
 
-                    else if (s.equals("MultipleShootingTower")) {
+                    else if (towerType.equals("MultipleShootingTower")) {
                         System.out.println("mult");
                         dataPanel = createMultipleShootingTowerPanel();
                     }
 
-                    else if (s.equals("BoostTower")) {
+                    else if (towerType.equals("BoostTower")) {
                         System.out.println("boost");
                         dataPanel = createBoostTowerPanel();
                     }
@@ -135,16 +127,16 @@ public class TowerDesignPanel extends JPanel {
                     dataPanel.setOpaque(false);
                     dataPanel.add(createTowerButton);
                     dataPanel.revalidate();
-                    t.add(dataPanel);
-                    t.revalidate();
-                    t.repaint();
+                    towerPanel.add(dataPanel);
+                    towerPanel.revalidate();
+                    towerPanel.repaint();
                     clearTextFields();
                 }
             }
 
         };
 
-        return a;
+        return listener;
 
     }
 
@@ -246,26 +238,6 @@ public class TowerDesignPanel extends JPanel {
         return panel;
     }
 
-    public MouseAdapter createTowerImageListener () {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                File imgSource = GameAuthoringGUI.mySelectedImage;
-                myImageSource = imgSource;
-                Image tower;
-                try {
-                    tower = ImageIO.read(imgSource);
-                    tower = tower.getScaledInstance(50, 50, Image.SCALE_FAST);
-                    myTowerImage.setIcon(new ImageIcon(tower));
-                }
-                catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        };
-        return listener;
-    }
-
     public MouseAdapter createTowerButtonListener (final TowerDesignPanel towerDesignDialog) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
@@ -284,6 +256,7 @@ public class TowerDesignPanel extends JPanel {
                     int cost = Integer.parseInt(myCostField.getText());
                     int recyclePrice = Integer.parseInt(myRecyclePriceField.getText());
                     String description = myDescriptionField.getText();
+                    String imageID = myTowerImage.getID();
 
                     if (name == null || damage < 0 || attackSpeed < 0 || range < 0 || cost < 0 ||
                         recyclePrice < 0 || description == null) {
@@ -297,10 +270,7 @@ public class TowerDesignPanel extends JPanel {
                         myGameData
                                 .addTower(type,
                                           name,
-                                          myImageSource.toString()
-                                                  .replace(System.getProperties()
-                                                          .getProperty("user.dir") + "/",
-                                                           ""),
+                                          imageID,
                                           damage,
                                           attackSpeed,
                                           mode, // attackMode?
@@ -316,7 +286,7 @@ public class TowerDesignPanel extends JPanel {
                         String magicType = (String) magicOptions.getSelectedItem();
                         double magicFactor = Double.parseDouble(magicFactorField.getText());
 
-                        myGameData.addMagicTower(type, name, myImageSource.toString(), damage,
+                        myGameData.addMagicTower(type, name, imageID, damage,
                                                  attackSpeed, mode, range, cost, recyclePrice,
                                                  description, magicFactor, magicType);
                     }
@@ -327,10 +297,7 @@ public class TowerDesignPanel extends JPanel {
                         myGameData
                                 .addBoostTower(type,
                                                name,
-                                               myImageSource.toString()
-                                                       .replace(System.getProperties()
-                                                               .getProperty("user.dir") + "/",
-                                                                ""),
+                                               imageID,
                                                damage,
                                                attackSpeed,
                                                range,
@@ -344,7 +311,7 @@ public class TowerDesignPanel extends JPanel {
                     else {
                         int mode = myAttackModeOptions.getSelectedIndex();
                         int attackAmount = Integer.parseInt(attackAmountField.getText());
-                        myGameData.addMultipleShootingTower(type, name, myImageSource.toString(),
+                        myGameData.addMultipleShootingTower(type, name, imageID,
                                                             damage, attackSpeed, mode,
                                                             attackAmount, range, cost,
                                                             recyclePrice, description);
@@ -352,7 +319,7 @@ public class TowerDesignPanel extends JPanel {
                     }
 
                     clearTextFields();
-                    myTowerDesignTab.addTower(myImageSource, myNameField.getText());
+                    myTowerDesignTab.addTower(myTowerImage.getImageFile(), myNameField.getText());
 
                 }
                 catch (NumberFormatException n) {
@@ -423,11 +390,10 @@ public class TowerDesignPanel extends JPanel {
         towerImageChooser = new JLabel("Choose image");
         towerImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
 
-        myTowerImage = new JLabel();
+        myTowerImage = new ImageLabel();
         myTowerImage.setPreferredSize(new Dimension(50, 50));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myTowerImage.setBorder(border);
-        myTowerImage.addMouseListener(createTowerImageListener());
 
         myDescriptionField.setLineWrap(true);
         scrollPane = new JScrollPane(myDescriptionField);
