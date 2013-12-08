@@ -28,11 +28,11 @@ public class TempBarrierDesignPanel extends JPanel {
     private JTextArea myDescriptionField;
     private JScrollPane scrollPane;
     private TempBarrierDesignTab myTempBarrierDesignTab;
+    private ImageLabel myBarrierImage;
 
     public TempBarrierDesignPanel (TempBarrierDesignTab tempBarrierDesignTab) {
         JLabel name = new JLabel("Name");
         myTempBarrierDesignTab = tempBarrierDesignTab;
-        // name.setPreferredSize(new Dimension(100, 30));
         name.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel damage = new JLabel("Damage");
         damage.setFont(Constants.DEFAULT_BODY_FONT);
@@ -42,7 +42,9 @@ public class TempBarrierDesignPanel extends JPanel {
         expire.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel description = new JLabel("Description");
         description.setFont(Constants.DEFAULT_BODY_FONT);
-
+        JLabel image = new JLabel("Choose image");
+        image.setFont(Constants.DEFAULT_BODY_FONT);
+        
         myNameField = new JTextField();
         myNameField.setPreferredSize(new Dimension(200, 30));
         myNameField.setFont(Constants.DEFAULT_BODY_FONT);
@@ -63,6 +65,13 @@ public class TempBarrierDesignPanel extends JPanel {
         JButton createBarrierButton = new JButton("Create New Barrier");
         createBarrierButton.setFont(Constants.DEFAULT_BODY_FONT);
 
+        
+        myBarrierImage = new ImageLabel();
+        myBarrierImage.setPreferredSize(new Dimension(50, 50));
+        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
+        myBarrierImage.setBorder(border);
+        
+        
         this.setLayout(new MigLayout("wrap 2"));
         this.add(name);
         this.add(myNameField);
@@ -74,6 +83,8 @@ public class TempBarrierDesignPanel extends JPanel {
         this.add(myExpiryField);
         this.add(description);
         this.add(scrollPane);
+        this.add(image);
+        this.add(myBarrierImage);
 
         this.add(createBarrierButton);
 
@@ -88,7 +99,14 @@ public class TempBarrierDesignPanel extends JPanel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 GameData gameData = myTempBarrierDesignTab.getGameData();
-
+                String name = myNameField.getText();
+                int damage = Integer.parseInt(myDamageField.getText());
+                int cost = Integer.parseInt(myCostField.getText());
+                int expire = Integer.parseInt(myExpiryField.getText());
+                String description = myDescriptionField.getText();
+                String image = myBarrierImage.getID();
+                
+                gameData.addBarrier(name, image, damage, cost, expire, description);
             }
         };
 

@@ -127,7 +127,12 @@ public class TowerDesignPanel extends JPanel {
                     dataPanel.setOpaque(false);
                     dataPanel.add(createTowerButton);
                     dataPanel.revalidate();
-                    towerPanel.add(dataPanel);
+                    
+                    JScrollPane scrollPane = new JScrollPane(dataPanel);
+                    scrollPane.getViewport().setOpaque(false);
+                    scrollPane.setOpaque(false);
+                    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                    towerPanel.add(scrollPane);
                     towerPanel.revalidate();
                     towerPanel.repaint();
                     clearTextFields();
@@ -179,7 +184,7 @@ public class TowerDesignPanel extends JPanel {
         magic.setFont(Constants.DEFAULT_BODY_FONT);
 
         magicFactorField = new JTextField();
-        magicFactorField.setPreferredSize(new Dimension(200, 30));
+        magicFactorField.setPreferredSize(new Dimension(150, 30));
         magicFactorField.setFont(Constants.DEFAULT_BODY_FONT);
         magicOptions = new JComboBox<String>(MAGIC_TYPES);
         magicOptions.setFont(Constants.DEFAULT_BODY_FONT);
@@ -366,26 +371,26 @@ public class TowerDesignPanel extends JPanel {
         description.setFont(Constants.DEFAULT_BODY_FONT);
 
         myNameField = new JTextField();
-        myNameField.setPreferredSize(new Dimension(200, 30));
+        myNameField.setPreferredSize(new Dimension(150, 30));
         myNameField.setFont(Constants.DEFAULT_BODY_FONT);
         myDamageField = new JTextField();
-        myDamageField.setPreferredSize(new Dimension(200, 30));
+        myDamageField.setPreferredSize(new Dimension(150, 30));
         myDamageField.setFont(Constants.DEFAULT_BODY_FONT);
         myAttackSpeedField = new JTextField();
-        myAttackSpeedField.setPreferredSize(new Dimension(200, 30));
+        myAttackSpeedField.setPreferredSize(new Dimension(150, 30));
         myAttackSpeedField.setFont(Constants.DEFAULT_BODY_FONT);
         myAttackModeOptions = new JComboBox<Integer>(ATTACK_MODES);
         myAttackModeOptions.setFont(Constants.DEFAULT_BODY_FONT);
         myRangeField = new JTextField();
-        myRangeField.setPreferredSize(new Dimension(200, 30));
+        myRangeField.setPreferredSize(new Dimension(150, 30));
         myRangeField.setFont(Constants.DEFAULT_BODY_FONT);
         myCostField = new JTextField();
-        myCostField.setPreferredSize(new Dimension(200, 30));
+        myCostField.setPreferredSize(new Dimension(150, 30));
         myCostField.setFont(Constants.DEFAULT_BODY_FONT);
         myRecyclePriceField = new JTextField();
-        myRecyclePriceField.setPreferredSize(new Dimension(200, 30));
+        myRecyclePriceField.setPreferredSize(new Dimension(150, 30));
         myRecyclePriceField.setFont(Constants.DEFAULT_BODY_FONT);
-        myDescriptionField = new JTextArea(2, 18);
+        myDescriptionField = new JTextArea(2, 12);
         myDescriptionField.setLineWrap(true);
         scrollPane = new JScrollPane(myDescriptionField);
         
