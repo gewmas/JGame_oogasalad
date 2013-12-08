@@ -74,9 +74,9 @@ public class Game extends StdGame {
     @Override
     public void initCanvas () {
         gameInfo = view.getGameInfo();
-
-        this.setMoneyTitle("Money");
-        this.setLivesTitle("Lives");
+        
+        this.setMoneyTitle(gameInfo.getMyGoldName());
+        this.setLivesTitle(gameInfo.getMyLivesName());
         Dimension size = gameInfo.getDimension();// view.getGameSize();
 
         setCanvasSettings(size.width, size.height, WIDTH / size.width,

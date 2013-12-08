@@ -43,13 +43,6 @@ public class View implements MenuActions {
 
     }
 
-    public void selectNewGame () {
-        gameFrame.quitGame();
-        gameFrame.dispose();
-        gameFrame = new GameFrame( this);
-        initializationFrame.setVisible(true);
-    }
-
     /**
      * Used to start the game
      */
@@ -67,7 +60,6 @@ public class View implements MenuActions {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }
@@ -132,6 +124,24 @@ public class View implements MenuActions {
 
     public void stopWaves () {
         controller.stopWaves();
+    }
+
+    @Override
+    public void selectNewGame () {
+        controller.startGame();
+        gameFrame.endGame();
+        gameFrame.quitGame();
+        gameFrame.dispose();
+        gameFrame = new GameFrame(this);
+        controller = new Controller();
+        initializationFrame.showFrame();
+
+    }
+
+    @Override
+    public void goToMainMenu () {
+        // TODO Auto-generated method stub
+
     }
 
 }

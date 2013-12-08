@@ -952,7 +952,6 @@ public abstract class StdGame extends JGEngine {
         setFont(status_font);
         setColor(status_color);
         drawString(money_title +" "+ money, status_l_margin, 0, -1);
-        drawString("Score " + score, status_l_margin,15,-1);
         if (lives_img == null) {
             drawString(lives_title +" " + lives, viewWidth() - status_r_margin, 0, 1);
         }
