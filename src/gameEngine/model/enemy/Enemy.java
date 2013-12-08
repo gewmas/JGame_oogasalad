@@ -90,6 +90,7 @@ public class Enemy extends JGObject implements IEMagicable {
     @Override
     public void move () {
         //update skills
+        lifeLessThanZero() ;
         if (mySkill != null)
             mySkill.update((int) this.getCenterX(), (int) this.getCenterY());
         // Should walk along the Path

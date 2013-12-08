@@ -65,9 +65,14 @@ public class Model {
        
         gameInfo = new GameInfo(parser);
     }
-    // Jiaran: now we can just read waves from JSon.
+    // Fabio Changed it (added win and life reset)
     public void startGame () {
-        rule.ruleStart();
+        gameInfo.SetIsWin(false);
+        gameInfo.setLife(parser.getInt("numberOfLives"));
+        gameInfo.setGold(parser.getInt("gold"));
+//        rule.ruleStart();
+        //Edited by Alex, call reset() instead of start()
+        rule.reset();
 
     }
 
@@ -205,6 +210,7 @@ public class Model {
     public GameInfo getGameInfo() {
         if (rule != null) {
             gameInfo.SetIsWin(rule.isWin());
+           
             gameInfo.SetCurrentWaveNumber(rule.getCurrentWaveNum());
         }
        
@@ -252,9 +258,11 @@ public class Model {
                 spawnedEnemies.remove(j);
             }
         } else if(cmd.equals("win_game")) {
-            //TODO
+            System.out.println("called");
+            gameInfo.SetIsWin(true);
+            System.out.println("gameInfo isWin is: "+gameInfo.getIsWin());
         } else if (cmd.equals("lose_game")) {
-            //TODO
+            gameInfo.setLife(0);
         } else {
             return false;
         }
@@ -265,5 +273,8 @@ public class Model {
         spawnedEnemies.add(enemy);
     }
     
+    public void stopWaves(){
+        rule.stop();
+    }
 
 }
