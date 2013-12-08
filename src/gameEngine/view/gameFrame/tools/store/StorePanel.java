@@ -4,9 +4,9 @@ import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.Panel;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameInitializable;
 import gameEngine.view.gameFrame.GameUpdatable;
@@ -20,7 +20,7 @@ import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
  *         Contains the option to select items and panel that displays
  *         item information
  */
-public class StorePanel extends Panel implements GameUpdatable, GameInitializable{
+public class StorePanel extends JPanel implements GameUpdatable, GameInitializable{
 
     private JTabbedPane storeTabbedPane;
     private View view;

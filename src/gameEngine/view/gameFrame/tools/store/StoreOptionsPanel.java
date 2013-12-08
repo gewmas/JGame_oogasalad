@@ -2,7 +2,6 @@ package gameEngine.view.gameFrame.tools.store;
 
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.ItemPurchaser;
@@ -28,7 +27,7 @@ import net.miginfocom.swing.MigLayout;
  * @author Lalita Maraj
  */
 @SuppressWarnings("serial")
-public class StoreOptionsPanel extends Panel {
+public class StoreOptionsPanel extends JPanel {
     private static final String[] DISPLAY_KEYS = { GameEngineConstant.PURCHASE_INFO_NAME,
                                                   GameEngineConstant.TOWER_DAMAGE,
                                                   GameEngineConstant.TOWER_ATTACK_SPEED,

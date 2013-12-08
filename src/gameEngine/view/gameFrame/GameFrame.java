@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import gameEngine.view.Frame;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.inputAndDisplay.InputAndDisplayFrame;
@@ -26,7 +25,7 @@ import gameEngine.controller.Controller;
  * @author Lalita Maraj Alex Zhu
  * 
  */
-public class GameFrame extends Frame implements GameInitializable {
+public class GameFrame extends JFrame implements GameInitializable {
 
     private View view;
     private InputAndDisplayFrame cheatCodeFrame;
@@ -95,7 +94,7 @@ public class GameFrame extends Frame implements GameInitializable {
      * Create the store of Towers
      * 
      * @param storePanel
-     * @param infoPanel2
+     * @param infoPanel
      */
     private void addGameTools (InfoDisplayPanel infoPanel, StorePanel storePanel) {
         JPanel tools = new JPanel();
@@ -104,7 +103,6 @@ public class GameFrame extends Frame implements GameInitializable {
         tools.add(infoPanel, BorderLayout.CENTER);
         tools.add(storePanel, BorderLayout.PAGE_START);
         gameInitializerItems.add(storePanel);
-
         this.add(tools, BorderLayout.EAST);
     }
 
