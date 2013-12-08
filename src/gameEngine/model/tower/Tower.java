@@ -7,6 +7,7 @@ import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.magic.ITMagicable;
 import gameEngine.model.purchase.PurchaseInfo;
 import jgame.JGObject;
+import jgame.JGRectangle;
 
 
 /**
@@ -73,10 +74,17 @@ public abstract class Tower extends JGObject implements ITMagicable {
         this.sellPrice = (int)recyclePrice;
 
         this.description = description;
+        this.x=x;
+        this.y=y;
 
-        this.x = x;
-        this.y = y;
-
+        //wenxin shi to place the tower in correct way
+//        JGRectangle box=this.getBBox();
+//        System.out.println(box.width+";"+box.height);
+//        System.out.println(x+";"+y);
+//        this.x=x-(box.width-GameEngineConstant.PIXELSPERTILE)/2;
+//        this.y=y-(box.height-GameEngineConstant.PIXELSPERTILE);
+//        System.out.println(this.x+";"+this.y);
+        
         this.purchaseInfo = purchaseInfo;
     }
 
