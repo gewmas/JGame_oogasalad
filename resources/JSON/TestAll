@@ -31,6 +31,7 @@
             "id": "woods_background",
             "url": "woods_background.png"
          },
+         { "id": "bullet", "url": "bullet.png" },
          {
             "id": "2",
             "url": "tower1.png"
@@ -104,10 +105,10 @@
          "Name": "Magic",
          "Damage": 10,
          "Description": "A magic tower",
-         "Range": 4,
+         "Range": 100,
          "Sell Price": 25,
          "Type": "MagicTower",
-         "Image": "BoostTower",
+         "Image": "4",
          "Magic": ["FrozeMagic"],
          "Attack Speed": 0.9,
          "Magic Factor": 2.5,
