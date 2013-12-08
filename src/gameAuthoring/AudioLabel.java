@@ -21,6 +21,7 @@ public class AudioLabel extends JLabel {
     private Image myAudioImage;
     private File myAudioImageSource;
     private String myID;
+    private boolean isMutable = false;
 
     public AudioLabel () {
         initialize();
@@ -31,6 +32,9 @@ public class AudioLabel extends JLabel {
         initialize();
         try {
             myAudioImageSource = new File(getClass().getResource("sound.png").toURI());
+            if (myAudioImageSource == null){
+                System.out.println("Audio image source is null");
+            }
         }
         catch (URISyntaxException e1) {
             e1.printStackTrace();
@@ -49,9 +53,14 @@ public class AudioLabel extends JLabel {
     public void initialize () {
         this.setPreferredSize(new Dimension(50, 50));
         this.addMouseListener(createAudioListener(this));
+        this.addMouseListener(addAudioListener(this));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         this.setBorder(border);
         this.addMouseListener(addCursorChangeListener(this));
+    }
+
+    public void setMutableStatusTrue () {
+        isMutable = true;
     }
 
     public void setAudioFile (File audio) {
@@ -95,6 +104,23 @@ public class AudioLabel extends JLabel {
 
     public MouseAdapter addCursorChangeListener (final AudioLabel label) {
         MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                if (GameAuthoringGUI.myAudioLabel == null) {
+                    GameAuthoringGUI.myAudioLabel = label;
+                    GameAuthoringGUI.myImageLabel.setLabelIcon(myAudioImageSource);
+                }
+                else if (isMutable) {
+                    System.out.println("is mutable");
+                    transferLabelInformation(GameAuthoringGUI.myAudioLabel);
+                }
+            }
+        };
+        return listener;
+    }
+
+    public MouseAdapter addAudioListener (final AudioLabel label) {
+        MouseAdapter listener = new MouseAdapter() {
             private boolean audioSelected = false;
 
             @Override
@@ -102,10 +128,15 @@ public class AudioLabel extends JLabel {
                 audioSelected = !audioSelected;
                 GameAuthoringGUI.myAudioLabel = label;
                 if (audioSelected) {
-                    GameAuthoringGUI.setCursor(label.getAudioImageSource());
+                    if (myAudioImageSource == null) {
+                        System.out.println("null");
+                    }
+                    GameAuthoringGUI
+                            .setCursor(myAudioImageSource);
                 }
                 else {
                     GameAuthoringGUI.setCursorNull();
+                    GameAuthoringGUI.myAudioLabel = null;
                 }
             }
         };

@@ -67,6 +67,7 @@ public class TempBarrierDesignPanel extends JPanel {
 
         myBarrierImage = new ImageLabel();
         myBarrierImage.setPreferredSize(new Dimension(50, 50));
+        myBarrierImage.setMutableStatusTrue();
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myBarrierImage.setBorder(border);
 

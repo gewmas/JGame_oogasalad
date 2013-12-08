@@ -42,6 +42,7 @@ public class ImageLabel extends JLabel {
 
     public void initialize () {
         this.addMouseListener(createImageListener(this));
+        this.addMouseListener(addCursorListener(this));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         this.setBorder(border);
     }
@@ -98,6 +99,26 @@ public class ImageLabel extends JLabel {
                 }
                 else if (isMutable) {
                     transferLabelInformation(GameAuthoringGUI.myImageLabel);
+                }
+            }
+        };
+        return listener;
+    }
+
+    public MouseAdapter addCursorListener (final ImageLabel image) {
+        MouseAdapter listener = new MouseAdapter() {
+            private boolean imageSelected = false;
+
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                imageSelected = !imageSelected;
+                if (imageSelected) {
+                    GameAuthoringGUI.setCursor(image.getImageFile());
+                    GameAuthoringGUI.myImageLabel = image;
+                }
+                else {
+                    GameAuthoringGUI.setCursorNull();
+                    GameAuthoringGUI.myImageLabel = null;
                 }
             }
         };
