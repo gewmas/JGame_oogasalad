@@ -207,6 +207,7 @@ public class Model {
     public GameInfo getGameInfo() {
         if (rule != null) {
             gameInfo.SetIsWin(rule.isWin());
+           
             gameInfo.SetCurrentWaveNumber(rule.getCurrentWaveNum());
         }
        

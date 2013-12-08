@@ -2,8 +2,8 @@ package gameEngine.view.initialization;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import gameEngine.view.Button;
 import gameEngine.view.StyleConstants;
 
 
@@ -13,7 +13,7 @@ import gameEngine.view.StyleConstants;
  * @author Lalita Maraj
  * 
  */
-public class CancelButton extends Button {
+public class CancelButton extends JButton {
     JFrame frame;
 
     public CancelButton (JFrame frame) {

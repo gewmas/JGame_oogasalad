@@ -1,6 +1,5 @@
 package gameEngine.view;
 
-import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +10,15 @@ import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.gameFrame.GameFrame;
-import gameEngine.view.gameFrame.GameFrameMediator;
 import gameEngine.view.gameFrame.menu.MenuActions;
 import gameEngine.view.initialization.InitializationFrame;
 
 
 /**
- * The main view class that holds all the panels and frames included in the
- * Game Engine GUI
+ * The main view class that orchestrates the sequence of events
+ * for selecting a game, starting a game, selecting a new game, and ending a game.
+ * This class serves as the interface to the controller as the front end. 
+ * No other front end elements are exposed to the rest of the game Engine.
  * 
  * @author Lalita Maraj, Alex Zhu
  * 
@@ -31,12 +31,14 @@ public class View implements MenuActions {
 
     public View (Controller controller) {
         this.controller = controller;
-       
-        gameFrame = new GameFrame(controller, this);
-        initializationFrame = new InitializationFrame(this);
+        this.gameFrame = new GameFrame(controller, this);
+        this.initializationFrame = new InitializationFrame(this);
 
     }
 
+    /**
+     * Prompts user for file to be read to start game
+     */
     public void promptForFile () {
         initializationFrame.showFrame();
 
@@ -49,6 +51,9 @@ public class View implements MenuActions {
         initializationFrame.setVisible(true);
     }
 
+    /**
+     * Used to start the game 
+     */
     public void startJGame () {
         gameFrame.showGame();
     }
@@ -88,7 +93,7 @@ public class View implements MenuActions {
     public PurchaseInfo getTowerInfo (int x, int y) {
         return controller.getTowerInfo(x, y);
     }
-    
+
     /**
      * Gets game related information from the model:
      * Title
@@ -105,6 +110,7 @@ public class View implements MenuActions {
     public List<Tile> getPath () {
         return controller.getPath();
     }
+
 
     public Map<String, List<PurchaseInfo>> getInventory () {
         return controller.getInventory();
