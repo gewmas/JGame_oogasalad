@@ -578,7 +578,7 @@ public abstract class StdGame extends JGEngine {
         removeGameState("StartGame");
         removeGameState("LifeLost");
         seqtimer = 0;
-        CreateEffect.Words(pfWidth()/2, pfHeight()/2, "GAME OVER");
+        CreateEffect.Words(pfWidth()/2, pfHeight()/2, "VICTORY");
         if (gamewon_ticks > 0) {
             if (gamewon_ingame)
                 addGameState("GameWon");
