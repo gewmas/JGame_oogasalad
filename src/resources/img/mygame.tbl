@@ -13,28 +13,127 @@
 //   file ("-" means none).  Available operations are flip ("x", "y") and
 //   rotate ("r" - right, "l" - left, "u" - 180 degrees).
 
-space_background	-	0	space_background.jpg	-
-woods_background	-	0	woods_background.png	-
-icons_map		icons16x23.gif		0	0	16	23	0	0
 
-tower			-	0	tower.png		-
-tower1			-	0	tower.png		-
-tower2			tr	0	icons_map	1	-
+//Fixed Resource
 
-barrier1			-	0	barrier1.png		-
-barrier2			-	0	barrier2.png		-
-
-BoostTower		-	0	BoostTower.png		-
-MagicTower		-	0	MagicTower.png		-
-MultipleShootingTower	-	0	MultipleShootingTower.png	-
-
-
-enemy	-	0	player.png	-
-enemy1	-	0	player.png	-
-enemy2			cu	0	icons_map	2		-
-enemy3			ja	0	icons_map	0		-
-bullet	-	0	bullet.png	-
 FrozeMagic	-	0	FrozeMagic.png	-
 BoostMagic	-	0	BoostMagic.png	-
-SpeedUpMagic	-	0	SpeedUpMagic.png	-
+HasteMagic	-	0	HasteMagic.png	-
 
+Armour1	-	0	Armour1.png	-
+Armour2	-	0	Armour2.png	-
+Armour3	-	0	Armour3.png	-
+ArmourEnd	-	0	ArmourEnd.png	-
+
+
+ArmourMagic	Armour1;Armour2;Armour3;ArmourEnd		0.3	false
+
+
+Heal1	-	0	Heal1.png	-
+Heal2	-	0	Heal2.png	-
+Heal3	-	0	Heal3.png	-
+Heal4	-	0	Heal4.png	-
+Heal5	-	0	Heal5.png	-
+Heal6	-	0	Heal6.png	-
+Heal7	-	0	Heal7.png	-
+Heal8	-	0	Heal8.png	-
+Heal9	-	0	Heal9.png	-
+Heal10	-	0	Heal10.png	-
+Heal11	-	0	Heal11.png	-
+Heal12	-	0	Heal12.png	-
+Heal13	-	0	Heal13.png	-
+Heal14	-	0	Heal14.png	-
+Heal15	-	0	Heal15.png	-
+HealEnd	-	0	HealEnd.png	-
+HealMagic	Heal1;Heal2;Heal3;Heal4;Heal5;Heal6;Heal7;Heal8;Heal9;Heal10;Heal11;Heal12;Heal13;Heal4;Heal15;HealEnd		0.3	false
+
+
+
+Light1	-	0	Light1.png	-
+Light2	-	0	Light2.png	-
+Light3	-	0	Light3.png	-
+Light4	-	0	Light4.png	-
+Light5	-	0	Light5.png	-
+LightEnd	-	0	LightEnd.png	-
+
+LightMagic	Light1;Light2;Light3;Light4;Light5;LightEnd		0.3	false
+
+Dollar	-	0	Dollar.png	-
+
+LetterA	-	0	LetterA.png	-
+LetterB	-	0	LetterB.png	-
+LetterC	-	0	LetterC.png	-
+LetterD	-	0	LetterD.png	-
+LetterE	-	0	LetterE.png	-
+LetterF	-	0	LetterF.png	-
+LetterG	-	0	LetterG.png	-
+LetterH	-	0	LetterH.png	-
+LetterI	-	0	LetterI.png	-
+LetterJ	-	0	LetterJ.png	-
+LetterK	-	0	LetterK.png	-
+LetterL	-	0	LetterL.png	-
+LetterM	-	0	LetterM.png	-
+LetterN	-	0	LetterN.png	-
+LetterO	-	0	LetterO.png	-
+LetterP	-	0	LetterP.png	-
+LetterQ	-	0	LetterQ.png	-
+LetterR	-	0	LetterR.png	-
+LetterS	-	0	LetterS.png	-
+LetterT	-	0	LetterT.png	-
+LetterU	-	0	LetterU.png	-
+LetterV	-	0	LetterV.png	-
+LetterW	-	0	LetterW.png	-
+LetterX	-	0	LetterX.png	-
+LetterY	-	0	LetterY.png	-
+LetterZ	-	0	LetterZ.png	-
+Letter0	-	0	Letter0.png	-
+Letter1	-	0	Letter1.png	-
+Letter2	-	0	Letter2.png	-
+Letter3	-	0	Letter3.png	-
+Letter3	-	0	Letter4.png	-
+Letter5	-	0	Letter5.png	-
+Letter6	-	0	Letter6.png	-
+Letter7	-	0	Letter7.png	-
+Letter8	-	0	Letter8.png	-
+Letter9	-	0	Letter9.png	-
+
+slider_bar	-	0	slider_bar.png	-
+slider_toggle	-	0	slider_toggle.png	-
+
+
+
+explode1		-	0	explode1.png	-
+explode2		-	0	explode2.png	-
+explode3		-	0	explode3.png	-
+explode4		-	0	explode4.png	-
+explode5		-	0	explode5.png	-
+explode6		-	0	explode6.png	-
+explode7		-	0	explode7.png	-
+explode8		-	0	explode8.png	-
+explode9		-	0	explode9.png	-
+explode10		-	0	explode10.png	-
+explode11		-	0	explode11.png	-
+explode12		-	0	explode12.png	-
+explode13		-	0	explode13.png	-
+explode14		-	0	explode14.png	-
+explode15		-	0	explode15.png	-
+explode16		-	0	explode16.png	-
+explode17		-	0	explode17.png	-
+explode18		-	0	explode18.png	-
+ExplodeEnd		-	0	explodeEnd.png	-
+
+
+
+
+Explode	explode1;explode2;explode3;explode4;explode5;explode6;explode7;explode8;explode9;explode10;explode11;explode12;explode13;explode14;explode15;explode16;explode17;explode18;ExplodeEnd;	0.3		false
+
+Blood1	-	0	Blood1.png	-
+Blood2	-	0	Blood2.png	-
+Blood3	-	0	Blood3.png	-
+Blood4	-	0	Blood4.png	-
+Blood5	-	0	Blood5.png	-
+Blood6	-	0	Blood6.png	-
+Blood7	-	0	Blood7.png	-
+BloodEnd	-	0	BloodEnd.png	-
+
+Blood	Blood1;Blood2;Blood3;Blood4;Blood5;Blood6;Blood7;BloodEnd;	0.3	false

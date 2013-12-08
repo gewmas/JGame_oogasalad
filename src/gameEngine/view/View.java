@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import jgame.impl.JGEngineInterface;
 import gameEngine.controller.Controller;
+import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.gameFrame.GameFrame;
@@ -89,51 +90,32 @@ public class View implements MenuActions {
     }
 
     /**
-     * Gets the dimensions of the game on initialization
+     * Gets game related information from the model:
+     * Title
+     * BGImage
+     * Gold
+     * Lives
+     * Wave Number
+     * IsWin
      */
-    public Dimension getGameSize () {
-        return controller.getGameSize();
+    public GameInfo getGameInfo(){
+        return controller.getGameInfo();
     }
 
     public List<Tile> getPath () {
         return controller.getPath();
     }
 
-    /**
-     * Gets the background image of the game upon initialization
-     */
-    public String getBGImage () {
-        return controller.getBGImage();
-    }
-
-    public int getMoney () {
-        return controller.getMoney();
-    }
-
-    public int getLives () {
-        return controller.getLives();
-    }
-
     public Map<String, List<PurchaseInfo>> getInventory () {
         return controller.getInventory();
     }
 
-    @Deprecated
-    public void quitGame () {
-        gameFrame.quitGame();
-    }
-
     public void endGame () {
         gameFrame.endGame();
-
     }
 
     public boolean activateCheat (String cheat) {
         return controller.activateCheat(cheat);
-    }
-
-    public String getGameTitle () {
-        return controller.getGameTitle();
     }
 
     public boolean upgradeTower (int x, int y) {

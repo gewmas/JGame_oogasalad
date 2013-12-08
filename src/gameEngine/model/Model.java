@@ -3,6 +3,8 @@ package gameEngine.model;
 import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.temporaryBarrier.TemporaryBarrierFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.effect.CreateEffect;
+import gameEngine.model.enemy.Enemy;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
@@ -17,7 +19,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import jgame.JGObject;
 import jgame.impl.JGEngineInterface;
 
 
@@ -42,6 +43,7 @@ public class Model {
     private Rule rule; // how each waves created, ruleStart, ruleStop
     private ArrayList<ArrayList<Tile>> grid;
     private ArrayList<Tile> barriers;
+    private ArrayList<Enemy> spawnedEnemies;
 
     public Model () {
          
@@ -56,19 +58,15 @@ public class Model {
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
         barriers = gridFactory.getBarrierList();
+        spawnedEnemies = new ArrayList<Enemy>();
         temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
-        rule = new Rule(1, enemyWarehouse);
-        rule.readWaveFromJSon(parser.getJSONArray("wave"));
+       
         gameInfo = new GameInfo(parser);
     }
     // Jiaran: now we can just read waves from JSon.
     public void startGame () {
-//        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
-//        Wave w1 = new Wave("2", 10, 0.5, 0, enemyWarehouse);
-//        rule.addWave(w);
-//        rule.addWave(w1);
         rule.ruleStart();
 
     }
@@ -118,6 +116,8 @@ public class Model {
         this.myEng = eng;
         Resources r = new Resources(myEng);
         r.register(parser);
+        rule = new Rule(1, enemyWarehouse,eng);
+        rule.readWaveFromJSon(parser.getJSONArray("wave"));
     }
     
     //Refractor method to check whether Tower exist at (x, y)
@@ -203,6 +203,11 @@ public class Model {
      */
 
     public GameInfo getGameInfo() {
+        if (rule != null) {
+            gameInfo.SetIsWin(rule.isWin());
+            gameInfo.SetCurrentWaveNumber(rule.getCurrentWaveNum());
+        }
+       
         return gameInfo;
     }
 
@@ -231,7 +236,6 @@ public class Model {
      * @return bool
      */
     public boolean activateCheat(String code) {
-        System.out.println("called activate cheat");
         String[] cheatArgs = code.split(" ");
         String cmd = cheatArgs[0];
         if(cmd.equals("add_gold")) {
@@ -241,7 +245,12 @@ public class Model {
             int amt = Integer.parseInt(cheatArgs[1]);
             gameInfo.addLife(amt);
         } else if(cmd.equals("kill_all")) {
-            //TODO
+            System.out.println("called kill_all and num emenies is: "+spawnedEnemies.size());
+            for (int j = 0; j < spawnedEnemies.size(); j++) {
+                Enemy enemy = spawnedEnemies.get(j);
+                enemy.setLife(0);
+                spawnedEnemies.remove(j);
+            }
         } else if(cmd.equals("win_game")) {
             //TODO
         } else if (cmd.equals("lose_game")) {
@@ -251,6 +260,10 @@ public class Model {
         }
         return true;
     }
-
+    
+    public void addEnemy(Enemy enemy) {
+        spawnedEnemies.add(enemy);
+    }
+    
 
 }

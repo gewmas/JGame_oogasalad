@@ -1,5 +1,7 @@
 package jgame.platform;
 
+import gameEngine.model.effect.CreateEffect;
+import gameEngine.model.effect.WordEffect;
 import jgame.*;
 import java.awt.*;
 import javax.swing.JOptionPane;
@@ -185,6 +187,8 @@ public abstract class StdGame extends JGEngine {
     public int leveldone_ticks = 80;
     /** Number of ticks to stay in LifeLost state, 0 = skip */
     public int lifelost_ticks = 80;
+    /** Number of ticks to stay in GameWon state, 0 = skip */
+    public int gamewon_ticks=120;
     /** Number of ticks to stay in GameOver state, 0 = skip */
     public int gameover_ticks = 120;
 
@@ -193,7 +197,7 @@ public abstract class StdGame extends JGEngine {
      * corresponding sequence state.
      */
     public boolean startgame_ingame = false, leveldone_ingame = false,
-            lifelost_ingame = false, gameover_ingame = false;
+            lifelost_ingame = false,gamewon_ingame=false, gameover_ingame = false;
 
     /** Horizontal margins to be used by status displays, default 12 pixels. */
     public int status_l_margin = 12, status_r_margin = 12;
@@ -236,14 +240,17 @@ public abstract class StdGame extends JGEngine {
     public void setSequences (boolean startgame_ingame, int startgame_ticks,
                               boolean leveldone_ingame, int leveldone_ticks,
                               boolean lifelost_ingame, int lifelost_ticks,
+                              boolean gamewon_ingame, int gamewon_ticks,
                               boolean gameover_ingame, int gameover_ticks) {
         this.startgame_ingame = startgame_ingame;
         this.leveldone_ingame = leveldone_ingame;
         this.lifelost_ingame = lifelost_ingame;
+        this.gamewon_ingame=gamewon_ingame;
         this.gameover_ingame = gameover_ingame;
         this.startgame_ticks = startgame_ticks;
         this.leveldone_ticks = leveldone_ticks;
         this.lifelost_ticks = lifelost_ticks;
+        this.gamewon_ticks = gamewon_ticks;
         this.gameover_ticks = gameover_ticks;
     }
 
@@ -434,7 +441,7 @@ public abstract class StdGame extends JGEngine {
      */
     public final void lifeLost () {
         if (!inGameState("InGame") || inGameState("LevelDone")
-            || inGameState("LifeLost") || inGameState("GameOver")) return;
+            || inGameState("LifeLost") || inGameState("GameWon") || inGameState("GameOver")) return;
         // System.err.println(
         // "Warning: lifeLost() called from other state than InGame." );
         // }
@@ -492,7 +499,7 @@ public abstract class StdGame extends JGEngine {
      */
     public final void levelDone () {
         if (!inGameState("InGame") || inGameState("LevelDone")
-            || inGameState("LifeLost") || inGameState("GameOver")) return;
+            || inGameState("LifeLost") || inGameState("GameWon") || inGameState("GameOver")) return;
         // System.err.println(
         // "Warning: levelDone() called from other state than InGame." );
         // }
@@ -538,6 +545,34 @@ public abstract class StdGame extends JGEngine {
             setGameState("InGame");
         }
     }
+    
+    /**
+     * Call to set state to gameWon, call when all enemies are gone. 
+     * Written by Alex Zhu
+     */
+    public final void gameWon () {
+        if (inGameState("GameWon")
+            || (!inGameState("InGame") && !inGameState("LifeLost"))) return;
+        clearKey(key_continuegame);
+        setFrameRate(30, 2);
+        removeGameState("StartLevel");
+        removeGameState("StartGame");
+        removeGameState("LifeLost");
+        seqtimer = 0;
+        if (gamewon_ticks > 0) {
+            if (gamewon_ingame)
+                addGameState("GameWon");
+            else setGameState("GameWon");
+            new JGTimer(gamewon_ticks, true, "GameWon") {
+                public void alarm () {
+                    gotoTitle();
+                }
+            };
+        }
+        else {
+            gotoTitle();
+        }
+    }
 
     /**
      * Call to make straight transition to GameOver; is called automatically
@@ -553,6 +588,7 @@ public abstract class StdGame extends JGEngine {
         // +" than InGame or LifeLost." );
         // }
         clearKey(key_continuegame);
+        setFrameRate(30,2);
         removeGameState("StartLevel");
         removeGameState("StartGame");
         removeGameState("LifeLost");
@@ -728,6 +764,9 @@ public abstract class StdGame extends JGEngine {
         else if (inGameState("LifeLost")) {
             if (getKey(key_continuegame)) endLifeLost();
         }
+        else if (inGameState("GameWon")) {
+            if (getKey(key_continuegame)) gotoTitle();
+        }
         else if (inGameState("GameOver")) {
             if (getKey(key_continuegame)) gotoTitle();
         }
@@ -853,6 +892,14 @@ public abstract class StdGame extends JGEngine {
      * standard state transition function. Default is do nothing.
      */
     public void startGameOver () {
+        CreateEffect.Words(pfWidth()/2,pfHeight()/2,"GAME OVER");
+    }
+    
+    /**
+     * Initialize game won sequence. Written by Alex Zhu
+     */
+    public void startGameWon (){
+        CreateEffect.Words(pfWidth()/2,pfHeight()/2,"VICTORY");
     }
 
     /**
@@ -938,11 +985,18 @@ public abstract class StdGame extends JGEngine {
         drawString("Life Lost !",
                    viewWidth() / 2, viewHeight() / 3, 0, title_font, title_color);
     }
+    
+    public void paintFrameGameWon () {
+        this.moveObjects("WordEffect", 0);
+//        drawString("You Won!",
+//                   viewWidth() / 2, viewHeight() / 3, 0, title_font, title_color);
+    }
 
     /** Default displays "Game Over!". */
     public void paintFrameGameOver () {
-        drawString("Game Over !",
-                   viewWidth() / 2, viewHeight() / 3, 0, title_font, title_color);
+        this.moveObjects("WordEffect", 0);
+//        drawString("Game Over !",
+//                   viewWidth() / 2, viewHeight() / 3, 0, title_font, title_color);
     }
 
     /**

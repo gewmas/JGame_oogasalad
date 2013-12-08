@@ -3,13 +3,14 @@ package gameEngine.model.tower;
 import java.text.DecimalFormat;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.GameInfo;
+import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.magic.ITMagicable;
 import gameEngine.model.purchase.PurchaseInfo;
 import jgame.JGObject;
 
 
 /**
- * @author Yuhua
+ * @author Yuhua, wenxin shi for magic interface implementation
  * 
  * Tower will shoot the Enemy within shooting range with Bullet
  */
@@ -20,10 +21,9 @@ public abstract class Tower extends JGObject implements ITMagicable {
     //    private String image;
 
     protected double damage;
-    protected double attackSpeed;
-
+    protected double attackSpeed;   
     protected double range;
-
+   
     protected double x;
     protected double y;
 
@@ -40,8 +40,7 @@ public abstract class Tower extends JGObject implements ITMagicable {
     protected PurchaseInfo purchaseInfo;
 
     DecimalFormat df = new DecimalFormat("#.#");
-
-
+    
     public Tower (String type,
                   String id,
 
@@ -82,11 +81,12 @@ public abstract class Tower extends JGObject implements ITMagicable {
     }
 
     public void addDescription () {
-        
         purchaseInfo.addToMap(GameEngineConstant.TOWER_RANGE, String.valueOf(range));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_SELL_PRICE, String.valueOf(sellPrice));
         purchaseInfo.addToMap(GameEngineConstant.PURCHASE_INFO_DESCRIPTION, String.valueOf(description));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_PRICE, String.valueOf(upgradePrice));
+//        purchaseInfo.addToMap(GameEngineConstant.TOWER_X,String.valueOf(x));
+//        purchaseInfo.addToMap(GameEngineConstant.TOWER_Y, String.valueOf(y));
     }
 
     /**
@@ -94,6 +94,8 @@ public abstract class Tower extends JGObject implements ITMagicable {
      */
     public void sell (GameInfo gameInfo){
         gameInfo.addGold(sellPrice);
+        CreateEffect effect=new CreateEffect();
+        effect.Dollar(this.x, this.y);
         this.remove();
     }
     public abstract void upgrade (GameInfo gameInfo);
@@ -103,8 +105,12 @@ public abstract class Tower extends JGObject implements ITMagicable {
 
     /**
      * TowerInfo Getter Method
+     * Edited by Alex, need to add X and Y coordinates here, as if you add them in
+     * addDescription the latest tower seems to overwrite all the previous ones
      */
     public PurchaseInfo getPurchaseInfo () {
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_X,String.valueOf(x));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_Y, String.valueOf(y));
         return purchaseInfo;
     }
 
@@ -130,5 +136,36 @@ public abstract class Tower extends JGObject implements ITMagicable {
     public void setCurrentMagic (int magic) {
         currentMagic = magic;
     }
-
+    
+    @Override
+    public double changePercentSpeed(double offset){
+       double change=0;
+        if(offset<1&&offset>-1)
+            change=attackSpeed*offset;
+        else
+            change=offset;
+        attackSpeed+=change;
+        return change;   
+    }
+    
+    @Override
+    public double changeSpeed(double offset){
+        double change=attackSpeed*offset;
+        attackSpeed+=change;
+        return change;
+    }
+    
+    @Override
+    public double changeRange(double offset){
+        range+=offset;
+        return offset;  
+    }
+    
+    @Override
+    public double changePercentRange(double percent){
+        double change=range*percent;
+        range+=change;
+        return change;
+    }
+    
 }
