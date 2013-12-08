@@ -1,5 +1,6 @@
 package jgame.platform;
 
+import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.effect.WordEffect;
 import jgame.*;
 import java.awt.*;
@@ -891,14 +892,14 @@ public abstract class StdGame extends JGEngine {
      * standard state transition function. Default is do nothing.
      */
     public void startGameOver () {
-        new WordEffect(pfWidth()/2,pfHeight()/2,"GAME OVER",60);
+        CreateEffect.Words(pfWidth()/2,pfHeight()/2,"GAME OVER");
     }
     
     /**
      * Initialize game won sequence. Written by Alex Zhu
      */
     public void startGameWon (){
-        new WordEffect(pfWidth()/2,pfHeight()/2,"VICTORY",60);
+        CreateEffect.Words(pfWidth()/2,pfHeight()/2,"VICTORY");
     }
 
     /**

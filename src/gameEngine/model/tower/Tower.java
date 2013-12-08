@@ -3,6 +3,7 @@ package gameEngine.model.tower;
 import java.text.DecimalFormat;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.GameInfo;
+import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.magic.ITMagicable;
 import gameEngine.model.purchase.PurchaseInfo;
 import jgame.JGObject;
@@ -93,6 +94,8 @@ public abstract class Tower extends JGObject implements ITMagicable {
      */
     public void sell (GameInfo gameInfo){
         gameInfo.addGold(sellPrice);
+        CreateEffect effect=new CreateEffect();
+        effect.Dollar(this.x, this.y);
         this.remove();
     }
     public abstract void upgrade (GameInfo gameInfo);

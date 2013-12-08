@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 import jgame.impl.JGEngineInterface;
 import gameEngine.constant.*;
 
@@ -30,7 +29,7 @@ public class Rule {
     private long myInitialDelayInMilliseconds = 2000;
     private EnemyWarehouse myEnemyWarehouse = null;
     private JGEngineInterface myEng=null;
-    private CreateEffect myNotifier= new CreateEffect();
+    
     public Rule (long delay, EnemyWarehouse e, JGEngineInterface eng) {
         myInitialDelayInMilliseconds = delay;
         myEnemyWarehouse = e;
@@ -59,7 +58,7 @@ public class Rule {
             if (myCurrentWaveIndex < Waves.size() && isAlive) {
                 Wave w = Waves.get(myCurrentWaveIndex);
                 w.waveStart();
-                myNotifier.Words(300, 300, "WAVE "+myCurrentWaveIndex);
+                CreateEffect.Words(300, 300, "WAVE "+myCurrentWaveIndex);
                 myTimer.schedule(new StartWave(), w.getInterval());
                 myCurrentWaveIndex++;
             }
