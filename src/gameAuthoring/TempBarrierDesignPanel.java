@@ -109,13 +109,13 @@ public class TempBarrierDesignPanel extends JPanel {
 
                 if (name != null && description != null && image != null && expire > 0) {
                     gameData.addBarrier(name, image, damage, cost, expire, description);
+                    myTempBarrierDesignTab.addBarrier(myBarrierImage.getImageFile(), name);
                     myNameField.setText("");
                     myDamageField.setText("");
                     myCostField.setText("");
                     myExpiryField.setText("");
                     myDescriptionField.setText("");
                     myBarrierImage = new ImageLabel();
-                    myTempBarrierDesignTab.addBarrier(myBarrierImage.getImageFile(), name);
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "One or more fields invalid!");

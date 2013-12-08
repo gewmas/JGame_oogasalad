@@ -1,6 +1,5 @@
 package gameAuthoring.JSONObjects;
 
-import java.awt.List;
 import java.awt.geom.Point2D;
 import java.io.Writer;
 import java.util.ArrayList;

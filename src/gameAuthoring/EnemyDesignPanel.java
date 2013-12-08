@@ -38,7 +38,7 @@ public class EnemyDesignPanel extends JPanel {
     private int myNumEnemies = 0;
     private JComboBox<String> mySkillOptions;
 
-    private final String[] SKILLS = { "", "Haste", "Armour", "Heal", "Light", "Poison" };
+    private final String[] SKILLS = {"Haste", "Armour", "Heal", "Light", "Poison" };
 
     public EnemyDesignPanel (EnemyDesignTab enemyDesignTab) {
         myEnemyDesignTab = enemyDesignTab;

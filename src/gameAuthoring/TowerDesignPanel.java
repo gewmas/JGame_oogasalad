@@ -327,8 +327,9 @@ public class TowerDesignPanel extends JPanel {
 
                     }
 
-                    clearTextFields();
+          
                     myTowerDesignTab.addTower(myTowerImage.getImageFile(), myNameField.getText());
+                    clearTextFields();
 
                 }
                 catch (NumberFormatException n) {
