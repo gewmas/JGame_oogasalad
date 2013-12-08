@@ -444,7 +444,7 @@
 	{
 	 "Type": "DefaultTower",
 	 "Name" : "Doctor Jason",
-	 "Image": "DefaultTower",
+	 "Image": "OldDoc",
 	 "Damage": -3,
 	 "Attack Speed": 0.8,
 	 "Attack Mode": 1,
@@ -457,7 +457,7 @@
 	{
 	 "Type": "DefaultTower",
 	 "Name" : "Doctor Newman",
-	 "Image": "YoungDoc",
+	 "Image": "OldDoc",
 	 "Damage": -3,
 	 "Attack Speed": 0.8,
 	 "Attack Mode": 1,
@@ -470,7 +470,7 @@
 	{
 	 "Type": "MultipleShootingTower",
 	 "Name" : "Doctor Duvall",
-	 "Image": "MultipleShootingTower",
+	 "Image": "DuvallDoc",
 	 "Damage": -3,
 	 "Attack Speed": 3.5,
 	 "Attack Mode": 2,
@@ -484,7 +484,7 @@
 	{
 	 "Type": "BoostTower",
 	 "Name" : "Hospital",
-	 "Image": "BoostTower",
+	 "Image": "YoungDoc",
 	 "Damage": -1,
 	 "Attack Speed": 0.8,
 	 "Range": 100,	
@@ -496,7 +496,7 @@
 	{
 	 "Type": "MagicTower",
 	 "Name": "Nurse",
-	 "Image": "MagicTower",
+	 "Image": "Nurser",
 	 "Damage": -1,
 	 "Attack Speed": 0.8,
 	 "Attack Mode": 2,
