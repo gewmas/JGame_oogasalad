@@ -4,6 +4,8 @@
 "BGImage" :  "resources/space_background.jpg",
 "gold" : 200,
 "numberOfLives" : 100,
+"goldName": "Money",
+"livesName": "Lives",
 "levels": 5,
 "widthOfWindow": 600,
 "heightOfWindow": 600,

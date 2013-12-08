@@ -21,9 +21,10 @@ abstract public class Skill {
     protected JGEngineInterface myEng;
     protected String myName;
 
-    public Skill (long cd, JGEngineInterface eng) {
+    public Skill (long cd, JGEngineInterface eng, String name) {
         myCoolDown = cd;
         myEng = eng;
+        myName=name;
     }
 
     /*

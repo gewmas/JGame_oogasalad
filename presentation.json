@@ -4,6 +4,8 @@
 "BGImage" :  "woods_background",
 "gold" : 500,
 "numberOfLives" : 10,
+"goldName": "Money",
+"livesName": "Lives",
 "levels": 2,
 "widthOfWindow": 600,
 "heightOfWindow": 600,
@@ -486,7 +488,7 @@
 	"image": "runRight",
 	"life": 10,
 	"speed": 0.5,
-   "skill": "",
+   "skill": "Poison",
 }, 
 {
 	"id": "2",
