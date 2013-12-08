@@ -15,8 +15,9 @@ import javax.swing.Timer;
 public class Wave implements ActionListener {
 
     private int mySpawnPeriodInMilliSecond = 0;
-    private String[] myEnemyType = null;
+    private String[] myEnemyType ;
     private Integer[] myNumberOfEnemies;
+   
     private Timer myTimer = null;
     private long myIntervalInMilliSecond = 0;
     private EnemyWarehouse myEnemyWarehouse = null;
@@ -85,5 +86,6 @@ public class Wave implements ActionListener {
     public boolean isDone(){
         return isDone;
     }
+   
 
 }
