@@ -177,6 +177,8 @@ public abstract class StdGame extends JGEngine {
     public double timer = 0;
     /** Player score; starts at 0 at beginning of game. */
     public int score = 0;
+    
+    public int money = 0;
     /**
      * Difficulty level; starts at 0 at beginning of game. Can be
      * incremented each time a level is complete. Can be used to determine game
@@ -949,7 +951,8 @@ public abstract class StdGame extends JGEngine {
     public void paintFrame () {
         setFont(status_font);
         setColor(status_color);
-        drawString(money_title +" "+ score, status_l_margin, 0, -1);
+        drawString(money_title +" "+ money, status_l_margin, 0, -1);
+        drawString("Score " + score, status_l_margin,15,-1);
         if (lives_img == null) {
             drawString(lives_title +" " + lives, viewWidth() - status_r_margin, 0, 1);
         }
