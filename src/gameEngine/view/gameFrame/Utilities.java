@@ -56,7 +56,9 @@ public class Utilities {
         sellButton.setVisible(true);
         upgradeButton.setTowerPosition(information,mouseX,mouseY);  
         sellButton.setTowerPosition(mouseX, mouseY);
-        rangeDisplay.setTower(Double.parseDouble(information.get(GameEngineConstant.TOWER_RANGE)),mouseX,mouseY);
+        rangeDisplay.setTower(Double.parseDouble(information.get(GameEngineConstant.TOWER_RANGE)),
+                              Double.parseDouble(information.get(GameEngineConstant.TOWER_X)),
+                              Double.parseDouble(information.get(GameEngineConstant.TOWER_Y)));
         rangeDisplay.resume();
     }
     
@@ -67,7 +69,7 @@ public class Utilities {
     public void setCursorImage(PurchaseInfo itemInformation){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = toolkit.getImage("src/resources/img/" + itemInformation.getInfo().get("Image") + ".png");
-        Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
+        Cursor c = toolkit.createCustomCursor(image, new Point(image.getWidth(null)/2, image.getHeight(null)/2), "tower");
         gameFrame.setCursor(c);
     }
     

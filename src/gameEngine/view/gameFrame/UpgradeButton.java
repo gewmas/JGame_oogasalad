@@ -92,7 +92,7 @@ public class UpgradeButton extends JButton {
     }
 
     public void checkActive(){
-        isActive=view.getMoney() >= Double.parseDouble(information.get(GameEngineConstant.TOWER_UPGRADE_PRICE));
+        isActive=view.getGameInfo().getGold() >= Double.parseDouble(information.get(GameEngineConstant.TOWER_UPGRADE_PRICE));
         setEnabled(isActive);
     }
     

@@ -88,45 +88,35 @@ public class View implements MenuActions {
     public PurchaseInfo getTowerInfo (int x, int y) {
         return controller.getTowerInfo(x, y);
     }
-    
+
+    /**
+     * Gets game related information from the model:
+     * Title
+     * BGImage
+     * Gold
+     * Lives
+     * Wave Number
+     * IsWin
+     */
     public GameInfo getGameInfo(){
         return controller.getGameInfo();
     }
-
 
     public List<Tile> getPath () {
         return controller.getPath();
     }
 
-    /**
-     * Gets the background image of the game upon initialization
-     */
-    public String getBGImage () {
-        return controller.getBGImage();
-    }
-
-    public int getMoney () {
-        return controller.getMoney();
-    }
-
-
-
     public Map<String, List<PurchaseInfo>> getInventory () {
         return controller.getInventory();
     }
 
-
-
     public void endGame () {
         gameFrame.endGame();
-
     }
 
     public boolean activateCheat (String cheat) {
         return controller.activateCheat(cheat);
     }
-
-
 
     public boolean upgradeTower (int x, int y) {
         return controller.upgradeTower(x, y);

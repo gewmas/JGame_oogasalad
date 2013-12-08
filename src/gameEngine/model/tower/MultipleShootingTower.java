@@ -36,7 +36,6 @@ public class MultipleShootingTower extends DefaultTower {
 
     public void addDescription(){
         super.addDescription();
-
         purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_AMOUNT, String.valueOf(attackAmount));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_ATTACK_AMOUNT, String.valueOf(attackAmount*upgradeFactor));
     }

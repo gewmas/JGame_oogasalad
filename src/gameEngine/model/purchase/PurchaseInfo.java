@@ -15,7 +15,7 @@ import java.util.Map;
 public class PurchaseInfo {
     private String name, image, type;
     private String description;
-    private int cost;
+    private int cost,x,y;
     private Map<String, String> info;
     
     public PurchaseInfo(String type, String name, String image, String description, int cost) {
@@ -34,6 +34,8 @@ public class PurchaseInfo {
         addToMap(GameEngineConstant.PURCHASE_INFO_DESCRIPTION, description);
         addToMap(GameEngineConstant.PURCHASE_INFO_COST, ((Integer)cost).toString());
         addToMap(GameEngineConstant.PURCHASE_INFO_IMAGE, image);
+        addToMap("X",((Integer)x).toString());
+        addToMap("Y",((Integer)y).toString());
     }
     
     public void addToMap(String key, String value) {
