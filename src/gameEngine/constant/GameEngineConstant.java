@@ -22,6 +22,7 @@ public class GameEngineConstant {
     public static final int ARMOURMAGIC_ID=8;
     public static final int HEALMAGIC_ID=16;
     public static final int LIGHTMAGIC_ID=32;
+    public static final int POISONMAGIC_ID = 64;
     public static final int OVERLAPMAGIC_ID=-1;
     
     //JSON TYPE
@@ -50,6 +51,7 @@ public class GameEngineConstant {
     public static final String TOWER_UPGRADE_BOOST_FACTOR = "Upgrade Boost Factor";
     public static final String TOWER_UPGRADE_MAGIC_FACTOR = "Upgrade Magic Factor";
     public static final String TOWER_UPGRADE_ATTACK_AMOUNT = "Upgrade Attack Amount";
+  
 
     public static int query (Class T) {
         // System.out.println(T.getName());

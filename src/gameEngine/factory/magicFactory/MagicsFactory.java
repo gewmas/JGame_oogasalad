@@ -22,6 +22,7 @@ public class MagicsFactory {
         myFactoryMap.put(GameEngineConstant.ARMOURMAGIC_ID, new EArmourFactory());
         myFactoryMap.put(GameEngineConstant.HEALMAGIC_ID, new EHealFactory());
         myFactoryMap.put(GameEngineConstant.LIGHTMAGIC_ID, new TLightFactory());
+        myFactoryMap.put(GameEngineConstant.POISONMAGIC_ID, new EPoisonFactory());
 
         myTranslateMap.put("FrozeMagic", GameEngineConstant.FROZEMAGIC_ID);
         myTranslateMap.put("BoostMagic", GameEngineConstant.BOOSTMAGIC_ID);
@@ -29,6 +30,7 @@ public class MagicsFactory {
         myTranslateMap.put("ArmourMagic", GameEngineConstant.ARMOURMAGIC_ID);
         myTranslateMap.put("HealMagic", GameEngineConstant.HEALMAGIC_ID);
         myTranslateMap.put("LightMagic", GameEngineConstant.LIGHTMAGIC_ID);
+        myTranslateMap.put("PoisonMagic", GameEngineConstant.POISONMAGIC_ID);
     }
 
     public static MagicsFactory getInstance () {
@@ -70,6 +72,16 @@ public class MagicsFactory {
         int newMagicIds = myTranslateMap.get(newMagicNames);
         createMagics(target, sender, newMagicIds, 0);
     }
+    
+    public void createMagics (IMagicable target, IMagicable sender, String newMagicNames, boolean overlap) {
+        int newMagicIds = myTranslateMap.get(newMagicNames);
+        if(overlap){
+            createMagics(target, sender, newMagicIds, 0);
+        }
+        else
+            createMagics(target, sender, newMagicIds, target.getCurrentMagics());
+    }
+
 
 
     public int parserMagicId (JSONArray array) {
