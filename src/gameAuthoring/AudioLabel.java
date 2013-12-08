@@ -27,23 +27,25 @@ public class AudioLabel extends JLabel {
         initialize();
     }
 
-    public AudioLabel (String id) {
+    public AudioLabel (String id, boolean displayImage) {
         myID = id;
         initialize();
-        try {
-            myAudioImageSource = new File(getClass().getResource("sound.png").toURI());
-        }
-        catch (URISyntaxException e1) {
-            e1.printStackTrace();
-        }
-        Image image;
-        try {
-            image = ImageIO.read(myAudioImageSource);
-            myAudioImage = image;
-            this.setIcon(new ImageIcon(image));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
+        if (displayImage) {
+            try {
+                myAudioImageSource = new File(getClass().getResource("sound.png").toURI());
+            }
+            catch (URISyntaxException e1) {
+                e1.printStackTrace();
+            }
+            Image image;
+            try {
+                image = ImageIO.read(myAudioImageSource);
+                myAudioImage = image;
+                this.setIcon(new ImageIcon(image));
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

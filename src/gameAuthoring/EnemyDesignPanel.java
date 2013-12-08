@@ -38,7 +38,7 @@ public class EnemyDesignPanel extends JPanel {
     private int myNumEnemies = 0;
     private JComboBox<String> mySkillOptions;
 
-    private final String[] SKILLS = {"Haste", "Armour", "Heal", "Light", "Poison" };
+    private final String[] SKILLS = { "Haste", "Armour", "Heal", "Light", "Poison" };
 
     public EnemyDesignPanel (EnemyDesignTab enemyDesignTab) {
         myEnemyDesignTab = enemyDesignTab;
@@ -78,6 +78,7 @@ public class EnemyDesignPanel extends JPanel {
         clearButton.addMouseListener(createClearAnimationsListener());
 
         mySkillOptions = new JComboBox<String>(SKILLS);
+        mySkillOptions.setFont(Constants.DEFAULT_BODY_FONT);
 
         myAnimationPanel = new JPanel();
         myAnimationPanel.setOpaque(false);
@@ -126,6 +127,7 @@ public class EnemyDesignPanel extends JPanel {
     public void clearAnimationPanel () {
         myAnimationPanel.removeAll();
         myAnimationPanel.revalidate();
+        myEnemyAnimations.clear();
     }
 
     public MouseAdapter createNewEnemyIconListener () {
@@ -147,6 +149,7 @@ public class EnemyDesignPanel extends JPanel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 GameData gameData = myEnemyDesignTab.getGameData();
+                myNumEnemies++;
                 String currentEnemyID = "enemy" + Integer.toString(myNumEnemies);
                 try {
                     int gold = Integer.parseInt(myGoldField.getText());
