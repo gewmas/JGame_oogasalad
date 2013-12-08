@@ -362,15 +362,6 @@
 {
   	   
      "image":[ 
-               { "id": "1", "url": "mr1.png" },
-               { "id": "2", "url": "mr2.png" },
-               { "id": "3", "url": "mr3.png" },
-               { "id": "4", "url": "mr4.png" },
-      			{ "id": "d1", "url": "d1.png" },
-               { "id": "d2", "url": "d2.png" },
-               { "id": "d3", "url": "d3.png" },
-               { "id": "d4", "url": "d4.png" },
-
                { "id": "Cleaner", "url": "Cleaner.png" },
                { "id": "Nurser", "url": "Nurser.png" },
                { "id": "YoungDoc", "url": "YoungDoc.png" },
@@ -384,11 +375,7 @@
                { "id": "bullet", "url": "bullet0.png" },
                { "id": "barrier1", "url": "barrier1.png" },
                { "id": "barrier2", "url": "barrier2.png" },
-      			
-				   { "id": "DefaultTower", "url": "DefaultTower.png" },
-      			{ "id": "BoostTower", "url": "BoostTower.png" },
-      			{ "id": "MagicTower", "url": "MagicTower.png" },
-      			{ "id": "MultipleShootingTower", "url": "MultipleShootingTower.png" },
+      		
       			
       		   { "id": "BoyPatient1", "url": "BoyPatient1.png" },
       			{ "id": "BoyPatient2", "url": "BoyPatient2.png" },

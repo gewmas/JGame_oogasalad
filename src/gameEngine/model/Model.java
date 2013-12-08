@@ -5,7 +5,6 @@ import gameEngine.cheats.CheatParser;
 import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.temporaryBarrier.TemporaryBarrierFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -47,7 +46,7 @@ public class Model {
     private ArrayList<Tile> barriers;
     private ArrayList<Enemy> spawnedEnemies;
     private CheatParser cheatParser;
-
+    private boolean isCheatToWin=false;
 
     public Model () {
          
@@ -212,14 +211,14 @@ public class Model {
      * deleted by Jiaran based on Duvall's suggestion. Delete this when
      * every on is aware
      **/
-
+    
     /*
      * Model Getter methods
      */
 
     public GameInfo getGameInfo() {
         if (rule != null) {
-            gameInfo.SetIsWin(rule.isWin());
+            gameInfo.SetIsWin(rule.isWin()||isCheatToWin);
            
             gameInfo.SetCurrentWaveNumber(rule.getCurrentWaveNum());
         }
@@ -266,5 +265,7 @@ public class Model {
     public void stopWaves(){
         rule.stop();
     }
+    
+    
 
 }

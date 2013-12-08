@@ -191,7 +191,7 @@ public class BasicInfoTab extends Tab {
             String livesName = altLivesText.getText();
             myGameData.setGold(gold);
             myGameData.setLives(lives);
-            myGameData.setSplashImage(mySplashImage);
+            myGameData.setSplashImage(mySplashImage.substring(0, mySplashImage.length()-4));
             myGameData.setGameName(name);
             myGameData.addAudio(myAudioLabel.getID(), myAudioLabel.getAudioFile().getName());
             myGameData.setGoldName(goldName);
@@ -215,12 +215,9 @@ public class BasicInfoTab extends Tab {
             public void mouseClicked (MouseEvent e) {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    mySplashImage =
-                            INPUT_CHOOSER
-                                    .getSelectedFile()
-                                    .toString()
-                                    .replace(System.getProperties().getProperty("user.dir") + "/",
-                                             "");
+             
+                    mySplashImage = INPUT_CHOOSER.getSelectedFile().getName();
+                    myGameData.addImage(mySplashImage.substring(0, mySplashImage.length()-4), mySplashImage);
                     mySplashImageLabel.setText(mySplashImage);
                 }
 

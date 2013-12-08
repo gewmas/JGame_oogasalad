@@ -1,5 +1,6 @@
 package gameAuthoring.JSONObjects;
 
+import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 /**
@@ -18,8 +19,12 @@ public class WaveJSONObject extends JSONObject {
      */
     public WaveJSONObject(String type, int number, double period, int interval){
        super();
-       this.put("type", type);
-       this.put("number", number);
+       JSONArray typeArray = new JSONArray();
+       typeArray.put(type);
+       JSONArray numberArray = new JSONArray();
+       numberArray.put(number);
+       this.put("type", typeArray);
+       this.put("number", numberArray);
        this.put("period", period);
        this.put("interval", interval);
     }
