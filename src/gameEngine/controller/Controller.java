@@ -1,5 +1,6 @@
 package gameEngine.controller;
 
+import gameEngine.model.GameInfo;
 import gameEngine.model.Model;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -177,44 +178,14 @@ public class Controller {
         return model.activateCheat(code);
     }
     
-
-    /**
-     * Returns the size of the game in number of tiles
-     */
-    public Dimension getGameSize () {
-        return model.getGameInfo().getDimension();
+    public GameInfo getGameInfo(){
+        return model.getGameInfo();
     }
-
-    /**
-     * Returns the URL to the game's background image
-     */
-    public String getBGImage () {
-        return model.getGameInfo().getBGImage();
-    }
-
-    /**
-     * Returns the amount of money in the game
-     */
-    public int getMoney () {
-        return model.getGameInfo().getGold();
-    }
-
-    /**
-     * Return the number of lives remaining
-     */
-    public int getLives () {
-        return model.getGameInfo().getLife();
-    }
-    
-    /**
-     * Return the game title
-     */
-    public String getGameTitle () {
-        return model.getGameInfo().getMyName();
-    }
-
     public List<Tile> getPath () {
         return model.getPathList();
     }
 
+    public void stopWaves(){
+        model.stopWaves();
+    }
 }

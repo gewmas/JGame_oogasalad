@@ -1,6 +1,7 @@
 package gameEngine.view.initialization;
 
-import gameEngine.view.Frame;
+
+import javax.swing.JFrame;
 import gameEngine.view.View;
 
 
@@ -11,7 +12,7 @@ import gameEngine.view.View;
  * @author Lalita Maraj
  * 
  */
-public class InitializationFrame extends Frame {
+public class InitializationFrame extends JFrame {
 
     /**
      * @param view interface between view components and controller
