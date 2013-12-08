@@ -27,6 +27,8 @@ public class SkillFactory {
                 return new EnemyMagicSkill(500,myEng, skillType);
             case "Light":
                 return new TowerMagicSkill(100,myEng,skillType);
+            case "Poison":
+                return new OneTimeSkill(100,myEng,skillType);
             default:
                 return null;
         }

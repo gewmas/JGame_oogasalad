@@ -21,7 +21,7 @@ public class Wave implements ActionListener {
     private long myIntervalInMilliSecond = 0;
     private EnemyWarehouse myEnemyWarehouse = null;
     private int myCurrentIndex = 0;
-
+    private boolean isDone=false;
     /**
      * To facilitate user, we take in period and interval in seconds. But we still
      * deal with these number in milliseconds inside the Wave class. Type.length
@@ -64,7 +64,10 @@ public class Wave implements ActionListener {
             myNumberOfEnemies[myCurrentIndex]--;
 
         }
-        else myTimer.stop();
+        else {
+            myTimer.stop();
+            isDone=true;
+        }
 
     }
 
@@ -78,6 +81,9 @@ public class Wave implements ActionListener {
 
     public void stop () {
         myTimer.stop();
+    }
+    public boolean isDone(){
+        return isDone;
     }
 
 }

@@ -13,8 +13,8 @@ abstract public class AutoSkill extends Skill{
     
     
     public AutoSkill (long cd, JGEngineInterface eng,String name) {
-        super(cd,eng);
-        myName=name;
+        super(cd,eng,name);
+        
        
     }
 

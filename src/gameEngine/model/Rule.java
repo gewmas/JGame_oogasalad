@@ -62,8 +62,8 @@ public class Rule {
                 myTimer.schedule(new StartWave(), w.getInterval());
                 myCurrentWaveIndex++;
             }
-            if (!isAlive)
-                Waves.get(myCurrentWaveIndex).stop();
+            
+               
         }
 
     }
@@ -117,7 +117,7 @@ public class Rule {
     }
 
     public boolean isWin(){
-        if(myCurrentWaveIndex==Waves.size()){
+        if(Waves.get(Waves.size()-1).isDone()){
             if(myEng.countObjects(null,GameEngineConstant.query(Enemy.class)) ==0){
                 return true;
             }
@@ -127,6 +127,10 @@ public class Rule {
     }
     public void stop () {
         isAlive = false;
+        for (int i = 0; i < Waves.size(); i++) {
+            Waves.get(i).stop();
+        }
+        Waves.clear();
     }
 
 }
