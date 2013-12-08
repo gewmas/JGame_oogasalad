@@ -6,7 +6,8 @@ package gameEngine.view.gameFrame.menu;
  *         by items in the menubar
  */
 public interface MenuActions {
-    public void selectNewGame ();
 
     public void endGame ();
+
+    public void selectNewGame ();
 }
