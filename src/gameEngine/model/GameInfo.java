@@ -123,7 +123,7 @@ public class GameInfo {
     public void SetCurrentWaveNumber(int n){
         myCurrentWaveNumber=n;
     }
-    public int getCurretWaveNumber(){
+    public int getCurrentWaveNumber(){
         return myCurrentWaveNumber;
     }
 

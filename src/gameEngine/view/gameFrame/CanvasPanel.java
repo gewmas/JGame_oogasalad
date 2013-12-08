@@ -28,6 +28,6 @@ public class CanvasPanel extends JPanel {
     }
 
     public void endGame () {
-        game.endGame();
+        game.loseGame();
     }
 }
