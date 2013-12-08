@@ -1,11 +1,11 @@
 package gameEngine.model.tower;
 
-import java.text.DecimalFormat;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.GameInfo;
 import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.magic.ITMagicable;
 import gameEngine.model.purchase.PurchaseInfo;
+import java.text.DecimalFormat;
 import jgame.JGObject;
 import jgame.JGRectangle;
 
@@ -25,9 +25,6 @@ public abstract class Tower extends JGObject implements ITMagicable {
     protected double attackSpeed;   
     protected double range;
    
-    protected double x;
-    protected double y;
-
     protected int cost;
     protected int upgradePrice;
     protected int sellPrice;
@@ -73,28 +70,21 @@ public abstract class Tower extends JGObject implements ITMagicable {
         this.upgradePrice = cost / 3;
         this.sellPrice = (int)recyclePrice;
 
-        this.description = description;
-        this.x=x;
-        this.y=y;
-
-        //wenxin shi to place the tower in correct way
-//        JGRectangle box=this.getBBox();
-//        System.out.println(box.width+";"+box.height);
-//        System.out.println(x+";"+y);
-//        this.x=x-(box.width-GameEngineConstant.PIXELSPERTILE)/2;
-//        this.y=y-(box.height-GameEngineConstant.PIXELSPERTILE);
-//        System.out.println(this.x+";"+this.y);
-        
+        this.description = description;        
         this.purchaseInfo = purchaseInfo;
+        
+        //Wenxin shi let tower place in the right place.
+        JGRectangle box=this.getBBox();
+        super.x=x-(box.width-GameEngineConstant.PIXELSPERTILE)/2;
+        super.y=y-(box.height-GameEngineConstant.PIXELSPERTILE);
+        
     }
-
+    
     public void addDescription () {
         purchaseInfo.addToMap(GameEngineConstant.TOWER_RANGE, String.valueOf(range));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_SELL_PRICE, String.valueOf(sellPrice));
         purchaseInfo.addToMap(GameEngineConstant.PURCHASE_INFO_DESCRIPTION, String.valueOf(description));
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_PRICE, String.valueOf(upgradePrice));
-//        purchaseInfo.addToMap(GameEngineConstant.TOWER_X,String.valueOf(x));
-//        purchaseInfo.addToMap(GameEngineConstant.TOWER_Y, String.valueOf(y));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_PRICE, String.valueOf(upgradePrice));        
     }
 
     /**
@@ -102,8 +92,7 @@ public abstract class Tower extends JGObject implements ITMagicable {
      */
     public void sell (GameInfo gameInfo){
         gameInfo.addGold(sellPrice);
-        CreateEffect effect=new CreateEffect();
-        effect.Dollar(this.x, this.y);
+        CreateEffect.Dollar(this.x, this.y);
         this.remove();
     }
     public abstract void upgrade (GameInfo gameInfo);
@@ -116,9 +105,12 @@ public abstract class Tower extends JGObject implements ITMagicable {
      * Edited by Alex, need to add X and Y coordinates here, as if you add them in
      * addDescription the latest tower seems to overwrite all the previous ones
      */
+    
+    //wenxinshi, register the center of tower in gameInfo for drawing the range
     public PurchaseInfo getPurchaseInfo () {
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_X,String.valueOf(x));
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_Y, String.valueOf(y));
+      JGRectangle box=this.getBBox();
+      purchaseInfo.addToMap(GameEngineConstant.TOWER_X,String.valueOf(x+box.width/2));
+      purchaseInfo.addToMap(GameEngineConstant.TOWER_Y, String.valueOf(y+box.height/2));
         return purchaseInfo;
     }
 

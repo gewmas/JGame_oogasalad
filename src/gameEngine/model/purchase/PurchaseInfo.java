@@ -1,7 +1,6 @@
 package gameEngine.model.purchase;
 
 import gameEngine.constant.GameEngineConstant;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

@@ -145,5 +145,7 @@ public class Rule {
         readWaveFromJSon(myInitialWaveInfo);
         ruleStart();
     }
+    
+  
 
 }
