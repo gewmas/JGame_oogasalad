@@ -368,6 +368,13 @@
                { "id": "d2", "url": "d2.png" },
                { "id": "d3", "url": "d3.png" },
                { "id": "d4", "url": "d4.png" },
+
+               { "id": "Cleaner", "url": "Cleaner.png" },
+               { "id": "Nurser", "url": "Nurser.png" },
+               { "id": "YoungDoc", "url": "YoungDoc.png" },
+               { "id": "OldDoc", "url": "OldDoc.png" },
+               { "id": "DuvallDoc", "url": "DuvallDoc.png" },
+
                
                { "id": "space_background", "url": "space_background.jpg" },
                { "id": "woods_background", "url": "woods_background.png" },
@@ -376,20 +383,42 @@
                { "id": "barrier1", "url": "barrier1.png" },
                { "id": "barrier2", "url": "barrier2.png" },
       			
-				{ "id": "DefaultTower", "url": "DefaultTower.png" },
+				   { "id": "DefaultTower", "url": "DefaultTower.png" },
       			{ "id": "BoostTower", "url": "BoostTower.png" },
       			{ "id": "MagicTower", "url": "MagicTower.png" },
       			{ "id": "MultipleShootingTower", "url": "MultipleShootingTower.png" },
-
-             
+      			
+      		   { "id": "BoyPatient1", "url": "BoyPatient1.png" },
+      			{ "id": "BoyPatient2", "url": "BoyPatient2.png" },
+      			{ "id": "BoyPatient3", "url": "BoyPatient3.png" },
+      			{ "id": "BoyPatient4", "url": "BoyPatient4.png" },
+      			
+      			{ "id": "KidPatient1", "url": "KidPatient1.png" },
+      			{ "id": "KidPatient2", "url": "KidPatient2.png" },
+      			{ "id": "KidPatient3", "url": "KidPatient3.png" },
+      			{ "id": "KidPatient4", "url": "KidPatient4.png" },
+      			
+      		    { "id": "OldPatient1", "url": "OldPatient1.png" },
+      			{ "id": "OldPatient2", "url": "OldPatient2.png" },
+      			{ "id": "OldPatient3", "url": "OldPatient3.png" },
+      			{ "id": "OldPatient4", "url": "OldPatient4.png" },
+ 
+       		    { "id": "GirlPatient1", "url": "GirlPatient1.png" },
+      			{ "id": "GirlPatient2", "url": "GirlPatient2.png" },
+      			{ "id": "GirlPatient3", "url": "GirlPatient3.png" },
+      			{ "id": "GirlPatient4", "url": "GirlPatient4.png" },            
            ], 
         "audio":[
          { "id": "alarm", "url": "alarm.wav" },
       	{ "id": "Haste", "url": "haste.wav" },
         ],
     "animation":[
-         { "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
+      { "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
       { "id": "drunRight", "sheet": [{"id":"d1"},{"id":"d2"},{"id":"d3"},{"id":"d4"}] },
+      { "id": "OldPatient", "sheet": [{"id":"OldPatient1"},{"id":"OldPatient2"},{"id":"OldPatient3"},{"id":"OldPatient4"}] },
+      { "id": "BoyPatient", "sheet": [{"id":"BoyPatient1"},{"id":"BoyPatient2"},{"id":"BoyPatient3"},{"id":"BoyPatient4"}] },
+      { "id": "GirlPatient", "sheet": [{"id":"GirlPatient1"},{"id":"GirlPatient2"},{"id":"GirlPatient3"},{"id":"GirlPatient4"}] },
+      { "id": "KidPatient", "sheet": [{"id":"KidPatient1"},{"id":"KidPatient2"},{"id":"KidPatient3"},{"id":"KidPatient4"}] },
         ]
 },
 "temporaryBarrierType":[
@@ -485,7 +514,7 @@
 {
 	"id": "1",
 	"gold": 5,
-	"image": "runRight",
+	"image": "OldPatient",
 	"life": 10,
 	"speed": 0.5,
    "skill": "Poison",
@@ -493,7 +522,7 @@
 {
 	"id": "2",
 	"gold": 10,
-	"image": "drunRight",
+	"image": "KidPatient",
 	"life": 15,
 	"speed": 0.5,
    "skill": "Light",
@@ -501,7 +530,7 @@
 {
 	"id": "3",
 	"gold": 10,
-	"image": "drunRight",
+	"image": "BoyPatient",
 	"life": 15,
 	"speed": 0.5,
    	"skill": "Armour",
