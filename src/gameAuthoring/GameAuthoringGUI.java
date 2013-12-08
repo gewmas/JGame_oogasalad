@@ -2,6 +2,7 @@ package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.menuBar.MenuBar;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,11 +12,13 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -30,6 +33,7 @@ public class GameAuthoringGUI {
     private EnemyDesignTab myEnemyDesignTab;
     private WaveDesignTab myWaveDesignTab;
     private MiscellaneousTab myMiscellaneousTab;
+    private TempBarrierDesignTab myTempBarrierTab;
     private UserLibraryMainTab myUserLibraryPanel;
     protected static ImageLabel myImageLabel;
     protected static AudioLabel myAudioLabel;
@@ -59,6 +63,7 @@ public class GameAuthoringGUI {
         myEnemyDesignTab = new EnemyDesignTab(gameData);
         myWaveDesignTab = new WaveDesignTab(gameData);
         myMiscellaneousTab = new MiscellaneousTab(gameData);
+        myTempBarrierTab = new TempBarrierDesignTab(gameData);
         myUserLibraryPanel = new UserLibraryMainTab();
 
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
@@ -67,7 +72,7 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Tower Design", myTowerDesignTab.getTab());
         gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
         gameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
-        gameDesignTab.addTab("Miscellaneous", myMiscellaneousTab.getTab());
+        gameDesignTab.addTab("Temp Barrier Design", myTempBarrierTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
         myMainPanel.add(title, "span 2, align left, gap 0 0 30 0");
         myMainPanel.add(gameDesignTab, "gap 50 20 30 40");
