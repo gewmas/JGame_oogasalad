@@ -1,0 +1,211 @@
+{
+   "resources": {
+      "animation": [
+         {
+            "id": "enemy0",
+            "sheet": [
+               {"id": "5"},
+               {"id": "6"}
+            ]
+         },
+         {
+            "id": "enemy0",
+            "sheet": [
+               {"id": "5"},
+               {"id": "6"},
+               {"id": "7"}
+            ]
+         }
+      ],
+      "audio": [{
+         "id": "1",
+         "url": "laser.wav"
+      }],
+      "image": [
+         {
+            "id": "woods_background",
+            "url": "woods_background.png"
+         },
+         {
+            "id": "1",
+            "url": "path.jpg"
+         },
+         {
+            "id": "src/resources/img/space_background",
+            "url": "src/resources/img/space_background.jpg"
+         },
+         {
+            "id": "2",
+            "url": "tower1.png"
+         },
+         {
+            "id": "3",
+            "url": "tower2.png"
+         },
+         {
+            "id": "4",
+            "url": "tower3.png"
+         },
+         {
+            "id": "5",
+            "url": "d1.png"
+         },
+         {
+            "id": "6",
+            "url": "d2.png"
+         },
+         {
+            "id": "7",
+            "url": "BoyPatient1.png"
+         }
+      ]
+   },
+   "temporaryBarrierType": [{
+      "id": "What",
+      "expire": 15,
+      "description": "TB",
+      "damage": 1,
+      "image": "3",
+      "cost": 1
+   }],
+   "enemyType": [
+      {
+         "id": "Dragon",
+         "life": 5,
+         "skill": "Haste",
+         "speed": 0.5,
+         "image": "enemy0",
+         "gold": 50
+      },
+      {
+         "id": "Not Dragon",
+         "life": 3,
+         "skill": "Heal",
+         "speed": 0.5,
+         "image": "enemy0",
+         "gold": 50
+      }
+   ],
+   "numberOfLives": 10,
+   "BGImage": "src/resources/img/space_background.jpg",
+   "goldName": "AltG",
+   "Tower": [
+      {
+         "Cost": 5,
+         "Name": "DTower",
+         "Damage": 10,
+         "Description": "A normal tower",
+         "Range": 5,
+         "Sell Price": 5,
+         "Type": "DefaultTower",
+         "Image": "2",
+         "Attack Speed": 0.5,
+         "Attack Mode": 2
+      },
+      {
+         "Cost": 15,
+         "Name": "MT",
+         "Attack Amount": 4,
+         "Damage": 1,
+         "Description": "This tower can shoot multiple bullets",
+         "Range": 5,
+         "Sell Price": 3,
+         "Type": "MultipleShootingTower",
+         "Image": "4",
+         "Attack Speed": 0.5,
+         "Attack Mode": 3
+      }
+   ],
+   "name": "Game",
+   "map": {
+      "Barriers": [],
+      "pathImage": "1",
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 0,
+            "x": 1
+         },
+         {
+            "y": 0,
+            "x": 2
+         },
+         {
+            "y": 0,
+            "x": 3
+         },
+         {
+            "y": 0,
+            "x": 4
+         },
+         {
+            "y": 0,
+            "x": 5
+         },
+         {
+            "y": 0,
+            "x": 6
+         },
+         {
+            "y": 0,
+            "x": 7
+         },
+         {
+            "y": 0,
+            "x": 8
+         },
+         {
+            "y": 0,
+            "x": 9
+         },
+         {
+            "y": 0,
+            "x": 10
+         },
+         {
+            "y": 0,
+            "x": 11
+         },
+         {
+            "y": 0,
+            "x": 12
+         },
+         {
+            "y": 0,
+            "x": 13
+         },
+         {
+            "y": 0,
+            "x": 14
+         },
+         {
+            "y": 0,
+            "x": 15
+         },
+         {
+            "y": 0,
+            "x": 16
+         },
+         {
+            "y": 0,
+            "x": 17
+         },
+         {
+            "y": 0,
+            "x": 18
+         }
+      ]
+   },
+   "wave": [{
+      "interval": 5,
+      "number": [5],
+      "period": 0.5,
+      "type": ["Dragon"]
+   }],
+   "livesName": "AltL",
+   "splashImage": "woods_background.png",
+   "gold": 1000
+}

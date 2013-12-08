@@ -140,8 +140,11 @@ public class MapDesignTab extends Tab {
 
     private void setPathData () {
         if (myGrid.isValidPathHelper()) {
-            JOptionPane.showMessageDialog(null, "Valid path! Map Written");
-            myGameData.setBackgroundImage(myBackgroundImage);
+            JOptionPane.showMessageDialog(null, "Valid path! Map Written.");
+            String key = myBackgroundImage.substring(0, myBackgroundImage.length() - 4 );
+            myGameData.setBackgroundImage(key);
+            myGameData.addImage(key, myBackgroundImage);
+            
             myGameData.setMap(myPathImage, myGrid.getPathCoordinates());
         }
         else {
@@ -157,9 +160,7 @@ public class MapDesignTab extends Tab {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     File imgSource = INPUT_CHOOSER.getSelectedFile();
-                    myBackgroundImage =
-                            imgSource.toString().replace(System.getProperties()
-                                    .getProperty("user.dir") + "/", "");
+                    myBackgroundImage = imgSource.getName();
                     myGrid.setBackgroundImageSource(imgSource);
                 }
             }
