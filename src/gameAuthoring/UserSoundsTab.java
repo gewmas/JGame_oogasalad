@@ -43,7 +43,7 @@ public class UserSoundsTab {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     myNumAudio++;
-                    AudioLabel sound = new AudioLabel("" + myNumAudio);
+                    AudioLabel sound = new AudioLabel("" + myNumAudio, true);
                     JButton playSound = new JButton("Play sound");
                     playSound.addMouseListener(addSoundPreviewListener(sound));
                     playSound.setFont(Constants.DEFAULT_BODY_FONT);

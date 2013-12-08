@@ -39,15 +39,15 @@ public class SkillsDesignTab extends Tab {
         subPanel.setPreferredSize(new Dimension(300, 300));
         mainPanel.setPreferredSize(new Dimension(500, 500));
 
-        AudioLabel hasteAudio = new AudioLabel("Haste");
+        AudioLabel hasteAudio = new AudioLabel("Haste", false);
         hasteAudio.setMutableStatusTrue();
-        AudioLabel armorAudio = new AudioLabel("Armour");
+        AudioLabel armorAudio = new AudioLabel("Armour", false);
         armorAudio.setMutableStatusTrue();
-        AudioLabel healAudio = new AudioLabel("Heal");
+        AudioLabel healAudio = new AudioLabel("Heal", false);
         healAudio.setMutableStatusTrue();
-        AudioLabel lightAudio = new AudioLabel("Light");
+        AudioLabel lightAudio = new AudioLabel("Light", false);
         lightAudio.setMutableStatusTrue();
-        AudioLabel poisonAudio = new AudioLabel("Poison");
+        AudioLabel poisonAudio = new AudioLabel("Poison", false);
         poisonAudio.setMutableStatusTrue();
 
         JLabel hasteLabel = new JLabel("Haste Audio:");
