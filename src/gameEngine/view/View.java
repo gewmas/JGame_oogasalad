@@ -43,8 +43,6 @@ public class View implements MenuActions {
 
     }
 
- 
-
     /**
      * Used to start the game
      */
@@ -62,7 +60,6 @@ public class View implements MenuActions {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }
@@ -135,16 +132,16 @@ public class View implements MenuActions {
         gameFrame.endGame();
         gameFrame.quitGame();
         gameFrame.dispose();
-        gameFrame = new GameFrame( this);
+        gameFrame = new GameFrame(this);
         controller = new Controller();
         initializationFrame.showFrame();
-        
+
     }
 
     @Override
     public void goToMainMenu () {
         // TODO Auto-generated method stub
-        
+
     }
 
 }
