@@ -63,7 +63,7 @@ public class Rule {
                 myCurrentWaveIndex++;
             }
             if (!isAlive)
-                Waves.get(myCurrentWaveIndex).stop();
+                Waves.get(myCurrentWaveIndex-1).stop();
         }
 
     }
