@@ -47,19 +47,19 @@ public class GameAuthoringGUI {
         catch (IOException e1) {
             e1.printStackTrace();
         }
-        myFrame.setPreferredSize(new Dimension(1200, 950));
+        myFrame.setPreferredSize(new Dimension(1200, 800));
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myMainPanel = new ImagePanel("texture0.jpg");
         myMainPanel.setLayout(new MigLayout("wrap 2"));
         JTabbedPane gameDesignTab = new JTabbedPane();
-        gameDesignTab.setPreferredSize(new Dimension(750, 650));
+        gameDesignTab.setPreferredSize(new Dimension(750, 600));
         myBasicInfoTab = new BasicInfoTab(gameData);
         myMapDesignTab = new MapDesignTab(gameData);
         myTowerDesignTab = new TowerDesignTab(gameData);
         myEnemyDesignTab = new EnemyDesignTab(gameData);
         myWaveDesignTab = new WaveDesignTab(gameData);
         myMiscellaneousTab = new MiscellaneousTab(gameData);
-        myUserLibraryPanel = new UserLibraryMainTab();
+        myUserLibraryPanel = new UserLibraryMainTab(gameData);
 
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -69,8 +69,8 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
         gameDesignTab.addTab("Miscellaneous", myMiscellaneousTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
-        myMainPanel.add(title, "span 2, align left, gap 0 0 30 0");
-        myMainPanel.add(gameDesignTab, "gap 50 20 30 40");
+        myMainPanel.add(title, "span 2, align center, gap 0 0 15 0");
+        myMainPanel.add(gameDesignTab, "gap 50 20 20 40");
         myMainPanel.add(myUserLibraryPanel);
         myFrame.setJMenuBar(menu);
         myFrame.setContentPane(myMainPanel);
