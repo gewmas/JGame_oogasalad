@@ -29,9 +29,9 @@ public class GameAuthoringGUI {
     private TowerDesignTab myTowerDesignTab;
     private EnemyDesignTab myEnemyDesignTab;
     private WaveDesignTab myWaveDesignTab;
-    private MiscellaneousTab myMiscellaneousTab;
+    private SkillsDesignTab mySkillsDesignTab;
     private TempBarrierDesignTab myTempBarrierTab;
-    private UserLibraryMainTab myUserLibraryPanel;
+    private UserLibraryMainTab myUserLibraryTab;
     protected static ImageLabel myImageLabel;
     protected static AudioLabel myAudioLabel;
 
@@ -59,9 +59,9 @@ public class GameAuthoringGUI {
         myTowerDesignTab = new TowerDesignTab(gameData);
         myEnemyDesignTab = new EnemyDesignTab(gameData);
         myWaveDesignTab = new WaveDesignTab(gameData);
-        myMiscellaneousTab = new MiscellaneousTab(gameData);
+        mySkillsDesignTab = new SkillsDesignTab(gameData);
         myTempBarrierTab = new TempBarrierDesignTab(gameData);
-        myUserLibraryPanel = new UserLibraryMainTab(gameData);
+        myUserLibraryTab = new UserLibraryMainTab(gameData);
 
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -70,10 +70,11 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
         gameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
         gameDesignTab.addTab("Temp Barrier Design", myTempBarrierTab.getTab());
+        gameDesignTab.addTab("Skills Design", mySkillsDesignTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
         myMainPanel.add(title, "span 2, align left, gap 0 0 15 0");
         myMainPanel.add(gameDesignTab, "gap 50 20 20 40");
-        myMainPanel.add(myUserLibraryPanel);
+        myMainPanel.add(myUserLibraryTab);
         myFrame.setJMenuBar(menu);
         myFrame.setContentPane(myMainPanel);
         myFrame.pack();

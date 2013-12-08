@@ -130,6 +130,7 @@ public class EnemyDesignPanel extends JPanel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 ImageLabel enemyImage = new ImageLabel(50, 50);
+                enemyImage.setMutableStatusTrue();
                 myAnimationPanel.add(enemyImage);
                 myEnemyAnimations.add(enemyImage);
                 myAnimationPanel.validate();

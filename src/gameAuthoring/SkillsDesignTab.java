@@ -19,7 +19,7 @@ import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
 
-public class MiscellaneousTab extends Tab {
+public class SkillsDesignTab extends Tab {
 
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir"));
@@ -31,7 +31,7 @@ public class MiscellaneousTab extends Tab {
     // invisibility - enemy
     // poison -
     // damage
-    public MiscellaneousTab (GameData gameData) {
+    public SkillsDesignTab (GameData gameData) {
         super(gameData);
     }
 
@@ -46,28 +46,34 @@ public class MiscellaneousTab extends Tab {
         subPanel.setPreferredSize(new Dimension(300, 300));
         mainPanel.setPreferredSize(new Dimension(500, 500));
 
-        ImageLabel bulletImage = new ImageLabel(50, 50);
-        ImageLabel speedImage = new ImageLabel(50, 50);
-        ImageLabel poisonImage = new ImageLabel(50, 50);
-        ImageLabel flameImage = new ImageLabel(50, 50);
+        AudioLabel hasteAudio = new AudioLabel();
+        AudioLabel armorAudio = new AudioLabel();
+        AudioLabel healAudio = new AudioLabel();
+        AudioLabel lightAudio = new AudioLabel();
+        AudioLabel poisonAudio = new AudioLabel();
 
-        JLabel bulletLabel = new JLabel("Bullet image:");
-        bulletLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        JLabel speedLabel = new JLabel("Speed image:");
-        speedLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        JLabel poisonLabel = new JLabel("Poison image:");
+        JLabel hasteLabel = new JLabel("Haste audio:");
+        hasteLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        JLabel armorLabel = new JLabel("Armor audio:");
+        armorLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        JLabel healLabel = new JLabel("Heal audio:");
+        healLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        JLabel lightLabel = new JLabel("Light audio:");
+        lightLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        JLabel poisonLabel = new JLabel("Poison audio:");
         poisonLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        JLabel flameLabel = new JLabel("Flame image:");
-        flameLabel.setFont(Constants.DEFAULT_BODY_FONT);
 
-        subPanel.add(bulletLabel);
-        subPanel.add(bulletImage);
-        subPanel.add(speedLabel);
-        subPanel.add(speedImage);
+        subPanel.add(hasteLabel);
+        subPanel.add(hasteAudio);
+        subPanel.add(armorLabel);
+        subPanel.add(armorAudio);
+        subPanel.add(healLabel);
+        subPanel.add(healAudio);
+        subPanel.add(lightLabel);
+        subPanel.add(lightAudio);
         subPanel.add(poisonLabel);
-        subPanel.add(poisonImage);
-        subPanel.add(flameLabel);
-        subPanel.add(flameImage);
+        subPanel.add(poisonAudio);
+
         subPanel.setOpaque(false);
         mainPanel.setOpaque(false);
         Border b = BorderFactory.createLineBorder(Color.black, 1);

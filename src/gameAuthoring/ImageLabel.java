@@ -20,6 +20,7 @@ public class ImageLabel extends JLabel {
     private File myImageSource;
     private File myAudioSource;
     private String myID;
+    private boolean isMutable = false;
 
     public ImageLabel () {
         initialize();
@@ -28,6 +29,10 @@ public class ImageLabel extends JLabel {
     public ImageLabel (String id) {
         myID = id;
         initialize();
+    }
+
+    public void setMutableStatusTrue () {
+        isMutable = true;
     }
 
     public ImageLabel (int width, int height) {
@@ -87,7 +92,13 @@ public class ImageLabel extends JLabel {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                label.transferLabelInformation(GameAuthoringGUI.myImageLabel);
+                if (GameAuthoringGUI.myImageLabel == null) {
+                    GameAuthoringGUI.myImageLabel = label;
+                    GameAuthoringGUI.myImageLabel.setLabelIcon(myImageSource);
+                }
+                else if (isMutable) {
+                    transferLabelInformation(GameAuthoringGUI.myImageLabel);
+                }
             }
         };
         return listener;

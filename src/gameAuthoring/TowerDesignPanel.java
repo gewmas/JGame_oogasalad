@@ -127,7 +127,7 @@ public class TowerDesignPanel extends JPanel {
                     dataPanel.setOpaque(false);
                     dataPanel.add(createTowerButton);
                     dataPanel.revalidate();
-                    
+
                     JScrollPane scrollPane = new JScrollPane(dataPanel);
                     scrollPane.getViewport().setOpaque(false);
                     scrollPane.setOpaque(false);
@@ -393,16 +393,15 @@ public class TowerDesignPanel extends JPanel {
         myDescriptionField = new JTextArea(2, 12);
         myDescriptionField.setLineWrap(true);
         scrollPane = new JScrollPane(myDescriptionField);
-        
+
         towerImageChooser = new JLabel("Choose image");
         towerImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
 
         myTowerImage = new ImageLabel();
+        myTowerImage.setMutableStatusTrue();
         myTowerImage.setPreferredSize(new Dimension(50, 50));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myTowerImage.setBorder(border);
-
-
 
         createTowerButton = new JButton("Create Tower");
         createTowerButton.setFont(Constants.DEFAULT_BODY_FONT);

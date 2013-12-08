@@ -52,6 +52,7 @@ public class MapDesignTab extends Tab {
         JLabel pathLabel = new JLabel("Path image:");
         pathLabel.setFont(Constants.DEFAULT_BODY_FONT);
         myCurrentPathImage = new ImageLabel(50, 50);
+        myCurrentPathImage.setMutableStatusTrue();
         myCurrentPathImage.setFont(Constants.DEFAULT_BODY_FONT);
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myCurrentPathImage.setBorder(border);
