@@ -69,6 +69,8 @@ public class Game extends StdGame {
     @Override
     public void initCanvas () {
         gameInfo=view.getGameInfo();
+        this.setMoneyTitle("TEST");
+        this.setLivesTitle("TEST");
         Dimension size = gameInfo.getDimension();//view.getGameSize();
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
