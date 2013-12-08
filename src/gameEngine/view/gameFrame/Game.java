@@ -6,8 +6,10 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
+import gameEngine.view.gameFrame.tools.DisplayValue;
 import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -183,9 +185,21 @@ public class Game extends StdGame {
             JGPoint mousePosition = getMousePos();
             if (!itemPurchaser.checkAndPlaceTower(mousePosition)) {
                 PurchaseInfo tower = view.getTowerInfo(mousePosition.x, mousePosition.y);
+                List<DisplayValue> display = new ArrayList();
                 if (tower != null) {
-                    utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
+                    for (String key: valuesToDisplay.keySet()){
+                        if (tower.getInfo().get(key)!=null){
+                        String field = key;
+                        String value = tower.getInfo().get(key);
+                        String color = valuesToDisplay.get(key);
+                       
+                        display.add(new DisplayValue(field,value,color));
+                        }
+                    }
+                    utilities.displayTowerInformation(tower.getInfo(), display,
                                                         mousePosition.x, mousePosition.y);
+//                    utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
+//                                                        mousePosition.x, mousePosition.y);
                 }
             }
            

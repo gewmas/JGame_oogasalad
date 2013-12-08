@@ -30,7 +30,7 @@ public class View implements MenuActions {
 
     public View (Controller controller) {
         this.controller = controller;
-        this.gameFrame = new GameFrame(controller, this);
+        this.gameFrame = new GameFrame(this);
         this.initializationFrame = new InitializationFrame(this);
 
     }
@@ -46,7 +46,7 @@ public class View implements MenuActions {
     public void selectNewGame () {
         gameFrame.quitGame();
         gameFrame.dispose();
-        gameFrame = new GameFrame(controller, this);
+        gameFrame = new GameFrame( this);
         initializationFrame.setVisible(true);
     }
 
