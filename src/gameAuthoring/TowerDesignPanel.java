@@ -386,7 +386,9 @@ public class TowerDesignPanel extends JPanel {
         myRecyclePriceField.setPreferredSize(new Dimension(200, 30));
         myRecyclePriceField.setFont(Constants.DEFAULT_BODY_FONT);
         myDescriptionField = new JTextArea(2, 18);
-
+        myDescriptionField.setLineWrap(true);
+        scrollPane = new JScrollPane(myDescriptionField);
+        
         towerImageChooser = new JLabel("Choose image");
         towerImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
 
@@ -395,8 +397,7 @@ public class TowerDesignPanel extends JPanel {
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myTowerImage.setBorder(border);
 
-        myDescriptionField.setLineWrap(true);
-        scrollPane = new JScrollPane(myDescriptionField);
+
 
         createTowerButton = new JButton("Create Tower");
         createTowerButton.setFont(Constants.DEFAULT_BODY_FONT);
