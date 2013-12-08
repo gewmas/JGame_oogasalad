@@ -15,7 +15,6 @@ public class FadeEffect extends Effect {
     }
 
     public void move () {
-
         if (!isDown) {
             myObject.alpha+=0.025;
             if (myObject.alpha >= 1) {

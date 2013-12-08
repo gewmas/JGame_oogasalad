@@ -69,7 +69,10 @@ public class Model {
     public void startGame () {
         gameInfo.SetIsWin(false);
         gameInfo.setLife(parser.getInt("numberOfLives"));
-        rule.ruleStart();
+        gameInfo.setGold(parser.getInt("gold"));
+//        rule.ruleStart();
+        //Edited by Alex, call reset() instead of start()
+        rule.reset();
 
     }
 
@@ -255,7 +258,9 @@ public class Model {
                 spawnedEnemies.remove(j);
             }
         } else if(cmd.equals("win_game")) {
+            System.out.println("called");
             gameInfo.SetIsWin(true);
+            System.out.println("gameInfo isWin is: "+gameInfo.getIsWin());
         } else if (cmd.equals("lose_game")) {
             gameInfo.setLife(0);
         } else {

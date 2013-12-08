@@ -76,8 +76,8 @@ public class Game extends StdGame {
     public void initCanvas () {
         gameInfo = view.getGameInfo();
 
-        this.setMoneyTitle("TEST");
-        this.setLivesTitle("TEST");
+        this.setMoneyTitle("Money");
+        this.setLivesTitle("Lives");
         Dimension size = gameInfo.getDimension();// view.getGameSize();
 
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
@@ -131,7 +131,7 @@ public class Game extends StdGame {
         frameRateBar.resume_in_view = false;
         toggleFrameRateBar();
     }
-
+    
     public void doFrameInGame () {
         moveObjects();
         gameInfo = view.getGameInfo();
@@ -152,6 +152,7 @@ public class Game extends StdGame {
         }
 
         if (getKey(KeyEsc)){
+            clearKey(KeyEsc);
             endGame();
         }
         
@@ -206,7 +207,7 @@ public class Game extends StdGame {
 
     public void wonGame(){
         view.stopWaves();
-//        removeGameObjects();
+        removeObjects(null,0);
         gameWon();
     }
 
@@ -217,16 +218,8 @@ public class Game extends StdGame {
 
     public void endGame(){
         view.stopWaves();
-        //view.startModel();
+        removeObjects(null,0);
         gameOver();
-    }
-
-    /**
-     * Removes all JGObjects and JGTimers
-     */
-    public void removeGameObjects () {
-        this.removeAllTimers();
-        removeObjects(null, 0);
     }
 
     /**
