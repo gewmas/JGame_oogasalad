@@ -38,6 +38,8 @@ public class BasicInfoTab extends Tab {
     private String mySplashImage;
     private JButton simulateButton;
 
+    private AudioLabel myAudioLabel;
+
     public BasicInfoTab (GameData gameData) {
         super(gameData);
         getTab();
@@ -97,9 +99,9 @@ public class BasicInfoTab extends Tab {
         altLivesText.setPreferredSize(new Dimension(200, 30));
         altLivesText.setFont(Constants.DEFAULT_BODY_FONT);
 
-        AudioLabel backgroundAudio = new AudioLabel();
+        myAudioLabel = new AudioLabel();
         JLabel audioLabel = new JLabel("Background audio:");
-        backgroundAudio.setMutableStatusTrue();
+        myAudioLabel.setMutableStatusTrue();
         audioLabel.setFont(Constants.DEFAULT_BODY_FONT);
 
         subPanel.add(gameName);
@@ -113,7 +115,7 @@ public class BasicInfoTab extends Tab {
         subPanel.add(altLivesLabel);
         subPanel.add(altLivesText);
         subPanel.add(audioLabel);
-        subPanel.add(backgroundAudio);
+        subPanel.add(myAudioLabel);
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
         subPanel.add(setInfoButton);
@@ -147,7 +149,6 @@ public class BasicInfoTab extends Tab {
             @Override
             public void mouseClicked (MouseEvent e) {
                 setData();
-
             }
         };
         return listener;
@@ -166,16 +167,23 @@ public class BasicInfoTab extends Tab {
 
     }
 
+    public void setBackgroundAudio (AudioLabel audio) {
+        myAudioLabel = audio;
+    }
+
     private void setData () {
         int gold = Integer.parseInt(myGold.getText());
         int lives = Integer.parseInt(myLives.getText());
         String name = myGameName.getText();
-
-        if (gold > 0 && lives > 0 && mySplashImage != null && name != null) {
+        if (myAudioLabel == null) {
+            System.out.println("Audio label is null");
+        }
+        if (myAudioLabel != null && gold > 0 && lives > 0 && mySplashImage != null && name != null) {
             myGameData.setGold(gold);
             myGameData.setLives(lives);
             myGameData.setSplashImage(mySplashImage);
             myGameData.setGameName(name);
+            myGameData.addAudio(myAudioLabel.getID(), myAudioLabel.getAudioFile().getName());
             activateSimmulate();
         }
 
