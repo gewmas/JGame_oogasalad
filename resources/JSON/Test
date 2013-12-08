@@ -1,0 +1,169 @@
+{
+   "resources": {
+      "animation": [
+         {
+            "id": "enemy0",
+            "sheet": [{"id": "4"}]
+         },
+         {
+            "id": "enemy0",
+            "sheet": [
+               {"id": "4"},
+               {"id": "4"}
+            ]
+         }
+      ],
+      "audio": [],
+      "image": [
+         {
+            "id": "1",
+            "url": "laser.wav"
+         },
+         {
+            "id": "2",
+            "url": "duvall.png"
+         },
+         {
+            "id": "3",
+            "url": "d1.png"
+         },
+         {
+            "id": "4",
+            "url": "d2.png"
+         }
+      ]
+   },
+   "temporaryBarrierType": [],
+   "name": "308 is the best class ever",
+   "map": {
+      "Barriers": [],
+      "pathImage": "resources/img/duvall.png",
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 0,
+            "x": 1
+         },
+         {
+            "y": 0,
+            "x": 2
+         },
+         {
+            "y": 0,
+            "x": 3
+         },
+         {
+            "y": 0,
+            "x": 4
+         },
+         {
+            "y": 0,
+            "x": 5
+         },
+         {
+            "y": 0,
+            "x": 6
+         },
+         {
+            "y": 0,
+            "x": 7
+         },
+         {
+            "y": 1,
+            "x": 7
+         },
+         {
+            "y": 1,
+            "x": 8
+         },
+         {
+            "y": 1,
+            "x": 9
+         },
+         {
+            "y": 1,
+            "x": 10
+         },
+         {
+            "y": 1,
+            "x": 11
+         },
+         {
+            "y": 1,
+            "x": 12
+         },
+         {
+            "y": 1,
+            "x": 13
+         },
+         {
+            "y": 1,
+            "x": 14
+         },
+         {
+            "y": 1,
+            "x": 15
+         },
+         {
+            "y": 1,
+            "x": 16
+         },
+         {
+            "y": 1,
+            "x": 17
+         },
+         {
+            "y": 1,
+            "x": 18
+         },
+         {
+            "y": 1,
+            "x": 19
+         }
+      ]
+   },
+   "wave": [],
+   "numberOfLives": 10,
+   "enemyType": [{
+      "id": "D",
+      "life": 3,
+      "skill": "",
+      "speed": 0.5,
+      "image": "enemy0",
+      "gold": 50
+   }],
+   "splashImage": "resources/img/duvall.png",
+   "gold": 1000,
+   "BGImage": "resources/img/duvall.png",
+   "towerType": [
+      {
+         "id": "Duvall",
+         "attackMode": 1,
+         "Sell Price": 1,
+         "range": 10,
+         "description": "Scary",
+         "damage": 10,
+         "attackSpeed": 0.1,
+         "image": "2",
+         "type": "DefaultTower",
+         "cost": 10
+      },
+      {
+         "id": "Wizard Duvall",
+         "magic": "FrozeMagic",
+         "magicFactor": 0.5,
+         "attackMode": 3,
+         "range": 4,
+         "description": "Wizard Duvall does magic",
+         "damage": 15,
+         "attackSpeed": 0.5,
+         "image": "2",
+         "recyclePrice": 50,
+         "type": "MagicTower",
+         "cost": 100
+      }
+   ]
+}

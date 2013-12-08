@@ -63,6 +63,7 @@ public class TempBarrierDesignPanel extends JPanel {
 
         JButton createBarrierButton = new JButton("Create New Barrier");
         createBarrierButton.setFont(Constants.DEFAULT_BODY_FONT);
+        createBarrierButton.addMouseListener(createBarrierListener());
 
         myBarrierImage = new ImageLabel();
         myBarrierImage.setPreferredSize(new Dimension(50, 50));
@@ -104,6 +105,13 @@ public class TempBarrierDesignPanel extends JPanel {
                 String image = myBarrierImage.getID();
 
                 gameData.addBarrier(name, image, damage, cost, expire, description);
+                myTempBarrierDesignTab.addBarrier(myBarrierImage.getImageFile(), name);
+                myNameField.setText("");
+                myDamageField.setText("");
+                myCostField.setText("");
+                myExpiryField.setText("");
+                myDescriptionField.setText("");
+                myBarrierImage = new ImageLabel();
             }
         };
 

@@ -34,7 +34,7 @@ public class GameData extends JSONObject {
      */
     public GameData () {
         super();
-        this.put("towerType", myTowerList);
+        this.put("Tower", myTowerList);
         this.put("enemyType", myEnemyList);
         this.put("temporaryBarrierType", myBarrierList);
         this.put("wave", myWaveList);
@@ -208,8 +208,8 @@ public class GameData extends JSONObject {
      * @param life Number enemy lives (hits enemy can endure)
      * @param speed Enemy speed
      */
-    public void addEnemy (String name, int gold, String image, int life, double speed) {
-        myEnemyList.put(new EnemyJSONObject(name, gold, image, life, speed));
+    public void addEnemy (String name, int gold, String image, int life, double speed, String skill) {
+        myEnemyList.put(new EnemyJSONObject(name, gold, image, life, speed, skill));
     }
 
     /**

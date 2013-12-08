@@ -76,8 +76,8 @@ public class WaveDesignPanel extends JPanel {
 
         this.setLayout(new MigLayout("wrap 2"));
         this.add(type);
-        //this.add(myTypeButton);
-        this.add(myEnemyChooser);
+        this.add(myTypeButton);
+        //this.add(myEnemyChooser);
         this.add(quantity);
         this.add(myNumberField);
         this.add(period);

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -36,6 +37,9 @@ public class EnemyDesignPanel extends JPanel {
     private List<ImageLabel> myEnemyAnimations = new ArrayList<ImageLabel>();
     private File myImageSource;
     private int myNumEnemies = 0;
+    private JComboBox<String> mySkillOptions;
+    
+    private final String[] SKILLS = {"", "Haste", "Armour", "Heal", "Light", "Poison"};
 
     public EnemyDesignPanel (EnemyDesignTab enemyDesignTab) {
         myEnemyDesignTab = enemyDesignTab;
@@ -47,6 +51,8 @@ public class EnemyDesignPanel extends JPanel {
         lives.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel speed = new JLabel("Speed");
         speed.setFont(Constants.DEFAULT_BODY_FONT);
+        JLabel skill = new JLabel("Skill");
+        skill.setFont(Constants.DEFAULT_BODY_FONT);
 
         myNameField = new JTextField();
         myNameField.setFont(Constants.DEFAULT_BODY_FONT);
@@ -76,6 +82,8 @@ public class EnemyDesignPanel extends JPanel {
         clearButton.setFont(Constants.DEFAULT_BODY_FONT);
         clearButton.addMouseListener(createClearAnimationsListener());
 
+        mySkillOptions = new JComboBox<String>(SKILLS);
+        
         myAnimationPanel = new JPanel();
         myAnimationPanel.setOpaque(false);
         myAnimationPanel.setPreferredSize(new Dimension(200, 100));
@@ -98,6 +106,8 @@ public class EnemyDesignPanel extends JPanel {
         this.add(myLifeField);
         this.add(speed);
         this.add(mySpeedField);
+        this.add(skill);
+        this.add(mySkillOptions);
         this.add(animationScrollPane, "span 2, gap 0 0 10 10");
         this.add(enemyImageChooser);
         this.add(clearButton);
@@ -149,6 +159,7 @@ public class EnemyDesignPanel extends JPanel {
                     int gold = Integer.parseInt(myGoldField.getText());
                     int life = Integer.parseInt(myLifeField.getText());
                     double speed = Double.parseDouble(mySpeedField.getText());
+                    String skill = (String) mySkillOptions.getSelectedItem();
                     myImageSource = myEnemyAnimations.get(0).getImageFile();
                     List<String> enemyAnimationPaths = new ArrayList<String>();
                     for (ImageLabel imageLabel : myEnemyAnimations) {
@@ -167,7 +178,8 @@ public class EnemyDesignPanel extends JPanel {
                                           gold,
                                           currentEnemyID,
                                           life,
-                                          speed);
+                                          speed,
+                                          skill);
                         myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
                         myNameField.setText("");
                         myGoldField.setText("");
