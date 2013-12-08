@@ -1,30 +1,44 @@
 package gameAuthoring;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
 
 
 public class ImageLabel extends JLabel {
 
     private Image myImage;
     private File myImageSource;
+    private File myAudioSource;
     private String myID;
 
     public ImageLabel () {
-
+        initialize();
     }
 
     public ImageLabel (String id) {
         myID = id;
+        initialize();
     }
 
     public ImageLabel (int width, int height) {
         this.setPreferredSize(new Dimension(width, height));
+        initialize();
+    }
+
+    public void initialize () {
+        this.addMouseListener(createImageListener(this));
+        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
+        this.setBorder(border);
     }
 
     public void setLabelIcon (File imageSource) {
@@ -39,6 +53,14 @@ public class ImageLabel extends JLabel {
         }
     }
 
+    public void setAudioFile (File audio) {
+        myAudioSource = audio;
+    }
+
+    public File getAudioFile () {
+        return myAudioSource;
+    }
+
     public String getID () {
         return myID;
     }
@@ -51,10 +73,24 @@ public class ImageLabel extends JLabel {
         return myImage;
     }
 
-    public void transferImageInformation (ImageLabel other) {
+    public void transferLabelInformation (ImageLabel other) {
         myImage = other.getImage();
         myImageSource = other.getImageFile();
         myID = other.getID();
-        this.setLabelIcon(myImageSource);
+        myAudioSource = other.getAudioFile();
+        if (myImageSource != null) {
+            this.setLabelIcon(myImageSource);
+        }
     }
+
+    public MouseAdapter createImageListener (final ImageLabel label) {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                label.transferLabelInformation(GameAuthoringGUI.myImageLabel);
+            }
+        };
+        return listener;
+    }
+
 }

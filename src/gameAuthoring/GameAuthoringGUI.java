@@ -10,9 +10,6 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
-import java.util.Observable;
-import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -26,7 +23,7 @@ public class GameAuthoringGUI {
 
     protected JFrame myFrame;
     protected static JPanel myMainPanel;
-    static File mySelectedImage = null;
+    protected static File mySelectedImage = null;
     private BasicInfoTab myBasicInfoTab;
     private MapDesignTab myMapDesignTab;
     private TowerDesignTab myTowerDesignTab;
@@ -34,9 +31,8 @@ public class GameAuthoringGUI {
     private WaveDesignTab myWaveDesignTab;
     private MiscellaneousTab myMiscellaneousTab;
     private UserLibraryMainTab myUserLibraryPanel;
-    private Image currentImage;
-    private ImageLabel myImageLabel;
-
+    protected static ImageLabel myImageLabel;
+    protected static AudioLabel myAudioLabel;
 
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
@@ -88,8 +84,7 @@ public class GameAuthoringGUI {
         GameAuthoringGUI gameAuthoringGUI = new GameAuthoringGUI();
     }
 
-    public static final void setCursor (ImageLabel imageLabel) {
-        File imageFile = imageLabel.getImageFile();
+    public static final void setCursor (File imageFile) {
         mySelectedImage = imageFile;
         Image image;
         try {

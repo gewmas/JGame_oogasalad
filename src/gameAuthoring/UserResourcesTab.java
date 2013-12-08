@@ -7,30 +7,22 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 
 
-public class UserImagesTab {
+public class UserResourcesTab {
 
-    private JPanel myMainPanel = new GradientPanel(new MigLayout("wrap 1"));
-    private JPanel mySubPanel = new JPanel(new MigLayout("wrap 1"));
-    private int myNumImages = 0;
-    private static final JFileChooser INPUT_CHOOSER =
+    protected JPanel myMainPanel = new GradientPanel(new MigLayout("wrap 1"));
+    protected JPanel mySubPanel = new JPanel(new MigLayout("wrap 1"));
+    protected int myNumItems = 0;
+    protected static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
 
     public JPanel getTab () {
         myMainPanel.setOpaque(false);
         mySubPanel.setPreferredSize(new Dimension(300, 500));
-        JButton uploadImage = new JButton("Load image");
-        uploadImage.setFont(Constants.DEFAULT_BODY_FONT);
-        uploadImage.addMouseListener(addFileUploadListener(this));
-        JScrollPane scrollPane = new JScrollPane(mySubPanel);
-        myMainPanel.add(scrollPane);
-        myMainPanel.add(uploadImage, "align center, gap 10 10 30 10");
         return myMainPanel;
     }
 
@@ -44,10 +36,9 @@ public class UserImagesTab {
                     Image image;
                     try {
                         image = ImageIO.read(imgSource);
-                        myNumImages++;
-                        ImageLabel imageLabel = new ImageLabel(" " + myNumImages);
+                        myNumItems++;
+                        ImageLabel imageLabel = new ImageLabel(" " + myNumItems);
                         imageLabel.setLabelIcon(imgSource);
-                        imageLabel.addMouseListener(addIconListener(userImagesTab, imageLabel));
                         GameAuthoringGUI.myImageLabel = imageLabel;
                         mySubPanel.add(imageLabel);
                         mySubPanel.revalidate();
@@ -61,22 +52,4 @@ public class UserImagesTab {
         return listener;
     }
 
-    public MouseAdapter addIconListener (final UserImagesTab userImagesTab,
-                                         final ImageLabel image) {
-        MouseAdapter listener = new MouseAdapter() {
-            private boolean imageSelected = false;
-
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                imageSelected = !imageSelected;
-                if (imageSelected) {
-                    GameAuthoringGUI.setCursor(image.getImageFile());
-                }
-                else {
-                    GameAuthoringGUI.setCursorNull();
-                }
-            }
-        };
-        return listener;
-    }
 }

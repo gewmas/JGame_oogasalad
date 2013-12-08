@@ -64,6 +64,10 @@ public class EnemyDesignPanel extends JPanel {
         mySpeedField.setPreferredSize(new Dimension(200, 30));
         mySpeedField.setFont(Constants.DEFAULT_BODY_FONT);
 
+        JLabel enemySoundLabel = new JLabel("Enemy attack sound:");
+        enemySoundLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        AudioLabel enemyAudio = new AudioLabel();
+
         JButton enemyImageChooser = new JButton("Add sprite");
         enemyImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
         enemyImageChooser.addMouseListener(createNewEnemyIconListener());
@@ -97,6 +101,8 @@ public class EnemyDesignPanel extends JPanel {
         this.add(animationScrollPane, "span 2, gap 0 0 10 10");
         this.add(enemyImageChooser);
         this.add(clearButton);
+        this.add(enemySoundLabel);
+        this.add(enemyAudio);
         this.add(createEnemyButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         this.setPreferredSize(new Dimension(380, 350));
@@ -119,24 +125,11 @@ public class EnemyDesignPanel extends JPanel {
         myAnimationPanel.revalidate();
     }
 
-    public MouseAdapter createEnemyImageListener (final ImageLabel label) {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                label.setLabelIcon(GameAuthoringGUI.mySelectedImage);
-            }
-        };
-        return listener;
-    }
-
     public MouseAdapter createNewEnemyIconListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
                 ImageLabel enemyImage = new ImageLabel(50, 50);
-                enemyImage.addMouseListener(createEnemyImageListener(enemyImage));
-                Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
-                enemyImage.setBorder(border);
                 myAnimationPanel.add(enemyImage);
                 myEnemyAnimations.add(enemyImage);
                 myAnimationPanel.validate();

@@ -37,6 +37,7 @@ public class BasicInfoTab extends Tab {
     private JLabel mySplashImageLabel;
     private String mySplashImage;
     private JButton simulateButton;
+
     public BasicInfoTab (GameData gameData) {
         super(gameData);
         getTab();
@@ -81,20 +82,37 @@ public class BasicInfoTab extends Tab {
         myGameName = new JTextField();
         myGameName.setPreferredSize(new Dimension(200, 30));
         myGold = new JTextField();
+        JLabel altGoldLabel = new JLabel("Alternative gold name:");
+        altGoldLabel.setFont(new Font("Calibri", Font.PLAIN, 14));
+        JTextField altGoldText = new JTextField();
+        altGoldText.setPreferredSize(new Dimension(200, 30));
+        altGoldText.setFont(new Font("Calibri", Font.PLAIN, 14));
+
         myGold.setPreferredSize(new Dimension(200, 30));
         myLives = new JTextField();
         myLives.setPreferredSize(new Dimension(200, 30));
+        JLabel altLivesLabel = new JLabel("Alternative lives name:");
+        JTextField altLivesText = new JTextField();
+        altLivesText.setPreferredSize(new Dimension(200, 30));
+
+        AudioLabel backgroundAudio = new AudioLabel();
+        JLabel audioLabel = new JLabel("Background audio:");
+        audioLabel.setFont(Constants.DEFAULT_BODY_FONT);
 
         subPanel.add(gameName);
         subPanel.add(myGameName);
         subPanel.add(gold);
         subPanel.add(myGold);
+        subPanel.add(altGoldLabel);
+        subPanel.add(altGoldText);
         subPanel.add(lives);
         subPanel.add(myLives);
-
+        subPanel.add(altLivesLabel);
+        subPanel.add(altLivesText);
+        subPanel.add(audioLabel);
+        subPanel.add(backgroundAudio);
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
-        
         subPanel.add(setInfoButton);
         subPanel.add(simulateButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
@@ -126,19 +144,20 @@ public class BasicInfoTab extends Tab {
             @Override
             public void mouseClicked (MouseEvent e) {
                 setData();
-                
+
             }
         };
         return listener;
 
     }
+
     public MouseAdapter setSimulateListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
                 Simulator simulator = new Simulator();
                 simulator.simulate(myGameData);
-                
+
             }
         };
         return listener;
