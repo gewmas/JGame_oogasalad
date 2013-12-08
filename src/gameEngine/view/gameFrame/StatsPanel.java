@@ -1,9 +1,9 @@
 package gameEngine.view.gameFrame;
 
-import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 
@@ -13,7 +13,7 @@ import javax.swing.border.Border;
  * @author Lalita Maraj
  * 
  */
-public class StatsPanel extends Panel {
+public class StatsPanel extends JPanel {
     private JLabel label;
 
     public StatsPanel () {

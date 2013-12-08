@@ -3,8 +3,8 @@ package gameEngine.view.initialization;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
-import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 
@@ -15,7 +15,7 @@ import gameEngine.view.View;
  *         to start a new game
  */
 
-public class InitializationPanel extends Panel {
+public class InitializationPanel extends JPanel {
 
     private static final String SELECTOR_BUTTOM_ALIGNMENT = "align right";
     private static final String CANCEL_BUTTOM_ALIGNMENT = "align left";

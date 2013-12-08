@@ -5,11 +5,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
-import gameEngine.view.Panel;
 
 
 /**
@@ -18,7 +18,7 @@ import gameEngine.view.Panel;
  *         user defined behavior on text input
  *         by calling the submit method on inputSender
  */
-public class InputPanel extends Panel {
+public class InputPanel extends JPanel {
 
     /**
      * 
