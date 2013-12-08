@@ -1,15 +1,18 @@
 {
-   "enemyType": [],
-   "numberOfLives": 4,
-   "tilesPerRow": 20,
-   "difficultyScale": 1.5,
-   "BGImage": "resources/img/bg.jpg",
-   "widthOfWindow": 600,
-   "levels": 0,
-   "name": "What",
-   "map": {
-      "pathImage": "dirt_tile.jpg",
-      "Path": [
+"name": "Hospital Cure",
+"spashImage" :  "game-bg.png",
+"BGImage" :  "woods_background",
+"gold" : 500,
+"numberOfLives" : 10,
+"levels": 2,
+"widthOfWindow": 600,
+"heightOfWindow": 600,
+"tilesPerRow": 20,
+"difficultyScale": 1.5,
+"map":
+{
+  	  "pathImage":  "path.png", 
+	  "Path": [
          {
             "y": 0,
             "x": 0
@@ -346,11 +349,181 @@
             "y": 0,
             "x": 19
          }
-      ]
+      ], 
+        "Barriers":[
+        	{ "x": 5, "y": 2, "image": "rock.jpg" },
+        	{ "x": 6, "y": 2, "image": "tree.jpg" }
+        ]
+},
+
+"resources":
+{
+  	   
+     "image":[ 
+               { "id": "1", "url": "mr1.png" },
+               { "id": "2", "url": "mr2.png" },
+               { "id": "3", "url": "mr3.png" },
+               { "id": "4", "url": "mr4.png" },
+      			{ "id": "d1", "url": "d1.png" },
+               { "id": "d2", "url": "d2.png" },
+               { "id": "d3", "url": "d3.png" },
+               { "id": "d4", "url": "d4.png" },
+               
+               { "id": "space_background", "url": "space_background.jpg" },
+               { "id": "woods_background", "url": "woods_background.png" },
+               
+               { "id": "bullet", "url": "bullet0.png" },
+               { "id": "barrier1", "url": "barrier1.png" },
+               { "id": "barrier2", "url": "barrier2.png" },
+      			
+				{ "id": "DefaultTower", "url": "DefaultTower.png" },
+      			{ "id": "BoostTower", "url": "BoostTower.png" },
+      			{ "id": "MagicTower", "url": "MagicTower.png" },
+      			{ "id": "MultipleShootingTower", "url": "MultipleShootingTower.png" },
+
+             
+           ], 
+        "audio":[
+         { "id": "alarm", "url": "alarm.wav" },
+      	{ "id": "Haste", "url": "haste.wav" },
+        ],
+    "animation":[
+         { "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
+      { "id": "drunRight", "sheet": [{"id":"d1"},{"id":"d2"},{"id":"d3"},{"id":"d4"}] },
+        ]
+},
+"temporaryBarrierType":[
+	{
+	 "id": "Lake",
+	 "image": "barrier1",
+	 "damage": 100,
+	 "cost": 200,
+	 "expire": 20,
+	 "description": "Buy a puddle of water to drown your enemies!  The sun is hot, so let's hope it doesn't evaporate too quickly"
+	},  
+	{
+	 "id": "Fire",
+	 "image": "barrier2",
+	 "damage": 100,
+	 "cost": 100,
+	 "expire": 10,
+	 "description": "Buy a flame to burn your enemies!  The fire won't burn forever"
+	},
+],
+
+"Tower": [
+	{
+	 "Type": "DefaultTower",
+	 "Name" : "Doctor Jason",
+	 "Image": "DefaultTower",
+	 "Damage": -3,
+	 "Attack Speed": 0.8,
+	 "Attack Mode": 1,
+	 "Range": 100,	
+	 "Cost": 50, 
+	 "Sell Price":  50,
+	 "Specialty" : 1,
+	 "Description": "Doctor Jason can cure patients, especially brain damage.",
+	},
+	{
+	 "Type": "DefaultTower",
+	 "Name" : "Doctor Newman",
+	 "Image": "DefaultTower",
+	 "Damage": -3,
+	 "Attack Speed": 0.8,
+	 "Attack Mode": 1,
+	 "Range": 100,	
+	 "Cost": 10, 
+	 "Sell Price":  50,
+	 "Specialty" : 2,
+	 "Description": "Doctor Newman can cure patients, especially brain damage.",
+	},
+	{
+	 "Type": "MultipleShootingTower",
+	 "Name" : "Doctor Duvall",
+	 "Image": "MultipleShootingTower",
+	 "Damage": -3,
+	 "Attack Speed": 3.5,
+	 "Attack Mode": 2,
+	 "Attack Amount": 5,
+	 "Range": 80,	
+	 "Cost": 100, 
+	 "Sell Price":  50,
+	 "Specialty" : 0,
+	 "Description": "Doctor Duvall, who is the best doctoc, will shoot multiple cures at one time.",
+	},
+	{
+	 "Type": "BoostTower",
+	 "Name" : "Hospital",
+	 "Image": "BoostTower",
+	 "Damage": -1,
+	 "Attack Speed": 0.8,
+	 "Range": 100,	
+	 "Cost": 100, 
+	 "Sell Price":  50,
+	 "Description": "Hospital will strength all doctors in adjacency.",
+	 "Boost Factor": 2.0,
+	},
+	{
+	 "Type": "MagicTower",
+	 "Name": "Nurse",
+	 "Image": "MagicTower",
+	 "Damage": -1,
+	 "Attack Speed": 0.8,
+	 "Attack Mode": 2,
+	 "Range": 100,	
+	 "Cost": 100, 
+	 "Sell Price":  50,
+	 "Specialty" : 3,
+	 "Description": "Nurse will cure patients with magic.",
+	 "Magic Factor": 2.0,
+	 "Magic" : ["FrozeMagic"],
+	}
+],
+
+"enemyType":[
+{
+	"id": "1",
+	"gold": 5,
+	"image": "runRight",
+	"life": 10,
+	"speed": 0.5,
+   "skill": "",
+}, 
+{
+	"id": "2",
+	"gold": 10,
+	"image": "drunRight",
+	"life": 15,
+	"speed": 0.5,
+   "skill": "Light",
+},
+{
+	"id": "3",
+	"gold": 10,
+	"image": "drunRight",
+	"life": 15,
+	"speed": 0.5,
+   	"skill": "Armour",
+}
+],
+
+"wave":[
+   {  
+      "type": [ "1","2","1"],
+      "number": [ 2,1,2],
+      "period" :2,
+      "interval": 10,
+     
    },
-   "splashImage": "resources/img/bg.jpg",
-   "levelData": [],
-   "gold": 100,
-   "heightOfWindow": 600,
-   "towerType": []
+   {  
+      "type": [ "1","3","1"],
+      "number": [ 2,1,2],
+      "period" :2,
+      "interval": 10,
+     
+   }
+  
+]  
+
 }
