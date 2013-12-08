@@ -2,12 +2,10 @@ package gameEngine.view.gameFrame.tools.store;
 
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrameMediator;
 import gameEngine.view.gameFrame.ItemPurchaser;
-import gameEngine.view.gameFrame.Utilities;
+import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -29,34 +27,37 @@ import net.miginfocom.swing.MigLayout;
  * @author Lalita Maraj
  */
 @SuppressWarnings("serial")
-public  class StoreOptionsPanel extends Panel {
-    private static final String[] DISPLAY_KEYS={GameEngineConstant.PURCHASE_INFO_NAME,
-                                                GameEngineConstant.TOWER_DAMAGE,
-                                                GameEngineConstant.TOWER_ATTACK_SPEED,
-                                                GameEngineConstant.TOWER_ATTACK_AMOUNT,
-                                                GameEngineConstant.TOWER_RANGE,
-                                                GameEngineConstant.TOWER_MAGIC,
-                                                GameEngineConstant.TOWER_MAGIC_FACTOR,
-                                                GameEngineConstant.TOWER_BOOST_FACTOR,
-                                                GameEngineConstant.PURCHASE_INFO_COST,
-                                                GameEngineConstant.PURCHASE_INFO_DESCRIPTION};
+public class StoreOptionsPanel extends JPanel {
+    private static final String[] DISPLAY_KEYS = { GameEngineConstant.PURCHASE_INFO_NAME,
+                                                  GameEngineConstant.TOWER_DAMAGE,
+                                                  GameEngineConstant.TOWER_ATTACK_SPEED,
+                                                  GameEngineConstant.TOWER_ATTACK_AMOUNT,
+                                                  GameEngineConstant.TOWER_RANGE,
+                                                  GameEngineConstant.TOWER_MAGIC,
+                                                  GameEngineConstant.TOWER_MAGIC_FACTOR,
+                                                  GameEngineConstant.TOWER_BOOST_FACTOR,
+                                                  GameEngineConstant.PURCHASE_INFO_COST,
+                                                  GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
     private static final String LAYOUT_WRAP = "wrap 4";
     private static final int PANEL_WIDTH = 250;
     private static final int PANEL_HEIGHT = 200;
     protected List<StoreItemButton> storeItems;
     protected View view;
-    private Utilities utilities;
+    private TowerUpgrader utilities;
     private ItemPurchaser itemPurchaser;
-    private Map<String,String> valuesToDisplay;
+    private Map<String, String> valuesToDisplay;
+
     /**
      * @param mediator facilitates communication between view components
      * @param engineView facilitates communication between view and controller
-     * @param utilities 
-     * @param itemPurchaser 
+     * @param utilities
+     * @param itemPurchaser
      */
     protected StoreOptionsPanel (
                                  View engineView,
-                                 List<PurchaseInfo> towerInformation, Utilities utilities, ItemPurchaser itemPurchaser) {
+                                 List<PurchaseInfo> towerInformation,
+                                 TowerUpgrader utilities,
+                                 ItemPurchaser itemPurchaser) {
 
         super();
         this.view = engineView;
@@ -65,10 +66,10 @@ public  class StoreOptionsPanel extends Panel {
         this.itemPurchaser = itemPurchaser;
         setUIStyle();
         JPanel options = createOptionsScrollPanel();
-        addStoreInventory (options, towerInformation);
-        valuesToDisplay=new LinkedHashMap<String,String>();
-        for (String str:DISPLAY_KEYS){
-            valuesToDisplay.put(str,"black");
+        addStoreInventory(options, towerInformation);
+        valuesToDisplay = new LinkedHashMap<String, String>();
+        for (String str : DISPLAY_KEYS) {
+            valuesToDisplay.put(str, "black");
         }
     }
 
@@ -77,7 +78,7 @@ public  class StoreOptionsPanel extends Panel {
      * inventory of towers a user can purchase
      * 
      * @param mediator facilitates communication between view components
-     * @return 
+     * @return
      */
     private JPanel createOptionsScrollPanel () {
 
@@ -103,7 +104,8 @@ public  class StoreOptionsPanel extends Panel {
 
     /**
      * Adds buttons based on the defined towers specified by Model
-     * @param options 
+     * 
+     * @param options
      * 
      * @param optionsPanel panel buttons are added to
      * @param mediator facilitates communication between view components
@@ -133,8 +135,8 @@ public  class StoreOptionsPanel extends Panel {
             StoreButtonAction hoverAction = new StoreButtonAction() {
                 @Override
                 public void executeAction () {
-                   utilities.displayStoreInformation(storeItem.getInfo(), valuesToDisplay);
-                
+                    utilities.displayStoreInformation(storeItem.getInfo(), valuesToDisplay);
+
                 }
             };
             StoreItemButton towerButton =
@@ -153,7 +155,10 @@ public  class StoreOptionsPanel extends Panel {
      */
     public void updateStoreStatus () {
         for (StoreItemButton button : storeItems) {
-            button.toggleButtonActivation(view.getGameInfo().getGold());
+
+            int money = view.getGameInfo().getGold();
+            button.toggleButtonActivation(money);
+
         }
     }
 

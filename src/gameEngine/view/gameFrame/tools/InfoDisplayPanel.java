@@ -4,9 +4,8 @@ import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.Map;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.Panel;
-import gameEngine.view.gameFrame.GameInitializable;
 import javax.swing.BorderFactory;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
@@ -20,7 +19,7 @@ import javax.swing.border.Border;
  * 
  * 
  */
-public class InfoDisplayPanel extends Panel  {
+public class InfoDisplayPanel extends JPanel  {
 
     /**
      * 
@@ -102,18 +101,6 @@ public class InfoDisplayPanel extends Panel  {
      * @param information information to be displayed
      */
     public void displayInformation (Map<String, String> information, Map<String, String> toDisplay) {
-        System.out.println("Updating information");
-        /*clearDisplay();
-        text.setText("");
-        StringBuilder t = new StringBuilder();
-        for (String key : toDisplay.keySet()) {
-            t.append("<font color=blue> <b>" + key + ":</b></font>  <font color=" +
-                     toDisplay.get(key) + ">" + information.get(key) +
-                     "</font><br>");
-
-        }
-        text.setContentType("text/html");
-        text.setText(t.toString());*/
         displayedInformation=information;
         updateInformation(toDisplay);
     }

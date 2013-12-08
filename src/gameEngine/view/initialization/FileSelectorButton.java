@@ -3,8 +3,8 @@ package gameEngine.view.initialization;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import gameEngine.view.Button;
 import gameEngine.view.View;
 import gameEngine.view.StyleConstants;
 
@@ -16,7 +16,7 @@ import gameEngine.view.StyleConstants;
  * @author Lalita Maraj
  * 
  */
-public class FileSelectorButton extends Button {
+public class FileSelectorButton extends JButton {
     private View view;
 
     /**
