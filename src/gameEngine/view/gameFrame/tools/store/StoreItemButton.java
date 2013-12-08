@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.Button;
+
 
 
 /**
@@ -15,7 +16,7 @@ import gameEngine.view.Button;
  * @author Lalita Maraj
  * 
  */
-public class StoreItemButton extends Button {
+public class StoreItemButton extends JButton {
 
     /**
      * 

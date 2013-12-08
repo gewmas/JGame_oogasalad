@@ -1,10 +1,10 @@
 package gameEngine.view.gameFrame.towerUpdater;
 
 import java.util.Map;
-import gameEngine.view.Button;
+import javax.swing.JButton;
 
 
-public abstract class TowerUpgraderButton extends Button {
+public abstract class TowerUpgraderButton extends JButton {
 
     public TowerUpgraderButton (String label) {
         super(label);

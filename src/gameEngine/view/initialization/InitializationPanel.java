@@ -1,9 +1,9 @@
 package gameEngine.view.initialization;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
-import gameEngine.view.Button;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
@@ -28,8 +28,8 @@ public class InitializationPanel extends Panel {
         JLabel message = new JLabel(StyleConstants.resourceBundle.getString("Welcome"));
         add(message, MESSAGE_SPAN);
 
-        Button selectorButton = new FileSelectorButton(view);
-        Button cancelButton = new CancelButton(initializationFrame);
+        JButton selectorButton = new FileSelectorButton(view);
+        JButton cancelButton = new CancelButton(initializationFrame);
         add(cancelButton, CANCEL_BUTTOM_ALIGNMENT);
         add(selectorButton, SELECTOR_BUTTOM_ALIGNMENT);
     }

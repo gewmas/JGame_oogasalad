@@ -4,11 +4,11 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
-import gameEngine.view.Button;
 import gameEngine.view.Panel;
 
 
@@ -38,7 +38,7 @@ public class InputPanel extends Panel {
                 BorderFactory.createTitledBorder("");
         setBorder(valuePanelBorder);
         setBorder(valuePanelBorder);
-        Button submit = new Button("Submit");
+        JButton submit = new JButton("Submit");
         final JTextArea input = new JTextArea("add_gold");
         input.setPreferredSize(new Dimension(TEXTBOX_WIDTH, TEXTBOX_HEIGHT));
         this.add(new JScrollPane(input), TEXT_BOX_POSITION);
