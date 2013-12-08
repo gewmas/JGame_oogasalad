@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import gameEngine.model.purchase.PurchaseInfo;
 
 
-
 /**
  * A button that represents an item that a user can purchase.
  * When hovered over, the item information is displayed on the GUI
@@ -40,7 +39,9 @@ public class StoreItemButton extends JButton {
         super("");
         active = false;
         this.setEnabled(false);
-        ImageIcon icon = new ImageIcon("src/resources/img/" + itemPurchaseInfo.getInfo().get("Image").trim() + ".png");
+        ImageIcon icon =
+                new ImageIcon("src/resources/img/" +
+                              itemPurchaseInfo.getInfo().get("Image").trim() + ".png");
         this.setIcon(icon);
         String tempInt = itemPurchaseInfo.getInfo().get("Cost");
         this.cost = (int) Double.parseDouble(tempInt);
@@ -101,12 +102,12 @@ public class StoreItemButton extends JButton {
 
             public void mouseExited (MouseEvent me) {
                 unHighlightButton();
-//                 hoverExitAction.executeAction();
+                // hoverExitAction.executeAction();
             }
 
             public void mouseEntered (MouseEvent me) {
                 highlightButton();
-                 hoverAction.executeAction();
+                hoverAction.executeAction();
             }
         });
 

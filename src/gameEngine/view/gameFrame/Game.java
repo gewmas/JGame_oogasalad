@@ -6,9 +6,10 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
-import gameEngine.view.gameFrame.gameObjects.RangeDisplay;
-import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
+import gameEngine.view.gameFrame.tools.DisplayValue;
+import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -42,7 +43,7 @@ public class Game extends StdGame {
     private int HEIGHT = 600;
 
     private View view;
-    private TowerUpgrader utilities;
+    private ItemOptionsDisplayer utilities;
 
     private FrameRateSlider frameRateSlider;
     private JGObject frameRateBar;
@@ -50,16 +51,14 @@ public class Game extends StdGame {
     private Map<String, String> valuesToDisplay;
 
     private Collection<GameInitializable> gameInitializerItems;
-
     private Collection<GameUpdatable> gameUpdatables;
-
     private Map<String, KeyActivationItem> keyActivationItems;
 
     private GameInfo gameInfo;
 
     public Game (View view,
                  ItemPurchaser itemPurchaser,
-                 TowerUpgrader utilities,
+                 ItemOptionsDisplayer utilities,
                  Collection<GameInitializable> gameInitializerItems,
                  Collection<GameUpdatable> gameUpdatables,
                  Map<String, KeyActivationItem> keyActivationItems) {
@@ -75,9 +74,9 @@ public class Game extends StdGame {
     @Override
     public void initCanvas () {
         gameInfo = view.getGameInfo();
-
-        this.setMoneyTitle("Money");
-        this.setLivesTitle("Lives");
+        
+        this.setMoneyTitle(gameInfo.getMyGoldName());
+        this.setLivesTitle(gameInfo.getMyLivesName());
         Dimension size = gameInfo.getDimension();// view.getGameSize();
 
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
@@ -88,12 +87,12 @@ public class Game extends StdGame {
     public void initGame () {
         setFrameRate(30, 2);
         defineMedia("mygame.tbl");
-        
+
         setHighscores(
                       10, // number of highscores
-                      new Highscore(0,"nobody"), // default entry for highscore
+                      new Highscore(0, "nobody"), // default entry for highscore
                       25 // max length of the player name
-              );
+        );
 
         initial_lives = gameInfo.getLife();// view.getLives();
         lives = initial_lives;// view.getLives();
@@ -136,13 +135,11 @@ public class Game extends StdGame {
         frameRateBar.resume_in_view = false;
         toggleFrameRateBar();
     }
-    
+
     public void doFrameInGame () {
         moveObjects();
         gameInfo = view.getGameInfo();
-        checkCollision(GameEngineConstant.BULLET_CID, GameEngineConstant.ENEMY_CID);
-        checkCollision(GameEngineConstant.ENEMY_CID, GameEngineConstant.BULLET_CID);
-        checkCollision(0, 0);
+        checkGameCollisions();
         checkUserInteractions();
         updateGameStats();
         for (GameUpdatable updatable : gameUpdatables) {
@@ -156,12 +153,12 @@ public class Game extends StdGame {
             }
         }
 
-        if (getKey(KeyEsc)){
+        if (getKey(KeyEsc)) {
             clearKey(KeyEsc);
             loseGame();
         }
-        
-        if (getKey('F')){
+
+        if (getKey('F')) {
             clearKey('F');
             toggleFrameRateBar();
         }
@@ -169,6 +166,12 @@ public class Game extends StdGame {
             wonGame();
         }
         if (lives <= 0) loseGame();
+    }
+
+    private void checkGameCollisions () {
+        checkCollision(GameEngineConstant.BULLET_CID, GameEngineConstant.ENEMY_CID);
+        checkCollision(GameEngineConstant.ENEMY_CID, GameEngineConstant.BULLET_CID);
+        checkCollision(0, 0);
     }
 
     /**
@@ -180,20 +183,26 @@ public class Game extends StdGame {
         if (getMouseButton(1) && getMouseInside()) {
             clearMouseButton(1);
             JGPoint mousePosition = getMousePos();
-            if (itemPurchaser.checkAndPlaceTower(mousePosition)) {
-                System.out.format("Buying at: %d,%d\n", mousePosition.x, mousePosition.y);
-            }
-            else {
+            if (!itemPurchaser.checkAndPlaceTower(mousePosition)) {
                 PurchaseInfo tower = view.getTowerInfo(mousePosition.x, mousePosition.y);
-                if (tower == null) {
-                    System.out.println("No tower here");
-                }
-                else {
-                    utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
+                List<DisplayValue> display = new ArrayList();
+                if (tower != null) {
+                    for (String key: valuesToDisplay.keySet()){
+                        if (tower.getInfo().get(key)!=null){
+                        String field = key;
+                        String value = tower.getInfo().get(key);
+                        String color = valuesToDisplay.get(key);
+                       
+                        display.add(new DisplayValue(field,value,color));
+                        }
+                    }
+                    utilities.displayTowerInformation(tower.getInfo(), display,
                                                         mousePosition.x, mousePosition.y);
-                    System.out.println("Checking tower");
+//                    utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
+//                                                        mousePosition.x, mousePosition.y);
                 }
             }
+           
         }
     }
 
@@ -203,7 +212,7 @@ public class Game extends StdGame {
     public void updateGameStats () {
         lives = gameInfo.getLife();
         money = gameInfo.getGold();
-        score=money+gameInfo.getCurrentWaveNumber()*100+lives;
+        score = money + gameInfo.getCurrentWaveNumber() * 100 + lives;
     }
 
     /**
@@ -211,7 +220,7 @@ public class Game extends StdGame {
      * to title screen
      */
 
-    public void wonGame(){
+    public void wonGame () {
         endGame();
         gameWon();
     }
@@ -221,18 +230,19 @@ public class Game extends StdGame {
      * GAME OVER and go to title screen
      */
 
-    public void loseGame(){
+    public void loseGame () {
         endGame();
         gameOver();
     }
-    
+
     /**
      * Standard routine whenever the game ends
      */
-    
-    public void endGame(){
+
+    public void endGame () {
         view.stopWaves();
-        removeObjects(null,0);
+        removeObjects(null, 0);
+
     }
 
     /**

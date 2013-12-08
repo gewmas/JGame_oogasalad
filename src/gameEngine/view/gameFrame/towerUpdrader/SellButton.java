@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.towerUpdater;
+package gameEngine.view.gameFrame.towerUpdrader;
 
 import gameEngine.view.View;
 import java.awt.Dimension;
@@ -14,9 +14,9 @@ public class SellButton extends TowerUpgraderButton {
 
     private View view;
     private int towerX, towerY;
-    private TowerUpgrader towerUpgrader;
+    private ItemOptionsDisplayer towerUpgrader;
 
-    public SellButton (TowerUpgrader utility, View viewer) {
+    public SellButton (ItemOptionsDisplayer utility, View viewer) {
         super(NAME);
         this.view = viewer;
         this.towerUpgrader = utility;

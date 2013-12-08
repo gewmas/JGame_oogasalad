@@ -23,14 +23,16 @@ public class CancelButton extends JButton {
 
     }
 
-
-    private void addMouseAdapter(){
-        addMouseListener(new MouseAdapter() { 
-            public void mouseClicked(MouseEvent me) { 
+    /**
+     * Creates and assings a mouse Adapter for button
+     */
+    private void addMouseAdapter () {
+        addMouseListener(new MouseAdapter() {
+            public void mouseClicked (MouseEvent me) {
                 frame.dispose();
-            } 
-         
-          }); 
+            }
+
+        });
 
     }
 
