@@ -207,7 +207,6 @@ public class Game extends StdGame {
 
     public void wonGame(){
         view.stopWaves();
-//        removeGameObjects();
         gameWon();
     }
 
@@ -218,7 +217,6 @@ public class Game extends StdGame {
 
     public void endGame(){
         view.stopWaves();
-        //view.startModel();
         gameOver();
     }
 
