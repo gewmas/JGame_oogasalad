@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.towerUpdater;
+package gameEngine.view.gameFrame.towerUpdrader;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,21 +6,18 @@ import java.util.List;
 import java.util.Map;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.gameObjects.RangeDisplay;
 import gameEngine.view.gameFrame.tools.DisplayValue;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 
 
-public class TowerUpgrader {
+public class ItemOptionsDisplayer {
     private InfoDisplayPanel display;
-    private GameFrame gameFrame;
     private RangeDisplay rangeDisplay;
     private Collection<TowerUpgraderButton> TowerUpgraderButtons;
 
-    public TowerUpgrader (InfoDisplayPanel display, GameFrame gameFrame, View view) {
+    public ItemOptionsDisplayer (InfoDisplayPanel display, View view) {
         this.display = display;
-        this.gameFrame = gameFrame;
         this.TowerUpgraderButtons = new ArrayList();
         TowerUpgraderButtons.add(new UpgradeButton(this, view));
         TowerUpgraderButtons.add(new SellButton(this, view));

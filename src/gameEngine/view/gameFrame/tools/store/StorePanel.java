@@ -11,7 +11,7 @@ import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameInitializable;
 import gameEngine.view.gameFrame.GameUpdatable;
 import gameEngine.view.gameFrame.ItemPurchaser;
-import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
+import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 
 
 /**
@@ -24,7 +24,7 @@ public class StorePanel extends JPanel implements GameUpdatable, GameInitializab
 
     private JTabbedPane storeTabbedPane;
     private View view;
-    private TowerUpgrader utilities;
+    private ItemOptionsDisplayer utilities;
     private List<StoreOptionsPanel> storeCategories;
     private ItemPurchaser itemPurchaser;
 
@@ -34,7 +34,7 @@ public class StorePanel extends JPanel implements GameUpdatable, GameInitializab
      * @param itemPurchaser
      */
 
-    public StorePanel (View view, TowerUpgrader utilities, ItemPurchaser itemPurchaser) {
+    public StorePanel (View view, ItemOptionsDisplayer utilities, ItemPurchaser itemPurchaser) {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
