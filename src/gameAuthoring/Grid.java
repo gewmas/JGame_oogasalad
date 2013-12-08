@@ -78,14 +78,6 @@ public class Grid extends JPanel {
         }
     }
 
-    public void setSelectionMode (String mode) {
-        for (int x = 0; x < myGrid.length; x++) {
-            for (int y = 0; y < myGrid[0].length; y++) {
-                myGrid[x][y].setSelectionMode(mode);
-            }
-        }
-    }
-
     public void setBackgroundImageSource (File bgSource) {
         myBackgroundImage = bgSource;
     }
@@ -196,10 +188,6 @@ public class Grid extends JPanel {
             int y = (getHeight() - img.getHeight(null)) / 2;
             page.drawImage(img, x, y, null);
         }
-    }
-
-    public static void main (String[] args) {
-        Grid g = new Grid(4, 4);
     }
 
 }

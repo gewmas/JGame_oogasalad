@@ -151,8 +151,7 @@ public class EnemyDesignPanel extends JPanel {
                     myImageSource = myEnemyAnimations.get(0).getImageFile();
                     List<String> enemyAnimationPaths = new ArrayList<String>();
                     for (ImageLabel imageLabel : myEnemyAnimations) {
-                        System.out.println(imageLabel.getImageFile().getName());
-                        enemyAnimationPaths.add(imageLabel.getImageFile().getName());
+                        enemyAnimationPaths.add(imageLabel.getID());
                         gameData.addAnimation(currentEnemyID,
                                               enemyAnimationPaths);
                     }

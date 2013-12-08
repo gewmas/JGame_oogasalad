@@ -31,10 +31,8 @@ public class MapDesignTab extends Tab {
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
     private Grid myGrid;
     private ImageLabel myCurrentPathImage;
-    private ImageLabel myCurrentBarrierImage;
     private String myBackgroundImage;
     private String myPathImage;
-    private String myBarrierImage;
 
     public MapDesignTab (GameData gameData) {
         super(gameData);
@@ -57,18 +55,7 @@ public class MapDesignTab extends Tab {
         myCurrentPathImage.setFont(Constants.DEFAULT_BODY_FONT);
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myCurrentPathImage.setBorder(border);
-        myCurrentPathImage
-                .addMouseListener(createPathBarrierListener(Constants.PATH_SELECTION_MODE,
-                                                            myCurrentPathImage));
-
-        JLabel boundaryLabel = new JLabel("Boundary image:");
-        boundaryLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        myCurrentBarrierImage = new ImageLabel(50, 50);
-        myCurrentBarrierImage.setBorder(border);
-        myCurrentBarrierImage
-                .addMouseListener(createPathBarrierListener(Constants.BARRIER_SELECTION_MODE,
-                                                            myCurrentBarrierImage));
-
+        myCurrentPathImage.addMouseListener(createPathListener());
         JButton checkPath = new JButton("Create Map");
         checkPath.setFont(Constants.DEFAULT_BODY_FONT);
         checkPath.addMouseListener(createPathCheckListener());
@@ -82,8 +69,6 @@ public class MapDesignTab extends Tab {
         mainPanel.add(gridPanel);
         buttonPanel.add(pathLabel, "gap 0 0 0 30");
         buttonPanel.add(myCurrentPathImage, "gap 0 0 0 30");
-        buttonPanel.add(boundaryLabel, "gap 0 0 0 30");
-        buttonPanel.add(myCurrentBarrierImage, "gap 0 0 0 30");
         buttonPanel.add(setBackground, "span 2");
         buttonPanel.add(checkPath);
         mainPanel.add(buttonPanel);
@@ -121,36 +106,22 @@ public class MapDesignTab extends Tab {
         setPathData();
     }
 
-    private MouseAdapter createPathBarrierListener (final String mode,
-                                                    final ImageLabel label) {
+    private MouseAdapter createPathListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                myGrid.setSelectionMode(mode);
-                if (label.getIcon() == null) {
-                    System.out.println("null");
-                    File imgSource = GameAuthoringGUI.mySelectedImage;
-                    myGrid.setImageSource(imgSource);
-                    Image path;
-                    if (mode.equals(Constants.BARRIER_SELECTION_MODE)) {
-                        myPathImage = imgSource.toString().replace(System.getProperties()
-                                .getProperty("user.dir") + "/", "");
-                    }
-                    if (mode.equals(Constants.PATH_SELECTION_MODE)) {
-                        myBarrierImage = imgSource.toString().replace(System.getProperties()
-                                .getProperty("user.dir") + "/", "");
-                    }
-                    try {
-                        path = ImageIO.read(imgSource).getScaledInstance(50, 50, Image.SCALE_FAST);
-                        label.setIcon(new ImageIcon(path));
-                    }
-                    catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+                File imgSource = GameAuthoringGUI.mySelectedImage;
+                myGrid.setImageSource(imgSource);
+                Image path;
+                try {
+                    myPathImage =
+                            imgSource.toString().replace(System.getProperties()
+                                    .getProperty("user.dir") + "/", "");
+                    path = ImageIO.read(imgSource).getScaledInstance(50, 50, Image.SCALE_FAST);
+                    myCurrentPathImage.setIcon(new ImageIcon(path));
                 }
-                else {
-                    File imgFile = label.getImageFile();
-                    GameAuthoringGUI.mySelectedImage = imgFile;
+                catch (IOException e1) {
+                    e1.printStackTrace();
                 }
             }
         };

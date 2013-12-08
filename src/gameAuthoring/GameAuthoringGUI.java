@@ -47,7 +47,7 @@ public class GameAuthoringGUI {
         catch (IOException e1) {
             e1.printStackTrace();
         }
-        myFrame.setPreferredSize(new Dimension(1200, 1000));
+        myFrame.setPreferredSize(new Dimension(1200, 950));
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myMainPanel = new ImagePanel("texture0.jpg");
         myMainPanel.setLayout(new MigLayout("wrap 2"));
