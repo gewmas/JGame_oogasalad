@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import gameEngine.view.Frame;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.inputAndDisplay.InputAndDisplayFrame;
@@ -26,7 +25,7 @@ import gameEngine.controller.Controller;
  * @author Lalita Maraj Alex Zhu
  * 
  */
-public class GameFrame extends Frame implements GameInitializable {
+public class GameFrame extends JFrame implements GameInitializable {
 
     private View view;
     private InputAndDisplayFrame cheatCodeFrame;
