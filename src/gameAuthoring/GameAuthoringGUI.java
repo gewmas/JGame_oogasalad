@@ -61,7 +61,7 @@ public class GameAuthoringGUI {
         myWaveDesignTab = new WaveDesignTab(gameData);
         myMiscellaneousTab = new MiscellaneousTab(gameData);
         myTempBarrierTab = new TempBarrierDesignTab(gameData);
-        myUserLibraryPanel = new UserLibraryMainTab();
+        myUserLibraryPanel = new UserLibraryMainTab(gameData);
 
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
