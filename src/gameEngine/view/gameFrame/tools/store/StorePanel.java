@@ -20,7 +20,7 @@ import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
  *         Contains the option to select items and panel that displays
  *         item information
  */
-public class StorePanel extends JPanel implements GameUpdatable, GameInitializable{
+public class StorePanel extends JPanel implements GameUpdatable, GameInitializable {
 
     private JTabbedPane storeTabbedPane;
     private View view;
@@ -60,7 +60,7 @@ public class StorePanel extends JPanel implements GameUpdatable, GameInitializab
         }
 
     }
-    
+
     public void update () {
         for (StoreOptionsPanel options : storeCategories) {
             options.updateStoreStatus();
@@ -77,10 +77,8 @@ public class StorePanel extends JPanel implements GameUpdatable, GameInitializab
 
     @Override
     public void initialize () {
-        openStore ();
-        
-    }
+        openStore();
 
-  
+    }
 
 }

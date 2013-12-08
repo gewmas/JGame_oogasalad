@@ -30,7 +30,7 @@ public class FileSelectorButton extends JButton {
     }
 
     /**
-     * Displays File choser and uses selected file to start a new game 
+     * Displays File choser and uses selected file to start a new game
      */
     private void selectFile () {
         JFileChooser chooser =
@@ -47,13 +47,13 @@ public class FileSelectorButton extends JButton {
     /**
      * Creates and assigns a mouse adapter
      */
-    private void addMouseAdapter(){
-        addMouseListener(new MouseAdapter() { 
-            public void mouseClicked(MouseEvent me) { 
+    private void addMouseAdapter () {
+        addMouseListener(new MouseAdapter() {
+            public void mouseClicked (MouseEvent me) {
                 selectFile();
-            } 
-         
-          }); 
+            }
+
+        });
 
     }
 
