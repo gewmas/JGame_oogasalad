@@ -18,12 +18,6 @@ public class TBoostMagic extends Magic{
         super(-1, target,sender ,NAME,CID,NAME,ID);
         myFactor=factor;
         magicOn();
-        double x=myTarget.getX();
-        double y=myTarget.getY();
-        JGRectangle boxTarget=((JGObject) myTarget).getBBox();
-        JGRectangle box=this.getBBox();
-        this.x=x-(box.width-boxTarget.width)/2;
-        this.y=y-(box.height-boxTarget.height);
     }
     
    public void magicOnAction () {
@@ -37,10 +31,7 @@ public class TBoostMagic extends Magic{
         return !myTarget.isAlive()||!mySender.isAlive();
     }
     
-    
-    protected void moveNextStep (){                
-
-       
+    public void moveNextStep (){                       
         if(alpha>0.99){
             alphIncrement=-0.01;
         }
@@ -48,6 +39,13 @@ public class TBoostMagic extends Magic{
            alphIncrement=0.01; 
         }
         alpha+=alphIncrement;
+        
+        double x=myTarget.getX();
+        double y=myTarget.getY();
+        JGRectangle boxTarget=((JGObject) myTarget).getBBox();
+        JGRectangle box=this.getBBox();
+        this.x=x-(box.width-boxTarget.width)/2;
+        this.y=y-(box.height-boxTarget.height);
     }
 
     

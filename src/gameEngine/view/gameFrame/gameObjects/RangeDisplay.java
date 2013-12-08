@@ -2,7 +2,6 @@ package gameEngine.view.gameFrame.gameObjects;
 
 import jgame.JGColor;
 import jgame.JGObject;
-import jgame.JGPoint;
 
 /**
  * 
@@ -32,11 +31,13 @@ public class RangeDisplay extends JGObject {
     public void paint(){
         eng.drawOval(x,y,range,range,false,true,4,JGColor.red);
     }
-
-    public void setTower (double range,double towerX, double towerY) {
+//wenxin shi, change towerX, towerY as center of tower
+//So when need to draw, use towerCenterX,towerCenterY
+    public void setTower (double range,double towerCenterX, double towerCenterY) {
         this.range=range;
-        JGPoint tileCoords=eng.getTileCoord(eng.getTileIndex(towerX, towerY));
-        this.setPos(tileCoords.x+tilewidth/2, tileCoords.y+tileheight/2);
+        this.setPos(towerCenterX, towerCenterY);
+//        JGPoint tileCoords=eng.getTileCoord(eng.getTileIndex(towerX, towerY));
+//        this.setPos(tileCoords.x+tilewidth/2, tileCoords.y+tileheight/2);
     }
 
 }
