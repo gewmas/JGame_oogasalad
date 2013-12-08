@@ -83,17 +83,19 @@ public class BasicInfoTab extends Tab {
         myGameName.setPreferredSize(new Dimension(200, 30));
         myGold = new JTextField();
         JLabel altGoldLabel = new JLabel("Alternative gold name:");
-        altGoldLabel.setFont(new Font("Calibri", Font.PLAIN, 14));
+        altGoldLabel.setFont(Constants.DEFAULT_BODY_FONT);
         JTextField altGoldText = new JTextField();
         altGoldText.setPreferredSize(new Dimension(200, 30));
-        altGoldText.setFont(new Font("Calibri", Font.PLAIN, 14));
+        altGoldText.setFont(Constants.DEFAULT_BODY_FONT);
 
         myGold.setPreferredSize(new Dimension(200, 30));
         myLives = new JTextField();
         myLives.setPreferredSize(new Dimension(200, 30));
         JLabel altLivesLabel = new JLabel("Alternative lives name:");
+        altLivesLabel.setFont(Constants.DEFAULT_BODY_FONT);
         JTextField altLivesText = new JTextField();
         altLivesText.setPreferredSize(new Dimension(200, 30));
+        altLivesText.setFont(Constants.DEFAULT_BODY_FONT);
 
         AudioLabel backgroundAudio = new AudioLabel();
         JLabel audioLabel = new JLabel("Background audio:");

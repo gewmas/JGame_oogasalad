@@ -1,8 +1,6 @@
 package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
-import gameEngine.parser.JSONLibrary.JSONArray;
-import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -16,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -137,8 +134,10 @@ public class TowerDesignPanel extends JPanel {
 
                     dataPanel.setOpaque(false);
                     dataPanel.add(createTowerButton);
+                    dataPanel.revalidate();
                     t.add(dataPanel);
                     t.revalidate();
+                    t.repaint();
                     clearTextFields();
                 }
             }
