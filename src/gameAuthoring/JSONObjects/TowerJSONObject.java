@@ -1,5 +1,6 @@
 package gameAuthoring.JSONObjects;
 
+import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 
@@ -125,7 +126,9 @@ public class TowerJSONObject extends JSONObject {
         this.put("recyclePrice", recyclePrice);
         this.put("description", description);
         this.put("magicFactor", magicFactor);
-        this.put("magic", magic);
+        JSONArray magicArray = new JSONArray();
+        magicArray.put(magic);
+        this.put("magic", magicArray);
     }
     
 

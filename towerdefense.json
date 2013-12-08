@@ -368,18 +368,12 @@
                { "id": "2", "url": "mr2.png" },
                { "id": "3", "url": "mr3.png" },
                { "id": "4", "url": "mr4.png" },
-<<<<<<< HEAD:presentation.json
-               { "id": "d1", "url": "d1.png" },
-               { "id": "d2", "url": "d2.png" },
-               { "id": "d3", "url": "d3.png" },
-               { "id": "d4", "url": "d4.png" },
-               {"id": "haste", "url":"haste.png"},
-=======
+
       			{ "id": "d1", "url": "d1.png" },
                { "id": "d2", "url": "d2.png" },
                { "id": "d3", "url": "d3.png" },
                { "id": "d4", "url": "d4.png" },
->>>>>>> master:towerdefense.json
+
                
                { "id": "space_background", "url": "space_background.jpg" },
                { "id": "woods_background", "url": "woods_background.png" },
@@ -487,11 +481,7 @@
 	 "Sell Price":  50,
 	 "Description": "Magic tower will shoot a magic bullet to affect the enemy.",
 	 "Magic Factor": 2.0,
-<<<<<<< HEAD:presentation.json
-	 "Magic" : "FrozeMagic",
-=======
 	 "Magic" : ["FrozeMagic"],
->>>>>>> master:towerdefense.json
 	}
 ],
 

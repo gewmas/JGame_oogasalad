@@ -32,10 +32,6 @@ public class TestJSONWrite {
                                           50, 
                                           "Test"));
         
-        //Testing enemy writing
-        game.addEnemy("name", 100, "image", 3, 10);
-        
-        
         
         //Testing resource writing
         game.addImage("1", "grass.jpg");
@@ -59,8 +55,8 @@ public class TestJSONWrite {
          game.addWave("2", 1, 0.5, 3);
 
         // Testing enemy writing
-         game.addEnemy("1", 5, "enemy1", 2, 0.5);
-         game.addEnemy("2", 10, "runRight", 3, 0.1);
+         game.addEnemy("1", 5, "enemy1", 2, 0.5, "Haste");
+         game.addEnemy("2", 10, "runRight", 3, 0.1, "Light");
 
          System.out.println(game.toString(1));
     }

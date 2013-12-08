@@ -3,7 +3,12 @@ package gameAuthoring;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -53,6 +58,22 @@ public class TempBarrierDesignTab extends Tab{
     public void loadJSON (Parser p) {
         // TODO Auto-generated method stub
         
+    }
+    
+    protected void addBarrier (File imgSource, String BarrierName) {
+        JLabel barrierIcon = new JLabel();
+        try {
+            Image barrierImage = ImageIO.read(imgSource);
+            barrierIcon.setIcon(new ImageIcon(barrierImage));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JLabel barrierNameLabel = new JLabel(BarrierName);
+        myScrollPanel.add(barrierNameLabel);
+        myScrollPanel.add(barrierIcon);
+
     }
 
 }
