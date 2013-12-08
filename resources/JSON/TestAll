@@ -1,22 +1,19 @@
 {
+
+"widthOfWindow": 600,
+"heightOfWindow": 600,
+"tilesPerRow": 20,
+"difficultyScale": 1.5,
+
+
    "resources": {
-      "animation": [
-         {
-            "id": "enemy0",
-            "sheet": [
-               {"id": "5"},
-               {"id": "6"}
-            ]
-         },
-         {
-            "id": "enemy0",
-            "sheet": [
-               {"id": "5"},
-               {"id": "6"},
-               {"id": "7"}
-            ]
-         }
-      ],
+      "animation": [{
+         "id": "enemy1",
+         "sheet": [
+            {"id": "5"},
+            {"id": "6"}
+         ]
+      }],
       "audio": [{
          "id": "1",
          "url": "laser.wav"
@@ -28,11 +25,11 @@
          },
          {
             "id": "1",
-            "url": "path.jpg"
+            "url": "path.png"
          },
          {
-            "id": "src/resources/img/space_background",
-            "url": "src/resources/img/space_background.jpg"
+            "id": "woods_background",
+            "url": "woods_background.png"
          },
          {
             "id": "2",
@@ -56,70 +53,71 @@
          },
          {
             "id": "7",
-            "url": "BoyPatient1.png"
+            "url": "KidPatient4.png"
          }
       ]
    },
    "temporaryBarrierType": [{
-      "id": "What",
-      "expire": 15,
-      "description": "TB",
-      "damage": 1,
+      "id": "BBB",
+      "expire": 10,
+      "description": "BBB",
+      "damage": 100,
       "image": "3",
-      "cost": 1
+      "cost": 43
    }],
    "enemyType": [
       {
          "id": "Dragon",
-         "life": 5,
+         "life": 10,
          "skill": "Haste",
-         "speed": 0.5,
-         "image": "enemy0",
-         "gold": 50
+         "speed": 1.4,
+         "image": "enemy1",
+         "gold": 100
       },
       {
-         "id": "Not Dragon",
+         "id": "Something",
          "life": 3,
-         "skill": "Heal",
-         "speed": 0.5,
-         "image": "enemy0",
-         "gold": 50
+         "skill": "Light",
+         "speed": 3.5,
+         "image": "7",
+         "gold": 30
       }
    ],
    "numberOfLives": 10,
-   "BGImage": "src/resources/img/space_background.jpg",
-   "goldName": "AltG",
+   "BGImage": "woods_background",
+   "goldName": "Gold",
    "Tower": [
       {
-         "Cost": 5,
-         "Name": "DTower",
+         "Cost": 100,
+         "Name": "D-FALT",
          "Damage": 10,
-         "Description": "A normal tower",
-         "Range": 5,
-         "Sell Price": 5,
+         "Description": "A normal Tower",
+         "Range": 3,
+         "Sell Price": 50,
          "Type": "DefaultTower",
          "Image": "2",
          "Attack Speed": 0.5,
          "Attack Mode": 2
       },
       {
-         "Cost": 15,
-         "Name": "MT",
-         "Attack Amount": 4,
-         "Damage": 1,
-         "Description": "This tower can shoot multiple bullets",
-         "Range": 5,
-         "Sell Price": 3,
-         "Type": "MultipleShootingTower",
-         "Image": "4",
-         "Attack Speed": 0.5,
-         "Attack Mode": 3
+         "Cost": 50,
+         "Name": "Magic",
+         "Damage": 10,
+         "Description": "A magic tower",
+         "Range": 4,
+         "Sell Price": 25,
+         "Type": "MagicTower",
+         "Image": "BoostTower",
+         "Magic": ["FrozeMagic"],
+         "Attack Speed": 0.9,
+         "Magic Factor": 2.5,
+         "Attack Mode": 2
       }
    ],
-   "name": "Game",
+   "name": "I want to sleep",
    "map": {
       "Barriers": [],
-      "pathImage": "1",
+      "pathImage": "path.png",
       "Path": [
          {
             "y": 0,
@@ -199,13 +197,21 @@
          }
       ]
    },
-   "wave": [{
-      "interval": 5,
-      "number": [5],
-      "period": 0.5,
-      "type": ["Dragon"]
-   }],
-   "livesName": "AltL",
-   "splashImage": "woods_background.png",
+   "wave": [
+      {
+         "interval": 10,
+         "number": [10],
+         "period": 0.5,
+         "type": ["Dragon"]
+      },
+      {
+         "interval": 12,
+         "number": [15],
+         "period": 0.9,
+         "type": ["Something"]
+      }
+   ],
+   "livesName": "Lives",
+   "splashImage": "woods_background",
    "gold": 1000
 }
