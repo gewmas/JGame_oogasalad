@@ -131,7 +131,7 @@ public class Game extends StdGame {
         frameRateBar.resume_in_view = false;
         toggleFrameRateBar();
     }
-    
+
     public void doFrameInGame () {
         moveObjects();
         gameInfo = view.getGameInfo();
@@ -151,12 +151,12 @@ public class Game extends StdGame {
             }
         }
 
-        if (getKey(KeyEsc)){
+        if (getKey(KeyEsc)) {
             clearKey(KeyEsc);
             endGame();
         }
-        
-        if (getKey('F')){
+
+        if (getKey('F')) {
             clearKey('F');
             toggleFrameRateBar();
         }
@@ -205,9 +205,9 @@ public class Game extends StdGame {
      * to title screen
      */
 
-    public void wonGame(){
+    public void wonGame () {
         view.stopWaves();
-        removeObjects(null,0);
+        removeObjects(null, 0);
         gameWon();
     }
 
@@ -216,9 +216,9 @@ public class Game extends StdGame {
      * GAME OVER and go to title screen
      */
 
-    public void endGame(){
+    public void endGame () {
         view.stopWaves();
-        removeObjects(null,0);
+        removeObjects(null, 0);
         gameOver();
     }
 

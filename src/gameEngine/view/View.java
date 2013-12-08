@@ -17,7 +17,7 @@ import gameEngine.view.initialization.InitializationFrame;
 /**
  * The main view class that orchestrates the sequence of events
  * for selecting a game, starting a game, selecting a new game, and ending a game.
- * This class serves as the interface to the controller as the front end. 
+ * This class serves as the interface to the controller as the front end.
  * No other front end elements are exposed to the rest of the game Engine.
  * 
  * @author Lalita Maraj, Alex Zhu
@@ -27,7 +27,6 @@ public class View implements MenuActions {
     private GameFrame gameFrame;
     private InitializationFrame initializationFrame;
     private Controller controller;
-
 
     public View (Controller controller) {
         this.controller = controller;
@@ -52,7 +51,7 @@ public class View implements MenuActions {
     }
 
     /**
-     * Used to start the game 
+     * Used to start the game
      */
     public void startJGame () {
         gameFrame.showGame();
@@ -103,14 +102,13 @@ public class View implements MenuActions {
      * Wave Number
      * IsWin
      */
-    public GameInfo getGameInfo(){
+    public GameInfo getGameInfo () {
         return controller.getGameInfo();
     }
 
     public List<Tile> getPath () {
         return controller.getPath();
     }
-
 
     public Map<String, List<PurchaseInfo>> getInventory () {
         return controller.getInventory();
@@ -131,8 +129,8 @@ public class View implements MenuActions {
     public boolean sellTower (int towerX, int towerY) {
         return controller.sellTower(towerX, towerY);
     }
-    
-    public void stopWaves(){
+
+    public void stopWaves () {
         controller.stopWaves();
     }
 

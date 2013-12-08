@@ -33,7 +33,7 @@ public class InputAndDisplayFrame extends JFrame implements KeyActivationItem {
         MigLayout layout = new MigLayout(LAYOUT_WRAP_SETTINGS);
         JPanel main = new JPanel(layout);
         main.add(new InputPanel(inputSender), INPUT_PANEL_POSITION);
-        
+
         add(main);
     }
 
