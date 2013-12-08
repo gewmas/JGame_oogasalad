@@ -7,8 +7,12 @@ import gameEngine.view.View;
 import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
 
 
+/**
+ * @author Alex Zhu
+ * Swing Panel that holds the JGame canvas
+ */
 public class CanvasPanel extends JPanel {
-    Game game;
+    private Game game;
 
     public CanvasPanel (View view,
                         ItemPurchaser itemPurchaser,
