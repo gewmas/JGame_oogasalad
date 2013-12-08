@@ -61,7 +61,6 @@ public class MainPanel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 GameAuthoringGUI gui = new GameAuthoringGUI();
-                close();
             }
         };
         return listener;

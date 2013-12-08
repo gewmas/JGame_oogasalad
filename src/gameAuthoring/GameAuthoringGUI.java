@@ -52,7 +52,7 @@ public class GameAuthoringGUI {
         catch (IOException e1) {
             e1.printStackTrace();
         }
-        myFrame.setPreferredSize(new Dimension(1200, 800));
+        myFrame.setPreferredSize(new Dimension(1190, 780));
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myMainPanel = new ImagePanel("texture0.jpg");
         myMainPanel.setLayout(new MigLayout("wrap 2"));
@@ -90,7 +90,7 @@ public class GameAuthoringGUI {
         myMainPanel.add(title, "span 2, align left, gap 0 0 15 0");
         myMainPanel.add(gameDesignTab, "gap 50 20 20 40");
         myMainPanel.add(myUserLibraryTab);
-        myMainPanel.add(myDuvallClippy);
+        // myMainPanel.add(myDuvallClippy);
         myFrame.setJMenuBar(menu);
         myFrame.setContentPane(myMainPanel);
         myFrame.pack();
