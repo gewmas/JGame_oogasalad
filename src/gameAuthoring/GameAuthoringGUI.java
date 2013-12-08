@@ -24,6 +24,7 @@ public class GameAuthoringGUI {
     protected JFrame myFrame;
     protected static JPanel myMainPanel;
     protected static File mySelectedImage = null;
+    protected static File mySelectedAudio = null;
     private BasicInfoTab myBasicInfoTab;
     private MapDesignTab myMapDesignTab;
     private TowerDesignTab myTowerDesignTab;
@@ -102,7 +103,11 @@ public class GameAuthoringGUI {
         }
     }
 
-    public final static void setCursorNull () {
+    public static final void setCursorNull () {
         myMainPanel.setCursor(Cursor.getDefaultCursor());
+    }
+
+    public static final void setAudioFile (File audio) {
+        mySelectedAudio = audio;
     }
 }

@@ -32,9 +32,6 @@ public class AudioLabel extends JLabel {
         initialize();
         try {
             myAudioImageSource = new File(getClass().getResource("sound.png").toURI());
-            if (myAudioImageSource == null){
-                System.out.println("Audio image source is null");
-            }
         }
         catch (URISyntaxException e1) {
             e1.printStackTrace();
@@ -52,11 +49,9 @@ public class AudioLabel extends JLabel {
 
     public void initialize () {
         this.setPreferredSize(new Dimension(50, 50));
-        this.addMouseListener(createAudioListener(this));
-        this.addMouseListener(addAudioListener(this));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         this.setBorder(border);
-        this.addMouseListener(addCursorChangeListener(this));
+        this.addMouseListener(changeCursorListener(this));
     }
 
     public void setMutableStatusTrue () {
@@ -92,49 +87,41 @@ public class AudioLabel extends JLabel {
         }
     }
 
-    public MouseAdapter createAudioListener (final AudioLabel label) {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                label.transferLabelInformation(GameAuthoringGUI.myAudioLabel);
-            }
-        };
-        return listener;
+    public void setLabelIcon (File imageSource) {
+        myAudioImageSource = imageSource;
+        try {
+            myAudioImage = ImageIO.read(imageSource);
+            myAudioImage = myAudioImage.getScaledInstance(50, 50, Image.SCALE_FAST);
+            this.setIcon(new ImageIcon(myAudioImage));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public MouseAdapter addCursorChangeListener (final AudioLabel label) {
+    public MouseAdapter changeCursorListener (final AudioLabel label) {
         MouseAdapter listener = new MouseAdapter() {
+            boolean selected = false;
+
             @Override
             public void mouseClicked (MouseEvent e) {
-                if (GameAuthoringGUI.myAudioLabel == null) {
+                selected = !selected;
+                // Cursor has not selected anything yet, transfer information from this audio label
+                // to cursor
+                if (GameAuthoringGUI.myAudioLabel == null && selected) {
+                    // System.out.println("If statement 1");
                     GameAuthoringGUI.myAudioLabel = label;
-                    GameAuthoringGUI.myImageLabel.setLabelIcon(myAudioImageSource);
+                    GameAuthoringGUI.setCursor(label.getAudioImageSource());
                 }
-                else if (isMutable) {
-                    System.out.println("is mutable");
-                    transferLabelInformation(GameAuthoringGUI.myAudioLabel);
+                // Audio label is mutable and GameAuthoringGUI already contains information
+                // Pass information to this audio label
+                if (GameAuthoringGUI.myAudioLabel != null && isMutable && selected) {
+                    // System.out.println("If statement 2");
+                    label.transferLabelInformation(GameAuthoringGUI.myAudioLabel);
+                    GameAuthoringGUI.setCursorNull();
                 }
-            }
-        };
-        return listener;
-    }
-
-    public MouseAdapter addAudioListener (final AudioLabel label) {
-        MouseAdapter listener = new MouseAdapter() {
-            private boolean audioSelected = false;
-
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                audioSelected = !audioSelected;
-                GameAuthoringGUI.myAudioLabel = label;
-                if (audioSelected) {
-                    if (myAudioImageSource == null) {
-                        System.out.println("null");
-                    }
-                    GameAuthoringGUI
-                            .setCursor(myAudioImageSource);
-                }
-                else {
+                if (!selected) {
+                    // System.out.println("If statement 3");
                     GameAuthoringGUI.setCursorNull();
                     GameAuthoringGUI.myAudioLabel = null;
                 }
