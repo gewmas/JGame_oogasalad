@@ -74,54 +74,26 @@ public class UpgradeButton extends TowerUpgraderButton {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered (MouseEvent e) {
-                List<DisplayValue> display = new ArrayList();
-               
-                    for (String key: upgradedValuesToDisplay.keySet()){
-                        if (information.get(key)!=null){
-                        String field = key;
-                        String value = information.get(key);
-                        String color = upgradedValuesToDisplay.get(key);
-                       
-                        display.add(new DisplayValue(field,value,color));
-                        }
-                    }
-                towerUpgrader.updateDisplay(display);
+                updateDisplayInformation(upgradedValuesToDisplay);
+
             }
 
             @Override
             public void mouseExited (MouseEvent e) {
-                List<DisplayValue> display = new ArrayList();
-                
-                for (String key: normalValuesToDisplay.keySet()){
-                    if (information.get(key)!=null){
-                    String field = key;
-                    String value = information.get(key);
-                    String color = normalValuesToDisplay.get(key);
-                   
-                    display.add(new DisplayValue(field,value,color));
-                    }
-                }
-                towerUpgrader.updateDisplay(display);
+                updateDisplayInformation(normalValuesToDisplay);
+
             }
 
             @Override
             public void mouseClicked (MouseEvent e) {
                 if (isActive) {
                     view.upgradeTower(towerX, towerY);
-                    List<DisplayValue> display = new ArrayList();
-                    for (String key: upgradedValuesToDisplay.keySet()){
-                        if (information.get(key)!=null){
-                        String field = key;
-                        String value = information.get(key);
-                        String color = upgradedValuesToDisplay.get(key);
-                       
-                        display.add(new DisplayValue(field,value,color));
-                        }
-                    }
-                towerUpgrader.updateDisplay(display);
+
+                    updateDisplayInformation(upgradedValuesToDisplay);
                 }
                 checkActive();
             }
+
         });
         this.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         this.setVisible(false);
@@ -144,5 +116,20 @@ public class UpgradeButton extends TowerUpgraderButton {
         towerY = mouseY;
         this.information = information;
         checkActive();
+    }
+
+    private void updateDisplayInformation (Map<String, String> valuesToDisplay) {
+        List<DisplayValue> display = new ArrayList();
+
+        for (String key : valuesToDisplay.keySet()) {
+            if (information.get(key) != null) {
+                String field = key;
+                String value = information.get(key);
+                String color = valuesToDisplay.get(key);
+
+                display.add(new DisplayValue(field, value, color));
+            }
+        }
+        towerUpgrader.updateDisplay(display);
     }
 }
