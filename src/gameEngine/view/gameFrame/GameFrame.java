@@ -15,7 +15,6 @@ import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 import gameEngine.view.gameFrame.tools.store.StorePanel;
 import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
-import gameEngine.controller.Controller;
 
 
 /**
@@ -40,9 +39,9 @@ public class GameFrame extends JFrame implements GameInitializable {
 
     /**
      * @param controller facilitates communication between view and model
-     * @param view
+     * @param view 
      */
-    public GameFrame (Controller controller, final View view) {
+    public GameFrame ( final View view) {
         super();
 
         this.view = view;
