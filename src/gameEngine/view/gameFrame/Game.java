@@ -153,7 +153,7 @@ public class Game extends StdGame {
 
         if (getKey(KeyEsc)){
             clearKey(KeyEsc);
-            endGame();
+            loseGame();
         }
         
         if (getKey('F')){
@@ -163,7 +163,7 @@ public class Game extends StdGame {
         if (gameInfo.getIsWin()) {
             wonGame();
         }
-        if (lives <= 0) endGame();
+        if (lives <= 0) loseGame();
     }
 
     /**
@@ -197,7 +197,8 @@ public class Game extends StdGame {
      */
     public void updateGameStats () {
         lives = gameInfo.getLife();
-        score = gameInfo.getGold();
+        money = gameInfo.getGold();
+        score=money+gameInfo.getCurrentWaveNumber()*100+lives;
     }
 
     /**
@@ -206,8 +207,7 @@ public class Game extends StdGame {
      */
 
     public void wonGame(){
-        view.stopWaves();
-        removeObjects(null,0);
+        endGame();
         gameWon();
     }
 
@@ -216,10 +216,18 @@ public class Game extends StdGame {
      * GAME OVER and go to title screen
      */
 
+    public void loseGame(){
+        endGame();
+        gameOver();
+    }
+    
+    /**
+     * Standard routine whenever the game ends
+     */
+    
     public void endGame(){
         view.stopWaves();
         removeObjects(null,0);
-        gameOver();
     }
 
     /**
