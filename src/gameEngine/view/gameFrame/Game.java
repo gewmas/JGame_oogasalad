@@ -25,17 +25,17 @@ import jgame.platform.StdGame;
  *         graphics rendering
  */
 public class Game extends StdGame {
-    private static final String[] DISPLAY_KEYS={GameEngineConstant.PURCHASE_INFO_NAME,
-                                                GameEngineConstant.TOWER_DAMAGE,
-                                                GameEngineConstant.TOWER_ATTACK_SPEED,
-                                                GameEngineConstant.TOWER_ATTACK_AMOUNT,
-                                                GameEngineConstant.TOWER_RANGE,
-                                                GameEngineConstant.TOWER_MAGIC,
-                                                GameEngineConstant.TOWER_MAGIC_FACTOR,
-                                                GameEngineConstant.TOWER_BOOST_FACTOR,
-                                                GameEngineConstant.TOWER_SELL_PRICE,
-                                                GameEngineConstant.TOWER_UPGRADE_PRICE,
-                                                GameEngineConstant.PURCHASE_INFO_DESCRIPTION};
+    private static final String[] DISPLAY_KEYS = { GameEngineConstant.PURCHASE_INFO_NAME,
+                                                  GameEngineConstant.TOWER_DAMAGE,
+                                                  GameEngineConstant.TOWER_ATTACK_SPEED,
+                                                  GameEngineConstant.TOWER_ATTACK_AMOUNT,
+                                                  GameEngineConstant.TOWER_RANGE,
+                                                  GameEngineConstant.TOWER_MAGIC,
+                                                  GameEngineConstant.TOWER_MAGIC_FACTOR,
+                                                  GameEngineConstant.TOWER_BOOST_FACTOR,
+                                                  GameEngineConstant.TOWER_SELL_PRICE,
+                                                  GameEngineConstant.TOWER_UPGRADE_PRICE,
+                                                  GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
 
     private int WIDTH = 600;
     private int HEIGHT = 600;
@@ -46,7 +46,7 @@ public class Game extends StdGame {
     private FrameRateSlider frameRateSlider;
     private JGObject frameRateBar;
     private ItemPurchaser itemPurchaser;
-    private Map<String,String> valuesToDisplay;
+    private Map<String, String> valuesToDisplay;
 
     private Collection<GameInitializable> gameInitializerItems;
 
@@ -56,20 +56,29 @@ public class Game extends StdGame {
 
     private GameInfo gameInfo;
 
-    public Game (View view,ItemPurchaser itemPurchaser, Utilities utilities, Collection<GameInitializable> gameInitializerItems, Collection<GameUpdatable> gameUpdatables,Map<String, KeyActivationItem> keyActivationItems) {
+    public Game (View view,
+                 ItemPurchaser itemPurchaser,
+                 Utilities utilities,
+                 Collection<GameInitializable> gameInitializerItems,
+                 Collection<GameUpdatable> gameUpdatables,
+                 Map<String, KeyActivationItem> keyActivationItems) {
         this.view = view;
-        this.keyActivationItems =  keyActivationItems;
+        this.keyActivationItems = keyActivationItems;
         this.itemPurchaser = itemPurchaser;
-        this.utilities=utilities;
-        this.gameInitializerItems =gameInitializerItems;
+        this.utilities = utilities;
+        this.gameInitializerItems = gameInitializerItems;
         this.gameUpdatables = gameUpdatables;
         initEngineComponent(WIDTH, HEIGHT);
     }
 
     @Override
     public void initCanvas () {
-        gameInfo=view.getGameInfo();
-        Dimension size = gameInfo.getDimension();
+        gameInfo = view.getGameInfo();
+
+        this.setMoneyTitle("TEST");
+        this.setLivesTitle("TEST");
+        Dimension size = gameInfo.getDimension();// view.getGameSize();
+
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
     }
@@ -79,12 +88,12 @@ public class Game extends StdGame {
         setFrameRate(30, 2);
         defineMedia("mygame.tbl");
 
-        initial_lives = gameInfo.getLife();//view.getLives();
-        lives = initial_lives;//view.getLives();
-        score = gameInfo.getGold();//view.getMoney();
-        defineImage("RESERVEDslider_bar","sb",256,"slider_bar.png","-");
-        defineImage("RESERVEDslider_toggle","sb",256,"slider_toggle.png","-");
-        String background=view.getGameInfo().getBGImage();//gameInfo.getBGImage();//view.getBGImage();
+        initial_lives = gameInfo.getLife();// view.getLives();
+        lives = initial_lives;// view.getLives();
+        score = gameInfo.getGold();// view.getMoney();
+        defineImage("RESERVEDslider_bar", "sb", 256, "slider_bar.png", "-");
+        defineImage("RESERVEDslider_toggle", "sb", 256, "slider_toggle.png", "-");
+        String background = view.getGameInfo().getBGImage();// gameInfo.getBGImage();//view.getBGImage();
 
         setBGImage(background);
         setHighscores(10, new Highscore(0, "aaa"), 3);
@@ -99,52 +108,56 @@ public class Game extends StdGame {
             tileCount++;
         }
 
-        this.game_title=gameInfo.getMyName();
+        this.game_title = gameInfo.getMyName();
 
-        valuesToDisplay=new LinkedHashMap<String,String>();
-        for (String str:DISPLAY_KEYS){
+        valuesToDisplay = new LinkedHashMap<String, String>();
+        for (String str : DISPLAY_KEYS) {
             valuesToDisplay.put(str, "black");
         }
     }
 
-    public void startInGame() {
+    public void startInGame () {
         view.startModel();
-        for (GameInitializable item: gameInitializerItems){
+        for (GameInitializable item : gameInitializerItems) {
             item.initialize();
         }
-        frameRateSlider=new FrameRateSlider("slider", true, pfWidth()/2, pfHeight()-40,256,"slider_toggle");
-        frameRateBar=new JGObject("sliderbar", true, pfWidth()/2-84, pfHeight()-30, 256, "slider_bar");
-        frameRateBar.resume_in_view=false;
-        toggleFrameRateBar();        
+        frameRateSlider =
+                new FrameRateSlider("slider", true, pfWidth() / 2, pfHeight() - 40, 256,
+                                    "slider_toggle");
+        frameRateBar =
+                new JGObject("sliderbar", true, pfWidth() / 2 - 84, pfHeight() - 30, 256,
+                             "slider_bar");
+        frameRateBar.resume_in_view = false;
+        toggleFrameRateBar();
     }
-    
+
     public void doFrameInGame () {
         moveObjects();
-        gameInfo=view.getGameInfo();
+        gameInfo = view.getGameInfo();
         checkCollision(GameEngineConstant.BULLET_CID, GameEngineConstant.ENEMY_CID);
         checkCollision(GameEngineConstant.ENEMY_CID, GameEngineConstant.BULLET_CID);
         checkCollision(0, 0);
         checkUserInteractions();
         updateGameStats();
-        for (GameUpdatable updatable: gameUpdatables){
+        for (GameUpdatable updatable : gameUpdatables) {
             updatable.update();
         }
-        for (String key: keyActivationItems.keySet()){
+        for (String key : keyActivationItems.keySet()) {
             KeyActivationItem item = keyActivationItems.get(key);
             if (getKey(key.charAt(0))) {
                 clearKey(key.charAt(0));
                 item.activate();
             }
         }
-        
-        if (getKey('F')){
+
+        if (getKey('F')) {
             clearKey('F');
             toggleFrameRateBar();
         }
-        if (gameInfo.getIsWin()){
+        if (gameInfo.getIsWin()) {
             wonGame();
         }
-        if (lives<=0) endGame();
+        if (lives <= 0) endGame();
     }
 
     /**
@@ -156,14 +169,17 @@ public class Game extends StdGame {
         if (getMouseButton(1) && getMouseInside()) {
             clearMouseButton(1);
             JGPoint mousePosition = getMousePos();
-            if (itemPurchaser.checkAndPlaceTower(mousePosition)){
-                System.out.format("Buying at: %d,%d\n",mousePosition.x, mousePosition.y);
-            } else {
-                PurchaseInfo tower=view.getTowerInfo(mousePosition.x, mousePosition.y);
-                if (tower==null) {
+            if (itemPurchaser.checkAndPlaceTower(mousePosition)) {
+                System.out.format("Buying at: %d,%d\n", mousePosition.x, mousePosition.y);
+            }
+            else {
+                PurchaseInfo tower = view.getTowerInfo(mousePosition.x, mousePosition.y);
+                if (tower == null) {
                     System.out.println("No tower here");
-                } else {
-                    utilities.displayCheckedInformation(tower.getInfo(),valuesToDisplay,mousePosition.x,mousePosition.y);
+                }
+                else {
+                    utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
+                                                        mousePosition.x, mousePosition.y);
                     System.out.println("Checking tower");
                 }
             }
@@ -182,36 +198,37 @@ public class Game extends StdGame {
      * Call if the user has won the game, will display VICTORY and go
      * to title screen
      */
-    public void wonGame(){
-//        removeGameObjects();
+    public void wonGame () {
+        // removeGameObjects();
         gameWon();
     }
 
     /**
-     * Call if the user has lost the game, will display 
+     * Call if the user has lost the game, will display
      * GAME OVER and go to title screen
      */
-    public void endGame(){
-        //view.startModel();
+    public void endGame () {
+        // view.startModel();
         gameOver();
     }
 
     /**
      * Removes all JGObjects and JGTimers
      */
-    public void removeGameObjects(){
+    public void removeGameObjects () {
         this.removeAllTimers();
-        removeObjects(null,0);
+        removeObjects(null, 0);
     }
-    
+
     /**
      * Suspends or resumes frame rate bar
      */
-    public void toggleFrameRateBar(){
-        if (frameRateSlider.is_suspended){
+    public void toggleFrameRateBar () {
+        if (frameRateSlider.is_suspended) {
             frameRateSlider.resume();
             frameRateBar.resume();
-        } else {
+        }
+        else {
             frameRateSlider.suspend();
             frameRateBar.suspend();
         }

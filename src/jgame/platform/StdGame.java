@@ -75,6 +75,10 @@ import java.io.*;
  * (through the key_pausegame, which defaults to 'P'), and program exit (key_quitprogram, default
  * Escape).
  */
+/**
+ * @author lalitamaraj
+ *
+ */
 public abstract class StdGame extends JGEngine {
 
     // XXX can levelDone and lifeLost be triggered simultaneously? (ramjet)
@@ -98,6 +102,15 @@ public abstract class StdGame extends JGEngine {
     
     public String game_title="Game";
     
+    
+    /**
+     * Added by Lalita Maraj, sets title of money parameter
+     */
+    public String money_title= "Money";
+    /**
+     * Added by Lalita Maraj, sets the title of lives parameter
+     */
+    public String lives_title = "Lives";
     /** Key for starting the game, JRE default is space, MIDP default is "*" */
     public int key_startgame = ' ';
     /** Key for invoking the game settings window, default = enter. */
@@ -254,6 +267,12 @@ public abstract class StdGame extends JGEngine {
         this.gameover_ticks = gameover_ticks;
     }
 
+    public void setMoneyTitle(String title){
+        money_title = title;
+    }
+    public void setLivesTitle(String title){
+        lives_title = title;
+    }
     /**
      * Highscore table, null (default) means not defined. Use setHighscores
      * to define the table. If defined, the game will handle highscores by
@@ -921,9 +940,9 @@ public abstract class StdGame extends JGEngine {
     public void paintFrame () {
         setFont(status_font);
         setColor(status_color);
-        drawString("Money " + score, status_l_margin, 0, -1);
+        drawString(money_title +" "+ score, status_l_margin, 0, -1);
         if (lives_img == null) {
-            drawString("Lives " + lives, viewWidth() - status_r_margin, 0, 1);
+            drawString(lives_title +" " + lives, viewWidth() - status_r_margin, 0, 1);
         }
         else {
             drawCount(lives - 1, lives_img, viewWidth() - status_r_margin, 0,

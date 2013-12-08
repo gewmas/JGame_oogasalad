@@ -5,7 +5,6 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.GameFrameMediator;
 import gameEngine.view.gameFrame.ItemPurchaser;
 import gameEngine.view.gameFrame.Utilities;
 import java.awt.Dimension;
