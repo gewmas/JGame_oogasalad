@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
+
 public class TempBarrierDesignPanel extends JPanel {
 
     private JTextField myNameField;
@@ -19,8 +20,7 @@ public class TempBarrierDesignPanel extends JPanel {
     private JTextField myExpiryField;
     private JTextArea myDescriptionField;
     private JScrollPane scrollPane;
-    
-    
+
     public TempBarrierDesignPanel (TempBarrierDesignTab tempBarrierDesignTab) {
         JLabel name = new JLabel("Name");
         name.setPreferredSize(new Dimension(100, 30));
@@ -33,8 +33,7 @@ public class TempBarrierDesignPanel extends JPanel {
         expire.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel description = new JLabel("Description");
         description.setFont(Constants.DEFAULT_BODY_FONT);
-        
-        
+
         myNameField = new JTextField();
         myNameField.setPreferredSize(new Dimension(200, 30));
         myNameField.setFont(Constants.DEFAULT_BODY_FONT);
@@ -47,13 +46,11 @@ public class TempBarrierDesignPanel extends JPanel {
         myExpiryField = new JTextField();
         myExpiryField.setPreferredSize(new Dimension(200, 30));
         myExpiryField.setFont(Constants.DEFAULT_BODY_FONT);
-        
+
         myDescriptionField = new JTextArea(2, 15);
         myDescriptionField.setLineWrap(true);
         scrollPane = new JScrollPane(myDescriptionField);
-        
-       
-        
+
         this.setLayout(new MigLayout("wrap 2"));
         this.add(name);
         this.add(myNameField);
@@ -65,7 +62,7 @@ public class TempBarrierDesignPanel extends JPanel {
         this.add(myExpiryField);
         this.add(description);
         this.add(scrollPane);
-       
+
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         this.setPreferredSize(new Dimension(380, 350));
         this.setBorder(b);
