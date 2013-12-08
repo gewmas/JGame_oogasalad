@@ -1,6 +1,5 @@
 package gameEngine.view.initialization;
 
-
 import javax.swing.JFrame;
 import gameEngine.view.View;
 

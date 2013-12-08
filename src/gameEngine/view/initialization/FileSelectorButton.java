@@ -29,26 +29,31 @@ public class FileSelectorButton extends JButton {
 
     }
 
-    protected void selectFile () {
+    /**
+     * Displays File choser and uses selected file to start a new game
+     */
+    private void selectFile () {
         JFileChooser chooser =
                 new JFileChooser(System.getProperties().getProperty("user.dir"));
 
         int selected = chooser.showOpenDialog(null);
         if (selected == JFileChooser.APPROVE_OPTION) {
             File file = new File(chooser.getSelectedFile().toString());
-            System.out.println(file.getAbsolutePath());
             view.newGame(file);
         }
 
     }
 
-    private void addMouseAdapter(){
-        addMouseListener(new MouseAdapter() { 
-            public void mouseClicked(MouseEvent me) { 
+    /**
+     * Creates and assigns a mouse adapter
+     */
+    private void addMouseAdapter () {
+        addMouseListener(new MouseAdapter() {
+            public void mouseClicked (MouseEvent me) {
                 selectFile();
-            } 
-         
-          }); 
+            }
+
+        });
 
     }
 
