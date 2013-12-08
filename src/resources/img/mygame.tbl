@@ -141,3 +141,9 @@ Blood	Blood1;Blood2;Blood3;Blood4;Blood5;Blood6;Blood7;BloodEnd;	0.3	false
 Skull	-	0	Skull.png	-
 Healthy	-	0	Healthy.png	-
 PoisonMagic	-	0	PoisonMagic.png	-
+
+Cleaner	-	0	Cleaner.png	-
+Nurser	-	0	Nurser.png	-
+YoungDoc	-	0	YoungDoc.png	-
+OldDoc	-	0	OldDoc.png	-
+DuvallDoc	-	0	DuvallDoc.png	-
