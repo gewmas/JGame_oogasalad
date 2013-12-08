@@ -43,6 +43,8 @@ public class GameEngineConstant {
     public static final String TOWER_MAGIC_FACTOR = "Magic Factor";
     public static final String TOWER_MAGIC = "Magic";    
     public static final String TOWER_ATTACK_MODE = "Attack Mode";
+    public static final String TOWER_X = "X";
+    public static final String TOWER_Y = "Y";
     //Tower Upgrade Constant
     public static final String TOWER_UPGRADE_PRICE = "Upgrade Price";
     public static final String TOWER_UPGRADE_DAMAGE = "Upgrade Damage";

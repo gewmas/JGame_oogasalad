@@ -19,12 +19,12 @@ public class Effect extends JGObject {
      * @param y: the y coordinate(center point to facilitate the user) where the effect will be presented
      * @param o: JGObject to be decorated 
      */
-    public Effect (
+    public Effect (String effectName,
                    double x,
                    double y,
                    JGObject o) {
        
-        super("effect", true, 0, 0, 0, null);
+        super(effectName, true, 0, 0, 0, null);
         myObject=o;
         JGPoint p=eng.getImageSize(o.getImageName());
         System.out.println(myObject);

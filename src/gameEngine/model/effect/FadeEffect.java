@@ -9,8 +9,8 @@ import jgame.JGObject;
  */
 public class FadeEffect extends Effect {
     private boolean isDown=false; 
-    public FadeEffect (double x, double y, JGObject o) {
-        super(x, y, o);
+    public FadeEffect (String effectName, double x, double y, JGObject o) {
+        super(effectName, x, y, o);
         myObject.alpha=0.1f;
     }
 

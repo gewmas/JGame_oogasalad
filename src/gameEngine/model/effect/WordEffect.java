@@ -30,7 +30,7 @@ public class WordEffect {
           
             String letter= "Letter"+c.toString();
             JGObject oneLetter= new JGObject(null, true,0, 0, 0, letter);
-            new FadeEffect(currentX,currentY,oneLetter);
+            new FadeEffect("WordEffect",currentX,currentY,oneLetter);
             currentX+=width;
         }
         

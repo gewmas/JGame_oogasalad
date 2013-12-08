@@ -264,7 +264,6 @@ public class Model {
     public void addEnemy(Enemy enemy) {
         spawnedEnemies.add(enemy);
     }
-
     
 
 }
