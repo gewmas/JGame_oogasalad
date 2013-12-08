@@ -1,5 +1,9 @@
 package gameEngine.model.magic;
 
+import gameEngine.constant.GameEngineConstant;
+import jgame.JGObject;
+import jgame.JGRectangle;
+
 /**
  * 
  * @author wenxin
@@ -27,11 +31,7 @@ public class TBoostMagic extends Magic{
         return !myTarget.isAlive()||!mySender.isAlive();
     }
     
-    
-    protected void moveNextStep (){                
-        this.x=myTarget.getX();
-        this.y=myTarget.getY();
-       
+    public void moveNextStep (){                       
         if(alpha>0.99){
             alphIncrement=-0.01;
         }
@@ -39,6 +39,13 @@ public class TBoostMagic extends Magic{
            alphIncrement=0.01; 
         }
         alpha+=alphIncrement;
+        
+        double x=myTarget.getX();
+        double y=myTarget.getY();
+        JGRectangle boxTarget=((JGObject) myTarget).getBBox();
+        JGRectangle box=this.getBBox();
+        this.x=x-(box.width-boxTarget.width)/2;
+        this.y=y-(box.height-boxTarget.height);
     }
 
     

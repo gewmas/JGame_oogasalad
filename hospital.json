@@ -1,0 +1,547 @@
+{
+"name": "Tower Destruction II",
+"spashImage" :  "game-bg.png",
+"BGImage" :  "woods_background",
+"gold" : 500,
+"numberOfLives" : 10,
+"goldName": "Money",
+"livesName": "Population",
+"levels": 2,
+"widthOfWindow": 600,
+"heightOfWindow": 600,
+"tilesPerRow": 20,
+"difficultyScale": 1.5,
+"map":
+{
+  	  "pathImage":  "path.png", 
+	  "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 1,
+            "x": 0
+         },
+         {
+            "y": 2,
+            "x": 0
+         },
+         {
+            "y": 3,
+            "x": 0
+         },
+         {
+            "y": 4,
+            "x": 0
+         },
+         {
+            "y": 5,
+            "x": 0
+         },
+         {
+            "y": 6,
+            "x": 0
+         },
+         {
+            "y": 7,
+            "x": 0
+         },
+         {
+            "y": 8,
+            "x": 0
+         },
+         {
+            "y": 9,
+            "x": 0
+         },
+         {
+            "y": 10,
+            "x": 0
+         },
+         {
+            "y": 11,
+            "x": 0
+         },
+         {
+            "y": 12,
+            "x": 0
+         },
+         {
+            "y": 13,
+            "x": 0
+         },
+         {
+            "y": 14,
+            "x": 0
+         },
+         {
+            "y": 15,
+            "x": 0
+         },
+         {
+            "y": 16,
+            "x": 0
+         },
+         {
+            "y": 17,
+            "x": 0
+         },
+         {
+            "y": 17,
+            "x": 1
+         },
+         {
+            "y": 17,
+            "x": 2
+         },
+         {
+            "y": 16,
+            "x": 2
+         },
+         {
+            "y": 15,
+            "x": 2
+         },
+         {
+            "y": 14,
+            "x": 2
+         },
+         {
+            "y": 13,
+            "x": 2
+         },
+         {
+            "y": 12,
+            "x": 2
+         },
+         {
+            "y": 11,
+            "x": 2
+         },
+         {
+            "y": 10,
+            "x": 2
+         },
+         {
+            "y": 9,
+            "x": 2
+         },
+         {
+            "y": 8,
+            "x": 2
+         },
+         {
+            "y": 8,
+            "x": 3
+         },
+         {
+            "y": 7,
+            "x": 3
+         },
+         {
+            "y": 6,
+            "x": 3
+         },
+         {
+            "y": 5,
+            "x": 3
+         },
+         {
+            "y": 4,
+            "x": 3
+         },
+         {
+            "y": 4,
+            "x": 4
+         },
+         {
+            "y": 4,
+            "x": 5
+         },
+         {
+            "y": 5,
+            "x": 5
+         },
+         {
+            "y": 6,
+            "x": 5
+         },
+         {
+            "y": 7,
+            "x": 5
+         },
+         {
+            "y": 8,
+            "x": 5
+         },
+         {
+            "y": 9,
+            "x": 5
+         },
+         {
+            "y": 10,
+            "x": 5
+         },
+         {
+            "y": 10,
+            "x": 6
+         },
+         {
+            "y": 10,
+            "x": 7
+         },
+         {
+            "y": 9,
+            "x": 7
+         },
+         {
+            "y": 8,
+            "x": 7
+         },
+         {
+            "y": 8,
+            "x": 8
+         },
+         {
+            "y": 8,
+            "x": 9
+         },
+         {
+            "y": 8,
+            "x": 10
+         },
+         {
+            "y": 9,
+            "x": 10
+         },
+         {
+            "y": 10,
+            "x": 10
+         },
+         {
+            "y": 11,
+            "x": 10
+         },
+         {
+            "y": 12,
+            "x": 10
+         },
+         {
+            "y": 12,
+            "x": 11
+         },
+         {
+            "y": 13,
+            "x": 11
+         },
+         {
+            "y": 14,
+            "x": 11
+         },
+         {
+            "y": 15,
+            "x": 11
+         },
+         {
+            "y": 15,
+            "x": 12
+         },
+         {
+            "y": 15,
+            "x": 13
+         },
+         {
+            "y": 15,
+            "x": 14
+         },
+         {
+            "y": 14,
+            "x": 14
+         },
+         {
+            "y": 13,
+            "x": 14
+         },
+         {
+            "y": 13,
+            "x": 15
+         },
+         {
+            "y": 12,
+            "x": 15
+         },
+         {
+            "y": 11,
+            "x": 15
+         },
+         {
+            "y": 10,
+            "x": 15
+         },
+         {
+            "y": 9,
+            "x": 15
+         },
+         {
+            "y": 8,
+            "x": 15
+         },
+         {
+            "y": 8,
+            "x": 14
+         },
+         {
+            "y": 8,
+            "x": 13
+         },
+         {
+            "y": 7,
+            "x": 13
+         },
+         {
+            "y": 6,
+            "x": 13
+         },
+         {
+            "y": 6,
+            "x": 14
+         },
+         {
+            "y": 5,
+            "x": 14
+         },
+         {
+            "y": 4,
+            "x": 14
+         },
+         {
+            "y": 3,
+            "x": 14
+         },
+         {
+            "y": 3,
+            "x": 15
+         },
+         {
+            "y": 2,
+            "x": 15
+         },
+         {
+            "y": 2,
+            "x": 16
+         },
+         {
+            "y": 2,
+            "x": 17
+         },
+         {
+            "y": 2,
+            "x": 18
+         },
+         {
+            "y": 2,
+            "x": 19
+         },
+         {
+            "y": 1,
+            "x": 19
+         },
+         {
+            "y": 0,
+            "x": 19
+         }
+      ], 
+        "Barriers":[
+        	{ "x": 5, "y": 2, "image": "rock.jpg" },
+        	{ "x": 6, "y": 2, "image": "tree.jpg" }
+        ]
+},
+
+"resources":
+{
+  	   
+     "image":[ 
+               { "id": "Cleaner", "url": "Cleaner.png" },
+               { "id": "Nurser", "url": "Nurser.png" },
+               { "id": "YoungDoc", "url": "YoungDoc.png" },
+               { "id": "OldDoc", "url": "OldDoc.png" },
+               { "id": "DuvallDoc", "url": "DuvallDoc.png" },
+
+               
+               { "id": "space_background", "url": "space_background.jpg" },
+               { "id": "woods_background", "url": "woods_background.png" },
+               
+               { "id": "bullet", "url": "bullet0.png" },
+               { "id": "barrier1", "url": "barrier1.png" },
+               { "id": "barrier2", "url": "barrier2.png" },
+      		
+      			
+      		   { "id": "BoyPatient1", "url": "BoyPatient1.png" },
+      			{ "id": "BoyPatient2", "url": "BoyPatient2.png" },
+      			{ "id": "BoyPatient3", "url": "BoyPatient3.png" },
+      			{ "id": "BoyPatient4", "url": "BoyPatient4.png" },
+      			
+      			{ "id": "KidPatient1", "url": "KidPatient1.png" },
+      			{ "id": "KidPatient2", "url": "KidPatient2.png" },
+      			{ "id": "KidPatient3", "url": "KidPatient3.png" },
+      			{ "id": "KidPatient4", "url": "KidPatient4.png" },
+      			
+      		    { "id": "OldPatient1", "url": "OldPatient1.png" },
+      			{ "id": "OldPatient2", "url": "OldPatient2.png" },
+      			{ "id": "OldPatient3", "url": "OldPatient3.png" },
+      			{ "id": "OldPatient4", "url": "OldPatient4.png" },
+ 
+       		    { "id": "GirlPatient1", "url": "GirlPatient1.png" },
+      			{ "id": "GirlPatient2", "url": "GirlPatient2.png" },
+      			{ "id": "GirlPatient3", "url": "GirlPatient3.png" },
+      			{ "id": "GirlPatient4", "url": "GirlPatient4.png" },            
+           ], 
+        "audio":[
+         { "id": "alarm", "url": "alarm.wav" },
+      	{ "id": "Haste", "url": "haste.wav" },
+        ],
+    "animation":[
+      { "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
+      { "id": "drunRight", "sheet": [{"id":"d1"},{"id":"d2"},{"id":"d3"},{"id":"d4"}] },
+      { "id": "OldPatient", "sheet": [{"id":"OldPatient1"},{"id":"OldPatient2"},{"id":"OldPatient3"},{"id":"OldPatient4"}] },
+      { "id": "BoyPatient", "sheet": [{"id":"BoyPatient1"},{"id":"BoyPatient2"},{"id":"BoyPatient3"},{"id":"BoyPatient4"}] },
+      { "id": "GirlPatient", "sheet": [{"id":"GirlPatient1"},{"id":"GirlPatient2"},{"id":"GirlPatient3"},{"id":"GirlPatient4"}] },
+      { "id": "KidPatient", "sheet": [{"id":"KidPatient1"},{"id":"KidPatient2"},{"id":"KidPatient3"},{"id":"KidPatient4"}] },
+        ]
+},
+"temporaryBarrierType":[
+	{
+	 "id": "Lake",
+	 "image": "barrier1",
+	 "damage": 100,
+	 "cost": 200,
+	 "expire": 20,
+	 "description": "Buy a puddle of water to drown your enemies!  The sun is hot, so let's hope it doesn't evaporate too quickly"
+	},  
+	{
+	 "id": "Fire",
+	 "image": "barrier2",
+	 "damage": 100,
+	 "cost": 100,
+	 "expire": 10,
+	 "description": "Buy a flame to burn your enemies!  The fire won't burn forever"
+	},
+],
+
+"Tower": [
+	{
+	 "Type": "DefaultTower",
+	 "Name" : "Doctor Jason",
+	 "Image": "OldDoc",
+	 "Damage": -3,
+	 "Attack Speed": 0.8,
+	 "Attack Mode": 1,
+	 "Range": 100,	
+	 "Cost": 50, 
+	 "Sell Price":  50,
+	 "Specialty" : 1,
+	 "Description": "Doctor Jason can cure patients, especially brain damage.",
+	},
+	{
+	 "Type": "DefaultTower",
+	 "Name" : "Doctor Newman",
+	 "Image": "OldDoc",
+	 "Damage": -3,
+	 "Attack Speed": 0.8,
+	 "Attack Mode": 1,
+	 "Range": 100,	
+	 "Cost": 10, 
+	 "Sell Price":  50,
+	 "Specialty" : 2,
+	 "Description": "Doctor Newman can cure patients, especially brain damage.",
+	},
+	{
+	 "Type": "MultipleShootingTower",
+	 "Name" : "Doctor Duvall",
+	 "Image": "DuvallDoc",
+	 "Damage": -3,
+	 "Attack Speed": 3.5,
+	 "Attack Mode": 2,
+	 "Attack Amount": 5,
+	 "Range": 80,	
+	 "Cost": 100, 
+	 "Sell Price":  50,
+	 "Specialty" : 0,
+	 "Description": "Doctor Duvall, who is the best doctoc, will shoot multiple cures at one time.",
+	},
+	{
+	 "Type": "BoostTower",
+	 "Name" : "Hospital",
+	 "Image": "YoungDoc",
+	 "Damage": -1,
+	 "Attack Speed": 0.8,
+	 "Range": 100,	
+	 "Cost": 100, 
+	 "Sell Price":  50,
+	 "Description": "Hospital will strength all doctors in adjacency.",
+	 "Boost Factor": 2.0,
+	},
+	{
+	 "Type": "MagicTower",
+	 "Name": "Nurse",
+	 "Image": "Nurser",
+	 "Damage": -1,
+	 "Attack Speed": 0.8,
+	 "Attack Mode": 2,
+	 "Range": 100,	
+	 "Cost": 100, 
+	 "Sell Price":  50,
+	 "Specialty" : 3,
+	 "Description": "Nurse will cure patients with magic.",
+	 "Magic Factor": 2.0,
+	 "Magic" : ["FrozeMagic"],
+	}
+],
+
+"enemyType":[
+{
+	"id": "1",
+	"gold": 5,
+	"image": "OldPatient",
+	"life": 10,
+	"speed": 0.5,
+   "skill": "Poison",
+}, 
+{
+	"id": "2",
+	"gold": 10,
+	"image": "KidPatient",
+	"life": 15,
+	"speed": 0.5,
+   "skill": "Light",
+},
+{
+	"id": "3",
+	"gold": 10,
+	"image": "BoyPatient",
+	"life": 15,
+	"speed": 0.5,
+   	"skill": "Armour",
+}
+],
+
+"wave":[
+   {  
+      "type": [ "1","2","1"],
+      "number": [ 2,1,2],
+      "period" :2,
+      "interval": 10,
+     
+   },
+   {  
+      "type": [ "1","3","1"],
+      "number": [ 2,1,2],
+      "period" :2,
+      "interval": 10,
+     
+   }
+  
+]  
+
+}
