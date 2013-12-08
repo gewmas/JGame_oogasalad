@@ -111,13 +111,12 @@ public class MapDesignTab extends Tab {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                File imgSource = GameAuthoringGUI.mySelectedImage;
+                File imgSource = GameAuthoringGUI.myImageLabel.getImageFile();
                 myGrid.setImageSource(imgSource);
                 Image path;
                 try {
                     myPathImage =
-                            imgSource.toString().replace(System.getProperties()
-                                    .getProperty("user.dir") + "/", "");
+                            GameAuthoringGUI.myImageLabel.getID();
                     path = ImageIO.read(imgSource).getScaledInstance(50, 50, Image.SCALE_FAST);
                     myCurrentPathImage.setIcon(new ImageIcon(path));
                 }

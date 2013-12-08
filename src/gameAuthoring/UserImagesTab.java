@@ -54,7 +54,6 @@ public class UserImagesTab {
                         ImageLabel imageLabel = new ImageLabel("" + myNumImages);
                         myGameData.addImage("" + myNumImages, imgSource.getName());
                         imageLabel.setLabelIcon(imgSource);
-                        imageLabel.addMouseListener(addIconListener(imageLabel));
                         GameAuthoringGUI.myImageLabel = imageLabel;
                         mySubPanel.add(imageLabel);
                         mySubPanel.revalidate();
@@ -62,26 +61,6 @@ public class UserImagesTab {
                     catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                }
-            }
-        };
-        return listener;
-    }
-
-    public MouseAdapter addIconListener (final ImageLabel image) {
-        MouseAdapter listener = new MouseAdapter() {
-            private boolean imageSelected = false;
-
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                imageSelected = !imageSelected;
-                if (imageSelected) {
-                    GameAuthoringGUI.setCursor(image.getImageFile());
-                    GameAuthoringGUI.myImageLabel = image;
-                }
-                else {
-                    GameAuthoringGUI.setCursorNull();
-                    GameAuthoringGUI.myImageLabel = null;
                 }
             }
         };

@@ -32,8 +32,8 @@ public class GameAuthoringGUI {
     private SkillsDesignTab mySkillsDesignTab;
     private TempBarrierDesignTab myTempBarrierTab;
     private UserLibraryMainTab myUserLibraryTab;
-    protected static ImageLabel myImageLabel;
-    protected static AudioLabel myAudioLabel;
+    protected static ImageLabel myImageLabel = null;
+    protected static AudioLabel myAudioLabel = null;
 
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {

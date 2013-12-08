@@ -101,6 +101,7 @@ public class BasicInfoTab extends Tab {
 
         AudioLabel backgroundAudio = new AudioLabel();
         JLabel audioLabel = new JLabel("Background audio:");
+        backgroundAudio.setMutableStatusTrue();
         audioLabel.setFont(Constants.DEFAULT_BODY_FONT);
 
         subPanel.add(gameName);
@@ -161,7 +162,6 @@ public class BasicInfoTab extends Tab {
             public void mouseClicked (MouseEvent e) {
                 Simulator simulator = new Simulator();
                 simulator.simulate(myGameData);
-
             }
         };
         return listener;

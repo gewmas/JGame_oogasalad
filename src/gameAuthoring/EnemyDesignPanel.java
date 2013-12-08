@@ -38,8 +38,8 @@ public class EnemyDesignPanel extends JPanel {
     private File myImageSource;
     private int myNumEnemies = 0;
     private JComboBox<String> mySkillOptions;
-    
-    private final String[] SKILLS = {"", "Haste", "Armour", "Heal", "Light", "Poison"};
+
+    private final String[] SKILLS = { "", "Haste", "Armour", "Heal", "Light", "Poison" };
 
     public EnemyDesignPanel (EnemyDesignTab enemyDesignTab) {
         myEnemyDesignTab = enemyDesignTab;
@@ -83,7 +83,7 @@ public class EnemyDesignPanel extends JPanel {
         clearButton.addMouseListener(createClearAnimationsListener());
 
         mySkillOptions = new JComboBox<String>(SKILLS);
-        
+
         myAnimationPanel = new JPanel();
         myAnimationPanel.setOpaque(false);
         myAnimationPanel.setPreferredSize(new Dimension(200, 100));
@@ -162,10 +162,15 @@ public class EnemyDesignPanel extends JPanel {
                     String skill = (String) mySkillOptions.getSelectedItem();
                     myImageSource = myEnemyAnimations.get(0).getImageFile();
                     List<String> enemyAnimationPaths = new ArrayList<String>();
-                    for (ImageLabel imageLabel : myEnemyAnimations) {
-                        enemyAnimationPaths.add(imageLabel.getID());
-                        gameData.addAnimation(currentEnemyID,
-                                              enemyAnimationPaths);
+                    if (myEnemyAnimations.size() > 1) {
+                        for (ImageLabel imageLabel : myEnemyAnimations) {
+                            enemyAnimationPaths.add(imageLabel.getID());
+                            gameData.addAnimation(currentEnemyID,
+                                                  enemyAnimationPaths);
+                        }
+                    }
+                    else {
+                        currentEnemyID = myEnemyAnimations.get(0).getID();
                     }
                     if (gold < 0 || life < 0) {
                         JOptionPane
