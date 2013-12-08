@@ -125,5 +125,9 @@ public class View implements MenuActions {
     public boolean sellTower (int towerX, int towerY) {
         return controller.sellTower(towerX, towerY);
     }
+    
+    public void stopWaves(){
+        controller.stopWaves();
+    }
 
 }

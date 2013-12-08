@@ -133,6 +133,9 @@ public class Game extends StdGame {
                 item.activate();
             }
         }
+        if (getKey(KeyEsc)){
+            endGame();
+        }
         
         if (getKey('F')){
             clearKey('F');
@@ -180,6 +183,7 @@ public class Game extends StdGame {
      * to title screen
      */
     public void wonGame(){
+        view.stopWaves();
 //        removeGameObjects();
         gameWon();
     }
@@ -189,6 +193,7 @@ public class Game extends StdGame {
      * GAME OVER and go to title screen
      */
     public void endGame(){
+        view.stopWaves();
         //view.startModel();
         gameOver();
     }
