@@ -32,13 +32,7 @@ public class RangeDisplay extends JGObject {
     public void paint () {
         eng.drawOval(x, y, range, range, false, true, 4, JGColor.red);
     }
-<<<<<<< HEAD
 
-    public void setTower (double range, double towerX, double towerY) {
-        this.range = range;
-        JGPoint tileCoords = eng.getTileCoord(eng.getTileIndex(towerX, towerY));
-        this.setPos(tileCoords.x + tilewidth / 2, tileCoords.y + tileheight / 2);
-=======
 //wenxin shi, change towerX, towerY as center of tower
 //So when need to draw, use towerCenterX,towerCenterY
     public void setTower (double range,double towerCenterX, double towerCenterY) {
@@ -46,7 +40,7 @@ public class RangeDisplay extends JGObject {
         this.setPos(towerCenterX, towerCenterY);
 //        JGPoint tileCoords=eng.getTileCoord(eng.getTileIndex(towerX, towerY));
 //        this.setPos(tileCoords.x+tilewidth/2, tileCoords.y+tileheight/2);
->>>>>>> engine
+
     }
 
 }
