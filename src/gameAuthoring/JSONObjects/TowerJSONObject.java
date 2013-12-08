@@ -79,8 +79,8 @@ public class TowerJSONObject extends JSONObject {
                             String name,
                             String imagePath,
                             int damage,
-                            int attackSpeed,
-                            int attackMode, //Not in JSON
+                            double attackSpeed,
+                            //int attackMode, //Not in JSON
                             int range,
                             int cost,
                             int recyclePrice,
@@ -92,7 +92,7 @@ public class TowerJSONObject extends JSONObject {
         this.put("image", imagePath);
         this.put("damage", damage);
         this.put("attackSpeed", attackSpeed);
-        this.put("attackMode", attackMode);
+        //this.put("attackMode", attackMode);
         this.put("range", range);
         this.put("cost", cost);
         this.put("Sell Price", recyclePrice);
@@ -112,7 +112,7 @@ public class TowerJSONObject extends JSONObject {
                             int recyclePrice,
                             String description,
                             double magicFactor,
-                            int magic) {
+                            String magic) {
 
         this.put("type", type);
         this.put("id", name);

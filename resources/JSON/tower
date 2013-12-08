@@ -1,0 +1,18 @@
+{
+   "resources": {},
+   "temporaryBarrierType": [],
+   "wave": [],
+   "enemyType": [],
+   "towerType": [{
+      "id": "Bob",
+      "attackMode": 0,
+      "Sell Price": 100,
+      "range": 100,
+      "description": "23",
+      "damage": 100,
+      "attackSpeed": 1,
+      "image": "resources/img/dirt_tile.jpg",
+      "type": "DefaultTower",
+      "cost": 100
+   }]
+}

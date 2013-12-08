@@ -37,7 +37,6 @@ public class GameAuthoringGUI {
     private Image currentImage;
     private ImageLabel myImageLabel;
 
-
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
         GameData gameData = new GameData();

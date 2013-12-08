@@ -101,7 +101,7 @@ public class GameData extends JSONObject {
                           String name,
                           String imagePath,
                           int damage,
-                          int attackSpeed,
+                          double attackSpeed,
                           int attackMode,
                           int range,
                           int cost,
@@ -112,7 +112,55 @@ public class GameData extends JSONObject {
                                             range, cost, recyclePrice, description));
 
     }
-
+    
+    public void addMagicTower(String type,
+                          String name,
+                          String imagePath,
+                          int damage,
+                          double attackSpeed,
+                          int attackMode,
+                          int range,
+                          int cost,
+                          int recyclePrice,
+                          String description,
+                          double magicFactor,
+                          String magic){
+        
+        myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed, attackMode,
+                                            range, cost, recyclePrice, description, magicFactor, magic));
+    }
+    
+    public void addMultipleShootingTower(String type,
+                              String name,
+                              String imagePath,
+                              int damage,
+                              double attackSpeed,
+                              int attackMode,
+                              int attackAmount,
+                              int range,
+                              int cost,
+                              int recyclePrice,
+                              String description){
+            
+            myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed, attackMode, attackAmount,
+                                                range, cost, recyclePrice, description));
+        }
+    
+    public void addBoostTower(String type,
+                              String name,
+                              String imagePath,
+                              int damage,
+                              double attackSpeed,
+                              int range,
+                              int cost,
+                              int recyclePrice,
+                              String description, 
+                              double boostFactor){
+            
+            myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed,
+                                                range, cost, recyclePrice, description, boostFactor));
+        }
+    
     public void addTower (TowerJSONObject t) {
         myTowerList.put(t);
     }

@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -33,13 +34,13 @@ import net.miginfocom.swing.MigLayout;
 
 public class TowerDesignPanel extends JPanel {
 
-    Map<String, JPanel> TowerPanelMap;
+    Map<String, JPanel> myTowerPanelMap;
 
     private TowerDesignTab myTowerDesignTab;
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
 
-    JComboBox<String> myTypeOptions;
+    private JComboBox<String> myTypeOptions;
     private JTextField myNameField;
     private JTextField myDamageField;
     private JTextField myAttackSpeedField;
@@ -48,40 +49,41 @@ public class TowerDesignPanel extends JPanel {
     private JTextField myCostField;
     private JTextField myRecyclePriceField;
     private JTextArea myDescriptionField;
+    private JTextField magicFactorField;
+    private JTextField boostFactorField;
+    private JTextField attackAmountField;
+
     private JButton createTowerButton;
     private JScrollPane scrollPane;
-    
-    private JPanel myDataPanel;
+    private JComboBox<String> magicOptions;
 
     private File myImageSource;
-
     private JLabel myTowerImage;
 
     private final static String[] TOWER_TYPES = { "DefaultTower", "MultipleShootingTower",
                                                  "BoostTower", "MagicTower" };
-    private final static Integer[] ATTACK_MODES = { 1, 2 };
-    private final static String[] MAGIC_TYPES = { "FrozeMagic", "SpeedUpMagic", "BoostMagic"};
-    
+    private final static Integer[] ATTACK_MODES = { 0, 1, 2, 3 };
+    private final static String[] MAGIC_TYPES = { "FrozeMagic", "SpeedUpMagic", "BoostMagic" };
 
-    JLabel name, damage, attackSpeed, attackMode, range, cost, recyclePrice, description, towerImageChooser;
+    JLabel type, name, damage, attackSpeed, attackMode, range, cost, recyclePrice, description,
+            towerImageChooser;
 
     public TowerDesignPanel (TowerDesignTab towerDesignTab) {
         FileNameExtensionFilter filter =
                 new FileNameExtensionFilter(
                                             "JPG & GIF Images", "jpg", "gif", "png");
         INPUT_CHOOSER.setFileFilter(filter);
+        initializeComponents();
+
         myTowerDesignTab = towerDesignTab;
 
-        initializeComponents();
-        
-        JLabel type = new JLabel("Type");
+        type = new JLabel("Type");
 
         type.setFont(Constants.DEFAULT_BODY_FONT);
 
-        JComboBox<String> myTypeOptions = new JComboBox<String>(TOWER_TYPES);
+        myTypeOptions = new JComboBox<String>(TOWER_TYPES);
         myTypeOptions.setFont(Constants.DEFAULT_BODY_FONT);
-        myTypeOptions.addActionListener(createTowerTypeListener());
-
+        myTypeOptions.addActionListener(createTowerTypeListener(this));
 
         this.setLayout(new MigLayout("wrap 2"));
         this.add(type);
@@ -89,6 +91,7 @@ public class TowerDesignPanel extends JPanel {
 
         this.setLayout(new MigLayout("wrap 1"));
         JPanel myDataPanel = createTowerPanel();
+        myDataPanel.setOpaque(false);
         myDataPanel.add(createTowerButton);
         this.add(myDataPanel);
 
@@ -98,31 +101,59 @@ public class TowerDesignPanel extends JPanel {
         this.setPreferredSize(new Dimension(380, 500));
     }
 
-    private ActionListener createTowerTypeListener(){
-
+    private ActionListener createTowerTypeListener (final TowerDesignPanel t) {
         ActionListener a = new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e) {
-                System.out.println("Type changed");  
+                String s = (String) myTypeOptions.getSelectedItem();
+                if (s != null) {
+
+                    System.out.println(s);
+                    t.removeAll();
+
+                    t.add(type);
+                    t.add(myTypeOptions);
+
+                    JPanel dataPanel;
+
+                    if (s.equals("MagicTower")) {
+                        System.out.println("magic");
+                        dataPanel = createMagicTowerPanel();
+                    }
+
+                    else if (s.equals("MultipleShootingTower")) {
+                        System.out.println("mult");
+                        dataPanel = createMultipleShootingTowerPanel();
+                    }
+
+                    else if (s.equals("BoostTower")) {
+                        System.out.println("boost");
+                        dataPanel = createBoostTowerPanel();
+                    }
+
+                    else {
+                        dataPanel = createTowerPanel();
+                    }
+
+                    dataPanel.setOpaque(false);
+                    dataPanel.add(createTowerButton);
+                    t.add(dataPanel);
+                    t.revalidate();
+                    clearTextFields();
+                }
             }
-            
+
         };
-        
+
         return a;
-    
-        
+
     }
-    
+
     // Methods to create new panels
     private JPanel createTowerPanel () {
         JPanel panel = new JPanel();
 
         panel.setLayout(new MigLayout("wrap 2"));
-
-        // JButton towerImageChooser = new JButton("Choose tower image");
-        // towerImageChooser.setFont(Constants.defaultBodyFont);
-        // towerImageChooser.addMouseListener(createPathListener());
-
 
         panel.add(name);
         panel.add(myNameField);
@@ -143,34 +174,34 @@ public class TowerDesignPanel extends JPanel {
         panel.add(towerImageChooser);
         panel.add(myTowerImage, "gap 0 0 10 10");
         // panel.add(myTowerImage);
-      
+
         return panel;
 
     }
 
     private JPanel createMagicTowerPanel () {
         JPanel panel = createTowerPanel();
-        
+
         JLabel magicFactor = new JLabel("Magic Factor");
         magicFactor.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel magic = new JLabel("Magic");
         magic.setFont(Constants.DEFAULT_BODY_FONT);
-        
-        JTextField magicFactorField = new JTextField();
+
+        magicFactorField = new JTextField();
         magicFactorField.setPreferredSize(new Dimension(200, 30));
         magicFactorField.setFont(Constants.DEFAULT_BODY_FONT);
-        JComboBox<String> magicOptions = new JComboBox<String>(MAGIC_TYPES);
+        magicOptions = new JComboBox<String>(MAGIC_TYPES);
         magicOptions.setFont(Constants.DEFAULT_BODY_FONT);
-        
+
         panel.add(magicFactor);
         panel.add(magicFactorField);
         panel.add(magic);
         panel.add(magicOptions);
-        
+
         return panel;
     }
 
-    private JPanel createBoostTowerPanel () { //To be refactored
+    private JPanel createBoostTowerPanel () { // To be refactored
         JPanel panel = new JPanel();
         panel.setLayout(new MigLayout("wrap 2"));
         panel.add(name);
@@ -189,13 +220,13 @@ public class TowerDesignPanel extends JPanel {
         panel.add(scrollPane);
         panel.add(towerImageChooser);
         panel.add(myTowerImage, "gap 0 0 10 10");
-        
+
         JLabel boostFactor = new JLabel("Boost Factor");
         boostFactor.setFont(Constants.DEFAULT_BODY_FONT);
-        JTextField boostFactorField = new JTextField();
+        boostFactorField = new JTextField();
         boostFactorField.setPreferredSize(new Dimension(200, 30));
         boostFactorField.setFont(Constants.DEFAULT_BODY_FONT);
-        
+
         panel.add(boostFactor);
         panel.add(boostFactorField);
         return panel;
@@ -203,15 +234,16 @@ public class TowerDesignPanel extends JPanel {
 
     private JPanel createMultipleShootingTowerPanel () {
         JPanel panel = createTowerPanel();
-        
+
         JLabel attackAmount = new JLabel("Attack Amount");
         attackAmount.setFont(Constants.DEFAULT_BODY_FONT);
-        JTextField attackAmountField = new JTextField();
+        attackAmountField = new JTextField();
         attackAmountField.setPreferredSize(new Dimension(200, 30));
         attackAmountField.setFont(Constants.DEFAULT_BODY_FONT);
-        
+
         panel.add(attackAmount);
         panel.add(attackAmountField);
+
         return panel;
     }
 
@@ -244,9 +276,11 @@ public class TowerDesignPanel extends JPanel {
                 {
                     String type = TOWER_TYPES[myTypeOptions.getSelectedIndex()];
                     System.out.println(type);
+
+                    // Things that all towers have in common
                     String name = myNameField.getText();
                     int damage = Integer.parseInt(myDamageField.getText());
-                    int attackSpeed = Integer.parseInt(myAttackSpeedField.getText());
+                    double attackSpeed = Double.parseDouble(myAttackSpeedField.getText());
                     int range = Integer.parseInt(myRangeField.getText());
                     int cost = Integer.parseInt(myCostField.getText());
                     int recyclePrice = Integer.parseInt(myRecyclePriceField.getText());
@@ -258,30 +292,69 @@ public class TowerDesignPanel extends JPanel {
                                 .showMessageDialog(null,
                                                    "Cannot have negative values for gold, life, or speed");
                     }
-                    else {
+                    if (type.equals("DefaultTower")) {
+                        int mode = myAttackModeOptions.getSelectedIndex();
+
                         myGameData
-                                .addTower(type, name,
+                                .addTower(type,
+                                          name,
                                           myImageSource.toString()
                                                   .replace(System.getProperties()
                                                           .getProperty("user.dir") + "/",
                                                            ""),
                                           damage,
                                           attackSpeed,
-                                          1, // attackMode?
+                                          mode, // attackMode?
                                           range,
                                           cost,
                                           recyclePrice,
                                           description);
 
-                        myTowerDesignTab.addTower(myImageSource, myNameField.getText());
-                        myNameField.setText("");
-                        myDamageField.setText("");
-                        myAttackSpeedField.setText("");
-                        myRangeField.setText("");
-                        myCostField.setText("");
-                        myRecyclePriceField.setText("");
-                        myTowerImage.setIcon(null);
                     }
+
+                    else if (type.equals("MagicTower")) {
+                        int mode = myAttackModeOptions.getSelectedIndex();
+                        String magicType = (String) magicOptions.getSelectedItem();
+                        double magicFactor = Double.parseDouble(magicFactorField.getText());
+
+                        myGameData.addMagicTower(type, name, myImageSource.toString(), damage,
+                                                 attackSpeed, mode, range, cost, recyclePrice,
+                                                 description, magicFactor, magicType);
+                    }
+
+                    else if (type.equals("BoostTower")) {
+                        double boostFactor = Double.parseDouble(boostFactorField.getText());
+
+                        myGameData
+                                .addBoostTower(type,
+                                               name,
+                                               myImageSource.toString()
+                                                       .replace(System.getProperties()
+                                                               .getProperty("user.dir") + "/",
+                                                                ""),
+                                               damage,
+                                               attackSpeed,
+                                               range,
+                                               cost,
+                                               recyclePrice,
+                                               description,
+                                               boostFactor);
+
+                    }
+
+                    else {
+                        int mode = myAttackModeOptions.getSelectedIndex();
+                        int attackAmount = Integer.parseInt(attackAmountField.getText());
+                        myGameData.addMultipleShootingTower(type, name, myImageSource.toString(),
+                                                            damage, attackSpeed, mode,
+                                                            attackAmount, range, cost,
+                                                            recyclePrice, description);
+
+                    }
+
+                    clearTextFields();
+                    myTowerDesignTab.addTower(myImageSource, myNameField.getText());
+
                 }
                 catch (NumberFormatException n) {
                     JOptionPane
@@ -293,8 +366,22 @@ public class TowerDesignPanel extends JPanel {
         };
         return listener;
     }
-    
-    private void initializeComponents(){
+
+    private void clearTextFields () {
+        myNameField.setText("");
+        myDamageField.setText("");
+        myAttackSpeedField.setText("");
+        myRangeField.setText("");
+        myCostField.setText("");
+        myRecyclePriceField.setText("");
+        myTowerImage.setIcon(null);
+        myDescriptionField.setText("");
+        magicFactorField.setText("");
+        boostFactorField.setText("");
+        attackAmountField.setText("");
+    }
+
+    private void initializeComponents () {
         name = new JLabel("Name");
         name.setFont(Constants.DEFAULT_BODY_FONT);
         damage = new JLabel("Damage");
@@ -332,8 +419,8 @@ public class TowerDesignPanel extends JPanel {
         myRecyclePriceField = new JTextField();
         myRecyclePriceField.setPreferredSize(new Dimension(200, 30));
         myRecyclePriceField.setFont(Constants.DEFAULT_BODY_FONT);
-        myDescriptionField = new JTextArea(3, 18);
-        
+        myDescriptionField = new JTextArea(2, 18);
+
         towerImageChooser = new JLabel("Choose image");
         towerImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
 
@@ -349,7 +436,12 @@ public class TowerDesignPanel extends JPanel {
         createTowerButton = new JButton("Create Tower");
         createTowerButton.setFont(Constants.DEFAULT_BODY_FONT);
         createTowerButton.addMouseListener(createTowerButtonListener(this));
-        
-        
+
+        myTowerPanelMap = new HashMap<String, JPanel>();
+        myTowerPanelMap.put("DefaultTower", createTowerPanel());
+        myTowerPanelMap.put("MultipleShootingTower", createMultipleShootingTowerPanel());
+        myTowerPanelMap.put("BoostTower", createBoostTowerPanel());
+        myTowerPanelMap.put("MagicTower", createMagicTowerPanel());
+
     }
 }
