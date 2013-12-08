@@ -88,6 +88,12 @@ public class Game extends StdGame {
     public void initGame () {
         setFrameRate(30, 2);
         defineMedia("mygame.tbl");
+        
+        setHighscores(
+                      10, // number of highscores
+                      new Highscore(0,"nobody"), // default entry for highscore
+                      25 // max length of the player name
+              );
 
         initial_lives = gameInfo.getLife();// view.getLives();
         lives = initial_lives;// view.getLives();
@@ -97,7 +103,6 @@ public class Game extends StdGame {
         String background = view.getGameInfo().getBGImage();// gameInfo.getBGImage();//view.getBGImage();
 
         setBGImage(background);
-        setHighscores(10, new Highscore(0, "aaa"), 3);
         startgame_ingame = true;
         List<Tile> pathList = view.getPath();
         int tileCount = 0;
