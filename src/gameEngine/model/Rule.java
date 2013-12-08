@@ -62,8 +62,8 @@ public class Rule {
                 myTimer.schedule(new StartWave(), w.getInterval());
                 myCurrentWaveIndex++;
             }
-            if (!isAlive)
-                Waves.get(myCurrentWaveIndex-1).stop();
+            
+               
         }
 
     }
@@ -127,6 +127,10 @@ public class Rule {
     }
     public void stop () {
         isAlive = false;
+        for (int i = 0; i < Waves.size(); i++) {
+            Waves.get(i).stop();
+        }
+        Waves.clear();
     }
 
 }
