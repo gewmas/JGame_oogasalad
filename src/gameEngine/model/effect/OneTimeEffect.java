@@ -10,8 +10,8 @@ import jgame.JGObject;
  */
 public class OneTimeEffect extends Effect {
     String myEnd= null;
-    public OneTimeEffect (double x, double y, JGObject o, String end) {
-        super(x, y, o);
+    public OneTimeEffect (String effectName,double x, double y, JGObject o, String end) {
+        super(effectName,x, y, o);
         myEnd=end;
     }
 

@@ -3,6 +3,7 @@ package gameEngine.model.tower;
 import java.text.DecimalFormat;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.GameInfo;
+import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.magic.ITMagicable;
 import gameEngine.model.purchase.PurchaseInfo;
 import jgame.JGObject;
@@ -80,11 +81,12 @@ public abstract class Tower extends JGObject implements ITMagicable {
     }
 
     public void addDescription () {
-        
         purchaseInfo.addToMap(GameEngineConstant.TOWER_RANGE, String.valueOf(range));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_SELL_PRICE, String.valueOf(sellPrice));
         purchaseInfo.addToMap(GameEngineConstant.PURCHASE_INFO_DESCRIPTION, String.valueOf(description));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_PRICE, String.valueOf(upgradePrice));
+//        purchaseInfo.addToMap(GameEngineConstant.TOWER_X,String.valueOf(x));
+//        purchaseInfo.addToMap(GameEngineConstant.TOWER_Y, String.valueOf(y));
     }
 
     /**
@@ -92,6 +94,8 @@ public abstract class Tower extends JGObject implements ITMagicable {
      */
     public void sell (GameInfo gameInfo){
         gameInfo.addGold(sellPrice);
+        CreateEffect effect=new CreateEffect();
+        effect.Dollar(this.x, this.y);
         this.remove();
     }
     public abstract void upgrade (GameInfo gameInfo);
@@ -101,8 +105,12 @@ public abstract class Tower extends JGObject implements ITMagicable {
 
     /**
      * TowerInfo Getter Method
+     * Edited by Alex, need to add X and Y coordinates here, as if you add them in
+     * addDescription the latest tower seems to overwrite all the previous ones
      */
     public PurchaseInfo getPurchaseInfo () {
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_X,String.valueOf(x));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_Y, String.valueOf(y));
         return purchaseInfo;
     }
 
