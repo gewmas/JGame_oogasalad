@@ -69,10 +69,6 @@ public class EnemyDesignPanel extends JPanel {
         mySpeedField.setPreferredSize(new Dimension(200, 30));
         mySpeedField.setFont(Constants.DEFAULT_BODY_FONT);
 
-        JLabel enemySoundLabel = new JLabel("Enemy Attack Sound:");
-        enemySoundLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        AudioLabel enemyAudio = new AudioLabel();
-
         JButton enemyImageChooser = new JButton("Add Sprite");
         enemyImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
         enemyImageChooser.addMouseListener(createNewEnemyIconListener());
@@ -86,11 +82,11 @@ public class EnemyDesignPanel extends JPanel {
         myAnimationPanel = new JPanel();
         myAnimationPanel.setOpaque(false);
         myAnimationPanel.setPreferredSize(new Dimension(200, 100));
-        JScrollPane animationScrollPane = new JScrollPane(myAnimationPanel);
-        animationScrollPane.setPreferredSize(new Dimension(200, 80));
-        animationScrollPane.getViewport().setOpaque(false);
-        animationScrollPane.setOpaque(false);
-        animationScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        myAnimationScrollPane = new JScrollPane(myAnimationPanel);
+        myAnimationScrollPane.setPreferredSize(new Dimension(200, 80));
+        myAnimationScrollPane.getViewport().setOpaque(false);
+        myAnimationScrollPane.setOpaque(false);
+        myAnimationScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 
         JButton createEnemyButton = new JButton("Create Enemy");
         createEnemyButton.setFont(Constants.DEFAULT_BODY_FONT);
@@ -107,11 +103,9 @@ public class EnemyDesignPanel extends JPanel {
         this.add(mySpeedField);
         this.add(skill);
         this.add(mySkillOptions);
-        this.add(animationScrollPane, "span 2, gap 0 0 10 10");
+        this.add(myAnimationScrollPane, "span 2, gap 0 0 10 10");
         this.add(enemyImageChooser);
         this.add(clearButton);
-        this.add(enemySoundLabel);
-        this.add(enemyAudio);
         this.add(createEnemyButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         this.setPreferredSize(new Dimension(380, 400));
@@ -142,7 +136,7 @@ public class EnemyDesignPanel extends JPanel {
                 enemyImage.setMutableStatusTrue();
                 myAnimationPanel.add(enemyImage);
                 myEnemyAnimations.add(enemyImage);
-                myAnimationPanel.validate();
+                myAnimationPanel.revalidate();
             }
         };
         return listener;

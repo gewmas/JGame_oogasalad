@@ -115,7 +115,9 @@ public class TempBarrierDesignPanel extends JPanel {
                     myCostField.setText("");
                     myExpiryField.setText("");
                     myDescriptionField.setText("");
-                    myBarrierImage = new ImageLabel();
+                    myTempBarrierDesignTab.addBarrier(myBarrierImage.getImageFile(), name);
+                    myBarrierImage.reset();
+
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "One or more fields invalid!");

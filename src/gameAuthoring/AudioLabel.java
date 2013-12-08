@@ -80,7 +80,9 @@ public class AudioLabel extends JLabel {
 
     public void transferLabelInformation (AudioLabel other) {
         if (other != null) {
-            myID = other.getID();
+            if (myID == null) {
+                myID = other.getID();
+            }
             myAudioSource = other.getAudioFile();
             myAudioImage = other.getAudioImage();
             this.setIcon(new ImageIcon(myAudioImage));
@@ -106,22 +108,15 @@ public class AudioLabel extends JLabel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 selected = !selected;
-                // Cursor has not selected anything yet, transfer information from this audio label
-                // to cursor
                 if (GameAuthoringGUI.myAudioLabel == null && selected) {
-                    // System.out.println("If statement 1");
                     GameAuthoringGUI.myAudioLabel = label;
                     GameAuthoringGUI.setCursor(label.getAudioImageSource());
                 }
-                // Audio label is mutable and GameAuthoringGUI already contains information
-                // Pass information to this audio label
                 if (GameAuthoringGUI.myAudioLabel != null && isMutable && selected) {
-                    // System.out.println("If statement 2");
                     label.transferLabelInformation(GameAuthoringGUI.myAudioLabel);
                     GameAuthoringGUI.setCursorNull();
                 }
                 if (!selected) {
-                    // System.out.println("If statement 3");
                     GameAuthoringGUI.setCursorNull();
                     GameAuthoringGUI.myAudioLabel = null;
                 }

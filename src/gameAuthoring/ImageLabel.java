@@ -41,8 +41,7 @@ public class ImageLabel extends JLabel {
     }
 
     public void initialize () {
-        this.addMouseListener(createImageListener(this));
-        this.addMouseListener(addCursorListener(this));
+        this.addMouseListener(createImageLabelListener(this));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         this.setBorder(border);
     }
@@ -57,14 +56,6 @@ public class ImageLabel extends JLabel {
         catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void setAudioFile (File audio) {
-        myAudioSource = audio;
-    }
-
-    public File getAudioFile () {
-        return myAudioSource;
     }
 
     public String getID () {
@@ -83,40 +74,34 @@ public class ImageLabel extends JLabel {
         myImage = other.getImage();
         myImageSource = other.getImageFile();
         myID = other.getID();
-        myAudioSource = other.getAudioFile();
         if (myImageSource != null) {
             this.setLabelIcon(myImageSource);
         }
     }
 
-    public MouseAdapter createImageListener (final ImageLabel label) {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                if (GameAuthoringGUI.myImageLabel == null) {
-                    GameAuthoringGUI.myImageLabel = label;
-                    GameAuthoringGUI.myImageLabel.setLabelIcon(myImageSource);
-                }
-                else if (isMutable) {
-                    transferLabelInformation(GameAuthoringGUI.myImageLabel);
-                }
-            }
-        };
-        return listener;
+    public void reset () {
+        myImage = null;
+        myImageSource = null;
+        myID = null;
+        this.setIcon(null);
     }
 
-    public MouseAdapter addCursorListener (final ImageLabel image) {
+    public MouseAdapter createImageLabelListener (final ImageLabel label) {
         MouseAdapter listener = new MouseAdapter() {
-            private boolean imageSelected = false;
+            boolean selected = false;
 
             @Override
             public void mouseClicked (MouseEvent e) {
-                imageSelected = !imageSelected;
-                if (imageSelected) {
-                    GameAuthoringGUI.setCursor(image.getImageFile());
-                    GameAuthoringGUI.myImageLabel = image;
+                selected = !selected;
+                if (GameAuthoringGUI.myImageLabel == null && selected) {
+                    GameAuthoringGUI.myImageLabel = label;
+                    GameAuthoringGUI.setCursor(label.getImageFile());
                 }
-                else {
+                if (GameAuthoringGUI.myImageLabel != null && isMutable && selected) {
+                    label.transferLabelInformation(GameAuthoringGUI.myImageLabel);
+                    GameAuthoringGUI.setCursorNull();
+                }
+                if (!selected) {
                     GameAuthoringGUI.setCursorNull();
                     GameAuthoringGUI.myImageLabel = null;
                 }
