@@ -60,6 +60,7 @@ public class View implements MenuActions {
             initializationFrame.setVisible(false);
         }
         catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle.getString("FileReadError"));
         }

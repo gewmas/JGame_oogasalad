@@ -32,7 +32,11 @@ public class NormalEnemyFactory implements EnemyFactory {
     public NormalEnemyFactory (JSONObject enemyInfo) {
         this.id = enemyInfo.getString("id");
         this.image = enemyInfo.getString("image");
-        this.specialty = enemyInfo.getInt("specialty");
+        try{
+            this.specialty = enemyInfo.getInt("specialty");
+        }catch(Exception e){
+            this.specialty = 0;
+        }
         this.gold = enemyInfo.getDouble("gold");
         this.life = enemyInfo.getDouble("life");
         this.speed = enemyInfo.getDouble("speed");

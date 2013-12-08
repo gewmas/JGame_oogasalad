@@ -156,7 +156,7 @@ public class Enemy extends JGObject implements IEMagicable {
                      *         no obj.remove(), let bullet kill itself
                      */
                     double damage=  ((Bullet) obj).getDamage();
-                    if((Bullet)obj.getSpecialty()==mySpecialty){
+                    if( ((Bullet)obj).getSpecialty()==mySpecialty){
                         damage*=2;
                     }
                     life -= damage;
