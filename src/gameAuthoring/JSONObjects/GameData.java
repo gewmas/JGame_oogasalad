@@ -58,7 +58,11 @@ public class GameData extends JSONObject {
     public void setGold (int gold) {
         this.put("gold", gold);
     }
-
+    
+    public void setGoldName(String goldName){
+        this.put("goldName", goldName);
+    }
+    
     /**
      * Sets starting number of lives
      * 
@@ -66,6 +70,10 @@ public class GameData extends JSONObject {
      */
     public void setLives (int lives) {
         this.put("numberOfLives", lives);
+    }
+    
+    public void setLivesName(String livesName){
+        this.put("livesName", livesName);
     }
 
     /**

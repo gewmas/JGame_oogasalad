@@ -33,6 +33,8 @@ public class BasicInfoTab extends Tab {
     private JTextField myGameName;
     private JTextField myGold;
     private JTextField myLives;
+    private JTextField altGoldText;
+    private JTextField altLivesText;
 
     private JLabel mySplashImageLabel;
     private String mySplashImage;
@@ -86,7 +88,7 @@ public class BasicInfoTab extends Tab {
         myGold = new JTextField();
         JLabel altGoldLabel = new JLabel("Alternative gold name:");
         altGoldLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        JTextField altGoldText = new JTextField();
+        altGoldText = new JTextField();
         altGoldText.setPreferredSize(new Dimension(200, 30));
         altGoldText.setFont(Constants.DEFAULT_BODY_FONT);
 
@@ -95,7 +97,7 @@ public class BasicInfoTab extends Tab {
         myLives.setPreferredSize(new Dimension(200, 30));
         JLabel altLivesLabel = new JLabel("Alternative lives name:");
         altLivesLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        JTextField altLivesText = new JTextField();
+        altLivesText = new JTextField();
         altLivesText.setPreferredSize(new Dimension(200, 30));
         altLivesText.setFont(Constants.DEFAULT_BODY_FONT);
 
@@ -175,15 +177,16 @@ public class BasicInfoTab extends Tab {
         int gold = Integer.parseInt(myGold.getText());
         int lives = Integer.parseInt(myLives.getText());
         String name = myGameName.getText();
-        if (myAudioLabel == null) {
-            System.out.println("Audio label is null");
-        }
         if (myAudioLabel != null && gold > 0 && lives > 0 && mySplashImage != null && name != null) {
+            String goldName = altGoldText.getText();
+            String livesName = altLivesText.getText();
             myGameData.setGold(gold);
             myGameData.setLives(lives);
             myGameData.setSplashImage(mySplashImage);
             myGameData.setGameName(name);
             myGameData.addAudio(myAudioLabel.getID(), myAudioLabel.getAudioFile().getName());
+            myGameData.setGoldName(goldName);
+            myGameData.setLivesName(livesName);
             activateSimmulate();
         }
 
