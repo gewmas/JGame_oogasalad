@@ -15,6 +15,7 @@ import gameEngine.view.gameFrame.inputAndDisplay.InputSender;
 import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 import gameEngine.view.gameFrame.tools.store.StorePanel;
+import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
 import gameEngine.controller.Controller;
 
 
@@ -32,7 +33,7 @@ public class GameFrame extends Frame implements GameInitializable {
     private StorePanel storePanel;
     private InfoDisplayPanel infoPanel;
     private CanvasPanel canvasPanel;
-    private Utilities utilities;
+    private TowerUpgrader towerUpgrader;
     private ItemPurchaser itemPurchaser;
     private Map<String, KeyActivationItem> gameKeyActivationItems;
     private Collection<GameInitializable> gameInitializerItems;
@@ -54,9 +55,9 @@ public class GameFrame extends Frame implements GameInitializable {
         gameKeyActivationItems.put("C", cheatCodeFrame);
 
         infoPanel = addInfoDisplay();
-        utilities = new Utilities(infoPanel, this, view);
+        towerUpgrader = new TowerUpgrader(infoPanel, this, view);
         itemPurchaser = new ItemPurchaser(view, this);
-        storePanel = addStorePanel(utilities, itemPurchaser);
+        storePanel = addStorePanel(towerUpgrader, itemPurchaser);
         gameInitializerItems = new ArrayList();
         gameUpdatables = new ArrayList();
         gameUpdatables.add(storePanel);
@@ -83,11 +84,11 @@ public class GameFrame extends Frame implements GameInitializable {
     public void createGame () {
         gameInitializerItems.add(this);
         canvasPanel =
-                new CanvasPanel(view, itemPurchaser, utilities, gameInitializerItems,
+                new CanvasPanel(view, itemPurchaser, towerUpgrader, gameInitializerItems,
                                 gameUpdatables, gameKeyActivationItems);
         this.add(canvasPanel, BorderLayout.WEST);
 
-        utilities.createRangeDisplay();
+        towerUpgrader.createRangeDisplay();
     }
 
     /**
@@ -107,9 +108,8 @@ public class GameFrame extends Frame implements GameInitializable {
         this.add(tools, BorderLayout.EAST);
     }
 
-    private StorePanel addStorePanel (Utilities utilities, ItemPurchaser itemPurchaser) {
-        StorePanel storePanel = new StorePanel(view, utilities, itemPurchaser);
-
+    private StorePanel addStorePanel (TowerUpgrader towerUpgrader, ItemPurchaser itemPurchaser) {
+        StorePanel storePanel = new StorePanel(view, towerUpgrader, itemPurchaser);
         return storePanel;
     }
 

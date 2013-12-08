@@ -6,7 +6,7 @@ import gameEngine.view.Panel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.ItemPurchaser;
-import gameEngine.view.gameFrame.Utilities;
+import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -44,7 +44,7 @@ public class StoreOptionsPanel extends Panel {
     private static final int PANEL_HEIGHT = 200;
     protected List<StoreItemButton> storeItems;
     protected View view;
-    private Utilities utilities;
+    private TowerUpgrader utilities;
     private ItemPurchaser itemPurchaser;
     private Map<String, String> valuesToDisplay;
 
@@ -57,7 +57,7 @@ public class StoreOptionsPanel extends Panel {
     protected StoreOptionsPanel (
                                  View engineView,
                                  List<PurchaseInfo> towerInformation,
-                                 Utilities utilities,
+                                 TowerUpgrader utilities,
                                  ItemPurchaser itemPurchaser) {
 
         super();
