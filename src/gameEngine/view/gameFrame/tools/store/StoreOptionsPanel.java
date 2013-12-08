@@ -153,7 +153,7 @@ public  class StoreOptionsPanel extends Panel {
      */
     public void updateStoreStatus () {
         for (StoreItemButton button : storeItems) {
-            button.toggleButtonActivation(view.getMoney());
+            button.toggleButtonActivation(view.getGameInfo().getGold());
         }
     }
 

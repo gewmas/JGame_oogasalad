@@ -178,48 +178,6 @@ public class Controller {
         return model.activateCheat(code);
     }
     
-
-    /**
-     * Returns the size of the game in number of tiles
-     */
-    @Deprecated
-    public Dimension getGameSize () {
-        return model.getGameInfo().getDimension();
-    }
-
-    /**
-     * Returns the URL to the game's background image
-     */
-    @Deprecated
-    public String getBGImage () {
-        return model.getGameInfo().getBGImage();
-    }
-
-    /**
-     * Returns the amount of money in the game
-     */
-    @Deprecated
-    public int getMoney () {
-        return model.getGameInfo().getGold();
-    }
-
-    /**
-     * Return the number of lives remaining
-     */
-    @Deprecated
-    public int getLives () {
-        
-        return model.getGameInfo().getLife();
-    }
-    
-    /**
-     * Return the game title
-     */
-    @Deprecated
-    public String getGameTitle () {
-        return model.getGameInfo().getMyName();
-    }
-    
     public GameInfo getGameInfo(){
         return model.getGameInfo();
     }

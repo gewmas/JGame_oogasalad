@@ -368,8 +368,21 @@
                { "id": "d2", "url": "d2.png" },
                { "id": "d3", "url": "d3.png" },
                { "id": "d4", "url": "d4.png" },
-      
                
+               { "id": "space_background", "url": "space_background.jpg" },
+               { "id": "woods_background", "url": "woods_background.png" },
+               
+               { "id": "bullet", "url": "bullet.png" },
+               
+               { "id": "tower", "url": "tower.png" },
+               { "id": "tower1", "url": "tower.png" },
+               { "id": "barrier1", "url": "barrier1.png" },
+               { "id": "barrier2", "url": "barrier2.png" },
+      			
+      			{ "id": "BoostTower", "url": "BoostTower.png" },
+      			{ "id": "MagicTower", "url": "MagicTower.png" },
+      			{ "id": "MultipleShootingTower", "url": "MultipleShootingTower.png" },
+
              
            ], 
         "audio":[

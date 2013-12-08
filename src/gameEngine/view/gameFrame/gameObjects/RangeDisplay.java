@@ -33,9 +33,9 @@ public class RangeDisplay extends JGObject {
         eng.drawOval(x,y,range,range,false,true,4,JGColor.red);
     }
 
-    public void setTower (double range,int mouseX, int mouseY) {
+    public void setTower (double range,double towerX, double towerY) {
         this.range=range;
-        JGPoint tileCoords=eng.getTileCoord(eng.getTileIndex(mouseX, mouseY));
+        JGPoint tileCoords=eng.getTileCoord(eng.getTileIndex(towerX, towerY));
         this.setPos(tileCoords.x+tilewidth/2, tileCoords.y+tileheight/2);
     }
 

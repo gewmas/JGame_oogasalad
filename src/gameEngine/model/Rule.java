@@ -64,8 +64,6 @@ public class Rule {
             }
             if (!isAlive)
                 Waves.get(myCurrentWaveIndex).stop();
-            
-
         }
 
     }
