@@ -94,7 +94,7 @@ public class GameFrame extends JFrame implements GameInitializable {
      * Create the store of Towers
      * 
      * @param storePanel
-     * @param infoPanel2
+     * @param infoPanel
      */
     private void addGameTools (InfoDisplayPanel infoPanel, StorePanel storePanel) {
         JPanel tools = new JPanel();
@@ -103,7 +103,6 @@ public class GameFrame extends JFrame implements GameInitializable {
         tools.add(infoPanel, BorderLayout.CENTER);
         tools.add(storePanel, BorderLayout.PAGE_START);
         gameInitializerItems.add(storePanel);
-
         this.add(tools, BorderLayout.EAST);
     }
 
