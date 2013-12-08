@@ -14,8 +14,9 @@ public class DefaultEnemy extends Enemy {
                          boolean unique_id,
                          int collisionid,
                          String image,
+                         int specialty,
                          Model model) {
-        super(gold, life, speed, id, unique_id, collisionid, image, model);
+        super(gold, life, speed, id, unique_id, collisionid, image, specialty,model);
         // TODO Auto-generated constructor stub
     }
 
