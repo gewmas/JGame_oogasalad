@@ -64,6 +64,16 @@ public class GameAuthoringGUI {
         myTempBarrierTab = new TempBarrierDesignTab(gameData);
         myUserLibraryTab = new UserLibraryMainTab(gameData);
 
+        JLabel duvallClippy = new JLabel();
+        Image duvallImage;
+        try {
+            duvallImage = ImageIO.read(this.getClass().getResource("duvall_clippy.png"));
+            duvallClippy.setIcon(new ImageIcon(duvallImage));
+        }
+        catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
         gameDesignTab.addTab("Map Design", myMapDesignTab.getTab());
@@ -76,6 +86,7 @@ public class GameAuthoringGUI {
         myMainPanel.add(title, "span 2, align left, gap 0 0 15 0");
         myMainPanel.add(gameDesignTab, "gap 50 20 20 40");
         myMainPanel.add(myUserLibraryTab);
+        myMainPanel.add(duvallClippy);
         myFrame.setJMenuBar(menu);
         myFrame.setContentPane(myMainPanel);
         myFrame.pack();

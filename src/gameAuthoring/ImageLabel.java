@@ -33,6 +33,7 @@ public class ImageLabel extends JLabel {
 
     public void setMutableStatusTrue () {
         isMutable = true;
+        this.setToolTipText("Drag a pre-defined image from the Image Library onto this button to set it");
     }
 
     public ImageLabel (int width, int height) {

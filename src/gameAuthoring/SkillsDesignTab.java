@@ -4,15 +4,12 @@ import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -21,8 +18,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class SkillsDesignTab extends Tab {
 
-    private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir"));
+    private List<AudioLabel> myAudioLabels = new ArrayList<AudioLabel>();
 
     public SkillsDesignTab (GameData gameData) {
         super(gameData);
@@ -50,6 +46,12 @@ public class SkillsDesignTab extends Tab {
         AudioLabel poisonAudio = new AudioLabel("Poison", false);
         poisonAudio.setMutableStatusTrue();
 
+        myAudioLabels.add(hasteAudio);
+        myAudioLabels.add(armorAudio);
+        myAudioLabels.add(healAudio);
+        myAudioLabels.add(lightAudio);
+        myAudioLabels.add(poisonAudio);
+
         JLabel hasteLabel = new JLabel("Haste Audio:");
         hasteLabel.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel armorLabel = new JLabel("Armor Audio:");
@@ -61,6 +63,10 @@ public class SkillsDesignTab extends Tab {
         JLabel poisonLabel = new JLabel("Poison Audio:");
         poisonLabel.setFont(Constants.DEFAULT_BODY_FONT);
 
+        JButton submitButton = new JButton("Set Skills Audio");
+        submitButton.setFont(Constants.DEFAULT_BODY_FONT);
+        submitButton.addMouseListener(createSubmitListener());
+
         subPanel.add(hasteLabel);
         subPanel.add(hasteAudio);
         subPanel.add(armorLabel);
@@ -71,6 +77,7 @@ public class SkillsDesignTab extends Tab {
         subPanel.add(lightAudio);
         subPanel.add(poisonLabel);
         subPanel.add(poisonAudio);
+        subPanel.add(submitButton, "align center");
 
         subPanel.setOpaque(false);
         mainPanel.setOpaque(false);
@@ -80,22 +87,12 @@ public class SkillsDesignTab extends Tab {
         return mainPanel;
     }
 
-    public MouseAdapter createImageSelectionListener (final JLabel imgLabel) {
+    public MouseAdapter createSubmitListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                int loadObject = INPUT_CHOOSER.showOpenDialog(null);
-                if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(INPUT_CHOOSER.getSelectedFile());
-                    File imgSource = INPUT_CHOOSER.getSelectedFile();
-                    Image tower;
-                    try {
-                        tower = ImageIO.read(imgSource);
-                        imgLabel.setIcon(new ImageIcon(tower));
-                    }
-                    catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+                for (AudioLabel label : myAudioLabels) {
+                    myGameData.addAudio(label.getID(), label.getAudioFile().getName());
                 }
             }
         };

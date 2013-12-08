@@ -5,7 +5,6 @@ import gameAuthoring.menuBar.Simulator;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
@@ -55,12 +54,15 @@ public class BasicInfoTab extends Tab {
         subPanel.setOpaque(false);
         JLabel gameName = new JLabel("Game Name");
         gameName.setFont(Constants.DEFAULT_BODY_FONT);
+        gameName.setToolTipText("Give your game a name. This will be displayed on the game start page.");
 
         JLabel gold = new JLabel("Starting Gold");
         gold.setFont(Constants.DEFAULT_BODY_FONT);
+        gold.setToolTipText("Input the number of gold a player starts out with.");
 
         JLabel lives = new JLabel("Starting Lives");
         lives.setFont(Constants.DEFAULT_BODY_FONT);
+        lives.setToolTipText("Input the number of lives a player starts out with.");
 
         JLabel title = new JLabel("Basic Game Info");
         title.setFont(Constants.DEFAULT_BODY_FONT);
@@ -70,7 +72,9 @@ public class BasicInfoTab extends Tab {
         mainPanel.add(title, "span 2");
 
         JButton setSplashImageButton = new JButton("Choose Splash Image");
-        setSplashImageButton.setFont(new Font("Calibri", Font.PLAIN, 14));
+        setSplashImageButton.setFont(Constants.DEFAULT_BODY_FONT);
+        setSplashImageButton
+                .setToolTipText("Select a Splash Image to be displayed before your game begins.");
         setSplashImageButton.addMouseListener(setSplashImageListener());
 
         mySplashImageLabel = new JLabel();
@@ -78,9 +82,11 @@ public class BasicInfoTab extends Tab {
         JButton setInfoButton = new JButton("Set Info");
         simulateButton = new JButton("Simulate");
         simulateButton.setEnabled(false);
-        simulateButton.setFont(new Font("Calibri", Font.PLAIN, 14));
+        simulateButton.setFont(Constants.DEFAULT_BODY_FONT);
         simulateButton.addMouseListener(setSimulateListener());
-        setInfoButton.setFont(new Font("Calibri", Font.PLAIN, 14));
+        setInfoButton.setFont(Constants.DEFAULT_BODY_FONT);
+        setInfoButton
+                .setToolTipText("Once all fields have been completed, click the submit button. You can then proceed to 'preview' your game.");
         setInfoButton.addMouseListener(setInfoListener());
 
         myGameName = new JTextField();
@@ -88,6 +94,7 @@ public class BasicInfoTab extends Tab {
         myGold = new JTextField();
         JLabel altGoldLabel = new JLabel("Alternative Gold Name:");
         altGoldLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        altGoldLabel.setToolTipText("If you want, choose another name for your currency.");
         altGoldText = new JTextField();
         altGoldText.setPreferredSize(new Dimension(200, 30));
         altGoldText.setFont(Constants.DEFAULT_BODY_FONT);
@@ -97,12 +104,14 @@ public class BasicInfoTab extends Tab {
         myLives.setPreferredSize(new Dimension(200, 30));
         JLabel altLivesLabel = new JLabel("Alternative Lives Name:");
         altLivesLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        altLivesLabel.setToolTipText("If you want, choose another name for your lives.");
         altLivesText = new JTextField();
         altLivesText.setPreferredSize(new Dimension(200, 30));
         altLivesText.setFont(Constants.DEFAULT_BODY_FONT);
 
         myAudioLabel = new AudioLabel();
         JLabel audioLabel = new JLabel("Background Audio:");
+        audioLabel.setToolTipText("Select an audio to be played in the background of your game");
         myAudioLabel.setMutableStatusTrue();
         audioLabel.setFont(Constants.DEFAULT_BODY_FONT);
 
