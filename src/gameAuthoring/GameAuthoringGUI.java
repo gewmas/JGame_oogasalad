@@ -71,7 +71,7 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
         gameDesignTab.addTab("Temp Barrier Design", myTempBarrierTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
-        myMainPanel.add(title, "span 2, align center, gap 0 0 15 0");
+        myMainPanel.add(title, "span 2, align left, gap 0 0 15 0");
         myMainPanel.add(gameDesignTab, "gap 50 20 20 40");
         myMainPanel.add(myUserLibraryPanel);
         myFrame.setJMenuBar(menu);
