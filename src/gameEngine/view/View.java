@@ -1,23 +1,24 @@
 package gameEngine.view;
 
-import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import jgame.impl.JGEngineInterface;
 import gameEngine.controller.Controller;
+import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.view.gameFrame.GameFrame;
-import gameEngine.view.gameFrame.GameFrameMediator;
 import gameEngine.view.gameFrame.menu.MenuActions;
 import gameEngine.view.initialization.InitializationFrame;
 
 
 /**
- * The main view class that holds all the panels and frames included in the
- * Game Engine GUI
+ * The main view class that orchestrates the sequence of events
+ * for selecting a game, starting a game, selecting a new game, and ending a game.
+ * This class serves as the interface to the controller as the front end. 
+ * No other front end elements are exposed to the rest of the game Engine.
  * 
  * @author Lalita Maraj, Alex Zhu
  * 
@@ -26,29 +27,33 @@ public class View implements MenuActions {
     private GameFrame gameFrame;
     private InitializationFrame initializationFrame;
     private Controller controller;
-    private GameFrameMediator mediator;
+
 
     public View (Controller controller) {
         this.controller = controller;
-        mediator = new GameFrameMediator();
-        gameFrame = new GameFrame(controller, this, mediator);
-        initializationFrame = new InitializationFrame(this);
-       
+        this.gameFrame = new GameFrame(controller, this);
+        this.initializationFrame = new InitializationFrame(this);
 
     }
 
+    /**
+     * Prompts user for file to be read to start game
+     */
     public void promptForFile () {
         initializationFrame.showFrame();
 
     }
 
     public void selectNewGame () {
-        mediator.quitGame();
+        gameFrame.quitGame();
         gameFrame.dispose();
-        gameFrame = new GameFrame(controller, this, mediator);
+        gameFrame = new GameFrame(controller, this);
         initializationFrame.setVisible(true);
     }
 
+    /**
+     * Used to start the game 
+     */
     public void startJGame () {
         gameFrame.showGame();
     }
@@ -79,7 +84,7 @@ public class View implements MenuActions {
      */
     public boolean buyTower (int x, int y, PurchaseInfo itemInformation) {
         return (controller.purchaseObject(x, y, itemInformation));
-               
+
     }
 
     /**
@@ -90,59 +95,45 @@ public class View implements MenuActions {
     }
 
     /**
-     * Gets the dimensions of the game on initialization
+     * Gets game related information from the model:
+     * Title
+     * BGImage
+     * Gold
+     * Lives
+     * Wave Number
+     * IsWin
      */
-    public Dimension getGameSize () {
-        return controller.getGameSize();
+    public GameInfo getGameInfo(){
+        return controller.getGameInfo();
     }
 
     public List<Tile> getPath () {
         return controller.getPath();
     }
 
-    /**
-     * Gets the background image of the game upon initialization
-     */
-    public String getBGImage () {
-        return controller.getBGImage();
-    }
-
-    public int getMoney () {
-        return controller.getMoney();
-    }
-
-    public int getLives () {
-        return controller.getLives();
-    }
 
     public Map<String, List<PurchaseInfo>> getInventory () {
         return controller.getInventory();
     }
 
-    public void quitGame () {
-        mediator.quitGame();
-    }
-
     public void endGame () {
-        mediator.endGame();
-        mediator.closeStore();
-        // controller.startGame();
+        gameFrame.endGame();
     }
 
     public boolean activateCheat (String cheat) {
         return controller.activateCheat(cheat);
     }
 
-    public String getGameTitle () {
-        return controller.getGameTitle();
-    }
-    
-    public boolean upgradeTower(int x, int y){
+    public boolean upgradeTower (int x, int y) {
         return controller.upgradeTower(x, y);
     }
 
     public boolean sellTower (int towerX, int towerY) {
         return controller.sellTower(towerX, towerY);
+    }
+    
+    public void stopWaves(){
+        controller.stopWaves();
     }
 
 }

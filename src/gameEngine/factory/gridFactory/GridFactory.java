@@ -15,6 +15,7 @@ import gameEngine.parser.JSONLibrary.JSONObject;
 import helpers.Coordinate;
 import java.util.ArrayList;
 import java.util.HashSet;
+import gameEngine.constant.*;
 
 
 /**
@@ -41,9 +42,9 @@ public class GridFactory {
         public void initialize() {
 
             //get all of the necessary values from the JSON
-            int height = parser.getInt("heightOfWindow");
-            int width = parser.getInt("widthOfWindow");
-            int tilesPerRow = parser.getInt("tilesPerRow");
+            int height = GameEngineConstant.GRID_HEIGHT;
+            int width = GameEngineConstant.GRID_WIDTH;
+            int tilesPerRow = GameEngineConstant.TILES_PER_ROW;
             JSONObject map = parser.getJSONObject("map");
             String pathImage = map.getString("pathImage");
             JSONArray pathList = map.getJSONArray("Path");

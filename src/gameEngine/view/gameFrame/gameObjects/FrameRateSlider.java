@@ -27,9 +27,11 @@ public class FrameRateSlider extends JGObject {
     public void move(){
         if (this.eng.getMouseButton(1) && eng.getMouseY() > initial_y){
             if (Math.abs(this.eng.getMouseX()-initial_x)<=100){
-                this.setPos(this.eng.getMouseX(),y);
+                this.setPos(this.eng.getMouseX()-this.getBBox().width/2,y);
             }
-            this.eng.setFrameRate((x-initial_x)+101, 2);
+            System.out.println("Setting framerate to:");
+            System.out.println(Math.pow(2, (x-initial_x)/25)*30);
+            this.eng.setFrameRate(Math.pow(2,(x-initial_x)/25)*30, 2);
         }
     }
 

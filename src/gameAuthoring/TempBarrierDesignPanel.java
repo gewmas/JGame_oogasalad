@@ -1,8 +1,12 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -21,9 +25,12 @@ public class TempBarrierDesignPanel extends JPanel {
     private JTextArea myDescriptionField;
     private JScrollPane scrollPane;
 
+    private TempBarrierDesignTab myTempBarrierDesignTab;
+    private ImageLabel myBarrierImage;
+
     public TempBarrierDesignPanel (TempBarrierDesignTab tempBarrierDesignTab) {
         JLabel name = new JLabel("Name");
-        name.setPreferredSize(new Dimension(100, 30));
+        myTempBarrierDesignTab = tempBarrierDesignTab;
         name.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel damage = new JLabel("Damage");
         damage.setFont(Constants.DEFAULT_BODY_FONT);
@@ -33,6 +40,9 @@ public class TempBarrierDesignPanel extends JPanel {
         expire.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel description = new JLabel("Description");
         description.setFont(Constants.DEFAULT_BODY_FONT);
+
+        JLabel image = new JLabel("Choose image");
+        image.setFont(Constants.DEFAULT_BODY_FONT);
 
         myNameField = new JTextField();
         myNameField.setPreferredSize(new Dimension(200, 30));
@@ -51,6 +61,14 @@ public class TempBarrierDesignPanel extends JPanel {
         myDescriptionField.setLineWrap(true);
         scrollPane = new JScrollPane(myDescriptionField);
 
+        JButton createBarrierButton = new JButton("Create New Barrier");
+        createBarrierButton.setFont(Constants.DEFAULT_BODY_FONT);
+
+        myBarrierImage = new ImageLabel();
+        myBarrierImage.setPreferredSize(new Dimension(50, 50));
+        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
+        myBarrierImage.setBorder(border);
+
         this.setLayout(new MigLayout("wrap 2"));
         this.add(name);
         this.add(myNameField);
@@ -63,10 +81,33 @@ public class TempBarrierDesignPanel extends JPanel {
         this.add(description);
         this.add(scrollPane);
 
+        this.add(image);
+        this.add(myBarrierImage);
+        this.add(createBarrierButton);
+
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         this.setPreferredSize(new Dimension(380, 350));
         this.setBorder(b);
         this.setOpaque(false);
+    }
+
+    public MouseAdapter createBarrierListener () {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                GameData gameData = myTempBarrierDesignTab.getGameData();
+                String name = myNameField.getText();
+                int damage = Integer.parseInt(myDamageField.getText());
+                int cost = Integer.parseInt(myCostField.getText());
+                int expire = Integer.parseInt(myExpiryField.getText());
+                String description = myDescriptionField.getText();
+                String image = myBarrierImage.getID();
+
+                gameData.addBarrier(name, image, damage, cost, expire, description);
+            }
+        };
+
+        return listener;
     }
 
 }
