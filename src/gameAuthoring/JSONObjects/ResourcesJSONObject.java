@@ -16,13 +16,13 @@ public class ResourcesJSONObject extends JSONObject {
     private JSONArray myAnimations;
 
     public ResourcesJSONObject () {
-        super();
-        this.put("image", myImages);
-        this.put("audio", myAudio);
-        this.put("animation", myAnimations);
         myAnimations = new JSONArray();
         myAudio = new JSONArray();
         myImages = new JSONArray();
+        this.put("image", myImages);
+        this.put("audio", myAudio);
+        this.put("animation", myAnimations);
+        
     }
 
     public void addImage (String id, String url) {
