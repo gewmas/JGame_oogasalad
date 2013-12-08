@@ -54,6 +54,7 @@ public class WaveDesignTab extends Tab{
 
     public void addWave (String type, int number) {
         JButton waveButton = new JButton(number + " " + type);
+        waveButton.setFont(Constants.DEFAULT_BODY_FONT);
         myScrollPanel.add(waveButton);
 
     }

@@ -115,7 +115,6 @@ public class TempBarrierDesignPanel extends JPanel {
                     myCostField.setText("");
                     myExpiryField.setText("");
                     myDescriptionField.setText("");
-                    myTempBarrierDesignTab.addBarrier(myBarrierImage.getImageFile(), name);
                     myBarrierImage.reset();
 
                 }
