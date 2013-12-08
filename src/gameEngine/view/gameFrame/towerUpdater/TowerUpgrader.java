@@ -74,6 +74,9 @@ public class TowerUpgrader {
         this.display.updateInformation(toDisplay);
     }
 
+    /**
+     * Adds a circle around the tower that was clicked
+     */
     public void createRangeDisplay () {
         this.rangeDisplay = new RangeDisplay("RangeDisplay", false, -1, -1, 256);
     }
