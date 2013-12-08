@@ -22,13 +22,14 @@ import gameEngine.constant.*;
  * @author Jiaran
  */
 public class Rule {
-    private List<Wave> Waves = new ArrayList<Wave>();
+    private List<Wave> myWaves = new ArrayList<Wave>();
     private int myCurrentWaveIndex = 0;
     private Timer myTimer = new Timer();
     private boolean isAlive = true;;
     private long myInitialDelayInMilliseconds = 2000;
     private EnemyWarehouse myEnemyWarehouse = null;
     private JGEngineInterface myEng=null;
+    private JSONArray myInitialWaveInfo;
     
     public Rule (long delay, EnemyWarehouse e, JGEngineInterface eng) {
         myInitialDelayInMilliseconds = delay;
@@ -37,7 +38,7 @@ public class Rule {
     }
 
     public void addWave (Wave wave) {
-        Waves.add(wave);
+        myWaves.add(wave);
     }
 
     /**
@@ -55,15 +56,15 @@ public class Rule {
 
         @Override
         public void run () {
-            if (myCurrentWaveIndex < Waves.size() && isAlive) {
-                Wave w = Waves.get(myCurrentWaveIndex);
+            if (myCurrentWaveIndex < myWaves.size() && isAlive) {
+                Wave w = myWaves.get(myCurrentWaveIndex);
                 w.waveStart();
-                CreateEffect.Words(300, 300, "WAVE "+myCurrentWaveIndex);
+                CreateEffect.Words(300, 300, "WAVE "+(myCurrentWaveIndex+1));
                 myTimer.schedule(new StartWave(), w.getInterval());
                 myCurrentWaveIndex++;
             }
-            if (!isAlive)
-                Waves.get(myCurrentWaveIndex-1).stop();
+            
+               
         }
 
     }
@@ -75,6 +76,8 @@ public class Rule {
      * 
      */
     public void readWaveFromJSon (JSONArray jsonArray) {
+        myInitialWaveInfo=jsonArray;
+       
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject oneWave = jsonArray.getJSONObject(i);
             String[] type = translateJSONArray(oneWave.getJSONArray("type"), String.class);
@@ -117,7 +120,7 @@ public class Rule {
     }
 
     public boolean isWin(){
-        if(Waves.get(Waves.size()-1).isDone()){
+        if(myWaves.get(myWaves.size()-1).isDone()){
             if(myEng.countObjects(null,GameEngineConstant.query(Enemy.class)) ==0){
                 return true;
             }
@@ -127,6 +130,20 @@ public class Rule {
     }
     public void stop () {
         isAlive = false;
+        myTimer.cancel();
+        for (int i = 0; i < myWaves.size(); i++) {
+            myWaves.get(i).stop();
+        }
+        myWaves.clear();
+    }
+    
+    public void reset(){
+        stop();
+        isAlive=true;
+        myTimer=new Timer();
+        myCurrentWaveIndex= 0;
+        readWaveFromJSon(myInitialWaveInfo);
+        ruleStart();
     }
 
 }

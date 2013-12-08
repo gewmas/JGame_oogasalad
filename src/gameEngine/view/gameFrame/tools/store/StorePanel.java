@@ -4,14 +4,14 @@ import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.Panel;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameInitializable;
 import gameEngine.view.gameFrame.GameUpdatable;
 import gameEngine.view.gameFrame.ItemPurchaser;
-import gameEngine.view.gameFrame.Utilities;
+import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
 
 
 /**
@@ -20,11 +20,11 @@ import gameEngine.view.gameFrame.Utilities;
  *         Contains the option to select items and panel that displays
  *         item information
  */
-public class StorePanel extends Panel implements GameUpdatable, GameInitializable{
+public class StorePanel extends JPanel implements GameUpdatable, GameInitializable{
 
     private JTabbedPane storeTabbedPane;
     private View view;
-    private Utilities utilities;
+    private TowerUpgrader utilities;
     private List<StoreOptionsPanel> storeCategories;
     private ItemPurchaser itemPurchaser;
 
@@ -34,7 +34,7 @@ public class StorePanel extends Panel implements GameUpdatable, GameInitializabl
      * @param itemPurchaser
      */
 
-    public StorePanel (View view, Utilities utilities, ItemPurchaser itemPurchaser) {
+    public StorePanel (View view, TowerUpgrader utilities, ItemPurchaser itemPurchaser) {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);

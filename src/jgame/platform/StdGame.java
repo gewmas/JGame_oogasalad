@@ -75,6 +75,10 @@ import java.io.*;
  * (through the key_pausegame, which defaults to 'P'), and program exit (key_quitprogram, default
  * Escape).
  */
+/**
+ * @author lalitamaraj
+ *
+ */
 public abstract class StdGame extends JGEngine {
 
     // XXX can levelDone and lifeLost be triggered simultaneously? (ramjet)
@@ -98,6 +102,15 @@ public abstract class StdGame extends JGEngine {
     
     public String game_title="Game";
     
+    
+    /**
+     * Added by Lalita Maraj, sets title of money parameter
+     */
+    public String money_title= "Money";
+    /**
+     * Added by Lalita Maraj, sets the title of lives parameter
+     */
+    public String lives_title = "Lives";
     /** Key for starting the game, JRE default is space, MIDP default is "*" */
     public int key_startgame = ' ';
     /** Key for invoking the game settings window, default = enter. */
@@ -164,6 +177,8 @@ public abstract class StdGame extends JGEngine {
     public double timer = 0;
     /** Player score; starts at 0 at beginning of game. */
     public int score = 0;
+    
+    public int money = 0;
     /**
      * Difficulty level; starts at 0 at beginning of game. Can be
      * incremented each time a level is complete. Can be used to determine game
@@ -254,6 +269,12 @@ public abstract class StdGame extends JGEngine {
         this.gameover_ticks = gameover_ticks;
     }
 
+    public void setMoneyTitle(String title){
+        money_title = title;
+    }
+    public void setLivesTitle(String title){
+        lives_title = title;
+    }
     /**
      * Highscore table, null (default) means not defined. Use setHighscores
      * to define the table. If defined, the game will handle highscores by
@@ -559,6 +580,7 @@ public abstract class StdGame extends JGEngine {
         removeGameState("StartGame");
         removeGameState("LifeLost");
         seqtimer = 0;
+        CreateEffect.Words(pfWidth()/2, pfHeight()/2, "VICTORY");
         if (gamewon_ticks > 0) {
             if (gamewon_ingame)
                 addGameState("GameWon");
@@ -593,6 +615,7 @@ public abstract class StdGame extends JGEngine {
         removeGameState("StartGame");
         removeGameState("LifeLost");
         seqtimer = 0;
+        CreateEffect.Words(pfWidth()/2, pfHeight()/2, "GAME OVER");
         if (gameover_ticks > 0) {
             if (gameover_ingame)
                 addGameState("GameOver");
@@ -795,6 +818,15 @@ public abstract class StdGame extends JGEngine {
         if (key >= 32 && key < 127 && playername.length() < highscore_maxnamelen)
             playername += key;
     }
+    
+    public void doFrameGameOver() {
+//        System.out.println(this.countObjects("WordEffect", 0));
+        this.moveObjects("WordEffect", 0);
+    }
+    
+    public void doFrameGameWon() {
+        this.moveObjects("WordEffect",0);
+    }
 
     /**
      * Try to save highscores to default location,
@@ -892,14 +924,12 @@ public abstract class StdGame extends JGEngine {
      * standard state transition function. Default is do nothing.
      */
     public void startGameOver () {
-        CreateEffect.Words(pfWidth()/2,pfHeight()/2,"GAME OVER");
     }
     
     /**
      * Initialize game won sequence. Written by Alex Zhu
      */
     public void startGameWon (){
-        CreateEffect.Words(pfWidth()/2,pfHeight()/2,"VICTORY");
     }
 
     /**
@@ -921,9 +951,10 @@ public abstract class StdGame extends JGEngine {
     public void paintFrame () {
         setFont(status_font);
         setColor(status_color);
-        drawString("Money " + score, status_l_margin, 0, -1);
+        drawString(money_title +" "+ money, status_l_margin, 0, -1);
+        drawString("Score " + score, status_l_margin,15,-1);
         if (lives_img == null) {
-            drawString("Lives " + lives, viewWidth() - status_r_margin, 0, 1);
+            drawString(lives_title +" " + lives, viewWidth() - status_r_margin, 0, 1);
         }
         else {
             drawCount(lives - 1, lives_img, viewWidth() - status_r_margin, 0,
@@ -987,14 +1018,13 @@ public abstract class StdGame extends JGEngine {
     }
     
     public void paintFrameGameWon () {
-        this.moveObjects("WordEffect", 0);
+//        this.moveObjects("WordEffect", 0);
 //        drawString("You Won!",
 //                   viewWidth() / 2, viewHeight() / 3, 0, title_font, title_color);
     }
 
     /** Default displays "Game Over!". */
     public void paintFrameGameOver () {
-        this.moveObjects("WordEffect", 0);
 //        drawString("Game Over !",
 //                   viewWidth() / 2, viewHeight() / 3, 0, title_font, title_color);
     }

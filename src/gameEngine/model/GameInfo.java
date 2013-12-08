@@ -16,7 +16,9 @@ public class GameInfo {
     private boolean isWin;
     private int myCurrentWaveNumber=0;
     private String myBGImage;
-
+    private String myGoldName;
+    private String myLivesName;
+    
     private Dimension myDimension;
     // private List<TowerInfo> myTowerInfo;
 
@@ -35,6 +37,8 @@ public class GameInfo {
         myDimension = new Dimension(20, 20);
         myBGImage = parser.getString("BGImage");
         myName = parser.getString("name");
+        myGoldName = parser.getString("goldName");
+        myLivesName = parser.getString("livesName");
         // myTowerInfo = new ArrayList<TowerInfo>();
         
     //    System.out.println(myGold+";"+myLife+";"+myWave+";"+x+";"+y+";"+myBGImage);
@@ -119,8 +123,18 @@ public class GameInfo {
     public void SetCurrentWaveNumber(int n){
         myCurrentWaveNumber=n;
     }
-    public int getCurretWaveNumber(){
+    public int getCurrentWaveNumber(){
         return myCurrentWaveNumber;
+    }
+
+    // @Author: Fabio
+    public String getMyGoldName () {
+        return myGoldName;
+    }
+
+    // @Author: Fabio
+    public String getMyLivesName () {
+        return myLivesName;
     }
 
 }
