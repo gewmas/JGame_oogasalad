@@ -117,7 +117,7 @@ public class Rule {
     }
 
     public boolean isWin(){
-        if(myCurrentWaveIndex==Waves.size()){
+        if(Waves.get(Waves.size()-1).isDone()){
             if(myEng.countObjects(null,GameEngineConstant.query(Enemy.class)) ==0){
                 return true;
             }

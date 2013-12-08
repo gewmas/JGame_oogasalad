@@ -486,7 +486,7 @@
 	"image": "runRight",
 	"life": 10,
 	"speed": 0.5,
-   "skill": "",
+   "skill": "Poison",
 }, 
 {
 	"id": "2",
