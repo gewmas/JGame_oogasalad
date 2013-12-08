@@ -8,12 +8,13 @@ import gameEngine.factory.towerfactory.TowerFactory;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.Panel;
 import gameEngine.view.View;
+import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
 
 
 public class CanvasPanel extends Panel {
     Game game;
 
-    public CanvasPanel (View view,  ItemPurchaser itemPurchaser, Utilities utilities, Collection<GameInitializable> gameInitializerItems, Collection<GameUpdatable> gameUpdatables,Map<String, KeyActivationItem> keyActivationItems) {
+    public CanvasPanel (View view,  ItemPurchaser itemPurchaser, TowerUpgrader utilities, Collection<GameInitializable> gameInitializerItems, Collection<GameUpdatable> gameUpdatables,Map<String, KeyActivationItem> keyActivationItems) {
         game = new Game(view,itemPurchaser, utilities,gameInitializerItems,gameUpdatables, keyActivationItems);
         this.add(game);
         view.sendEngine(game);
