@@ -76,8 +76,8 @@ public class Game extends StdGame {
     public void initCanvas () {
         gameInfo = view.getGameInfo();
 
-        this.setMoneyTitle("TEST");
-        this.setLivesTitle("TEST");
+        this.setMoneyTitle("Money");
+        this.setLivesTitle("Lives");
         Dimension size = gameInfo.getDimension();// view.getGameSize();
 
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
@@ -88,6 +88,12 @@ public class Game extends StdGame {
     public void initGame () {
         setFrameRate(30, 2);
         defineMedia("mygame.tbl");
+        
+        setHighscores(
+                      10, // number of highscores
+                      new Highscore(0,"nobody"), // default entry for highscore
+                      25 // max length of the player name
+              );
 
         initial_lives = gameInfo.getLife();// view.getLives();
         lives = initial_lives;// view.getLives();
@@ -97,7 +103,6 @@ public class Game extends StdGame {
         String background = view.getGameInfo().getBGImage();// gameInfo.getBGImage();//view.getBGImage();
 
         setBGImage(background);
-        setHighscores(10, new Highscore(0, "aaa"), 3);
         startgame_ingame = true;
         List<Tile> pathList = view.getPath();
         int tileCount = 0;
@@ -131,7 +136,7 @@ public class Game extends StdGame {
         frameRateBar.resume_in_view = false;
         toggleFrameRateBar();
     }
-
+    
     public void doFrameInGame () {
         moveObjects();
         gameInfo = view.getGameInfo();
@@ -152,7 +157,8 @@ public class Game extends StdGame {
         }
 
         if (getKey(KeyEsc)){
-            endGame();
+            clearKey(KeyEsc);
+            loseGame();
         }
         
         if (getKey('F')){
@@ -162,7 +168,7 @@ public class Game extends StdGame {
         if (gameInfo.getIsWin()) {
             wonGame();
         }
-        if (lives <= 0) endGame();
+        if (lives <= 0) loseGame();
     }
 
     /**
@@ -196,7 +202,8 @@ public class Game extends StdGame {
      */
     public void updateGameStats () {
         lives = gameInfo.getLife();
-        score = gameInfo.getGold();
+        money = gameInfo.getGold();
+        score=money+gameInfo.getCurrentWaveNumber()*100+lives;
     }
 
     /**
@@ -205,8 +212,7 @@ public class Game extends StdGame {
      */
 
     public void wonGame(){
-        view.stopWaves();
-//        removeGameObjects();
+        endGame();
         gameWon();
     }
 
@@ -215,18 +221,18 @@ public class Game extends StdGame {
      * GAME OVER and go to title screen
      */
 
-    public void endGame(){
-        view.stopWaves();
-        //view.startModel();
+    public void loseGame(){
+        endGame();
         gameOver();
     }
-
+    
     /**
-     * Removes all JGObjects and JGTimers
+     * Standard routine whenever the game ends
      */
-    public void removeGameObjects () {
-        this.removeAllTimers();
-        removeObjects(null, 0);
+    
+    public void endGame(){
+        view.stopWaves();
+        removeObjects(null,0);
     }
 
     /**

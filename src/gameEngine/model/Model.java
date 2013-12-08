@@ -79,7 +79,10 @@ public class Model {
     public void startGame () {
         gameInfo.SetIsWin(false);
         gameInfo.setLife(parser.getInt("numberOfLives"));
-        rule.ruleStart();
+        gameInfo.setGold(parser.getInt("gold"));
+//        rule.ruleStart();
+        //Edited by Alex, call reset() instead of start()
+        rule.reset();
 
     }
 

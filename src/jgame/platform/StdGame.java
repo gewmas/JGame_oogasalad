@@ -177,6 +177,8 @@ public abstract class StdGame extends JGEngine {
     public double timer = 0;
     /** Player score; starts at 0 at beginning of game. */
     public int score = 0;
+    
+    public int money = 0;
     /**
      * Difficulty level; starts at 0 at beginning of game. Can be
      * incremented each time a level is complete. Can be used to determine game
@@ -578,6 +580,7 @@ public abstract class StdGame extends JGEngine {
         removeGameState("StartGame");
         removeGameState("LifeLost");
         seqtimer = 0;
+        CreateEffect.Words(pfWidth()/2, pfHeight()/2, "VICTORY");
         if (gamewon_ticks > 0) {
             if (gamewon_ingame)
                 addGameState("GameWon");
@@ -612,6 +615,7 @@ public abstract class StdGame extends JGEngine {
         removeGameState("StartGame");
         removeGameState("LifeLost");
         seqtimer = 0;
+        CreateEffect.Words(pfWidth()/2, pfHeight()/2, "GAME OVER");
         if (gameover_ticks > 0) {
             if (gameover_ingame)
                 addGameState("GameOver");
@@ -814,6 +818,15 @@ public abstract class StdGame extends JGEngine {
         if (key >= 32 && key < 127 && playername.length() < highscore_maxnamelen)
             playername += key;
     }
+    
+    public void doFrameGameOver() {
+//        System.out.println(this.countObjects("WordEffect", 0));
+        this.moveObjects("WordEffect", 0);
+    }
+    
+    public void doFrameGameWon() {
+        this.moveObjects("WordEffect",0);
+    }
 
     /**
      * Try to save highscores to default location,
@@ -911,14 +924,12 @@ public abstract class StdGame extends JGEngine {
      * standard state transition function. Default is do nothing.
      */
     public void startGameOver () {
-        CreateEffect.Words(pfWidth()/2,pfHeight()/2,"GAME OVER");
     }
     
     /**
      * Initialize game won sequence. Written by Alex Zhu
      */
     public void startGameWon (){
-        CreateEffect.Words(pfWidth()/2,pfHeight()/2,"VICTORY");
     }
 
     /**
@@ -940,7 +951,8 @@ public abstract class StdGame extends JGEngine {
     public void paintFrame () {
         setFont(status_font);
         setColor(status_color);
-        drawString(money_title +" "+ score, status_l_margin, 0, -1);
+        drawString(money_title +" "+ money, status_l_margin, 0, -1);
+        drawString("Score " + score, status_l_margin,15,-1);
         if (lives_img == null) {
             drawString(lives_title +" " + lives, viewWidth() - status_r_margin, 0, 1);
         }
@@ -1006,14 +1018,13 @@ public abstract class StdGame extends JGEngine {
     }
     
     public void paintFrameGameWon () {
-        this.moveObjects("WordEffect", 0);
+//        this.moveObjects("WordEffect", 0);
 //        drawString("You Won!",
 //                   viewWidth() / 2, viewHeight() / 3, 0, title_font, title_color);
     }
 
     /** Default displays "Game Over!". */
     public void paintFrameGameOver () {
-        this.moveObjects("WordEffect", 0);
 //        drawString("Game Over !",
 //                   viewWidth() / 2, viewHeight() / 3, 0, title_font, title_color);
     }

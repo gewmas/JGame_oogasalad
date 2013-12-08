@@ -19,6 +19,7 @@
 FrozeMagic	-	0	FrozeMagic.png	-
 BoostMagic	-	0	BoostMagic.png	-
 HasteMagic	-	0	HasteMagic.png	-
+PoisonMagic	-	0	PoisonMagic.png	-
 
 Armour1	-	0	Armour1.png	-
 Armour2	-	0	Armour2.png	-
@@ -140,4 +141,3 @@ Blood	Blood1;Blood2;Blood3;Blood4;Blood5;Blood6;Blood7;BloodEnd;	0.3	false
 
 Skull	-	0	Skull.png	-
 Healthy	-	0	Healthy.png	-
-PoisonMagic	-	0	PoisonMagic.png	-
