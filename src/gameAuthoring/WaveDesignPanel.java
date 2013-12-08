@@ -48,6 +48,7 @@ public class WaveDesignPanel extends JPanel {
         interval.setFont(Constants.DEFAULT_BODY_FONT);
 
         myTypeButton = new JButton(DEFAULT_TYPE_TEXT);
+        myTypeButton.setFont(Constants.DEFAULT_BODY_FONT);
         myTypeButton.addMouseListener(createWaveTypeListener());
 
         myEnemyChooser = new JComboBox<String>();
@@ -77,7 +78,7 @@ public class WaveDesignPanel extends JPanel {
         this.setLayout(new MigLayout("wrap 2"));
         this.add(type);
         this.add(myTypeButton);
-        //this.add(myEnemyChooser);
+        // this.add(myEnemyChooser);
         this.add(quantity);
         this.add(myNumberField);
         this.add(period);
@@ -154,8 +155,6 @@ public class WaveDesignPanel extends JPanel {
                         JSONObject enemy = (JSONObject) enemyList.get(i);
                         enemyOptions[i] = enemy.getString("id");
                     }
-                    
-                    
 
                 }
 

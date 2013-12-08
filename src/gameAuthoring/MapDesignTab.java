@@ -49,7 +49,7 @@ public class MapDesignTab extends Tab {
         title.setFont(new Font("Calibri", Font.PLAIN, 30));
         title.setForeground(new Color(80, 80, 80));
 
-        JLabel pathLabel = new JLabel("Path image:");
+        JLabel pathLabel = new JLabel("Path Image:");
         pathLabel.setFont(Constants.DEFAULT_BODY_FONT);
         myCurrentPathImage = new ImageLabel(50, 50);
         myCurrentPathImage.setMutableStatusTrue();
@@ -61,7 +61,7 @@ public class MapDesignTab extends Tab {
         checkPath.setFont(Constants.DEFAULT_BODY_FONT);
         checkPath.addMouseListener(createPathCheckListener());
 
-        JButton setBackground = new JButton("Set background image");
+        JButton setBackground = new JButton("Set Background Image");
         setBackground.setFont(Constants.DEFAULT_BODY_FONT);
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
 

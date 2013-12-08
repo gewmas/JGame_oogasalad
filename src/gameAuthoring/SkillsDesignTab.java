@@ -24,13 +24,6 @@ public class SkillsDesignTab extends Tab {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir"));
 
-    // bullet image
-    // magic image for each
-    // speed
-    // flame
-    // invisibility - enemy
-    // poison -
-    // damage
     public SkillsDesignTab (GameData gameData) {
         super(gameData);
     }
@@ -47,20 +40,25 @@ public class SkillsDesignTab extends Tab {
         mainPanel.setPreferredSize(new Dimension(500, 500));
 
         AudioLabel hasteAudio = new AudioLabel();
+        hasteAudio.setMutableStatusTrue();
         AudioLabel armorAudio = new AudioLabel();
+        armorAudio.setMutableStatusTrue();
         AudioLabel healAudio = new AudioLabel();
+        healAudio.setMutableStatusTrue();
         AudioLabel lightAudio = new AudioLabel();
+        lightAudio.setMutableStatusTrue();
         AudioLabel poisonAudio = new AudioLabel();
+        poisonAudio.setMutableStatusTrue();
 
-        JLabel hasteLabel = new JLabel("Haste audio:");
+        JLabel hasteLabel = new JLabel("Haste Audio:");
         hasteLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        JLabel armorLabel = new JLabel("Armor audio:");
+        JLabel armorLabel = new JLabel("Armor Audio:");
         armorLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        JLabel healLabel = new JLabel("Heal audio:");
+        JLabel healLabel = new JLabel("Heal Audio:");
         healLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        JLabel lightLabel = new JLabel("Light audio:");
+        JLabel lightLabel = new JLabel("Light Audio:");
         lightLabel.setFont(Constants.DEFAULT_BODY_FONT);
-        JLabel poisonLabel = new JLabel("Poison audio:");
+        JLabel poisonLabel = new JLabel("Poison Audio:");
         poisonLabel.setFont(Constants.DEFAULT_BODY_FONT);
 
         subPanel.add(hasteLabel);
@@ -86,7 +84,6 @@ public class SkillsDesignTab extends Tab {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                System.out.println("clicked");
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     System.out.println(INPUT_CHOOSER.getSelectedFile());
