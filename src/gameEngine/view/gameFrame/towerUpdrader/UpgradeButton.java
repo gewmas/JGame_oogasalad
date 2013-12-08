@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.towerUpdater;
+package gameEngine.view.gameFrame.towerUpdrader;
 
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.view.View;
@@ -51,7 +51,7 @@ public class UpgradeButton extends TowerUpgraderButton {
                                                              NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
                                                              UPGRADE_KEY, UPGRADE_KEY, NORMAL_KEY,
                                                              NORMAL_KEY, NORMAL_KEY };
-    private TowerUpgrader towerUpgrader;
+    private ItemOptionsDisplayer towerUpgrader;
     private Map<String, String> upgradedValuesToDisplay;
     private Map<String, String> normalValuesToDisplay;
     private View view;
@@ -59,7 +59,7 @@ public class UpgradeButton extends TowerUpgraderButton {
     private Map<String, String> information;
     private boolean isActive;
 
-    public UpgradeButton (TowerUpgrader utility, View viewer) {
+    public UpgradeButton (ItemOptionsDisplayer utility, View viewer) {
         super(NAME);
         this.towerUpgrader = utility;
         this.view = viewer;

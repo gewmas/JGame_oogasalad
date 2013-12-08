@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 import javax.swing.JPanel;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
+import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 
 
 /**
@@ -16,7 +16,7 @@ public class CanvasPanel extends JPanel {
 
     public CanvasPanel (View view,
                         ItemPurchaser itemPurchaser,
-                        TowerUpgrader utilities,
+                        ItemOptionsDisplayer utilities,
                         Collection<GameInitializable> gameInitializerItems,
                         Collection<GameUpdatable> gameUpdatables,
                         Map<String, KeyActivationItem> keyActivationItems) {

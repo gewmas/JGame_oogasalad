@@ -7,7 +7,7 @@ import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
 import gameEngine.view.gameFrame.tools.DisplayValue;
-import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
+import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,7 +43,7 @@ public class Game extends StdGame {
     private int HEIGHT = 600;
 
     private View view;
-    private TowerUpgrader utilities;
+    private ItemOptionsDisplayer utilities;
 
     private FrameRateSlider frameRateSlider;
     private JGObject frameRateBar;
@@ -58,7 +58,7 @@ public class Game extends StdGame {
 
     public Game (View view,
                  ItemPurchaser itemPurchaser,
-                 TowerUpgrader utilities,
+                 ItemOptionsDisplayer utilities,
                  Collection<GameInitializable> gameInitializerItems,
                  Collection<GameUpdatable> gameUpdatables,
                  Map<String, KeyActivationItem> keyActivationItems) {
