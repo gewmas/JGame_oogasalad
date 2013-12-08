@@ -131,7 +131,7 @@ public class Game extends StdGame {
         frameRateBar.resume_in_view = false;
         toggleFrameRateBar();
     }
-
+    
     public void doFrameInGame () {
         moveObjects();
         gameInfo = view.getGameInfo();
@@ -152,6 +152,7 @@ public class Game extends StdGame {
         }
 
         if (getKey(KeyEsc)){
+            clearKey(KeyEsc);
             endGame();
         }
         
