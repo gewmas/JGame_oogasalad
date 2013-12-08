@@ -5,9 +5,11 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.ItemPurchaser;
+import gameEngine.view.gameFrame.tools.DisplayValue;
 import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,7 +137,17 @@ public class StoreOptionsPanel extends JPanel {
             StoreButtonAction hoverAction = new StoreButtonAction() {
                 @Override
                 public void executeAction () {
-                    utilities.displayStoreInformation(storeItem.getInfo(), valuesToDisplay);
+                    List<DisplayValue> display= new ArrayList();
+                    for (String key: valuesToDisplay.keySet()){
+                        if (storeItem.getInfo().get(key)!=null){
+                            String field = key;
+                            String value = storeItem.getInfo().get(key);
+                            String color = valuesToDisplay.get(key);
+                           
+                            display.add(new DisplayValue(field,value,color));
+                            }
+                    }
+                    utilities.displayStoreInformation(storeItem.getInfo(), display);
 
                 }
             };

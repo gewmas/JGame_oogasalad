@@ -2,10 +2,13 @@ package gameEngine.view.gameFrame.towerUpdater;
 
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.view.View;
+import gameEngine.view.gameFrame.tools.DisplayValue;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -71,19 +74,51 @@ public class UpgradeButton extends TowerUpgraderButton {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered (MouseEvent e) {
-                towerUpgrader.updateDisplay(upgradedValuesToDisplay);
+                List<DisplayValue> display = new ArrayList();
+               
+                    for (String key: upgradedValuesToDisplay.keySet()){
+                        if (information.get(key)!=null){
+                        String field = key;
+                        String value = information.get(key);
+                        String color = upgradedValuesToDisplay.get(key);
+                       
+                        display.add(new DisplayValue(field,value,color));
+                        }
+                    }
+                towerUpgrader.updateDisplay(display);
             }
 
             @Override
             public void mouseExited (MouseEvent e) {
-                towerUpgrader.updateDisplay(normalValuesToDisplay);
+                List<DisplayValue> display = new ArrayList();
+                
+                for (String key: normalValuesToDisplay.keySet()){
+                    if (information.get(key)!=null){
+                    String field = key;
+                    String value = information.get(key);
+                    String color = normalValuesToDisplay.get(key);
+                   
+                    display.add(new DisplayValue(field,value,color));
+                    }
+                }
+                towerUpgrader.updateDisplay(display);
             }
 
             @Override
             public void mouseClicked (MouseEvent e) {
                 if (isActive) {
                     view.upgradeTower(towerX, towerY);
-                    towerUpgrader.updateDisplay(upgradedValuesToDisplay);
+                    List<DisplayValue> display = new ArrayList();
+                    for (String key: upgradedValuesToDisplay.keySet()){
+                        if (information.get(key)!=null){
+                        String field = key;
+                        String value = information.get(key);
+                        String color = upgradedValuesToDisplay.get(key);
+                       
+                        display.add(new DisplayValue(field,value,color));
+                        }
+                    }
+                towerUpgrader.updateDisplay(display);
                 }
                 checkActive();
             }

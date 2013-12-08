@@ -2,24 +2,25 @@ package gameEngine.view.gameFrame.towerUpdater;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.gameObjects.RangeDisplay;
+import gameEngine.view.gameFrame.tools.DisplayValue;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 
 
 public class TowerUpgrader {
-    InfoDisplayPanel display;
-    GameFrame gameFrame;
-    RangeDisplay rangeDisplay;
+    private InfoDisplayPanel display;
+    private GameFrame gameFrame;
+    private RangeDisplay rangeDisplay;
     private Collection<TowerUpgraderButton> TowerUpgraderButtons;
 
     public TowerUpgrader (InfoDisplayPanel display, GameFrame gameFrame, View view) {
         this.display = display;
         this.gameFrame = gameFrame;
-
         this.TowerUpgraderButtons = new ArrayList();
         TowerUpgraderButtons.add(new UpgradeButton(this, view));
         TowerUpgraderButtons.add(new SellButton(this, view));
@@ -34,27 +35,30 @@ public class TowerUpgrader {
         for (TowerUpgraderButton button : TowerUpgraderButtons) {
             button.setVisible(false);
         }
-
         rangeDisplay.suspend();
     }
 
     public void displayStoreInformation (Map<String, String> information,
-                                         Map<String, String> displayValues) {
-        this.display.displayInformation(information, displayValues);
-
-        for (TowerUpgraderButton button : TowerUpgraderButtons) {
-            button.setVisible(false);
-        }
-
-        rangeDisplay.suspend();
+                                         List<DisplayValue> displayValues) {
+        clearDisplay ();
+        updateDisplay(displayValues);
 
     }
 
-    public void displayCheckedInformation (Map<String, String> information,
-                                           Map<String, String> display,
+
+    /**
+     * Adds a circle around the tower that was clicked
+     */
+    public void createRangeDisplay () {
+        this.rangeDisplay = new RangeDisplay("RangeDisplay", false, -1, -1, 256);
+    }
+
+    public void displayTowerInformation (Map<String, String> information,
+                                           List<DisplayValue> display,
                                            int mouseX,
                                            int mouseY) {
-        this.display.displayInformation(information, display);
+        clearDisplay ();
+        this.display.updateDisplayInformation( display);
 
         for (TowerUpgraderButton button : TowerUpgraderButtons) {
             button.setVisible(true);
@@ -70,15 +74,9 @@ public class TowerUpgrader {
         rangeDisplay.resume();
     }
 
-    public void updateDisplay (Map<String, String> toDisplay) {
-        this.display.updateInformation(toDisplay);
-    }
-
-    /**
-     * Adds a circle around the tower that was clicked
-     */
-    public void createRangeDisplay () {
-        this.rangeDisplay = new RangeDisplay("RangeDisplay", false, -1, -1, 256);
+    public void updateDisplay (List<DisplayValue> display) {
+        this.display.updateDisplayInformation( display);
+        
     }
 
 }
