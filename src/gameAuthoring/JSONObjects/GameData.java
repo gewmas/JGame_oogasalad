@@ -7,8 +7,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.swing.JFileChooser;
 
 
@@ -34,7 +34,7 @@ public class GameData extends JSONObject {
      */
     public GameData () {
         super();
-        this.put("towerType", myTowerList);
+        this.put("Tower", myTowerList);
         this.put("enemyType", myEnemyList);
         this.put("temporaryBarrierType", myBarrierList);
         this.put("wave", myWaveList);
@@ -58,7 +58,11 @@ public class GameData extends JSONObject {
     public void setGold (int gold) {
         this.put("gold", gold);
     }
-
+    
+    public void setGoldName(String goldName){
+        this.put("goldName", goldName);
+    }
+    
     /**
      * Sets starting number of lives
      * 
@@ -66,6 +70,10 @@ public class GameData extends JSONObject {
      */
     public void setLives (int lives) {
         this.put("numberOfLives", lives);
+    }
+    
+    public void setLivesName(String livesName){
+        this.put("livesName", livesName);
     }
 
     /**
@@ -101,7 +109,7 @@ public class GameData extends JSONObject {
                           String name,
                           String imagePath,
                           int damage,
-                          int attackSpeed,
+                          double attackSpeed,
                           int attackMode,
                           int range,
                           int cost,
@@ -112,7 +120,55 @@ public class GameData extends JSONObject {
                                             range, cost, recyclePrice, description));
 
     }
-
+    
+    public void addMagicTower(String type,
+                          String name,
+                          String imagePath,
+                          int damage,
+                          double attackSpeed,
+                          int attackMode,
+                          int range,
+                          int cost,
+                          int recyclePrice,
+                          String description,
+                          double magicFactor,
+                          String magic){
+        
+        myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed, attackMode,
+                                            range, cost, recyclePrice, description, magicFactor, magic));
+    }
+    
+    public void addMultipleShootingTower(String type,
+                              String name,
+                              String imagePath,
+                              int damage,
+                              double attackSpeed,
+                              int attackMode,
+                              int attackAmount,
+                              int range,
+                              int cost,
+                              int recyclePrice,
+                              String description){
+            
+            myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed, attackMode, attackAmount,
+                                                range, cost, recyclePrice, description));
+        }
+    
+    public void addBoostTower(String type,
+                              String name,
+                              String imagePath,
+                              int damage,
+                              double attackSpeed,
+                              int range,
+                              int cost,
+                              int recyclePrice,
+                              String description, 
+                              double boostFactor){
+            
+            myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed,
+                                                range, cost, recyclePrice, description, boostFactor));
+        }
+    
     public void addTower (TowerJSONObject t) {
         myTowerList.put(t);
     }
@@ -160,8 +216,8 @@ public class GameData extends JSONObject {
      * @param life Number enemy lives (hits enemy can endure)
      * @param speed Enemy speed
      */
-    public void addEnemy (String name, int gold, String image, int life, double speed) {
-        myEnemyList.put(new EnemyJSONObject(name, gold, image, life, speed));
+    public void addEnemy (String name, int gold, String image, int life, double speed, String skill) {
+        myEnemyList.put(new EnemyJSONObject(name, gold, image, life, speed, skill));
     }
 
     /**
@@ -197,12 +253,20 @@ public class GameData extends JSONObject {
         myResources.addAudio(id, url);
     }
 
-    public void addAnimation (String id, ArrayList<String> imagePaths) {
+    public void addAnimation (String id, List<String> imagePaths) {
         myResources.addAnimation(id, imagePaths);
     }
 
     public ResourcesJSONObject getResources () {
         return myResources;
+    }
+    
+    public void addBulletImage(String imageID){
+        this.put("bulletImage", imageID);
+    }
+    
+    public void addBGAudio(String audioID){
+        this.put("bgMusic", audioID);
     }
 
     /**
@@ -264,7 +328,7 @@ public class GameData extends JSONObject {
      * @author Lalita Maraj
      */
     private boolean isComplete () {
-        // TODO Auto-generated method stub
-        return true;
+       return (this.has("name") && this.has("splashImage") && this.has("BGImage") && this.has("gold") && this.has("numberOfLives"));
+ 
     }
 }

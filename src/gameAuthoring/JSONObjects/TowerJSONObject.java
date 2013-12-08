@@ -1,5 +1,6 @@
 package gameAuthoring.JSONObjects;
 
+import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 
@@ -44,7 +45,7 @@ public class TowerJSONObject extends JSONObject {
         this.put("attackMode", attackMode);
         this.put("range", range);
         this.put("cost", cost);
-        this.put("recyclePrice", recyclePrice);
+        this.put("Sell Price", recyclePrice);
         this.put("description", description);
     }
 
@@ -70,7 +71,7 @@ public class TowerJSONObject extends JSONObject {
         this.put("attackAmount", attackAmount);
         this.put("range", range);
         this.put("cost", cost);
-        this.put("recyclePrice", recyclePrice);
+        this.put("Sell Price", recyclePrice);
         this.put("description", description);
     }
     
@@ -79,8 +80,8 @@ public class TowerJSONObject extends JSONObject {
                             String name,
                             String imagePath,
                             int damage,
-                            int attackSpeed,
-                            int attackMode, //Not in JSON
+                            double attackSpeed,
+                            //int attackMode, //Not in JSON
                             int range,
                             int cost,
                             int recyclePrice,
@@ -92,10 +93,10 @@ public class TowerJSONObject extends JSONObject {
         this.put("image", imagePath);
         this.put("damage", damage);
         this.put("attackSpeed", attackSpeed);
-        this.put("attackMode", attackMode);
+        //this.put("attackMode", attackMode);
         this.put("range", range);
         this.put("cost", cost);
-        this.put("recyclePrice", recyclePrice);
+        this.put("Sell Price", recyclePrice);
         this.put("description", description);
         this.put("boostFactor", boostFactor);
     }
@@ -112,7 +113,7 @@ public class TowerJSONObject extends JSONObject {
                             int recyclePrice,
                             String description,
                             double magicFactor,
-                            int magic) {
+                            String magic) {
 
         this.put("type", type);
         this.put("id", name);
@@ -125,7 +126,9 @@ public class TowerJSONObject extends JSONObject {
         this.put("recyclePrice", recyclePrice);
         this.put("description", description);
         this.put("magicFactor", magicFactor);
-        this.put("magic", magic);
+        JSONArray magicArray = new JSONArray();
+        magicArray.put(magic);
+        this.put("magic", magicArray);
     }
     
 

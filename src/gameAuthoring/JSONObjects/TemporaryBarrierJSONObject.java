@@ -12,6 +12,7 @@ public class TemporaryBarrierJSONObject extends JSONObject{
         super();
         this.put("id", id);
         this.put("image", image);
+        this.put("cost", cost);
         this.put("damage", damage);
         this.put("expire", expire);
         this.put("description", description );

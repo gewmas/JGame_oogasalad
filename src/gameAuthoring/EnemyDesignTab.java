@@ -44,7 +44,7 @@ public class EnemyDesignTab extends Tab {
         myCreatedEnemies = new JScrollPane(myScrollPanel);
         myCreatedEnemies.getViewport().setOpaque(false);
         myCreatedEnemies.setOpaque(false);
-        myCreatedEnemies.setPreferredSize(new Dimension(380, 350));
+        myCreatedEnemies.setPreferredSize(new Dimension(380, 400));
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         myCreatedEnemies.setBorder(BorderFactory
                 .createTitledBorder(b, "Created Enemies",
@@ -66,7 +66,7 @@ public class EnemyDesignTab extends Tab {
             e.printStackTrace();
         }
         JLabel enemyNameLabel = new JLabel(enemyName);
-        enemyNameLabel.setFont(Constants.defaultBodyFont);
+        enemyNameLabel.setFont(Constants.DEFAULT_BODY_FONT);
         myScrollPanel.add(enemyNameLabel);
         myScrollPanel.add(enemyIcon);
     }

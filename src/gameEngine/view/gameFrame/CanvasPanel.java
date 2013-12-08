@@ -1,31 +1,27 @@
 package gameEngine.view.gameFrame;
 
-import jgame.impl.JGEngineInterface;
-import gameEngine.controller.Controller;
-import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.Panel;
+import java.util.Collection;
+import java.util.Map;
+import javax.swing.JPanel;
 import gameEngine.view.View;
+import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
 
 
-public class CanvasPanel extends Panel {
+public class CanvasPanel extends JPanel {
     Game game;
 
-    public CanvasPanel (View view, GameFrameMediator mediator, ItemPurchaser itemPurchaser, Utilities utilities) {
-        game = new Game(view, mediator,itemPurchaser, utilities);
+    public CanvasPanel (View view,  ItemPurchaser itemPurchaser, TowerUpgrader utilities, Collection<GameInitializable> gameInitializerItems, Collection<GameUpdatable> gameUpdatables,Map<String, KeyActivationItem> keyActivationItems) {
+        game = new Game(view,itemPurchaser, utilities,gameInitializerItems,gameUpdatables, keyActivationItems);
         this.add(game);
         view.sendEngine(game);
     }
-//
-//    public void placeTower (PurchaseInfo towerInfo) {
-//        game.placeTower(towerInfo);
-//    }
+
 
     public void quitGame () {
         game.destroy();
     }
 
     public void endGame () {
-        game.endGame();
+        game.loseGame();
     }
 }

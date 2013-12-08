@@ -6,7 +6,6 @@ import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -31,8 +30,7 @@ public class MapDesignTab extends Tab {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
     private Grid myGrid;
-    private JLabel myCurrentPathImage;
-    private JLabel myCurrentBoundaryImage;
+    private ImageLabel myCurrentPathImage;
     private String myBackgroundImage;
     private String myPathImage;
 
@@ -51,27 +49,20 @@ public class MapDesignTab extends Tab {
         title.setFont(new Font("Calibri", Font.PLAIN, 30));
         title.setForeground(new Color(80, 80, 80));
 
-        JLabel pathLabel = new JLabel("Path image:");
-        pathLabel.setFont(Constants.defaultBodyFont);
-        myCurrentPathImage = new JLabel();
-        myCurrentPathImage.setFont(Constants.defaultBodyFont);
-        myCurrentPathImage.setPreferredSize(new Dimension(50, 50));
+        JLabel pathLabel = new JLabel("Path Image:");
+        pathLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        myCurrentPathImage = new ImageLabel(50, 50);
+        myCurrentPathImage.setMutableStatusTrue();
+        myCurrentPathImage.setFont(Constants.DEFAULT_BODY_FONT);
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myCurrentPathImage.setBorder(border);
         myCurrentPathImage.addMouseListener(createPathListener());
-
-        JLabel boundaryLabel = new JLabel("Boundary image:");
-        boundaryLabel.setFont(Constants.defaultBodyFont);
-        myCurrentBoundaryImage = new JLabel();
-        myCurrentBoundaryImage.setPreferredSize(new Dimension(50, 50));
-        myCurrentBoundaryImage.setBorder(border);
-
         JButton checkPath = new JButton("Create Map");
-        checkPath.setFont(Constants.defaultBodyFont);
+        checkPath.setFont(Constants.DEFAULT_BODY_FONT);
         checkPath.addMouseListener(createPathCheckListener());
 
-        JButton setBackground = new JButton("Set background image");
-        setBackground.setFont(Constants.defaultBodyFont);
+        JButton setBackground = new JButton("Set Background Image");
+        setBackground.setFont(Constants.DEFAULT_BODY_FONT);
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
 
         mainPanel.add(title, "span 2");
@@ -79,8 +70,6 @@ public class MapDesignTab extends Tab {
         mainPanel.add(gridPanel);
         buttonPanel.add(pathLabel, "gap 0 0 0 30");
         buttonPanel.add(myCurrentPathImage, "gap 0 0 0 30");
-        buttonPanel.add(boundaryLabel, "gap 0 0 0 30");
-        buttonPanel.add(myCurrentBoundaryImage, "gap 0 0 0 30");
         buttonPanel.add(setBackground, "span 2");
         buttonPanel.add(checkPath);
         mainPanel.add(buttonPanel);
@@ -103,8 +92,6 @@ public class MapDesignTab extends Tab {
             int x = (Integer) point.get("x");
             int y = (Integer) point.get("y");
 
-
-
             myGrid.toggleGridButton(x, y);
 
             if (i == 0) myGrid.setPathStart(new Point2D.Double(x, y));
@@ -117,21 +104,19 @@ public class MapDesignTab extends Tab {
         catch (IOException e) {
             e.printStackTrace();
         }
-        setData();
+        setPathData();
     }
 
     private MouseAdapter createPathListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-
-                File imgSource = GameAuthoringGUI.mySelectedImage;
+                File imgSource = GameAuthoringGUI.myImageLabel.getImageFile();
                 myGrid.setImageSource(imgSource);
                 Image path;
                 try {
                     myPathImage =
-                            imgSource.toString().replace(System.getProperties()
-                                    .getProperty("user.dir") + "/", "");
+                            GameAuthoringGUI.myImageLabel.getID();
                     path = ImageIO.read(imgSource).getScaledInstance(50, 50, Image.SCALE_FAST);
                     myCurrentPathImage.setIcon(new ImageIcon(path));
                 }
@@ -147,13 +132,13 @@ public class MapDesignTab extends Tab {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                setData();
+                setPathData();
             }
         };
         return listener;
     }
 
-    private void setData () {
+    private void setPathData () {
         if (myGrid.isValidPathHelper()) {
             JOptionPane.showMessageDialog(null, "Valid path! Map Written");
             myGameData.setBackgroundImage(myBackgroundImage);

@@ -2,8 +2,8 @@ package gameEngine.factory.magicFactory;
 
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.magic.IMagicable;
+import gameEngine.parser.JSONLibrary.JSONArray;
 import java.util.HashMap;
-import java.util.List;
 
 
 /*
@@ -13,18 +13,24 @@ public class MagicsFactory {
 
     private static MagicsFactory myMagicFactory;
     private HashMap<Integer, IMagicFactory> myFactoryMap = new HashMap<Integer, IMagicFactory>();
-    private HashMap<String, Integer> myTranlateMap=new HashMap<String,Integer>();
-    
+    private HashMap<String, Integer> myTranslateMap = new HashMap<String, Integer>();
+
     private MagicsFactory () {
         myFactoryMap.put(GameEngineConstant.FROZEMAGIC_ID, new EFrozeFactory());
         myFactoryMap.put(GameEngineConstant.BOOSTMAGIC_ID, new TBoostFactory());
-        myFactoryMap.put(GameEngineConstant.SPEEDUPMAGIC_ID, new ESpeedUpFactory());
-        
-        
-        
-        myTranlateMap.put("FrozeMagic", GameEngineConstant.FROZEMAGIC_ID);
-        myTranlateMap.put("BoostMagic", GameEngineConstant.FROZEMAGIC_ID);
-        myTranlateMap.put("SpeedMagic", GameEngineConstant.SPEEDUPMAGIC_ID);
+        myFactoryMap.put(GameEngineConstant.HASTEMAGIC_ID, new EHasteFactory());
+        myFactoryMap.put(GameEngineConstant.ARMOURMAGIC_ID, new EArmourFactory());
+        myFactoryMap.put(GameEngineConstant.HEALMAGIC_ID, new EHealFactory());
+        myFactoryMap.put(GameEngineConstant.LIGHTMAGIC_ID, new TLightFactory());
+        myFactoryMap.put(GameEngineConstant.POISONMAGIC_ID, new EPoisonFactory());
+
+        myTranslateMap.put("FrozeMagic", GameEngineConstant.FROZEMAGIC_ID);
+        myTranslateMap.put("BoostMagic", GameEngineConstant.BOOSTMAGIC_ID);
+        myTranslateMap.put("HasteMagic", GameEngineConstant.HASTEMAGIC_ID);
+        myTranslateMap.put("ArmourMagic", GameEngineConstant.ARMOURMAGIC_ID);
+        myTranslateMap.put("HealMagic", GameEngineConstant.HEALMAGIC_ID);
+        myTranslateMap.put("LightMagic", GameEngineConstant.LIGHTMAGIC_ID);
+        myTranslateMap.put("PoisonMagic", GameEngineConstant.POISONMAGIC_ID);
     }
 
     public static MagicsFactory getInstance () {
@@ -38,39 +44,52 @@ public class MagicsFactory {
      * 
      * @param target
      * @param magicIdToCreate
-     * @param currentMagicIds,if the magic can overlap then make the currentMagicIds be Constant.OVERLAPMAGIC_ID
+     * @param currentMagicIds,if the magic can overlap then make the currentMagicIds be
+     *        Constant.OVERLAPMAGIC_ID
      */
-    public void createMagics (IMagicable target, IMagicable sender,int magicIdToCreate, int currMagicIds) {
-        if(currMagicIds!=GameEngineConstant.OVERLAPMAGIC_ID){
+    public void createMagics (IMagicable target,
+                              IMagicable sender,
+                              int magicIdToCreate,
+                              int currMagicIds) {
+        if (currMagicIds != GameEngineConstant.OVERLAPMAGIC_ID) {
             magicIdToCreate = (~currMagicIds) & magicIdToCreate;
         }
-        
-        int temp=magicIdToCreate;
-        int mask=1;
-        while(magicIdToCreate > 0) {
-            IMagicFactory factory = myFactoryMap.get(temp&mask);
+
+        int temp = magicIdToCreate;
+        int mask = 1;
+        while (magicIdToCreate > 0) {
+            IMagicFactory factory = myFactoryMap.get(temp & mask);
             if (factory != null) {
-                factory.createMagicInstance(target,sender);
+                factory.createMagicInstance(target, sender);
             }
             magicIdToCreate = magicIdToCreate >> 1;
-            mask=mask<<1;
+            mask = mask << 1;
         }
     }
+
+
+    public void createMagics (IMagicable target, IMagicable sender, String newMagicNames) {
+        int newMagicIds = myTranslateMap.get(newMagicNames);
+        createMagics(target, sender, newMagicIds, 0);
+    }
     
-    public void creatMagics(IMagicable target, IMagicable sender,List<String> magicIdToCreate,List<String> currMagicIds){
-        int newMagicIds=0;
-        int currentMagicIds=0;
-        
-        for(String str:magicIdToCreate){
-            newMagicIds+= myTranlateMap.get(str);
+    public void createMagics (IMagicable target, IMagicable sender, String newMagicNames, boolean overlap) {
+        int newMagicIds = myTranslateMap.get(newMagicNames);
+        if(overlap){
+            createMagics(target, sender, newMagicIds, 0);
         }
-        
-        for(String str:currMagicIds){
-            currentMagicIds+= myTranlateMap.get(str);
-        }
-        
-        createMagics (target, sender,newMagicIds, currentMagicIds);
-        
-        
+        else
+            createMagics(target, sender, newMagicIds, target.getCurrentMagics());
+    }
+
+
+
+    public int parserMagicId (JSONArray array) {
+        int temp = 0;
+        for (int i = 0; i < array.length(); i++) {
+            temp += myTranslateMap.get(array.get(i));
+        }        
+       
+        return temp;
     }
 }

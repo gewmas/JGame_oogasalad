@@ -1,8 +1,12 @@
 package gameEngine.model;
 
+import gameEngine.cheats.Cheat;
+import gameEngine.cheats.CheatParser;
 import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.temporaryBarrier.TemporaryBarrierFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
+import gameEngine.model.effect.CreateEffect;
+import gameEngine.model.enemy.Enemy;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
@@ -17,7 +21,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import jgame.JGObject;
 import jgame.impl.JGEngineInterface;
 
 
@@ -42,9 +45,17 @@ public class Model {
     private Rule rule; // how each waves created, ruleStart, ruleStop
     private ArrayList<ArrayList<Tile>> grid;
     private ArrayList<Tile> barriers;
+    private ArrayList<Enemy> spawnedEnemies;
+    private CheatParser cheatParser;
+
 
     public Model () {
          
+    }
+
+    // @Author: Fabio
+    public ArrayList<Enemy> getSpawnedEnemies () {
+        return spawnedEnemies;
     }
 
     public void newGame (File jsonFile) throws Exception {        
@@ -56,20 +67,22 @@ public class Model {
         path = gridFactory.getPathList();
         grid = gridFactory.getGridList();
         barriers = gridFactory.getBarrierList();
+        spawnedEnemies = new ArrayList<Enemy>();
         temporaryBarrierWarehouse = new TemporaryBarrierWarehouse(parser);
         towerWarehouse = new TowerWarehouse(parser);
         enemyWarehouse = new EnemyWarehouse(parser, this);
-        rule = new Rule(1, enemyWarehouse);
-        rule.readWaveFromJSon(parser.getJSONArray("wave"));
+        cheatParser = new CheatParser(this);
+       
         gameInfo = new GameInfo(parser);
     }
-    // Jiaran: now we can just read waves from JSon.
+    // Fabio Changed it (added win and life reset)
     public void startGame () {
-//        Wave w = new Wave("1", 10, 0.5, 4, enemyWarehouse);
-//        Wave w1 = new Wave("2", 10, 0.5, 0, enemyWarehouse);
-//        rule.addWave(w);
-//        rule.addWave(w1);
-        rule.ruleStart();
+        gameInfo.SetIsWin(false);
+        gameInfo.setLife(parser.getInt("numberOfLives"));
+        gameInfo.setGold(parser.getInt("gold"));
+//        rule.ruleStart();
+        //Edited by Alex, call reset() instead of start()
+        rule.reset();
 
     }
 
@@ -118,6 +131,8 @@ public class Model {
         this.myEng = eng;
         Resources r = new Resources(myEng);
         r.register(parser);
+        rule = new Rule(1, enemyWarehouse,eng);
+        rule.readWaveFromJSon(parser.getJSONArray("wave"));
     }
     
     //Refractor method to check whether Tower exist at (x, y)
@@ -203,6 +218,12 @@ public class Model {
      */
 
     public GameInfo getGameInfo() {
+        if (rule != null) {
+            gameInfo.SetIsWin(rule.isWin());
+           
+            gameInfo.SetCurrentWaveNumber(rule.getCurrentWaveNum());
+        }
+       
         return gameInfo;
     }
 
@@ -231,26 +252,19 @@ public class Model {
      * @return bool
      */
     public boolean activateCheat(String code) {
-
-        String[] cheatArgs = code.split(" ");
-        String cmd = cheatArgs[0];
-        if(cmd == "add_gold") {
-            int amt = Integer.parseInt(cheatArgs[1]);
-            gameInfo.addGold(amt);
-        } else if(cmd.equals("add_lives")) {
-            int amt = Integer.parseInt(cheatArgs[1]);
-            gameInfo.addLife(amt);
-        } else if(cmd.equals("kill_all")) {
-            //TODO
-        } else if(cmd.equals("win_game")) {
-            //TODO
-        } else if (cmd.equals("lose_game")) {
-            //TODO
-        } else {
+        Cheat cheat = cheatParser.parse(code);
+        if(cheat == null) {
             return false;
         }
-        return true;
+        return cheat.execute();
     }
-
+    
+    public void addEnemy(Enemy enemy) {
+        spawnedEnemies.add(enemy);
+    }
+    
+    public void stopWaves(){
+        rule.stop();
+    }
 
 }

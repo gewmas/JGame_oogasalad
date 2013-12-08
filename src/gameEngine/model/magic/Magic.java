@@ -14,6 +14,7 @@ public abstract class Magic extends JGObject {
     int myMagicId;
     IMagicable mySender;
     
+    double myChangeRecord;
     double pathX;
     double pathY;
     public Magic (int expire,
@@ -28,7 +29,8 @@ public abstract class Magic extends JGObject {
 
         myTarget = target;
         mySender=sender;
-        myMagicId=magicId;  
+        myMagicId=magicId; 
+        myChangeRecord=0;
     }
 
     public void remove () {
