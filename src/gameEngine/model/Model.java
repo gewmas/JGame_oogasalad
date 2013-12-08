@@ -265,5 +265,8 @@ public class Model {
         spawnedEnemies.add(enemy);
     }
     
+    public void stopWaves(){
+        rule.stop();
+    }
 
 }

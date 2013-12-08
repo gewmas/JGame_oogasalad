@@ -185,4 +185,7 @@ public class Controller {
         return model.getPathList();
     }
 
+    public void stopWaves(){
+        model.stopWaves();
+    }
 }
