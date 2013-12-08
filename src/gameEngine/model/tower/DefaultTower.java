@@ -106,6 +106,7 @@ public class DefaultTower extends Tower {
         // check the enemies within the shooting range
         // create bullets
         // check the time after last shoot
+        super.move();
         long deltaTime = (System.currentTimeMillis() - prevTime) / 1000; // convert to second
 
         if (attackSpeed>0&&deltaTime > 1 / attackSpeed) {
