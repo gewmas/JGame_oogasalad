@@ -28,7 +28,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class BasicInfoTab extends Tab {
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources/img");
 
     private JTextField myGameName;
     private JTextField myGold;

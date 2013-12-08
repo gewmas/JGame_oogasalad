@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -98,6 +99,7 @@ public class TempBarrierDesignPanel extends JPanel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 GameData gameData = myTempBarrierDesignTab.getGameData();
+
                 String name = myNameField.getText();
                 int damage = Integer.parseInt(myDamageField.getText());
                 int cost = Integer.parseInt(myCostField.getText());
@@ -105,14 +107,19 @@ public class TempBarrierDesignPanel extends JPanel {
                 String description = myDescriptionField.getText();
                 String image = myBarrierImage.getID();
 
-                gameData.addBarrier(name, image, damage, cost, expire, description);
-                myTempBarrierDesignTab.addBarrier(myBarrierImage.getImageFile(), name);
-                myNameField.setText("");
-                myDamageField.setText("");
-                myCostField.setText("");
-                myExpiryField.setText("");
-                myDescriptionField.setText("");
-                myBarrierImage = new ImageLabel();
+                if (name != null && description != null && image != null && expire > 0) {
+                    gameData.addBarrier(name, image, damage, cost, expire, description);
+                    myNameField.setText("");
+                    myDamageField.setText("");
+                    myCostField.setText("");
+                    myExpiryField.setText("");
+                    myDescriptionField.setText("");
+                    myBarrierImage = new ImageLabel();
+                    myTempBarrierDesignTab.addBarrier(myBarrierImage.getImageFile(), name);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "One or more fields invalid!");
+                }
             }
         };
 

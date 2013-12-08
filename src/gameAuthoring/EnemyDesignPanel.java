@@ -165,9 +165,9 @@ public class EnemyDesignPanel extends JPanel {
                     if (myEnemyAnimations.size() > 1) {
                         for (ImageLabel imageLabel : myEnemyAnimations) {
                             enemyAnimationPaths.add(imageLabel.getID());
-                            gameData.addAnimation(currentEnemyID,
-                                                  enemyAnimationPaths);
                         }
+                        gameData.addAnimation(currentEnemyID,
+                                              enemyAnimationPaths);
                     }
                     else {
                         currentEnemyID = myEnemyAnimations.get(0).getID();

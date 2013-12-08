@@ -18,17 +18,18 @@ import net.miginfocom.swing.MigLayout;
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 
-public class TempBarrierDesignTab extends Tab{
+
+public class TempBarrierDesignTab extends Tab {
     private JScrollPane myCreatedTempBarriers;
     private JPanel myScrollPanel;
     private JPanel myMainPanel;
-    
+
     public TempBarrierDesignTab (GameData gameData) {
         super(gameData);
     }
-    
+
     @Override
-    public JPanel getTab(){
+    public JPanel getTab () {
         myMainPanel = new GradientPanel(new MigLayout("wrap 2"));
         myMainPanel.setPreferredSize(new Dimension(500, 500));
         JLabel title = new JLabel("Temporary Barrier Design");
@@ -52,14 +53,13 @@ public class TempBarrierDesignTab extends Tab{
         myMainPanel.add(myCreatedTempBarriers, "aligny center");
         return myMainPanel;
     }
-    
 
     @Override
     public void loadJSON (Parser p) {
         // TODO Auto-generated method stub
-        
+
     }
-    
+
     protected void addBarrier (File imgSource, String BarrierName) {
         JLabel barrierIcon = new JLabel();
         try {
