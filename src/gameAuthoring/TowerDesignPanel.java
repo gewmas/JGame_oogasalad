@@ -127,8 +127,11 @@ public class TowerDesignPanel extends JPanel {
                     dataPanel.setOpaque(false);
                     dataPanel.add(createTowerButton);
                     dataPanel.revalidate();
+              
 
                     JScrollPane scrollPane = new JScrollPane(dataPanel);
+                    Border empty = BorderFactory.createEmptyBorder();
+                    scrollPane.setBorder(empty);
                     scrollPane.getViewport().setOpaque(false);
                     scrollPane.setOpaque(false);
                     scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -170,6 +173,7 @@ public class TowerDesignPanel extends JPanel {
         panel.add(towerImageChooser);
         panel.add(myTowerImage, "gap 0 0 10 10");
         // panel.add(myTowerImage);
+        
 
         return panel;
 
