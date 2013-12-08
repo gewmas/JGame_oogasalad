@@ -11,7 +11,6 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,8 +23,8 @@ import net.miginfocom.swing.MigLayout;
 public class EnemyDesignPanel extends JPanel {
 
     private EnemyDesignTab myEnemyDesignTab;
-//    private static final JFileChooser INPUT_CHOOSER =
-//            new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources");
+    // private static final JFileChooser INPUT_CHOOSER =
+    // new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources");
 
     private JTextField myNameField;
     private JTextField myGoldField;
@@ -70,15 +69,15 @@ public class EnemyDesignPanel extends JPanel {
         mySpeedField.setPreferredSize(new Dimension(200, 30));
         mySpeedField.setFont(Constants.DEFAULT_BODY_FONT);
 
-        JLabel enemySoundLabel = new JLabel("Enemy attack sound:");
+        JLabel enemySoundLabel = new JLabel("Enemy Attack Sound:");
         enemySoundLabel.setFont(Constants.DEFAULT_BODY_FONT);
         AudioLabel enemyAudio = new AudioLabel();
 
-        JButton enemyImageChooser = new JButton("Add sprite");
+        JButton enemyImageChooser = new JButton("Add Sprite");
         enemyImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
         enemyImageChooser.addMouseListener(createNewEnemyIconListener());
 
-        JButton clearButton = new JButton("Clear all sprites");
+        JButton clearButton = new JButton("Clear All Sprites");
         clearButton.setFont(Constants.DEFAULT_BODY_FONT);
         clearButton.addMouseListener(createClearAnimationsListener());
 
@@ -115,7 +114,7 @@ public class EnemyDesignPanel extends JPanel {
         this.add(enemyAudio);
         this.add(createEnemyButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
-        this.setPreferredSize(new Dimension(380, 350));
+        this.setPreferredSize(new Dimension(380, 400));
         this.setBorder(b);
         this.setOpaque(false);
     }

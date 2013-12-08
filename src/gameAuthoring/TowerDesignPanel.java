@@ -390,11 +390,12 @@ public class TowerDesignPanel extends JPanel {
         myRecyclePriceField = new JTextField();
         myRecyclePriceField.setPreferredSize(new Dimension(150, 30));
         myRecyclePriceField.setFont(Constants.DEFAULT_BODY_FONT);
-        myDescriptionField = new JTextArea(2, 12);
+        myDescriptionField = new JTextArea();
         myDescriptionField.setLineWrap(true);
+        myDescriptionField.setPreferredSize(new Dimension(150, 30));
         scrollPane = new JScrollPane(myDescriptionField);
 
-        towerImageChooser = new JLabel("Choose image");
+        towerImageChooser = new JLabel("Choose Image");
         towerImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
 
         myTowerImage = new ImageLabel();
