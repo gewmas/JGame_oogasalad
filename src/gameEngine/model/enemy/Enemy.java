@@ -1,12 +1,12 @@
 package gameEngine.model.enemy;
-import gameEngine.model.skill.Skill;
-import gameEngine.model.skill.SkillFactory;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Model;
 import gameEngine.model.bullet.Bullet;
+import gameEngine.model.effect.CreateEffect;
 import gameEngine.model.magic.IEMagicable;
-
+import gameEngine.model.skill.Skill;
+import gameEngine.model.skill.SkillFactory;
 import gameEngine.model.temporaryBarrier.TemporaryBarrier;
 import gameEngine.model.tile.Tile;
 import gameEngine.model.tower.Tower;
@@ -90,6 +90,7 @@ public class Enemy extends JGObject implements IEMagicable {
     @Override
     public void move () {
         //update skills
+        lifeLessThanZero() ;
         if (mySkill != null)
             mySkill.update((int) this.getCenterX(), (int) this.getCenterY());
         // Should walk along the Path
@@ -121,6 +122,10 @@ public class Enemy extends JGObject implements IEMagicable {
     public void lifeLessThanZero() {
         if(life <= 0) {
             model.getGameInfo().addGold((int)gold);
+            CreateEffect effect=new CreateEffect();
+            effect.blood(this.getCenterX(), this.getCenterY());
+            effect.Dollar(this.getCenterX(), this.getCenterY());
+            
             remove();
         }
     }
@@ -139,7 +144,8 @@ public class Enemy extends JGObject implements IEMagicable {
                 life--;
                 lifeLessThanZero();
    
-            } else {
+            }
+            else {
                 Bullet bullet = (Bullet) obj;
                 if (this == bullet.getTargetEnemy()) {
                     /**
@@ -258,20 +264,44 @@ public class Enemy extends JGObject implements IEMagicable {
     }
 
     @Override
-    public void changeLife (double lifePercent) {
-        life = life + originalLife * lifePercent;
+    public double changeLife (double offset) {
+        life+=offset;
+        return offset;
+    }
+    
+    @Override
+    public double changePercentLife (double percent) {
+        double change=life*percent;
+        life+=change;
+        return change;  
     }
 
     @Override
-    public void changeSpeed (double speedPercent) {
-        speed = speed + orignalSpeed * speedPercent;   
+    public double changePercentSpeed (double percent) {
+        double change=speed*percent;
+        speed+=change;
+        return change;    
     }
     
 
+    @Override
+    public double changeSpeed(double offset){
+       speed+=offset;
+       return offset;
+    }
+
+
+
+    public void setLife(int value) {
+        life = value;
+        lifeLessThanZero();
+    }
 
 
     public void setSkill(String skill){
         SkillFactory sf= new SkillFactory(this.eng);
         mySkill=sf.create(skill);
     }
+
+
 }

@@ -5,7 +5,9 @@ package gameEngine.constant;
 /**
  * @author Jiaran, Yuhua
  *         Stores all the constant value of game engine.
- *         These constants should include all the CIDs of JGObject.
+ *         These constants should include all the CIDs of JGObject and 
+ *         strings used to present different fields in data. This 
+ *         Constant class allows program to avoid magic number.
  */
 public class GameEngineConstant {
     public static final int PIXELSPERTILE=20;
@@ -16,9 +18,11 @@ public class GameEngineConstant {
     
     public static final int FROZEMAGIC_ID=1;
     public static final int BOOSTMAGIC_ID=2;
-    public static final int SPEEDUPMAGIC_ID=4;
-    public static final int POISONMAGIC_ID=8;
-    public static final int SLOWMAGIC_ID=16;
+    public static final int HASTEMAGIC_ID=4;
+    public static final int ARMOURMAGIC_ID=8;
+    public static final int HEALMAGIC_ID=16;
+    public static final int LIGHTMAGIC_ID=32;
+    public static final int POISONMAGIC_ID = 64;
     public static final int OVERLAPMAGIC_ID=-1;
     
     //JSON TYPE
@@ -40,6 +44,12 @@ public class GameEngineConstant {
     public static final String TOWER_MAGIC_FACTOR = "Magic Factor";
     public static final String TOWER_MAGIC = "Magic";    
     public static final String TOWER_ATTACK_MODE = "Attack Mode";
+
+    public static final String TOWER_X = "X";
+    public static final String TOWER_Y = "Y";
+
+    public static final String TOWER_SPECIALTY = "Specialty";
+
     //Tower Upgrade Constant
     public static final String TOWER_UPGRADE_PRICE = "Upgrade Price";
     public static final String TOWER_UPGRADE_DAMAGE = "Upgrade Damage";
@@ -47,10 +57,12 @@ public class GameEngineConstant {
     public static final String TOWER_UPGRADE_BOOST_FACTOR = "Upgrade Boost Factor";
     public static final String TOWER_UPGRADE_MAGIC_FACTOR = "Upgrade Magic Factor";
     public static final String TOWER_UPGRADE_ATTACK_AMOUNT = "Upgrade Attack Amount";
+
     //Grid Constants
     public static final int GRID_WIDTH = 600;
     public static final int GRID_HEIGHT = 600;
     public static final int TILES_PER_ROW = 20;
+
 
     public static int query (Class T) {
         // System.out.println(T.getName());

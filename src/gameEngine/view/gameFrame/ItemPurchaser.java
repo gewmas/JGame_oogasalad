@@ -1,5 +1,9 @@
 package gameEngine.view.gameFrame;
 
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import jgame.JGPoint;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.View;
@@ -8,14 +12,14 @@ import gameEngine.view.View;
 public class ItemPurchaser {
 
     private String towerToPurchaseName;
-    private Utilities utilities;
+    private GameFrame gameFrame;
     private PurchaseInfo towerToPurchase;
     private boolean purchasing;
     private View view;
 
-    public ItemPurchaser (View view, Utilities utilities) {
+    public ItemPurchaser (View view, GameFrame gameFrame) {
         this.view = view;
-        this.utilities = utilities;
+        this.gameFrame = gameFrame;
         purchasing = false;
         towerToPurchaseName = "";
 
@@ -31,30 +35,43 @@ public class ItemPurchaser {
 
             System.out.println(towerName);
             if (towerName.equals(towerToPurchaseName)) {
-                utilities.restoreDefaultCursor();
+                restoreDefaultCursor();
                 System.out.println("Tower cancelled");
                 towerToPurchase = null;
                 towerToPurchaseName=null;
                 purchasing = false;
                 return;
             }
-            utilities.setCursorImage(purchaseInfo);
+            setCursorImage(purchaseInfo);
             purchasing = true;
             towerToPurchase = purchaseInfo;
             towerToPurchaseName = purchaseInfo.getInfo().get("Name");
         //}
     }
 
-    public void checkAndPlaceTower (JGPoint mousePosition) {
+    public boolean checkAndPlaceTower (JGPoint mousePosition) {
         if (purchasing) {
             if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)) {
                 towerToPurchase = null;
                 towerToPurchaseName=null;
                 purchasing = false;
-                utilities.restoreDefaultCursor();
+                restoreDefaultCursor();
             }
             System.out.println(towerToPurchase);
         }
+        
+        return purchasing;
+    }
+    
+    public void setCursorImage(PurchaseInfo itemInformation){
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage("src/resources/img/" + itemInformation.getInfo().get("Image") + ".png");
+        Cursor c = toolkit.createCustomCursor(image, new Point(image.getWidth(null)/2, image.getHeight(null)/2), "tower");
+        gameFrame.setCursor(c);
+    }
+    
+    public void restoreDefaultCursor() {
+        gameFrame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
     
 }
