@@ -55,7 +55,7 @@ public class GameFrame extends Frame implements GameInitializable {
 
         infoPanel = addInfoDisplay();
         utilities = new Utilities(infoPanel, this, view);
-        itemPurchaser = new ItemPurchaser(view, utilities);
+        itemPurchaser = new ItemPurchaser(view, this);
         storePanel = addStorePanel(utilities, itemPurchaser);
         gameInitializerItems = new ArrayList();
         gameUpdatables = new ArrayList();

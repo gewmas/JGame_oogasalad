@@ -66,16 +66,7 @@ public class Utilities {
         this.display.updateInformation(toDisplay);
     }
     
-    public void setCursorImage(PurchaseInfo itemInformation){
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage("src/resources/img/" + itemInformation.getInfo().get("Image") + ".png");
-        Cursor c = toolkit.createCustomCursor(image, new Point(image.getWidth(null)/2, image.getHeight(null)/2), "tower");
-        gameFrame.setCursor(c);
-    }
-    
-    public void restoreDefaultCursor() {
-        gameFrame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-    }
+
 
     public void createRangeDisplay () {
         this.rangeDisplay=new RangeDisplay("RangeDisplay", false, -1, -1, 256);
