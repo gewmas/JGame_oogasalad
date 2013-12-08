@@ -24,8 +24,8 @@ import net.miginfocom.swing.MigLayout;
 public class EnemyDesignPanel extends JPanel {
 
     private EnemyDesignTab myEnemyDesignTab;
-    private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
+//    private static final JFileChooser INPUT_CHOOSER =
+//            new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources");
 
     private JTextField myNameField;
     private JTextField myGoldField;
