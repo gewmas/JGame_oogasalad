@@ -141,4 +141,10 @@ public class View implements MenuActions {
         
     }
 
+    @Override
+    public void goToMainMenu () {
+        // TODO Auto-generated method stub
+        
+    }
+
 }

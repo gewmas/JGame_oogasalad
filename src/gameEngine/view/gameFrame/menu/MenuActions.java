@@ -10,4 +10,6 @@ public interface MenuActions {
     public void endGame ();
 
     public void selectNewGame ();
+    
+    public void goToMainMenu();
 }
