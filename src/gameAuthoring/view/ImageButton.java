@@ -1,4 +1,4 @@
-package gameAuthoring.modifiedSwingComponents;
+package gameAuthoring.view;
 
 import java.awt.Graphics;
 import java.awt.Image;

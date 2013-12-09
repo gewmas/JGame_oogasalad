@@ -58,6 +58,7 @@ public class GameAuthoringGUI extends Observable {
 
     /**
      * Constructor for GameAuthoringGUI that sets up all design tabs in the main frame
+     * Creates new GameAuthoringGUI
      */
     public GameAuthoringGUI () {
         myGameData = new GameData();
@@ -113,6 +114,7 @@ public class GameAuthoringGUI extends Observable {
 
     /**
      * 
+     * Adds tab and label for tower design into the main panel
      */
     private void addTowerDesignTab () {
         myTowerDesignTab = new TowerDesignTab();
@@ -122,6 +124,10 @@ public class GameAuthoringGUI extends Observable {
                                myTowerDesignTab.getTab());
     }
 
+
+    /**
+     * Adds controller to communicate between EnemyDesignTab and WaveDesignTab
+     */
     private void addEnemyWaveDesignTab () {
         EnemyDesignController enemyDesignController = new EnemyDesignController(myGameData);
         myEnemyDesignTab = new EnemyDesignTab();
@@ -137,6 +143,10 @@ public class GameAuthoringGUI extends Observable {
                                myWaveDesignTab.getTab());
     }
 
+
+    /**
+     * Adds tab and label for temporary barrier design into main panel
+     */
     private void addTemporaryBarrierDesignTab () {
         TempBarrierDesignController tempBarrierDesignController =
                 new TempBarrierDesignController(myGameData);
@@ -146,6 +156,10 @@ public class GameAuthoringGUI extends Observable {
                                myTempBarrierTab.getTab());
     }
 
+
+    /**
+     * Adds tab and label for skills design tab into main panel
+     */
     private void addSkillsDesignTab () {
         mySkillsDesignTab = new SkillsDesignTab();
         SkillsDesignController skillsDesignController = new SkillsDesignController(myGameData);
@@ -154,6 +168,10 @@ public class GameAuthoringGUI extends Observable {
                                mySkillsDesignTab.getTab());
     }
 
+    /**
+     * Sets up user library in main panel
+     * User library contains resources (images and audio) that user loads
+     */
     private void createUserLibraryTab () {
         JTabbedPane userLibrary = new JTabbedPane();
         userLibrary.setPreferredSize(RESOURCE_LIBRARY_DIMENSION);
@@ -169,6 +187,11 @@ public class GameAuthoringGUI extends Observable {
         myMainPanel.add(userLibrary);
     }
 
+    /**
+     * Allows for clicking and dragging of images from user library
+     * 
+     * @param imageFile is image that cursor should be set to
+     */
     public static final void setCursor (File imageFile) {
         mySelectedImage = imageFile;
         Image image;
@@ -184,6 +207,11 @@ public class GameAuthoringGUI extends Observable {
         }
     }
 
+    /**
+     * Notify office assistant of tab switches
+     * 
+     * @return ChangeListener that notifies office assistant of tab navigation
+     */
     private ChangeListener observeTabChange () {
         ChangeListener changeListener = new ChangeListener() {
             public void stateChanged (ChangeEvent changeEvent) {
@@ -198,10 +226,16 @@ public class GameAuthoringGUI extends Observable {
         return changeListener;
     }
 
-    public static final void setCursorNull () {
+    /**
+     * Set cursor for entire frame back to default cursor
+     */
+    public static final void setCursorDefault () {
         myMainPanel.setCursor(Cursor.getDefaultCursor());
     }
 
+    /**
+     * @param audio is audio file to be transferred from user library
+     */
     public static final void setAudioFile (File audio) {
         mySelectedAudio = audio;
     }

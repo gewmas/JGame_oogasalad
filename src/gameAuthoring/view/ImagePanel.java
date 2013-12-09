@@ -8,10 +8,17 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 
+/**
+ * @author BecLai
+ *         Modified JPanel that is painted with a specified image as background
+ */
 public class ImagePanel extends JPanel {
 
     private String myImageName;
 
+    /**
+     * @param imageName
+     */
     public ImagePanel (String imageName) {
         myImageName = imageName;
     }

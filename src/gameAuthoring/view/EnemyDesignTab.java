@@ -25,6 +25,15 @@ import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * @author Rebecca Lai & Susan Zhang
+ *         EnemyDesignTab allows for users to design parameters for game enemies, including their
+ *         names, worth in gold, number of lives, damage amount, speed, and
+ *         sprites/animations.EnemyDesignTab inherits from the Tab class and is thus an Observable.
+ *         When all fields in EnemyDesignTab are set, it notifies its observers by sending an
+ *         EnemyJSONObject. EnemyJSONObject is transferred from the observers (i.e. controllers) to
+ *         GameData.
+ */
 public class EnemyDesignTab extends Tab {
 
     private JScrollPane myCreatedEnemies;
@@ -51,6 +60,9 @@ public class EnemyDesignTab extends Tab {
     private static final String SCROLL_PANEL_WRAP_MODE = "wrap 4";
     private static final String CREATED_ENEMIES_PANEL_FORMATTING = "aligny center";
 
+    /**
+     * Creates new EnemyDesignTab
+     */
     public EnemyDesignTab () {
     }
 
@@ -77,6 +89,12 @@ public class EnemyDesignTab extends Tab {
         return myMainPanel;
     }
 
+    /**
+     * Displays created enemy in CreatedEnemies panel
+     * 
+     * @param imgSource is enemy's image/sprites
+     * @param enemyName is name of enemy
+     */
     private void addEnemy (File imgSource, String enemyName) {
         JLabel enemyIcon = new JLabel();
         enemyIcon.setPreferredSize(IMAGE_LABEL_DIMENSION);
@@ -93,6 +111,9 @@ public class EnemyDesignTab extends Tab {
         myScrollPanel.add(enemyIcon);
     }
 
+    /**
+     * Sets all fields in the main panel
+     */
     private void createMainPanel () {
         myContentPanel = new JPanel();
         addName();
@@ -111,12 +132,18 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.setOpaque(false);
     }
 
+    /**
+     * Adds descriptive title to main panel
+     */
     private void addTitle () {
         JLabel title = new JLabel(StyleConstants.resourceBundle.getString("EnemyTitle"));
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
         myMainPanel.add(title, "span 2");
     }
 
+    /**
+     * Adds label and text field that allows setting enemy name
+     */
     private void addName () {
         JLabel name = new JLabel(StyleConstants.resourceBundle.getString("EnemyName"));
         name.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -128,6 +155,9 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(myNameField);
     }
 
+    /**
+     * Adds label and text field that allows setting enemy's worth in gold
+     */
     private void addGold () {
         JLabel gold = new JLabel(StyleConstants.resourceBundle.getString("EnemyGold"));
         gold.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -139,6 +169,9 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(myGoldField);
     }
 
+    /**
+     * Adds label and text field that allows setting enemy's number of lives
+     */
     private void addLives () {
         JLabel lives = new JLabel(StyleConstants.resourceBundle.getString("EnemyLives"));
         lives.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -151,6 +184,9 @@ public class EnemyDesignTab extends Tab {
 
     }
 
+    /**
+     * Adds label and text field that allows setting enemy speed
+     */
     private void addSpeed () {
         JLabel speed = new JLabel(StyleConstants.resourceBundle.getString("EnemySpeed"));
         speed.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -162,6 +198,9 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(mySpeedField);
     }
 
+    /**
+     * Adds label and text field that allows setting amount of damage that enemy inflicts
+     */
     private void addDamage () {
         JLabel damage = new JLabel(StyleConstants.resourceBundle.getString("EnemyDamage"));
         damage.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -174,6 +213,9 @@ public class EnemyDesignTab extends Tab {
 
     }
 
+    /**
+     * Adds label and text field that allows setting enemy's special skill type
+     */
     private void addSkill () {
         JLabel skill = new JLabel(StyleConstants.resourceBundle.getString("EnemySkill"));
         skill.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -184,6 +226,9 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(mySkillOptions);
     }
 
+    /**
+     * Adds label and scroll pane that allows setting sprites for enemy
+     */
     private void addAnimation () {
         JLabel animation = new JLabel(StyleConstants.resourceBundle.getString("EnemyAnimation"));
         animation.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -200,6 +245,10 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(myAnimationScrollPane, ANIMATION_SCROLL_PANE_FORMATTING);
     }
 
+
+    /**
+     * Adds button for adding another sprite box to animation scroll pane
+     */
     public void addEnemySpriteChooser () {
         JButton enemyImageChooser =
                 new JButton(StyleConstants.resourceBundle.getString("EnemySprite"));
@@ -209,6 +258,11 @@ public class EnemyDesignTab extends Tab {
                 .setToolTipText(StyleConstants.resourceBundle.getString("EnemySpriteTip"));
         myContentPanel.add(enemyImageChooser);
     }
+
+
+    /**
+     * Adds button that allows for clearing of all sprites uploaded so far for enemy
+     */
 
     public void addClearButton () {
         JButton clearButton =
@@ -220,6 +274,9 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(clearButton);
     }
 
+    /**
+     * Adds button that completes creation of enemy
+     */
     private void addCreateEnemyButton () {
         JButton createEnemyButton =
                 new JButton(StyleConstants.resourceBundle.getString("EnemyCreation"));
@@ -232,6 +289,11 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(createEnemyButton);
     }
 
+    /**
+     * Clears animations in scroll pane upon click
+     * 
+     * @return MouseAdapter that allows for clearing of animations in animation scroll pane
+     */
     private MouseAdapter createClearAnimationsListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
@@ -242,12 +304,21 @@ public class EnemyDesignTab extends Tab {
         return listener;
     }
 
+    /**
+     * Clears animation pane of all objects
+     */
     private void clearAnimationPanel () {
         myAnimationPanel.removeAll();
         myAnimationPanel.revalidate();
         myEnemyAnimations.clear();
     }
 
+    /**
+     * Displays newly created enemies in tab
+     * 
+     * @return MouseAdapter that allows for newly created enemy to be displayed in CreatedEnemies
+     *         panel
+     */
     private MouseAdapter createNewEnemyIconListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
@@ -263,6 +334,13 @@ public class EnemyDesignTab extends Tab {
         return listener;
     }
 
+    /**
+     * Creates new enemy from completed fields in tab
+     * Notifies observers of change
+     * Sends EnemyJSONObject to observer
+     * 
+     * @return MouseAdapter that allows for enemy to be created and passed to GameData
+     */
     private MouseAdapter createEnemyButtonListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
