@@ -56,16 +56,16 @@ To access extra help in the game authoring phase, click on Show -> Clippy to bri
 **Our Roles**
 
 **Game Authoring:**
-Rebecca Lai - Worked with Susan to create the GameAuthoringGUI. Primarily worked on 
-Susan Zhang
-Engine:
-Front End:
-Lalita Maraj
-Alex Zhu - Built jgame interface, tower status, upgrade and sell, integration with backend, frame rate slider
+- Rebecca Lai - Worked with Susan to create the GameAuthoringGUI. Primarily worked on 
+- Susan Zhang
+
+**Engine Front End:**
+- Lalita Maraj
+- Alex Zhu - Built jgame interface, tower status, upgrade and sell, integration with backend, frame rate slider
 
 **Back End:**
-Fabio Berger - built enemy core functionality, interfacing with tile class , enemy factory, cheat code handler and contributed to JSON parser, game end/begin mechanics and game graphics
-Jiaran Hao
-Yuhua Mai
-Harris Osserman - Built JSON parser, tile initialization/path creation (with integration with other model objects and front end), temporary barriers (with refactoring of TowerInfo to PurchaseInfo class), and permanent barriers.  
-Wenxin Shi -Build the magic for both of enemy and tower. Cooperate with creating the skill and the animation for the game. Refactor the code to let the enemy and tower place in the right position.
+- Fabio Berger - built enemy core functionality, interfacing with tile class , enemy factory, cheat code handler and contributed to JSON parser, game end/begin mechanics and game graphics
+- Jiaran Hao
+- Yuhua Mai
+- Harris Osserman - Built JSON parser, tile initialization/path creation (with integration with other model objects and front end), temporary barriers (with refactoring of TowerInfo to PurchaseInfo class), and permanent barriers.  
+- Wenxin Shi -Build the magic for both of enemy and tower. Cooperate with creating the skill and the animation for the game. Refactor the code to let the enemy and tower place in the right position.
