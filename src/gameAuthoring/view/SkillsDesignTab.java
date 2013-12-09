@@ -1,5 +1,6 @@
 package gameAuthoring.view;
 
+import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;

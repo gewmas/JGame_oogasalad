@@ -1,5 +1,6 @@
 package gameAuthoring.view;
 
+import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,27 +17,35 @@ import net.miginfocom.swing.MigLayout;
 
 public class UserSoundsTab {
 
-    private JPanel myMainPanel = new GradientPanel(new MigLayout("wrap 1"));
-    private JPanel mySubPanel = new JPanel(new MigLayout("wrap 2"));
+    private JPanel myMainPanel;
+    private JPanel myContentPanel;
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/audio");
     private int myNumAudio;
+    private static final String AUDIO_UPLOAD_BUTTON_FORMATTING = "align center, gap 10 10 30 10";
+    private static final String NEW_SOUND_BUTTON_FORMATTING = "gap 40 0 0 10";
+    private static final String PLAY_SOUND_BUTTON_FORMATTING = "gap 20 0 0 10";
+    private static final String MAIN_PANEL_WRAP_MODE = "wrap 1";
+    private static final Dimension CONTENT_PANEL_DIMENSION = new Dimension(300, 500);
 
     public JPanel getTab () {
+        myMainPanel = new GradientPanel(new MigLayout(MAIN_PANEL_WRAP_MODE));
+        myContentPanel = new JPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myMainPanel.setOpaque(false);
-        mySubPanel.setPreferredSize(new Dimension(300, 500));
-        JButton uploadAudio = new JButton("Load audio");
+        myContentPanel.setPreferredSize(CONTENT_PANEL_DIMENSION);
+        JButton uploadAudio =
+                new JButton(StyleConstants.resourceBundle.getString("UserSoundsTitle"));
         uploadAudio.setFont(StyleConstants.DEFAULT_BODY_FONT);
         uploadAudio.addMouseListener(addFileUploadListener());
-        JScrollPane scrollPane = new JScrollPane(mySubPanel);
+        JScrollPane scrollPane = new JScrollPane(myContentPanel);
         scrollPane.getViewport().setOpaque(false);
         scrollPane.setOpaque(false);
         myMainPanel.add(scrollPane);
-        myMainPanel.add(uploadAudio, "align center, gap 10 10 30 10");
+        myMainPanel.add(uploadAudio, AUDIO_UPLOAD_BUTTON_FORMATTING);
         return myMainPanel;
     }
 
-    public MouseAdapter addFileUploadListener () {
+    private MouseAdapter addFileUploadListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
@@ -50,19 +59,17 @@ public class UserSoundsTab {
                     File audioSource = INPUT_CHOOSER.getSelectedFile();
                     myNumAudio++;
                     sound.setAudioFile(audioSource);
-                    mySubPanel.add(sound, "gap 40 0 0 10");
-                    mySubPanel.add(playSound, "gap 20 0 0 10");
-                    mySubPanel.revalidate();
+                    myContentPanel.add(sound, NEW_SOUND_BUTTON_FORMATTING);
+                    myContentPanel.add(playSound, PLAY_SOUND_BUTTON_FORMATTING);
+                    myContentPanel.revalidate();
                 }
             }
         };
         return listener;
     }
 
-    public MouseAdapter addSoundPreviewListener (final AudioLabel label) {
+    private MouseAdapter addSoundPreviewListener (final AudioLabel label) {
         MouseAdapter listener = new MouseAdapter() {
-            private boolean audioSelected = false;
-
             @Override
             public void mouseClicked (MouseEvent e) {
                 playSound(label);
@@ -71,7 +78,7 @@ public class UserSoundsTab {
         return listener;
     }
 
-    public void playSound (AudioLabel sound) {
+    private void playSound (AudioLabel sound) {
         try {
             AudioInputStream audioInputStream =
                     AudioSystem

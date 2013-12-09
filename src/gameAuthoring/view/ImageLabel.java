@@ -40,7 +40,7 @@ public class ImageLabel extends JLabel {
         initialize();
     }
 
-    public void initialize () {
+    protected void initialize () {
         this.addMouseListener(createImageLabelListener(this));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         this.setBorder(border);
@@ -59,19 +59,19 @@ public class ImageLabel extends JLabel {
         }
     }
 
-    public String getID () {
+    protected String getID () {
         return myID;
     }
 
-    public File getImageFile () {
+    protected File getImageFile () {
         return myImageSource;
     }
 
-    public Image getImage () {
+    protected Image getImage () {
         return myImage;
     }
 
-    public void transferLabelInformation (ImageLabel other) {
+    protected void transferLabelInformation (ImageLabel other) {
         myImage = other.getImage();
         myImageSource = other.getImageFile();
         myID = other.getID();

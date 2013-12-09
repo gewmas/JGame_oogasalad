@@ -43,31 +43,33 @@ public class GameAuthoringGUI extends Observable {
     private SkillsDesignTab mySkillsDesignTab;
     private GameData myGameData;
     private JTabbedPane myGameDesignTab;
+    private static final String GAME_DESIGN_TAB_FORMATTING = "gap 50 20 100 40";
+    private static final String DEFAULT_PANEL_BG_IMAGE_NAME = "texture0.png";
+    private static final Dimension GAME_DESIGN_TAB_DEFAULT_DIMENSION = new Dimension(750, 600);
+    private static final Dimension RESOURCE_LIBRARY_DIMENSION = new Dimension(300, 600);
+    private static final Dimension FRAME_DEFAULT_DIMENSION = new Dimension(1190, 780);
 
     public GameAuthoringGUI () {
         myGameData = new GameData();
         JFrame frame = new JFrame();
-        frame.setPreferredSize(new Dimension(1190, 780));
+        frame.setPreferredSize(FRAME_DEFAULT_DIMENSION);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myMainPanel = new ImagePanel("texture0.png");
-        myMainPanel.setLayout(new MigLayout("wrap 2"));
+        myMainPanel = new ImagePanel(DEFAULT_PANEL_BG_IMAGE_NAME);
+        myMainPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myGameDesignTab = new JTabbedPane();
-        myGameDesignTab.setPreferredSize(new Dimension(750, 600));
+        myGameDesignTab.setPreferredSize(GAME_DESIGN_TAB_DEFAULT_DIMENSION);
         myGameDesignTab.setFont(StyleConstants.DEFAULT_BODY_FONT);
-
         addBasicInfoTab();
         addMapDesignTab();
         addTowerDesignTab();
         addEnemyWaveDesignTab();
         addTemporaryBarrierDesignTab();
         addSkillsDesignTab();
-
         myGameDesignTab.addChangeListener(observeTabChange());
         MenuBar menu =
                 new MenuBar(this, myGameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
-        myMainPanel.add(myGameDesignTab, "gap 50 20 100 40");
+        myMainPanel.add(myGameDesignTab, GAME_DESIGN_TAB_FORMATTING);
         createUserLibraryTab();
-        // myMainPanel.add(myDuvallClippy);
         frame.setJMenuBar(menu);
         frame.setContentPane(myMainPanel);
         frame.pack();
@@ -81,21 +83,24 @@ public class GameAuthoringGUI extends Observable {
         BasicInfoDesignController basicInfoDesignController =
                 new BasicInfoDesignController(myGameData);
         myBasicInfoTab.addObserver(basicInfoDesignController);
-        myGameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
+        myGameDesignTab.addTab(StyleConstants.resourceBundle.getString("BasicInfoTab"),
+                               myBasicInfoTab.getTab());
     }
 
     public void addMapDesignTab () {
         myMapDesignTab = new MapDesignTab();
         MapDesignController mapDesignController = new MapDesignController(myGameData);
         myMapDesignTab.addObserver(mapDesignController);
-        myGameDesignTab.addTab("Map Design", myMapDesignTab.getTab());
+        myGameDesignTab.addTab(StyleConstants.resourceBundle.getString("MapTab"),
+                               myMapDesignTab.getTab());
     }
 
     public void addTowerDesignTab () {
         myTowerDesignTab = new TowerDesignTab();
         TowerDesignController towerDesignController = new TowerDesignController(myGameData);
         myTowerDesignTab.addObserver(towerDesignController);
-        myGameDesignTab.addTab("Tower Design", myTowerDesignTab.getTab());
+        myGameDesignTab.addTab(StyleConstants.resourceBundle.getString("TowerTab"),
+                               myTowerDesignTab.getTab());
     }
 
     public void addEnemyWaveDesignTab () {
@@ -107,8 +112,10 @@ public class GameAuthoringGUI extends Observable {
         myWaveDesignTab = new WaveDesignTab();
         enemyWaveCommController.addObserver(myWaveDesignTab);
         myEnemyDesignTab.addObserver(enemyWaveCommController);
-        myGameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
-        myGameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
+        myGameDesignTab.addTab(StyleConstants.resourceBundle.getString("EnemyTab"),
+                               myEnemyDesignTab.getTab());
+        myGameDesignTab.addTab(StyleConstants.resourceBundle.getString("WaveTab"),
+                               myWaveDesignTab.getTab());
     }
 
     public void addTemporaryBarrierDesignTab () {
@@ -116,25 +123,29 @@ public class GameAuthoringGUI extends Observable {
                 new TempBarrierDesignController(myGameData);
         myTempBarrierTab = new TempBarrierDesignTab();
         myTempBarrierTab.addObserver(tempBarrierDesignController);
-        myGameDesignTab.addTab("Temp Barrier Design", myTempBarrierTab.getTab());
+        myGameDesignTab.addTab(StyleConstants.resourceBundle.getString("TempBarrierTab"),
+                               myTempBarrierTab.getTab());
     }
 
     public void addSkillsDesignTab () {
         mySkillsDesignTab = new SkillsDesignTab();
         SkillsDesignController skillsDesignController = new SkillsDesignController(myGameData);
         mySkillsDesignTab.addObserver(skillsDesignController);
-        myGameDesignTab.addTab("Skills Design", mySkillsDesignTab.getTab());
+        myGameDesignTab.addTab(StyleConstants.resourceBundle.getString("SkillsTab"),
+                               mySkillsDesignTab.getTab());
     }
 
     private void createUserLibraryTab () {
         JTabbedPane userLibrary = new JTabbedPane();
-        userLibrary.setPreferredSize(new Dimension(300, 600));
+        userLibrary.setPreferredSize(RESOURCE_LIBRARY_DIMENSION);
         UserImagesTab userImagesTab = new UserImagesTab();
         UserImagesController userImagesController = new UserImagesController(myGameData);
         userImagesTab.addObserver(userImagesController);
         UserSoundsTab userSoundsTab = new UserSoundsTab();
-        userLibrary.add("Image Library", userImagesTab.getTab());
-        userLibrary.add("Sound Library", userSoundsTab.getTab());
+        userLibrary.add(StyleConstants.resourceBundle.getString("ImagesTab"),
+                        userImagesTab.getTab());
+        userLibrary.add(StyleConstants.resourceBundle.getString("SoundsTab"),
+                        userSoundsTab.getTab());
         userLibrary.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myMainPanel.add(userLibrary);
     }
@@ -160,7 +171,6 @@ public class GameAuthoringGUI extends Observable {
                 JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
                 int index = sourceTabbedPane.getSelectedIndex();
                 String key = sourceTabbedPane.getTitleAt(index);
-                System.out.println(sourceTabbedPane.getTitleAt(index));
                 setChanged();
                 notifyObservers(key);
                 clearChanged();

@@ -1,5 +1,6 @@
 package gameAuthoring.view;
 
+import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;

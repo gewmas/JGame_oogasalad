@@ -1,5 +1,6 @@
-package gameAuthoring.view;
+package gameAuthoring.modifiedSwingComponents;
 
+import gameAuthoring.view.ImagePanel;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -23,7 +24,7 @@ public class DuvallClippy extends JFrame implements Observer {
     private JLabel myDisplayBox;
 
     public DuvallClippy () {
-        JPanel mainPanel = new JPanel();
+        JPanel mainPanel = new ImagePanel("rainbow_texture.png");
         this.setPreferredSize(new Dimension(300, 300));
         JLabel duvallClippy = new JLabel();
         Image duvallImage;

@@ -1,5 +1,6 @@
 package gameAuthoring.view;
 
+import gameAuthoring.modifiedSwingComponents.GridButton;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;

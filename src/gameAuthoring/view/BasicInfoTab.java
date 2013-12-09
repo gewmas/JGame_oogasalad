@@ -1,6 +1,7 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.ResourceJSONObject;
+import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
