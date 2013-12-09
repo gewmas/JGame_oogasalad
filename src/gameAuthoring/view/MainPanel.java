@@ -31,7 +31,7 @@ public class MainPanel {
         frame.setResizable(false);
     }
 
-    private void show () {
+    public void show () {
         frame.setVisible(true);
     }
 

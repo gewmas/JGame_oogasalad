@@ -12,7 +12,6 @@ import gameAuthoring.controllers.UserImagesController;
 import gameAuthoring.menuBar.MenuBar;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -35,7 +34,15 @@ public class GameAuthoringGUI extends Observable {
     protected static File mySelectedAudio = null;
     protected static ImageLabel myImageLabel = null;
     protected static AudioLabel myAudioLabel = null;
+    private BasicInfoTab myBasicInfoTab;
+    private MapDesignTab myMapDesignTab;
+    private TowerDesignTab myTowerDesignTab;
+    private EnemyDesignTab myEnemyDesignTab;
+    private WaveDesignTab myWaveDesignTab;
+    private TempBarrierDesignTab myTempBarrierTab;
+    private SkillsDesignTab mySkillsDesignTab;
     private GameData myGameData;
+    private JTabbedPane myGameDesignTab;
 
     public GameAuthoringGUI () {
         myGameData = new GameData();
@@ -44,52 +51,21 @@ public class GameAuthoringGUI extends Observable {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myMainPanel = new ImagePanel("texture0.png");
         myMainPanel.setLayout(new MigLayout("wrap 2"));
-        JTabbedPane gameDesignTab = new JTabbedPane();
-        gameDesignTab.setPreferredSize(new Dimension(750, 600));
+        myGameDesignTab = new JTabbedPane();
+        myGameDesignTab.setPreferredSize(new Dimension(750, 600));
+        myGameDesignTab.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
-        BasicInfoTab basicInfoTab = new BasicInfoTab();
-        BasicInfoDesignController basicInfoDesignController =
-                new BasicInfoDesignController(myGameData);
-        basicInfoTab.addObserver(basicInfoDesignController);
+        addBasicInfoTab();
+        addMapDesignTab();
+        addTowerDesignTab();
+        addEnemyWaveDesignTab();
+        addTemporaryBarrierDesignTab();
+        addSkillsDesignTab();
 
-        MapDesignTab mapDesignTab = new MapDesignTab();
-        MapDesignController mapDesignController = new MapDesignController(myGameData);
-        mapDesignTab.addObserver(mapDesignController);
-
-        TowerDesignTab towerDesignTab = new TowerDesignTab();
-        TowerDesignController towerDesignController = new TowerDesignController(myGameData);
-        towerDesignTab.addObserver(towerDesignController);
-
-        EnemyDesignController enemyDesignController = new EnemyDesignController(myGameData);
-        EnemyDesignTab enemyDesignTab = new EnemyDesignTab();
-        enemyDesignTab.addObserver(enemyDesignController);
-
-        WaveDesignTab waveDesignTab = new WaveDesignTab();
-        SkillsDesignTab skillsDesignTab = new SkillsDesignTab();
-        SkillsDesignController skillsDesignController = new SkillsDesignController(myGameData);
-        skillsDesignTab.addObserver(skillsDesignController);
-
-        EnemyWaveCommunicationController enemyWaveCommController =
-                new EnemyWaveCommunicationController();
-        enemyWaveCommController.addObserver(waveDesignTab);
-        enemyDesignTab.addObserver(enemyWaveCommController);
-
-        TempBarrierDesignController tempBarrierDesignController =
-                new TempBarrierDesignController(myGameData);
-        TempBarrierDesignTab tempBarrierTab = new TempBarrierDesignTab();
-        tempBarrierTab.addObserver(tempBarrierDesignController);
-
-        gameDesignTab.addTab("Basic Info", basicInfoTab.getTab());
-        gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
-        gameDesignTab.addTab("Map Design", mapDesignTab.getTab());
-        gameDesignTab.addTab("Tower Design", towerDesignTab.getTab());
-        gameDesignTab.addTab("Enemy Design", enemyDesignTab.getTab());
-        gameDesignTab.addTab("Wave Design", waveDesignTab.getTab());
-        gameDesignTab.addTab("Temp Barrier Design", tempBarrierTab.getTab());
-        gameDesignTab.addTab("Skills Design", skillsDesignTab.getTab());
-        gameDesignTab.addChangeListener(observeTabChange());
-        MenuBar menu = new MenuBar(this, myGameData, basicInfoTab, mapDesignTab, waveDesignTab);
-        myMainPanel.add(gameDesignTab, "gap 50 20 100 40");
+        myGameDesignTab.addChangeListener(observeTabChange());
+        MenuBar menu =
+                new MenuBar(this, myGameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
+        myMainPanel.add(myGameDesignTab, "gap 50 20 100 40");
         createUserLibraryTab();
         // myMainPanel.add(myDuvallClippy);
         frame.setJMenuBar(menu);
@@ -98,6 +74,56 @@ public class GameAuthoringGUI extends Observable {
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
         frame.setResizable(false);
+    }
+
+    public void addBasicInfoTab () {
+        myBasicInfoTab = new BasicInfoTab();
+        BasicInfoDesignController basicInfoDesignController =
+                new BasicInfoDesignController(myGameData);
+        myBasicInfoTab.addObserver(basicInfoDesignController);
+        myGameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
+    }
+
+    public void addMapDesignTab () {
+        myMapDesignTab = new MapDesignTab();
+        MapDesignController mapDesignController = new MapDesignController(myGameData);
+        myMapDesignTab.addObserver(mapDesignController);
+        myGameDesignTab.addTab("Map Design", myMapDesignTab.getTab());
+    }
+
+    public void addTowerDesignTab () {
+        myTowerDesignTab = new TowerDesignTab();
+        TowerDesignController towerDesignController = new TowerDesignController(myGameData);
+        myTowerDesignTab.addObserver(towerDesignController);
+        myGameDesignTab.addTab("Tower Design", myTowerDesignTab.getTab());
+    }
+
+    public void addEnemyWaveDesignTab () {
+        EnemyDesignController enemyDesignController = new EnemyDesignController(myGameData);
+        myEnemyDesignTab = new EnemyDesignTab();
+        myEnemyDesignTab.addObserver(enemyDesignController);
+        EnemyWaveCommunicationController enemyWaveCommController =
+                new EnemyWaveCommunicationController();
+        myWaveDesignTab = new WaveDesignTab();
+        enemyWaveCommController.addObserver(myWaveDesignTab);
+        myEnemyDesignTab.addObserver(enemyWaveCommController);
+        myGameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
+        myGameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
+    }
+
+    public void addTemporaryBarrierDesignTab () {
+        TempBarrierDesignController tempBarrierDesignController =
+                new TempBarrierDesignController(myGameData);
+        myTempBarrierTab = new TempBarrierDesignTab();
+        myTempBarrierTab.addObserver(tempBarrierDesignController);
+        myGameDesignTab.addTab("Temp Barrier Design", myTempBarrierTab.getTab());
+    }
+
+    public void addSkillsDesignTab () {
+        mySkillsDesignTab = new SkillsDesignTab();
+        SkillsDesignController skillsDesignController = new SkillsDesignController(myGameData);
+        mySkillsDesignTab.addObserver(skillsDesignController);
+        myGameDesignTab.addTab("Skills Design", mySkillsDesignTab.getTab());
     }
 
     private void createUserLibraryTab () {
