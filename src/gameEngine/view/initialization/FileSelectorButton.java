@@ -6,7 +6,7 @@ import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import gameEngine.view.View;
-import gameEngine.view.StyleConstants;
+import gameEngine.view.ViewConstants;
 
 
 /**
@@ -23,7 +23,7 @@ public class FileSelectorButton extends JButton {
      * @param controller facilitates communication between view and model
      */
     public FileSelectorButton (View view) {
-        super(StyleConstants.resourceBundle.getString("SelectFile"));
+        super(ViewConstants.resourceBundle.getString("SelectFile"));
         this.view = view;
         addMouseAdapter();
 
