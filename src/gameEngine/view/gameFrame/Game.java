@@ -187,7 +187,7 @@ public class Game extends StdGame {
             System.out.println(mousePosition.x);
             System.out.println(mousePosition.y);
             itemPurchaser.checkAndPlaceTower(mousePosition);
-            if (itemPurchaser.isPurchasing()){
+            if (!itemPurchaser.isPurchasing()){
                 PurchaseInfo tower = controller.getTowerInfo(mousePosition.x, mousePosition.y);
                 List<DisplayValue> display = new ArrayList<DisplayValue>();
                 if (tower != null) {
