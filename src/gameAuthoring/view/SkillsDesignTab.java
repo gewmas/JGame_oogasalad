@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,8 +19,8 @@ public class SkillsDesignTab extends Tab {
 
     private List<AudioLabel> myAudioLabels = new ArrayList<AudioLabel>();
 
-    public SkillsDesignTab (GameData gameData) {
-        super(gameData);
+    public SkillsDesignTab () {
+        super(null);
     }
 
     @Override
@@ -91,9 +90,9 @@ public class SkillsDesignTab extends Tab {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                for (AudioLabel label : myAudioLabels) {
-                    myGameData.addAudio(label.getID(), label.getAudioFile().getName());
-                }
+                setChanged();
+                notifyObservers(myAudioLabels);
+                clearChanged();
             }
         };
         return listener;

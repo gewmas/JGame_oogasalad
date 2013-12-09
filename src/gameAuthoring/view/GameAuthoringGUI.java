@@ -1,6 +1,7 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.controllers.SkillsDesignController;
 import gameAuthoring.menuBar.MenuBar;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -54,7 +55,9 @@ public class GameAuthoringGUI {
         myTowerDesignTab = new TowerDesignTab(gameData);
         myEnemyDesignTab = new EnemyDesignTab(gameData);
         myWaveDesignTab = new WaveDesignTab(gameData);
-        mySkillsDesignTab = new SkillsDesignTab(gameData);
+        mySkillsDesignTab = new SkillsDesignTab();
+        SkillsDesignController skillsDesignController = new SkillsDesignController(gameData);
+        mySkillsDesignTab.addObserver(skillsDesignController);
         myTempBarrierTab = new TempBarrierDesignTab(gameData);
         myUserLibraryTab = new UserLibraryMainTab(gameData);
 
