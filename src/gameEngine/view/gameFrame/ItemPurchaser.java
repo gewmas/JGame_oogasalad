@@ -40,6 +40,7 @@ public class ItemPurchaser {
             towerToPurchase = null;
             towerToPurchaseName = null;
             purchasing = false;
+//            System.out.println("Cancelling purchase");
             return;
         }
         
@@ -54,8 +55,10 @@ public class ItemPurchaser {
     }
 
     public boolean checkAndPlaceTower (JGPoint mousePosition) {
+        boolean bought=false;
         if (purchasing) {
-            if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)) {
+            bought=view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase);
+            if (bought){
                 towerToPurchase = null;
                 towerToPurchaseName = null;
                 purchasing = false;
@@ -63,7 +66,7 @@ public class ItemPurchaser {
             }
         }
 
-        return purchasing;
+        return bought;
     }
 
     public void setCursorImage (String imagePath) {
