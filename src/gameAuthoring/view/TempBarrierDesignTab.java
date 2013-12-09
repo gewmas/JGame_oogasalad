@@ -24,8 +24,10 @@ import net.miginfocom.swing.MigLayout;
 
 /**
  * @author Rebecca Lai & Susan Zhang
- *         Tab that allows for design of temporary barriers in game
- *         Name, damage, cost, expiration, description, and image can be set per barrier
+ *         TempBarrierDesignTab allows for design of temporary barriers in game. Name, damage, cost,
+ *         expiration, description, and image can be set per barrier. TempBarrierDesignTab inherits
+ *         from Tab and is thus an Observable. When all fields in the tab have been complete,
+ *         TempBarrierDesignTab notifies its observers by sending them a TempBarrierJSONObject.
  */
 public class TempBarrierDesignTab extends Tab {
 
@@ -41,6 +43,9 @@ public class TempBarrierDesignTab extends Tab {
     private static final Dimension TEXT_FIELD_DIMENSION = new Dimension(200, 30);
     private static final String SCROLL_PANEL_WRAP_MODE = "wrap 4";
 
+    /**
+     * Creates new TempBarrierDesignTab
+     */
     public TempBarrierDesignTab () {
     }
 
@@ -77,7 +82,7 @@ public class TempBarrierDesignTab extends Tab {
     }
 
     /**
-     * Add ScrollPanel to display created barriers
+     * Adds ScrollPanel to display created barriers
      */
     private void addCreatedBarriers () {
         myCreatedTempBarriers = new JScrollPane(myScrollPanel);
@@ -93,7 +98,7 @@ public class TempBarrierDesignTab extends Tab {
     }
 
     /**
-     * Add button that allows for creation of new barrier
+     * Adds button that allows for creation of new barrier
      */
     private void addBarrierCreationButton () {
         JButton createBarrierButton =
@@ -106,7 +111,7 @@ public class TempBarrierDesignTab extends Tab {
     }
 
     /**
-     * Add text field to allow user input for barrier name
+     * Adds text field to allow user input for barrier name
      */
     private void addBarrierName () {
         JLabel name = new JLabel(StyleConstants.resourceBundle.getString("BarrierName"));
@@ -120,7 +125,7 @@ public class TempBarrierDesignTab extends Tab {
     }
 
     /**
-     * Add text field to allow user input for barrier damage
+     * Adds text field to allow user input for barrier damage
      */
     private void addBarrierDamage () {
         JLabel damage = new JLabel(StyleConstants.resourceBundle.getString("BarrierDamage"));
@@ -134,7 +139,7 @@ public class TempBarrierDesignTab extends Tab {
     }
 
     /**
-     * Add text field to allow user input for barrier cost
+     * Adds text field to allow user input for barrier cost
      */
     private void addBarrierCost () {
         JLabel cost = new JLabel(StyleConstants.resourceBundle.getString("BarrierCost"));
@@ -148,7 +153,7 @@ public class TempBarrierDesignTab extends Tab {
     }
 
     /**
-     * Add text field to allow user input for barrier expiration time
+     * Adds text field to allow user input for barrier expiration time
      */
     private void addBarrierExpiry () {
         JLabel expire = new JLabel(StyleConstants.resourceBundle.getString("BarrierExpiry"));
@@ -162,7 +167,7 @@ public class TempBarrierDesignTab extends Tab {
     }
 
     /**
-     * Add text area to allow user input for barrier description
+     * Adds text area to allow user input for barrier description
      */
     private void addBarrierDescription () {
         JLabel description =
@@ -177,7 +182,7 @@ public class TempBarrierDesignTab extends Tab {
     }
 
     /**
-     * Add image label for barrier image
+     * Adds image label for barrier image
      */
     private void addBarrierCreationImage () {
         JLabel image = new JLabel(StyleConstants.resourceBundle.getString("BarrierSelectImage"));
@@ -190,7 +195,7 @@ public class TempBarrierDesignTab extends Tab {
     }
 
     /**
-     * Add barrier icon to ScrollPanel once barrier has been created
+     * Adds barrier icon to ScrollPanel once barrier has been created
      * 
      * @param imgSource is image File to be used for barrier
      * @param BarrierName is image path of image
@@ -211,6 +216,8 @@ public class TempBarrierDesignTab extends Tab {
     }
 
     /**
+     * Allows for barrier to be created when clicked
+     * 
      * @return MouseAdapter that allows for barrier to be created once fields are completed
      */
     private MouseAdapter createBarrierListener () {

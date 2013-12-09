@@ -19,7 +19,7 @@ import net.miginfocom.swing.MigLayout;
  *         BasicInfoTab allows for users to design the basic information for a Tower Defense game,
  *         including game name, starting amount of gold, starting number of lives, splash image,
  *         background audio, and alternate names for gold and lives.BasicInfoTab inherits from the
- *         Tab class and is thus an Observable. Whenever all fields in BasicInfoTab are set,
+ *         Tab class and is thus an Observable. When all fields in BasicInfoTab are set,
  *         BasicInfoTab notifies its observers (i.e. controller) by passing a BasicInformation
  *         object. Its observers can then extract basic game information.
  */

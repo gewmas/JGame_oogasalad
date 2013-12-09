@@ -12,6 +12,13 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * @author Rebecca Lai & Susan Zhang
+ *         SkillsDesignTab allows for users to upload audio corresponding to the special skills
+ *         allowed for enemies. When all fields in SkillsDesignTab are completed, SkillsDesignTab
+ *         notifies its observers by passing its stored audio as ResourceJSONObjects. These JSON
+ *         objects can then be stored in GameData.
+ */
 public class SkillsDesignTab extends Tab {
 
     private List<AudioLabel> myAudioLabels = new ArrayList<AudioLabel>();
@@ -24,6 +31,9 @@ public class SkillsDesignTab extends Tab {
     private static final Dimension SUBPANEL_DIMENSION = new Dimension(300, 300);
     private static final String WRAP_MODE = "wrap 1";
 
+    /**
+     * Creates new SkillsDesignTab
+     */
     public SkillsDesignTab () {
     }
 
@@ -49,6 +59,9 @@ public class SkillsDesignTab extends Tab {
         return myMainPanel;
     }
 
+    /**
+     * Adds label and AudioLabel that allows for haste skill audio to be set
+     */
     private void addHaste () {
         JLabel hasteLabel = new JLabel(StyleConstants.resourceBundle.getString("SkillsHaste"));
         hasteLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -60,6 +73,9 @@ public class SkillsDesignTab extends Tab {
         myContentPanel.add(hasteAudio);
     }
 
+    /**
+     * Adds label and AudioLabel that allows for armour skill audio to be set
+     */
     private void addArmour () {
         JLabel armourLabel = new JLabel(StyleConstants.resourceBundle.getString("SkillsArmour"));
         armourLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -71,6 +87,9 @@ public class SkillsDesignTab extends Tab {
         myContentPanel.add(armorAudio);
     }
 
+    /**
+     * Adds label and AudioLabel that allows for heal skill audio to be set
+     */
     private void addHeal () {
         JLabel healLabel = new JLabel(StyleConstants.resourceBundle.getString("SkillsHeal"));
         healLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -82,6 +101,9 @@ public class SkillsDesignTab extends Tab {
         myContentPanel.add(healAudio);
     }
 
+    /**
+     * Adds label and AudioLabel that allows for light skill audio to be set
+     */
     private void addLight () {
         JLabel lightLabel = new JLabel(StyleConstants.resourceBundle.getString("SkillsLight"));
         lightLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -93,6 +115,9 @@ public class SkillsDesignTab extends Tab {
         myContentPanel.add(lightAudio);
     }
 
+    /**
+     * Adds label and AudioLabel that allows for poison skill audio to be set
+     */
     private void addPoison () {
         JLabel poisonLabel = new JLabel(StyleConstants.resourceBundle.getString("SkillsPoison"));
         poisonLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -104,6 +129,9 @@ public class SkillsDesignTab extends Tab {
         myContentPanel.add(poisonAudio);
     }
 
+    /**
+     * Adds button that, when clicked, allows for skills audio to be set
+     */
     private void addSubmitButton () {
         JButton submitButton = new JButton(StyleConstants.resourceBundle.getString("SkillsSubmit"));
         submitButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -112,6 +140,11 @@ public class SkillsDesignTab extends Tab {
         myContentPanel.add(submitButton, BUTTON_ALIGNMENT);
     }
 
+    /**
+     * Set audio for special enemy skills
+     * 
+     * @return MouseAdapter that allows for skills audio to be set
+     */
     private MouseAdapter createSubmitListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override

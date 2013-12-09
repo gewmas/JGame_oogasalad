@@ -22,6 +22,15 @@ import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * @author Rebecca Lai & Susan Zhang
+ *         MapDesignTab allows for users to design a map with a path for a Tower Defense game. Users
+ *         can select images to use for the path tiles and map background, define start/end points
+ *         for the path, and check path integrity. MapDesignTab inherits from Tab and is thus an
+ *         Observable. When all fields in MapDesignTab are set, its observers are notified and a
+ *         MapDesignInformation object is passed to them, allowing for map information to be
+ *         extracted into GameData.
+ */
 public class MapDesignTab extends Tab {
 
     private static final JFileChooser INPUT_CHOOSER =
@@ -34,6 +43,9 @@ public class MapDesignTab extends Tab {
     private JPanel myButtonPanel;
     private static final String PATH_LABEL_FORMATTING = "gap 0 0 0 30";
 
+    /**
+     * Creates new MapDesignTab
+     */
     public MapDesignTab () {
     }
 
@@ -54,6 +66,9 @@ public class MapDesignTab extends Tab {
         return myMainPanel;
     }
 
+    /**
+     * Adds button for selecting map background image
+     */
     private void addBackgroundButton () {
         JButton setBackground =
                 new JButton(StyleConstants.resourceBundle.getString("MapBackground"));
@@ -64,6 +79,9 @@ public class MapDesignTab extends Tab {
         myButtonPanel.add(setBackground, StyleConstants.DEFAULT_SPAN_MODE);
     }
 
+    /**
+     * Adds button for checking validity of path and setting it
+     */
     private void addSubmitMapButton () {
         JButton checkPath = new JButton(StyleConstants.resourceBundle.getString("CreateMap"));
         checkPath.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -73,18 +91,27 @@ public class MapDesignTab extends Tab {
         myButtonPanel.add(checkPath);
     }
 
+    /**
+     * Adds title to tab
+     */
     private void addTitle () {
         JLabel title = new JLabel(StyleConstants.resourceBundle.getString("MapDesignTitle"));
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
         myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
     }
 
+    /**
+     * Creates and adds new Grid to tab
+     */
     private void addGrid () {
         myGrid = new Grid(20, 20);
         myGridPanel.add(myGrid, BorderLayout.WEST);
         myMainPanel.add(myGridPanel);
     }
 
+    /**
+     * Adds label and ImageLabel to allow specification of path tile image
+     */
     private void addPathImage () {
         myCurrentPathImage = new ImageLabel(50, 50);
         myCurrentPathImage.setMutableStatusTrue();
@@ -122,6 +149,11 @@ public class MapDesignTab extends Tab {
         setPathData();
     }
 
+    /**
+     * Sets path tiles to specified image
+     * 
+     * @return MouseAdapter that allows for tiles of Grid to be set to path images
+     */
     private MouseAdapter createPathListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
@@ -143,6 +175,11 @@ public class MapDesignTab extends Tab {
         return listener;
     }
 
+    /**
+     * Set user-defined map/path data
+     * 
+     * @return MouseAdapter that allows for map/path data to be set
+     */
     private MouseAdapter createPathCheckListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
@@ -153,6 +190,9 @@ public class MapDesignTab extends Tab {
         return listener;
     }
 
+    /**
+     * If path defined by user is valid, send map/path information to observers
+     */
     private void setPathData () {
         if (myGrid.isValidPathHelper()) {
             JOptionPane.showMessageDialog(null,
@@ -172,6 +212,12 @@ public class MapDesignTab extends Tab {
         }
     }
 
+    /**
+     * Allows users to define background image for map
+     * 
+     * @param grid is grid for which background is set
+     * @return MouseAdapter allowing for map background image to be set upon click
+     */
     private MouseAdapter createGridBackgroundListener (final Grid grid) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
