@@ -1,6 +1,6 @@
 package gameEngine.view.gameFrame.menu;
 
-import gameEngine.view.StyleConstants;
+import gameEngine.view.ViewConstants;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
@@ -12,16 +12,17 @@ import javax.swing.AbstractAction;
  * 
  */
 @SuppressWarnings("serial")
-class NewGameMenuItem extends AbstractAction {
+class SelectNewGameItem extends AbstractAction {
     private MenuActions menuActions;
 
-    public NewGameMenuItem (MenuActions menuActions) {
-        super(StyleConstants.resourceBundle.getString("NewGameFileMenu"));
+    public SelectNewGameItem (MenuActions menuActions) {
+        super(ViewConstants.resourceBundle.getString("NewGameFileMenu"));
         this.menuActions = menuActions;
     }
 
     @Override
     public void actionPerformed (ActionEvent e) {
+        
         menuActions.selectNewGame();
 
     }

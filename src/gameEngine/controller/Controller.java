@@ -188,4 +188,7 @@ public class Controller {
     public void stopWaves(){
         model.stopWaves();
     }
+    public Map<String,String> getImageURL(){
+        return model.getImageURL();
+    }
 }

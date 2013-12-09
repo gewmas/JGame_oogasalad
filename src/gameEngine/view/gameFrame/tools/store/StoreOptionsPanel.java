@@ -2,10 +2,11 @@ package gameEngine.view.gameFrame.tools.store;
 
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.StyleConstants;
+import gameEngine.view.ViewConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.ItemPurchaser;
-import gameEngine.view.gameFrame.towerUpdater.TowerUpgrader;
+import gameEngine.view.gameFrame.tools.DisplayValue;
+import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -41,22 +42,24 @@ public class StoreOptionsPanel extends JPanel {
     private static final String LAYOUT_WRAP = "wrap 4";
     private static final int PANEL_WIDTH = 250;
     private static final int PANEL_HEIGHT = 200;
-    protected List<StoreItemButton> storeItems;
-    protected View view;
-    private TowerUpgrader utilities;
+    private List<StoreItemButton> storeItems;
+    private View view;
+    private ItemOptionsDisplayer utilities;
     private ItemPurchaser itemPurchaser;
     private Map<String, String> valuesToDisplay;
+    private JPanel options;
 
     /**
      * @param mediator facilitates communication between view components
      * @param engineView facilitates communication between view and controller
+     * @param images
      * @param utilities
      * @param itemPurchaser
      */
     protected StoreOptionsPanel (
                                  View engineView,
-                                 List<PurchaseInfo> towerInformation,
-                                 TowerUpgrader utilities,
+                                 Map<String, String> images, List<PurchaseInfo> towerInformation,
+                                 ItemOptionsDisplayer utilities,
                                  ItemPurchaser itemPurchaser) {
 
         super();
@@ -66,7 +69,7 @@ public class StoreOptionsPanel extends JPanel {
         this.itemPurchaser = itemPurchaser;
         setUIStyle();
         JPanel options = createOptionsScrollPanel();
-        addStoreInventory(options, towerInformation);
+        addStoreInventory(images, options, towerInformation);
         valuesToDisplay = new LinkedHashMap<String, String>();
         for (String str : DISPLAY_KEYS) {
             valuesToDisplay.put(str, "black");
@@ -82,7 +85,7 @@ public class StoreOptionsPanel extends JPanel {
      */
     private JPanel createOptionsScrollPanel () {
 
-        JPanel options = new JPanel(new MigLayout(LAYOUT_WRAP));
+        options = new JPanel(new MigLayout(LAYOUT_WRAP));
         options.setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         JScrollPane scrollPane = new JScrollPane(options);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -97,7 +100,7 @@ public class StoreOptionsPanel extends JPanel {
     private void setUIStyle () {
 
         Border listPanelBorder =
-                BorderFactory.createTitledBorder(StyleConstants.resourceBundle
+                BorderFactory.createTitledBorder(ViewConstants.resourceBundle
                         .getString("StoreName"));
         setBorder(listPanelBorder);
     }
@@ -111,7 +114,9 @@ public class StoreOptionsPanel extends JPanel {
      * @param mediator facilitates communication between view components
      * @param view facilitates communication between view and model
      */
-    private void addStoreInventory (JPanel options, List<PurchaseInfo> towerInformation) {
+    private void addStoreInventory (Map<String, String> images,
+                                    JPanel options,
+                                    List<PurchaseInfo> towerInformation) {
 
         StoreButtonAction hoverExitAction = new StoreButtonAction() {
 
@@ -135,12 +140,26 @@ public class StoreOptionsPanel extends JPanel {
             StoreButtonAction hoverAction = new StoreButtonAction() {
                 @Override
                 public void executeAction () {
-                    utilities.displayStoreInformation(storeItem.getInfo(), valuesToDisplay);
+                    List<DisplayValue> display = new ArrayList();
+                    for (String key : valuesToDisplay.keySet()) {
+                        if (storeItem.getInfo().get(key) != null) {
+                            String field = key;
+                            String value = storeItem.getInfo().get(key);
+                            String color = valuesToDisplay.get(key);
+
+                            display.add(new DisplayValue(field, value, color));
+                        }
+                    }
+                    utilities.displayStoreInformation(storeItem.getInfo(), display);
 
                 }
             };
+            String imagePath = ViewConstants.IMAGE_PATH +
+                               images.get(storeItem.getInfo()
+                                       .get(GameEngineConstant.PURCHASE_INFO_IMAGE).trim());
             StoreItemButton towerButton =
-                    new StoreItemButton(storeItem, hoverExitAction, hoverAction, clickAction);
+                    new StoreItemButton(imagePath, storeItem, hoverExitAction, hoverAction,
+                                        clickAction);
             options.add(towerButton);
             storeItems.add(towerButton);
         }
@@ -162,7 +181,11 @@ public class StoreOptionsPanel extends JPanel {
         }
     }
 
-    public void closeStore () {
+    public void endGame () {
+        options.removeAll();
+        options.revalidate();
+        options.repaint();
+        
         storeItems = null;
     }
 

@@ -12,6 +12,7 @@ public class WinGameCheat extends Cheat {
     @Override
     public boolean execute() {
         model.getGameInfo().SetIsWin(true);
+        model.setCheatToWin(true);
         return true;
     }
 

@@ -1429,6 +1429,7 @@ public class JGObject {
      * if not inside either of these actions.
      */
     public void remove () {
+       
         if (isAlive()) eng.removeObject(this);
         is_alive = false;
     }
