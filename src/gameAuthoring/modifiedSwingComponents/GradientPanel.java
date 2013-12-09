@@ -9,10 +9,11 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 
+@SuppressWarnings("serial")
 public class GradientPanel extends JPanel {
 
     public GradientPanel () {
-
+        this.setOpaque(false);
     }
 
     public GradientPanel (LayoutManager layoutManager) {

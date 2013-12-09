@@ -1,7 +1,6 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.WaveJSONObject;
-import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -26,8 +25,6 @@ import net.miginfocom.swing.MigLayout;
 public class WaveDesignTab extends Tab implements Observer {
     private JScrollPane myCreatedWaves;
     private JPanel myScrollPanel;
-    private JPanel myMainPanel;
-    private JPanel myContentPanel;
     private JButton myTypeButton;
     private JTextField myNumberField;
     private JTextField myPeriodField;
@@ -45,9 +42,8 @@ public class WaveDesignTab extends Tab implements Observer {
 
     @Override
     public JPanel getTab () {
-        myMainPanel = new GradientPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        myMainPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myMainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
-        myContentPanel = new JPanel();
         myContentPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myContentPanel.setPreferredSize(DEFAULT_PANEL_DIMENSION);
         myContentPanel.setBorder(StyleConstants.DEFAULT_PANEL_BORDER);

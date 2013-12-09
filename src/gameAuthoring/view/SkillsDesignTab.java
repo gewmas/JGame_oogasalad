@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -16,7 +15,6 @@ import net.miginfocom.swing.MigLayout;
 public class SkillsDesignTab extends Tab {
 
     private List<AudioLabel> myAudioLabels = new ArrayList<AudioLabel>();
-    private JPanel myContentPanel;
     private static final String HASTE = "haste";
     private static final String ARMOUR = "armour";
     private static final String HEAL = "heal";
@@ -31,25 +29,24 @@ public class SkillsDesignTab extends Tab {
 
     @Override
     public JPanel getTab () {
-        JPanel mainPanel = new GradientPanel();
-        mainPanel.setLayout(new MigLayout(WRAP_MODE));
-        myContentPanel = new JPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        myMainPanel.setLayout(new MigLayout(WRAP_MODE));
+        myContentPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myContentPanel.setPreferredSize(SUBPANEL_DIMENSION);
         myContentPanel.setOpaque(false);
         myContentPanel.setBorder(StyleConstants.DEFAULT_PANEL_BORDER);
-        mainPanel.setOpaque(false);
-        mainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
+        myMainPanel.setOpaque(false);
+        myMainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
         JLabel title = new JLabel(StyleConstants.resourceBundle.getString("SkillsTitle"));
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
-        mainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
+        myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
         addHaste();
         addArmour();
         addHeal();
         addLight();
         addPoison();
         addSubmitButton();
-        mainPanel.add(myContentPanel);
-        return mainPanel;
+        myMainPanel.add(myContentPanel);
+        return myMainPanel;
     }
 
     private void addHaste () {

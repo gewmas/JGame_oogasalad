@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 
 
+@SuppressWarnings("serial")
 public class AudioLabel extends ImageLabel {
 
     private File myAudioSource;
