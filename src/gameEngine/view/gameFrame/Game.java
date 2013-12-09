@@ -165,7 +165,7 @@ public class Game extends StdGame {
         if (gameInfo.getIsWin()) {
             wonGame();
         }
-        if (lives <= 0) loseGame();
+        if (lives <= 0 || gameInfo.getGold() < 0) loseGame();
     }
 
     private void checkGameCollisions () {
