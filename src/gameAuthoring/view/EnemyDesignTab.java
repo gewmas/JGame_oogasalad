@@ -115,7 +115,7 @@ public class EnemyDesignTab extends Tab {
     }
 
     private void addTitle () {
-        JLabel title = new JLabel(StyleConstants.resourceBundle.getString("EnemyDesignTitle"));
+        JLabel title = new JLabel(StyleConstants.resourceBundle.getString("EnemyTitle"));
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
         myMainPanel.add(title, "span 2");
     }
@@ -221,11 +221,11 @@ public class EnemyDesignTab extends Tab {
     private void addCreateEnemyButton () {
 
         JButton createEnemyButton =
-                new JButton(StyleConstants.resourceBundle.getString("EnemyCreateEnemy"));
+                new JButton(StyleConstants.resourceBundle.getString("EnemyCreation"));
         createEnemyButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         createEnemyButton.addMouseListener(createEnemyButtonListener());
         createEnemyButton
-                .setToolTipText(StyleConstants.resourceBundle.getString("EnemyCreateEnemyTip"));
+                .setToolTipText(StyleConstants.resourceBundle.getString("EnemyCreationTip"));
         myContentPanel.add(createEnemyButton);
     }
 
