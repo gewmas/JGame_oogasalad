@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -34,8 +33,7 @@ public class MapDesignTab extends Tab {
     private String myBackgroundImage;
     private String myPathImage;
 
-    public MapDesignTab (GameData gameData) {
-        super(gameData);
+    public MapDesignTab () {
     }
 
     @Override

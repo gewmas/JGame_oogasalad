@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.JSONObjects.GameData;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -127,7 +126,6 @@ public class TowerDesignPanel extends JPanel {
                     dataPanel.setOpaque(false);
                     dataPanel.add(createTowerButton);
                     dataPanel.revalidate();
-              
 
                     JScrollPane scrollPane = new JScrollPane(dataPanel);
                     Border empty = BorderFactory.createEmptyBorder();
@@ -173,7 +171,6 @@ public class TowerDesignPanel extends JPanel {
         panel.add(towerImageChooser);
         panel.add(myTowerImage, "gap 0 0 10 10");
         // panel.add(myTowerImage);
-        
 
         return panel;
 
@@ -251,7 +248,7 @@ public class TowerDesignPanel extends JPanel {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                GameData myGameData = myTowerDesignTab.getGameData();
+                // GameData myGameData = myTowerDesignTab.getGameData();
                 try
                 {
                     String type = TOWER_TYPES[myTypeOptions.getSelectedIndex()];
@@ -276,17 +273,17 @@ public class TowerDesignPanel extends JPanel {
                     if (type.equals("DefaultTower")) {
                         int mode = myAttackModeOptions.getSelectedIndex();
 
-                        myGameData
-                                .addTower(type,
-                                          name,
-                                          imageID,
-                                          damage,
-                                          attackSpeed,
-                                          mode, // attackMode?
-                                          range,
-                                          cost,
-                                          recyclePrice,
-                                          description);
+                        // myGameData
+                        // .addTower(type,
+                        // name,
+                        // imageID,
+                        // damage,
+                        // attackSpeed,
+                        // mode, // attackMode?
+                        // range,
+                        // cost,
+                        // recyclePrice,
+                        // description);
 
                     }
 
@@ -295,39 +292,38 @@ public class TowerDesignPanel extends JPanel {
                         String magicType = (String) magicOptions.getSelectedItem();
                         double magicFactor = Double.parseDouble(magicFactorField.getText());
 
-                        myGameData.addMagicTower(type, name, imageID, damage,
-                                                 attackSpeed, mode, range, cost, recyclePrice,
-                                                 description, magicFactor, magicType);
+                        // myGameData.addMagicTower(type, name, imageID, damage,
+                        // attackSpeed, mode, range, cost, recyclePrice,
+                        // description, magicFactor, magicType);
                     }
 
                     else if (type.equals("BoostTower")) {
                         double boostFactor = Double.parseDouble(boostFactorField.getText());
 
-                        myGameData
-                                .addBoostTower(type,
-                                               name,
-                                               imageID,
-                                               damage,
-                                               attackSpeed,
-                                               range,
-                                               cost,
-                                               recyclePrice,
-                                               description,
-                                               boostFactor);
+                        // myGameData
+                        // .addBoostTower(type,
+                        // name,
+                        // imageID,
+                        // damage,
+                        // attackSpeed,
+                        // range,
+                        // cost,
+                        // recyclePrice,
+                        // description,
+                        // boostFactor);
 
                     }
 
                     else {
                         int mode = myAttackModeOptions.getSelectedIndex();
                         int attackAmount = Integer.parseInt(attackAmountField.getText());
-                        myGameData.addMultipleShootingTower(type, name, imageID,
-                                                            damage, attackSpeed, mode,
-                                                            attackAmount, range, cost,
-                                                            recyclePrice, description);
+                        // myGameData.addMultipleShootingTower(type, name, imageID,
+                        // damage, attackSpeed, mode,
+                        // attackAmount, range, cost,
+                        // recyclePrice, description);
 
                     }
 
-          
                     myTowerDesignTab.addTower(myTowerImage.getImageFile(), myNameField.getText());
                     clearTextFields();
 

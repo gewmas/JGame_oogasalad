@@ -43,7 +43,7 @@ public class BasicInfoTab extends Tab {
     private ImageLabel myImageLabel;
 
     public BasicInfoTab (GameData gameData) {
-        super(gameData);
+        // super(gameData);
         getTab();
     }
 
@@ -67,10 +67,10 @@ public class BasicInfoTab extends Tab {
 
         JLabel title = new JLabel("Basic Game Info");
         title.setFont(Constants.DEFAULT_BODY_FONT);
-        
+
         JLabel bullet = new JLabel("Bullet Image");
         bullet.setFont(Constants.DEFAULT_BODY_FONT);
-        
+
         myImageLabel = new ImageLabel();
         myImageLabel.setMutableStatusTrue();
         myImageLabel.setPreferredSize(new Dimension(50, 50));
@@ -199,12 +199,13 @@ public class BasicInfoTab extends Tab {
         int lives = Integer.parseInt(myLives.getText());
         String name = myGameName.getText();
         String bulletName = myImageLabel.getImageFile().getName();
-        if (myAudioLabel != null && gold > 0 && lives > 0 && mySplashImage != null && name != null && bulletName != null) {
+        if (myAudioLabel != null && gold > 0 && lives > 0 && mySplashImage != null &&
+            name != null && bulletName != null) {
             String goldName = altGoldText.getText();
             String livesName = altLivesText.getText();
             myGameData.setGold(gold);
             myGameData.setLives(lives);
-            myGameData.setSplashImage(mySplashImage.substring(0, mySplashImage.length()-4));
+            myGameData.setSplashImage(mySplashImage.substring(0, mySplashImage.length() - 4));
             myGameData.setGameName(name);
             myGameData.addAudio(myAudioLabel.getID(), myAudioLabel.getAudioFile().getName());
             myGameData.setGoldName(goldName);
@@ -229,9 +230,10 @@ public class BasicInfoTab extends Tab {
             public void mouseClicked (MouseEvent e) {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
-             
+
                     mySplashImage = INPUT_CHOOSER.getSelectedFile().getName();
-                    myGameData.addImage(mySplashImage.substring(0, mySplashImage.length()-4), mySplashImage);
+                    myGameData.addImage(mySplashImage.substring(0, mySplashImage.length() - 4),
+                                        mySplashImage);
                     mySplashImageLabel.setText(mySplashImage);
                 }
 

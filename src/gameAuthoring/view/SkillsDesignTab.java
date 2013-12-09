@@ -20,7 +20,6 @@ public class SkillsDesignTab extends Tab {
     private List<AudioLabel> myAudioLabels = new ArrayList<AudioLabel>();
 
     public SkillsDesignTab () {
-        super(null);
     }
 
     @Override

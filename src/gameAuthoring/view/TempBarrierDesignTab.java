@@ -1,5 +1,6 @@
 package gameAuthoring.view;
 
+import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,8 +16,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
-import gameAuthoring.JSONObjects.GameData;
-import gameEngine.parser.Parser;
 
 
 public class TempBarrierDesignTab extends Tab {
@@ -24,8 +23,7 @@ public class TempBarrierDesignTab extends Tab {
     private JPanel myScrollPanel;
     private JPanel myMainPanel;
 
-    public TempBarrierDesignTab (GameData gameData) {
-        super(gameData);
+    public TempBarrierDesignTab () {
     }
 
     @Override

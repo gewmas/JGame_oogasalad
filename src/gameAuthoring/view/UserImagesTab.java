@@ -1,12 +1,13 @@
 package gameAuthoring.view;
 
-import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.JSONObjects.ResourceJSONObject;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Observable;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -15,17 +16,15 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 
 
-public class UserImagesTab {
+public class UserImagesTab extends Observable {
 
     private JPanel myMainPanel = new GradientPanel(new MigLayout("wrap 1"));
     private JPanel mySubPanel = new JPanel(new MigLayout("wrap 1"));
     private int myNumImages = 0;
-    private GameData myGameData;
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources/img");
 
-    public UserImagesTab (GameData gameData) {
-        myGameData = gameData;
+    public UserImagesTab () {
     }
 
     public JPanel getTab () {
@@ -51,8 +50,13 @@ public class UserImagesTab {
                     try {
                         image = ImageIO.read(imgSource);
                         myNumImages++;
+                        String id = "" + myNumImages;
                         ImageLabel imageLabel = new ImageLabel("" + myNumImages);
-                        myGameData.addImage("" + myNumImages, imgSource.getName());
+                        ResourceJSONObject imageResource =
+                                new ResourceJSONObject(id, imgSource.getName());
+                        setChanged();
+                        notifyObservers(imageResource);
+                        clearChanged();
                         imageLabel.setLabelIcon(imgSource);
                         GameAuthoringGUI.myImageLabel = imageLabel;
                         mySubPanel.add(imageLabel);

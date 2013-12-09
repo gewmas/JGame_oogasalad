@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,8 +27,7 @@ public class TowerDesignTab extends Tab {
     private JScrollPane myCreatedTowers;
     private JPanel myScrollPanel;
 
-    public TowerDesignTab (GameData gameData) {
-        super(gameData);
+    public TowerDesignTab () {
     }
 
     // TODO: Get rid of magic number
