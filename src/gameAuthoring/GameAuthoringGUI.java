@@ -43,18 +43,9 @@ public class GameAuthoringGUI {
     public GameAuthoringGUI () {
         GameData gameData = new GameData();
         myFrame = new JFrame();
-        JLabel title = new JLabel();
-        Image titleImage;
-        try {
-            titleImage = ImageIO.read(this.getClass().getResource("title.png"));
-            title.setIcon(new ImageIcon(titleImage));
-        }
-        catch (IOException e1) {
-            e1.printStackTrace();
-        }
         myFrame.setPreferredSize(new Dimension(1190, 780));
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myMainPanel = new ImagePanel("texture0.jpg");
+        myMainPanel = new ImagePanel("texture0.png");
         myMainPanel.setLayout(new MigLayout("wrap 2"));
         JTabbedPane gameDesignTab = new JTabbedPane();
         gameDesignTab.setPreferredSize(new Dimension(750, 600));
@@ -87,8 +78,7 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Temp Barrier Design", myTempBarrierTab.getTab());
         gameDesignTab.addTab("Skills Design", mySkillsDesignTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
-        myMainPanel.add(title, "span 2, align left, gap 0 0 15 0");
-        myMainPanel.add(gameDesignTab, "gap 50 20 20 40");
+        myMainPanel.add(gameDesignTab, "gap 50 20 100 40");
         myMainPanel.add(myUserLibraryTab);
         // myMainPanel.add(myDuvallClippy);
         myFrame.setJMenuBar(menu);
