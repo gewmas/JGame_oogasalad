@@ -181,12 +181,5 @@ public class StoreOptionsPanel extends JPanel {
         }
     }
 
-    public void endGame () {
-        options.removeAll();
-        options.revalidate();
-        options.repaint();
-        
-        storeItems = null;
-    }
 
 }
