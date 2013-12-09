@@ -45,6 +45,7 @@ public class ImageLabel extends JLabel {
         this.addMouseListener(createImageLabelListener(this));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         this.setBorder(border);
+        this.setPreferredSize(new Dimension(50, 50));
     }
 
     public void setLabelIcon (File imageSource) {

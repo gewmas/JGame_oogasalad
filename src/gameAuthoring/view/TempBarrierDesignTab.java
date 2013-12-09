@@ -26,35 +26,55 @@ import net.miginfocom.swing.MigLayout;
 
 
 public class TempBarrierDesignTab extends Tab {
+
     private JScrollPane myCreatedTempBarriers;
     private JPanel myScrollPanel;
-    private JPanel myMainPanel;
     private JPanel myContentPanel;
-
     private JTextField myNameField;
     private JTextField myDamageField;
     private JTextField myCostField;
     private JTextField myExpiryField;
     private JTextArea myDescriptionField;
-    private JScrollPane scrollPane;
-
     private ImageLabel myBarrierImage;
+    private static final Dimension PANEL_DIMENSION = new Dimension(380, 350);
+    private static final String SCROLL_PANEL_WRAP_MODE = "wrap 4";
 
     public TempBarrierDesignTab () {
     }
 
     @Override
     public JPanel getTab () {
-        myMainPanel = new GradientPanel(new MigLayout("wrap 2"));
-        myMainPanel.setPreferredSize(new Dimension(500, 500));
+        JPanel mainPanel = new GradientPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        mainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
         JLabel title = new JLabel("Temporary Barrier Design");
-        title.setFont(new Font("Calibri", Font.PLAIN, 30));
-        title.setForeground(new Color(80, 80, 80));
-        myMainPanel.add(title, "span 2");
-        myScrollPanel = new JPanel(new MigLayout("wrap 4"));
+        title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
+        mainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
+        myScrollPanel = new JPanel(new MigLayout(SCROLL_PANEL_WRAP_MODE));
         myScrollPanel.setOpaque(false);
-        createMainPanel();
-        myMainPanel.add(myContentPanel);
+        myContentPanel = new JPanel();
+        myContentPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        myContentPanel.setPreferredSize(PANEL_DIMENSION);
+        myContentPanel.setBorder(StyleConstants.DEFAULT_PANEL_BORDER);
+        myContentPanel.setOpaque(false);
+        addBarrierName();
+        addBarrierDamage();
+        addBarrierCost();
+        addBarrierExpiry();
+        addBarrierDescription();
+        addBarrierCreationImage();
+        mainPanel.add(myContentPanel);
+        addCreatedBarriers();
+        mainPanel.add(myCreatedTempBarriers, "aligny center");
+        return mainPanel;
+    }
+
+    @Override
+    public void loadJSON (Parser p) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public void addCreatedBarriers () {
         myCreatedTempBarriers = new JScrollPane(myScrollPanel);
         myCreatedTempBarriers.getViewport().setOpaque(false);
         myCreatedTempBarriers.setOpaque(false);
@@ -65,80 +85,71 @@ public class TempBarrierDesignTab extends Tab {
                                     TitledBorder.CENTER,
                                     TitledBorder.TOP,
                                     new Font("Calibri", Font.PLAIN, 20)));
-        myMainPanel.add(myCreatedTempBarriers, "aligny center");
-        return myMainPanel;
     }
 
-    @Override
-    public void loadJSON (Parser p) {
-        // TODO Auto-generated method stub
-
-    }
-
-    private void createMainPanel () {
-        myContentPanel = new JPanel();
-
-        JLabel name = new JLabel("Name");
-        name.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        JLabel damage = new JLabel("Damage");
-        damage.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        JLabel cost = new JLabel("Cost");
-        cost.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        JLabel expire = new JLabel("Expire");
-        expire.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        JLabel description = new JLabel("Description");
-        description.setFont(StyleConstants.DEFAULT_BODY_FONT);
-
-        JLabel image = new JLabel("Choose image");
-        image.setFont(StyleConstants.DEFAULT_BODY_FONT);
-
-        myNameField = new JTextField();
-        myNameField.setPreferredSize(new Dimension(200, 30));
-        myNameField.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        myDamageField = new JTextField();
-        myDamageField.setPreferredSize(new Dimension(200, 30));
-        myDamageField.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        myCostField = new JTextField();
-        myCostField.setPreferredSize(new Dimension(200, 30));
-        myCostField.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        myExpiryField = new JTextField();
-        myExpiryField.setPreferredSize(new Dimension(200, 30));
-        myExpiryField.setFont(StyleConstants.DEFAULT_BODY_FONT);
-
-        myDescriptionField = new JTextArea(2, 15);
-        myDescriptionField.setLineWrap(true);
-        scrollPane = new JScrollPane(myDescriptionField);
-
+    public void addBarrierCreationButton () {
         JButton createBarrierButton = new JButton("Create New Barrier");
         createBarrierButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         createBarrierButton.addMouseListener(createBarrierListener());
+        myContentPanel.add(createBarrierButton);
+    }
 
-        myBarrierImage = new ImageLabel();
-        myBarrierImage.setPreferredSize(new Dimension(50, 50));
-        myBarrierImage.setMutableStatusTrue();
-        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
-        myBarrierImage.setBorder(border);
-
-        myContentPanel.setLayout(new MigLayout("wrap 2"));
+    public void addBarrierName () {
+        JLabel name = new JLabel("Name");
+        name.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myNameField = new JTextField();
+        myNameField.setPreferredSize(new Dimension(200, 30));
+        myNameField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myContentPanel.add(name);
         myContentPanel.add(myNameField);
+    }
+
+    public void addBarrierDamage () {
+        JLabel damage = new JLabel("Damage");
+        damage.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myDamageField = new JTextField();
+        myDamageField.setPreferredSize(new Dimension(200, 30));
+        myDamageField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myContentPanel.add(damage);
         myContentPanel.add(myDamageField);
+    }
+
+    public void addBarrierCost () {
+        JLabel cost = new JLabel("Cost");
+        cost.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myCostField = new JTextField();
+        myCostField.setPreferredSize(new Dimension(200, 30));
+        myCostField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myContentPanel.add(cost);
         myContentPanel.add(myCostField);
+    }
+
+    public void addBarrierExpiry () {
+        JLabel expire = new JLabel("Expire");
+        expire.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myExpiryField = new JTextField();
+        myExpiryField.setPreferredSize(new Dimension(200, 30));
+        myExpiryField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myContentPanel.add(expire);
         myContentPanel.add(myExpiryField);
+    }
+
+    public void addBarrierDescription () {
+        JLabel description = new JLabel("Description");
+        description.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myDescriptionField = new JTextArea(2, 15);
+        myDescriptionField.setLineWrap(true);
+        JScrollPane scrollPane = new JScrollPane(myDescriptionField);
         myContentPanel.add(description);
         myContentPanel.add(scrollPane);
+    }
 
+    public void addBarrierCreationImage () {
+        JLabel image = new JLabel("Choose image");
+        image.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myBarrierImage = new ImageLabel();
         myContentPanel.add(image);
         myContentPanel.add(myBarrierImage);
-        myContentPanel.add(createBarrierButton);
-
-        Border b = BorderFactory.createLineBorder(Color.black, 1);
-        myContentPanel.setPreferredSize(new Dimension(380, 350));
-        myContentPanel.setBorder(b);
-        myContentPanel.setOpaque(false);
     }
 
     protected void addBarrier (File imgSource, String BarrierName) {
