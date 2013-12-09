@@ -22,7 +22,7 @@ public class UserImagesTab {
     private int myNumImages = 0;
     private GameData myGameData;
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources/img");
 
     public UserImagesTab (GameData gameData) {
         myGameData = gameData;

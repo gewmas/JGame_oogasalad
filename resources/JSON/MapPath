@@ -1,0 +1,43 @@
+{
+   "resources": {
+      "animation": [],
+      "audio": [],
+      "image": [
+         {
+            "id": "1",
+            "url": "path.png"
+         },
+         {
+            "id": "woods_background",
+            "url": "woods_background.png"
+         }
+      ]
+   },
+   "temporaryBarrierType": [],
+   "Tower": [],
+   "map": {
+      "Barriers": [],
+      "pathImage": "path.png",
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 0,
+            "x": 1
+         },
+         {
+            "y": 0,
+            "x": 2
+         },
+         {
+            "y": 0,
+            "x": 3
+         }
+      ]
+   },
+   "wave": [],
+   "enemyType": [],
+   "BGImage": "woods_background"
+}
