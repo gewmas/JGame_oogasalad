@@ -1,7 +1,6 @@
 package gameEngine.view.gameFrame;
 
 import java.util.Collection;
-import java.util.Map;
 import javax.swing.JPanel;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;

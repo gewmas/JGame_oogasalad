@@ -3,6 +3,10 @@ package gameEngine.view.gameFrame;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**Composite version of GameUpdatable
+ * @author lalitamaraj
+ *
+ */
 public class CompositeGameUpdatable implements GameUpdatable
 {
     private Collection<GameUpdatable> gameUpdatables;

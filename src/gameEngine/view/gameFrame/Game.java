@@ -147,8 +147,8 @@ public class Game extends StdGame {
 
         for (KeyActivationItem item : keyActivationItems) {
          
-            if (getKey(item.getActivationKey().charAt(0))) {
-                clearKey(item.getActivationKey().charAt(0));
+            if (getKey(item.getActivationKey().getKeyChar())) {
+                clearKey(item.getActivationKey().getKeyChar());
                 item.activate();
             }
         }
@@ -158,8 +158,8 @@ public class Game extends StdGame {
             loseGame();
         }
 
-        if (getKey('F')) {
-            clearKey('F');
+        if (getKey(ActivationKey.FRAME.getKeyChar())) {
+            clearKey(ActivationKey.FRAME.getKeyChar());
             toggleFrameRateBar();
         }
         if (gameInfo.getIsWin()) {
