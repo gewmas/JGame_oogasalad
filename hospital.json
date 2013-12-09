@@ -4,7 +4,7 @@
 "BGImage" :  "woods_background",
 "gold" : 500,
 "numberOfLives" : 10,
-"goldName": "Money",
+"goldName": "GDP",
 "livesName": "Population",
 "levels": 2,
 "widthOfWindow": 600,
@@ -511,7 +511,7 @@
 "enemyType":[
 {
 	"id": "1",
-	"gold": 5,
+	"gold": -5,
 	"image": "OldPatient",
 	"life": 10,
 	"speed": 0.5,
@@ -520,20 +520,20 @@
 }, 
 {
 	"id": "2",
-	"gold": 10,
+	"gold": -10,
 	"image": "KidPatient",
 	"life": 15,
 	"speed": 0.5,
-   "skill": "",
+   "skill": "Poison",
    "Specialty" : 2,
 },
 {
 	"id": "3",
-	"gold": 10,
+	"gold": -10,
 	"image": "BoyPatient",
 	"life": 15,
 	"speed": 0.5,
-   	"skill": "Armour",
+   	"skill": "Poison",
    	"Specialty" : 1,
 }
 ],
