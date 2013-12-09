@@ -31,7 +31,7 @@ public class UserImagesTab extends Observable {
         myMainPanel.setOpaque(false);
         mySubPanel.setPreferredSize(new Dimension(300, 500));
         JButton uploadImage = new JButton("Load image");
-        uploadImage.setFont(Constants.DEFAULT_BODY_FONT);
+        uploadImage.setFont(StyleConstants.DEFAULT_BODY_FONT);
         uploadImage.addMouseListener(addFileUploadListener(this));
         JScrollPane scrollPane = new JScrollPane(mySubPanel);
         myMainPanel.add(scrollPane);

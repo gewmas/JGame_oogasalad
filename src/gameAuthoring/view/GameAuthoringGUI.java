@@ -47,7 +47,7 @@ public class GameAuthoringGUI {
         JTabbedPane gameDesignTab = new JTabbedPane();
         gameDesignTab.setPreferredSize(new Dimension(750, 600));
 
-        BasicInfoTab basicInfoTab = new BasicInfoTab(myGameData);
+        BasicInfoTab basicInfoTab = new BasicInfoTab();
         BasicInfoDesignController basicInfoDesignController =
                 new BasicInfoDesignController(myGameData);
         basicInfoTab.addObserver(basicInfoDesignController);
@@ -114,7 +114,7 @@ public class GameAuthoringGUI {
         UserSoundsTab userSoundsTab = new UserSoundsTab();
         userLibrary.add("Image Library", userImagesTab.getTab());
         userLibrary.add("Sound Library", userSoundsTab.getTab());
-        userLibrary.setFont(Constants.DEFAULT_BODY_FONT);
+        userLibrary.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myMainPanel.add(userLibrary);
     }
 

@@ -69,7 +69,7 @@ public class TowerDesignTab extends Tab {
         }
 
         JLabel towerNameLabel = new JLabel(towerName);
-        towerNameLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        towerNameLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myScrollPanel.add(towerNameLabel);
         myScrollPanel.add(towerIcon);
 

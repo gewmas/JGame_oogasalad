@@ -74,44 +74,44 @@ public class WaveDesignTab extends Tab implements Observer {
     public void createMainPanel () {
         myContentPanel = new JPanel();
         JLabel type = new JLabel("Type of Enemy");
-        type.setFont(Constants.DEFAULT_BODY_FONT);
+        type.setFont(StyleConstants.DEFAULT_BODY_FONT);
         type.setToolTipText("Select an enemy type to be in the wave.");
 
         JLabel quantity = new JLabel("Quantity of Enemy");
-        quantity.setFont(Constants.DEFAULT_BODY_FONT);
+        quantity.setFont(StyleConstants.DEFAULT_BODY_FONT);
         quantity.setToolTipText("Select the number of enemies to be in the wave.");
 
         JLabel period = new JLabel("Period");
-        period.setFont(Constants.DEFAULT_BODY_FONT);
+        period.setFont(StyleConstants.DEFAULT_BODY_FONT);
         period.setToolTipText("Input the period of time for which enemies will be active.");
 
         JLabel interval = new JLabel("Interval");
-        interval.setFont(Constants.DEFAULT_BODY_FONT);
+        interval.setFont(StyleConstants.DEFAULT_BODY_FONT);
         interval.setToolTipText("Input the interval of time for which enemies will be active.");
 
         myTypeButton = new JButton(DEFAULT_TYPE_TEXT);
-        myTypeButton.setFont(Constants.DEFAULT_BODY_FONT);
+        myTypeButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myTypeButton.addMouseListener(createWaveTypeListener());
 
         myEnemyChooser = new JComboBox<String>();
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(myEnemyOptions);
         myEnemyChooser.setModel(model);
-        myEnemyChooser.setFont(Constants.DEFAULT_BODY_FONT);
+        myEnemyChooser.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myNumberField = new JTextField();
         myNumberField.setPreferredSize(new Dimension(200, 30));
-        myNumberField.setFont(Constants.DEFAULT_BODY_FONT);
+        myNumberField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myPeriodField = new JTextField();
         myPeriodField.setPreferredSize(new Dimension(200, 30));
-        myPeriodField.setFont(Constants.DEFAULT_BODY_FONT);
+        myPeriodField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myIntervalField = new JTextField();
         myIntervalField.setPreferredSize(new Dimension(200, 30));
-        myIntervalField.setFont(Constants.DEFAULT_BODY_FONT);
+        myIntervalField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         JButton createWaveButton = new JButton("Create Wave");
-        createWaveButton.setFont(Constants.DEFAULT_BODY_FONT);
+        createWaveButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         createWaveButton.addMouseListener(createWaveButtonListener());
         createWaveButton
                 .setToolTipText("Once all fields are complete, click to finish creating a wave.");
@@ -135,7 +135,7 @@ public class WaveDesignTab extends Tab implements Observer {
 
     public void addWave (String type, int number) {
         JButton waveButton = new JButton(number + " " + type);
-        waveButton.setFont(Constants.DEFAULT_BODY_FONT);
+        waveButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myScrollPanel.add(waveButton);
 
     }

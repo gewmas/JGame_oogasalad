@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.JSONObjects.ResourceJSONObject;
 import gameEngine.parser.Parser;
 import java.awt.Color;
@@ -26,6 +25,7 @@ import net.miginfocom.swing.MigLayout;
  * 
  */
 public class BasicInfoTab extends Tab {
+
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources/img");
 
@@ -42,34 +42,37 @@ public class BasicInfoTab extends Tab {
     private AudioLabel myAudioLabel;
     private ImageLabel myImageLabel;
 
-    public BasicInfoTab (GameData gameData) {
+    private JPanel myMainPanel;
+    private JPanel mySubPanel;
+
+    public BasicInfoTab () {
 
     }
 
     // TO DO: Get rid of magic number
     @Override
     public JPanel getTab () {
-        JPanel mainPanel = new GradientPanel(new MigLayout("wrap 2"));
-        JPanel subPanel = new JPanel(new MigLayout("wrap 2"));
-        subPanel.setOpaque(false);
-        JLabel gameName = new JLabel("Game Name");
-        gameName.setFont(Constants.DEFAULT_BODY_FONT);
-        gameName.setToolTipText("Give your game a name. This will be displayed on the game start page.");
+        myMainPanel = new GradientPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        mySubPanel = new JPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        mySubPanel.setOpaque(false);
+        JLabel gameName = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoGameName"));
+        gameName.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        gameName.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoGameNameTip"));
 
-        JLabel gold = new JLabel("Starting Gold");
-        gold.setFont(Constants.DEFAULT_BODY_FONT);
-        gold.setToolTipText("Input the number of gold a player starts out with.");
+        JLabel gold = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoGold"));
+        gold.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        gold.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoGoldTip"));
 
-        JLabel lives = new JLabel("Starting Lives");
-        lives.setFont(Constants.DEFAULT_BODY_FONT);
-        lives.setToolTipText("Input the number of lives a player starts out with.");
+        JLabel lives = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoLives"));
+        lives.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        lives.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoLivesTip"));
 
-        JLabel title = new JLabel("Basic Game Info");
-        title.setFont(Constants.DEFAULT_BODY_FONT);
+        JLabel title = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoTitle"));
+        title.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
-        JLabel bullet = new JLabel("Bullet Image");
-        bullet.setToolTipText("Select an image for the bullet that towers shoot");
-        bullet.setFont(Constants.DEFAULT_BODY_FONT);
+        JLabel bullet = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoBullet"));
+        bullet.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoBulletTip"));
+        bullet.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myImageLabel = new ImageLabel();
         myImageLabel.setMutableStatusTrue();
@@ -77,12 +80,12 @@ public class BasicInfoTab extends Tab {
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myImageLabel.setBorder(border);
 
-        title.setFont(Constants.DEFAULT_TITLE_FONT);
+        title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
         title.setForeground(new Color(80, 80, 80));
-        mainPanel.add(title, "span 2");
+        myMainPanel.add(title, "span 2");
 
         JButton setSplashImageButton = new JButton("Choose Splash Image");
-        setSplashImageButton.setFont(Constants.DEFAULT_BODY_FONT);
+        setSplashImageButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         setSplashImageButton
                 .setToolTipText("Select a Splash Image to be displayed before your game begins.");
         setSplashImageButton.addMouseListener(setSplashImageListener());
@@ -90,11 +93,7 @@ public class BasicInfoTab extends Tab {
         mySplashImageLabel = new JLabel();
 
         JButton setInfoButton = new JButton("Set Info");
-        // simulateButton = new JButton("Simulate");
-        // simulateButton.setEnabled(false);
-        // simulateButton.setFont(Constants.DEFAULT_BODY_FONT);
-        // simulateButton.addMouseListener(setSimulateListener());
-        setInfoButton.setFont(Constants.DEFAULT_BODY_FONT);
+        setInfoButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         setInfoButton
                 .setToolTipText("Once all fields have been completed, click the submit button. You can then proceed to 'preview' your game.");
         setInfoButton.addMouseListener(setInfoListener());
@@ -103,51 +102,120 @@ public class BasicInfoTab extends Tab {
         myGameName.setPreferredSize(new Dimension(200, 30));
         myGold = new JTextField();
         JLabel altGoldLabel = new JLabel("Alternative Gold Name:");
-        altGoldLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        altGoldLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         altGoldLabel.setToolTipText("If you want, choose another name for your currency.");
         altGoldText = new JTextField();
         altGoldText.setPreferredSize(new Dimension(200, 30));
-        altGoldText.setFont(Constants.DEFAULT_BODY_FONT);
+        altGoldText.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myGold.setPreferredSize(new Dimension(200, 30));
         myLives = new JTextField();
         myLives.setPreferredSize(new Dimension(200, 30));
         JLabel altLivesLabel = new JLabel("Alternative Lives Name:");
-        altLivesLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        altLivesLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         altLivesLabel.setToolTipText("If you want, choose another name for your lives.");
         altLivesText = new JTextField();
         altLivesText.setPreferredSize(new Dimension(200, 30));
-        altLivesText.setFont(Constants.DEFAULT_BODY_FONT);
+        altLivesText.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myAudioLabel = new AudioLabel();
         JLabel audioLabel = new JLabel("Background Audio:");
         audioLabel.setToolTipText("Select an audio to be played in the background of your game");
         myAudioLabel.setMutableStatusTrue();
-        audioLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        audioLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
-        subPanel.add(gameName);
-        subPanel.add(myGameName);
-        subPanel.add(gold);
-        subPanel.add(myGold);
-        subPanel.add(altGoldLabel);
-        subPanel.add(altGoldText);
-        subPanel.add(lives);
-        subPanel.add(myLives);
-        subPanel.add(altLivesLabel);
-        subPanel.add(altLivesText);
-        subPanel.add(audioLabel);
-        subPanel.add(myAudioLabel);
-        subPanel.add(bullet);
-        subPanel.add(myImageLabel);
-        subPanel.add(setSplashImageButton);
-        subPanel.add(mySplashImageLabel);
-        subPanel.add(setInfoButton);
+        addGameName();
+        addGold();
+        addLives();
+        addBackgroundAudio();
+        addBullet();
+
+        mySubPanel.add(myGameName);
+        mySubPanel.add(gold);
+        mySubPanel.add(myGold);
+        mySubPanel.add(altGoldLabel);
+        mySubPanel.add(altGoldText);
+        mySubPanel.add(lives);
+        mySubPanel.add(myLives);
+        mySubPanel.add(altLivesLabel);
+        mySubPanel.add(altLivesText);
+        mySubPanel.add(audioLabel);
+        mySubPanel.add(myAudioLabel);
+        mySubPanel.add(bullet);
+        mySubPanel.add(myImageLabel);
+        mySubPanel.add(setSplashImageButton);
+        mySubPanel.add(mySplashImageLabel);
+        mySubPanel.add(setInfoButton);
         // subPanel.add(simulateButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
-        subPanel.setBorder(b);
-        mainPanel.add(subPanel, "align center");
+        mySubPanel.setBorder(b);
+        addTitle();
+        myMainPanel.add(mySubPanel, "align center");
 
-        return mainPanel;
+        return myMainPanel;
+    }
+
+    public void addTitle () {
+        JLabel title = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoTitle"));
+        title.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myMainPanel.add(title);
+    }
+
+    public void addGameName () {
+        JLabel gameName = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoGameName"));
+        gameName.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        gameName.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoGameNameTip"));
+        mySubPanel.add(gameName);
+    }
+
+    public void addGold () {
+        JLabel gold = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoGold"));
+        gold.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        gold.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoGoldTip"));
+        myGold = new JTextField();
+        myGold.setPreferredSize(new Dimension(200, 30));
+        JLabel altGoldLabel = new JLabel("Alternative Gold Name:");
+        altGoldLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        altGoldLabel.setToolTipText("If you want, choose another name for your currency.");
+        altGoldText = new JTextField();
+        altGoldText.setPreferredSize(new Dimension(200, 30));
+        altGoldText.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        mySubPanel.add(myGameName);
+        mySubPanel.add(gold);
+        mySubPanel.add(altGoldLabel);
+        mySubPanel.add(altGoldText);
+    }
+
+    public void addLives () {
+        JLabel lives = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoLives"));
+        lives.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        lives.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoLivesTip"));
+        myLives = new JTextField();
+        myLives.setPreferredSize(new Dimension(200, 30));
+        JLabel altLivesLabel = new JLabel("Alternative Lives Name:");
+        altLivesLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        altLivesLabel.setToolTipText("If you want, choose another name for your lives.");
+        altLivesText = new JTextField();
+        altLivesText.setPreferredSize(new Dimension(200, 30));
+        altLivesText.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        mySubPanel.add(lives);
+        mySubPanel.add(myLives);
+        mySubPanel.add(altLivesLabel);
+        mySubPanel.add(altLivesText);
+    }
+
+    public void addBackgroundAudio () {
+        myAudioLabel = new AudioLabel();
+        JLabel audioLabel = new JLabel("Background Audio:");
+        audioLabel.setToolTipText("Select an audio to be played in the background of your game");
+        myAudioLabel.setMutableStatusTrue();
+        audioLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        mySubPanel.add(audioLabel);
+        mySubPanel.add(myAudioLabel);
+    }
+
+    public void addBullet () {
+
     }
 
     public void loadJSON (Parser p) {

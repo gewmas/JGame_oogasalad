@@ -1,5 +1,6 @@
 package gameAuthoring.view;
 
+import gameAuthoring.JSONObjects.AnimationJSONObject;
 import gameAuthoring.JSONObjects.EnemyJSONObject;
 import gameEngine.parser.Parser;
 import java.awt.Color;
@@ -52,10 +53,10 @@ public class EnemyDesignTab extends Tab {
 
     @Override
     public JPanel getTab () {
-        myMainPanel = new GradientPanel(new MigLayout("wrap 2"));
-        myMainPanel.setPreferredSize(new Dimension(500, 500));
+        myMainPanel = new GradientPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        myMainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
         JLabel title = new JLabel("Enemy Design");
-        title.setFont(new Font("Calibri", Font.PLAIN, 30));
+        title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
         title.setForeground(new Color(80, 80, 80));
         myMainPanel.add(title, "span 2");
         myScrollPanel = new JPanel(new MigLayout("wrap 4"));
@@ -87,7 +88,7 @@ public class EnemyDesignTab extends Tab {
             e.printStackTrace();
         }
         JLabel enemyNameLabel = new JLabel(enemyName);
-        enemyNameLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        enemyNameLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myScrollPanel.add(enemyNameLabel);
         myScrollPanel.add(enemyIcon);
     }
@@ -95,62 +96,62 @@ public class EnemyDesignTab extends Tab {
     private void createMainPanel () {
         myContentPanel = new JPanel();
         JLabel name = new JLabel("Name");
-        name.setFont(Constants.DEFAULT_BODY_FONT);
+        name.setFont(StyleConstants.DEFAULT_BODY_FONT);
         name.setToolTipText("Give your enemy a name that will be displayed in the game.");
 
         JLabel gold = new JLabel("Worth in Gold");
-        gold.setFont(Constants.DEFAULT_BODY_FONT);
+        gold.setFont(StyleConstants.DEFAULT_BODY_FONT);
         gold.setToolTipText("Set the amount of gold your enemy is worth.");
 
         JLabel lives = new JLabel("Number of Lives");
-        lives.setFont(Constants.DEFAULT_BODY_FONT);
+        lives.setFont(StyleConstants.DEFAULT_BODY_FONT);
         lives.setToolTipText("Set the number of lives your enemy starts with.");
 
         JLabel speed = new JLabel("Speed");
-        speed.setFont(Constants.DEFAULT_BODY_FONT);
+        speed.setFont(StyleConstants.DEFAULT_BODY_FONT);
         speed.setToolTipText("Set the speed of your enemy.");
 
         JLabel skill = new JLabel("Skill");
-        skill.setFont(Constants.DEFAULT_BODY_FONT);
+        skill.setFont(StyleConstants.DEFAULT_BODY_FONT);
         skill.setToolTipText("Select a special skill for your enemy.");
 
         JLabel damage = new JLabel("Damage");
-        damage.setFont(Constants.DEFAULT_BODY_FONT);
+        damage.setFont(StyleConstants.DEFAULT_BODY_FONT);
         damage.setToolTipText("Select the type of damage your enemy inflicts.");
 
         myNameField = new JTextField();
-        myNameField.setFont(Constants.DEFAULT_BODY_FONT);
+        myNameField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myNameField.setPreferredSize(new Dimension(200, 30));
 
         myGoldField = new JTextField();
         myGoldField.setPreferredSize(new Dimension(200, 30));
-        myGoldField.setFont(Constants.DEFAULT_BODY_FONT);
+        myGoldField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myLifeField = new JTextField();
         myLifeField.setPreferredSize(new Dimension(200, 30));
-        myLifeField.setFont(Constants.DEFAULT_BODY_FONT);
+        myLifeField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         mySpeedField = new JTextField();
         mySpeedField.setPreferredSize(new Dimension(200, 30));
-        mySpeedField.setFont(Constants.DEFAULT_BODY_FONT);
+        mySpeedField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myDamageField = new JTextField();
         myDamageField.setPreferredSize(new Dimension(200, 30));
-        myDamageField.setFont(Constants.DEFAULT_BODY_FONT);
+        myDamageField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         JButton enemyImageChooser = new JButton("Add Sprite");
-        enemyImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
+        enemyImageChooser.setFont(StyleConstants.DEFAULT_BODY_FONT);
         enemyImageChooser.addMouseListener(createNewEnemyIconListener());
         enemyImageChooser
                 .setToolTipText("Add an image to represent your enemy or be part of an animation sequence.");
 
         JButton clearButton = new JButton("Clear All Sprites");
-        clearButton.setFont(Constants.DEFAULT_BODY_FONT);
+        clearButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         clearButton.addMouseListener(createClearAnimationsListener());
         clearButton.setToolTipText("Clear all sprites loaded so far.");
 
         mySkillOptions = new JComboBox<String>(SKILLS);
-        mySkillOptions.setFont(Constants.DEFAULT_BODY_FONT);
+        mySkillOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myAnimationPanel = new JPanel();
         myAnimationPanel.setOpaque(false);
@@ -162,7 +163,7 @@ public class EnemyDesignTab extends Tab {
         myAnimationScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 
         JButton createEnemyButton = new JButton("Create Enemy");
-        createEnemyButton.setFont(Constants.DEFAULT_BODY_FONT);
+        createEnemyButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         createEnemyButton.addMouseListener(createEnemyButtonListener());
         createEnemyButton
                 .setToolTipText("Once all fields are completed, click to finish creating an enemy.");
@@ -238,7 +239,11 @@ public class EnemyDesignTab extends Tab {
                         for (ImageLabel imageLabel : myEnemyAnimations) {
                             enemyAnimationPaths.add(imageLabel.getID());
                         }
-                        // gameData.addAnimation(currentEnemyID, enemyAnimationPaths);
+                        AnimationJSONObject animation =
+                                new AnimationJSONObject(currentEnemyID, enemyAnimationPaths);
+                        setChanged();
+                        notifyObservers(animation);
+                        clearChanged();
                     }
                     else {
                         currentEnemyID = myEnemyAnimations.get(0).getID();

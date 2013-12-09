@@ -26,7 +26,7 @@ public class UserSoundsTab {
         myMainPanel.setOpaque(false);
         mySubPanel.setPreferredSize(new Dimension(300, 500));
         JButton uploadAudio = new JButton("Load audio");
-        uploadAudio.setFont(Constants.DEFAULT_BODY_FONT);
+        uploadAudio.setFont(StyleConstants.DEFAULT_BODY_FONT);
         uploadAudio.addMouseListener(addFileUploadListener());
         JScrollPane scrollPane = new JScrollPane(mySubPanel);
         scrollPane.getViewport().setOpaque(false);
@@ -46,7 +46,7 @@ public class UserSoundsTab {
                     AudioLabel sound = new AudioLabel("" + myNumAudio, true);
                     JButton playSound = new JButton("Play sound");
                     playSound.addMouseListener(addSoundPreviewListener(sound));
-                    playSound.setFont(Constants.DEFAULT_BODY_FONT);
+                    playSound.setFont(StyleConstants.DEFAULT_BODY_FONT);
                     File audioSource = INPUT_CHOOSER.getSelectedFile();
                     myNumAudio++;
                     sound.setAudioFile(audioSource);

@@ -48,23 +48,23 @@ public class MapDesignTab extends Tab {
         title.setForeground(new Color(80, 80, 80));
 
         JLabel pathLabel = new JLabel("Path Image:");
-        pathLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        pathLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         pathLabel.setToolTipText("Choose an image for each tile in the map path.");
 
         myCurrentPathImage = new ImageLabel(50, 50);
         myCurrentPathImage.setMutableStatusTrue();
-        myCurrentPathImage.setFont(Constants.DEFAULT_BODY_FONT);
+        myCurrentPathImage.setFont(StyleConstants.DEFAULT_BODY_FONT);
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         myCurrentPathImage.setBorder(border);
         myCurrentPathImage.addMouseListener(createPathListener());
         JButton checkPath = new JButton("Create Map");
-        checkPath.setFont(Constants.DEFAULT_BODY_FONT);
+        checkPath.setFont(StyleConstants.DEFAULT_BODY_FONT);
         checkPath.addMouseListener(createPathCheckListener());
         checkPath
                 .setToolTipText("Once path is drawn, click to check if path is valid and if map can be saved.");
 
         JButton setBackground = new JButton("Set Background Image");
-        setBackground.setFont(Constants.DEFAULT_BODY_FONT);
+        setBackground.setFont(StyleConstants.DEFAULT_BODY_FONT);
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
         setBackground
                 .setToolTipText("Set the background image of the map.");
