@@ -33,54 +33,72 @@ public class MapDesignTab extends Tab {
     private ImageLabel myCurrentPathImage;
     private String myBackgroundImage;
     private String myPathImage;
+    private JPanel myMainPanel;
+    private JPanel myGridPanel;
+    private JPanel myButtonPanel;
   
-    private static final Dimension IMAGE_LABEL_DIMENSION = new Dimension(50, 50);
 
     public MapDesignTab () {
     }
 
     @Override
     public JPanel getTab () {
-        JPanel mainPanel = new GradientPanel(new MigLayout("wrap 2"));
-        JPanel gridPanel = new JPanel(new BorderLayout());
-        JPanel buttonPanel = new JPanel(new MigLayout("wrap 2"));
-        buttonPanel.setOpaque(false);
-        myGrid = new Grid(20, 20);
-        JLabel title = new JLabel(StyleConstants.resourceBundle.getString("MapDesignTitle"));
-        title.setFont(new Font("Calibri", Font.PLAIN, 30));
-
-        JLabel pathLabel = new JLabel(StyleConstants.resourceBundle.getString("MapPath"));
-        pathLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        pathLabel.setToolTipText(StyleConstants.resourceBundle.getString("MapPathTip"));
-
-        myCurrentPathImage = new ImageLabel(50, 50);
-        myCurrentPathImage.setMutableStatusTrue();
-        myCurrentPathImage.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        myCurrentPathImage.addMouseListener(createPathListener());
-        JButton checkPath = new JButton("Create Map");
-        checkPath.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        checkPath.addMouseListener(createPathCheckListener());
-        checkPath
-                .setToolTipText(StyleConstants.resourceBundle.getString("MapPathCheckTip"));
-
+        myMainPanel = new GradientPanel(new MigLayout("wrap 2"));
+        myGridPanel = new JPanel(new BorderLayout());
+        myButtonPanel = new JPanel(new MigLayout("wrap 2"));
+        myButtonPanel.setOpaque(false);
+        addTitle();
+        addGrid();      
+        addPathImage();
+        addBackgroundButton();
+        addSubmitMapButton();
+        myMainPanel.add(myButtonPanel);
+        Border b = BorderFactory.createLoweredBevelBorder();
+        myGridPanel.setBorder(b);
+        return myMainPanel;
+    }
+        
+    private void addBackgroundButton(){
         JButton setBackground = new JButton(StyleConstants.resourceBundle.getString("MapBackground"));
         setBackground.setFont(StyleConstants.DEFAULT_BODY_FONT);
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
         setBackground
                 .setToolTipText(StyleConstants.resourceBundle.getString("MapBackgroundTip"));
-
-        mainPanel.add(title, "span 2");
-        gridPanel.add(myGrid, BorderLayout.WEST);
-        mainPanel.add(gridPanel);
-        buttonPanel.add(pathLabel, "gap 0 0 0 30");
-        buttonPanel.add(myCurrentPathImage, "gap 0 0 0 30");
-        buttonPanel.add(setBackground, "span 2");
-        buttonPanel.add(checkPath);
-        mainPanel.add(buttonPanel);
-        Border b = BorderFactory.createLoweredBevelBorder();
-        gridPanel.setBorder(b);
-        return mainPanel;
+        myButtonPanel.add(setBackground, "span 2");
     }
+    private void addSubmitMapButton(){
+        JButton checkPath = new JButton("Create Map");
+        checkPath.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        checkPath.addMouseListener(createPathCheckListener());
+        checkPath
+                .setToolTipText(StyleConstants.resourceBundle.getString("MapPathCheckTip"));
+        myButtonPanel.add(checkPath);
+    }
+    private void addTitle(){
+        JLabel title = new JLabel(StyleConstants.resourceBundle.getString("MapDesignTitle"));
+        title.setFont(new Font("Calibri", Font.PLAIN, 30));
+        myMainPanel.add(title, "span 2");
+    }
+    
+    
+    private void addGrid(){
+        myGrid = new Grid(20, 20);
+        myGridPanel.add(myGrid, BorderLayout.WEST);
+        myMainPanel.add(myGridPanel);
+    }
+    
+    private void addPathImage(){
+        myCurrentPathImage = new ImageLabel(50, 50);
+        myCurrentPathImage.setMutableStatusTrue();
+        myCurrentPathImage.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myCurrentPathImage.addMouseListener(createPathListener());
+        JLabel pathLabel = new JLabel(StyleConstants.resourceBundle.getString("MapPath"));
+        pathLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        pathLabel.setToolTipText(StyleConstants.resourceBundle.getString("MapPathTip"));
+        myButtonPanel.add(pathLabel, "gap 0 0 0 30");
+        myButtonPanel.add(myCurrentPathImage, "gap 0 0 0 30");
+    }
+    
 
     public void loadJSON (Parser p) {
         myBackgroundImage = p.getString("BGImage");
