@@ -5,6 +5,7 @@ import gameAuthoring.controllers.EnemyDesignController;
 import gameAuthoring.controllers.EnemyWaveCommunicationController;
 import gameAuthoring.controllers.MapDesignController;
 import gameAuthoring.controllers.SkillsDesignController;
+import gameAuthoring.controllers.UserImagesController;
 import gameAuthoring.menuBar.MenuBar;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -33,9 +34,10 @@ public class GameAuthoringGUI {
     protected static ImageLabel myImageLabel = null;
     protected static AudioLabel myAudioLabel = null;
     private JLabel myDuvallClippy;
+    private GameData myGameData;
 
     public GameAuthoringGUI () {
-        GameData gameData = new GameData();
+        myGameData = new GameData();
         JFrame frame = new JFrame();
         frame.setPreferredSize(new Dimension(1190, 780));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,21 +46,21 @@ public class GameAuthoringGUI {
         JTabbedPane gameDesignTab = new JTabbedPane();
         gameDesignTab.setPreferredSize(new Dimension(750, 600));
 
-        BasicInfoTab basicInfoTab = new BasicInfoTab(gameData);
+        BasicInfoTab basicInfoTab = new BasicInfoTab(myGameData);
 
-        MapDesignTab mapDesignTab = new MapDesignTab(gameData);
-        MapDesignController mapDesignController = new MapDesignController(gameData);
+        MapDesignTab mapDesignTab = new MapDesignTab(myGameData);
+        MapDesignController mapDesignController = new MapDesignController(myGameData);
         mapDesignTab.addObserver(mapDesignController);
 
-        TowerDesignTab towerDesignTab = new TowerDesignTab(gameData);
+        TowerDesignTab towerDesignTab = new TowerDesignTab(myGameData);
 
-        EnemyDesignController enemyDesignController = new EnemyDesignController(gameData);
-        EnemyDesignTab enemyDesignTab = new EnemyDesignTab(gameData);
+        EnemyDesignController enemyDesignController = new EnemyDesignController(myGameData);
+        EnemyDesignTab enemyDesignTab = new EnemyDesignTab(myGameData);
         enemyDesignTab.addObserver(enemyDesignController);
 
-        WaveDesignTab waveDesignTab = new WaveDesignTab(gameData);
+        WaveDesignTab waveDesignTab = new WaveDesignTab(myGameData);
         SkillsDesignTab skillsDesignTab = new SkillsDesignTab();
-        SkillsDesignController skillsDesignController = new SkillsDesignController(gameData);
+        SkillsDesignController skillsDesignController = new SkillsDesignController(myGameData);
         skillsDesignTab.addObserver(skillsDesignController);
 
         EnemyWaveCommunicationController enemyWaveCommController =
@@ -66,7 +68,7 @@ public class GameAuthoringGUI {
         enemyWaveCommController.addObserver(waveDesignTab);
         enemyDesignTab.addObserver(enemyWaveCommController);
 
-        TempBarrierDesignTab tempBarrierTab = new TempBarrierDesignTab(gameData);
+        TempBarrierDesignTab tempBarrierTab = new TempBarrierDesignTab(myGameData);
 
         myDuvallClippy = new JLabel();
         Image duvallImage;
@@ -87,7 +89,7 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Wave Design", waveDesignTab.getTab());
         gameDesignTab.addTab("Temp Barrier Design", tempBarrierTab.getTab());
         gameDesignTab.addTab("Skills Design", skillsDesignTab.getTab());
-        MenuBar menu = new MenuBar(gameData, basicInfoTab, mapDesignTab, waveDesignTab);
+        MenuBar menu = new MenuBar(myGameData, basicInfoTab, mapDesignTab, waveDesignTab);
         myMainPanel.add(gameDesignTab, "gap 50 20 100 40");
         createUserLibraryTab();
         // myMainPanel.add(myDuvallClippy);
@@ -102,7 +104,9 @@ public class GameAuthoringGUI {
     public void createUserLibraryTab () {
         JTabbedPane userLibrary = new JTabbedPane();
         userLibrary.setPreferredSize(new Dimension(300, 600));
-        UserImagesTab userImagesTab = new UserImagesTab(null);
+        UserImagesTab userImagesTab = new UserImagesTab();
+        UserImagesController userImagesController = new UserImagesController(myGameData);
+        userImagesTab.addObserver(userImagesController);
         UserSoundsTab userSoundsTab = new UserSoundsTab();
         userLibrary.add("Image Library", userImagesTab.getTab());
         userLibrary.add("Sound Library", userSoundsTab.getTab());

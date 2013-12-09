@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.JSONObjects.WaveJSONObject;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
@@ -45,8 +44,7 @@ public class WaveDesignTab extends Tab implements Observer {
 
     private final String DEFAULT_TYPE_TEXT = "Select an Enemy Type";
 
-    public WaveDesignTab (GameData gameData) {
-        super(gameData);
+    public WaveDesignTab () {
     }
 
     @Override

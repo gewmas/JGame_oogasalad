@@ -1,7 +1,6 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.EnemyJSONObject;
-import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -48,8 +47,7 @@ public class EnemyDesignTab extends Tab {
     private JComboBox<String> mySkillOptions;
     private final String[] SKILLS = { "Haste", "Armour", "Heal", "Light", "Poison" };
 
-    public EnemyDesignTab (GameData gameData) {
-        super(gameData);
+    public EnemyDesignTab () {
     }
 
     @Override
