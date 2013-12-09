@@ -493,7 +493,7 @@
 	"image": "runRight",
 	"life": 10,
 	"speed": 0.5,
-   "skill": "Poison",
+   "skill": "",
    "Specialty" : 0,
    "damage":1
 }, 

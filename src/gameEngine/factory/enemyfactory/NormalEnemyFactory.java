@@ -53,6 +53,7 @@ public class NormalEnemyFactory implements EnemyFactory {
         Enemy enemy =
                 new Enemy(gold, life, speed, id, true, GameEngineConstant.ENEMY_CID, image,
                           specialty, model,damage);
+        System.out.println("created");
         model.addEnemy(enemy);
         System.out.println(skill);
         enemy.setSkill(skill);

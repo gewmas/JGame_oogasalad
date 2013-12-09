@@ -88,7 +88,7 @@ public class Model {
         gameInfo.setLife(parser.getInt("numberOfLives"));
         gameInfo.setGold(parser.getInt("gold"));
         setCheatToWin(false);
-//        rule.ruleStart();
+
         //Edited by Alex, call reset() instead of start()
         rule.reset();
 

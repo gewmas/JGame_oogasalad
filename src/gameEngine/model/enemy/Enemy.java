@@ -58,7 +58,7 @@ public class Enemy extends JGObject implements IEMagicable {
                   int speciaty,
                   Model model,int damage) {
         super(id, unique_id, model.getPathList().get(0).getX(), model.getPathList().get(0).getY(),
-              collisionid, image,damage);
+              collisionid, image);
 
         this.model = model;
         this.id = id;
@@ -94,6 +94,7 @@ public class Enemy extends JGObject implements IEMagicable {
     public void move () {
         // update skills
         lifeLessThanZero();
+        
         if (mySkill != null)
             mySkill.update((int) this.getCenterX(), (int) this.getCenterY());
         // Should walk along the Path
@@ -101,8 +102,8 @@ public class Enemy extends JGObject implements IEMagicable {
             // System.out.println("Reached point!");
             calculateNewDirection();
         }
-        pathX += xMovement * speed;
-        pathY += yMovement * speed;
+        pathX += xMovement *speed;
+        pathY += yMovement *speed;
         JGRectangle box = this.getImageBBox();
 
         this.x = pathX - (box.width - GameEngineConstant.PIXELSPERTILE) / 2;
@@ -124,6 +125,7 @@ public class Enemy extends JGObject implements IEMagicable {
 
     public void lifeLessThanZero () {
         if (life <= 0) {
+           
             model.getGameInfo().addGold((int) gold);
             CreateEffect effect = new CreateEffect();
             effect.blood(this.getCenterX(), this.getCenterY());
