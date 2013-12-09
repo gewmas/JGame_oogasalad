@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame;
 
 import gameEngine.constant.GameEngineConstant;
+import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -28,21 +29,21 @@ import jgame.platform.StdGame;
  */
 public class Game extends StdGame {
     private static final String[] DISPLAY_KEYS = { GameEngineConstant.PURCHASE_INFO_NAME,
-                                                  GameEngineConstant.TOWER_DAMAGE,
-                                                  GameEngineConstant.TOWER_ATTACK_SPEED,
-                                                  GameEngineConstant.TOWER_ATTACK_AMOUNT,
-                                                  GameEngineConstant.TOWER_RANGE,
-                                                  GameEngineConstant.TOWER_MAGIC,
-                                                  GameEngineConstant.TOWER_MAGIC_FACTOR,
-                                                  GameEngineConstant.TOWER_BOOST_FACTOR,
-                                                  GameEngineConstant.TOWER_SELL_PRICE,
-                                                  GameEngineConstant.TOWER_UPGRADE_PRICE,
-                                                  GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
+                                                   GameEngineConstant.TOWER_DAMAGE,
+                                                   GameEngineConstant.TOWER_ATTACK_SPEED,
+                                                   GameEngineConstant.TOWER_ATTACK_AMOUNT,
+                                                   GameEngineConstant.TOWER_RANGE,
+                                                   GameEngineConstant.TOWER_MAGIC,
+                                                   GameEngineConstant.TOWER_MAGIC_FACTOR,
+                                                   GameEngineConstant.TOWER_BOOST_FACTOR,
+                                                   GameEngineConstant.TOWER_SELL_PRICE,
+                                                   GameEngineConstant.TOWER_UPGRADE_PRICE,
+                                                   GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
 
     private int WIDTH = 600;
     private int HEIGHT = 600;
 
-    private View view;
+    private ControllerToViewInterface controller;
     private ItemOptionsDisplayer utilities;
 
     private FrameRateSlider frameRateSlider;
@@ -56,13 +57,13 @@ public class Game extends StdGame {
 
     private GameInfo gameInfo;
 
-    public Game (View view,
+    public Game (ControllerToViewInterface controller,
                  ItemPurchaser itemPurchaser,
                  ItemOptionsDisplayer utilities,
                  GameInitializable gameInitializerItems,
                  GameUpdatable gameUpdatables,
                  Collection<KeyActivationItem> keyActivationItems) {
-        this.view = view;
+        this.controller = controller;
         this.keyActivationItems = keyActivationItems;
         this.itemPurchaser = itemPurchaser;
         this.utilities = utilities;
@@ -74,7 +75,7 @@ public class Game extends StdGame {
     @Override
     public void initCanvas () {
 
-        gameInfo = view.getGameInfo();
+        gameInfo = controller.getGameInfo();
 
         this.setMoneyTitle(gameInfo.getMyGoldName());
         this.setLivesTitle(gameInfo.getMyLivesName());
@@ -93,18 +94,18 @@ public class Game extends StdGame {
                       10, // number of highscores
                       new Highscore(0, "nobody"), // default entry for highscore
                       25 // max length of the player name
-        );
+                );
 
         initial_lives = gameInfo.getLife();// view.getLives();
         lives = initial_lives;// view.getLives();
         score = gameInfo.getGold();// view.getMoney();
         defineImage("RESERVEDslider_bar", "sb", 256, "slider_bar.png", "-");
         defineImage("RESERVEDslider_toggle", "sb", 256, "slider_toggle.png", "-");
-        String background = view.getGameInfo().getBGImage();// gameInfo.getBGImage();//view.getBGImage();
+        String background = controller.getGameInfo().getBGImage();// gameInfo.getBGImage();//view.getBGImage();
 
         setBGImage(background);
         startgame_ingame = true;
-        List<Tile> pathList = view.getPath();
+        List<Tile> pathList = controller.getPath();
         int tileCount = 0;
         for (Tile tile : pathList) {
             defineImage("tile" + String.valueOf(tileCount), "#" + String.valueOf(tileCount), 256,
@@ -123,30 +124,30 @@ public class Game extends StdGame {
     }
 
     public void startInGame () {
-        view.startModel();
+        controller.startGame();
 
         gameInitializerItems.initialize();
 
         frameRateSlider =
                 new FrameRateSlider("slider", true, pfWidth() / 2, pfHeight() - 40, 256,
-                                    "slider_toggle");
+                        "slider_toggle");
         frameRateBar =
                 new JGObject("sliderbar", true, pfWidth() / 2 - 84, pfHeight() - 30, 256,
-                             "slider_bar");
+                        "slider_bar");
         frameRateBar.resume_in_view = false;
         toggleFrameRateBar();
     }
 
     public void doFrameInGame () {
         moveObjects();
-        gameInfo = view.getGameInfo();
+        gameInfo = controller.getGameInfo();
         checkGameCollisions();
         checkUserInteractions();
         updateGameStats();
         gameUpdatables.update();
 
         for (KeyActivationItem item : keyActivationItems) {
-         
+
             if (getKey(item.getActivationKey().getKeyChar())) {
                 clearKey(item.getActivationKey().getKeyChar());
                 item.activate();
@@ -185,9 +186,10 @@ public class Game extends StdGame {
             JGPoint mousePosition = getMousePos();
             System.out.println(mousePosition.x);
             System.out.println(mousePosition.y);
-            if (!itemPurchaser.checkAndPlaceTower(mousePosition)) {
-                PurchaseInfo tower = view.getTowerInfo(mousePosition.x, mousePosition.y);
-                List<DisplayValue> display = new ArrayList();
+            itemPurchaser.checkAndPlaceTower(mousePosition);
+            if (!itemPurchaser.isPurchasing()){
+                PurchaseInfo tower = controller.getTowerInfo(mousePosition.x, mousePosition.y);
+                List<DisplayValue> display = new ArrayList<DisplayValue>();
                 if (tower != null) {
                     for (String key : valuesToDisplay.keySet()) {
                         if (tower.getInfo().get(key) != null) {
@@ -242,7 +244,7 @@ public class Game extends StdGame {
      */
 
     public void endGame () {
-        view.stopWaves();
+        controller.stopWaves();
         gameUpdatables.endGame();
 
         removeObjects(null, 0);

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameInitializable;
@@ -27,24 +28,24 @@ import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 public class StorePanel extends JPanel implements GameUpdatable, GameInitializable {
 
     private JTabbedPane storeTabbedPane;
-    private View view;
+    private ControllerToViewInterface controller;
     private ItemOptionsDisplayer itemOptionsDisplayer;
     private List<StoreCategoryPanel> storeCategories;
     private ItemPurchaser itemPurchaser;
 
     /**
-     * @param view interface between controller and GUI
+     * @param controller interface between controller and GUI
      * @param itemOptionsDisplayer tool to display different options that can be performed on a
      * @param itemPurchaser tool to facilitate purchasing a store item
      */
-    public StorePanel (View view,
+    public StorePanel (ControllerToViewInterface controller,
                        ItemOptionsDisplayer itemOptionsDisplayer,
                        ItemPurchaser itemPurchaser) {
         super();
         BorderLayout borderLayout = new BorderLayout();
         setLayout(borderLayout);
         this.itemOptionsDisplayer = itemOptionsDisplayer;
-        this.view = view;
+        this.controller = controller;
         this.itemPurchaser = itemPurchaser;
         storeCategories = new ArrayList<StoreCategoryPanel>();
 
@@ -59,12 +60,12 @@ public class StorePanel extends JPanel implements GameUpdatable, GameInitializab
      * adds the items to its display
      */
     public void openAndStockStore () {
-        Map<String, List<PurchaseInfo>> storeInventory = view.getInventory();
+        Map<String, List<PurchaseInfo>> storeInventory = controller.getInventory();
 
         for (String item : storeInventory.keySet()) {
-            Map<String, String> images = view.getStoreImages();
+            Map<String, String> images = controller.getImageURL();
             StoreCategoryPanel storeCategory =
-                    new StoreCategoryPanel(view, images, storeInventory.get(item),
+                    new StoreCategoryPanel(controller, images, storeInventory.get(item),
                                            itemOptionsDisplayer, itemPurchaser);
             storeTabbedPane.addTab(item, storeCategory);
             storeCategories.add(storeCategory);

@@ -1,9 +1,9 @@
 package gameEngine.view.gameFrame.towerUpdrader;
 
 import gameEngine.constant.GameEngineConstant;
+import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.tools.DisplayValue;
-
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -32,15 +32,15 @@ public class UpgradeButton extends TowerUpgraderButton {
     private ItemOptionsDisplayer towerUpgrader;
     private Map<String, String> upgradedValuesToDisplay;
     private Map<String, String> normalValuesToDisplay;
-    private View view;
+    private ControllerToViewInterface controller;
     private int towerX, towerY;
     private Map<String, String> information;
     private boolean isActive;
 
-    public UpgradeButton (ItemOptionsDisplayer utility, View viewer) {
+    public UpgradeButton (ItemOptionsDisplayer utility, ControllerToViewInterface controller_in) {
         super(NAME);
         this.towerUpgrader = utility;
-        this.view = viewer;
+        this.controller = controller_in;
         normalValuesToDisplay = new LinkedHashMap<String, String>();
         upgradedValuesToDisplay = new LinkedHashMap<String, String>();
         
@@ -63,7 +63,7 @@ public class UpgradeButton extends TowerUpgraderButton {
             public void mouseClicked (MouseEvent e) {
             	updateValuesToDisplay();
                 if (isActive) {
-                    view.upgradeTower(towerX, towerY);
+                    controller.upgradeTower(towerX, towerY);
 
                     updateDisplayInformation(upgradedValuesToDisplay);
                 }
@@ -88,7 +88,7 @@ public class UpgradeButton extends TowerUpgraderButton {
 
 	public void checkActive () {
 
-        int money = view.getGameInfo().getGold();
+        int money = controller.getGameInfo().getGold();
         isActive =
                 money >= Double
                         .parseDouble(information.get(GameEngineConstant.TOWER_UPGRADE_PRICE));
