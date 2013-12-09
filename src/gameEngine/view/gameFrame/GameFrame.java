@@ -34,7 +34,7 @@ public class GameFrame extends JFrame implements GameInitializable {
     private ItemOptionsDisplayer towerUpgrader;
     private ItemPurchaser itemPurchaser;
     private Map<String, KeyActivationItem> gameKeyActivationItems;
-    private Collection<GameInitializable> gameInitializerItems;
+    private CompositeGameInitializable gameInitializerItems;
     private CompositeGameUpdatable gameUpdatables;
 
     /**
@@ -56,7 +56,7 @@ public class GameFrame extends JFrame implements GameInitializable {
         towerUpgrader = new ItemOptionsDisplayer(infoPanel, view);
         itemPurchaser = new ItemPurchaser(view, this);
         storePanel = addStorePanel(towerUpgrader, itemPurchaser);
-        gameInitializerItems = new ArrayList();
+        gameInitializerItems = new CompositeGameInitializable();
         gameUpdatables = new CompositeGameUpdatable();
         gameUpdatables.add(storePanel);
         addGameTools(infoPanel, storePanel);
