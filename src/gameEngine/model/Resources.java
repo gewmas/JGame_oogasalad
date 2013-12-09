@@ -3,6 +3,8 @@ package gameEngine.model;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
 import jgame.impl.JGEngineInterface;
 
 
@@ -16,7 +18,7 @@ public class Resources {
 
     JGEngineInterface myEngine;
 
-    // private Map<String, String> myImages = new HashMap<String, String>();
+    private Map<String, String> myImages = new HashMap<String, String>();
 
     public Resources (JGEngineInterface eng) {
         myEngine = eng;
@@ -55,6 +57,9 @@ public class Resources {
         }
     }
 
+    Map<String, String> getImages(){
+        return myImages;
+    }
     /**
      * @param jsonArray
      * @return a String array represents the animation.
@@ -86,12 +91,14 @@ public class Resources {
         public void register (JSONObject oneItem) {
             String id = oneItem.getString("id");
             String url = oneItem.getString("url");
+            myImages.put(id, url);
             myEngine.defineImage(id, "-", 256, url, "-");
 
         }
 
     }
 
+    
     private class AudioRegister extends RegisterStrategy {
 
         public AudioRegister () {

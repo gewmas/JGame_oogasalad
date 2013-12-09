@@ -50,6 +50,7 @@ public class Model {
     private ArrayList<Enemy> spawnedEnemies;
     private CheatParser cheatParser;
     private boolean isCheatToWin=false;
+    private Resources myResources=null;
 
     public Model () {
          
@@ -135,8 +136,8 @@ public class Model {
     //For detector use
     public void setJGEngine(JGEngineInterface eng){
         this.myEng = eng;
-        Resources r = new Resources(myEng);
-        r.register(parser);
+        myResources = new Resources(myEng);
+        myResources.register(parser);
         rule = new Rule(1, enemyWarehouse,eng);
         rule.readWaveFromJSon(parser.getJSONArray("wave"));
     }
@@ -152,6 +153,7 @@ public class Model {
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
     public PurchaseInfo getTowerInfo (int x, int y) {
+       
         return checkTowerAtXY(x, y).getPurchaseInfo();
     }
 
@@ -271,6 +273,10 @@ public class Model {
     
     public void stopWaves(){
         rule.stop();
+    }
+    
+    public Map<String, String> getImageURL(){
+        return myResources.getImages(); 
     }
     
     
