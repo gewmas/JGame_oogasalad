@@ -261,6 +261,10 @@ public class GameData extends JSONObject {
         myMap = new MapJSONObject(pathImage, pointList);
         this.put("map", myMap);
     }
+    
+    public void setMap (MapJSONObject map){
+        this.put("map", map);
+    }
 
     public void addBarrier (int x, int y, String imageName) {
         myMap.addBarrier(x, y, imageName);
@@ -269,9 +273,17 @@ public class GameData extends JSONObject {
     public void addImage (String id, String url) {
         myResources.addImage(id, url);
     }
+    
+    public void addImage(ResourceJSONObject image){
+        
+    }
 
     public void addAudio (String id, String url) {
         myResources.addAudio(id, url);
+    }
+    
+    public void addAudio(ResourceJSONObject audio){
+        
     }
 
     public void addAnimation (String id, List<String> imagePaths) {
