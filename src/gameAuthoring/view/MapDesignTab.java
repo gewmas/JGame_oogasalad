@@ -4,7 +4,6 @@ import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -33,15 +32,16 @@ public class MapDesignTab extends Tab {
     private String myPathImage;
     private JPanel myGridPanel;
     private JPanel myButtonPanel;
+    private static final String PATH_LABEL_FORMATTING = "gap 0 0 0 30";
 
     public MapDesignTab () {
     }
 
     @Override
     public JPanel getTab () {
-        myMainPanel.setLayout(new MigLayout("wrap 2"));
+        myMainPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myGridPanel = new JPanel(new BorderLayout());
-        myButtonPanel = new JPanel(new MigLayout("wrap 2"));
+        myButtonPanel = new JPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myButtonPanel.setOpaque(false);
         addTitle();
         addGrid();
@@ -61,11 +61,11 @@ public class MapDesignTab extends Tab {
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
         setBackground
                 .setToolTipText(StyleConstants.resourceBundle.getString("MapBackgroundTip"));
-        myButtonPanel.add(setBackground, "span 2");
+        myButtonPanel.add(setBackground, StyleConstants.DEFAULT_SPAN_MODE);
     }
 
     private void addSubmitMapButton () {
-        JButton checkPath = new JButton("Create Map");
+        JButton checkPath = new JButton(StyleConstants.resourceBundle.getString("CreateMap"));
         checkPath.setFont(StyleConstants.DEFAULT_BODY_FONT);
         checkPath.addMouseListener(createPathCheckListener());
         checkPath
@@ -75,8 +75,8 @@ public class MapDesignTab extends Tab {
 
     private void addTitle () {
         JLabel title = new JLabel(StyleConstants.resourceBundle.getString("MapDesignTitle"));
-        title.setFont(new Font("Calibri", Font.PLAIN, 30));
-        myMainPanel.add(title, "span 2");
+        title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
+        myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
     }
 
     private void addGrid () {
@@ -93,8 +93,8 @@ public class MapDesignTab extends Tab {
         JLabel pathLabel = new JLabel(StyleConstants.resourceBundle.getString("MapPath"));
         pathLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         pathLabel.setToolTipText(StyleConstants.resourceBundle.getString("MapPathTip"));
-        myButtonPanel.add(pathLabel, "gap 0 0 0 30");
-        myButtonPanel.add(myCurrentPathImage, "gap 0 0 0 30");
+        myButtonPanel.add(pathLabel, PATH_LABEL_FORMATTING);
+        myButtonPanel.add(myCurrentPathImage, PATH_LABEL_FORMATTING);
     }
 
     public void loadJSON (Parser p) {
@@ -105,14 +105,11 @@ public class MapDesignTab extends Tab {
                                        myPathImage));
         JSONArray pathPoints = (JSONArray) map.get("Path");
         myGrid.reset();
-
         for (int i = 0; i < pathPoints.length(); i++) {
             JSONObject point = (JSONObject) pathPoints.get(i);
             int x = (Integer) point.get("x");
             int y = (Integer) point.get("y");
-
             myGrid.toggleGridButton(x, y);
-
             if (i == 0) myGrid.setPathStart(new Point2D.Double(x, y));
             if (i == pathPoints.length() - 1) myGrid.setPathEnd(new Point2D.Double(x, y));
         }

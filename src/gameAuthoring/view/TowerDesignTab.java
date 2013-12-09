@@ -1,7 +1,6 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.TowerJSONObject;
-import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -11,8 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -37,10 +34,6 @@ public class TowerDesignTab extends Tab {
 
     private JScrollPane myCreatedTowers;
     private JPanel myCreatedTowersPanel;
-    private JPanel myMainPanel;
-    private JPanel myContentPanel;
-
-    private Map<String, JPanel> myTowerPanelMap;
     private JComboBox<String> myTypeOptions;
     private JTextField myNameField;
     private JTextField myDamageField;
@@ -50,38 +43,40 @@ public class TowerDesignTab extends Tab {
     private JTextField myCostField;
     private JTextField myRecyclePriceField;
     private JTextArea myDescriptionField;
-    private JTextField magicFactorField;
-    private JTextField boostFactorField;
-    private JTextField attackAmountField;
-
-    private JButton createTowerButton;
+    private JTextField myMagicFactorField;
+    private JTextField myBoostFactorField;
+    private JTextField myAttackAmountField;
+    private JButton myCreateTowerButton;
     private JScrollPane scrollPane;
-    private JComboBox<String> magicOptions;
-
+    private JComboBox<String> myMagicOptions;
     private ImageLabel myTowerImage;
-
     private final static String[] TOWER_TYPES = { "DefaultTower", "MultipleShootingTower",
                                                  "BoostTower", "MagicTower" };
     private final static Integer[] ATTACK_MODES = { 0, 1, 2, 3 };
     private final static String[] MAGIC_TYPES = { "FrozeMagic", "HasteMagic", "PoisonMagic",
                                                  "HealMagic", "ArmourMagic" };
-
     private final static Dimension FIELD_DIMENSION = new Dimension(150, 30);
     private final static Dimension MAIN_PANEL_DIMENSION = new Dimension(500, 500);
     private final static Dimension PANEL_DIMENSION = new Dimension(380, 500);
-
-    JLabel type, name, damage, attackSpeed, attackMode, range, cost, recyclePrice, description,
-            towerImageChooser;
+    private static final String DEFAULT_TOWER_NAME = "DefaultTower";
+    private static final String MULTIPLE_SHOOTING_TOWER_NAME = "MultipleShootingTower";
+    private static final String BOOST_TOWER_NAME = "BoostTower";
+    private static final String MAGIC_TOWER_NAME = "MagicTower";
+    private static final String TOWER_IMAGE_FORMATTING = "gap 0 0 10 10";
+    private static final String CONTENT_PANEL_WRAP_MODE = "wrap 1";
+    private final static String CREATED_TOWERS_WRAP_MODE = "wrap 8";
+    JLabel type, myNameLabel, myDamageLabel, myAttackSpeedLabel, myAttackModeLabel, myRangeLabel,
+            myCostLabel, myRecyclePriceLabel, myDescriptionLabel,
+            myTowerImageChooser;
 
     public TowerDesignTab () {
     }
 
-    // TODO: Get rid of magic number
     @Override
     public JPanel getTab () {
-        myMainPanel = new GradientPanel(new MigLayout("wrap 2"));
-        initializeTitle();
+        myMainPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myMainPanel.setPreferredSize(MAIN_PANEL_DIMENSION);
+        initializeTitle();
         initializeNameField();
         initializeDamageField();
         initializeAttackSpeedField();
@@ -92,7 +87,6 @@ public class TowerDesignTab extends Tab {
         initializeDescriptionField();
         initializeTowerImageChooser();
         initializeTowerCreationButton();
-        initializeMap();
         initializeContentPanel();
         myMainPanel.add(myContentPanel);
         initializeCreatedTowersPanel();
@@ -101,22 +95,22 @@ public class TowerDesignTab extends Tab {
     }
 
     public void initializeCreatedTowersPanel () {
-        myCreatedTowersPanel = new JPanel(new MigLayout("wrap 8"));
+        myCreatedTowersPanel = new JPanel(new MigLayout(CREATED_TOWERS_WRAP_MODE));
         myCreatedTowersPanel.setOpaque(false);
         myCreatedTowers = new JScrollPane(myCreatedTowersPanel);
         myCreatedTowers.setPreferredSize(PANEL_DIMENSION);
         myCreatedTowers.setOpaque(false);
         myCreatedTowers.getViewport().setOpaque(false);
         myCreatedTowers.setBorder(BorderFactory
-                .createTitledBorder(StyleConstants.DEFAULT_PANEL_BORDER, "Created Towers",
+                .createTitledBorder(StyleConstants.DEFAULT_PANEL_BORDER,
+                                    StyleConstants.resourceBundle.getString("CreatedTowers"),
                                     TitledBorder.CENTER,
                                     TitledBorder.TOP,
                                     StyleConstants.TITLE_FONT_2));
     }
 
     private void initializeContentPanel () {
-        myContentPanel = new JPanel();
-        myContentPanel.setLayout(new MigLayout("wrap 1"));
+        myContentPanel.setLayout(new MigLayout(CONTENT_PANEL_WRAP_MODE));
         type = new JLabel("Type");
         type.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myTypeOptions = new JComboBox<String>(TOWER_TYPES);
@@ -126,7 +120,7 @@ public class TowerDesignTab extends Tab {
         myContentPanel.add(myTypeOptions);
         JPanel myDataPanel = createTowerPanel();
         myDataPanel.setOpaque(false);
-        myDataPanel.add(createTowerButton);
+        myDataPanel.add(myCreateTowerButton);
         myContentPanel.add(myDataPanel);
         myContentPanel.setBorder(StyleConstants.DEFAULT_PANEL_BORDER);
         myContentPanel.setOpaque(false);
@@ -134,19 +128,15 @@ public class TowerDesignTab extends Tab {
     }
 
     public void addTower (File imgSource, String towerName) {
-        System.out.println(towerName);
         JLabel towerIcon = new JLabel();
         Image towerImage;
         try {
             towerImage = ImageIO.read(imgSource);
             towerIcon.setIcon(new ImageIcon(towerImage));
-            System.out.println("try");
         }
         catch (IOException e) {
-
             e.printStackTrace();
         }
-
         JLabel towerNameLabel = new JLabel(towerName);
         towerNameLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myCreatedTowersPanel.add(towerNameLabel);
@@ -168,28 +158,22 @@ public class TowerDesignTab extends Tab {
                     contentPanel.removeAll();
                     contentPanel.add(type);
                     contentPanel.add(myTypeOptions);
-                    JPanel dataPanel = myTowerPanelMap.get(towerType);
-                    // WHAT IS GOING ON HERE??
-                    if (towerType.equals("MagicTower")) {
+                    JPanel dataPanel;
+                    if (towerType.equals(MAGIC_TOWER_NAME)) {
                         dataPanel = createMagicTowerPanel();
                     }
-
-                    else if (towerType.equals("MultipleShootingTower")) {
+                    else if (towerType.equals(MULTIPLE_SHOOTING_TOWER_NAME)) {
                         dataPanel = createMultipleShootingTowerPanel();
                     }
-
-                    else if (towerType.equals("BoostTower")) {
+                    else if (towerType.equals("BOOST_TOWER_NAME")) {
                         dataPanel = createBoostTowerPanel();
                     }
-
                     else {
                         dataPanel = createTowerPanel();
                     }
-
                     dataPanel.setOpaque(false);
-                    dataPanel.add(createTowerButton);
+                    dataPanel.add(myCreateTowerButton);
                     dataPanel.revalidate();
-
                     JScrollPane scrollPane = new JScrollPane(dataPanel);
                     Border empty = BorderFactory.createEmptyBorder();
                     scrollPane.setBorder(empty);
@@ -202,104 +186,94 @@ public class TowerDesignTab extends Tab {
                     clearTextFields();
                 }
             }
-
         };
-
         return listener;
-
     }
 
-    // Methods to create new panels
     private JPanel createTowerPanel () {
         JPanel panel = new JPanel();
-
-        panel.setLayout(new MigLayout("wrap 2"));
-        panel.add(name);
+        panel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        panel.add(myNameLabel);
         panel.add(myNameField);
-        panel.add(damage);
+        panel.add(myDamageLabel);
         panel.add(myDamageField);
-        panel.add(attackSpeed);
+        panel.add(myAttackSpeedLabel);
         panel.add(myAttackSpeedField);
-        panel.add(attackMode);
+        panel.add(myAttackModeLabel);
         panel.add(myAttackModeOptions);
-        panel.add(range);
+        panel.add(myRangeLabel);
         panel.add(myRangeField);
-        panel.add(cost);
+        panel.add(myCostLabel);
         panel.add(myCostField);
-        panel.add(recyclePrice);
+        panel.add(myRecyclePriceLabel);
         panel.add(myRecyclePriceField);
-        panel.add(description);
+        panel.add(myDescriptionLabel);
         panel.add(scrollPane);
-        panel.add(towerImageChooser);
-        panel.add(myTowerImage, "gap 0 0 10 10");
-        // panel.add(myTowerImage);
-
+        panel.add(myTowerImageChooser);
+        panel.add(myTowerImage, TOWER_IMAGE_FORMATTING);
         return panel;
-
     }
 
     private JPanel createMagicTowerPanel () {
         JPanel panel = createTowerPanel();
-
-        JLabel magicFactor = new JLabel("Magic Factor");
+        JLabel magicFactor = new JLabel(StyleConstants.resourceBundle.getString("TowerMagic"));
         magicFactor.setFont(StyleConstants.DEFAULT_BODY_FONT);
         JLabel magic = new JLabel("Magic");
         magic.setFont(StyleConstants.DEFAULT_BODY_FONT);
-
-        magicFactorField = new JTextField();
-        magicFactorField.setPreferredSize(FIELD_DIMENSION);
-        magicFactorField.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        magicOptions = new JComboBox<String>(MAGIC_TYPES);
-        magicOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
-
+        myMagicFactorField = new JTextField();
+        myMagicFactorField.setPreferredSize(FIELD_DIMENSION);
+        myMagicFactorField.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myMagicFactorField.setToolTipText(StyleConstants.resourceBundle.getString("TowerMagicTip"));
+        myMagicOptions = new JComboBox<String>(MAGIC_TYPES);
+        myMagicOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
         panel.add(magicFactor);
-        panel.add(magicFactorField);
+        panel.add(myMagicFactorField);
         panel.add(magic);
-        panel.add(magicOptions);
-
+        panel.add(myMagicOptions);
         return panel;
     }
 
-    private JPanel createBoostTowerPanel () { // To be refactored
+    private JPanel createBoostTowerPanel () {
         JPanel panel = new JPanel();
-        panel.setLayout(new MigLayout("wrap 2"));
-        panel.add(name);
+        panel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        panel.add(myNameLabel);
         panel.add(myNameField);
-        panel.add(damage);
+        panel.add(myDamageLabel);
         panel.add(myDamageField);
-        panel.add(attackSpeed);
+        panel.add(myAttackSpeedLabel);
         panel.add(myAttackSpeedField);
-        panel.add(range);
+        panel.add(myRangeLabel);
         panel.add(myRangeField);
-        panel.add(cost);
+        panel.add(myCostLabel);
         panel.add(myCostField);
-        panel.add(recyclePrice);
+        panel.add(myRecyclePriceLabel);
         panel.add(myRecyclePriceField);
-        panel.add(description);
+        panel.add(myDescriptionLabel);
         panel.add(scrollPane);
-        panel.add(towerImageChooser);
-        panel.add(myTowerImage, "gap 0 0 10 10");
-
-        JLabel boostFactor = new JLabel("Boost Factor");
+        panel.add(myTowerImageChooser);
+        panel.add(myTowerImage, TOWER_IMAGE_FORMATTING);
+        JLabel boostFactor = new JLabel(StyleConstants.resourceBundle.getString("TowerBoost"));
         boostFactor.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        boostFactorField = new JTextField();
-        boostFactorField.setPreferredSize(FIELD_DIMENSION);
-        boostFactorField.setFont(StyleConstants.DEFAULT_BODY_FONT);
-
+        boostFactor.setToolTipText(StyleConstants.resourceBundle.getString("TowerBoostTip"));
+        myBoostFactorField = new JTextField();
+        myBoostFactorField.setPreferredSize(FIELD_DIMENSION);
+        myBoostFactorField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         panel.add(boostFactor);
-        panel.add(boostFactorField);
+        panel.add(myBoostFactorField);
         return panel;
     }
 
     private JPanel createMultipleShootingTowerPanel () {
         JPanel panel = createTowerPanel();
-        JLabel attackAmount = new JLabel("Attack Amount");
+        JLabel attackAmount = new JLabel(StyleConstants.resourceBundle.getString("TowerAttack"));
         attackAmount.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        attackAmountField = new JTextField();
-        attackAmountField.setPreferredSize(FIELD_DIMENSION);
-        attackAmountField.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        attackAmount.setToolTipText(StyleConstants.resourceBundle
+                .getString("TowerAttackTip"));
+        myAttackAmountField = new JTextField();
+        myAttackAmountField.setPreferredSize(FIELD_DIMENSION);
+        myAttackAmountField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         panel.add(attackAmount);
-        panel.add(attackAmountField);
+        panel.add(myAttackAmountField);
         return panel;
     }
 
@@ -310,7 +284,6 @@ public class TowerDesignTab extends Tab {
                 try
                 {
                     String type = TOWER_TYPES[myTypeOptions.getSelectedIndex()];
-                    // Things that all towers have in common
                     String name = myNameField.getText();
                     int damage = Integer.parseInt(myDamageField.getText());
                     double attackSpeed = Double.parseDouble(myAttackSpeedField.getText());
@@ -323,29 +296,29 @@ public class TowerDesignTab extends Tab {
                         recyclePrice < 0 || description == null) {
                         JOptionPane
                                 .showMessageDialog(null,
-                                                   "Cannot have negative values for gold, life, or speed");
+                                                   StyleConstants.resourceBundle
+                                                           .getString("TowerInvalidSubmission"));
                     }
-
                     else {
                         TowerJSONObject tower;
-                        if (type.equals("DefaultTower")) {
+                        if (type.equals(DEFAULT_TOWER_NAME)) {
                             int mode = myAttackModeOptions.getSelectedIndex();
                             tower = new TowerJSONObject(type,
                                                         name,
                                                         imageID,
                                                         damage,
                                                         attackSpeed,
-                                                        mode, // attackMode?
+                                                        mode,
                                                         range,
                                                         cost,
                                                         recyclePrice,
                                                         description);
 
                         }
-                        else if (type.equals("MagicTower")) {
+                        else if (type.equals(MAGIC_TOWER_NAME)) {
                             int mode = myAttackModeOptions.getSelectedIndex();
-                            String magicType = (String) magicOptions.getSelectedItem();
-                            double magicFactor = Double.parseDouble(magicFactorField.getText());
+                            String magicType = (String) myMagicOptions.getSelectedItem();
+                            double magicFactor = Double.parseDouble(myMagicFactorField.getText());
 
                             tower =
                                     new TowerJSONObject(type, name, imageID, damage,
@@ -353,8 +326,8 @@ public class TowerDesignTab extends Tab {
                                                         recyclePrice,
                                                         description, magicFactor, magicType);
                         }
-                        else if (type.equals("BoostTower")) {
-                            double boostFactor = Double.parseDouble(boostFactorField.getText());
+                        else if (type.equals(BOOST_TOWER_NAME)) {
+                            double boostFactor = Double.parseDouble(myBoostFactorField.getText());
                             tower = new TowerJSONObject(type,
                                                         name,
                                                         imageID,
@@ -365,21 +338,16 @@ public class TowerDesignTab extends Tab {
                                                         recyclePrice,
                                                         description,
                                                         boostFactor);
-
                         }
                         else {
                             int mode = myAttackModeOptions.getSelectedIndex();
-                            int attackAmount = Integer.parseInt(attackAmountField.getText());
+                            int attackAmount = Integer.parseInt(myAttackAmountField.getText());
                             tower = new TowerJSONObject(type, name, imageID,
                                                         damage, attackSpeed, mode,
                                                         attackAmount, range, cost,
                                                         recyclePrice, description);
-
                         }
-
-                        System.out.println(myTowerImage.getImageFile() + " " + name);
                         addTower(myTowerImage.getImageFile(), name);
-
                         setChanged();
                         notifyObservers(tower);
                         clearChanged();
@@ -389,7 +357,8 @@ public class TowerDesignTab extends Tab {
                 catch (NumberFormatException n) {
                     JOptionPane
                             .showMessageDialog(null,
-                                               "Invalid input");
+                                               StyleConstants.resourceBundle
+                                                       .getString("TowerInvalidInput"));
                 }
             }
         };
@@ -397,92 +366,108 @@ public class TowerDesignTab extends Tab {
     }
 
     private void clearTextFields () {
-        myNameField.setText("");
-        myDamageField.setText("");
-        myAttackSpeedField.setText("");
-        myRangeField.setText("");
-        myCostField.setText("");
-        myRecyclePriceField.setText("");
+        myNameField.setText(StyleConstants.NULL_STRING);
+        myDamageField.setText(StyleConstants.NULL_STRING);
+        myAttackSpeedField.setText(StyleConstants.NULL_STRING);
+        myRangeField.setText(StyleConstants.NULL_STRING);
+        myCostField.setText(StyleConstants.NULL_STRING);
+        myRecyclePriceField.setText(StyleConstants.NULL_STRING);
         myTowerImage.setIcon(null);
-        myDescriptionField.setText("");
-        magicFactorField.setText("");
-        boostFactorField.setText("");
-        attackAmountField.setText("");
+        myDescriptionField.setText(StyleConstants.NULL_STRING);
+        myMagicFactorField.setText(StyleConstants.NULL_STRING);
+        myBoostFactorField.setText(StyleConstants.NULL_STRING);
+        myAttackAmountField.setText(StyleConstants.NULL_STRING);
     }
 
     private void initializeTitle () {
         JLabel title = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerTitle"));
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
-        myMainPanel.add(title, "span 2");
+        myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
     }
 
     private void initializeNameField () {
-        name = new JLabel(StyleConstants.resourceBundle
+        myNameLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerName"));
-        name.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myNameLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myNameField = new JTextField();
         myNameField.setPreferredSize(FIELD_DIMENSION);
         myNameField.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myNameField.setToolTipText(StyleConstants.resourceBundle
+                .getString("TowerNameTip"));
     }
 
     private void initializeDamageField () {
-        damage = new JLabel(StyleConstants.resourceBundle
+        myDamageLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerDamage"));
-        damage.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myDamageLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myDamageField = new JTextField();
         myDamageField.setPreferredSize(FIELD_DIMENSION);
         myDamageField.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myDamageLabel.setToolTipText(StyleConstants.resourceBundle
+                .getString("TowerDamageTip"));
     }
 
     private void initializeAttackSpeedField () {
-        attackSpeed = new JLabel(StyleConstants.resourceBundle
+        myAttackSpeedLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerAttackSpeed"));
-        attackSpeed.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myAttackSpeedLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myAttackSpeedLabel.setToolTipText(StyleConstants.resourceBundle
+                .getString("TowerAttackSpeedTip"));
         myAttackSpeedField = new JTextField();
         myAttackSpeedField.setPreferredSize(FIELD_DIMENSION);
         myAttackSpeedField.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
     private void initializeAttackModeField () {
-        attackMode = new JLabel(StyleConstants.resourceBundle
+        myAttackModeLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerAttackMode"));
-        attackMode.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myAttackModeLabel.setToolTipText(StyleConstants.resourceBundle
+                .getString("TowerAttackModeTip"));
+        myAttackModeLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myAttackModeOptions = new JComboBox<Integer>(ATTACK_MODES);
         myAttackModeOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
     private void initializeRangeField () {
-        range = new JLabel(StyleConstants.resourceBundle
+        myRangeLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerRange"));
-        range.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myRangeLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myRangeLabel.setToolTipText(StyleConstants.resourceBundle
+                .getString("TowerRangeTip"));
         myRangeField = new JTextField();
         myRangeField.setPreferredSize(FIELD_DIMENSION);
         myRangeField.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
     private void initializeCostField () {
-        cost = new JLabel(StyleConstants.resourceBundle
+        myCostLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerCost"));
-        cost.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myCostLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myCostLabel.setToolTipText(StyleConstants.resourceBundle
+                .getString("TowerCostTip"));
         myCostField = new JTextField();
         myCostField.setPreferredSize(FIELD_DIMENSION);
         myCostField.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
     private void initializeRecycleField () {
-        recyclePrice = new JLabel(StyleConstants.resourceBundle
+        myRecyclePriceLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerRecyclePrice"));
-        recyclePrice.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myRecyclePriceLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myRecyclePriceLabel.setToolTipText(StyleConstants.resourceBundle
+                .getString("TowerRecyclePrice"));
         myRecyclePriceField = new JTextField();
         myRecyclePriceField.setPreferredSize(FIELD_DIMENSION);
         myRecyclePriceField.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
     private void initializeDescriptionField () {
-        description = new JLabel(StyleConstants.resourceBundle
+        myDescriptionLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerDescription"));
-        description.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myDescriptionLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myDescriptionLabel.setToolTipText(StyleConstants.resourceBundle
+                .getString("TowerDescriptionTip"));
         myDescriptionField = new JTextArea();
         myDescriptionField.setLineWrap(true);
         myDescriptionField.setPreferredSize(FIELD_DIMENSION);
@@ -490,25 +475,19 @@ public class TowerDesignTab extends Tab {
     }
 
     private void initializeTowerImageChooser () {
-        towerImageChooser = new JLabel(StyleConstants.resourceBundle
+        myTowerImageChooser = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerImage"));
-        towerImageChooser.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myTowerImageChooser.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myTowerImage = new ImageLabel();
         myTowerImage.setMutableStatusTrue();
     }
 
     private void initializeTowerCreationButton () {
-        createTowerButton = new JButton(StyleConstants.resourceBundle
+        myCreateTowerButton = new JButton(StyleConstants.resourceBundle
                 .getString("TowerCreation"));
-        createTowerButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        createTowerButton.addMouseListener(createTowerButtonListener());
-    }
-
-    private void initializeMap () {
-        myTowerPanelMap = new HashMap<String, JPanel>();
-        myTowerPanelMap.put("DefaultTower", createTowerPanel());
-        myTowerPanelMap.put("MultipleShootingTower", createMultipleShootingTowerPanel());
-        myTowerPanelMap.put("BoostTower", createBoostTowerPanel());
-        myTowerPanelMap.put("MagicTower", createMagicTowerPanel());
+        myCreateTowerButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myCreateTowerButton.setToolTipText(StyleConstants.resourceBundle
+                .getString("TowerCreationTip"));
+        myCreateTowerButton.addMouseListener(createTowerButtonListener());
     }
 }

@@ -27,6 +27,13 @@ import javax.swing.event.ChangeListener;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * @author Rebecca and Susan Zhang
+ *         GameAuthoringGUI is the main game authoring environment. Tabs separate the game authoring
+ *         process into basic info design, map design, tower design, enemy design, temporary barrier
+ *         design, and skills design.
+ * 
+ */
 public class GameAuthoringGUI extends Observable {
 
     protected static JPanel myMainPanel;
@@ -49,6 +56,9 @@ public class GameAuthoringGUI extends Observable {
     private static final Dimension RESOURCE_LIBRARY_DIMENSION = new Dimension(300, 600);
     private static final Dimension FRAME_DEFAULT_DIMENSION = new Dimension(1190, 780);
 
+    /**
+     * Constructor for GameAuthoringGUI that sets up all design tabs in the main frame
+     */
     public GameAuthoringGUI () {
         myGameData = new GameData();
         JFrame frame = new JFrame();
@@ -78,7 +88,10 @@ public class GameAuthoringGUI extends Observable {
         frame.setResizable(false);
     }
 
-    public void addBasicInfoTab () {
+    /**
+     * Adds tab and label for basic information design into the main panel
+     */
+    private void addBasicInfoTab () {
         myBasicInfoTab = new BasicInfoTab();
         BasicInfoDesignController basicInfoDesignController =
                 new BasicInfoDesignController(myGameData);
@@ -87,7 +100,10 @@ public class GameAuthoringGUI extends Observable {
                                myBasicInfoTab.getTab());
     }
 
-    public void addMapDesignTab () {
+    /**
+     * Adds tab and label for map design into the main panel
+     */
+    private void addMapDesignTab () {
         myMapDesignTab = new MapDesignTab();
         MapDesignController mapDesignController = new MapDesignController(myGameData);
         myMapDesignTab.addObserver(mapDesignController);
@@ -95,7 +111,10 @@ public class GameAuthoringGUI extends Observable {
                                myMapDesignTab.getTab());
     }
 
-    public void addTowerDesignTab () {
+    /**
+     * 
+     */
+    private void addTowerDesignTab () {
         myTowerDesignTab = new TowerDesignTab();
         TowerDesignController towerDesignController = new TowerDesignController(myGameData);
         myTowerDesignTab.addObserver(towerDesignController);
@@ -103,7 +122,7 @@ public class GameAuthoringGUI extends Observable {
                                myTowerDesignTab.getTab());
     }
 
-    public void addEnemyWaveDesignTab () {
+    private void addEnemyWaveDesignTab () {
         EnemyDesignController enemyDesignController = new EnemyDesignController(myGameData);
         myEnemyDesignTab = new EnemyDesignTab();
         myEnemyDesignTab.addObserver(enemyDesignController);
@@ -118,7 +137,7 @@ public class GameAuthoringGUI extends Observable {
                                myWaveDesignTab.getTab());
     }
 
-    public void addTemporaryBarrierDesignTab () {
+    private void addTemporaryBarrierDesignTab () {
         TempBarrierDesignController tempBarrierDesignController =
                 new TempBarrierDesignController(myGameData);
         myTempBarrierTab = new TempBarrierDesignTab();
@@ -127,7 +146,7 @@ public class GameAuthoringGUI extends Observable {
                                myTempBarrierTab.getTab());
     }
 
-    public void addSkillsDesignTab () {
+    private void addSkillsDesignTab () {
         mySkillsDesignTab = new SkillsDesignTab();
         SkillsDesignController skillsDesignController = new SkillsDesignController(myGameData);
         mySkillsDesignTab.addObserver(skillsDesignController);
