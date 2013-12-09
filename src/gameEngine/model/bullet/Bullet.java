@@ -13,11 +13,13 @@ import jgame.JGObject;
  */
 public class Bullet extends JGObject {
 
-    Enemy targetEnemy;
-    int currentMagic;
+	private Enemy targetEnemy;
+    private int currentMagic;
 
-    double damage;
-    int specialty;
+    private double damage;
+    private int specialty;
+    
+    private double speed;
 
     public Bullet (
                    Enemy targetEnemy,
@@ -35,9 +37,11 @@ public class Bullet extends JGObject {
         super(name, unique_id, x, y, collisionid, gfxname);
 
         this.targetEnemy = targetEnemy;
-        this.damage = 1;
+        this.damage = damage;
         this.currentMagic = magic;
         this.specialty = specialty;
+        
+        this.speed = 2;
     }
 
     @Override
@@ -49,8 +53,8 @@ public class Bullet extends JGObject {
         double dy = targetEnemy.y - y;
         double ds = Math.sqrt(dx * dx + dy * dy);
 
-        x += dx / ds;
-        y += dy / ds;
+        x += dx / ds * speed;
+        y += dy / ds * speed;
     }
 
     @Override
