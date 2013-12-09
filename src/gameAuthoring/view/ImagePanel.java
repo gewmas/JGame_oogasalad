@@ -12,17 +12,25 @@ import javax.swing.JPanel;
  * @author BecLai
  *         Modified JPanel that is painted with a specified image as background
  */
+@SuppressWarnings("serial")
 public class ImagePanel extends JPanel {
 
     private String myImageName;
 
     /**
-     * @param imageName
+     * Creates new ImagePanel
+     * 
+     * @param imageName is name of image to be displayed in panel background
      */
     public ImagePanel (String imageName) {
         myImageName = imageName;
     }
 
+    /**
+     * Set layout manager for ImagePanel
+     * 
+     * @param layoutManager is layout manager for panel
+     */
     public ImagePanel (LayoutManager layoutManager) {
         super(layoutManager);
         this.setOpaque(false);

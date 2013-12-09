@@ -8,6 +8,10 @@ import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
 
+/**
+ * @author Rebecca Lai & Susan Zhang
+ *         Constants that apply for ALL Game Authoring classes
+ */
 public final class StyleConstants {
     public static final String DEFAULT_RESOURCE_PACKAGE = "gameAuthoring/resources.";
     public static final ResourceBundle resourceBundle = ResourceBundle
