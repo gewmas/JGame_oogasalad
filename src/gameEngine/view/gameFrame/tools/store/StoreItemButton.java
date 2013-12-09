@@ -1,12 +1,18 @@
 package gameEngine.view.gameFrame.tools.store;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.purchase.PurchaseInfo;
-
+import gameEngine.view.ViewConstants;
 
 
 /**
@@ -34,19 +40,36 @@ public class StoreItemButton extends JButton {
      * @param hoverAction defines behavior when button is hovered over
      * @param clickAction defines behavior when button is clicked
      */
-    public StoreItemButton (PurchaseInfo itemPurchaseInfo, StoreButtonAction hoverExitAction,
+    public StoreItemButton (String imagePath,
+                            PurchaseInfo itemPurchaseInfo,
+                            StoreButtonAction hoverExitAction,
                             StoreButtonAction hoverAction,
                             StoreButtonAction clickAction) {
         super("");
         active = false;
         this.setEnabled(false);
-        ImageIcon icon = new ImageIcon("src/resources/img/" + itemPurchaseInfo.getInfo().get("Image").trim() + ".png");
-        this.setIcon(icon);
-        String tempInt = itemPurchaseInfo.getInfo().get("Cost");
+
+        setIconImage(imagePath);
+
+        String tempInt = itemPurchaseInfo.getInfo().get(GameEngineConstant.PURCHASE_INFO_COST);
         this.cost = (int) Double.parseDouble(tempInt);
-        setToolTipText(itemPurchaseInfo.getInfo().get("Name"));
+        setToolTipText(itemPurchaseInfo.getInfo().get(GameEngineConstant.PURCHASE_INFO_NAME));
         setOpaque(true);
         this.addMouseAdapter(hoverAction, hoverExitAction, clickAction);
+    }
+
+    private void setIconImage (String imagePath) {
+        File file = new File(imagePath);
+        Image myImage = null;
+        try {
+            myImage = ImageIO.read(file);
+        }
+        catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        myImage = myImage.getScaledInstance(32,32, Image.SCALE_FAST);
+        this.setIcon(new ImageIcon(myImage));
     }
 
     /**
@@ -101,12 +124,12 @@ public class StoreItemButton extends JButton {
 
             public void mouseExited (MouseEvent me) {
                 unHighlightButton();
-//                 hoverExitAction.executeAction();
+
             }
 
             public void mouseEntered (MouseEvent me) {
                 highlightButton();
-                 hoverAction.executeAction();
+                hoverAction.executeAction();
             }
         });
 

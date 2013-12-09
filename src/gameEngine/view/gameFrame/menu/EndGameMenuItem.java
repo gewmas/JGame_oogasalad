@@ -1,7 +1,6 @@
 package gameEngine.view.gameFrame.menu;
 
-
-import gameEngine.view.StyleConstants;
+import gameEngine.view.ViewConstants;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
@@ -11,8 +10,8 @@ public class EndGameMenuItem extends AbstractAction {
 
     public EndGameMenuItem (MenuActions menuActions) {
 
-        super(StyleConstants.resourceBundle.getString("EndGameFileMenu"));
-      
+        super(ViewConstants.resourceBundle.getString("EndGameFileMenu"));
+
         this.menuActions = menuActions;
     }
 

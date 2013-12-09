@@ -4,6 +4,8 @@
 "BGImage" :  "woods_background",
 "gold" : 500,
 "numberOfLives" : 10,
+"goldName": "Money",
+"livesName": "Lives",
 "levels": 2,
 "widthOfWindow": 600,
 "heightOfWindow": 600,
@@ -364,17 +366,30 @@
                { "id": "2", "url": "mr2.png" },
                { "id": "3", "url": "mr3.png" },
                { "id": "4", "url": "mr4.png" },
-      { "id": "d1", "url": "d1.png" },
+      			{ "id": "d1", "url": "d1.png" },
                { "id": "d2", "url": "d2.png" },
                { "id": "d3", "url": "d3.png" },
                { "id": "d4", "url": "d4.png" },
-      {"id": "haste", "url":"haste.png"},
                
+               { "id": "space_background", "url": "space_background.jpg" },
+               { "id": "woods_background", "url": "woods_background.png" },
+               
+               { "id": "bullet", "url": "bullet.png" },
+               
+               { "id": "tower", "url": "tower.png" },
+               { "id": "tower1", "url": "tower.png" },
+               { "id": "barrier1", "url": "barrier1.png" },
+               { "id": "barrier2", "url": "barrier2.png" },
+      			
+      			{ "id": "BoostTower", "url": "BoostTower.png" },
+      			{ "id": "MagicTower", "url": "MagicTower.png" },
+      			{ "id": "MultipleShootingTower", "url": "MultipleShootingTower.png" },
+
              
            ], 
         "audio":[
          { "id": "alarm", "url": "alarm.wav" },
-      { "id": "haste", "url": "haste.wav" },
+      	{ "id": "Haste", "url": "haste.wav" },
         ],
     "animation":[
          { "id": "runRight", "sheet": [{"id":"1"},{"id":"2"},{"id":"3"},{"id":"4"}] },
@@ -412,6 +427,7 @@
 	 "Cost": 50, 
 	 "Sell Price":  50,
 	 "Description": "Default tower will shoot enemy, Surprise!",
+	 "Specialty" : 0,
 	},
 	{
 	 "Type": "DefaultTower",
@@ -424,6 +440,7 @@
 	 "Cost": 10, 
 	 "Sell Price":  50,
 	 "Description": "Default tower will shoot enemy, Surprise!",
+	 "Specialty" : 0,
 	},
 	{
 	 "Type": "MultipleShootingTower",
@@ -437,6 +454,7 @@
 	 "Cost": 100, 
 	 "Sell Price":  50,
 	 "Description": "MultipleShooting tower will shoot multiple bullets at one time.",
+	 "Specialty" : 0,
 	},
 	{
 	 "Type": "BoostTower",
@@ -449,6 +467,7 @@
 	 "Sell Price":  50,
 	 "Description": "Boost tower will strength towers in adjacency.",
 	 "Boost Factor": 2.0,
+	 "Specialty" : 0,
 	},
 	{
 	 "Type": "MagicTower",
@@ -462,7 +481,8 @@
 	 "Sell Price":  50,
 	 "Description": "Magic tower will shoot a magic bullet to affect the enemy.",
 	 "Magic Factor": 2.0,
-	 "Magic" : 1,
+	 "Magic" : ["FrozeMagic"],
+	 "Specialty" : 0,
 	}
 ],
 
@@ -474,6 +494,8 @@
 	"life": 10,
 	"speed": 0.5,
    "skill": "",
+   "Specialty" : 0,
+   "damage":1
 }, 
 {
 	"id": "2",
@@ -481,59 +503,38 @@
 	"image": "drunRight",
 	"life": 15,
 	"speed": 0.5,
-   "skill": "haste",
+   "skill": "Light",
+   "Specialty" : 0,
+   "damage":1
+},
+{
+	"id": "3",
+	"gold": 10,
+	"image": "drunRight",
+	"life": 15,
+	"speed": 0.5,
+   	"skill": "Armour",
+   	"Specialty" : 0,
+   	"damage":1
 }
 ],
 
 "wave":[
    {  
-      "type": "1",
-      "number":1,
+      "type": [ "1","2","1"],
+      "number": [ 10,5,20],
       "period" :2,
       "interval": 10,
+     
    },
    {  
-      "type": "1",
-      "number":1,
+      "type": [ "1","3","1"],
+      "number": [ 20,10,20],
       "period" :2,
-      "interval": 0,
-   },
-   {  
-      "type": "2",
-      "number":1,
-      "period" :2,
-      "interval": 0,
-   },
-   {  
-      "type": "1",
-      "number":1,
-      "period" :2,
-      "interval": 5,
-   },
-	{	
-		"type": "1",
-		"number":20,
-		"period" :2,
-		"interval": 7,
-	},
-	{	
-		"type": "1",
-		"number":30,
-		"period" :1,
-		"interval": 5,
-	},
-	{	
-		"type": "2",
-		"number":3,
-		"period" :4,
-		"interval": 5,
-	},
-	{	
-		"type": "2",
-		"number":10,
-		"period" :3,
-		"interval": 5,
-	}
+      "interval": 10,
+     
+   }
+  
 ]  
 
 }
