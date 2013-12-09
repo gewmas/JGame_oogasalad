@@ -192,7 +192,8 @@ public class WaveDesignTab extends Tab implements Observer {
                 }
                 else {
                     JOptionPane.showMessageDialog(null,
-                                                  StyleConstants.resourceBundle.getString("WaveInvalidSubmission));
+                                                  StyleConstants.resourceBundle
+                                                          .getString("WaveInvalidSubmission"));
                 }
             }
         };
@@ -208,7 +209,6 @@ public class WaveDesignTab extends Tab implements Observer {
             int number = (int) wave.get("number");
             double period = (double) wave.get("period");
             int interval = (int) wave.get("interval");
-            // myGameData.addWave(type, number, period, interval);
             addWave(type, number);
         }
     }

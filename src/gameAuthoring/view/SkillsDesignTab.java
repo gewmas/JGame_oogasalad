@@ -18,6 +18,8 @@ import net.miginfocom.swing.MigLayout;
 public class SkillsDesignTab extends Tab {
 
     private List<AudioLabel> myAudioLabels = new ArrayList<AudioLabel>();
+    private JPanel mySubPanel;
+    private static final String WRAP_MODE = "wrap 1";
 
     public SkillsDesignTab () {
     }
@@ -25,12 +27,12 @@ public class SkillsDesignTab extends Tab {
     @Override
     public JPanel getTab () {
         JPanel mainPanel = new GradientPanel();
-        mainPanel.setLayout(new MigLayout("wrap 1"));
+        mainPanel.setLayout(new MigLayout(WRAP_MODE));
         JLabel title = new JLabel("Miscellaneous");
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
         mainPanel.add(title, "span 2");
-        JPanel subPanel = new JPanel(new MigLayout("wrap 2"));
-        subPanel.setPreferredSize(new Dimension(300, 300));
+        mySubPanel = new JPanel(new MigLayout("wrap 2"));
+        mySubPanel.setPreferredSize(new Dimension(300, 300));
         mainPanel.setPreferredSize(new Dimension(500, 500));
 
         AudioLabel hasteAudio = new AudioLabel("Haste", false);
@@ -65,24 +67,57 @@ public class SkillsDesignTab extends Tab {
         submitButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         submitButton.addMouseListener(createSubmitListener());
 
-        subPanel.add(hasteLabel);
-        subPanel.add(hasteAudio);
-        subPanel.add(armorLabel);
-        subPanel.add(armorAudio);
-        subPanel.add(healLabel);
-        subPanel.add(healAudio);
-        subPanel.add(lightLabel);
-        subPanel.add(lightAudio);
-        subPanel.add(poisonLabel);
-        subPanel.add(poisonAudio);
-        subPanel.add(submitButton, "align center");
+        mySubPanel.add(hasteLabel);
+        mySubPanel.add(hasteAudio);
+        mySubPanel.add(armorLabel);
+        mySubPanel.add(armorAudio);
+        mySubPanel.add(healLabel);
+        mySubPanel.add(healAudio);
+        mySubPanel.add(lightLabel);
+        mySubPanel.add(lightAudio);
+        mySubPanel.add(poisonLabel);
+        mySubPanel.add(poisonAudio);
+        mySubPanel.add(submitButton, "align center");
 
-        subPanel.setOpaque(false);
+        mySubPanel.setOpaque(false);
         mainPanel.setOpaque(false);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
-        subPanel.setBorder(b);
-        mainPanel.add(subPanel);
+        mySubPanel.setBorder(b);
+        mainPanel.add(mySubPanel);
         return mainPanel;
+    }
+
+    public void addHaste () {
+        JLabel hasteLabel = new JLabel("Haste Audio:");
+        hasteLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        AudioLabel hasteAudio = new AudioLabel("Haste", false);
+        hasteAudio.setMutableStatusTrue();
+        mySubPanel.add(hasteLabel);
+        mySubPanel.add(hasteAudio);
+    }
+
+    public void addArmour () {
+        JLabel armorLabel = new JLabel("Armor Audio:");
+        armorLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        AudioLabel armorAudio = new AudioLabel("Armour", false);
+        armorAudio.setMutableStatusTrue();
+        mySubPanel.add(armorLabel);
+        mySubPanel.add(armorAudio);
+    }
+
+    public void addHeal () {
+        JLabel healLabel = new JLabel("Heal Audio:");
+        healLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        AudioLabel healAudio = new AudioLabel("Heal", false);
+        healAudio.setMutableStatusTrue();
+        mySubPanel.add(healLabel);
+        mySubPanel.add(healAudio);
+    }
+
+    public void addLight () {
+        JLabel lightLabel = new JLabel("Light Audio:");
+        lightLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
+
     }
 
     public MouseAdapter createSubmitListener () {
