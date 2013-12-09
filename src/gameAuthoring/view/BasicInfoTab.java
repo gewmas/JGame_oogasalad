@@ -83,7 +83,11 @@ public class BasicInfoTab extends Tab {
         JLabel gameName = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoGameName"));
         gameName.setFont(StyleConstants.DEFAULT_BODY_FONT);
         gameName.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoGameNameTip"));
+        myGameName = new JTextField();
+        myGameName.setPreferredSize(TEXT_DIMENSION);
+        myGameName.setFont(StyleConstants.DEFAULT_BODY_FONT);
         mySubPanel.add(gameName);
+        mySubPanel.add(myGameName);
     }
 
     public void addGold () {
@@ -100,6 +104,7 @@ public class BasicInfoTab extends Tab {
         myAltGoldText.setPreferredSize(TEXT_DIMENSION);
         myAltGoldText.setFont(StyleConstants.DEFAULT_BODY_FONT);
         mySubPanel.add(gold);
+        mySubPanel.add(myGold);
         mySubPanel.add(altGoldLabel);
         mySubPanel.add(myAltGoldText);
     }

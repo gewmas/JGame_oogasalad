@@ -125,6 +125,8 @@ public class WaveDesignTab extends Tab implements Observer {
         myIntervalField = new JTextField();
         myIntervalField.setPreferredSize(TEXT_FIELD_DIMENSION);
         myIntervalField.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        myContentPanel.add(interval);
+        myContentPanel.add(myIntervalField);
     }
 
     private void addWaveCreationButton () {
@@ -175,10 +177,12 @@ public class WaveDesignTab extends Tab implements Observer {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                String type = myTypeButton.getText();
-                int number = Integer.parseInt(myNumberField.getText());
-                double period = Double.parseDouble(myPeriodField.getText());
-                int interval = Integer.parseInt(myIntervalField.getText());
+   
+                    String type = myTypeButton.getText();
+                    int number = Integer.parseInt(myNumberField.getText());
+                    double period = Double.parseDouble(myPeriodField.getText());
+                    int interval = Integer.parseInt(myIntervalField.getText());
+             
                 if (!type.equals(DEFAULT_TYPE_TEXT) && type != null && number > 0 && interval > 0 &&
                     0.0 < period && period < 1.0) {
                     WaveJSONObject wave = new WaveJSONObject(type, number, period, interval);

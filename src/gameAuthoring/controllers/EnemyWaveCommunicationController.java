@@ -1,5 +1,6 @@
 package gameAuthoring.controllers;
 
+import gameAuthoring.JSONObjects.AnimationJSONObject;
 import gameAuthoring.JSONObjects.EnemyJSONObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +18,17 @@ public class EnemyWaveCommunicationController extends Observable implements Obse
     @Override
     public void update (Observable o, Object arg) {
         System.out.println("EnemyWaveCommunicationController received update from EnemyDesignTab");
-        EnemyJSONObject enemy = (EnemyJSONObject) arg;
-        myCreatedEnemies.add((String) enemy.get("id"));
-        setChanged();
-        notifyObservers(myCreatedEnemies);
-        clearChanged();
+        try {
+            EnemyJSONObject enemy = (EnemyJSONObject) arg;
+            myCreatedEnemies.add((String) enemy.get("id"));
+            setChanged();
+            notifyObservers(myCreatedEnemies);
+            clearChanged();
+        }
+        
+        catch (ClassCastException c){
+           
+        }
     }
 
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import jgame.impl.JGEngineInterface;
-import gameAuthoring.MainPanel;
+import gameAuthoring.view.MainPanel;
 import gameEngine.controller.Controller;
 import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
