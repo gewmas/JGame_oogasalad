@@ -97,8 +97,7 @@ public abstract class Tower extends JGObject implements ITMagicable {
     }
     public abstract void upgrade (GameInfo gameInfo);
 
-    public void setAttackMode (int mode) {
-    } // not all tower need this, serve as public interface
+    public abstract void setAttackMode (int mode); // not all tower need this, serve as public interface
 
     /**
      * TowerInfo Getter Method
