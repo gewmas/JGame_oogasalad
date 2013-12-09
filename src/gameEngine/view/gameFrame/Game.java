@@ -51,7 +51,7 @@ public class Game extends StdGame {
     private Map<String, String> valuesToDisplay;
 
     private Collection<GameInitializable> gameInitializerItems;
-    private Collection<GameUpdatable> gameUpdatables;
+    private GameUpdatable gameUpdatables;
     private Map<String, KeyActivationItem> keyActivationItems;
 
     private GameInfo gameInfo;
@@ -60,7 +60,7 @@ public class Game extends StdGame {
                  ItemPurchaser itemPurchaser,
                  ItemOptionsDisplayer utilities,
                  Collection<GameInitializable> gameInitializerItems,
-                 Collection<GameUpdatable> gameUpdatables,
+                 GameUpdatable gameUpdatables,
                  Map<String, KeyActivationItem> keyActivationItems) {
         this.view = view;
         this.keyActivationItems = keyActivationItems;
@@ -143,9 +143,8 @@ public class Game extends StdGame {
         checkGameCollisions();
         checkUserInteractions();
         updateGameStats();
-        for (GameUpdatable updatable : gameUpdatables) {
-            updatable.update();
-        }
+        gameUpdatables.update();
+     
         for (String key : keyActivationItems.keySet()) {
             KeyActivationItem item = keyActivationItems.get(key);
             if (getKey(key.charAt(0))) {
@@ -244,9 +243,8 @@ public class Game extends StdGame {
 
     public void endGame () {
         view.stopWaves();
-        for (GameUpdatable updatable:gameUpdatables){
-            updatable.endGame();
-        }
+        gameUpdatables.endGame();
+    
         removeObjects(null, 0);
 
     }

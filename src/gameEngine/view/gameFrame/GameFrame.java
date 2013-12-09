@@ -35,7 +35,7 @@ public class GameFrame extends JFrame implements GameInitializable {
     private ItemPurchaser itemPurchaser;
     private Map<String, KeyActivationItem> gameKeyActivationItems;
     private Collection<GameInitializable> gameInitializerItems;
-    private Collection<GameUpdatable> gameUpdatables;
+    private CompositeGameUpdatable gameUpdatables;
 
     /**
      * @param controller facilitates communication between view and model
@@ -57,7 +57,7 @@ public class GameFrame extends JFrame implements GameInitializable {
         itemPurchaser = new ItemPurchaser(view, this);
         storePanel = addStorePanel(towerUpgrader, itemPurchaser);
         gameInitializerItems = new ArrayList();
-        gameUpdatables = new ArrayList();
+        gameUpdatables = new CompositeGameUpdatable();
         gameUpdatables.add(storePanel);
         addGameTools(infoPanel, storePanel);
 
