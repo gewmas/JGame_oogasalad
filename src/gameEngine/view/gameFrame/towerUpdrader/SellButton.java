@@ -1,5 +1,6 @@
 package gameEngine.view.gameFrame.towerUpdrader;
 
+import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.View;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -12,18 +13,18 @@ public class SellButton extends TowerUpgraderButton {
     private static final int BUTTON_WIDTH = 180;
     private static final int BUTTON_HEIGHT = 20;
 
-    private View view;
+    private ControllerToViewInterface controller;
     private int towerX, towerY;
     private ItemOptionsDisplayer towerUpgrader;
 
-    public SellButton (ItemOptionsDisplayer utility, View viewer) {
+    public SellButton (ItemOptionsDisplayer utility, ControllerToViewInterface controller_in) {
         super(NAME);
-        this.view = viewer;
+        this.controller = controller_in;
         this.towerUpgrader = utility;
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                view.sellTower(towerX, towerY);
+                controller.sellTower(towerX, towerY);
                 towerUpgrader.clearDisplay();
             }
         });

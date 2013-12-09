@@ -1,6 +1,7 @@
 package gameEngine.view.gameFrame.tools.store;
 
 import gameEngine.constant.GameEngineConstant;
+import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.ViewConstants;
 import gameEngine.view.View;
@@ -33,26 +34,26 @@ public class StoreCategoryPanel extends JPanel {
     private final int PANEL_HEIGHT = 200;
 
     private Collection<StoreItemButton> storeItems;
-    private View view;
+    private ControllerToViewInterface controller;
     private StoreItemCreator storeItemCreator;
 
     /**
      * Constructor
      * 
-     * @param view the View that serves as interface for controller
+     * @param controller the View that serves as interface for controller
      * @param itemImagesMap map that contains the image paths for all store item
      * @param itemInformation Collection of the different items to be sold in this category
      * @param itemOptionsDisplayer Tool used to display information about store items
      * @param itemPurchaser Tool used to facilitate purchasing an item
      */
-    protected StoreCategoryPanel (View view,
+    protected StoreCategoryPanel (ControllerToViewInterface controller,
                                   Map<String, String> itemImagesMap,
                                   Collection<PurchaseInfo> itemInformation,
                                   ItemOptionsDisplayer itemOptionsDisplayer,
                                   ItemPurchaser itemPurchaser) {
 
         super();
-        this.view = view;
+        this.controller = controller;
         this.storeItems = new ArrayList<StoreItemButton>();
         this.storeItemCreator = new StoreItemCreator(itemOptionsDisplayer, itemPurchaser);
         setUIStyle();
@@ -118,7 +119,7 @@ public class StoreCategoryPanel extends JPanel {
      */
     public void updateStoreStatus () {
         for (StoreItemButton button : storeItems) {
-            int money = view.getGameInfo().getGold();
+            int money = controller.getGameInfo().getGold();
             button.toggleButtonActivation(money);
 
         }
