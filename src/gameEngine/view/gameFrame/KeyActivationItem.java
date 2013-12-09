@@ -17,6 +17,6 @@ public interface KeyActivationItem {
     /**
      * @return Key that activates object
      */
-    public String getActivationKey();
+    public ActivationKey getActivationKey();
     
 }

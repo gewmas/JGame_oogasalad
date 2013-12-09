@@ -18,9 +18,9 @@ public class CheatFrame implements KeyActivationItem {
     }
 
     @Override
-    public String getActivationKey () {
-        // TODO Auto-generated method stub
-        return ACTIVATION_KEY;
+    public ActivationKey getActivationKey () {
+        
+        return ActivationKey.CHEAT;
     }
 
 }
