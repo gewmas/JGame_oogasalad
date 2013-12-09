@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.inputAndDisplay;
+package gameEngine.view.gameFrame.inputFrame;
 
 import gameEngine.view.gameFrame.KeyActivationItem;
 import javax.swing.JFrame;
@@ -8,23 +8,19 @@ import net.miginfocom.swing.MigLayout;
 
 /**
  * @author Lalita Maraj
- *         A frame that displays dynamically changing information
- *         and accepts user text input and can specify actions
+ *         A frame that accepts user text input and can specify actions
  *         to be performed by text input when user clicks the
  *         submit button.
  *         The text input behavior is defined in the InputSender's submit
  *         method.
  */
-public class InputAndDisplayFrame extends JFrame implements KeyActivationItem {
+@SuppressWarnings("serial")
+public class InputFrame extends JFrame implements KeyActivationItem {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
     private static final String INPUT_PANEL_POSITION = "span 2";
     private static final String LAYOUT_WRAP_SETTINGS = "wrap 3";
 
-    public InputAndDisplayFrame (String displayName, InputSender inputSender) {
+    public InputFrame (String displayName, InputSender inputSender) {
         super();
 
         MigLayout layout = new MigLayout(LAYOUT_WRAP_SETTINGS);

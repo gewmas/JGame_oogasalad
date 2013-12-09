@@ -9,8 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import gameEngine.view.ViewConstants;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.inputAndDisplay.InputAndDisplayFrame;
-import gameEngine.view.gameFrame.inputAndDisplay.InputSender;
+import gameEngine.view.gameFrame.inputFrame.InputFrame;
+import gameEngine.view.gameFrame.inputFrame.InputSender;
 import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 import gameEngine.view.gameFrame.tools.store.StorePanel;
@@ -27,7 +27,7 @@ import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 public class GameFrame extends JFrame implements GameInitializable {
 
     private View view;
-    private InputAndDisplayFrame cheatCodeFrame;
+    private InputFrame cheatCodeFrame;
     private StorePanel storePanel;
     private InfoDisplayPanel infoPanel;
     private CanvasPanel canvasPanel;
@@ -64,8 +64,8 @@ public class GameFrame extends JFrame implements GameInitializable {
         setJMenuBar(new Menu(view));
     }
 
-    private InputAndDisplayFrame addCheatCodeFrame (final View view) {
-        return new InputAndDisplayFrame("Cheat Sheet", new InputSender() {
+    private InputFrame addCheatCodeFrame (final View view) {
+        return new InputFrame("Cheat Sheet", new InputSender() {
             @Override
             public void submit (String cheat) {
                 view.activateCheat(cheat);
