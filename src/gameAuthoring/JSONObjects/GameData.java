@@ -198,6 +198,10 @@ public class GameData extends JSONObject {
         myWaveList.put(new WaveJSONObject(type, number, period, interval));
     }
 
+    public void addWave(WaveJSONObject wave){
+        myWaveList.put(wave);
+    }
+    
     /**
      * Adds barrier to myBarrierList JSONArray
      * 
@@ -231,6 +235,10 @@ public class GameData extends JSONObject {
      */
     public void addEnemy (String name, int gold, String image, int life, int damage, double speed, String skill) {
         myEnemyList.put(new EnemyJSONObject(name, gold, image, life, damage, speed, skill));
+    }
+    
+    public void addEnemy(EnemyJSONObject enemy){
+        myEnemyList.put(enemy);
     }
 
     /**

@@ -1,5 +1,4 @@
 {
-   "goldName": "j",
    "resources": {
       "animation": [],
       "audio": [{
@@ -9,21 +8,35 @@
       "image": [
          {
             "id": "1",
-            "url": "Armour3.png"
+            "url": "tower1.png"
          },
          {
-            "id": "ArmourEnd",
-            "url": "ArmourEnd.png"
+            "id": "woods_background",
+            "url": "woods_background.png"
+         },
+         {
+            "id": "bullet",
+            "url": "tower1.png"
          }
       ]
    },
    "temporaryBarrierType": [],
-   "Tower": [],
-   "name": "h",
-   "livesName": "k",
-   "wave": [],
-   "numberOfLives": 12,
    "enemyType": [],
-   "splashImage": "ArmourEnd",
-   "gold": 12
+   "numberOfLives": 15,
+   "tilesPerRow": 20,
+   "difficultyScale": 1.5,
+   "goldName": "G",
+   "widthOfWindow": 600,
+   "Tower": [],
+   "name": "Woo",
+   "livesName": "dfdd",
+   "wave": [],
+   "map": {
+      "Barriers": [],
+      "pathImage": "path.png",
+      "Path": []
+   },
+   "splashImage": "woods_background",
+   "heightOfWindow": 600,
+   "gold": 100
 }
