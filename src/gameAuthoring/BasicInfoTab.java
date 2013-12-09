@@ -137,10 +137,10 @@ public class BasicInfoTab extends Tab {
         subPanel.add(altLivesText);
         subPanel.add(audioLabel);
         subPanel.add(myAudioLabel);
-        subPanel.add(setSplashImageButton);
-        subPanel.add(mySplashImageLabel);
         subPanel.add(bullet);
         subPanel.add(myImageLabel);
+        subPanel.add(setSplashImageButton);
+        subPanel.add(mySplashImageLabel);
         subPanel.add(setInfoButton);
         subPanel.add(simulateButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
@@ -198,7 +198,8 @@ public class BasicInfoTab extends Tab {
         int gold = Integer.parseInt(myGold.getText());
         int lives = Integer.parseInt(myLives.getText());
         String name = myGameName.getText();
-        if (myAudioLabel != null && gold > 0 && lives > 0 && mySplashImage != null && name != null) {
+        String bulletName = myImageLabel.getImageFile().getName();
+        if (myAudioLabel != null && gold > 0 && lives > 0 && mySplashImage != null && name != null && bulletName != null) {
             String goldName = altGoldText.getText();
             String livesName = altLivesText.getText();
             myGameData.setGold(gold);
@@ -208,6 +209,7 @@ public class BasicInfoTab extends Tab {
             myGameData.addAudio(myAudioLabel.getID(), myAudioLabel.getAudioFile().getName());
             myGameData.setGoldName(goldName);
             myGameData.setLivesName(livesName);
+            myGameData.addImage("bullet", bulletName);
             activateSimmulate();
         }
 
