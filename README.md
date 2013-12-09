@@ -71,6 +71,6 @@ The timers for each wave of enemies are done outside of jgame, so changing the f
 
 - Fabio Berger - built enemy core functionality, interfacing with tile class , enemy factory, cheat code handler and contributed to JSON parser, game end/begin mechanics and game graphics
 - Jiaran Hao - Build the Waves to handle generating enemies in game. Detector to help with other team members to make detection. Resources to register images,audio,animation from JSON. Skill lets Enemy to have different behaviors, eg casting magic. Effects and WordEffects to improve the graphics of game. Also, rewrites JGame to support Blending.    
-- Yuhua Mai
+- Yuhua Mai - Built Tower(DefaultTower, MultipleShootingTower, MagicTower, BoostTower), Bullet class. Implement Towerwarehouse, TowerFactory to create Tower. Update PurchaseInfo. Figure out pipeline of Model.
 - Harris Osserman - Built JSON parser, tile initialization/path creation (with integration with other model objects and front end), temporary barriers (with refactoring of TowerInfo to PurchaseInfo class), and permanent barriers.  
 - Wenxin Shi -Build the magic for both of enemy and tower. Cooperate with creating the skill and the animation for the game. Refactor the code to let the enemy and tower place in the right position. Creates fancy pictures using PS.
