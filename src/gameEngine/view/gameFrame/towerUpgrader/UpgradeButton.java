@@ -12,8 +12,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
-public class UpgradeButton extends TowerUpgraderButton {
+/**
+ * Allows the user to upgrade the selected tower
+ * @author alex
+ *
+ */
+public class UpgradeButton extends TowerOptionButton {
     private static final String NAME = "Upgrade";
     private static final String NORMAL_KEY = "black";
     private static final String UPGRADE_KEY = "red";
