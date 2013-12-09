@@ -423,7 +423,7 @@
 	 "Damage": 3,
 	 "Attack Speed": 0.8,
 	 "Attack Mode": 1,
-	 "Range": 100,	
+	 "Range": 180,	
 	 "Cost": 50, 
 	 "Sell Price":  50,
 	 "Description": "Default tower will shoot enemy, Surprise!",
