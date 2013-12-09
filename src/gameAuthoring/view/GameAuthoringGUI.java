@@ -2,6 +2,8 @@ package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.controllers.EnemyDesignController;
+import gameAuthoring.controllers.EnemyWaveCommunicationController;
+import gameAuthoring.controllers.MapDesignController;
 import gameAuthoring.controllers.SkillsDesignController;
 import gameAuthoring.menuBar.MenuBar;
 import java.awt.Cursor;
@@ -41,18 +43,30 @@ public class GameAuthoringGUI {
         myMainPanel.setLayout(new MigLayout("wrap 2"));
         JTabbedPane gameDesignTab = new JTabbedPane();
         gameDesignTab.setPreferredSize(new Dimension(750, 600));
+
         BasicInfoTab basicInfoTab = new BasicInfoTab(gameData);
+
         MapDesignTab mapDesignTab = new MapDesignTab(gameData);
+        MapDesignController mapDesignController = new MapDesignController(gameData);
+        mapDesignTab.addObserver(mapDesignController);
+
         TowerDesignTab towerDesignTab = new TowerDesignTab(gameData);
+
         EnemyDesignController enemyDesignController = new EnemyDesignController(gameData);
         EnemyDesignTab enemyDesignTab = new EnemyDesignTab(gameData);
         enemyDesignTab.addObserver(enemyDesignController);
+
         WaveDesignTab waveDesignTab = new WaveDesignTab(gameData);
         SkillsDesignTab skillsDesignTab = new SkillsDesignTab();
         SkillsDesignController skillsDesignController = new SkillsDesignController(gameData);
         skillsDesignTab.addObserver(skillsDesignController);
+
+        EnemyWaveCommunicationController enemyWaveCommController =
+                new EnemyWaveCommunicationController();
+        enemyWaveCommController.addObserver(waveDesignTab);
+        enemyDesignTab.addObserver(enemyWaveCommController);
+
         TempBarrierDesignTab tempBarrierTab = new TempBarrierDesignTab(gameData);
-        UserLibraryMainTab userLibraryTab = new UserLibraryMainTab(gameData);
 
         myDuvallClippy = new JLabel();
         Image duvallImage;
@@ -75,7 +89,7 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Skills Design", skillsDesignTab.getTab());
         MenuBar menu = new MenuBar(gameData, basicInfoTab, mapDesignTab, waveDesignTab);
         myMainPanel.add(gameDesignTab, "gap 50 20 100 40");
-        myMainPanel.add(userLibraryTab);
+        createUserLibraryTab();
         // myMainPanel.add(myDuvallClippy);
         frame.setJMenuBar(menu);
         frame.setContentPane(myMainPanel);
@@ -83,6 +97,17 @@ public class GameAuthoringGUI {
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
         frame.setResizable(false);
+    }
+
+    public void createUserLibraryTab () {
+        JTabbedPane userLibrary = new JTabbedPane();
+        userLibrary.setPreferredSize(new Dimension(300, 600));
+        UserImagesTab userImagesTab = new UserImagesTab(null);
+        UserSoundsTab userSoundsTab = new UserSoundsTab();
+        userLibrary.add("Image Library", userImagesTab.getTab());
+        userLibrary.add("Sound Library", userSoundsTab.getTab());
+        userLibrary.setFont(Constants.DEFAULT_BODY_FONT);
+        myMainPanel.add(userLibrary);
     }
 
     public MouseMotionAdapter makeClippyDraggingListener () {

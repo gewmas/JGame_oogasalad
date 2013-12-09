@@ -15,6 +15,7 @@ public class EnemyDesignController extends DesignController {
     public void update (Observable o, Object arg) {
         System.out.println("EnemyDesignController received update from EnemyDesignTab");
         EnemyJSONObject enemy = (EnemyJSONObject) arg;
+        myGameData.addEnemy(enemy);
     }
 
 }

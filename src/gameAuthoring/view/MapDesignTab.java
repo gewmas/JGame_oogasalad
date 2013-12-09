@@ -141,11 +141,13 @@ public class MapDesignTab extends Tab {
     private void setPathData () {
         if (myGrid.isValidPathHelper()) {
             JOptionPane.showMessageDialog(null, "Valid path! Map Written.");
-            String key = myBackgroundImage.substring(0, myBackgroundImage.length() - 4 );
-            myGameData.setBackgroundImage(key);
-            myGameData.addImage(key, myBackgroundImage);
-            
-            myGameData.setMap(myPathImage, myGrid.getPathCoordinates());
+            String key = myBackgroundImage.substring(0, myBackgroundImage.length() - 4);
+            MapDesignInformation mapDesignInfo =
+                    new MapDesignInformation(myBackgroundImage, myPathImage, key,
+                                             myGrid.getPathCoordinates());
+            setChanged();
+            notifyObservers(mapDesignInfo);
+            clearChanged();
         }
         else {
             JOptionPane.showMessageDialog(null,

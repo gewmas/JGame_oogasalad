@@ -1,6 +1,7 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.JSONObjects.WaveJSONObject;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -11,6 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -25,7 +30,7 @@ import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 
 
-public class WaveDesignTab extends Tab {
+public class WaveDesignTab extends Tab implements Observer {
     private JScrollPane myCreatedWaves;
     private JPanel myScrollPanel;
     private JPanel myMainPanel;
@@ -35,7 +40,7 @@ public class WaveDesignTab extends Tab {
     private JTextField myNumberField;
     private JTextField myPeriodField;
     private JTextField myIntervalField;
-
+    private List<String> myEnemyList = new ArrayList<String>();
     private String[] myEnemyOptions = {};
 
     private final String DEFAULT_TYPE_TEXT = "Select an Enemy Type";
@@ -136,7 +141,6 @@ public class WaveDesignTab extends Tab {
     public MouseAdapter createWaveTypeListener () {
 
         MouseAdapter listener = new MouseAdapter() {
-            // GameData myGameData = myWaveDesignTab.getGameData();
             @Override
             public void mouseClicked (MouseEvent e) {
                 JSONArray enemyList = myGameData.getEnemyList();
@@ -154,9 +158,7 @@ public class WaveDesignTab extends Tab {
                                                              null,
                                                              enemyOptions,
                                                              "");
-
                 myTypeButton.setText(choice);
-
             }
         };
         return listener;
@@ -165,7 +167,6 @@ public class WaveDesignTab extends Tab {
 
     public MouseAdapter createRevalidationListener () {
         MouseAdapter listener = new MouseAdapter() {
-            // GameData myGameData = myWaveDesignTab.getGameData();
             @Override
             public void mouseClicked (MouseEvent e) {
                 System.out.println("mouse");
@@ -181,14 +182,12 @@ public class WaveDesignTab extends Tab {
         ActionListener a = new ActionListener() {
             @Override
             public void actionPerformed (ActionEvent e) {
-                // GameData myGameData = myWaveDesignTab.getGameData();
                 JSONArray enemyList = myGameData.getEnemyList();
 
-                if (enemyList.length() > myEnemyOptions.length) {
-                    String[] enemyOptions = new String[enemyList.length()];
-                    for (int i = 0; i < enemyOptions.length; i++) {
-                        JSONObject enemy = (JSONObject) enemyList.get(i);
-                        enemyOptions[i] = enemy.getString("id");
+                if (myEnemyList.size() > myEnemyOptions.length) {
+                    String[] enemyOptions = new String[myEnemyList.size()];
+                    for (int i = 0; i < myEnemyList.size(); i++) {
+                        enemyOptions[i] = myEnemyList.get(i);
                     }
                 }
                 String[] test = {};
@@ -205,7 +204,6 @@ public class WaveDesignTab extends Tab {
 
     public MouseAdapter createWaveButtonListener () {
         MouseAdapter listener = new MouseAdapter() {
-            // GameData myGameData = myWaveDesignTab.getGameData();
             @Override
             public void mouseClicked (MouseEvent e) {
                 String type = myTypeButton.getText();
@@ -215,14 +213,16 @@ public class WaveDesignTab extends Tab {
 
                 if (!type.equals(DEFAULT_TYPE_TEXT) && type != null && number > 0 && interval > 0 &&
                     0.0 < period && period < 1.0) {
-                    myGameData.addWave(type, number, period, interval);
+                    WaveJSONObject wave = new WaveJSONObject(type, number, period, interval);
+                    setChanged();
+                    notifyObservers(wave);
+                    clearChanged();
                     addWave(type, number);
                     myTypeButton.setText(DEFAULT_TYPE_TEXT);
                     myNumberField.setText("");
                     myPeriodField.setText("");
                     myIntervalField.setText("");
                 }
-
                 else {
                     JOptionPane.showMessageDialog(null,
                                                   "One or more fields invalid! Please try again.");
@@ -235,19 +235,22 @@ public class WaveDesignTab extends Tab {
     @Override
     public void loadJSON (Parser p) {
         JSONArray waves = p.getJSONArray("wave");
-
         for (int i = 0; i < waves.length(); i++) {
             JSONObject wave = (JSONObject) waves.get(i);
-
             String type = (String) wave.get("type");
             int number = (int) wave.get("number");
             double period = (double) wave.get("period");
             int interval = (int) wave.get("interval");
-
             myGameData.addWave(type, number, period, interval);
-
             addWave(type, number);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void update (Observable arg0, Object arg1) {
+        System.out.println("WaveDesignTab received update from EnemyWaveController");
+        myEnemyList = (ArrayList<String>) arg1;
     }
 
 }

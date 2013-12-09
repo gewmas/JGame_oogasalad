@@ -28,7 +28,6 @@ public class MainPanel {
         frame.setContentPane(mainPanel);
         frame.pack();
         frame.setLocationByPlatform(true);
-
         frame.setResizable(false);
     }
 
