@@ -5,8 +5,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 
+/**
+ * @author Lalita Maraj
+ * Menu item to end game
+ */
+@SuppressWarnings("serial")
 public class EndGameMenuItem extends AbstractAction {
-    MenuActions menuActions;
+    private MenuActions menuActions;
 
     public EndGameMenuItem (MenuActions menuActions) {
 

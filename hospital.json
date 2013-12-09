@@ -522,7 +522,7 @@
 	"image": "KidPatient",
 	"life": 15,
 	"speed": 0.5,
-   "skill": "",
+   "skill": "Poison",
    "Specialty" : 2,
    "damage":-1
 },
@@ -532,7 +532,7 @@
 	"image": "BoyPatient",
 	"life": 15,
 	"speed": 0.5,
-   	"skill": "Armour",
+   	"skill": "Poison",
    	"Specialty" : 1,
    	"damage":-1
 }

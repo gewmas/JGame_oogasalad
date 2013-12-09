@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import jgame.JGPoint;
 import gameEngine.constant.GameEngineConstant;
+import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.View;
 import gameEngine.view.ViewConstants;
@@ -17,10 +18,10 @@ public class ItemPurchaser {
     private GameFrame gameFrame;
     private PurchaseInfo towerToPurchase;
     private boolean purchasing;
-    private View view;
+    private ControllerToViewInterface controller;
 
-    public ItemPurchaser (View view, GameFrame gameFrame) {
-        this.view = view;
+    public ItemPurchaser (ControllerToViewInterface controller, GameFrame gameFrame) {
+        this.controller = controller;
         this.gameFrame = gameFrame;
         purchasing = false;
         towerToPurchaseName = "";
@@ -45,7 +46,7 @@ public class ItemPurchaser {
         }
         
         setCursorImage(ViewConstants.IMAGE_PATH +
-                       view.getStoreImages()
+                       controller.getImageURL()
                                .get(purchaseInfo.getInfo()
                                             .get(GameEngineConstant.PURCHASE_INFO_IMAGE)));
         purchasing = true;
@@ -57,7 +58,7 @@ public class ItemPurchaser {
     public boolean checkAndPlaceTower (JGPoint mousePosition) {
         boolean bought=false;
         if (purchasing) {
-            bought=view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase);
+            bought=controller.purchaseObject(mousePosition.x, mousePosition.y, towerToPurchase);
             if (bought){
                 towerToPurchase = null;
                 towerToPurchaseName = null;
@@ -65,7 +66,7 @@ public class ItemPurchaser {
                 restoreDefaultCursor();
             }
         }
-
+        
         return bought;
     }
 
@@ -82,6 +83,10 @@ public class ItemPurchaser {
 
     public void restoreDefaultCursor () {
         gameFrame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+    }
+
+    public boolean isPurchasing () {
+        return purchasing;
     }
 
 }

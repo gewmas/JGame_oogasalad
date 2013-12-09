@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.inputAndDisplay;
+package gameEngine.view.gameFrame.inputFrame;
 
 /**
  * @author lalitamaraj

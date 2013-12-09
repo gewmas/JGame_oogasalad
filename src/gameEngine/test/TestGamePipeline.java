@@ -78,7 +78,7 @@ public class TestGamePipeline {
     public void testTowerPurchase(){
         try {
             // Check that the JSON was parsed correctly
-            GameInfo gameInfo=view.getGameInfo();
+            GameInfo gameInfo=controller.getGameInfo();
             assertEquals(gameInfo.getMyName(),"Tower Destruction II");
             assertEquals(gameInfo.getGold(),500);
             assertEquals(gameInfo.getLife(),10);
@@ -109,7 +109,7 @@ public class TestGamePipeline {
             robot.delay(200);
             
             //Test checking tower status
-            PurchaseInfo boughtTower=view.getTowerInfo(100,73);
+            PurchaseInfo boughtTower=controller.getTowerInfo(100,73);
             assertEquals(boughtTower.getInfo().get(GameEngineConstant.PURCHASE_INFO_NAME),"DefaultTower1");
         }
         catch (SecurityException | IllegalArgumentException | AWTException e) {
