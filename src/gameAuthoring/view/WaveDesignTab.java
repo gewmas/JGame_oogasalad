@@ -146,16 +146,14 @@ public class WaveDesignTab extends Tab implements Observer {
 
     }
 
-   private MouseAdapter createWaveButtonListener () {
+    private MouseAdapter createWaveButtonListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-
                 String type = (String) myEnemiesDropdown.getSelectedItem();
                 int number = Integer.parseInt(myNumberField.getText());
                 double period = Double.parseDouble(myPeriodField.getText());
                 int interval = Integer.parseInt(myIntervalField.getText());
-
                 if (!type.equals(DEFAULT_TYPE_TEXT) && type != null && number > 0 && interval > 0 &&
                     0.0 < period && period < 1.0) {
                     WaveJSONObject wave = new WaveJSONObject(type, number, period, interval);
@@ -199,19 +197,19 @@ public class WaveDesignTab extends Tab implements Observer {
         System.out.println(myEnemyList);
 
         myEnemyOptions = new String[myEnemyList.size()];
-        
+
         for (int i = 0; i < myEnemyList.size(); i++) {
             myEnemyOptions[i] = myEnemyList.get(i);
         }
-        
+
         System.out.println(Arrays.toString(myEnemyOptions));
-        
+
         myEnemiesDropdown.removeAllItems();
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(myEnemyOptions);
         myEnemiesDropdown.setModel(model);
         myEnemiesDropdown.revalidate();
         myEnemiesDropdown.repaint();
-       
+
     }
 
 }

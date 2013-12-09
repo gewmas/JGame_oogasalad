@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.modifiedSwingComponents.ImageButton;
 import gameEngine.controller.Controller;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;

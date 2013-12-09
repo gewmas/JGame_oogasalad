@@ -3,6 +3,7 @@ package gameAuthoring.test;
 import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.controllers.EnemyDesignController;
 import gameAuthoring.view.EnemyDesignTab;
+import gameEngine.parser.JSONLibrary.JSONArray;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -19,6 +20,7 @@ public class TestEnemyDesign {
         myEnemyDesignTab = new EnemyDesignTab();
         myEnemyDesignController = new EnemyDesignController(myGameData);
         myEnemyDesignTab.addObserver(myEnemyDesignController);
+        JSONArray myEnemies = (JSONArray) myGameData.get("enemyType");
     }
 
     @Test

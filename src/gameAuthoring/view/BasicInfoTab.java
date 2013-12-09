@@ -14,6 +14,15 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * @author Rebecca Lai & Susan Zhang
+ *         BasicInfoTab allows for users to design the basic information for a Tower Defense game,
+ *         including game name, starting amount of gold, starting number of lives, splash image,
+ *         background audio, and alternate names for gold and lives.BasicInfoTab inherits from the
+ *         Tab class and is thus an Observable. Whenever all fields in BasicInfoTab are set,
+ *         BasicInfoTab notifies its observers (i.e. controller) by passing a BasicInformation
+ *         object. Its observers can then extract basic game information.
+ */
 public class BasicInfoTab extends Tab {
 
     private static final JFileChooser INPUT_CHOOSER =
@@ -31,6 +40,9 @@ public class BasicInfoTab extends Tab {
     private static final Dimension IMAGE_LABEL_DIMENSION = new Dimension(50, 50);
     private static final String CONTENT_PANEL_FORMATTING = "align center";
 
+    /**
+     * Creates a new BasicInfoTab
+     */
     public BasicInfoTab () {
 
     }
@@ -53,6 +65,9 @@ public class BasicInfoTab extends Tab {
         return myMainPanel;
     }
 
+    /**
+     * Adds button for submitting basic game information
+     */
     private void addSubmitButton () {
         JButton setInfoButton =
                 new JButton(StyleConstants.resourceBundle.getString("BasicInfoSubmit"));
@@ -63,6 +78,9 @@ public class BasicInfoTab extends Tab {
         myContentPanel.add(setInfoButton);
     }
 
+    /**
+     * Adds title to BasicInfoTab
+     */
     private void addTitle () {
         JLabel title = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoTitle"));
         title.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -70,6 +88,9 @@ public class BasicInfoTab extends Tab {
         myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
     }
 
+    /**
+     * Adds label and text field for setting game name
+     */
     private void addGameName () {
         JLabel gameName = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoGameName"));
         gameName.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -82,6 +103,9 @@ public class BasicInfoTab extends Tab {
 
     }
 
+    /**
+     * Adds label and text field for setting starting amount of gold
+     */
     private void addGold () {
         JLabel gold = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoGold"));
         gold.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -102,6 +126,9 @@ public class BasicInfoTab extends Tab {
         myContentPanel.add(myAltGoldText);
     }
 
+    /**
+     * Adds label and text field for setting starting number of lives
+     */
     private void addLives () {
         JLabel lives = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoLives"));
         lives.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -120,6 +147,9 @@ public class BasicInfoTab extends Tab {
         myContentPanel.add(myAltLivesText);
     }
 
+    /**
+     * Adds label and AudioLabel for setting game's background audio
+     */
     private void addBackgroundAudio () {
         myAudioLabel = new AudioLabel();
         JLabel audioLabel =
@@ -132,6 +162,9 @@ public class BasicInfoTab extends Tab {
         myContentPanel.add(myAudioLabel);
     }
 
+    /**
+     * Adds label and ImageLabel for setting bullet image
+     */
     private void addBullet () {
         JLabel bullet = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoBullet"));
         bullet.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoBulletTip"));
@@ -143,6 +176,9 @@ public class BasicInfoTab extends Tab {
         myContentPanel.add(myImageLabel);
     }
 
+    /**
+     * Adds label and button for setting game's splash image
+     */
     private void addSplashImage () {
         JButton setSplashImageButton =
                 new JButton(StyleConstants.resourceBundle.getString("BasicInfoSplashImage"));
@@ -170,6 +206,9 @@ public class BasicInfoTab extends Tab {
         }
     }
 
+    /**
+     * @return MouseAdapter that sets all game basic information when mouse event occurs
+     */
     private MouseAdapter setInfoListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
@@ -181,10 +220,18 @@ public class BasicInfoTab extends Tab {
 
     }
 
+    /**
+     * @param audio is AudioLabel that stores audio file
+     */
     public void setBackgroundAudio (AudioLabel audio) {
         myAudioLabel = audio;
     }
 
+    /**
+     * Extracts information from all text fields
+     * Notifies observers of BasicInfoTab of changes
+     * Sends all basic game information to observers
+     */
     private void setData () {
         int gold = Integer.parseInt(myGold.getText());
         int lives = Integer.parseInt(myLives.getText());
@@ -210,6 +257,10 @@ public class BasicInfoTab extends Tab {
         }
     }
 
+    /**
+     * @return MouseAdapter that creates new ResourceJSONObject (i.e. image object) when game splash
+     *         image is set
+     */
     private MouseAdapter setSplashImageListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
