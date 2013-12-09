@@ -19,7 +19,6 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -314,7 +313,7 @@ public class TowerDesignTab extends Tab {
                 try
                 {
                     String type = TOWER_TYPES[myTypeOptions.getSelectedIndex()];
-  
+
                     // Things that all towers have in common
                     String name = myNameField.getText();
                     int damage = Integer.parseInt(myDamageField.getText());
