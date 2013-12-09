@@ -26,7 +26,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import jgame.JGColor;
 import jgame.JGPoint;
+import jgame.platform.JGEngine;
 
 import org.junit.After;
 import org.junit.Before;
@@ -56,33 +58,55 @@ import static org.hamcrest.CoreMatchers.*;
 ]
  */
 
-public class TestTowerFactoryAndTower {
-    private static final String jsonFile="/src/gameEngine/test/TestTowerJSON.json";
-    
-    private DefaultTowerFactory defaultTowerFactory;
-    
-    @Before
-    public void setUp () throws Exception {
-    	File file = new File("");
-    	Scanner scanner = new Scanner(new File(file.getAbsolutePath()+jsonFile));
-    	Parser parser = new Parser(scanner);
-    	JSONArray jsonArray = parser.getJSONArray(GameEngineConstant.TOWER_TYPE);
-    	JSONObject currTower = jsonArray.getJSONObject(0);
-    	defaultTowerFactory = new DefaultTowerFactory(currTower);
-    }
+public class TestTowerFactoryAndTower extends JGEngine{
+	private static final String jsonFile="/src/gameEngine/test/TestTowerJSON.json";
 
-    @After
-    public void tearDown () throws Exception {
-       defaultTowerFactory = null;
-    }
+	private DefaultTowerFactory defaultTowerFactory;
 
-    @Test
-    public void testTowerPurchase(){
-    	int x = 0;
-    	int y = 0;
-    	Tower tower = defaultTowerFactory.create(x, y);
-    	Map<String, String> infoMap = tower.getPurchaseInfo().getInfo();
-    	assertEquals(infoMap.get("Name"), "DefaultTower1");
-    }
+	@Before
+	public void setUp () throws Exception {
+		initEngine(480, 300);
+		
+		File file = new File("");
+		Model model = new Model();
+		model.newGame(new File(file.getAbsolutePath()+jsonFile));
+		
+		defaultTowerFactory = (DefaultTowerFactory) model.getTowerWarehouse().getTowers().get("DefaultTower1");
+	}
+
+	@After
+	public void tearDown () throws Exception {
+		defaultTowerFactory = null;
+	}
+
+	@Override
+	public void initCanvas() {
+		setCanvasSettings(
+				1, // width of the canvas in tiles
+				1, // height of the canvas in tiles
+				displayWidth(), // width of one tile
+				displayHeight(), // height of one tile
+				null,// foreground colour -> use default colour white
+				JGColor.white,// background colour -> use default colour black
+				null // standard font -> use default font
+				);
+	}
+
+	@Override
+	public void initGame() {
+		defineMedia("mygame.tbl");
+        setFrameRate(60, 2);
+	}
+
+	@Test
+	public void testTowerPurchase(){
+		int x = 0;
+		int y = 0;
+		Tower tower = defaultTowerFactory.create(x, y);
+		Map<String, String> infoMap = tower.getPurchaseInfo().getInfo();
+		assertEquals(infoMap.get("Name"), "DefaultTower1");
+	}
+
+
 
 }

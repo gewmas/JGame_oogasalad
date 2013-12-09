@@ -236,7 +236,11 @@ public class Model {
         return gameInfo;
     }
 
-    /**
+    public TowerWarehouse getTowerWarehouse() {
+		return towerWarehouse;
+	}
+
+	/**
      * @author Harris
      * Purchase temporary barrier
      **/
