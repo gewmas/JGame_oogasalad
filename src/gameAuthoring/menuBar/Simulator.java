@@ -9,11 +9,12 @@ public class Simulator {
 
     public void simulate(GameData gameData){
         File file = gameData.createSimmulationFile();
-        file = new File("../oogasalad_FooBar/simmulation.json");
+//        file = new File("../oogasalad_FooBar/simmulation.json");
         if (file!= null){
             Controller controller = new Controller();
             try {
                 controller.newGame(file);
+                System.out.println("dds");
             }
             catch (Exception e) {
                 JOptionPane.showMessageDialog(null,

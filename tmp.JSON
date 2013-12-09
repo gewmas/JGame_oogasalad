@@ -1,4 +1,5 @@
 {
+   "goldName": "j",
    "resources": {
       "animation": [],
       "audio": [{
@@ -7,110 +8,22 @@
       }],
       "image": [
          {
-            "id": "woods_background",
-            "url": "woods_background.png"
-         },
-         {
             "id": "1",
-            "url": "path.jpg"
+            "url": "Armour3.png"
          },
          {
-            "id": "src/resources/img/space_background",
-            "url": "src/resources/img/space_background.jpg"
+            "id": "ArmourEnd",
+            "url": "ArmourEnd.png"
          }
       ]
    },
    "temporaryBarrierType": [],
-   "enemyType": [],
-   "numberOfLives": 10,
-   "BGImage": "src/resources/img/space_background.jpg",
-   "goldName": "AltG",
    "Tower": [],
-   "name": "Game",
-   "map": {
-      "Barriers": [],
-      "pathImage": "1",
-      "Path": [
-         {
-            "y": 0,
-            "x": 0
-         },
-         {
-            "y": 0,
-            "x": 1
-         },
-         {
-            "y": 0,
-            "x": 2
-         },
-         {
-            "y": 0,
-            "x": 3
-         },
-         {
-            "y": 0,
-            "x": 4
-         },
-         {
-            "y": 0,
-            "x": 5
-         },
-         {
-            "y": 0,
-            "x": 6
-         },
-         {
-            "y": 0,
-            "x": 7
-         },
-         {
-            "y": 0,
-            "x": 8
-         },
-         {
-            "y": 0,
-            "x": 9
-         },
-         {
-            "y": 0,
-            "x": 10
-         },
-         {
-            "y": 0,
-            "x": 11
-         },
-         {
-            "y": 0,
-            "x": 12
-         },
-         {
-            "y": 0,
-            "x": 13
-         },
-         {
-            "y": 0,
-            "x": 14
-         },
-         {
-            "y": 0,
-            "x": 15
-         },
-         {
-            "y": 0,
-            "x": 16
-         },
-         {
-            "y": 0,
-            "x": 17
-         },
-         {
-            "y": 0,
-            "x": 18
-         }
-      ]
-   },
+   "name": "h",
+   "livesName": "k",
    "wave": [],
-   "livesName": "AltL",
-   "splashImage": "woods_background.png",
-   "gold": 1000
+   "numberOfLives": 12,
+   "enemyType": [],
+   "splashImage": "ArmourEnd",
+   "gold": 12
 }

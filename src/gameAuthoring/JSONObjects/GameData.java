@@ -311,8 +311,9 @@ public class GameData extends JSONObject {
      * @return
      */
     public File createSimmulationFile () {
-        if (isComplete()) {
+        if (true) {
             File file = new File("tmp.JSON");
+            System.out.println("dlkfjsdjfdsjfdsjfs");
             PrintStream out;
             try {
                 file.createNewFile();
