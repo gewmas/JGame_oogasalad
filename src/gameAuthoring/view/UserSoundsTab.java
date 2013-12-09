@@ -1,4 +1,4 @@
-package gameAuthoring;
+package gameAuthoring.view;
 
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;

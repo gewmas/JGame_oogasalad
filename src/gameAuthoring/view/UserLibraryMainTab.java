@@ -1,4 +1,4 @@
-package gameAuthoring;
+package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.GameData;
 import java.awt.Dimension;

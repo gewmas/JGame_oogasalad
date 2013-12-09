@@ -1,4 +1,4 @@
-package gameAuthoring;
+package gameAuthoring.view;
 
 import gameEngine.controller.Controller;
 import java.awt.Dimension;
