@@ -16,11 +16,10 @@ import javax.swing.border.Border;
 
 public class ImageLabel extends JLabel {
 
-    private Image myImage;
-    private File myImageSource;
-    private File myAudioSource;
-    private String myID;
-    private boolean isMutable = false;
+    protected Image myImage;
+    protected File myImageSource;
+    protected String myID;
+    protected boolean isMutable = false;
 
     public ImageLabel () {
         initialize();
@@ -88,7 +87,7 @@ public class ImageLabel extends JLabel {
         this.setIcon(null);
     }
 
-    public MouseAdapter createImageLabelListener (final ImageLabel label) {
+    private MouseAdapter createImageLabelListener (final ImageLabel label) {
         MouseAdapter listener = new MouseAdapter() {
             boolean selected = false;
 

@@ -11,17 +11,12 @@ import java.net.URISyntaxException;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.border.Border;
 
 
-public class AudioLabel extends JLabel {
+public class AudioLabel extends ImageLabel {
 
     private File myAudioSource;
-    private Image myAudioImage;
-    private File myAudioImageSource;
-    private String myID;
-    private boolean isMutable = false;
 
     public AudioLabel () {
         initialize();
@@ -32,15 +27,15 @@ public class AudioLabel extends JLabel {
         initialize();
         if (displayImage) {
             try {
-                myAudioImageSource = new File(getClass().getResource("sound.png").toURI());
+                myImageSource = new File(getClass().getResource("sound.png").toURI());
             }
             catch (URISyntaxException e1) {
                 e1.printStackTrace();
             }
             Image image;
             try {
-                image = ImageIO.read(myAudioImageSource);
-                myAudioImage = image;
+                image = ImageIO.read(myImageSource);
+                myImage = image;
                 this.setIcon(new ImageIcon(image));
             }
             catch (IOException e) {
@@ -49,15 +44,12 @@ public class AudioLabel extends JLabel {
         }
     }
 
+    @Override
     public void initialize () {
         this.setPreferredSize(new Dimension(50, 50));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         this.setBorder(border);
         this.addMouseListener(changeCursorListener(this));
-    }
-
-    public void setMutableStatusTrue () {
-        isMutable = true;
     }
 
     public void setAudioFile (File audio) {
@@ -68,38 +60,15 @@ public class AudioLabel extends JLabel {
         return myAudioSource;
     }
 
-    public String getID () {
-        return myID;
-    }
-
-    public Image getAudioImage () {
-        return myAudioImage;
-    }
-
-    public File getAudioImageSource () {
-        return myAudioImageSource;
-    }
-
     public void transferLabelInformation (AudioLabel other) {
         if (other != null) {
             if (myID == null) {
                 myID = other.getID();
             }
             myAudioSource = other.getAudioFile();
-            myAudioImage = other.getAudioImage();
-            this.setIcon(new ImageIcon(myAudioImage));
-        }
-    }
-
-    public void setLabelIcon (File imageSource) {
-        myAudioImageSource = imageSource;
-        try {
-            myAudioImage = ImageIO.read(imageSource);
-            myAudioImage = myAudioImage.getScaledInstance(50, 50, Image.SCALE_FAST);
-            this.setIcon(new ImageIcon(myAudioImage));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
+            myImageSource = other.getImageFile();
+            myImage = other.getImage();
+            this.setIcon(new ImageIcon(myImage));
         }
     }
 
@@ -110,15 +79,28 @@ public class AudioLabel extends JLabel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 selected = !selected;
+                System.out.println("Selected? " + selected);
+                if (GameAuthoringGUI.myAudioLabel == null) {
+                    System.out.println("GameAuthoringGUI label null");
+                }
+                if (GameAuthoringGUI.myAudioLabel != null) {
+                    System.out.println("GameAuthoringGUI label ID " +
+                                       GameAuthoringGUI.myAudioLabel.getID());
+                }
+                System.out.println("Mutable? " + isMutable);
+
                 if (GameAuthoringGUI.myAudioLabel == null && selected) {
+                    System.out.println("IF 1");
                     GameAuthoringGUI.myAudioLabel = label;
-                    GameAuthoringGUI.setCursor(label.getAudioImageSource());
+                    GameAuthoringGUI.setCursor(label.getImageFile());
                 }
                 if (GameAuthoringGUI.myAudioLabel != null && isMutable && selected) {
+                    System.out.println("IF 2");
                     label.transferLabelInformation(GameAuthoringGUI.myAudioLabel);
                     GameAuthoringGUI.setCursorNull();
                 }
                 if (!selected) {
+                    System.out.println("IF 3");
                     GameAuthoringGUI.setCursorNull();
                     GameAuthoringGUI.myAudioLabel = null;
                 }
