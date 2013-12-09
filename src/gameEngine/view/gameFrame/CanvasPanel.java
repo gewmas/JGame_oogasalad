@@ -17,8 +17,8 @@ public class CanvasPanel extends JPanel {
     public CanvasPanel (View view,
                         ItemPurchaser itemPurchaser,
                         ItemOptionsDisplayer utilities,
-                        Collection<GameInitializable> gameInitializerItems,
-                        Collection<GameUpdatable> gameUpdatables,
+                        GameInitializable gameInitializerItems,
+                        GameUpdatable gameUpdatables,
                         Map<String, KeyActivationItem> keyActivationItems) {
         game =
                 new Game(view, itemPurchaser, utilities, gameInitializerItems, gameUpdatables,
