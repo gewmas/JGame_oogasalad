@@ -20,11 +20,13 @@ Two game templates have been provided in the root of the branch: hospital.json a
 Images and sounds that are packaged with the game are stored in src/resources/img. We are using a .tbl file (mygame.tbl) in this folder to load some default game graphics that are generic to every game.
 
 **Game Authoring Instructions**
+
 The different tabs in the Game Authoring environment organize the different components of game design in a self-explanatory manner. Hovering the cursor over a field in the tab brings up a explanatory popup in case further explanation is required. One can also choose to bring up DuvallClippy, our version of an “Office Assistant” to explain the purpose of each tab by going to Show -> Clippy. Once all fields in all tabs have been complete, save the game out by clicking File -> Save.
 
 In general, images and audio files can be loaded to the User Library for easy access throughout the design process. The User Library is the panel to the right hand side in the Game Authoring environment. Once resources are loaded into the library, one can set images for certain tab fields (e.g. an image for a new enemy type) by first clicking on an image/audio in the library and then clicking on the image label that represents the tab field. The same rule applies for audio files.  
 
 **Game Instructions**
+
 To purchase objects from the store, simply click them, and the cursor will change to that object’s image. Then click on any valid position on the field to place that object. Towers can be validly placed on tiles that are not on the path. Temporary Barriers can be validly placed on tiles that are on the path. To cancel a purchase, click the object again and the cursor will revert back to normal.
 
 To check the status of an object on the field, click on the object, and it’s stats will show in the information panel beneath the store. You can also upgrade or sell that object from this information panel.
@@ -47,23 +49,26 @@ The timers for each wave of enemies are done outside of jgame, so changing the f
 
 **Extra Features**
 
-To set the frame rate of the game, press f at any time in the game to access the frame rate bar. Click anywhere on the bar to set the frame rate (right is higher, center is 30fps).
+- To set the frame rate of the game, press f at any time in the game to access the frame rate bar. Click anywhere on the bar to set the frame rate (right is higher, center is 30fps).
 
-To activate the cheat terminal, press “c” on your key board
+- To activate the cheat terminal, press “c” on your key board
 
-To access extra help in the game authoring phase, click on Show -> Clippy to bring up our version of an Office Assistant, DuvallClippy. 
+- To access extra help in the game authoring phase, click on Show -> Clippy to bring up our version of an Office Assistant, DuvallClippy. 
 
 **Our Roles**
 
 **Game Authoring:**
+
 - Rebecca Lai - Worked with Susan to create the GameAuthoringGUI. Primarily worked on 
 - Susan Zhang
 
 **Engine Front End:**
+
 - Lalita Maraj
 - Alex Zhu - Built jgame interface, tower status, upgrade and sell, integration with backend, frame rate slider
 
 **Back End:**
+
 - Fabio Berger - built enemy core functionality, interfacing with tile class , enemy factory, cheat code handler and contributed to JSON parser, game end/begin mechanics and game graphics
 - Jiaran Hao
 - Yuhua Mai
