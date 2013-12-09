@@ -28,16 +28,28 @@ public class ResourcesJSONObject extends JSONObject {
     public void addImage (String id, String url) {
         myImages.put(createBasicResource(id, url));
     }
+    
+    public void addImage(ResourceJSONObject image){
+         myImages.put(image);
+    }
 
     public void addAudio (String id, String url) {
         myAudio.put(createBasicResource(id, url));
     }
 
+    public void addAudio(ResourceJSONObject audio){
+        myAudio.put(audio);
+   }
+    
     private JSONObject createBasicResource (String id, String url) {
         JSONObject image = new JSONObject();
         image.put("id", id);
         image.put("url", url);
         return image;
+    }
+    
+    public void addAnimation(AnimationJSONObject animation){
+        myAnimations.put(animation);
     }
 
     public void addAnimation (String id, List<String> imagePaths) {

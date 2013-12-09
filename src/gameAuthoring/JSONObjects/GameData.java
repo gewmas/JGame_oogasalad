@@ -151,6 +151,10 @@ public class GameData extends JSONObject {
                                             range, cost, recyclePrice, description, magicFactor, magic));
     }
     
+    public void addTower(TowerJSONObject tower){
+        myTowerList.put(tower);
+    }
+    
     public void addMultipleShootingTower(String type,
                               String name,
                               String imagePath,
@@ -181,10 +185,6 @@ public class GameData extends JSONObject {
             myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed,
                                                 range, cost, recyclePrice, description, boostFactor));
         }
-    
-    public void addTower (TowerJSONObject t) {
-        myTowerList.put(t);
-    }
 
     /**
      * Adds wave to myWaveList JSONArray
@@ -222,6 +222,10 @@ public class GameData extends JSONObject {
         myBarrierList.put(new TemporaryBarrierJSONObject(name, image, damage, cost, expire,
                                                          description));
 
+    }
+    
+    public void addBarrier (TemporaryBarrierJSONObject barrier){
+        myBarrierList.put(barrier);
     }
 
     /**
@@ -261,6 +265,10 @@ public class GameData extends JSONObject {
         myMap = new MapJSONObject(pathImage, pointList);
         this.put("map", myMap);
     }
+    
+    public void setMap (MapJSONObject map){
+        this.put("map", map);
+    }
 
     public void addBarrier (int x, int y, String imageName) {
         myMap.addBarrier(x, y, imageName);
@@ -269,9 +277,17 @@ public class GameData extends JSONObject {
     public void addImage (String id, String url) {
         myResources.addImage(id, url);
     }
+    
+    public void addImage(ResourceJSONObject image){
+        myResources.addImage(image);
+    }
 
     public void addAudio (String id, String url) {
         myResources.addAudio(id, url);
+    }
+    
+    public void addAudio(ResourceJSONObject audio){
+        myResources.addAudio(audio);
     }
 
     public void addAnimation (String id, List<String> imagePaths) {
