@@ -33,16 +33,17 @@ public class ItemPurchaser {
         // setBGColor(JGColor.red);
         String towerName = purchaseInfo.getInfo().get("Name");
 
-        System.out.println(towerName);
+        
         if (towerName.equals(towerToPurchaseName)) {
             restoreDefaultCursor();
-            System.out.println("Tower cancelled");
+            
             towerToPurchase = null;
             towerToPurchaseName = null;
             purchasing = false;
             return;
         }
-        setCursorImage(purchaseInfo);
+        ;
+        setCursorImage("src/resources/img/"+view.getStoreImages().get(purchaseInfo.getInfo().get("Image")));
         purchasing = true;
         towerToPurchase = purchaseInfo;
         towerToPurchaseName = purchaseInfo.getInfo().get("Name");
@@ -63,11 +64,10 @@ public class ItemPurchaser {
         return purchasing;
     }
 
-    public void setCursorImage (PurchaseInfo itemInformation) {
+    public void setCursorImage (String imagePath) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image =
-                toolkit.getImage("src/resources/img/" + itemInformation.getInfo().get("Image") +
-                                 ".png");
+                toolkit.getImage(imagePath);
         Cursor c =
                 toolkit.createCustomCursor(image,
                                            new Point(image.getWidth(null) / 2, image
