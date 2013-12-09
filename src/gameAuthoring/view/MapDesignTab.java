@@ -5,6 +5,7 @@ import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -32,6 +33,8 @@ public class MapDesignTab extends Tab {
     private ImageLabel myCurrentPathImage;
     private String myBackgroundImage;
     private String myPathImage;
+  
+    private static final Dimension IMAGE_LABEL_DIMENSION = new Dimension(50, 50);
 
     public MapDesignTab () {
     }
@@ -53,8 +56,6 @@ public class MapDesignTab extends Tab {
         myCurrentPathImage = new ImageLabel(50, 50);
         myCurrentPathImage.setMutableStatusTrue();
         myCurrentPathImage.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
-        myCurrentPathImage.setBorder(border);
         myCurrentPathImage.addMouseListener(createPathListener());
         JButton checkPath = new JButton("Create Map");
         checkPath.setFont(StyleConstants.DEFAULT_BODY_FONT);
