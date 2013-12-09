@@ -214,7 +214,7 @@ public class Game extends StdGame {
     public void updateGameStats () {
         lives = gameInfo.getLife();
         money = gameInfo.getGold();
-        score = money + gameInfo.getCurrentWaveNumber() * 100 + lives;
+        score = money + lives*5;
     }
 
     /**
