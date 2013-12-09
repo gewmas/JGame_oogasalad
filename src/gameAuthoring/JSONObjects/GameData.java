@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -39,8 +40,20 @@ public class GameData extends JSONObject {
         this.put("temporaryBarrierType", myBarrierList);
         this.put("wave", myWaveList);
         this.put("resources", myResources);
+        
+        
+        Collection<Point2D> pathList = new ArrayList<Point2D>();       
+        myMap = new MapJSONObject("path.png", pathList);
+        this.put("map", myMap);
+        
+        //TODO: Remove this later
+        this.put("widthOfWindow", 600);
+        this.put("heightOfWindow", 600);
+        this.put("tilesPerRow", 20);
+        this.put("difficultyScale", 1.5);
     }
 
+    
     /**
      * Sets name of game
      * 
@@ -185,6 +198,10 @@ public class GameData extends JSONObject {
         myWaveList.put(new WaveJSONObject(type, number, period, interval));
     }
 
+    public void addWave(WaveJSONObject wave){
+        myWaveList.put(wave);
+    }
+    
     /**
      * Adds barrier to myBarrierList JSONArray
      * 
@@ -216,8 +233,12 @@ public class GameData extends JSONObject {
      * @param life Number enemy lives (hits enemy can endure)
      * @param speed Enemy speed
      */
-    public void addEnemy (String name, int gold, String image, int life, double speed, String skill) {
-        myEnemyList.put(new EnemyJSONObject(name, gold, image, life, speed, skill));
+    public void addEnemy (String name, int gold, String image, int life, int damage, double speed, String skill) {
+        myEnemyList.put(new EnemyJSONObject(name, gold, image, life, damage, speed, skill));
+    }
+    
+    public void addEnemy(EnemyJSONObject enemy){
+        myEnemyList.put(enemy);
     }
 
     /**
@@ -240,6 +261,10 @@ public class GameData extends JSONObject {
         myMap = new MapJSONObject(pathImage, pointList);
         this.put("map", myMap);
     }
+    
+    public void setMap (MapJSONObject map){
+        this.put("map", map);
+    }
 
     public void addBarrier (int x, int y, String imageName) {
         myMap.addBarrier(x, y, imageName);
@@ -248,9 +273,17 @@ public class GameData extends JSONObject {
     public void addImage (String id, String url) {
         myResources.addImage(id, url);
     }
+    
+    public void addImage(ResourceJSONObject image){
+        
+    }
 
     public void addAudio (String id, String url) {
         myResources.addAudio(id, url);
+    }
+    
+    public void addAudio(ResourceJSONObject audio){
+        
     }
 
     public void addAnimation (String id, List<String> imagePaths) {
@@ -298,8 +331,9 @@ public class GameData extends JSONObject {
      * @return
      */
     public File createSimmulationFile () {
-        if (isComplete()) {
+        if (true) {
             File file = new File("tmp.JSON");
+            System.out.println("dlkfjsdjfdsjfdsjfs");
             PrintStream out;
             try {
                 file.createNewFile();

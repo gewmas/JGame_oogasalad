@@ -48,14 +48,17 @@ public class TestJSONWrite {
          game.setMap("path.jpg", pathList);
         
          game.addBarrier(5, 2, "rock.jpg");
+         
+         WaveJSONObject w = new WaveJSONObject("1", 5, 0.5, 7);
 
         // Testing wave writing
-         game.addWave("1", 5, 0.5, 7);
+         //game.addWave("1", 5, 0.5, 7);
+         game.addWave(w);
          game.addWave("2", 1, 0.5, 3);
 
         // Testing enemy writing
-         game.addEnemy("1", 5, "enemy1", 2, 0.5, "Haste");
-         game.addEnemy("2", 10, "runRight", 3, 0.1, "Light");
+         game.addEnemy("1", 5, "enemy1", 2, 3, 0.5, "Haste");
+         game.addEnemy("2", 10, "runRight", 3, 4, 0.1, "Light");
 
          System.out.println(game.toString(1));
     }
