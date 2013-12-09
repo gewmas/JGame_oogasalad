@@ -2,6 +2,7 @@ package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.AnimationJSONObject;
 import gameAuthoring.JSONObjects.EnemyJSONObject;
+import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;

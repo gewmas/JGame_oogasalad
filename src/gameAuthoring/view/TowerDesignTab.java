@@ -1,6 +1,7 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.TowerJSONObject;
+import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.Image;

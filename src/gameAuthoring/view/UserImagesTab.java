@@ -1,6 +1,7 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.ResourceJSONObject;
+import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -18,28 +19,34 @@ import net.miginfocom.swing.MigLayout;
 
 public class UserImagesTab extends Observable {
 
-    private JPanel myMainPanel = new GradientPanel(new MigLayout("wrap 1"));
-    private JPanel mySubPanel = new JPanel(new MigLayout("wrap 1"));
+    private JPanel myContentPanel;
     private int myNumImages = 0;
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources/img");
+    private static final Dimension CONTENT_PANEL_DIMENSION = new Dimension(300, 500);
+    private static final String CONTENT_PANEL_WRAP_MODE = "wrap 1";
+    private static final String UPLOAD_IMAGE_BUTTON_FORMATTING = "align center, gap 10 10 30 10";
+    private static final String MAIN_PANEL_WRAP_MODE = "wrap 1";
 
     public UserImagesTab () {
     }
 
     public JPanel getTab () {
-        myMainPanel.setOpaque(false);
-        mySubPanel.setPreferredSize(new Dimension(300, 500));
-        JButton uploadImage = new JButton("Load image");
-        uploadImage.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        uploadImage.addMouseListener(addFileUploadListener(this));
-        JScrollPane scrollPane = new JScrollPane(mySubPanel);
-        myMainPanel.add(scrollPane);
-        myMainPanel.add(uploadImage, "align center, gap 10 10 30 10");
-        return myMainPanel;
+        JPanel mainPanel = new GradientPanel(new MigLayout(MAIN_PANEL_WRAP_MODE));
+        myContentPanel = new JPanel(new MigLayout(CONTENT_PANEL_WRAP_MODE));
+        mainPanel.setOpaque(false);
+        myContentPanel.setPreferredSize(CONTENT_PANEL_DIMENSION);
+        JButton uploadImageButton =
+                new JButton(StyleConstants.resourceBundle.getString("UserImagesTitle"));
+        uploadImageButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        uploadImageButton.addMouseListener(addFileUploadListener(this));
+        JScrollPane scrollPane = new JScrollPane(myContentPanel);
+        mainPanel.add(scrollPane);
+        mainPanel.add(uploadImageButton, UPLOAD_IMAGE_BUTTON_FORMATTING);
+        return mainPanel;
     }
 
-    public MouseAdapter addFileUploadListener (final UserImagesTab userImagesTab) {
+    private MouseAdapter addFileUploadListener (final UserImagesTab userImagesTab) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
@@ -59,8 +66,8 @@ public class UserImagesTab extends Observable {
                         clearChanged();
                         imageLabel.setLabelIcon(imgSource);
                         GameAuthoringGUI.myImageLabel = imageLabel;
-                        mySubPanel.add(imageLabel);
-                        mySubPanel.revalidate();
+                        myContentPanel.add(imageLabel);
+                        myContentPanel.revalidate();
                     }
                     catch (IOException e1) {
                         e1.printStackTrace();

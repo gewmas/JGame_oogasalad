@@ -44,7 +44,6 @@ public class AudioLabel extends ImageLabel {
         }
     }
 
-    @Override
     public void initialize () {
         this.setPreferredSize(new Dimension(50, 50));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
@@ -79,28 +78,15 @@ public class AudioLabel extends ImageLabel {
             @Override
             public void mouseClicked (MouseEvent e) {
                 selected = !selected;
-                System.out.println("Selected? " + selected);
-                if (GameAuthoringGUI.myAudioLabel == null) {
-                    System.out.println("GameAuthoringGUI label null");
-                }
-                if (GameAuthoringGUI.myAudioLabel != null) {
-                    System.out.println("GameAuthoringGUI label ID " +
-                                       GameAuthoringGUI.myAudioLabel.getID());
-                }
-                System.out.println("Mutable? " + isMutable);
-
                 if (GameAuthoringGUI.myAudioLabel == null && selected) {
-                    System.out.println("IF 1");
                     GameAuthoringGUI.myAudioLabel = label;
                     GameAuthoringGUI.setCursor(label.getImageFile());
                 }
                 if (GameAuthoringGUI.myAudioLabel != null && isMutable && selected) {
-                    System.out.println("IF 2");
                     label.transferLabelInformation(GameAuthoringGUI.myAudioLabel);
                     GameAuthoringGUI.setCursorNull();
                 }
                 if (!selected) {
-                    System.out.println("IF 3");
                     GameAuthoringGUI.setCursorNull();
                     GameAuthoringGUI.myAudioLabel = null;
                 }
