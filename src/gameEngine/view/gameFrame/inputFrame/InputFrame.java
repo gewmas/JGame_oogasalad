@@ -15,7 +15,7 @@ import net.miginfocom.swing.MigLayout;
  *         method.
  */
 @SuppressWarnings("serial")
-public class InputFrame extends JFrame implements KeyActivationItem {
+public class InputFrame extends JFrame{
 
     private static final String INPUT_PANEL_POSITION = "span 2";
     private static final String LAYOUT_WRAP_SETTINGS = "wrap 3";
@@ -30,7 +30,7 @@ public class InputFrame extends JFrame implements KeyActivationItem {
         add(main);
     }
 
-    public void activate () {
+    public void display () {
         pack();
         setVisible(true);
     }
