@@ -22,7 +22,7 @@ class SelectNewGameItem extends AbstractAction {
 
     @Override
     public void actionPerformed (ActionEvent e) {
-        
+
         menuActions.selectNewGame();
 
     }
