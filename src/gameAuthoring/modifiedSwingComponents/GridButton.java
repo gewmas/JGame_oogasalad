@@ -1,7 +1,7 @@
 package gameAuthoring.modifiedSwingComponents;
 
 import gameAuthoring.view.Grid;
-import java.awt.Color;
+import gameAuthoring.view.StyleConstants;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,6 @@ import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -20,12 +19,11 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 
+@SuppressWarnings("serial")
 public class GridButton extends JButton {
 
     private Point2D myCoordinate;
-    private JButton myButton;
     private boolean isPath;
-    private String mySelectionMode;
     private Grid myGrid;
     private File myImgSource;
     private JPopupMenu myPopupMenu;
@@ -36,16 +34,12 @@ public class GridButton extends JButton {
         myCoordinate = new Point2D.Double(x, y);
         myGrid = grid;
         isPath = false;
-        this.setBorder(BorderFactory.createLineBorder(Color.white, 1));
+        this.setBorder(StyleConstants.DEFAULT_PANEL_BORDER);
         addPathListener(this);
     }
 
     public void setImageSource (File imgSource) {
         myImgSource = imgSource;
-    }
-
-    public void setSelectionMode (String mode) {
-        mySelectionMode = mode;
     }
 
     private void addPathListener (final GridButton gButton) {
@@ -67,17 +61,21 @@ public class GridButton extends JButton {
                 }
                 if (SwingUtilities.isRightMouseButton(e)) {
                     myPopupMenu = new JPopupMenu();
-                    myStartOptionItem = new JMenuItem("Set as path start");
+                    myStartOptionItem =
+                            new JMenuItem(
+                                          StyleConstants.resourceBundle
+                                                  .getString("GridButtonStartMessage"));
                     myStartOptionItem.addMouseListener(new MouseAdapter() {
                         public void mousePressed (MouseEvent me) {
-                            System.out.println("Set as start");
                             myGrid.setPathStart(myCoordinate);
                         }
                     });
-                    myEndOptionItem = new JMenuItem("Set as path end");
+                    myEndOptionItem =
+                            new JMenuItem(
+                                          StyleConstants.resourceBundle
+                                                  .getString("GridButtonEndMessage"));
                     myEndOptionItem.addMouseListener(new MouseAdapter() {
                         public void mousePressed (MouseEvent me) {
-                            System.out.println("Set as end");
                             myGrid.setPathEnd(myCoordinate);
                         }
                     });
@@ -100,7 +98,6 @@ public class GridButton extends JButton {
                             }
                         }
                     });
-
                 }
             }
         };
@@ -110,7 +107,8 @@ public class GridButton extends JButton {
     public void setImage () {
         try {
             if (myImgSource == null) {
-                JOptionPane.showMessageDialog(null, "No image defined");
+                JOptionPane.showMessageDialog(null, StyleConstants.resourceBundle
+                        .getString("GridButtonImageUndefined"));
             }
             else {
                 Image path = ImageIO.read(myImgSource);
@@ -120,7 +118,7 @@ public class GridButton extends JButton {
             }
         }
         catch (IOException ex) {
-            System.out.println("Image not found");
+            System.out.println(StyleConstants.resourceBundle.getString("GridButtonImageNotFound"));
         }
     }
 

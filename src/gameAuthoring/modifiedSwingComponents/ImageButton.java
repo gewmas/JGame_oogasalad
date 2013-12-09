@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 
+@SuppressWarnings("serial")
 public class ImageButton extends JButton {
 
     private String myImageName;

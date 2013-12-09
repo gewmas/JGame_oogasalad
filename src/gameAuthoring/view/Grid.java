@@ -6,8 +6,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
@@ -57,20 +55,6 @@ public class Grid extends JPanel {
         }
     }
 
-    private MouseAdapter addPathDoneListener () {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                if (isValidPath(0, 0, 2, 2)) {
-                    for (Point2D point : myPathCoordinates) {
-                        System.out.println(point.toString());
-                    }
-                }
-            }
-        };
-        return listener;
-    }
-
     public void setImageSource (File imgSource) {
         for (int x = 0; x < myGrid.length; x++) {
             for (int y = 0; y < myGrid[0].length; y++) {
@@ -81,6 +65,7 @@ public class Grid extends JPanel {
 
     public void setBackgroundImageSource (File bgSource) {
         myBackgroundImage = bgSource;
+        this.revalidate();
     }
 
     public void addPathCoordinate (Point2D coordinate) {
@@ -124,18 +109,11 @@ public class Grid extends JPanel {
 
     public boolean isValidPathHelper () {
         if (myStart == null || myEnd == null) {
-            JOptionPane.showMessageDialog(null, "Start or Endpoint not defined!");
+            JOptionPane.showMessageDialog(null, StyleConstants.resourceBundle
+                    .getString("GridStartEndMessage"));
             return false;
         }
         myPathCoordinates.clear();
-        /*
-         * for (int i = 0; i < myPath[0].length; i++) {
-         * for (int j = 0; j < myPath.length; j++) {
-         * System.out.print(myGrid[i][j].isPath() ? '.' : 'x');
-         * }
-         * System.out.println();
-         * }
-         */
         return isValidPath((int) myStart.getX(), (int) myStart.getY(), (int) myEnd.getX(),
                            (int) myEnd.getY());
     }
@@ -149,12 +127,7 @@ public class Grid extends JPanel {
         else {
             return false;
         }
-        if (startX == endX && startY == endY) {
-            for (Point2D point : myPathCoordinates) {
-                System.out.println(point.toString());
-            }
-            return true;
-        }
+        if (startX == endX && startY == endY) { return true; }
         return (isValidPath(startX + 1, startY, endX, endY) || isValidPath(startX, startY + 1,
                                                                            endX, endY) ||
                 isValidPath(startX - 1, startY, endX, endY) || isValidPath(startX, startY - 1,
@@ -177,7 +150,6 @@ public class Grid extends JPanel {
             }
             int h = img.getHeight(null);
             int w = img.getWidth(null);
-
             if (w > this.getWidth() || w < this.getWidth()) {
                 img = img.getScaledInstance(getWidth(), -1, Image.SCALE_DEFAULT);
                 h = img.getHeight(null);

@@ -1,7 +1,6 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.TemporaryBarrierJSONObject;
-import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -32,7 +31,6 @@ public class TempBarrierDesignTab extends Tab {
 
     private JScrollPane myCreatedTempBarriers;
     private JPanel myScrollPanel;
-    private JPanel myContentPanel;
     private JTextField myNameField;
     private JTextField myDamageField;
     private JTextField myCostField;
@@ -48,14 +46,13 @@ public class TempBarrierDesignTab extends Tab {
 
     @Override
     public JPanel getTab () {
-        JPanel mainPanel = new GradientPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
-        mainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
+        myMainPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        myMainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
         JLabel title = new JLabel("Temporary Barrier Design");
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
-        mainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
+        myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
         myScrollPanel = new JPanel(new MigLayout(SCROLL_PANEL_WRAP_MODE));
         myScrollPanel.setOpaque(false);
-        myContentPanel = new JPanel();
         myContentPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myContentPanel.setPreferredSize(PANEL_DIMENSION);
         myContentPanel.setBorder(StyleConstants.DEFAULT_PANEL_BORDER);
@@ -66,10 +63,11 @@ public class TempBarrierDesignTab extends Tab {
         addBarrierExpiry();
         addBarrierDescription();
         addBarrierCreationImage();
-        mainPanel.add(myContentPanel);
+        addBarrierCreationButton();
+        myMainPanel.add(myContentPanel);
         addCreatedBarriers();
-        mainPanel.add(myCreatedTempBarriers, "aligny center");
-        return mainPanel;
+        myMainPanel.add(myCreatedTempBarriers, "aligny center");
+        return myMainPanel;
     }
 
     @Override

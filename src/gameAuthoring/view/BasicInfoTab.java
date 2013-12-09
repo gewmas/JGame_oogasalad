@@ -1,7 +1,6 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.ResourceJSONObject;
-import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
@@ -15,13 +14,6 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 
-/**
- * Subclass of Tab that contains Swing components to input or load basic game information such as
- * game name, starting quantity of gold, splash image, etc.
- * 
- * 
- * 
- */
 public class BasicInfoTab extends Tab {
 
     private static final JFileChooser INPUT_CHOOSER =
@@ -35,10 +27,9 @@ public class BasicInfoTab extends Tab {
     private String mySplashImage;
     private AudioLabel myAudioLabel;
     private ImageLabel myImageLabel;
-    private JPanel myMainPanel;
-    private JPanel mySubPanel;
     private static final Dimension TEXT_DIMENSION = new Dimension(200, 30);
     private static final Dimension IMAGE_LABEL_DIMENSION = new Dimension(50, 50);
+    private static final String CONTENT_PANEL_FORMATTING = "align center";
 
     public BasicInfoTab () {
 
@@ -46,10 +37,10 @@ public class BasicInfoTab extends Tab {
 
     @Override
     public JPanel getTab () {
-        myMainPanel = new GradientPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
-        mySubPanel = new JPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
-        mySubPanel.setOpaque(false);
-        mySubPanel.setBorder(StyleConstants.DEFAULT_PANEL_BORDER);
+        myMainPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        myContentPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        myContentPanel.setOpaque(false);
+        myContentPanel.setBorder(StyleConstants.DEFAULT_PANEL_BORDER);
         addGameName();
         addGold();
         addLives();
@@ -58,39 +49,40 @@ public class BasicInfoTab extends Tab {
         addSplashImage();
         addSubmitButton();
         addTitle();
-        myMainPanel.add(mySubPanel, "align center");
+        myMainPanel.add(myContentPanel, CONTENT_PANEL_FORMATTING);
         return myMainPanel;
     }
 
-    public void addSubmitButton () {
+    private void addSubmitButton () {
         JButton setInfoButton =
                 new JButton(StyleConstants.resourceBundle.getString("BasicInfoSubmit"));
         setInfoButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         setInfoButton
                 .setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoSubmitTip"));
         setInfoButton.addMouseListener(setInfoListener());
-        mySubPanel.add(setInfoButton);
+        myContentPanel.add(setInfoButton);
     }
 
-    public void addTitle () {
+    private void addTitle () {
         JLabel title = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoTitle"));
         title.setFont(StyleConstants.DEFAULT_BODY_FONT);
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
         myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
     }
 
-    public void addGameName () {
+    private void addGameName () {
         JLabel gameName = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoGameName"));
         gameName.setFont(StyleConstants.DEFAULT_BODY_FONT);
         gameName.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoGameNameTip"));
         myGameName = new JTextField();
         myGameName.setPreferredSize(TEXT_DIMENSION);
         myGameName.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        mySubPanel.add(gameName);
-        mySubPanel.add(myGameName);
+        myContentPanel.add(gameName);
+        myContentPanel.add(myGameName);
+
     }
 
-    public void addGold () {
+    private void addGold () {
         JLabel gold = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoGold"));
         gold.setFont(StyleConstants.DEFAULT_BODY_FONT);
         gold.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoGoldTip"));
@@ -103,13 +95,14 @@ public class BasicInfoTab extends Tab {
         myAltGoldText = new JTextField();
         myAltGoldText.setPreferredSize(TEXT_DIMENSION);
         myAltGoldText.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        mySubPanel.add(gold);
-        mySubPanel.add(myGold);
-        mySubPanel.add(altGoldLabel);
-        mySubPanel.add(myAltGoldText);
+
+        myContentPanel.add(gold);
+        myContentPanel.add(myGold);
+        myContentPanel.add(altGoldLabel);
+        myContentPanel.add(myAltGoldText);
     }
 
-    public void addLives () {
+    private void addLives () {
         JLabel lives = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoLives"));
         lives.setFont(StyleConstants.DEFAULT_BODY_FONT);
         lives.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoLivesTip"));
@@ -121,13 +114,13 @@ public class BasicInfoTab extends Tab {
         myAltLivesText = new JTextField();
         myAltLivesText.setPreferredSize(TEXT_DIMENSION);
         myAltLivesText.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        mySubPanel.add(lives);
-        mySubPanel.add(myLives);
-        mySubPanel.add(altLivesLabel);
-        mySubPanel.add(myAltLivesText);
+        myContentPanel.add(lives);
+        myContentPanel.add(myLives);
+        myContentPanel.add(altLivesLabel);
+        myContentPanel.add(myAltLivesText);
     }
 
-    public void addBackgroundAudio () {
+    private void addBackgroundAudio () {
         myAudioLabel = new AudioLabel();
         JLabel audioLabel =
                 new JLabel(StyleConstants.resourceBundle.getString("BasicInfoBackgroundAudio"));
@@ -135,22 +128,22 @@ public class BasicInfoTab extends Tab {
                 .getString("BasicInfoBackgroundAudioTip"));
         myAudioLabel.setMutableStatusTrue();
         audioLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        mySubPanel.add(audioLabel);
-        mySubPanel.add(myAudioLabel);
+        myContentPanel.add(audioLabel);
+        myContentPanel.add(myAudioLabel);
     }
 
-    public void addBullet () {
+    private void addBullet () {
         JLabel bullet = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoBullet"));
         bullet.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoBulletTip"));
         bullet.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myImageLabel = new ImageLabel();
         myImageLabel.setMutableStatusTrue();
         myImageLabel.setPreferredSize(IMAGE_LABEL_DIMENSION);
-        mySubPanel.add(bullet);
-        mySubPanel.add(myImageLabel);
+        myContentPanel.add(bullet);
+        myContentPanel.add(myImageLabel);
     }
 
-    public void addSplashImage () {
+    private void addSplashImage () {
         JButton setSplashImageButton =
                 new JButton(StyleConstants.resourceBundle.getString("BasicInfoSplashImage"));
         setSplashImageButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -158,8 +151,8 @@ public class BasicInfoTab extends Tab {
                 .setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoSplashImageTip"));
         setSplashImageButton.addMouseListener(setSplashImageListener());
         mySplashImageLabel = new JLabel();
-        mySubPanel.add(setSplashImageButton);
-        mySubPanel.add(mySplashImageLabel);
+        myContentPanel.add(setSplashImageButton);
+        myContentPanel.add(mySplashImageLabel);
     }
 
     public void loadJSON (Parser p) {
@@ -177,7 +170,7 @@ public class BasicInfoTab extends Tab {
         }
     }
 
-    public MouseAdapter setInfoListener () {
+    private MouseAdapter setInfoListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
@@ -217,7 +210,7 @@ public class BasicInfoTab extends Tab {
         }
     }
 
-    public MouseAdapter setSplashImageListener () {
+    private MouseAdapter setSplashImageListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {

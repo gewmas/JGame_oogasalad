@@ -1,12 +1,9 @@
 package gameAuthoring.view;
 
-import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -34,22 +31,20 @@ public class MapDesignTab extends Tab {
     private ImageLabel myCurrentPathImage;
     private String myBackgroundImage;
     private String myPathImage;
-    private JPanel myMainPanel;
     private JPanel myGridPanel;
     private JPanel myButtonPanel;
-  
 
     public MapDesignTab () {
     }
 
     @Override
     public JPanel getTab () {
-        myMainPanel = new GradientPanel(new MigLayout("wrap 2"));
+        myMainPanel.setLayout(new MigLayout("wrap 2"));
         myGridPanel = new JPanel(new BorderLayout());
         myButtonPanel = new JPanel(new MigLayout("wrap 2"));
         myButtonPanel.setOpaque(false);
         addTitle();
-        addGrid();      
+        addGrid();
         addPathImage();
         addBackgroundButton();
         addSubmitMapButton();
@@ -58,16 +53,18 @@ public class MapDesignTab extends Tab {
         myGridPanel.setBorder(b);
         return myMainPanel;
     }
-        
-    private void addBackgroundButton(){
-        JButton setBackground = new JButton(StyleConstants.resourceBundle.getString("MapBackground"));
+
+    private void addBackgroundButton () {
+        JButton setBackground =
+                new JButton(StyleConstants.resourceBundle.getString("MapBackground"));
         setBackground.setFont(StyleConstants.DEFAULT_BODY_FONT);
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
         setBackground
                 .setToolTipText(StyleConstants.resourceBundle.getString("MapBackgroundTip"));
         myButtonPanel.add(setBackground, "span 2");
     }
-    private void addSubmitMapButton(){
+
+    private void addSubmitMapButton () {
         JButton checkPath = new JButton("Create Map");
         checkPath.setFont(StyleConstants.DEFAULT_BODY_FONT);
         checkPath.addMouseListener(createPathCheckListener());
@@ -75,20 +72,20 @@ public class MapDesignTab extends Tab {
                 .setToolTipText(StyleConstants.resourceBundle.getString("MapPathCheckTip"));
         myButtonPanel.add(checkPath);
     }
-    private void addTitle(){
+
+    private void addTitle () {
         JLabel title = new JLabel(StyleConstants.resourceBundle.getString("MapDesignTitle"));
         title.setFont(new Font("Calibri", Font.PLAIN, 30));
         myMainPanel.add(title, "span 2");
     }
-    
-    
-    private void addGrid(){
+
+    private void addGrid () {
         myGrid = new Grid(20, 20);
         myGridPanel.add(myGrid, BorderLayout.WEST);
         myMainPanel.add(myGridPanel);
     }
-    
-    private void addPathImage(){
+
+    private void addPathImage () {
         myCurrentPathImage = new ImageLabel(50, 50);
         myCurrentPathImage.setMutableStatusTrue();
         myCurrentPathImage.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -99,7 +96,6 @@ public class MapDesignTab extends Tab {
         myButtonPanel.add(pathLabel, "gap 0 0 0 30");
         myButtonPanel.add(myCurrentPathImage, "gap 0 0 0 30");
     }
-    
 
     public void loadJSON (Parser p) {
         myBackgroundImage = p.getString("BGImage");
@@ -163,7 +159,8 @@ public class MapDesignTab extends Tab {
 
     private void setPathData () {
         if (myGrid.isValidPathHelper()) {
-            JOptionPane.showMessageDialog(null, StyleConstants.resourceBundle.getString("MapValidPath"));
+            JOptionPane.showMessageDialog(null,
+                                          StyleConstants.resourceBundle.getString("MapValidPath"));
             String key = myBackgroundImage.substring(0, myBackgroundImage.length() - 4);
             MapDesignInformation mapDesignInfo =
                     new MapDesignInformation(myBackgroundImage, myPathImage, key,
@@ -173,8 +170,9 @@ public class MapDesignTab extends Tab {
             clearChanged();
         }
         else {
-            JOptionPane.showMessageDialog(null,
-                                          StyleConstants.resourceBundle.getString("MapInvalidPath"));
+            JOptionPane
+                    .showMessageDialog(null,
+                                       StyleConstants.resourceBundle.getString("MapInvalidPath"));
         }
     }
 

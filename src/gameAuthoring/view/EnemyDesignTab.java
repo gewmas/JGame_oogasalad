@@ -2,7 +2,6 @@ package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.AnimationJSONObject;
 import gameAuthoring.JSONObjects.EnemyJSONObject;
-import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,7 +30,6 @@ import net.miginfocom.swing.MigLayout;
 public class EnemyDesignTab extends Tab {
 
     private JScrollPane myCreatedEnemies;
-    private JPanel myContentPanel;
     private JPanel myScrollPanel;
     private JTextField myNameField;
     private JTextField myGoldField;
@@ -44,7 +42,6 @@ public class EnemyDesignTab extends Tab {
     private File myImageSource;
     private int myNumEnemies = 0;
     private JComboBox<String> mySkillOptions;
-    private JPanel myMainPanel;
 
     private final String[] SKILLS = { "Haste", "Armour", "Heal", "Light", "Poison" };
 
@@ -60,7 +57,7 @@ public class EnemyDesignTab extends Tab {
 
     @Override
     public JPanel getTab () {
-        myMainPanel = new GradientPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
+        myMainPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myMainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
         addTitle();
         myScrollPanel = new JPanel(new MigLayout("wrap 4"));
@@ -188,7 +185,6 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(mySkillOptions);
     }
 
-
     private void addAnimation () {
 
         JButton enemyImageChooser =
@@ -217,7 +213,6 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(myAnimationScrollPane, "span 2, gap 0 0 10 10");
 
     }
-
 
     private void addCreateEnemyButton () {
 
