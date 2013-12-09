@@ -12,7 +12,8 @@ import jgame.platform.JGEngine;
  * 
  * @author Yuhua
  * 
- *         Test Tower Enemy and Bullet
+ * This test play an important part for BackEnd to test visually when FrontEnd hadn't finished View.
+ * Now this test is deprecated.
  * 
  */
 public class testTowerEnemyBullet extends JGEngine {
