@@ -59,15 +59,15 @@ public class ImageLabel extends JLabel {
         }
     }
 
-    protected String getID () {
+    public String getID () {
         return myID;
     }
 
-    protected File getImageFile () {
+    public File getImageFile () {
         return myImageSource;
     }
 
-    protected Image getImage () {
+    public Image getImage () {
         return myImage;
     }
 
