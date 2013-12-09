@@ -294,6 +294,10 @@ public class GameData extends JSONObject {
         myResources.addAnimation(id, imagePaths);
     }
 
+    public void addAnimation (AnimationJSONObject animation){
+        myResources.addAnimation(animation);
+    }
+    
     public ResourcesJSONObject getResources () {
         return myResources;
     }
