@@ -40,7 +40,7 @@ public class Enemy extends JGObject implements IEMagicable {
 
     double pathX;
     double pathY;
-
+    
     // wenxin add this attribution for magic.
     int currentMagics = 0;
 
@@ -59,7 +59,7 @@ public class Enemy extends JGObject implements IEMagicable {
                   Model model,int damage) {
         super(id, unique_id, model.getPathList().get(0).getX(), model.getPathList().get(0).getY(),
               collisionid, image);
-
+        
         this.model = model;
         this.id = id;
         this.image = image;
