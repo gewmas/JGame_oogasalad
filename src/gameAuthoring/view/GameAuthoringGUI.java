@@ -1,6 +1,7 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.controllers.EnemyDesignController;
 import gameAuthoring.controllers.SkillsDesignController;
 import gameAuthoring.menuBar.MenuBar;
 import java.awt.Cursor;
@@ -24,42 +25,34 @@ import net.miginfocom.swing.MigLayout;
 
 public class GameAuthoringGUI {
 
-    protected JFrame myFrame;
     protected static JPanel myMainPanel;
     protected static File mySelectedImage = null;
     protected static File mySelectedAudio = null;
-    private BasicInfoTab myBasicInfoTab;
-    private MapDesignTab myMapDesignTab;
-    private TowerDesignTab myTowerDesignTab;
-    private EnemyDesignTab myEnemyDesignTab;
-    private WaveDesignTab myWaveDesignTab;
-    private SkillsDesignTab mySkillsDesignTab;
-    private TempBarrierDesignTab myTempBarrierTab;
-    private UserLibraryMainTab myUserLibraryTab;
     protected static ImageLabel myImageLabel = null;
     protected static AudioLabel myAudioLabel = null;
     private JLabel myDuvallClippy;
 
-    // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
         GameData gameData = new GameData();
-        myFrame = new JFrame();
-        myFrame.setPreferredSize(new Dimension(1190, 780));
-        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame();
+        frame.setPreferredSize(new Dimension(1190, 780));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myMainPanel = new ImagePanel("texture0.png");
         myMainPanel.setLayout(new MigLayout("wrap 2"));
         JTabbedPane gameDesignTab = new JTabbedPane();
         gameDesignTab.setPreferredSize(new Dimension(750, 600));
-        myBasicInfoTab = new BasicInfoTab(gameData);
-        myMapDesignTab = new MapDesignTab(gameData);
-        myTowerDesignTab = new TowerDesignTab(gameData);
-        myEnemyDesignTab = new EnemyDesignTab(gameData);
-        myWaveDesignTab = new WaveDesignTab(gameData);
-        mySkillsDesignTab = new SkillsDesignTab();
+        BasicInfoTab basicInfoTab = new BasicInfoTab(gameData);
+        MapDesignTab mapDesignTab = new MapDesignTab(gameData);
+        TowerDesignTab towerDesignTab = new TowerDesignTab(gameData);
+        EnemyDesignController enemyDesignController = new EnemyDesignController(gameData);
+        EnemyDesignTab enemyDesignTab = new EnemyDesignTab(gameData);
+        enemyDesignTab.addObserver(enemyDesignController);
+        WaveDesignTab waveDesignTab = new WaveDesignTab(gameData);
+        SkillsDesignTab skillsDesignTab = new SkillsDesignTab();
         SkillsDesignController skillsDesignController = new SkillsDesignController(gameData);
-        mySkillsDesignTab.addObserver(skillsDesignController);
-        myTempBarrierTab = new TempBarrierDesignTab(gameData);
-        myUserLibraryTab = new UserLibraryMainTab(gameData);
+        skillsDesignTab.addObserver(skillsDesignController);
+        TempBarrierDesignTab tempBarrierTab = new TempBarrierDesignTab(gameData);
+        UserLibraryMainTab userLibraryTab = new UserLibraryMainTab(gameData);
 
         myDuvallClippy = new JLabel();
         Image duvallImage;
@@ -72,24 +65,24 @@ public class GameAuthoringGUI {
         }
         myDuvallClippy.addMouseMotionListener(makeClippyDraggingListener());
 
-        gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
+        gameDesignTab.addTab("Basic Info", basicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
-        gameDesignTab.addTab("Map Design", myMapDesignTab.getTab());
-        gameDesignTab.addTab("Tower Design", myTowerDesignTab.getTab());
-        gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
-        gameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
-        gameDesignTab.addTab("Temp Barrier Design", myTempBarrierTab.getTab());
-        gameDesignTab.addTab("Skills Design", mySkillsDesignTab.getTab());
-        MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
+        gameDesignTab.addTab("Map Design", mapDesignTab.getTab());
+        gameDesignTab.addTab("Tower Design", towerDesignTab.getTab());
+        gameDesignTab.addTab("Enemy Design", enemyDesignTab.getTab());
+        gameDesignTab.addTab("Wave Design", waveDesignTab.getTab());
+        gameDesignTab.addTab("Temp Barrier Design", tempBarrierTab.getTab());
+        gameDesignTab.addTab("Skills Design", skillsDesignTab.getTab());
+        MenuBar menu = new MenuBar(gameData, basicInfoTab, mapDesignTab, waveDesignTab);
         myMainPanel.add(gameDesignTab, "gap 50 20 100 40");
-        myMainPanel.add(myUserLibraryTab);
+        myMainPanel.add(userLibraryTab);
         // myMainPanel.add(myDuvallClippy);
-        myFrame.setJMenuBar(menu);
-        myFrame.setContentPane(myMainPanel);
-        myFrame.pack();
-        myFrame.setLocationByPlatform(true);
-        myFrame.setVisible(true);
-        myFrame.setResizable(false);
+        frame.setJMenuBar(menu);
+        frame.setContentPane(myMainPanel);
+        frame.pack();
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
+        frame.setResizable(false);
     }
 
     public MouseMotionAdapter makeClippyDraggingListener () {
@@ -101,10 +94,6 @@ public class GameAuthoringGUI {
             }
         };
         return listener;
-    }
-
-    public static void main (String[] arg) {
-        GameAuthoringGUI gameAuthoringGUI = new GameAuthoringGUI();
     }
 
     public static final void setCursor (File imageFile) {
@@ -129,4 +118,9 @@ public class GameAuthoringGUI {
     public static final void setAudioFile (File audio) {
         mySelectedAudio = audio;
     }
+
+    public static void main (String[] arg) {
+        GameAuthoringGUI gameAuthoringGUI = new GameAuthoringGUI();
+    }
+
 }

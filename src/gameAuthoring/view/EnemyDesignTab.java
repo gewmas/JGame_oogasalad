@@ -37,6 +37,7 @@ public class EnemyDesignTab extends Tab {
     private JTextField myNameField;
     private JTextField myGoldField;
     private JTextField myLifeField;
+    private JTextField myDamageField;
     private JTextField mySpeedField;
     private JPanel myAnimationPanel;
     private JScrollPane myAnimationScrollPane;
@@ -61,8 +62,8 @@ public class EnemyDesignTab extends Tab {
         myMainPanel.add(title, "span 2");
         myScrollPanel = new JPanel(new MigLayout("wrap 4"));
         myScrollPanel.setOpaque(false);
-        EnemyDesignPanel enemyDesignPanel = new EnemyDesignPanel(this);
-        myMainPanel.add(enemyDesignPanel);
+        createMainPanel();
+        myMainPanel.add(myContentPanel);
         myCreatedEnemies = new JScrollPane(myScrollPanel);
         myCreatedEnemies.getViewport().setOpaque(false);
         myCreatedEnemies.setOpaque(false);
@@ -77,7 +78,7 @@ public class EnemyDesignTab extends Tab {
         return myMainPanel;
     }
 
-    public void addEnemy (File imgSource, String enemyName) {
+    private void addEnemy (File imgSource, String enemyName) {
         JLabel enemyIcon = new JLabel();
         enemyIcon.setPreferredSize(new Dimension(50, 50));
         try {
@@ -105,6 +106,8 @@ public class EnemyDesignTab extends Tab {
         speed.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel skill = new JLabel("Skill");
         skill.setFont(Constants.DEFAULT_BODY_FONT);
+        JLabel damage = new JLabel("Damage");
+        damage.setFont(Constants.DEFAULT_BODY_FONT);
 
         myNameField = new JTextField();
         myNameField.setFont(Constants.DEFAULT_BODY_FONT);
@@ -121,6 +124,10 @@ public class EnemyDesignTab extends Tab {
         mySpeedField = new JTextField();
         mySpeedField.setPreferredSize(new Dimension(200, 30));
         mySpeedField.setFont(Constants.DEFAULT_BODY_FONT);
+
+        myDamageField = new JTextField();
+        myDamageField.setPreferredSize(new Dimension(200, 30));
+        myDamageField.setFont(Constants.DEFAULT_BODY_FONT);
 
         JButton enemyImageChooser = new JButton("Add Sprite");
         enemyImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
@@ -155,6 +162,8 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(myLifeField);
         myContentPanel.add(speed);
         myContentPanel.add(mySpeedField);
+        myContentPanel.add(damage);
+        myContentPanel.add(myDamageField);
         myContentPanel.add(skill);
         myContentPanel.add(mySkillOptions);
         myContentPanel.add(myAnimationScrollPane, "span 2, gap 0 0 10 10");
@@ -167,7 +176,7 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.setOpaque(false);
     }
 
-    public MouseAdapter createClearAnimationsListener () {
+    private MouseAdapter createClearAnimationsListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
@@ -177,13 +186,13 @@ public class EnemyDesignTab extends Tab {
         return listener;
     }
 
-    public void clearAnimationPanel () {
+    private void clearAnimationPanel () {
         myAnimationPanel.removeAll();
         myAnimationPanel.revalidate();
         myEnemyAnimations.clear();
     }
 
-    public MouseAdapter createNewEnemyIconListener () {
+    private MouseAdapter createNewEnemyIconListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
@@ -197,7 +206,7 @@ public class EnemyDesignTab extends Tab {
         return listener;
     }
 
-    public MouseAdapter createEnemyButtonListener () {
+    private MouseAdapter createEnemyButtonListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
@@ -206,6 +215,7 @@ public class EnemyDesignTab extends Tab {
                 try {
                     int gold = Integer.parseInt(myGoldField.getText());
                     int life = Integer.parseInt(myLifeField.getText());
+                    int damage = Integer.parseInt(myGoldField.getText());
                     double speed = Double.parseDouble(mySpeedField.getText());
                     String skill = (String) mySkillOptions.getSelectedItem();
                     myImageSource = myEnemyAnimations.get(0).getImageFile();
@@ -227,7 +237,10 @@ public class EnemyDesignTab extends Tab {
                     else {
                         EnemyJSONObject enemy =
                                 new EnemyJSONObject(myNameField.getText(), gold, currentEnemyID,
-                                                    life, speed, skill);
+                                                    life, damage, speed, skill);
+                        setChanged();
+                        notifyObservers(enemy);
+                        clearChanged();
                         addEnemy(myImageSource, myNameField.getText());
                         myNameField.setText("");
                         myGoldField.setText("");

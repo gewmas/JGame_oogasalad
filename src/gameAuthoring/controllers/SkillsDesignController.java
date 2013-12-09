@@ -5,15 +5,14 @@ import gameAuthoring.view.AudioLabel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
 
-public class SkillsDesignController implements Observer {
+public class SkillsDesignController extends DesignController {
 
     private GameData myGameData;
 
     public SkillsDesignController (GameData gameData) {
-        myGameData = gameData;
+        super(gameData);
     }
 
     @Override

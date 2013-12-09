@@ -26,7 +26,6 @@ public class WaveDesignPanel extends JPanel {
 
     private JButton myTypeButton;
     JComboBox<String> myEnemyChooser;
-
     private JTextField myNumberField;
     private JTextField myPeriodField;
     private JTextField myIntervalField;
