@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.towerUpdrader;
+package gameEngine.view.gameFrame.towerUpgrader;
 
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.View;

@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.towerUpdrader;
+package gameEngine.view.gameFrame.towerUpgrader;
 
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.controller.ControllerToViewInterface;
@@ -21,12 +21,12 @@ public class UpgradeButton extends TowerUpgraderButton {
     private static final int BUTTON_HEIGHT = 20;
     
     private static final String[] DISPLAY_NORMAL_COLORS = { NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
-                                                           NORMAL_KEY, NORMAL_KEY,
+                                                           NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
                                                            NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
                                                            NORMAL_KEY, NORMAL_KEY, NORMAL_KEY };
 
     private static final String[] DISPLAY_UPGRADED_COLORS = { NORMAL_KEY, UPGRADE_KEY, UPGRADE_KEY,
-                                                             NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
+                                                             NORMAL_KEY, NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
                                                              UPGRADE_KEY, UPGRADE_KEY, NORMAL_KEY,
                                                              NORMAL_KEY, NORMAL_KEY };
     private ItemOptionsDisplayer towerUpgrader;
@@ -78,7 +78,7 @@ public class UpgradeButton extends TowerUpgraderButton {
     }
 
     protected void updateValuesToDisplay() {
-    	for (int i = 0; i < GameEngineConstant.UPGRADE_DISPLAY_KEYS().length; i++) {
+    	for (int i = 0; i < GameEngineConstant.NORMAL_DISPLAY_KEYS().length; i++) {
             normalValuesToDisplay.put(GameEngineConstant.NORMAL_DISPLAY_KEYS()[i], DISPLAY_NORMAL_COLORS[i]);
         }
         for (int i = 0; i < GameEngineConstant.UPGRADE_DISPLAY_KEYS().length; i++) {

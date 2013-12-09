@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.towerUpdrader;
+package gameEngine.view.gameFrame.towerUpgrader;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +21,7 @@ public class ItemOptionsDisplayer {
         this.display = display;
         this.TowerUpgraderButtons = new ArrayList<TowerUpgraderButton>();
         TowerUpgraderButtons.add(new UpgradeButton(this, controller));
+        TowerUpgraderButtons.add(new AttackModeButton(this,controller));
         TowerUpgraderButtons.add(new SellButton(this, controller));
         for (TowerUpgraderButton button : TowerUpgraderButtons) {
             display.add(button);

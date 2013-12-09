@@ -12,7 +12,7 @@ import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameInitializable;
 import gameEngine.view.gameFrame.GameUpdatable;
 import gameEngine.view.gameFrame.ItemPurchaser;
-import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
+import gameEngine.view.gameFrame.towerUpgrader.ItemOptionsDisplayer;
 
 
 /**

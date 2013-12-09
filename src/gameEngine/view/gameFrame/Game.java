@@ -8,7 +8,7 @@ import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
 import gameEngine.view.gameFrame.tools.DisplayValue;
-import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
+import gameEngine.view.gameFrame.towerUpgrader.ItemOptionsDisplayer;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,6 +32,7 @@ public class Game extends StdGame {
                                                    GameEngineConstant.TOWER_DAMAGE,
                                                    GameEngineConstant.TOWER_ATTACK_SPEED,
                                                    GameEngineConstant.TOWER_ATTACK_AMOUNT,
+                                                   GameEngineConstant.TOWER_ATTACK_MODE,
                                                    GameEngineConstant.TOWER_RANGE,
                                                    GameEngineConstant.TOWER_MAGIC,
                                                    GameEngineConstant.TOWER_MAGIC_FACTOR,
@@ -118,7 +119,7 @@ public class Game extends StdGame {
         this.game_title = gameInfo.getMyName();
 
         valuesToDisplay = new LinkedHashMap<String, String>();
-        for (String str : DISPLAY_KEYS) {
+        for (String str : GameEngineConstant.NORMAL_DISPLAY_KEYS()) {
             valuesToDisplay.put(str, "black");
         }
     }

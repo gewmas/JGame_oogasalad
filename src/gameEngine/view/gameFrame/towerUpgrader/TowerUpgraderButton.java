@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.towerUpdrader;
+package gameEngine.view.gameFrame.towerUpgrader;
 
 import java.util.Map;
 import javax.swing.JButton;
