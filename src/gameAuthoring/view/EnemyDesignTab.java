@@ -5,7 +5,6 @@ import gameAuthoring.JSONObjects.EnemyJSONObject;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -188,7 +187,9 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(mySkillOptions);
     }
 
+
     private void addAnimation () {
+
         JButton enemyImageChooser =
                 new JButton(StyleConstants.resourceBundle.getString("EnemySprite"));
         enemyImageChooser.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -216,7 +217,9 @@ public class EnemyDesignTab extends Tab {
 
     }
 
+
     private void addCreateEnemyButton () {
+
         JButton createEnemyButton =
                 new JButton(StyleConstants.resourceBundle.getString("EnemyCreateEnemy"));
         createEnemyButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
