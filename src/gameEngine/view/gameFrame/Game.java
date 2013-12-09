@@ -5,7 +5,6 @@ import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
-import gameEngine.view.View;
 import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
 import gameEngine.view.gameFrame.tools.DisplayValue;
 import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
@@ -29,16 +28,16 @@ import jgame.platform.StdGame;
  */
 public class Game extends StdGame {
     private static final String[] DISPLAY_KEYS = { GameEngineConstant.PURCHASE_INFO_NAME,
-                                                   GameEngineConstant.TOWER_DAMAGE,
-                                                   GameEngineConstant.TOWER_ATTACK_SPEED,
-                                                   GameEngineConstant.TOWER_ATTACK_AMOUNT,
-                                                   GameEngineConstant.TOWER_RANGE,
-                                                   GameEngineConstant.TOWER_MAGIC,
-                                                   GameEngineConstant.TOWER_MAGIC_FACTOR,
-                                                   GameEngineConstant.TOWER_BOOST_FACTOR,
-                                                   GameEngineConstant.TOWER_SELL_PRICE,
-                                                   GameEngineConstant.TOWER_UPGRADE_PRICE,
-                                                   GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
+                                                  GameEngineConstant.TOWER_DAMAGE,
+                                                  GameEngineConstant.TOWER_ATTACK_SPEED,
+                                                  GameEngineConstant.TOWER_ATTACK_AMOUNT,
+                                                  GameEngineConstant.TOWER_RANGE,
+                                                  GameEngineConstant.TOWER_MAGIC,
+                                                  GameEngineConstant.TOWER_MAGIC_FACTOR,
+                                                  GameEngineConstant.TOWER_BOOST_FACTOR,
+                                                  GameEngineConstant.TOWER_SELL_PRICE,
+                                                  GameEngineConstant.TOWER_UPGRADE_PRICE,
+                                                  GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
 
     private int WIDTH = 600;
     private int HEIGHT = 600;
@@ -94,7 +93,7 @@ public class Game extends StdGame {
                       10, // number of highscores
                       new Highscore(0, "nobody"), // default entry for highscore
                       25 // max length of the player name
-                );
+        );
 
         initial_lives = gameInfo.getLife();// view.getLives();
         lives = initial_lives;// view.getLives();
@@ -130,10 +129,10 @@ public class Game extends StdGame {
 
         frameRateSlider =
                 new FrameRateSlider("slider", true, pfWidth() / 2, pfHeight() - 40, 256,
-                        "slider_toggle");
+                                    "slider_toggle");
         frameRateBar =
                 new JGObject("sliderbar", true, pfWidth() / 2 - 84, pfHeight() - 30, 256,
-                        "slider_bar");
+                             "slider_bar");
         frameRateBar.resume_in_view = false;
         toggleFrameRateBar();
     }
@@ -187,7 +186,7 @@ public class Game extends StdGame {
             System.out.println(mousePosition.x);
             System.out.println(mousePosition.y);
             itemPurchaser.checkAndPlaceTower(mousePosition);
-            if (!itemPurchaser.isPurchasing()){
+            if (!itemPurchaser.isPurchasing()) {
                 PurchaseInfo tower = controller.getTowerInfo(mousePosition.x, mousePosition.y);
                 List<DisplayValue> display = new ArrayList<DisplayValue>();
                 if (tower != null) {

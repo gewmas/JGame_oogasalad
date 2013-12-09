@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import gameEngine.controller.Controller;
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.ViewConstants;
 import gameEngine.view.View;
