@@ -1,11 +1,10 @@
 package gameEngine.view.gameFrame;
 
-import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.tower.TowerInfo;
-import gameEngine.view.gameFrame.store.TowerInfoPanel;
-import gameEngine.view.gameFrame.store.TowersOptionPanel;
+import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
+import gameEngine.view.gameFrame.tools.store.StorePanel;
 
 
+@Deprecated
 /**
  * Used to implement the Mediator design pattern. Facilitates
  * communication between view components.
@@ -25,72 +24,75 @@ import gameEngine.view.gameFrame.store.TowersOptionPanel;
  */
 public class GameFrameMediator {
 
-    private TowersOptionPanel storeOptions;
     private GameFrame gameFrame;
     private CanvasPanel canvasPanel;
-    private TowerInfoPanel towerInfoPanel;
+    private InfoDisplayPanel towerInfoPanel;
+    private StorePanel storePanel;
 
-    public void addTowersOptionPanel (TowersOptionPanel storeOptions) {
-        this.storeOptions = storeOptions;
-    }
-
+    @Deprecated
     /**
      * Destroys the jgame instance so that it can be reloaded
      */
+    public void quitGame () {
+        canvasPanel.quitGame();
+    }
 
+    @Deprecated
     public void endGame () {
+        towerInfoPanel.clearDisplay();
         canvasPanel.endGame();
+        storePanel.closeStore();
     }
 
-    /**
-     * Notifies all colleagues that need to be updated
-     * when a user is trying to purchase a tower
-     * 
-     * @param towername
-     */
-    public void placeTower (TowerInfo towerInfo) {
-
-        canvasPanel.placeTower(towerInfo);
-        gameFrame.placeTower(towerInfo);
-    }
-
-    /**
-     * Used by display information about a tower
-     * on the Tower Info Panel
-     * 
-     * @param tower
-     */
-    public void displayTowerInfo (TowerInfo tower) {
-        towerInfoPanel.displayTowerInfo(tower);
-    }
-
-    /**
-     * Executes the actions on the view components
-     * that are impacted by the purchase of a tower
-     */
-    public void purchaseTower () {
-        gameFrame.purchaseTower();
-    }
-
-    /**
-     * Updates the enabled status of store items.
-     */
-    public void updateStoreStatus () {
-        storeOptions.updateStoreStatus();
-    }
-
+    @Deprecated
     public void addGameFrame (GameFrame gameFrame) {
         this.gameFrame = gameFrame;
 
     }
 
+    @Deprecated
     public void addGame (CanvasPanel canvasPanel) {
         this.canvasPanel = canvasPanel;
 
     }
 
-    public void addTowerInfoPanel (TowerInfoPanel towerInfoPanel) {
+    @Deprecated
+    public void addInfoPanel (InfoDisplayPanel towerInfoPanel) {
         this.towerInfoPanel = towerInfoPanel;
     }
 
+    @Deprecated
+    private void clearDisplay () {
+        this.towerInfoPanel.clearDisplay();
+    }
+
+    @Deprecated
+    public void openStore () {
+        storePanel.openStore();
+    }
+
+    @Deprecated
+    private void closeStore () {
+        storePanel.closeStore();
+    }
+
+    @Deprecated
+    /**
+     * Updates the enabled status of store items.
+     */
+    public void updateStoreStatus () {
+        storePanel.update();
+    }
+
+    @Deprecated
+    public void addStore (StorePanel storePanel) {
+        this.storePanel = storePanel;
+
+    }
+
+    @Deprecated
+    public void openInfoPanel () {
+        this.towerInfoPanel.setVisible(true);
+        gameFrame.pack();
+    }
 }

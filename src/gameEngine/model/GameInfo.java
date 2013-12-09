@@ -13,9 +13,12 @@ public class GameInfo {
     private int myGold;
     private int myLife;
     private int myWave;
-
+    private boolean isWin;
+    private int myCurrentWaveNumber=0;
     private String myBGImage;
-
+    private String myGoldName;
+    private String myLivesName;
+    
     private Dimension myDimension;
     // private List<TowerInfo> myTowerInfo;
 
@@ -33,6 +36,9 @@ public class GameInfo {
 //      right now I just put the 20*20 dimension
         myDimension = new Dimension(20, 20);
         myBGImage = parser.getString("BGImage");
+        myName = parser.getString("name");
+        myGoldName = parser.getString("goldName");
+        myLivesName = parser.getString("livesName");
         // myTowerInfo = new ArrayList<TowerInfo>();
         
     //    System.out.println(myGold+";"+myLife+";"+myWave+";"+x+";"+y+";"+myBGImage);
@@ -77,9 +83,13 @@ public class GameInfo {
     public void addLife () {
         myLife++;
     }
+    
+    public void addLife (int amt) {
+        myLife += amt;
+    }
 
-    public void loseLife () {
-        myLife--;
+    public void loseLife (int damage) {
+        myLife-=damage;
     }
 
     public void nextWave () {
@@ -100,20 +110,31 @@ public class GameInfo {
     }
 
 
-    // public void addTowerInfo (TowerInfo tower) {
-    // myTowerInfo.add(tower);
-    // }
-    //
-    // public void removeTowerInfo (TowerInfo tower) {
-    // myTowerInfo.remove(tower);
-    // }
-    //
-    // public void removeAllTowerInfo () {
-    // myTowerInfo = new ArrayList<TowerInfo>();
-    // }
-    //
-    // public List<TowerInfo> getTowerInfo () {
-    // return myTowerInfo;
-    // }
+    public String getMyName () {
+        return myName;
+    }
+
+    public void SetIsWin(boolean b){
+        isWin=b;
+    }
+    public boolean getIsWin(){
+        return isWin;
+    }
+    public void SetCurrentWaveNumber(int n){
+        myCurrentWaveNumber=n;
+    }
+    public int getCurrentWaveNumber(){
+        return myCurrentWaveNumber;
+    }
+
+    // @Author: Fabio
+    public String getMyGoldName () {
+        return myGoldName;
+    }
+
+    // @Author: Fabio
+    public String getMyLivesName () {
+        return myLivesName;
+    }
 
 }

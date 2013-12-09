@@ -1,22 +1,25 @@
 package gameEngine.controller;
 
+import gameEngine.model.GameInfo;
 import gameEngine.model.Model;
-import gameEngine.model.Tile;
-import gameEngine.model.tower.Tower;
-import gameEngine.model.tower.TowerInfo;
+import gameEngine.model.purchase.PurchaseInfo;
+import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
+import jgame.impl.JGEngineInterface;
 
 
 public class Controller {
 
     Model model;
     View view;
-
-
     Dimension gameSize;
+    private static final String TEMPORARY_BARRIER = "Temporary Barrier";
+    private static final String NAME = "Name";
+    private static final String TYPE  = "Type";
 
     public Controller () {
 
@@ -25,9 +28,13 @@ public class Controller {
         model = new Model();
     }
 
+    public void promptForFile(){
+        view.promptForFile();
+    }
     public void newGame (File jsonFile) throws Exception {
         model.newGame(jsonFile); // will throw exception if fail
-        view.startGame();
+        view.startJGame();
+//        startGame();
         // Model parses jsonFile and passes gameData to view
         // view.initialize(gameData);
         // view.showGame();
@@ -38,13 +45,56 @@ public class Controller {
     }
 
     /**
-     * Get All kinds of TowerFactory
+     * For Detector in Model to detect JGObjects in range
+     * @param eng
+     */
+    public void setJGEngine(JGEngineInterface eng){
+        model.setJGEngine(eng);
+    }
+    
+    /**
+     * @author Yuhua
+     * Tower Related Method
+     */
+    
+    /**
+     * Get All kinds of TowerFactory, and Barriers
      * However, can only return the basic property of the TowerFactory
      */
-    public List<TowerInfo> getTowerFactory () {
-        return model.getAllTowerInfo();  
+    public Map<String, List<PurchaseInfo>> getInventory () {
+        return model.getInventory();  
     }
+    
 
+    /**
+     * Sends a call to the model to update the monitored tower stats to the tower
+     * at x,y. If the position is invalid, do nothing
+     */
+    public PurchaseInfo getTowerInfo (int x, int y) {
+        PurchaseInfo towerinfo;
+        try {
+            towerinfo=model.getTowerInfo(x,y);
+        } catch (Exception e) {
+//            e.printStackTrace();
+            towerinfo=null;
+        }
+        return towerinfo;
+    }
+    
+    /**
+     * @author Harris
+     * A more generic way to purchase an object
+     * GUI uses this when object is purchased
+     **/
+    public boolean purchaseObject(int x, int y, PurchaseInfo purchaseInfo) {
+        if(purchaseInfo.getInfo().get(TYPE).equals(TEMPORARY_BARRIER)) {
+            return purchaseTemporaryBarrier(x, y, purchaseInfo.getInfo().get(NAME));
+        } 
+        return purchaseTower(x, y, purchaseInfo.getInfo().get(NAME));
+
+        
+    }
+    
     /**
      * Sends a call to the model to purchase tower tower at position x,y
      * If position is invalid, do nothing for now
@@ -52,55 +102,93 @@ public class Controller {
     public boolean purchaseTower (int x, int y, String name) {
         return model.purchaseTower(x, y, name);
     }
-
+    
     /**
-     * Sends a call to the model to update the monitored tower stats to the tower
-     * at x,y. If the position is invalid, do nothing
+     * @author Harris
+     * Sends a call to the model to purchase temporary barrier at position x,y
+     * If position is invalid, do nothing for now
      */
-    public TowerInfo getTowerInfo (int x, int y) {
-        TowerInfo towerinfo;
-        try {
-            towerinfo=model.getTowerInfo(x,y);
-        } catch (Exception e) {
-            towerinfo=null;
-        }
-        return towerinfo;
+    public boolean purchaseTemporaryBarrier (int x, int y, String name) {
+        return model.purchaseTemporaryBarrier(x, y, name);
     }
-
+    
     /**
-     * Returns the size of the game in number of tiles
+     * @author Yuhua
+     * 
+     * Sell Tower at (x,y)
+     * Succeed, return true, added gold
+     * No such tower, return false
+     * 
+     * @param x
+     * @param y
+     * @return
      */
-    public Dimension getGameSize () {
-        return model.getGameSize();
+    public boolean sellTower(int x, int y){
+        return model.sellTower(x, y);
     }
-
+    
     /**
-     * Returns the URL to the game's background image
+     * @author Yuhua
+     * 
+     * Upgrade Tower at (x, y)
+     * Succeed, return true, decrease gold
+     * No such tower/Insufficient fund, return false
+     * 
+     * @param x
+     * @param y
+     * @return
      */
-    public String getBGImage () {
-        return model.getBGImage();
+    public boolean upgradeTower(int x, int y){
+        return model.upgradeTower(x, y);
     }
-
+    
     /**
-     * Returns the amount of money in the game
+     * @author Yuhua
+     * Set Tower Attack Mode at (x, y)
+     * 
+     * AttackMode include 
+     * 0 - shoot the closest enemy
+     * 1 - shoot the farthest enemy
+     * 2 - shoot weakest enemy with least life
+     * 3 - shoot strongest enemy with most life
+     *
+     * Return true when set tower attackMode succeed
+     * Return false when no such tower/already at that attackMode
+     * 
+     * @param x
+     * @param y
+     * @param attackMode
+     * @return
      */
-    public int getMoney () {
-        return model.getMoney();
+    public boolean setTowerAttackMode(int x, int y, int attackMode){
+        return model.setTowerAttackMode(x, y, attackMode);
     }
-
+    
     /**
-     * Return the number of lives remaining
+     * @author Fabio
+     * 
+     * Activate input cheat
+     * Succeed, return true
+     * No such cheat, return false
+     * 
+     * @param code
+     * @return bool
      */
-    public int getLives () {
-        return model.getLife();
+    public boolean activateCheat(String code) {
+        return model.activateCheat(code);
     }
-
+    
+    public GameInfo getGameInfo(){
+        return model.getGameInfo();
+    }
     public List<Tile> getPath () {
         return model.getPathList();
     }
 
-    // public String getPathImage(){
-    // }
-
-
+    public void stopWaves(){
+        model.stopWaves();
+    }
+    public Map<String,String> getImageURL(){
+        return model.getImageURL();
+    }
 }

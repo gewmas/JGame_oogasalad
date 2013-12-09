@@ -1,26 +1,20 @@
 package gameEngine.view.gameFrame;
 
 import java.awt.BorderLayout;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
-import gameEngine.view.Frame;
-import gameEngine.view.Panel;
+import javax.swing.JPanel;
 import gameEngine.view.StyleConstants;
 import gameEngine.view.View;
+import gameEngine.view.gameFrame.inputAndDisplay.InputAndDisplayFrame;
+import gameEngine.view.gameFrame.inputAndDisplay.InputSender;
 import gameEngine.view.gameFrame.menu.Menu;
-import gameEngine.view.gameFrame.store.TowerStorePanel;
-import gameEngine.controller.Controller;
-import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.tower.TowerInfo;
+import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
+import gameEngine.view.gameFrame.tools.store.StorePanel;
+import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 
 
 /**
@@ -30,96 +24,116 @@ import gameEngine.model.tower.TowerInfo;
  * @author Lalita Maraj Alex Zhu
  * 
  */
-public class GameFrame extends Frame {
+public class GameFrame extends JFrame implements GameInitializable {
 
-    private Controller controller;
-    private GameFrameMediator mediator;
-    private View engineView;
-    private Panel storePanel;
+    private View view;
+    private InputAndDisplayFrame cheatCodeFrame;
+    private StorePanel storePanel;
+    private InfoDisplayPanel infoPanel;
+    private CanvasPanel canvasPanel;
+    private ItemOptionsDisplayer towerUpgrader;
+    private ItemPurchaser itemPurchaser;
+    private Map<String, KeyActivationItem> gameKeyActivationItems;
+    private Collection<GameInitializable> gameInitializerItems;
+    private Collection<GameUpdatable> gameUpdatables;
 
     /**
      * @param controller facilitates communication between view and model
-     * @param engineView
+     * @param view 
      */
-    public GameFrame (Controller controller, View engineView, GameFrameMediator mediator) {
+    public GameFrame ( final View view) {
         super();
-        this.mediator = mediator;
-        this.controller = controller;
-        this.engineView = engineView;
 
-        setUIStyle();
+        this.view = view;
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.cheatCodeFrame = addCheatCodeFrame(view);
 
-        mediator.addGameFrame(this);
+        this.gameKeyActivationItems = new HashMap();
+        gameKeyActivationItems.put("C", cheatCodeFrame);
+
+        infoPanel = addInfoDisplay();
+        towerUpgrader = new ItemOptionsDisplayer(infoPanel, view);
+        itemPurchaser = new ItemPurchaser(view, this);
+        storePanel = addStorePanel(towerUpgrader, itemPurchaser);
+        gameInitializerItems = new ArrayList();
+        gameUpdatables = new ArrayList();
+        gameUpdatables.add(storePanel);
+        addGameTools(infoPanel, storePanel);
+
+        setJMenuBar(new Menu(view));
     }
 
-    /**
-     * Setting the Look and Feel of the UI
-     */
-    private void setUIStyle () {
-        Font f = new Font(StyleConstants.BUTTON_FONT, StyleConstants.BUTTON_FONT_STYLE,
-                          StyleConstants.BUTTON_FONT_SIZE);
-        UIManager.put(StyleConstants.BUTTON_FONT_KEY, f);
-
+    private InputAndDisplayFrame addCheatCodeFrame (final View view) {
+        return new InputAndDisplayFrame("Cheat Sheet", new InputSender() {
+            @Override
+            public void submit (String cheat) {
+                view.activateCheat(cheat);
+            }
+        });
     }
 
     public void showGame () {
         createGame();
-        createStore();
-        // createStats();
-        createMenu();
         pack();
         setVisible(true);
     }
 
     public void createGame () {
-        CanvasPanel canvasPanel = new CanvasPanel(engineView, mediator);
+        gameInitializerItems.add(this);
+        canvasPanel =
+                new CanvasPanel(view, itemPurchaser, towerUpgrader, gameInitializerItems,
+                                gameUpdatables, gameKeyActivationItems);
         this.add(canvasPanel, BorderLayout.WEST);
-        mediator.addGame(canvasPanel);
-    }
 
-    // public void createStats(){
-    // Panel statsPanel = new StatsPanel();
-    // add(statsPanel, BorderLayout.SOUTH);
-    // }
-
-    public void createMenu () {
-        setJMenuBar(new Menu(engineView));
+        towerUpgrader.createRangeDisplay();
     }
 
     /**
      * Create the store of Towers
+     * 
+     * @param storePanel
+     * @param infoPanel
      */
-    private void createStore () {
-        storePanel = new TowerStorePanel(mediator, engineView);
-        this.add(storePanel, BorderLayout.EAST);
+    private void addGameTools (InfoDisplayPanel infoPanel, StorePanel storePanel) {
+        JPanel tools = new JPanel();
+        BorderLayout borderLayout = new BorderLayout();
+        tools.setLayout(borderLayout);
+        tools.add(infoPanel, BorderLayout.CENTER);
+        tools.add(storePanel, BorderLayout.PAGE_START);
+        gameInitializerItems.add(storePanel);
+        this.add(tools, BorderLayout.EAST);
+    }
+
+    private StorePanel addStorePanel (ItemOptionsDisplayer towerUpgrader, ItemPurchaser itemPurchaser) {
+        StorePanel storePanel = new StorePanel(view, towerUpgrader, itemPurchaser);
+        return storePanel;
+    }
+
+    private InfoDisplayPanel addInfoDisplay () {
+        InfoDisplayPanel infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
+                .getString("ItemInfo"));
+        return infoPanel;
+    }
+
+    @Override
+    public void initialize () {
+        infoPanel.setVisible(true);
+        this.pack();
+
     }
 
     /**
-     * Changes the default cursor to the image of the tower to be placed
+     * Destroys the jgame instance so that it can be reloaded
      */
-    public void placeTower (TowerInfo towerInfo) {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        System.out.println(towerInfo.getImage());
-        Image image = toolkit.getImage("resources/img/"+towerInfo.getImage()+".png");
-        Cursor c = toolkit.createCustomCursor(image, new Point(0, 0), "tower");
-        setCursor(c);
+
+    public void quitGame () {
+        canvasPanel.quitGame();
     }
 
-    public boolean newGame (File file) {
-        try {
-            engineView.newGame(file);
-            engineView.loadNewGame();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return true;
+    public void endGame () {
+        infoPanel.clearDisplay();
+        canvasPanel.endGame();
+        storePanel.closeStore();
     }
-
-    public void purchaseTower () {
-        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-    }
-
 }

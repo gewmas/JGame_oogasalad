@@ -1,19 +1,18 @@
 package gameEngine.factory.enemyfactory;
 
-import java.util.LinkedList;
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.Model;
-import gameEngine.model.Tile;
 import gameEngine.model.enemy.Enemy;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
 
 /**
+ * This is a factory that creates Enemy and initialize it according to
+ * the JSON object. It hides the information how the program reads from
+ * JSON and create the enemy.
+ * 
  * @author Jiaran
- *         NormalEnemyFactory. Each type of enemy should have a certain
- *         factory based on the information read from JSON file.
- *         To add more fancier enemy(eg, boss, or enemy that has different
- *         ability), one can extend from this class.
+ * 
  */
 public class NormalEnemyFactory implements EnemyFactory {
 
@@ -22,29 +21,42 @@ public class NormalEnemyFactory implements EnemyFactory {
     private double gold;
     private double life;
     private double speed;
+    private String skill;
+    private int specialty;
+    private int damage;
 
+    /**
+     * @param enemyInfo: the JSONObject that contains an enemy type information.
+     *        This method takes enemy Information and creates a enemy factory with
+     *        the parameters specified in the JSON file.
+     */
     public NormalEnemyFactory (JSONObject enemyInfo) {
         this.id = enemyInfo.getString("id");
         this.image = enemyInfo.getString("image");
-
+        try{
+            this.specialty = enemyInfo.getInt("specialty");
+        }catch(Exception e){
+            this.specialty = 0;
+        }
         this.gold = enemyInfo.getDouble("gold");
         this.life = enemyInfo.getDouble("life");
         this.speed = enemyInfo.getDouble("speed");
-
+        this.skill = enemyInfo.getString("skill");
+        this.damage= enemyInfo.getInt("damage");
     }
 
+    /**
+     * this is the methods that actually creates one enemy.
+     */
     @Override
-    
     public Enemy create (Model model) {
-        return new Enemy(gold, life, speed, id, true, Constant.ENEMY_CID, image, model);
+        Enemy enemy =
+                new Enemy(gold, life, speed, id, true, GameEngineConstant.ENEMY_CID, image,
+                          specialty, model,damage);
+        model.addEnemy(enemy);
+        System.out.println(skill);
+        enemy.setSkill(skill);
+        return enemy;
     }
-    
-  //Yuhua comment out
-//    public Enemy create (LinkedList<Tile> path) {
-//        return new Enemy(gold, life, speed, id, true, path.element().getCenterX(), path.element()
-//                .getCenterY(), Constant.ENEMY_CID, image, path);
-//
-//
-//    }
 
 }

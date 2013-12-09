@@ -1,58 +1,60 @@
 package gameEngine.factory.towerfactory;
 
+import gameEngine.constant.GameEngineConstant;
+import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tower.Tower;
-import gameEngine.model.tower.*;
+import gameEngine.parser.JSONLibrary.JSONObject;
 
-public abstract class TowerFactory implements TowerInfo{
-    
-    String id;
-    String description;
-    String image;
 
-    double x;
-    double y;
+public abstract class TowerFactory {
 
-    double damage;
-    double attackSpeed;
-    double range;
+    protected String type;
+    protected String id;
 
-    double cost;
-    double recyclePrice;
+    protected String description;
+    protected String image;
 
-    public abstract Tower create ();
+    protected double damage;
+    protected double attackSpeed;
+
+    protected double range;
+
+    protected int cost;
+    protected double sellPrice;
+
+    protected PurchaseInfo purchaseInfo;
+
+    public TowerFactory (JSONObject currTower) {
+        type = currTower.getString(GameEngineConstant.PURCHASE_INFO_TYPE);
+        id = currTower.getString(GameEngineConstant.PURCHASE_INFO_NAME);
+        image = currTower.getString(GameEngineConstant.PURCHASE_INFO_IMAGE);
+        damage = currTower.getDouble(GameEngineConstant.TOWER_DAMAGE);
+        attackSpeed = currTower.getDouble(GameEngineConstant.TOWER_ATTACK_SPEED);
+        range = currTower.getDouble(GameEngineConstant.TOWER_RANGE);
+        cost = currTower.getInt(GameEngineConstant.PURCHASE_INFO_COST);
+        sellPrice = currTower.getDouble(GameEngineConstant.TOWER_SELL_PRICE);
+        description = currTower.getString(GameEngineConstant.PURCHASE_INFO_DESCRIPTION);
+
+        purchaseInfo = new PurchaseInfo(type, id, image, description, cost);
+    }
+
+    public void addDescription () {
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_RANGE, String.valueOf(range));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_SELL_PRICE, String.valueOf(sellPrice));
+    }
 
     public abstract Tower create (int x, int y);
 
-    public String getImage () {
-        return image;
+    /**
+     * Implement PurchaseInfo
+     */
+    public PurchaseInfo getPurchaseInfo () {
+        return purchaseInfo;
     }
-
 
     public int getCost () {
-        return (int) cost;
+        return cost;
     }
 
-    public String getName () {
-        return id;
-    }
-
-    public String getDescription () {
-        return description;
-    }
-    
-    public double getDamage (){
-        return damage;
-    }
-    public double getAttackSpeed (){
-        return attackSpeed;
-    }
-    public double getRange (){
-        return range;
-    }
-    
-    public double getRecyclePrice (){
-        return recyclePrice;
-    }
-    
 
 }

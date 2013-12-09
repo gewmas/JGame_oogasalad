@@ -1,26 +1,37 @@
 package gameEngine.view.gameFrame;
 
-import gameEngine.controller.Controller;
-import gameEngine.factory.towerfactory.TowerFactory;
-import gameEngine.model.tower.TowerInfo;
-import gameEngine.view.Panel;
+import java.util.Collection;
+import java.util.Map;
+import javax.swing.JPanel;
 import gameEngine.view.View;
+import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 
 
-public class CanvasPanel extends Panel {
-    Game game;
+/**
+ * @author Alex Zhu
+ * Swing Panel that holds the JGame canvas
+ */
+public class CanvasPanel extends JPanel {
+    private Game game;
 
-    public CanvasPanel (View view, GameFrameMediator mediator) {
-        game = new Game(view, mediator);
+    public CanvasPanel (View view,
+                        ItemPurchaser itemPurchaser,
+                        ItemOptionsDisplayer utilities,
+                        Collection<GameInitializable> gameInitializerItems,
+                        Collection<GameUpdatable> gameUpdatables,
+                        Map<String, KeyActivationItem> keyActivationItems) {
+        game =
+                new Game(view, itemPurchaser, utilities, gameInitializerItems, gameUpdatables,
+                         keyActivationItems);
         this.add(game);
+        view.sendEngine(game);
     }
 
-    public void placeTower (TowerInfo towerInfo) {
-        game.placeTower(towerInfo.getTowerName());
-    }
-
-    public void endGame () {
+    public void quitGame () {
         game.destroy();
     }
 
+    public void endGame () {
+        game.loseGame();
+    }
 }

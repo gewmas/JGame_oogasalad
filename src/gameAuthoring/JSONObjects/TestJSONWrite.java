@@ -1,12 +1,9 @@
 package gameAuthoring.JSONObjects;
 
-import gameAuthoring.GameData;
-import gameEngine.parser.JSONLibrary.JSONArray;
-import gameEngine.parser.JSONLibrary.JSONObject;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.awt.geom.Point2D;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 public class TestJSONWrite {
@@ -18,27 +15,56 @@ public class TestJSONWrite {
     }
 
     public void testWrite () {
-        writer = new PrintWriter(System.out);
 
-        JSONObject container = new JSONObject();
+        GameData game = new GameData();
 
-        EnemyJSONObject testEnemy = new EnemyJSONObject("test", 1, "imgsrc", 2, 3);
-        EnemyJSONObject testEnemy2 = new EnemyJSONObject("test2", 1, "imgsrc2", 2, 3);
+        // Testing tower writing
+        game.addTower(new TowerJSONObject("MultipleShootingTower", 
+                                          "name",
+                                          "image", 
+                                          3, 
+                                          3.0,
+                                          2,
+                                          5, 
+                                          80, 
+                                          300, 
+                                          50, 
+                                          "Test"));
+        
+        
+        //Testing resource writing
+        game.addImage("1", "grass.jpg");
+        ArrayList<String> temp = new ArrayList<String>();
+        temp.add("1");
+        temp.add("2");
+        game.addAnimation("run", temp);
+        
+        // Testing map writing
+         Collection<Point2D> pathList = new ArrayList<Point2D>();
+         pathList.add(new Point2D.Double(0, 0));
+         pathList.add(new Point2D.Double(0, 1));
+         pathList.add(new Point2D.Double(1, 1));
+        
+         game.setMap("path.jpg", pathList);
+        
+         game.addBarrier(5, 2, "rock.jpg");
 
-        JSONArray list = new JSONArray();
+        // Testing wave writing
+         game.addWave("1", 5, 0.5, 7);
+         game.addWave("2", 1, 0.5, 3);
 
-        list.put(testEnemy);
-        list.put(testEnemy2);
-        container.put("enemyType", list);
+        // Testing enemy writing
+         game.addEnemy("1", 5, "enemy1", 2, 0.5, "Haste");
+         game.addEnemy("2", 10, "runRight", 3, 0.1, "Light");
 
-        System.out.println(container.toString(1));
-
-        testEnemy.write(writer);
+         System.out.println(game.toString(1));
     }
 
     public static void main (String[] args) {
         TestJSONWrite x = new TestJSONWrite();
         x.testWrite();
+
+        
     }
 
 }

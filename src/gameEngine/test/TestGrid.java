@@ -5,15 +5,14 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import gameEngine.model.Tile;
-import gameEngine.Constant.Constant;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.Factory;
 import gameEngine.model.Model;
+import gameEngine.model.tile.Tile;
 import gameEngine.parser.Parser;
 import jgame.JGColor;
 import jgame.JGPoint;
 import jgame.platform.JGEngine;
-
 
 /**
  * 
@@ -52,19 +51,25 @@ public class TestGrid extends JGEngine {
         setFrameRate(60, 2);
         Model model = new Model();
         try {
-            model.newGame(new File("src/gameEngine/test/testTowerEnemyBullet/mygame.json"));
+            //Yuhua, change of newGame signature
+//            model.newGame(new File("officialJSON.json", ));
         }
         catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        List<Tile> pathList = model.getPathList();
+        LinkedList<Tile> pathList = model.getPathList();
         for (Tile tile : pathList) {
             System.out.println("Path x=" + tile.getX() + " y=" + tile.getY());
             System.out.println("Center x=" + tile.getCenterX() + " center y=" + tile.getCenterY());
             System.out.println("img path is " + tile.getPathImage());
         }
+        System.out.println("tile is on path? " + model.getTile(405,  165).hasPath());//should be on path
+        System.out.println("tile is on path? " + model.getTile(405,  305).hasPath());//should not be on path
+        
+        System.out.println("tile has barrier? " + model.getTile(160, 90).hasStaticBarrier());//should have barrier
+        System.out.println("tile has barrier? " + model.getTile(405,  305).hasStaticBarrier());//should not have barrier
     }
 
     @Override

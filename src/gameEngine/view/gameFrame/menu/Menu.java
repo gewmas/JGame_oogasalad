@@ -1,7 +1,5 @@
 package gameEngine.view.gameFrame.menu;
 
-import gameEngine.controller.Controller;
-import gameEngine.view.View;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
@@ -11,13 +9,13 @@ import javax.swing.JMenuBar;
  *         Menu used to define the menus in the GUI
  */
 public class Menu extends JMenuBar {
-    View engineView;
 
-    public Menu (View engineView) {
-        this.engineView = engineView;
+    public Menu (MenuActions menuOptions) {
+
         JMenu menuitem = new JMenu("File");
-        menuitem.add(new NewGameMenuItem(engineView));
-        menuitem.add(new RestartGameMenuItem(engineView));
+        menuitem.add(new SelectNewGameItem(menuOptions));
+        menuitem.add(new EndGameMenuItem(menuOptions));
+        menuitem.add(new ReturnToMainMenuItem(menuOptions));
         add(menuitem);
 
     }

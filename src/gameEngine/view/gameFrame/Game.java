@@ -1,18 +1,23 @@
 package gameEngine.view.gameFrame;
 
-import gameEngine.controller.Controller;
-import gameEngine.model.Tile;
-import gameEngine.model.tower.Tower;
-import gameEngine.model.tower.TowerInfo;
+import gameEngine.constant.GameEngineConstant;
+import gameEngine.model.GameInfo;
+import gameEngine.model.purchase.PurchaseInfo;
+import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
+import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
+import gameEngine.view.gameFrame.tools.DisplayValue;
+import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import jgame.Highscore;
 import jgame.JGColor;
+import jgame.JGObject;
 import jgame.JGPoint;
-import jgame.platform.JGEngine;
 import jgame.platform.StdGame;
 
 
@@ -22,26 +27,59 @@ import jgame.platform.StdGame;
  *         graphics rendering
  */
 public class Game extends StdGame {
+    private static final String[] DISPLAY_KEYS = { GameEngineConstant.PURCHASE_INFO_NAME,
+                                                  GameEngineConstant.TOWER_DAMAGE,
+                                                  GameEngineConstant.TOWER_ATTACK_SPEED,
+                                                  GameEngineConstant.TOWER_ATTACK_AMOUNT,
+                                                  GameEngineConstant.TOWER_RANGE,
+                                                  GameEngineConstant.TOWER_MAGIC,
+                                                  GameEngineConstant.TOWER_MAGIC_FACTOR,
+                                                  GameEngineConstant.TOWER_BOOST_FACTOR,
+                                                  GameEngineConstant.TOWER_SELL_PRICE,
+                                                  GameEngineConstant.TOWER_UPGRADE_PRICE,
+                                                  GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
 
     private int WIDTH = 600;
     private int HEIGHT = 600;
 
     private View view;
-    private boolean purchasing;
-    private String towerToPurchase;
-    private GameFrameMediator mediator;
+    private ItemOptionsDisplayer utilities;
 
-    public Game (View view, GameFrameMediator mediator) {
+    private FrameRateSlider frameRateSlider;
+    private JGObject frameRateBar;
+    private ItemPurchaser itemPurchaser;
+    private Map<String, String> valuesToDisplay;
+
+    private Collection<GameInitializable> gameInitializerItems;
+    private Collection<GameUpdatable> gameUpdatables;
+    private Map<String, KeyActivationItem> keyActivationItems;
+
+    private GameInfo gameInfo;
+
+    public Game (View view,
+                 ItemPurchaser itemPurchaser,
+                 ItemOptionsDisplayer utilities,
+                 Collection<GameInitializable> gameInitializerItems,
+                 Collection<GameUpdatable> gameUpdatables,
+                 Map<String, KeyActivationItem> keyActivationItems) {
         this.view = view;
-        this.mediator = mediator;
+        this.keyActivationItems = keyActivationItems;
+        this.itemPurchaser = itemPurchaser;
+        this.utilities = utilities;
+        this.gameInitializerItems = gameInitializerItems;
+        this.gameUpdatables = gameUpdatables;
         initEngineComponent(WIDTH, HEIGHT);
     }
 
     @Override
     public void initCanvas () {
-        Dimension size = view.getGameSize();
-        System.out.println(size.width);
-        System.out.println(size.height);
+
+        gameInfo = view.getGameInfo();
+        
+        this.setMoneyTitle(gameInfo.getMyGoldName());
+        this.setLivesTitle(gameInfo.getMyLivesName());
+        Dimension size = gameInfo.getDimension();// view.getGameSize();
+
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
     }
@@ -50,14 +88,21 @@ public class Game extends StdGame {
     public void initGame () {
         setFrameRate(30, 2);
         defineMedia("mygame.tbl");
-        initial_lives = view.getLives();
-        lives = view.getLives();
-        score = view.getMoney();
-        String bgImage = "space_background.jpg";
-        defineImage("background", "bg", 256, bgImage, "-");
-        setBGImage("background");
-        purchasing = false;
-        setHighscores(10, new Highscore(0, "aaa"), 3);
+
+        setHighscores(
+                      10, // number of highscores
+                      new Highscore(0, "nobody"), // default entry for highscore
+                      25 // max length of the player name
+        );
+
+        initial_lives = gameInfo.getLife();// view.getLives();
+        lives = initial_lives;// view.getLives();
+        score = gameInfo.getGold();// view.getMoney();
+        defineImage("RESERVEDslider_bar", "sb", 256, "slider_bar.png", "-");
+        defineImage("RESERVEDslider_toggle", "sb", 256, "slider_toggle.png", "-");
+        String background = view.getGameInfo().getBGImage();// gameInfo.getBGImage();//view.getBGImage();
+
+        setBGImage(background);
         startgame_ingame = true;
         List<Tile> pathList = view.getPath();
         int tileCount = 0;
@@ -68,17 +113,66 @@ public class Game extends StdGame {
             setTile(tilePos.x, tilePos.y, "#" + String.valueOf(tileCount));
             tileCount++;
         }
+
+        this.game_title = gameInfo.getMyName();
+
+        valuesToDisplay = new LinkedHashMap<String, String>();
+        for (String str : DISPLAY_KEYS) {
+            valuesToDisplay.put(str, "black");
+        }
+    }
+
+    public void startInGame () {
+        view.startModel();
+        for (GameInitializable item : gameInitializerItems) {
+            item.initialize();
+        }
+        frameRateSlider =
+                new FrameRateSlider("slider", true, pfWidth() / 2, pfHeight() - 40, 256,
+                                    "slider_toggle");
+        frameRateBar =
+                new JGObject("sliderbar", true, pfWidth() / 2 - 84, pfHeight() - 30, 256,
+                             "slider_bar");
+        frameRateBar.resume_in_view = false;
+        toggleFrameRateBar();
     }
 
     public void doFrameInGame () {
-        checkCollision(0, 0);
+        moveObjects();
+        gameInfo = view.getGameInfo();
+        checkGameCollisions();
         checkUserInteractions();
         updateGameStats();
-        mediator.updateStoreStatus();
+        for (GameUpdatable updatable : gameUpdatables) {
+            updatable.update();
+        }
+        for (String key : keyActivationItems.keySet()) {
+            KeyActivationItem item = keyActivationItems.get(key);
+            if (getKey(key.charAt(0))) {
+                clearKey(key.charAt(0));
+                item.activate();
+            }
+        }
+
         if (getKey(KeyEsc)) {
             clearKey(KeyEsc);
-            lives = 0;
+            loseGame();
         }
+
+        if (getKey('F')) {
+            clearKey('F');
+            toggleFrameRateBar();
+        }
+        if (gameInfo.getIsWin()) {
+            wonGame();
+        }
+        if (lives <= 0 || gameInfo.getGold() < 0) loseGame();
+    }
+
+    private void checkGameCollisions () {
+        checkCollision(GameEngineConstant.BULLET_CID, GameEngineConstant.ENEMY_CID);
+        checkCollision(GameEngineConstant.ENEMY_CID, GameEngineConstant.BULLET_CID);
+        checkCollision(0, 0);
     }
 
     /**
@@ -90,22 +184,26 @@ public class Game extends StdGame {
         if (getMouseButton(1) && getMouseInside()) {
             clearMouseButton(1);
             JGPoint mousePosition = getMousePos();
-            JGPoint tilePosition = getTileIndex(mousePosition.x, mousePosition.y);
-            if (purchasing) {
-                if (view.buyTower(mousePosition.x, mousePosition.y, towerToPurchase)){
-                    purchasing = false;
+            if (!itemPurchaser.checkAndPlaceTower(mousePosition)) {
+                PurchaseInfo tower = view.getTowerInfo(mousePosition.x, mousePosition.y);
+                List<DisplayValue> display = new ArrayList();
+                if (tower != null) {
+                    for (String key: valuesToDisplay.keySet()){
+                        if (tower.getInfo().get(key)!=null){
+                        String field = key;
+                        String value = tower.getInfo().get(key);
+                        String color = valuesToDisplay.get(key);
+                       
+                        display.add(new DisplayValue(field,value,color));
+                        }
+                    }
+                    utilities.displayTowerInformation(tower.getInfo(), display,
+                                                        mousePosition.x, mousePosition.y);
+//                    utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
+//                                                        mousePosition.x, mousePosition.y);
                 }
-                System.out.format("Buying tower at: %d,%d\n", mousePosition.x, mousePosition.y);
             }
-            else {
-                TowerInfo tower=view.getTowerInfo(tilePosition.x, tilePosition.y);
-                if (tower==null) {
-                    System.out.println("No tower here");
-                } else {
-                    mediator.displayTowerInfo(tower);
-                }
-                System.out.format("Checking tower at: %d,%d\n", tilePosition.x, tilePosition.y);
-            }
+           
         }
     }
 
@@ -113,24 +211,53 @@ public class Game extends StdGame {
      * Updates the number of lives and money remaining in the game
      */
     public void updateGameStats () {
-        lives = view.getLives();
-        score = view.getMoney();
-    }
-
-    @Override
-    public void paintFrame () {
-        super.paintFrame();
-        // drawString("Money " + String.valueOf(sc), pfWidth() - 10, 10, 1);
+        lives = gameInfo.getLife();
+        money = gameInfo.getGold();
+        score = money + gameInfo.getCurrentWaveNumber() * 100 + lives;
     }
 
     /**
-     * Indicates that the user wants to buy a tower
+     * Call if the user has won the game, will display VICTORY and go
+     * to title screen
      */
-    public void placeTower (String tower) {
-        // setBGColor(JGColor.red);
-        System.out.println("User wants to purchase " + tower);
-        purchasing = true;
-        towerToPurchase = tower;
+
+    public void wonGame () {
+        endGame();
+        gameWon();
+    }
+
+    /**
+     * Call if the user has lost the game, will display
+     * GAME OVER and go to title screen
+     */
+
+    public void loseGame () {
+        endGame();
+        gameOver();
+    }
+
+    /**
+     * Standard routine whenever the game ends
+     */
+
+    public void endGame () {
+        view.stopWaves();
+        removeObjects(null, 0);
+
+    }
+
+    /**
+     * Suspends or resumes frame rate bar
+     */
+    public void toggleFrameRateBar () {
+        if (frameRateSlider.is_suspended) {
+            frameRateSlider.resume();
+            frameRateBar.resume();
+        }
+        else {
+            frameRateSlider.suspend();
+            frameRateBar.suspend();
+        }
     }
 
 }

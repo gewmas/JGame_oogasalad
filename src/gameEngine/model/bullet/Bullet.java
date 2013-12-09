@@ -13,13 +13,20 @@ import jgame.JGObject;
  */
 public class Bullet extends JGObject {
 
-    Enemy targetEnemy;
+	private Enemy targetEnemy;
+    private int currentMagic;
 
-    double damage;
+    private double damage;
+    private int specialty;
+    
+    private double speed;
 
     public Bullet (
                    Enemy targetEnemy,
                    double damage,
+                   
+                   int magic,
+                   int specialty,
 
                    String name,
                    boolean unique_id,
@@ -31,24 +38,51 @@ public class Bullet extends JGObject {
 
         this.targetEnemy = targetEnemy;
         this.damage = damage;
+        this.currentMagic = magic;
+        this.specialty = specialty;
+        
+        this.speed = 2;
     }
 
     @Override
     public void move () {
+        // if target enemy destroy other bullets, remove
+        if (!targetEnemy.isAlive()) remove();
+
         double dx = targetEnemy.x - x;
         double dy = targetEnemy.y - y;
         double ds = Math.sqrt(dx * dx + dy * dy);
 
-        x += dx / ds;
-        y += dy / ds;
+        x += dx / ds * speed;
+        y += dy / ds * speed;
     }
 
     @Override
     public void hit (JGObject obj) {
-
+        // Bullet can only kill target Enemy
+        if (obj == targetEnemy) {
+            remove();
+        }
     }
 
     public double getDamage () {
         return damage;
     }
+
+    public Enemy getTargetEnemy () {
+        return targetEnemy;
+    }
+
+    public int getCurrentMagic () {
+        return currentMagic;
+    }
+
+    public void setCurrentMagic (int magic) {
+        currentMagic = magic;
+    }
+
+	public int getSpecialty() {
+		return specialty;
+	}
+
 }

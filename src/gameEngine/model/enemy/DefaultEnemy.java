@@ -1,7 +1,7 @@
 package gameEngine.model.enemy;
 
 import gameEngine.model.Model;
-import gameEngine.model.Tile;
+import gameEngine.model.tile.Tile;
 import java.util.LinkedList;
 
 
@@ -14,8 +14,9 @@ public class DefaultEnemy extends Enemy {
                          boolean unique_id,
                          int collisionid,
                          String image,
-                         Model model) {
-        super(gold, life, speed, id, unique_id, collisionid, image, model);
+                         int specialty,
+                         Model model,int damage) {
+        super(gold, life, speed, id, unique_id, collisionid, image, specialty,model,damage);
         // TODO Auto-generated constructor stub
     }
 
