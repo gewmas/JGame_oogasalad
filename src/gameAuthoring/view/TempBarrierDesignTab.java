@@ -79,38 +79,38 @@ public class TempBarrierDesignTab extends Tab {
         myContentPanel = new JPanel();
 
         JLabel name = new JLabel("Name");
-        name.setFont(Constants.DEFAULT_BODY_FONT);
+        name.setFont(StyleConstants.DEFAULT_BODY_FONT);
         JLabel damage = new JLabel("Damage");
-        damage.setFont(Constants.DEFAULT_BODY_FONT);
+        damage.setFont(StyleConstants.DEFAULT_BODY_FONT);
         JLabel cost = new JLabel("Cost");
-        cost.setFont(Constants.DEFAULT_BODY_FONT);
+        cost.setFont(StyleConstants.DEFAULT_BODY_FONT);
         JLabel expire = new JLabel("Expire");
-        expire.setFont(Constants.DEFAULT_BODY_FONT);
+        expire.setFont(StyleConstants.DEFAULT_BODY_FONT);
         JLabel description = new JLabel("Description");
-        description.setFont(Constants.DEFAULT_BODY_FONT);
+        description.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         JLabel image = new JLabel("Choose image");
-        image.setFont(Constants.DEFAULT_BODY_FONT);
+        image.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myNameField = new JTextField();
         myNameField.setPreferredSize(new Dimension(200, 30));
-        myNameField.setFont(Constants.DEFAULT_BODY_FONT);
+        myNameField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myDamageField = new JTextField();
         myDamageField.setPreferredSize(new Dimension(200, 30));
-        myDamageField.setFont(Constants.DEFAULT_BODY_FONT);
+        myDamageField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myCostField = new JTextField();
         myCostField.setPreferredSize(new Dimension(200, 30));
-        myCostField.setFont(Constants.DEFAULT_BODY_FONT);
+        myCostField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myExpiryField = new JTextField();
         myExpiryField.setPreferredSize(new Dimension(200, 30));
-        myExpiryField.setFont(Constants.DEFAULT_BODY_FONT);
+        myExpiryField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myDescriptionField = new JTextArea(2, 15);
         myDescriptionField.setLineWrap(true);
         scrollPane = new JScrollPane(myDescriptionField);
 
         JButton createBarrierButton = new JButton("Create New Barrier");
-        createBarrierButton.setFont(Constants.DEFAULT_BODY_FONT);
+        createBarrierButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         createBarrierButton.addMouseListener(createBarrierListener());
 
         myBarrierImage = new ImageLabel();
