@@ -98,7 +98,9 @@ public class View implements MenuActions {
     public GameInfo getGameInfo () {
         return controller.getGameInfo();
     }
-
+    public Map<String,String> getStoreImages(){
+        return controller.getImageURL();
+    }
     public List<Tile> getPath () {
         return controller.getPath();
     }

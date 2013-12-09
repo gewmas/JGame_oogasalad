@@ -45,8 +45,8 @@ public class GameFrame extends JFrame implements GameInitializable {
         super();
 
         this.view = view;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.cheatCodeFrame = addCheatCodeFrame(view);
 
         this.gameKeyActivationItems = new HashMap();

@@ -73,6 +73,7 @@ public class Game extends StdGame {
 
     @Override
     public void initCanvas () {
+
         gameInfo = view.getGameInfo();
         
         this.setMoneyTitle(gameInfo.getMyGoldName());
@@ -165,7 +166,7 @@ public class Game extends StdGame {
         if (gameInfo.getIsWin()) {
             wonGame();
         }
-        if (lives <= 0) loseGame();
+        if (lives <= 0 || gameInfo.getGold() < 0) loseGame();
     }
 
     private void checkGameCollisions () {

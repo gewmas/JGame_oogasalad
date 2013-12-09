@@ -7,8 +7,6 @@ import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+import net.miginfocom.swing.MigLayout;
 
 
 public class MapDesignTab extends Tab {
@@ -31,7 +30,7 @@ public class MapDesignTab extends Tab {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
     private Grid myGrid;
-    private JButton myCurrentPathImage;
+    private ImageLabel myCurrentPathImage;
     private String myBackgroundImage;
     private String myPathImage;
 
@@ -39,60 +38,41 @@ public class MapDesignTab extends Tab {
         super(gameData);
     }
 
-    // TODO: Get rid of magic number
     @Override
     public JPanel getTab () {
-        JPanel mainPanel = new GradientPanel(new GridBagLayout());
+        JPanel mainPanel = new GradientPanel(new MigLayout("wrap 2"));
         JPanel gridPanel = new JPanel(new BorderLayout());
+        JPanel buttonPanel = new JPanel(new MigLayout("wrap 2"));
+        buttonPanel.setOpaque(false);
         myGrid = new Grid(20, 20);
         JLabel title = new JLabel("Map Design");
         title.setFont(new Font("Calibri", Font.PLAIN, 30));
         title.setForeground(new Color(80, 80, 80));
-        // JLabel label = new JLabel("Current path image");
 
-        myCurrentPathImage = new JButton("Choose path image");
-        myCurrentPathImage.setFont(Constants.mapFont);
+        JLabel pathLabel = new JLabel("Path Image:");
+        pathLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        myCurrentPathImage = new ImageLabel(50, 50);
+        myCurrentPathImage.setMutableStatusTrue();
+        myCurrentPathImage.setFont(Constants.DEFAULT_BODY_FONT);
+        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
+        myCurrentPathImage.setBorder(border);
         myCurrentPathImage.addMouseListener(createPathListener());
-
         JButton checkPath = new JButton("Create Map");
-        checkPath.setFont(Constants.mapFont);
+        checkPath.setFont(Constants.DEFAULT_BODY_FONT);
         checkPath.addMouseListener(createPathCheckListener());
 
-        JButton setBackground = new JButton("Set background image");
-        setBackground.setFont(Constants.mapFont);
+        JButton setBackground = new JButton("Set Background Image");
+        setBackground.setFont(Constants.DEFAULT_BODY_FONT);
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
 
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        mainPanel.add(title);
+        mainPanel.add(title, "span 2");
         gridPanel.add(myGrid, BorderLayout.WEST);
-
-        // Add grid panel
-        c.gridx = 0;
-        c.gridy = 1;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        mainPanel.add(gridPanel, c);
-
-        // Add path image button
-        // c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridwidth = 2;
-        c.gridx = 0;
-        c.gridy = 2;
-        c.anchor = GridBagConstraints.WEST;
-        mainPanel.add(myCurrentPathImage, c);
-
-        // Add background image button
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 3;
-        mainPanel.add(setBackground, c);
-
-        // Add check path button
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 4;
-        mainPanel.add(checkPath, c);
+        mainPanel.add(gridPanel);
+        buttonPanel.add(pathLabel, "gap 0 0 0 30");
+        buttonPanel.add(myCurrentPathImage, "gap 0 0 0 30");
+        buttonPanel.add(setBackground, "span 2");
+        buttonPanel.add(checkPath);
+        mainPanel.add(buttonPanel);
         Border b = BorderFactory.createLoweredBevelBorder();
         gridPanel.setBorder(b);
         return mainPanel;
@@ -124,29 +104,24 @@ public class MapDesignTab extends Tab {
         catch (IOException e) {
             e.printStackTrace();
         }
-        setData();
+        setPathData();
     }
 
     private MouseAdapter createPathListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                int loadObject = INPUT_CHOOSER.showOpenDialog(null);
-                if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(INPUT_CHOOSER.getSelectedFile());
-                    File imgSource = INPUT_CHOOSER.getSelectedFile();
-                    myGrid.setImageSource(imgSource);
-                    Image path;
-                    try {
-                        myPathImage =
-                                imgSource.toString().replace(System.getProperties()
-                                        .getProperty("user.dir") + "/", "");
-                        path = ImageIO.read(imgSource);
-                        // myCurrentPathImage.setIcon(new ImageIcon(path));
-                    }
-                    catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+                File imgSource = GameAuthoringGUI.myImageLabel.getImageFile();
+                myGrid.setImageSource(imgSource);
+                Image path;
+                try {
+                    myPathImage =
+                            GameAuthoringGUI.myImageLabel.getID();
+                    path = ImageIO.read(imgSource).getScaledInstance(50, 50, Image.SCALE_FAST);
+                    myCurrentPathImage.setIcon(new ImageIcon(path));
+                }
+                catch (IOException e1) {
+                    e1.printStackTrace();
                 }
             }
         };
@@ -157,16 +132,19 @@ public class MapDesignTab extends Tab {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                setData();
+                setPathData();
             }
         };
         return listener;
     }
 
-    private void setData () {
+    private void setPathData () {
         if (myGrid.isValidPathHelper()) {
-            JOptionPane.showMessageDialog(null, "Valid path! Map Written");
-            myGameData.setBackgroundImage(myBackgroundImage);
+            JOptionPane.showMessageDialog(null, "Valid path! Map Written.");
+            String key = myBackgroundImage.substring(0, myBackgroundImage.length() - 4 );
+            myGameData.setBackgroundImage(key);
+            myGameData.addImage(key, myBackgroundImage);
+            
             myGameData.setMap(myPathImage, myGrid.getPathCoordinates());
         }
         else {
@@ -182,9 +160,7 @@ public class MapDesignTab extends Tab {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     File imgSource = INPUT_CHOOSER.getSelectedFile();
-                    myBackgroundImage =
-                            imgSource.toString().replace(System.getProperties()
-                                    .getProperty("user.dir") + "/", "");
+                    myBackgroundImage = imgSource.getName();
                     myGrid.setBackgroundImageSource(imgSource);
                 }
             }

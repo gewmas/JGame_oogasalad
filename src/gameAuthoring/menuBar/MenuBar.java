@@ -2,6 +2,7 @@ package gameAuthoring.menuBar;
 
 import gameAuthoring.BasicInfoTab;
 import gameAuthoring.MapDesignTab;
+import gameAuthoring.WaveDesignTab;
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONObject;
@@ -19,16 +20,19 @@ public class MenuBar extends JMenuBar {
     private GameData myGameData;
     private BasicInfoTab myBasicInfoTab;
     private MapDesignTab myMapDesignTab;
+    private WaveDesignTab myWaveDesignTab;
+    
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");
     private Parser myParser;
     private Simulator simulator;
 
-    public MenuBar (GameData gameData, BasicInfoTab basicInfoTab, MapDesignTab mapDesignTab) {
+    public MenuBar (GameData gameData, BasicInfoTab basicInfoTab, MapDesignTab mapDesignTab, WaveDesignTab waveDesignTab) {
         add(fileMenu());
         myGameData = gameData;
         myBasicInfoTab = basicInfoTab;
         myMapDesignTab = mapDesignTab;
+        myWaveDesignTab = waveDesignTab;
         simulator  = new Simulator();
     }
 
@@ -54,6 +58,7 @@ public class MenuBar extends JMenuBar {
                         myParser = new Parser(s);
                         myBasicInfoTab.loadJSON(myParser);
                         myMapDesignTab.loadJSON(myParser);
+                        myWaveDesignTab.loadJSON(myParser);
                     }
                     catch (FileNotFoundException e1) {
                         JOptionPane.showMessageDialog(null,
