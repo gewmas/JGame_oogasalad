@@ -43,13 +43,12 @@ public class MapDesignTab extends Tab {
         JPanel buttonPanel = new JPanel(new MigLayout("wrap 2"));
         buttonPanel.setOpaque(false);
         myGrid = new Grid(20, 20);
-        JLabel title = new JLabel("Map Design");
+        JLabel title = new JLabel(StyleConstants.resourceBundle.getString("MapDesignTitle"));
         title.setFont(new Font("Calibri", Font.PLAIN, 30));
-        title.setForeground(new Color(80, 80, 80));
 
-        JLabel pathLabel = new JLabel("Path Image:");
+        JLabel pathLabel = new JLabel(StyleConstants.resourceBundle.getString("MapPath"));
         pathLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        pathLabel.setToolTipText("Choose an image for each tile in the map path.");
+        pathLabel.setToolTipText(StyleConstants.resourceBundle.getString("MapPathTip"));
 
         myCurrentPathImage = new ImageLabel(50, 50);
         myCurrentPathImage.setMutableStatusTrue();
@@ -61,13 +60,13 @@ public class MapDesignTab extends Tab {
         checkPath.setFont(StyleConstants.DEFAULT_BODY_FONT);
         checkPath.addMouseListener(createPathCheckListener());
         checkPath
-                .setToolTipText("Once path is drawn, click to check if path is valid and if map can be saved.");
+                .setToolTipText(StyleConstants.resourceBundle.getString("MapPathCheckTip"));
 
-        JButton setBackground = new JButton("Set Background Image");
+        JButton setBackground = new JButton(StyleConstants.resourceBundle.getString("MapBackground"));
         setBackground.setFont(StyleConstants.DEFAULT_BODY_FONT);
         setBackground.addMouseListener(createGridBackgroundListener(myGrid));
         setBackground
-                .setToolTipText("Set the background image of the map.");
+                .setToolTipText(StyleConstants.resourceBundle.getString("MapBackgroundTip"));
 
         mainPanel.add(title, "span 2");
         gridPanel.add(myGrid, BorderLayout.WEST);
@@ -144,7 +143,7 @@ public class MapDesignTab extends Tab {
 
     private void setPathData () {
         if (myGrid.isValidPathHelper()) {
-            JOptionPane.showMessageDialog(null, "Valid path! Map Written.");
+            JOptionPane.showMessageDialog(null, StyleConstants.resourceBundle.getString("MapValidPath"));
             String key = myBackgroundImage.substring(0, myBackgroundImage.length() - 4);
             MapDesignInformation mapDesignInfo =
                     new MapDesignInformation(myBackgroundImage, myPathImage, key,
@@ -155,7 +154,7 @@ public class MapDesignTab extends Tab {
         }
         else {
             JOptionPane.showMessageDialog(null,
-                                          "Invalid path! Please fix path and try again");
+                                          StyleConstants.resourceBundle.getString("MapInvalidPath"));
         }
     }
 

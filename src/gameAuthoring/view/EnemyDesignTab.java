@@ -41,7 +41,6 @@ public class EnemyDesignTab extends Tab {
     private JTextField mySpeedField;
     private JPanel myAnimationPanel;
     private JScrollPane myAnimationScrollPane;
-    private JLabel myEnemyImage;
     private List<ImageLabel> myEnemyAnimations = new ArrayList<ImageLabel>();
     private File myImageSource;
     private int myNumEnemies = 0;
@@ -55,7 +54,7 @@ public class EnemyDesignTab extends Tab {
     public JPanel getTab () {
         myMainPanel = new GradientPanel(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myMainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
-        JLabel title = new JLabel("Enemy Design");
+        JLabel title = new JLabel(StyleConstants.resourceBundle.getString("EnemyDesignTitle"));
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
         title.setForeground(new Color(80, 80, 80));
         myMainPanel.add(title, "span 2");
@@ -69,7 +68,7 @@ public class EnemyDesignTab extends Tab {
         myCreatedEnemies.setPreferredSize(new Dimension(380, 400));
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         myCreatedEnemies.setBorder(BorderFactory
-                .createTitledBorder(b, "Created Enemies",
+                .createTitledBorder(b, StyleConstants.resourceBundle.getString("EnemyCreatedEnemies"),
                                     TitledBorder.CENTER,
                                     TitledBorder.TOP,
                                     new Font("Calibri", Font.PLAIN, 20)));
@@ -95,29 +94,29 @@ public class EnemyDesignTab extends Tab {
 
     private void createMainPanel () {
         myContentPanel = new JPanel();
-        JLabel name = new JLabel("Name");
+        JLabel name = new JLabel(StyleConstants.resourceBundle.getString("EnemyName"));
         name.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        name.setToolTipText("Give your enemy a name that will be displayed in the game.");
+        name.setToolTipText(StyleConstants.resourceBundle.getString("EnemyNameTip"));
 
-        JLabel gold = new JLabel("Worth in Gold");
+        JLabel gold = new JLabel(StyleConstants.resourceBundle.getString("EnemyGold"));
         gold.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        gold.setToolTipText("Set the amount of gold your enemy is worth.");
+        gold.setToolTipText(StyleConstants.resourceBundle.getString("EnemyGoldTip"));
 
-        JLabel lives = new JLabel("Number of Lives");
+        JLabel lives = new JLabel(StyleConstants.resourceBundle.getString("EnemyLives"));
         lives.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        lives.setToolTipText("Set the number of lives your enemy starts with.");
+        lives.setToolTipText(StyleConstants.resourceBundle.getString("EnemyLivesTip"));
 
-        JLabel speed = new JLabel("Speed");
+        JLabel speed = new JLabel(StyleConstants.resourceBundle.getString("EnemySpeed"));
         speed.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        speed.setToolTipText("Set the speed of your enemy.");
+        speed.setToolTipText(StyleConstants.resourceBundle.getString("EnemySpeedTip"));
 
-        JLabel skill = new JLabel("Skill");
+        JLabel skill = new JLabel(StyleConstants.resourceBundle.getString("EnemySkill"));
         skill.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        skill.setToolTipText("Select a special skill for your enemy.");
+        skill.setToolTipText(StyleConstants.resourceBundle.getString("EnemySkillTip"));
 
-        JLabel damage = new JLabel("Damage");
+        JLabel damage = new JLabel(StyleConstants.resourceBundle.getString("EnemyDamage"));
         damage.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        damage.setToolTipText("Select the type of damage your enemy inflicts.");
+        damage.setToolTipText(StyleConstants.resourceBundle.getString("EnemyDamageTip"));
 
         myNameField = new JTextField();
         myNameField.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -139,16 +138,16 @@ public class EnemyDesignTab extends Tab {
         myDamageField.setPreferredSize(new Dimension(200, 30));
         myDamageField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
-        JButton enemyImageChooser = new JButton("Add Sprite");
+        JButton enemyImageChooser = new JButton(StyleConstants.resourceBundle.getString("EnemySprite"));
         enemyImageChooser.setFont(StyleConstants.DEFAULT_BODY_FONT);
         enemyImageChooser.addMouseListener(createNewEnemyIconListener());
         enemyImageChooser
-                .setToolTipText("Add an image to represent your enemy or be part of an animation sequence.");
+                .setToolTipText(StyleConstants.resourceBundle.getString("EnemySpriteTip"));
 
-        JButton clearButton = new JButton("Clear All Sprites");
+        JButton clearButton = new JButton(StyleConstants.resourceBundle.getString("EnemyClearSprites"));
         clearButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         clearButton.addMouseListener(createClearAnimationsListener());
-        clearButton.setToolTipText("Clear all sprites loaded so far.");
+        clearButton.setToolTipText(StyleConstants.resourceBundle.getString("EnemyClearSpritesTip"));
 
         mySkillOptions = new JComboBox<String>(SKILLS);
         mySkillOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -162,11 +161,11 @@ public class EnemyDesignTab extends Tab {
         myAnimationScrollPane.setOpaque(false);
         myAnimationScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 
-        JButton createEnemyButton = new JButton("Create Enemy");
+        JButton createEnemyButton = new JButton(StyleConstants.resourceBundle.getString("EnemyCreateEnemy"));
         createEnemyButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         createEnemyButton.addMouseListener(createEnemyButtonListener());
         createEnemyButton
-                .setToolTipText("Once all fields are completed, click to finish creating an enemy.");
+                .setToolTipText(StyleConstants.resourceBundle.getString("EnemyCreateEnemyTip"));
 
         myContentPanel.setLayout(new MigLayout("wrap 2"));
         myContentPanel.add(name);
@@ -251,7 +250,7 @@ public class EnemyDesignTab extends Tab {
                     if (gold < 0 || life < 0) {
                         JOptionPane
                                 .showMessageDialog(null,
-                                                   "Cannot have negative values for gold, life, or speed");
+                                                   StyleConstants.resourceBundle.getString("EnemyNegativeInput"));
                     }
                     else {
                         EnemyJSONObject enemy =
@@ -271,7 +270,7 @@ public class EnemyDesignTab extends Tab {
                 }
                 catch (NumberFormatException n)
                 {
-                    JOptionPane.showMessageDialog(null, "Invalid input");
+                    JOptionPane.showMessageDialog(null, StyleConstants.resourceBundle.getString("EnemyInvalidInput"));
                 }
             }
         };
