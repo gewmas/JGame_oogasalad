@@ -28,16 +28,16 @@ import jgame.platform.StdGame;
  */
 public class Game extends StdGame {
     private static final String[] DISPLAY_KEYS = { GameEngineConstant.PURCHASE_INFO_NAME,
-                                                  GameEngineConstant.TOWER_DAMAGE,
-                                                  GameEngineConstant.TOWER_ATTACK_SPEED,
-                                                  GameEngineConstant.TOWER_ATTACK_AMOUNT,
-                                                  GameEngineConstant.TOWER_RANGE,
-                                                  GameEngineConstant.TOWER_MAGIC,
-                                                  GameEngineConstant.TOWER_MAGIC_FACTOR,
-                                                  GameEngineConstant.TOWER_BOOST_FACTOR,
-                                                  GameEngineConstant.TOWER_SELL_PRICE,
-                                                  GameEngineConstant.TOWER_UPGRADE_PRICE,
-                                                  GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
+                                                   GameEngineConstant.TOWER_DAMAGE,
+                                                   GameEngineConstant.TOWER_ATTACK_SPEED,
+                                                   GameEngineConstant.TOWER_ATTACK_AMOUNT,
+                                                   GameEngineConstant.TOWER_RANGE,
+                                                   GameEngineConstant.TOWER_MAGIC,
+                                                   GameEngineConstant.TOWER_MAGIC_FACTOR,
+                                                   GameEngineConstant.TOWER_BOOST_FACTOR,
+                                                   GameEngineConstant.TOWER_SELL_PRICE,
+                                                   GameEngineConstant.TOWER_UPGRADE_PRICE,
+                                                   GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
 
     private int WIDTH = 600;
     private int HEIGHT = 600;
@@ -75,7 +75,7 @@ public class Game extends StdGame {
     public void initCanvas () {
 
         gameInfo = view.getGameInfo();
-        
+
         this.setMoneyTitle(gameInfo.getMyGoldName());
         this.setLivesTitle(gameInfo.getMyLivesName());
         Dimension size = gameInfo.getDimension();// view.getGameSize();
@@ -93,7 +93,7 @@ public class Game extends StdGame {
                       10, // number of highscores
                       new Highscore(0, "nobody"), // default entry for highscore
                       25 // max length of the player name
-        );
+                );
 
         initial_lives = gameInfo.getLife();// view.getLives();
         lives = initial_lives;// view.getLives();
@@ -129,10 +129,10 @@ public class Game extends StdGame {
         }
         frameRateSlider =
                 new FrameRateSlider("slider", true, pfWidth() / 2, pfHeight() - 40, 256,
-                                    "slider_toggle");
+                        "slider_toggle");
         frameRateBar =
                 new JGObject("sliderbar", true, pfWidth() / 2 - 84, pfHeight() - 30, 256,
-                             "slider_bar");
+                        "slider_bar");
         frameRateBar.resume_in_view = false;
         toggleFrameRateBar();
     }
@@ -184,26 +184,28 @@ public class Game extends StdGame {
         if (getMouseButton(1) && getMouseInside()) {
             clearMouseButton(1);
             JGPoint mousePosition = getMousePos();
+            System.out.println(mousePosition.x);
+            System.out.println(mousePosition.y);
             if (!itemPurchaser.checkAndPlaceTower(mousePosition)) {
                 PurchaseInfo tower = view.getTowerInfo(mousePosition.x, mousePosition.y);
                 List<DisplayValue> display = new ArrayList();
                 if (tower != null) {
                     for (String key: valuesToDisplay.keySet()){
                         if (tower.getInfo().get(key)!=null){
-                        String field = key;
-                        String value = tower.getInfo().get(key);
-                        String color = valuesToDisplay.get(key);
-                       
-                        display.add(new DisplayValue(field,value,color));
+                            String field = key;
+                            String value = tower.getInfo().get(key);
+                            String color = valuesToDisplay.get(key);
+
+                            display.add(new DisplayValue(field,value,color));
                         }
                     }
                     utilities.displayTowerInformation(tower.getInfo(), display,
-                                                        mousePosition.x, mousePosition.y);
-//                    utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
-//                                                        mousePosition.x, mousePosition.y);
+                                                      mousePosition.x, mousePosition.y);
+                    //                    utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
+                    //                                                        mousePosition.x, mousePosition.y);
                 }
             }
-           
+
         }
     }
 
