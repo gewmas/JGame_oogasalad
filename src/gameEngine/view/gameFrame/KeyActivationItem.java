@@ -13,4 +13,7 @@ public interface KeyActivationItem {
      * The behavior that should occur once the key press is made
      */
     public void activate ();
+    
+    public String getActivationKey();
+    
 }
