@@ -28,16 +28,16 @@ import jgame.platform.StdGame;
  */
 public class Game extends StdGame {
     private static final String[] DISPLAY_KEYS = { GameEngineConstant.PURCHASE_INFO_NAME,
-                                                   GameEngineConstant.TOWER_DAMAGE,
-                                                   GameEngineConstant.TOWER_ATTACK_SPEED,
-                                                   GameEngineConstant.TOWER_ATTACK_AMOUNT,
-                                                   GameEngineConstant.TOWER_RANGE,
-                                                   GameEngineConstant.TOWER_MAGIC,
-                                                   GameEngineConstant.TOWER_MAGIC_FACTOR,
-                                                   GameEngineConstant.TOWER_BOOST_FACTOR,
-                                                   GameEngineConstant.TOWER_SELL_PRICE,
-                                                   GameEngineConstant.TOWER_UPGRADE_PRICE,
-                                                   GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
+                                                  GameEngineConstant.TOWER_DAMAGE,
+                                                  GameEngineConstant.TOWER_ATTACK_SPEED,
+                                                  GameEngineConstant.TOWER_ATTACK_AMOUNT,
+                                                  GameEngineConstant.TOWER_RANGE,
+                                                  GameEngineConstant.TOWER_MAGIC,
+                                                  GameEngineConstant.TOWER_MAGIC_FACTOR,
+                                                  GameEngineConstant.TOWER_BOOST_FACTOR,
+                                                  GameEngineConstant.TOWER_SELL_PRICE,
+                                                  GameEngineConstant.TOWER_UPGRADE_PRICE,
+                                                  GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
 
     private int WIDTH = 600;
     private int HEIGHT = 600;
@@ -50,18 +50,18 @@ public class Game extends StdGame {
     private ItemPurchaser itemPurchaser;
     private Map<String, String> valuesToDisplay;
 
-    private Collection<GameInitializable> gameInitializerItems;
-    private Collection<GameUpdatable> gameUpdatables;
-    private Map<String, KeyActivationItem> keyActivationItems;
+    private GameInitializable gameInitializerItems;
+    private GameUpdatable gameUpdatables;
+    private Collection<KeyActivationItem> keyActivationItems;
 
     private GameInfo gameInfo;
 
     public Game (View view,
                  ItemPurchaser itemPurchaser,
                  ItemOptionsDisplayer utilities,
-                 Collection<GameInitializable> gameInitializerItems,
-                 Collection<GameUpdatable> gameUpdatables,
-                 Map<String, KeyActivationItem> keyActivationItems) {
+                 GameInitializable gameInitializerItems,
+                 GameUpdatable gameUpdatables,
+                 Collection<KeyActivationItem> keyActivationItems) {
         this.view = view;
         this.keyActivationItems = keyActivationItems;
         this.itemPurchaser = itemPurchaser;
@@ -93,7 +93,7 @@ public class Game extends StdGame {
                       10, // number of highscores
                       new Highscore(0, "nobody"), // default entry for highscore
                       25 // max length of the player name
-                );
+        );
 
         initial_lives = gameInfo.getLife();// view.getLives();
         lives = initial_lives;// view.getLives();
@@ -124,15 +124,15 @@ public class Game extends StdGame {
 
     public void startInGame () {
         view.startModel();
-        for (GameInitializable item : gameInitializerItems) {
-            item.initialize();
-        }
+
+        gameInitializerItems.initialize();
+
         frameRateSlider =
                 new FrameRateSlider("slider", true, pfWidth() / 2, pfHeight() - 40, 256,
-                        "slider_toggle");
+                                    "slider_toggle");
         frameRateBar =
                 new JGObject("sliderbar", true, pfWidth() / 2 - 84, pfHeight() - 30, 256,
-                        "slider_bar");
+                             "slider_bar");
         frameRateBar.resume_in_view = false;
         toggleFrameRateBar();
     }
@@ -143,13 +143,12 @@ public class Game extends StdGame {
         checkGameCollisions();
         checkUserInteractions();
         updateGameStats();
-        for (GameUpdatable updatable : gameUpdatables) {
-            updatable.update();
-        }
-        for (String key : keyActivationItems.keySet()) {
-            KeyActivationItem item = keyActivationItems.get(key);
-            if (getKey(key.charAt(0))) {
-                clearKey(key.charAt(0));
+        gameUpdatables.update();
+
+        for (KeyActivationItem item : keyActivationItems) {
+         
+            if (getKey(item.getActivationKey().getKeyChar())) {
+                clearKey(item.getActivationKey().getKeyChar());
                 item.activate();
             }
         }
@@ -159,8 +158,8 @@ public class Game extends StdGame {
             loseGame();
         }
 
-        if (getKey('F')) {
-            clearKey('F');
+        if (getKey(ActivationKey.FRAME.getKeyChar())) {
+            clearKey(ActivationKey.FRAME.getKeyChar());
             toggleFrameRateBar();
         }
         if (gameInfo.getIsWin()) {
@@ -190,19 +189,19 @@ public class Game extends StdGame {
                 PurchaseInfo tower = view.getTowerInfo(mousePosition.x, mousePosition.y);
                 List<DisplayValue> display = new ArrayList();
                 if (tower != null) {
-                    for (String key: valuesToDisplay.keySet()){
-                        if (tower.getInfo().get(key)!=null){
+                    for (String key : valuesToDisplay.keySet()) {
+                        if (tower.getInfo().get(key) != null) {
                             String field = key;
                             String value = tower.getInfo().get(key);
                             String color = valuesToDisplay.get(key);
 
-                            display.add(new DisplayValue(field,value,color));
+                            display.add(new DisplayValue(field, value, color));
                         }
                     }
                     utilities.displayTowerInformation(tower.getInfo(), display,
                                                       mousePosition.x, mousePosition.y);
-                    //                    utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
-                    //                                                        mousePosition.x, mousePosition.y);
+                    // utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
+                    // mousePosition.x, mousePosition.y);
                 }
             }
 
@@ -244,9 +243,8 @@ public class Game extends StdGame {
 
     public void endGame () {
         view.stopWaves();
-        for (GameUpdatable updatable:gameUpdatables){
-            updatable.endGame();
-        }
+        gameUpdatables.endGame();
+
         removeObjects(null, 0);
 
     }

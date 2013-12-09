@@ -1,7 +1,6 @@
 package gameEngine.view.gameFrame;
 
 import java.util.Collection;
-import java.util.Map;
 import javax.swing.JPanel;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
@@ -17,9 +16,9 @@ public class CanvasPanel extends JPanel {
     public CanvasPanel (View view,
                         ItemPurchaser itemPurchaser,
                         ItemOptionsDisplayer utilities,
-                        Collection<GameInitializable> gameInitializerItems,
-                        Collection<GameUpdatable> gameUpdatables,
-                        Map<String, KeyActivationItem> keyActivationItems) {
+                        GameInitializable gameInitializerItems,
+                        GameUpdatable gameUpdatables,
+                        Collection<KeyActivationItem> keyActivationItems) {
         game =
                 new Game(view, itemPurchaser, utilities, gameInitializerItems, gameUpdatables,
                          keyActivationItems);
