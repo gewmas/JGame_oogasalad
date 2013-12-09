@@ -16,27 +16,25 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
+import java.util.Observable;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import net.miginfocom.swing.MigLayout;
 
 
-public class GameAuthoringGUI {
+public class GameAuthoringGUI extends Observable {
 
     protected static JPanel myMainPanel;
     protected static File mySelectedImage = null;
     protected static File mySelectedAudio = null;
     protected static ImageLabel myImageLabel = null;
     protected static AudioLabel myAudioLabel = null;
-    private JLabel myDuvallClippy;
     private GameData myGameData;
 
     public GameAuthoringGUI () {
@@ -76,20 +74,10 @@ public class GameAuthoringGUI {
         enemyWaveCommController.addObserver(waveDesignTab);
         enemyDesignTab.addObserver(enemyWaveCommController);
 
-        TempBarrierDesignController tempBarrierDesignController = new TempBarrierDesignController(myGameData);
+        TempBarrierDesignController tempBarrierDesignController =
+                new TempBarrierDesignController(myGameData);
         TempBarrierDesignTab tempBarrierTab = new TempBarrierDesignTab();
         tempBarrierTab.addObserver(tempBarrierDesignController);
-
-        myDuvallClippy = new JLabel();
-        Image duvallImage;
-        try {
-            duvallImage = ImageIO.read(this.getClass().getResource("duvall_clippy.png"));
-            myDuvallClippy.setIcon(new ImageIcon(duvallImage));
-        }
-        catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        myDuvallClippy.addMouseMotionListener(makeClippyDraggingListener());
 
         gameDesignTab.addTab("Basic Info", basicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -99,7 +87,8 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Wave Design", waveDesignTab.getTab());
         gameDesignTab.addTab("Temp Barrier Design", tempBarrierTab.getTab());
         gameDesignTab.addTab("Skills Design", skillsDesignTab.getTab());
-        MenuBar menu = new MenuBar(myGameData, basicInfoTab, mapDesignTab, waveDesignTab);
+        gameDesignTab.addChangeListener(observeTabChange());
+        MenuBar menu = new MenuBar(this, myGameData, basicInfoTab, mapDesignTab, waveDesignTab);
         myMainPanel.add(gameDesignTab, "gap 50 20 100 40");
         createUserLibraryTab();
         // myMainPanel.add(myDuvallClippy);
@@ -111,7 +100,7 @@ public class GameAuthoringGUI {
         frame.setResizable(false);
     }
 
-    public void createUserLibraryTab () {
+    private void createUserLibraryTab () {
         JTabbedPane userLibrary = new JTabbedPane();
         userLibrary.setPreferredSize(new Dimension(300, 600));
         UserImagesTab userImagesTab = new UserImagesTab();
@@ -122,17 +111,6 @@ public class GameAuthoringGUI {
         userLibrary.add("Sound Library", userSoundsTab.getTab());
         userLibrary.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myMainPanel.add(userLibrary);
-    }
-
-    public MouseMotionAdapter makeClippyDraggingListener () {
-        MouseMotionAdapter listener = new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged (MouseEvent e) {
-                e.translatePoint(e.getComponent().getLocation().x, e.getComponent().getLocation().y);
-                myDuvallClippy.setLocation(e.getX(), e.getY());
-            }
-        };
-        return listener;
     }
 
     public static final void setCursor (File imageFile) {
@@ -148,6 +126,21 @@ public class GameAuthoringGUI {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private ChangeListener observeTabChange () {
+        ChangeListener changeListener = new ChangeListener() {
+            public void stateChanged (ChangeEvent changeEvent) {
+                JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+                int index = sourceTabbedPane.getSelectedIndex();
+                String key = sourceTabbedPane.getTitleAt(index);
+                System.out.println(sourceTabbedPane.getTitleAt(index));
+                setChanged();
+                notifyObservers(key);
+                clearChanged();
+            }
+        };
+        return changeListener;
     }
 
     public static final void setCursorNull () {
