@@ -3,8 +3,6 @@ package gameEngine.view.gameFrame;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import gameEngine.view.ViewConstants;
@@ -27,7 +25,6 @@ import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 public class GameFrame extends JFrame implements GameInitializable {
 
     private View view;
-    private CheatFrame cheatCodeFrame;
     private StorePanel storePanel;
     private InfoDisplayPanel infoPanel;
     private CanvasPanel canvasPanel;
@@ -47,7 +44,7 @@ public class GameFrame extends JFrame implements GameInitializable {
         this.view = view;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.cheatCodeFrame = addCheatCodeFrame(view);
+        CheatFrame cheatCodeFrame = addCheatCodeFrame(view);
 
         this.gameKeyActivationItems = new ArrayList();
         gameKeyActivationItems.add(cheatCodeFrame);
@@ -65,7 +62,7 @@ public class GameFrame extends JFrame implements GameInitializable {
     }
 
     private CheatFrame addCheatCodeFrame (final View view) {
-        InputFrame inputFrame = new InputFrame("Cheat Sheet", new InputSender() {
+        InputFrame inputFrame = new InputFrame( new InputSender() {
             @Override
             public void submit (String cheat) {
                 view.activateCheat(cheat);

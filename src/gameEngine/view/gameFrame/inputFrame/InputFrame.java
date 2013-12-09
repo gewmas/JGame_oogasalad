@@ -1,6 +1,5 @@
 package gameEngine.view.gameFrame.inputFrame;
 
-import gameEngine.view.gameFrame.KeyActivationItem;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
@@ -20,7 +19,7 @@ public class InputFrame extends JFrame{
     private static final String INPUT_PANEL_POSITION = "span 2";
     private static final String LAYOUT_WRAP_SETTINGS = "wrap 3";
 
-    public InputFrame (String displayName, InputSender inputSender) {
+    public InputFrame (InputSender inputSender) {
         super();
 
         MigLayout layout = new MigLayout(LAYOUT_WRAP_SETTINGS);
