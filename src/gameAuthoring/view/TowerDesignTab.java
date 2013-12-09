@@ -106,10 +106,10 @@ public class TowerDesignTab extends Tab {
 
         type = new JLabel("Type");
 
-        type.setFont(Constants.DEFAULT_BODY_FONT);
+        type.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myTypeOptions = new JComboBox<String>(TOWER_TYPES);
-        myTypeOptions.setFont(Constants.DEFAULT_BODY_FONT);
+        myTypeOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myTypeOptions.addActionListener(createTowerTypeListener(myContentPanel));
 
         myContentPanel.setLayout(new MigLayout("wrap 2"));
@@ -242,15 +242,15 @@ public class TowerDesignTab extends Tab {
         JPanel panel = createTowerPanel();
 
         JLabel magicFactor = new JLabel("Magic Factor");
-        magicFactor.setFont(Constants.DEFAULT_BODY_FONT);
+        magicFactor.setFont(StyleConstants.DEFAULT_BODY_FONT);
         JLabel magic = new JLabel("Magic");
-        magic.setFont(Constants.DEFAULT_BODY_FONT);
+        magic.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         magicFactorField = new JTextField();
         magicFactorField.setPreferredSize(new Dimension(150, 30));
-        magicFactorField.setFont(Constants.DEFAULT_BODY_FONT);
+        magicFactorField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         magicOptions = new JComboBox<String>(MAGIC_TYPES);
-        magicOptions.setFont(Constants.DEFAULT_BODY_FONT);
+        magicOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         panel.add(magicFactor);
         panel.add(magicFactorField);
@@ -281,10 +281,10 @@ public class TowerDesignTab extends Tab {
         panel.add(myTowerImage, "gap 0 0 10 10");
 
         JLabel boostFactor = new JLabel("Boost Factor");
-        boostFactor.setFont(Constants.DEFAULT_BODY_FONT);
+        boostFactor.setFont(StyleConstants.DEFAULT_BODY_FONT);
         boostFactorField = new JTextField();
         boostFactorField.setPreferredSize(new Dimension(200, 30));
-        boostFactorField.setFont(Constants.DEFAULT_BODY_FONT);
+        boostFactorField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         panel.add(boostFactor);
         panel.add(boostFactorField);
@@ -295,10 +295,10 @@ public class TowerDesignTab extends Tab {
         JPanel panel = createTowerPanel();
 
         JLabel attackAmount = new JLabel("Attack Amount");
-        attackAmount.setFont(Constants.DEFAULT_BODY_FONT);
+        attackAmount.setFont(StyleConstants.DEFAULT_BODY_FONT);
         attackAmountField = new JTextField();
         attackAmountField.setPreferredSize(new Dimension(200, 30));
-        attackAmountField.setFont(Constants.DEFAULT_BODY_FONT);
+        attackAmountField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         panel.add(attackAmount);
         panel.add(attackAmountField);
@@ -419,49 +419,49 @@ public class TowerDesignTab extends Tab {
 
     private void initializeComponents () {
         name = new JLabel("Name");
-        name.setFont(Constants.DEFAULT_BODY_FONT);
+        name.setFont(StyleConstants.DEFAULT_BODY_FONT);
         damage = new JLabel("Damage");
-        damage.setFont(Constants.DEFAULT_BODY_FONT);
+        damage.setFont(StyleConstants.DEFAULT_BODY_FONT);
         attackSpeed = new JLabel("Attack Speed");
-        attackSpeed.setFont(Constants.DEFAULT_BODY_FONT);
+        attackSpeed.setFont(StyleConstants.DEFAULT_BODY_FONT);
         attackMode = new JLabel("Attack Mode");
-        attackMode.setFont(Constants.DEFAULT_BODY_FONT);
+        attackMode.setFont(StyleConstants.DEFAULT_BODY_FONT);
         range = new JLabel("Range");
-        range.setFont(Constants.DEFAULT_BODY_FONT);
+        range.setFont(StyleConstants.DEFAULT_BODY_FONT);
         cost = new JLabel("Cost");
-        cost.setFont(Constants.DEFAULT_BODY_FONT);
+        cost.setFont(StyleConstants.DEFAULT_BODY_FONT);
         recyclePrice = new JLabel("Recycle Price");
-        recyclePrice.setFont(Constants.DEFAULT_BODY_FONT);
+        recyclePrice.setFont(StyleConstants.DEFAULT_BODY_FONT);
         description = new JLabel("Description");
-        description.setFont(Constants.DEFAULT_BODY_FONT);
+        description.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myNameField = new JTextField();
         myNameField.setPreferredSize(new Dimension(150, 30));
-        myNameField.setFont(Constants.DEFAULT_BODY_FONT);
+        myNameField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myDamageField = new JTextField();
         myDamageField.setPreferredSize(new Dimension(150, 30));
-        myDamageField.setFont(Constants.DEFAULT_BODY_FONT);
+        myDamageField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myAttackSpeedField = new JTextField();
         myAttackSpeedField.setPreferredSize(new Dimension(150, 30));
-        myAttackSpeedField.setFont(Constants.DEFAULT_BODY_FONT);
+        myAttackSpeedField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myAttackModeOptions = new JComboBox<Integer>(ATTACK_MODES);
-        myAttackModeOptions.setFont(Constants.DEFAULT_BODY_FONT);
+        myAttackModeOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myRangeField = new JTextField();
         myRangeField.setPreferredSize(new Dimension(150, 30));
-        myRangeField.setFont(Constants.DEFAULT_BODY_FONT);
+        myRangeField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myCostField = new JTextField();
         myCostField.setPreferredSize(new Dimension(150, 30));
-        myCostField.setFont(Constants.DEFAULT_BODY_FONT);
+        myCostField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myRecyclePriceField = new JTextField();
         myRecyclePriceField.setPreferredSize(new Dimension(150, 30));
-        myRecyclePriceField.setFont(Constants.DEFAULT_BODY_FONT);
+        myRecyclePriceField.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myDescriptionField = new JTextArea();
         myDescriptionField.setLineWrap(true);
         myDescriptionField.setPreferredSize(new Dimension(150, 30));
         scrollPane = new JScrollPane(myDescriptionField);
 
         towerImageChooser = new JLabel("Choose Image");
-        towerImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
+        towerImageChooser.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
         myTowerImage = new ImageLabel();
         myTowerImage.setMutableStatusTrue();
@@ -470,7 +470,7 @@ public class TowerDesignTab extends Tab {
         myTowerImage.setBorder(border);
 
         createTowerButton = new JButton("Create Tower");
-        createTowerButton.setFont(Constants.DEFAULT_BODY_FONT);
+        createTowerButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         createTowerButton.addMouseListener(createTowerButtonListener());
 
         myTowerPanelMap = new HashMap<String, JPanel>();
