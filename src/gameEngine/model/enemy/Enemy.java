@@ -35,6 +35,7 @@ public class Enemy extends JGObject implements IEMagicable {
     int pathIndex;
     double pathStep;
     int mySpecialty = 0;
+    int damage=0;
     LinkedList<Tile> path;
 
     double pathX;
@@ -55,9 +56,9 @@ public class Enemy extends JGObject implements IEMagicable {
                   int collisionid,
                   String image,
                   int speciaty,
-                  Model model) {
+                  Model model,int damage) {
         super(id, unique_id, model.getPathList().get(0).getX(), model.getPathList().get(0).getY(),
-              collisionid, image);
+              collisionid, image,damage);
 
         this.model = model;
         this.id = id;
@@ -173,7 +174,7 @@ public class Enemy extends JGObject implements IEMagicable {
     }
 
     public void reachedGoal () {
-        model.getGameInfo().loseLife();
+        model.getGameInfo().loseLife(damage);
         remove();
     }
 

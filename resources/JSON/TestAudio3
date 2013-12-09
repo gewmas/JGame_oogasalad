@@ -1,0 +1,18 @@
+{
+   "resources": {
+      "animation": [],
+      "audio": [{
+         "id": "1",
+         "url": "laser.wav"
+      }],
+      "image": []
+   },
+   "temporaryBarrierType": [],
+   "Tower": [],
+   "name": "askdljf;alksdf",
+   "wave": [],
+   "numberOfLives": 3,
+   "enemyType": [],
+   "splashImage": "C:\\Users\\BecLai\\workspace\\oogasalad_FooBar\\resources\\img\\duvall.png",
+   "gold": 1
+}

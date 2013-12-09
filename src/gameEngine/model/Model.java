@@ -79,7 +79,7 @@ public class Model {
         gameInfo = new GameInfo(parser);
         
         //Change Description In GameEngineConst
-//        GameEngineConstant.updateDescription(parser);
+        GameEngineConstant.updateDescription(parser);
 
     }
     // Fabio Changed it (added win and life reset)

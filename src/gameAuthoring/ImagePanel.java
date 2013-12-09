@@ -10,8 +10,10 @@ import javax.swing.JPanel;
 
 public class ImagePanel extends JPanel {
 
-    public ImagePanel () {
+    private String myImageName;
 
+    public ImagePanel (String imageName) {
+        myImageName = imageName;
     }
 
     public ImagePanel (LayoutManager layoutManager) {
@@ -23,7 +25,7 @@ public class ImagePanel extends JPanel {
     protected void paintComponent (Graphics grphcs) {
         Image img = null;
         try {
-            img = ImageIO.read(this.getClass().getResource("texture0.jpg"));
+            img = ImageIO.read(this.getClass().getResource(myImageName));
         }
         catch (IOException e) {
             e.printStackTrace();

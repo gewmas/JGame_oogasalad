@@ -14,6 +14,13 @@ import gameEngine.parser.JSONLibrary.JSONObject;
  *         Constant class allows program to avoid magic number.
  */
 public class GameEngineConstant {
+
+    //Grid Constants
+    public static final int GRID_WIDTH = 600;
+    public static final int GRID_HEIGHT = 600;
+    public static final int TILES_PER_ROW = 20;
+
+
 	public static final int PIXELSPERTILE=20;
 	public static final int ENEMY_CID = 1;
 	public static final int TOWER_CID = 2;
@@ -69,13 +76,47 @@ public class GameEngineConstant {
 			TOWER_ATTACK_SPEED = jsonObject.getString("TOWER_ATTACK_SPEED");
 			TOWER_ATTACK_AMOUNT = jsonObject.getString("TOWER_ATTACK_AMOUNT");
 			TOWER_ATTACK_MODE = jsonObject.getString("TOWER_ATTACK_MODE");
-			
+
 			TOWER_UPGRADE_DAMAGE = jsonObject.getString("TOWER_UPGRADE_DAMAGE");
 			TOWER_UPGRADE_ATTACK_SPEED = jsonObject.getString("TOWER_UPGRADE_ATTACK_SPEED");
 			TOWER_UPGRADE_ATTACK_AMOUNT = jsonObject.getString("TOWER_UPGRADE_ATTACK_AMOUNT");
 		}catch(Exception e){
 			return;
 		}
+	}
+
+	//For View UpgradeButton
+	public static String[] NORMAL_DISPLAY_KEYS(){
+		String[] s = 
+			{ GameEngineConstant.PURCHASE_INFO_NAME,
+				GameEngineConstant.TOWER_DAMAGE,
+				GameEngineConstant.TOWER_ATTACK_SPEED,
+				GameEngineConstant.TOWER_ATTACK_AMOUNT,
+				GameEngineConstant.TOWER_RANGE,
+				GameEngineConstant.TOWER_MAGIC,
+				GameEngineConstant.TOWER_MAGIC_FACTOR,
+				GameEngineConstant.TOWER_BOOST_FACTOR,
+				GameEngineConstant.TOWER_SELL_PRICE,
+				GameEngineConstant.TOWER_UPGRADE_PRICE,
+				GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
+
+		return s;
+	}
+	public static String[] UPGRADE_DISPLAY_KEYS(){
+		String[] s = 
+			{ GameEngineConstant.PURCHASE_INFO_NAME,
+			     GameEngineConstant.TOWER_UPGRADE_DAMAGE,
+			     GameEngineConstant.TOWER_UPGRADE_ATTACK_SPEED,
+			     GameEngineConstant.TOWER_ATTACK_AMOUNT,
+			     GameEngineConstant.TOWER_RANGE,
+			     GameEngineConstant.TOWER_MAGIC,
+			     GameEngineConstant.TOWER_UPGRADE_MAGIC_FACTOR,
+			     GameEngineConstant.TOWER_UPGRADE_BOOST_FACTOR,
+			     GameEngineConstant.TOWER_SELL_PRICE,
+			     GameEngineConstant.TOWER_UPGRADE_PRICE,
+			     GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
+
+		return s;
 	}
 
 	public static int query (Class T) {

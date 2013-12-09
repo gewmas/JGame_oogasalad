@@ -88,8 +88,8 @@ public class GameInfo {
         myLife += amt;
     }
 
-    public void loseLife () {
-        myLife--;
+    public void loseLife (int damage) {
+        myLife-=damage;
     }
 
     public void nextWave () {

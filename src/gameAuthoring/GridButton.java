@@ -2,6 +2,8 @@ package gameAuthoring;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -11,7 +13,9 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 
@@ -20,8 +24,12 @@ public class GridButton extends JButton {
     private Point2D myCoordinate;
     private JButton myButton;
     private boolean isPath;
+    private String mySelectionMode;
     private Grid myGrid;
     private File myImgSource;
+    private JPopupMenu myPopupMenu;
+    private JMenuItem myStartOptionItem;
+    private JMenuItem myEndOptionItem;
 
     public GridButton (int x, int y, Grid grid) {
         myCoordinate = new Point2D.Double(x, y);
@@ -35,49 +43,70 @@ public class GridButton extends JButton {
         myImgSource = imgSource;
     }
 
+    public void setSelectionMode (String mode) {
+        mySelectionMode = mode;
+    }
+
     private void addPathListener (final GridButton gButton) {
         MouseAdapter listener = new MouseAdapter() {
+
             @Override
             public void mouseClicked (MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
-                    isPath = false;
-                    myGrid.removeCoordinate(myCoordinate);
-                    gButton.setIcon(null);
+                    isPath = !isPath;
+                    if (isPath) {
+                        myGrid.addPathCoordinate(myCoordinate);
+                        setImage();
+                        myGrid.addPathCoordinate(myCoordinate);
+                    }
+                    else {
+                        myGrid.removePathCoordinate(myCoordinate);
+                        gButton.setIcon(null);
+                    }
                 }
                 if (SwingUtilities.isRightMouseButton(e)) {
-                    String[] options = { "Set as start", "Set as end" };
-                    String choice =
-                            (String) JOptionPane.showInputDialog(
-                                                                 null,
-                                                                 "Set path start and end:",
-                                                                 "Set path start and end",
-                                                                 JOptionPane.PLAIN_MESSAGE,
-                                                                 null,
-                                                                 options,
-                                                                 "");
-                    if (choice.equals("Set as start")) {
-                        myGrid.setPathStart(myCoordinate);
-                    }
-                    if (choice.equals("Set as end")) {
-                        myGrid.setPathEnd(myCoordinate);
-                    }
-                }
-            }
+                    myPopupMenu = new JPopupMenu();
+                    myStartOptionItem = new JMenuItem("Set as path start");
+                    myStartOptionItem.addMouseListener(new MouseAdapter() {
+                        public void mousePressed (MouseEvent me) {
+                            System.out.println("Set as start");
+                            myGrid.setPathStart(myCoordinate);
+                        }
+                    });
+                    myEndOptionItem = new JMenuItem("Set as path end");
+                    myEndOptionItem.addMouseListener(new MouseAdapter() {
+                        public void mousePressed (MouseEvent me) {
+                            System.out.println("Set as end");
+                            myGrid.setPathEnd(myCoordinate);
+                        }
+                    });
+                    myPopupMenu.add(myStartOptionItem);
+                    myPopupMenu.add(myEndOptionItem);
+                    myStartOptionItem.addActionListener(new ActionListener() {
+                        public void actionPerformed (ActionEvent e) {
+                        }
+                    });
+                    gButton.addMouseListener(new MouseAdapter() {
+                        public void mousePressed (MouseEvent me) {
+                            if (me.isPopupTrigger()) {
+                                myPopupMenu.show(me.getComponent(), me.getX(), me.getY());
+                            }
+                        }
 
-            @Override
-            public void mouseEntered (MouseEvent e) {
-                if (myImgSource != null) {
-                    toggle();
-                    System.out.println(myCoordinate);
+                        public void mouseReleased (MouseEvent Me) {
+                            if (Me.isPopupTrigger()) {
+                                myPopupMenu.show(Me.getComponent(), Me.getX(), Me.getY());
+                            }
+                        }
+                    });
+
                 }
             }
         };
         gButton.addMouseListener(listener);
     }
 
-    public void toggle () {
-        isPath = true;
-        myGrid.addCoordinate(myCoordinate);
+    public void setImage () {
         try {
             if (myImgSource == null) {
                 JOptionPane.showMessageDialog(null, "No image defined");

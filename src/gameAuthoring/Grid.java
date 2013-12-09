@@ -23,6 +23,7 @@ public class Grid extends JPanel {
     private Point2D myStart;
     private Point2D myEnd;
     private Collection<Point2D> myPathCoordinates = new ArrayList<Point2D>();
+    private Collection<Point2D> myBarrierCoordinates = new ArrayList<Point2D>();
     private File myBackgroundImage;
     private int myWidth;
     private int myHeight;
@@ -36,7 +37,7 @@ public class Grid extends JPanel {
         myGrid = new GridButton[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                GridButton gButton = new GridButton(y, x, this);
+                GridButton gButton = new GridButton(x, y, this);
                 myGrid[x][y] = gButton;
                 gButton.setOpaque(false);
                 gButton.setContentAreaFilled(false);
@@ -81,17 +82,23 @@ public class Grid extends JPanel {
         myBackgroundImage = bgSource;
     }
 
-    public void addCoordinate (Point2D coordinate) {
+    public void addPathCoordinate (Point2D coordinate) {
         myPathCoordinates.add(coordinate);
     }
 
-    public void removeCoordinate (Point2D coordinate) {
+    public void addBarrierCoordinate (Point2D coordinate) {
+        if (myPathCoordinates.contains(coordinate)) {
+            myPathCoordinates.remove(coordinate);
+        }
+        myBarrierCoordinates.add(coordinate);
+    }
+
+    public void removePathCoordinate (Point2D coordinate) {
         myPathCoordinates.remove(coordinate);
     }
 
     public void setPathStart (Point2D start) {
         myStart = start;
-        System.out.println(myStart.toString());
     }
 
     public Point2D getPathStart () {
@@ -100,7 +107,6 @@ public class Grid extends JPanel {
 
     public void setPathEnd (Point2D end) {
         myEnd = end;
-        System.out.println(myEnd.toString());
     }
 
     public Point2D getPathEnd () {
@@ -112,7 +118,7 @@ public class Grid extends JPanel {
     }
 
     public void toggleGridButton (int x, int y) {
-        myGrid[x][y].toggle();
+        myGrid[x][y].setImage();
     }
 
     public boolean isValidPathHelper () {
@@ -182,10 +188,6 @@ public class Grid extends JPanel {
             int y = (getHeight() - img.getHeight(null)) / 2;
             page.drawImage(img, x, y, null);
         }
-    }
-
-    public static void main (String[] args) {
-        Grid g = new Grid(4, 4);
     }
 
 }

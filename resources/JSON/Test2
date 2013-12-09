@@ -1,0 +1,186 @@
+{
+   "resources": {
+      "animation": [
+         {
+            "id": "enemy0",
+            "sheet": [{"id": "2"}]
+         },
+         {
+            "id": "enemy0",
+            "sheet": [
+               {"id": "2"},
+               {"id": "3"}
+            ]
+         }
+      ],
+      "audio": [],
+      "image": [
+         {
+            "id": "1",
+            "url": "duvall.png"
+         },
+         {
+            "id": "2",
+            "url": "d1.png"
+         },
+         {
+            "id": "3",
+            "url": "d2.png"
+         },
+         {
+            "id": "4",
+            "url": "Armour1.png"
+         }
+      ]
+   },
+   "temporaryBarrierType": [
+      {
+         "id": "WFODASf",
+         "expire": 1,
+         "description": "Rebecca is the best",
+         "damage": 1
+      },
+      {
+         "id": "WFODASf",
+         "expire": 1,
+         "description": "Rebecca is the best",
+         "damage": 1,
+         "image": "3"
+      }
+   ],
+   "enemyType": [{
+      "id": "dfadsf",
+      "life": 1,
+      "skill": "Haste",
+      "speed": 0.5,
+      "image": "enemy0",
+      "gold": 1
+   }],
+   "numberOfLives": 5,
+   "BGImage": "resources/img/duvall.png",
+   "goldName": "Candy",
+   "Tower": [
+      {
+         "id": "Normal",
+         "attackMode": 1,
+         "Sell Price": 4,
+         "range": 4,
+         "description": "4",
+         "damage": 4,
+         "attackSpeed": 4,
+         "image": "1",
+         "type": "DefaultTower",
+         "cost": 4
+      },
+      {
+         "id": "magic",
+         "magic": ["FrozeMagic"],
+         "magicFactor": 1.5,
+         "attackMode": 3,
+         "range": 2,
+         "description": "fdfd",
+         "damage": 1,
+         "attackSpeed": 1,
+         "image": "1",
+         "recyclePrice": 2,
+         "type": "MagicTower",
+         "cost": 2
+      }
+   ],
+   "name": "I want to sleep",
+   "map": {
+      "Barriers": [],
+      "pathImage": "1",
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 0,
+            "x": 1
+         },
+         {
+            "y": 0,
+            "x": 2
+         },
+         {
+            "y": 0,
+            "x": 3
+         },
+         {
+            "y": 0,
+            "x": 4
+         },
+         {
+            "y": 0,
+            "x": 5
+         },
+         {
+            "y": 0,
+            "x": 6
+         },
+         {
+            "y": 0,
+            "x": 7
+         },
+         {
+            "y": 0,
+            "x": 8
+         },
+         {
+            "y": 0,
+            "x": 9
+         },
+         {
+            "y": 0,
+            "x": 10
+         },
+         {
+            "y": 0,
+            "x": 11
+         },
+         {
+            "y": 0,
+            "x": 12
+         },
+         {
+            "y": 0,
+            "x": 13
+         },
+         {
+            "y": 0,
+            "x": 14
+         },
+         {
+            "y": 0,
+            "x": 15
+         },
+         {
+            "y": 0,
+            "x": 16
+         },
+         {
+            "y": 0,
+            "x": 17
+         },
+         {
+            "y": 0,
+            "x": 18
+         },
+         {
+            "y": 0,
+            "x": 19
+         }
+      ]
+   },
+   "wave": [{
+      "interval": 2,
+      "number": 100,
+      "period": 0.5,
+      "type": "dfadsf"
+   }],
+   "livesName": "Grr",
+   "splashImage": "resources/img/duvall.png",
+   "gold": 100
+}
