@@ -26,7 +26,6 @@ public class MenuBar extends JMenuBar {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");
     private Parser myParser;
-    private Simulator simulator;
     private GameAuthoringGUI myGameAuthoringGUI;
 
     public MenuBar (GameAuthoringGUI gameAuthoringGUI,
@@ -41,7 +40,6 @@ public class MenuBar extends JMenuBar {
         myBasicInfoTab = basicInfoTab;
         myMapDesignTab = mapDesignTab;
         myWaveDesignTab = waveDesignTab;
-        simulator = new Simulator();
     }
 
     private JMenu showMenu () {
@@ -85,12 +83,7 @@ public class MenuBar extends JMenuBar {
                 }
             }
         });
-        menu.add(new AbstractAction("Simulate") {
-            @Override
-            public void actionPerformed (ActionEvent e) {
-                simulator.simulate(myGameData);
-            }
-        });
+  
         return menu;
     }
 
