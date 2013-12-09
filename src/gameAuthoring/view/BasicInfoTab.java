@@ -2,18 +2,15 @@ package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.ResourceJSONObject;
 import gameEngine.parser.Parser;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -39,6 +36,8 @@ public class BasicInfoTab extends Tab {
     private ImageLabel myImageLabel;
     private JPanel myMainPanel;
     private JPanel mySubPanel;
+    private static final Dimension TEXT_DIMENSION = new Dimension(200, 30);
+    private static final Dimension IMAGE_LABEL_DIMENSION = new Dimension(50, 50);
 
     public BasicInfoTab () {
 
@@ -63,10 +62,11 @@ public class BasicInfoTab extends Tab {
     }
 
     public void addSubmitButton () {
-        JButton setInfoButton = new JButton("Set Info");
+        JButton setInfoButton =
+                new JButton(StyleConstants.resourceBundle.getString("BasicInfoSubmit"));
         setInfoButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         setInfoButton
-                .setToolTipText("Once all fields have been completed, click the submit button. You can then proceed to 'preview' your game.");
+                .setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoSubmitTip"));
         setInfoButton.addMouseListener(setInfoListener());
         mySubPanel.add(setInfoButton);
     }
@@ -75,8 +75,7 @@ public class BasicInfoTab extends Tab {
         JLabel title = new JLabel(StyleConstants.resourceBundle.getString("BasicInfoTitle"));
         title.setFont(StyleConstants.DEFAULT_BODY_FONT);
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
-        title.setForeground(new Color(80, 80, 80));
-        myMainPanel.add(title, "span 2");
+        myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
     }
 
     public void addGameName () {
@@ -91,12 +90,13 @@ public class BasicInfoTab extends Tab {
         gold.setFont(StyleConstants.DEFAULT_BODY_FONT);
         gold.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoGoldTip"));
         myGold = new JTextField();
-        myGold.setPreferredSize(new Dimension(200, 30));
-        JLabel altGoldLabel = new JLabel("Alternative Gold Name:");
+        myGold.setPreferredSize(TEXT_DIMENSION);
+        JLabel altGoldLabel =
+                new JLabel(StyleConstants.resourceBundle.getString("BasicInfoAltGold"));
         altGoldLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        altGoldLabel.setToolTipText("If you want, choose another name for your currency.");
+        altGoldLabel.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoAltGoldTip"));
         myAltGoldText = new JTextField();
-        myAltGoldText.setPreferredSize(new Dimension(200, 30));
+        myAltGoldText.setPreferredSize(TEXT_DIMENSION);
         myAltGoldText.setFont(StyleConstants.DEFAULT_BODY_FONT);
         mySubPanel.add(gold);
         mySubPanel.add(altGoldLabel);
@@ -108,12 +108,12 @@ public class BasicInfoTab extends Tab {
         lives.setFont(StyleConstants.DEFAULT_BODY_FONT);
         lives.setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoLivesTip"));
         myLives = new JTextField();
-        myLives.setPreferredSize(new Dimension(200, 30));
+        myLives.setPreferredSize(TEXT_DIMENSION);
         JLabel altLivesLabel = new JLabel("Alternative Lives Name:");
         altLivesLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         altLivesLabel.setToolTipText("If you want, choose another name for your lives.");
         myAltLivesText = new JTextField();
-        myAltLivesText.setPreferredSize(new Dimension(200, 30));
+        myAltLivesText.setPreferredSize(TEXT_DIMENSION);
         myAltLivesText.setFont(StyleConstants.DEFAULT_BODY_FONT);
         mySubPanel.add(lives);
         mySubPanel.add(myLives);
@@ -123,8 +123,10 @@ public class BasicInfoTab extends Tab {
 
     public void addBackgroundAudio () {
         myAudioLabel = new AudioLabel();
-        JLabel audioLabel = new JLabel("Background Audio:");
-        audioLabel.setToolTipText("Select an audio to be played in the background of your game");
+        JLabel audioLabel =
+                new JLabel(StyleConstants.resourceBundle.getString("BasicInfoBackgroundAudio"));
+        audioLabel.setToolTipText(StyleConstants.resourceBundle
+                .getString("BasicInfoBackgroundAudioTip"));
         myAudioLabel.setMutableStatusTrue();
         audioLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);
         mySubPanel.add(audioLabel);
@@ -137,18 +139,17 @@ public class BasicInfoTab extends Tab {
         bullet.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myImageLabel = new ImageLabel();
         myImageLabel.setMutableStatusTrue();
-        myImageLabel.setPreferredSize(new Dimension(50, 50));
-        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
-        myImageLabel.setBorder(border);
+        myImageLabel.setPreferredSize(IMAGE_LABEL_DIMENSION);
         mySubPanel.add(bullet);
         mySubPanel.add(myImageLabel);
     }
 
     public void addSplashImage () {
-        JButton setSplashImageButton = new JButton("Choose Splash Image");
+        JButton setSplashImageButton =
+                new JButton(StyleConstants.resourceBundle.getString("BasicInfoSplashImage"));
         setSplashImageButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         setSplashImageButton
-                .setToolTipText("Select a Splash Image to be displayed before your game begins.");
+                .setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoSplashImageTip"));
         setSplashImageButton.addMouseListener(setSplashImageListener());
         mySplashImageLabel = new JLabel();
         mySubPanel.add(setSplashImageButton);
@@ -205,7 +206,8 @@ public class BasicInfoTab extends Tab {
 
         else {
             JOptionPane.showMessageDialog(null,
-                                          "One or more fields invalid! Please try again.");
+                                          StyleConstants.resourceBundle
+                                                  .getString("BasicInfoInvalidSubmission"));
         }
     }
 
