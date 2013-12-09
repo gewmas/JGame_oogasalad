@@ -184,6 +184,7 @@ public class TempBarrierDesignTab extends Tab {
         image.setFont(StyleConstants.DEFAULT_BODY_FONT);
         image.setToolTipText(StyleConstants.resourceBundle.getString("BarrierSelectImageTip"));
         myBarrierImage = new ImageLabel();
+        myBarrierImage.setMutableStatusTrue();
         myContentPanel.add(image);
         myContentPanel.add(myBarrierImage);
     }
