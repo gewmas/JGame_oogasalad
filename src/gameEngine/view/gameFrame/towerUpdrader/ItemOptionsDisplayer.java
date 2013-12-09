@@ -36,7 +36,7 @@ public class ItemOptionsDisplayer {
     }
 
     public void displayStoreInformation (Map<String, String> information,
-                                         List<DisplayValue> displayValues) {
+                                         Collection<DisplayValue> displayValues) {
         clearDisplay ();
         updateDisplay(displayValues);
 
@@ -71,8 +71,8 @@ public class ItemOptionsDisplayer {
         rangeDisplay.resume();
     }
 
-    public void updateDisplay (List<DisplayValue> display) {
-        this.display.updateDisplayInformation( display);
+    public void updateDisplay (Collection<DisplayValue> displayValues) {
+        this.display.updateDisplayInformation( displayValues);
         
     }
 

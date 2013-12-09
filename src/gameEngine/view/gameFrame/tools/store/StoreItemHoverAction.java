@@ -5,7 +5,8 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.gameFrame.tools.DisplayValue;
 import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+
 
 
 /**
@@ -15,6 +16,10 @@ import java.util.List;
  */
 public class StoreItemHoverAction implements StoreButtonAction {
 
+    /**
+     * Keys to be displayed from the PurchaseInfo data structure when a user hovers
+     * over the storeItem button
+     */
     private final String[] DISPLAY_KEYS = { GameEngineConstant.PURCHASE_INFO_NAME,
                                            GameEngineConstant.TOWER_DAMAGE,
                                            GameEngineConstant.TOWER_ATTACK_SPEED,
@@ -27,11 +32,15 @@ public class StoreItemHoverAction implements StoreButtonAction {
                                            GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
     private final String DISPLAY_COLOR = "black";
     private ItemOptionsDisplayer itemOptionsDisplayer;
-    private PurchaseInfo storeItem;
+    private PurchaseInfo storeItemInformation;
 
-    public StoreItemHoverAction (ItemOptionsDisplayer itemOptionsDisplayer, PurchaseInfo storeItem) {
+    /** Constructor 
+     * @param itemOptionsDisplayer tool used to display options that can be performed on store item
+     * @param storeItemInformation information about item the HoverAction is being created for
+     */
+    public StoreItemHoverAction (ItemOptionsDisplayer itemOptionsDisplayer, PurchaseInfo storeItemInformation) {
         this.itemOptionsDisplayer = itemOptionsDisplayer;
-        this.storeItem = storeItem;
+        this.storeItemInformation = storeItemInformation;
     }
 
     @Override
@@ -40,17 +49,22 @@ public class StoreItemHoverAction implements StoreButtonAction {
      * a user hovers over the button 
      */
     public void executeAction () {
-        List<DisplayValue> display = createDisplayValues(storeItem);
-        itemOptionsDisplayer.displayStoreInformation(storeItem.getInfo(), display);
+        Collection<DisplayValue> display = createDisplayValues(storeItemInformation);
+        itemOptionsDisplayer.displayStoreInformation(storeItemInformation.getInfo(), display);
 
     }
 
-    private List<DisplayValue> createDisplayValues (final PurchaseInfo storeItem) {
-        List<DisplayValue> display = new ArrayList<DisplayValue>();
+    /** Creates the Collection of DisplayValues to be used by the Information Display panel 
+     * to display information about storeItemButton when a user hovers over it
+     * @param storeItemInformation information about store item StoreItemHoverAction is being created for
+     * @return Collection of DisplayValues that represents the data and formating of information to be displayed
+     */
+    private Collection<DisplayValue> createDisplayValues (final PurchaseInfo storeItemInformation) {
+        Collection<DisplayValue> display = new ArrayList<DisplayValue>();
         for (String key : DISPLAY_KEYS) {
-            if (storeItem.getInfo().get(key) != null) {
+            if (storeItemInformation.getInfo().get(key) != null) {
                 String field = key;
-                String value = storeItem.getInfo().get(key);
+                String value = storeItemInformation.getInfo().get(key);
                 String color = DISPLAY_COLOR;
                 display.add(new DisplayValue(field, value, color));
             }
