@@ -4,7 +4,7 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import gameAuthoring.JSONObjects.GameData;
 import gameEngine.controller.Controller;
-
+@Deprecated
 public class Simulator {
 
     public void simulate(GameData gameData){
