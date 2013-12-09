@@ -93,10 +93,10 @@ public class DefaultTower extends Tower {
     public void addDescription () {
         super.addDescription();
         purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_MODE, String.valueOf(attackMode));
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_DAMAGE, df.format(damage));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_DAMAGE, df.format(Math.abs(damage)));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_SPEED, df.format(attackSpeed));
 
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_DAMAGE, df.format(damage * upgradeFactor));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_DAMAGE, df.format(Math.abs(damage * upgradeFactor)));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_UPGRADE_ATTACK_SPEED, df.format(attackSpeed * upgradeFactor));
 
     }

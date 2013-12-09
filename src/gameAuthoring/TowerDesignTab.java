@@ -60,6 +60,7 @@ public class TowerDesignTab extends Tab {
     }
 
     public void addTower (File imgSource, String towerName) {
+        System.out.println(towerName);
         JLabel towerIcon = new JLabel();
         try {
             Image towerImage = ImageIO.read(imgSource);
@@ -70,6 +71,7 @@ public class TowerDesignTab extends Tab {
         }
 
         JLabel towerNameLabel = new JLabel(towerName);
+        towerNameLabel.setFont(Constants.DEFAULT_BODY_FONT);
         myScrollPanel.add(towerNameLabel);
         myScrollPanel.add(towerIcon);
 

@@ -52,12 +52,13 @@ public class StoreOptionsPanel extends JPanel {
     /**
      * @param mediator facilitates communication between view components
      * @param engineView facilitates communication between view and controller
+     * @param images 
      * @param utilities
      * @param itemPurchaser
      */
     protected StoreOptionsPanel (
                                  View engineView,
-                                 List<PurchaseInfo> towerInformation,
+                                 Map<String, String> images, List<PurchaseInfo> towerInformation,
                                  ItemOptionsDisplayer utilities,
                                  ItemPurchaser itemPurchaser) {
 
@@ -68,7 +69,7 @@ public class StoreOptionsPanel extends JPanel {
         this.itemPurchaser = itemPurchaser;
         setUIStyle();
         JPanel options = createOptionsScrollPanel();
-        addStoreInventory(options, towerInformation);
+        addStoreInventory(images,options, towerInformation);
         valuesToDisplay = new LinkedHashMap<String, String>();
         for (String str : DISPLAY_KEYS) {
             valuesToDisplay.put(str, "black");
@@ -113,7 +114,7 @@ public class StoreOptionsPanel extends JPanel {
      * @param mediator facilitates communication between view components
      * @param view facilitates communication between view and model
      */
-    private void addStoreInventory (JPanel options, List<PurchaseInfo> towerInformation) {
+    private void addStoreInventory (Map<String,String> images,JPanel options, List<PurchaseInfo> towerInformation) {
 
         StoreButtonAction hoverExitAction = new StoreButtonAction() {
 
@@ -152,7 +153,7 @@ public class StoreOptionsPanel extends JPanel {
                 }
             };
             StoreItemButton towerButton =
-                    new StoreItemButton(storeItem, hoverExitAction, hoverAction, clickAction);
+                    new StoreItemButton(images, storeItem, hoverExitAction, hoverAction, clickAction);
             options.add(towerButton);
             storeItems.add(towerButton);
         }

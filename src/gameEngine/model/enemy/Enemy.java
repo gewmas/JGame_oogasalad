@@ -35,6 +35,7 @@ public class Enemy extends JGObject implements IEMagicable {
     int pathIndex;
     double pathStep;
     int mySpecialty = 0;
+    int damage=0;
     LinkedList<Tile> path;
 
     double pathX;
@@ -55,7 +56,7 @@ public class Enemy extends JGObject implements IEMagicable {
                   int collisionid,
                   String image,
                   int speciaty,
-                  Model model) {
+                  Model model,int damage) {
         super(id, unique_id, model.getPathList().get(0).getX(), model.getPathList().get(0).getY(),
               collisionid, image);
 
@@ -73,7 +74,7 @@ public class Enemy extends JGObject implements IEMagicable {
         this.orignalSpeed = speed;
         this.path = model.getPathList();
         this.pathIndex = 0;
-
+        this.damage=damage;
         this.x = path.get(0).getX();
         this.y = path.get(0).getY();
 
@@ -93,6 +94,7 @@ public class Enemy extends JGObject implements IEMagicable {
     public void move () {
         // update skills
         lifeLessThanZero();
+        
         if (mySkill != null)
             mySkill.update((int) this.getCenterX(), (int) this.getCenterY());
         // Should walk along the Path
@@ -100,8 +102,8 @@ public class Enemy extends JGObject implements IEMagicable {
             // System.out.println("Reached point!");
             calculateNewDirection();
         }
-        pathX += xMovement * speed;
-        pathY += yMovement * speed;
+        pathX += xMovement *speed;
+        pathY += yMovement *speed;
         JGRectangle box = this.getImageBBox();
 
         this.x = pathX - (box.width - GameEngineConstant.PIXELSPERTILE) / 2;
@@ -123,10 +125,10 @@ public class Enemy extends JGObject implements IEMagicable {
 
     public void lifeLessThanZero () {
         if (life <= 0) {
+           
             model.getGameInfo().addGold((int) gold);
-            CreateEffect effect = new CreateEffect();
-            effect.blood(this.getCenterX(), this.getCenterY());
-            effect.Dollar(this.getCenterX(), this.getCenterY());
+            CreateEffect.blood(this.getCenterX(), this.getCenterY());
+            CreateEffect.Dollar(this.getCenterX(), this.getCenterY());
 
             remove();
         }
@@ -173,7 +175,7 @@ public class Enemy extends JGObject implements IEMagicable {
     }
 
     public void reachedGoal () {
-        model.getGameInfo().loseLife();
+        model.getGameInfo().loseLife(damage);
         remove();
     }
 

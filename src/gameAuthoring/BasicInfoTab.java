@@ -1,10 +1,10 @@
 package gameAuthoring;
 
 import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.menuBar.Simulator;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
@@ -27,18 +27,19 @@ import net.miginfocom.swing.MigLayout;
  */
 public class BasicInfoTab extends Tab {
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources/img");
 
     private JTextField myGameName;
     private JTextField myGold;
     private JTextField myLives;
-    private JTextField myWindowWidth;
-    private JTextField myWindowHeight;
-    private JTextField myTilesPerRow;
-    private JTextField myDifficultyScale;
+    private JTextField altGoldText;
+    private JTextField altLivesText;
 
     private JLabel mySplashImageLabel;
     private String mySplashImage;
+    private JButton simulateButton;
+
+    private AudioLabel myAudioLabel;
 
     public BasicInfoTab (GameData gameData) {
         super(gameData);
@@ -52,76 +53,84 @@ public class BasicInfoTab extends Tab {
         JPanel subPanel = new JPanel(new MigLayout("wrap 2"));
         subPanel.setOpaque(false);
         JLabel gameName = new JLabel("Game Name");
-        gameName.setFont(Constants.defaultBodyFont);
+        gameName.setFont(Constants.DEFAULT_BODY_FONT);
+        gameName.setToolTipText("Give your game a name. This will be displayed on the game start page.");
 
         JLabel gold = new JLabel("Starting Gold");
-        gold.setFont(Constants.defaultBodyFont);
+        gold.setFont(Constants.DEFAULT_BODY_FONT);
+        gold.setToolTipText("Input the number of gold a player starts out with.");
 
         JLabel lives = new JLabel("Starting Lives");
-        lives.setFont(Constants.defaultBodyFont);
+        lives.setFont(Constants.DEFAULT_BODY_FONT);
+        lives.setToolTipText("Input the number of lives a player starts out with.");
 
         JLabel title = new JLabel("Basic Game Info");
-        title.setFont(Constants.defaultBodyFont);
+        title.setFont(Constants.DEFAULT_BODY_FONT);
 
-        JLabel width = new JLabel("Window Width");
-        width.setFont(Constants.defaultBodyFont);
-
-        JLabel height = new JLabel("Window Height");
-        height.setFont(Constants.defaultBodyFont);
-
-        JLabel tiles = new JLabel("Tiles Per Row");
-        tiles.setFont(Constants.defaultBodyFont);
-
-        JLabel difficultyScale = new JLabel("Difficulty Scale");
-        difficultyScale.setFont(Constants.defaultBodyFont);
-
-        title.setFont(Constants.defaultTitleFont);
+        title.setFont(Constants.DEFAULT_TITLE_FONT);
         title.setForeground(new Color(80, 80, 80));
         mainPanel.add(title, "span 2");
 
         JButton setSplashImageButton = new JButton("Choose Splash Image");
-        setSplashImageButton.setFont(new Font("Calibri", Font.PLAIN, 14));
+        setSplashImageButton.setFont(Constants.DEFAULT_BODY_FONT);
+        setSplashImageButton
+                .setToolTipText("Select a Splash Image to be displayed before your game begins.");
         setSplashImageButton.addMouseListener(setSplashImageListener());
 
         mySplashImageLabel = new JLabel();
 
         JButton setInfoButton = new JButton("Set Info");
-        setInfoButton.setFont(new Font("Calibri", Font.PLAIN, 14));
+        simulateButton = new JButton("Simulate");
+        simulateButton.setEnabled(false);
+        simulateButton.setFont(Constants.DEFAULT_BODY_FONT);
+        simulateButton.addMouseListener(setSimulateListener());
+        setInfoButton.setFont(Constants.DEFAULT_BODY_FONT);
+        setInfoButton
+                .setToolTipText("Once all fields have been completed, click the submit button. You can then proceed to 'preview' your game.");
         setInfoButton.addMouseListener(setInfoListener());
 
         myGameName = new JTextField();
         myGameName.setPreferredSize(new Dimension(200, 30));
         myGold = new JTextField();
+        JLabel altGoldLabel = new JLabel("Alternative Gold Name:");
+        altGoldLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        altGoldLabel.setToolTipText("If you want, choose another name for your currency.");
+        altGoldText = new JTextField();
+        altGoldText.setPreferredSize(new Dimension(200, 30));
+        altGoldText.setFont(Constants.DEFAULT_BODY_FONT);
+
         myGold.setPreferredSize(new Dimension(200, 30));
         myLives = new JTextField();
         myLives.setPreferredSize(new Dimension(200, 30));
-        myWindowWidth = new JTextField();
-        myWindowWidth.setPreferredSize(new Dimension(200, 30));
-        myWindowHeight = new JTextField();
-        myWindowHeight.setPreferredSize(new Dimension(200, 30));
-        myTilesPerRow = new JTextField();
-        myTilesPerRow.setPreferredSize(new Dimension(200, 30));
-        myDifficultyScale = new JTextField();
-        myDifficultyScale.setPreferredSize(new Dimension(200, 30));
+        JLabel altLivesLabel = new JLabel("Alternative Lives Name:");
+        altLivesLabel.setFont(Constants.DEFAULT_BODY_FONT);
+        altLivesLabel.setToolTipText("If you want, choose another name for your lives.");
+        altLivesText = new JTextField();
+        altLivesText.setPreferredSize(new Dimension(200, 30));
+        altLivesText.setFont(Constants.DEFAULT_BODY_FONT);
+
+        myAudioLabel = new AudioLabel();
+        JLabel audioLabel = new JLabel("Background Audio:");
+        audioLabel.setToolTipText("Select an audio to be played in the background of your game");
+        myAudioLabel.setMutableStatusTrue();
+        audioLabel.setFont(Constants.DEFAULT_BODY_FONT);
 
         subPanel.add(gameName);
         subPanel.add(myGameName);
         subPanel.add(gold);
         subPanel.add(myGold);
+        subPanel.add(altGoldLabel);
+        subPanel.add(altGoldText);
         subPanel.add(lives);
         subPanel.add(myLives);
-        subPanel.add(width);
-        subPanel.add(myWindowWidth);
-        subPanel.add(height);
-        subPanel.add(myWindowHeight);
-        subPanel.add(tiles);
-        subPanel.add(myTilesPerRow);
-        subPanel.add(difficultyScale);
-        subPanel.add(myDifficultyScale);
-
+        subPanel.add(altLivesLabel);
+        subPanel.add(altLivesText);
+        subPanel.add(audioLabel);
+        subPanel.add(myAudioLabel);
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
         subPanel.add(setInfoButton);
+        subPanel.add(simulateButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         subPanel.setBorder(b);
         mainPanel.add(subPanel, "align center");
@@ -134,10 +143,6 @@ public class BasicInfoTab extends Tab {
             myGameName.setText(p.getString("name"));
             myGold.setText(String.valueOf(p.getInt("gold")));
             myLives.setText(String.valueOf(p.getInt("numberOfLives")));
-            myWindowWidth.setText(String.valueOf(p.getInt("widthOfWindow")));
-            myWindowHeight.setText(String.valueOf(p.getInt("heightOfWindow")));
-            myTilesPerRow.setText(String.valueOf(p.getInt("tilesPerRow")));
-            myDifficultyScale.setText(String.valueOf(p.getDouble("difficultyScale")));
             mySplashImage = p.getString("splashImage");
             mySplashImageLabel.setText(mySplashImage);
 
@@ -161,25 +166,37 @@ public class BasicInfoTab extends Tab {
 
     }
 
+    public MouseAdapter setSimulateListener () {
+        MouseAdapter listener = new MouseAdapter() {
+            @Override
+            public void mouseClicked (MouseEvent e) {
+                Simulator simulator = new Simulator();
+                simulator.simulate(myGameData);
+            }
+        };
+        return listener;
+
+    }
+
+    public void setBackgroundAudio (AudioLabel audio) {
+        myAudioLabel = audio;
+    }
+
     private void setData () {
         int gold = Integer.parseInt(myGold.getText());
         int lives = Integer.parseInt(myLives.getText());
-        int width = Integer.parseInt(myWindowWidth.getText());
-        int height = Integer.parseInt(myWindowHeight.getText());
-        int tiles = Integer.parseInt(myTilesPerRow.getText());
-        float difficultyScale = Float.parseFloat(myDifficultyScale.getText());
         String name = myGameName.getText();
-
-        if (gold > 0 && lives > 0 && width > 0 && height > 0 && tiles > 0 &&
-            difficultyScale > 1 && mySplashImage != null && name != null) {
+        if (myAudioLabel != null && gold > 0 && lives > 0 && mySplashImage != null && name != null) {
+            String goldName = altGoldText.getText();
+            String livesName = altLivesText.getText();
             myGameData.setGold(gold);
             myGameData.setLives(lives);
-            myGameData.setWindowWidth(width);
-            myGameData.setWindowHeight(height);
-            myGameData.setTilesPerRow(tiles);
-            myGameData.setDifficultyScale(difficultyScale);
-            myGameData.setSplashImage(mySplashImage);
+            myGameData.setSplashImage(mySplashImage.substring(0, mySplashImage.length()-4));
             myGameData.setGameName(name);
+            myGameData.addAudio(myAudioLabel.getID(), myAudioLabel.getAudioFile().getName());
+            myGameData.setGoldName(goldName);
+            myGameData.setLivesName(livesName);
+            activateSimmulate();
         }
 
         else {
@@ -188,18 +205,19 @@ public class BasicInfoTab extends Tab {
         }
     }
 
+    private void activateSimmulate () {
+        simulateButton.setEnabled(true);
+    }
+
     public MouseAdapter setSplashImageListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    mySplashImage =
-                            INPUT_CHOOSER
-                                    .getSelectedFile()
-                                    .toString()
-                                    .replace(System.getProperties().getProperty("user.dir") + "/",
-                                             "");
+             
+                    mySplashImage = INPUT_CHOOSER.getSelectedFile().getName();
+                    myGameData.addImage(mySplashImage.substring(0, mySplashImage.length()-4), mySplashImage);
                     mySplashImageLabel.setText(mySplashImage);
                 }
 

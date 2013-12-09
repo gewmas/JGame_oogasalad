@@ -25,6 +25,7 @@ public class FadeEffect extends Effect {
         else {
             myObject.alpha-=0.025;
             if(myObject.alpha<=0){
+                
                 myObject.remove();
                 remove();
             }

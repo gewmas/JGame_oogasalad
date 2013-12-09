@@ -10,8 +10,6 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -21,19 +19,22 @@ import javax.swing.JTabbedPane;
 import net.miginfocom.swing.MigLayout;
 
 
-public class GameAuthoringGUI implements Observer {
+public class GameAuthoringGUI {
 
     protected JFrame myFrame;
-    protected JPanel myMainPanel;
-    static File mySelectedImage = null;
+    protected static JPanel myMainPanel;
+    protected static File mySelectedImage = null;
+    protected static File mySelectedAudio = null;
     private BasicInfoTab myBasicInfoTab;
     private MapDesignTab myMapDesignTab;
     private TowerDesignTab myTowerDesignTab;
     private EnemyDesignTab myEnemyDesignTab;
-    private LevelDesignTab myLevelDesignTab;
-    private MiscellaneousTab myMiscellaneousTab;
-    private UserLibraryMainTab myUserLibraryPanel;
-    private Image currentImage;
+    private WaveDesignTab myWaveDesignTab;
+    private SkillsDesignTab mySkillsDesignTab;
+    private TempBarrierDesignTab myTempBarrierTab;
+    private UserLibraryMainTab myUserLibraryTab;
+    protected static ImageLabel myImageLabel = null;
+    protected static AudioLabel myAudioLabel = null;
 
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
@@ -48,30 +49,44 @@ public class GameAuthoringGUI implements Observer {
         catch (IOException e1) {
             e1.printStackTrace();
         }
-        myFrame.setPreferredSize(new Dimension(1200, 1000));
+        myFrame.setPreferredSize(new Dimension(1200, 800));
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myMainPanel = new ImagePanel(new MigLayout("wrap 2"));
+        myMainPanel = new ImagePanel("texture0.jpg");
+        myMainPanel.setLayout(new MigLayout("wrap 2"));
         JTabbedPane gameDesignTab = new JTabbedPane();
-        gameDesignTab.setPreferredSize(new Dimension(750, 650));
+        gameDesignTab.setPreferredSize(new Dimension(750, 600));
         myBasicInfoTab = new BasicInfoTab(gameData);
         myMapDesignTab = new MapDesignTab(gameData);
         myTowerDesignTab = new TowerDesignTab(gameData);
         myEnemyDesignTab = new EnemyDesignTab(gameData);
-        myLevelDesignTab = new LevelDesignTab(gameData);
-        myMiscellaneousTab = new MiscellaneousTab(gameData);
-        myUserLibraryPanel = new UserLibraryMainTab(this);
+        myWaveDesignTab = new WaveDesignTab(gameData);
+        mySkillsDesignTab = new SkillsDesignTab(gameData);
+        myTempBarrierTab = new TempBarrierDesignTab(gameData);
+        myUserLibraryTab = new UserLibraryMainTab(gameData);
+
+        JLabel duvallClippy = new JLabel();
+        Image duvallImage;
+        try {
+            duvallImage = ImageIO.read(this.getClass().getResource("duvall_clippy.png"));
+            duvallClippy.setIcon(new ImageIcon(duvallImage));
+        }
+        catch (IOException e1) {
+            e1.printStackTrace();
+        }
 
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
         gameDesignTab.addTab("Map Design", myMapDesignTab.getTab());
         gameDesignTab.addTab("Tower Design", myTowerDesignTab.getTab());
         gameDesignTab.addTab("Enemy Design", myEnemyDesignTab.getTab());
-        gameDesignTab.addTab("Level Design", myLevelDesignTab.getTab());
-        gameDesignTab.addTab("Miscellaneous", myMiscellaneousTab.getTab());
-        MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab);
-        myMainPanel.add(title, "span 2, align left, gap 0 0 30 0");
-        myMainPanel.add(gameDesignTab, "gap 50 20 30 40");
-        myMainPanel.add(myUserLibraryPanel);
+        gameDesignTab.addTab("Wave Design", myWaveDesignTab.getTab());
+        gameDesignTab.addTab("Temp Barrier Design", myTempBarrierTab.getTab());
+        gameDesignTab.addTab("Skills Design", mySkillsDesignTab.getTab());
+        MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
+        myMainPanel.add(title, "span 2, align left, gap 0 0 15 0");
+        myMainPanel.add(gameDesignTab, "gap 50 20 20 40");
+        myMainPanel.add(myUserLibraryTab);
+        myMainPanel.add(duvallClippy);
         myFrame.setJMenuBar(menu);
         myFrame.setContentPane(myMainPanel);
         myFrame.pack();
@@ -84,25 +99,26 @@ public class GameAuthoringGUI implements Observer {
         GameAuthoringGUI gameAuthoringGUI = new GameAuthoringGUI();
     }
 
-    @Override
-    public void update (Observable arg0, Object arg1) {
-        if (arg1 instanceof File) {
-            File imageFile = (File) arg1;
-            mySelectedImage = imageFile;
-            Image image;
-            try {
-                image = ImageIO.read(imageFile);
-                Toolkit toolkit = Toolkit.getDefaultToolkit();
-                Cursor c = toolkit.createCustomCursor(image, new Point(myMainPanel.getX(),
-                                                                       myMainPanel.getY()), "img");
-                myMainPanel.setCursor(c);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
+    public static final void setCursor (File imageFile) {
+        mySelectedImage = imageFile;
+        Image image;
+        try {
+            image = ImageIO.read(imageFile);
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Cursor c = toolkit.createCustomCursor(image, new Point(myMainPanel.getX(),
+                                                                   myMainPanel.getY()), "img");
+            myMainPanel.setCursor(c);
         }
-        if (arg1 instanceof Integer) {
-            myMainPanel.setCursor(Cursor.getDefaultCursor());
+        catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    public static final void setCursorNull () {
+        myMainPanel.setCursor(Cursor.getDefaultCursor());
+    }
+
+    public static final void setAudioFile (File audio) {
+        mySelectedAudio = audio;
     }
 }

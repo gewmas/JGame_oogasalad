@@ -1,11 +1,13 @@
 package gameAuthoring.JSONObjects;
 
+import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
+
 
 /**
  * Class that represents Tower in form of JSONObject
  * 
- *
+ * 
  */
 public class TowerJSONObject extends JSONObject {
 
@@ -23,27 +25,110 @@ public class TowerJSONObject extends JSONObject {
      * @param recyclePrice Gold gained by selling tower
      * @param description Brief description of tower behavior
      */
-    public TowerJSONObject (String type, 
+    public TowerJSONObject (String type,
                             String name,
                             String imagePath,
                             int damage,
-                            int attackSpeed,
+                            double attackSpeed,
                             int attackMode,
                             int range,
                             int cost,
                             int recyclePrice,
                             String description) {
-        
-        this.put("type", type);
-        this.put("id", name);
-        this.put("image", imagePath);
-        this.put("damage", damage);
-        this.put("attackSpeed", attackSpeed);
-        this.put("attackMode", attackMode);
-        this.put("range", range);
-        this.put("cost", cost);
-        this.put("recyclePrice", recyclePrice);
-        this.put("description", description);      
+
+        this.put("Type", type);
+        this.put("Name", name);
+        this.put("Image", imagePath);
+        this.put("Damage", damage);
+        this.put("Attack Speed", attackSpeed);
+        this.put("Attack Mode", attackMode);
+        this.put("Range", range);
+        this.put("Cost", cost);
+        this.put("Sell Price", recyclePrice);
+        this.put("Description", description);
     }
+
+    //MultipleShootingTower
+    public TowerJSONObject (String type,
+                            String name,
+                            String imagePath,
+                            int damage,
+                            double attackSpeed,
+                            int attackMode,
+                            int attackAmount,
+                            int range,
+                            int cost,
+                            int recyclePrice,
+                            String description) {
+
+        this.put("Type", type);
+        this.put("Name", name);
+        this.put("Image", imagePath);
+        this.put("Damage", damage);
+        this.put("Attack Speed", attackSpeed);
+        this.put("Attack Mode", attackMode);
+        this.put("Attack Amount", attackAmount);
+        this.put("Range", range);
+        this.put("Cost", cost);
+        this.put("Sell Price", recyclePrice);
+        this.put("Description", description);
+    }
+    
+    //BoostTower
+    public TowerJSONObject (String type,
+                            String name,
+                            String imagePath,
+                            int damage,
+                            double attackSpeed,
+                            //int attackMode, //Not in JSON
+                            int range,
+                            int cost,
+                            int recyclePrice,
+                            String description,
+                            double boostFactor) {
+
+        this.put("Type", type);
+        this.put("Name", name);
+        this.put("Image", imagePath);
+        this.put("Damage", damage);
+        this.put("Attack Speed", attackSpeed);
+        //this.put("attackMode", attackMode);
+        this.put("Range", range);
+        this.put("Cost", cost);
+        this.put("Sell Price", recyclePrice);
+        this.put("Description", description);
+        this.put("Boost Factor", boostFactor);
+    }
+    
+    //MagicTower
+    public TowerJSONObject (String type,
+                            String name,
+                            String imagePath,
+                            int damage,
+                            double attackSpeed,
+                            int attackMode,
+                            int range,
+                            int cost,
+                            int recyclePrice,
+                            String description,
+                            double magicFactor,
+                            String magic) {
+
+        this.put("Type", type);
+        this.put("Name", name);
+        this.put("Image", imagePath);
+        this.put("Damage", damage);
+        this.put("Attack Speed", attackSpeed);
+        this.put("Attack Mode", attackMode);
+        this.put("Range", range);
+        this.put("Cost", cost);
+        this.put("Sell Price", recyclePrice);
+        this.put("Description", description);
+        this.put("Magic Factor", magicFactor);
+        JSONArray magicArray = new JSONArray();
+        magicArray.put(magic);
+        this.put("Magic", magicArray);
+    }
+    
 
 }

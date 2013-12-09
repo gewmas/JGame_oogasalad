@@ -1,5 +1,5 @@
 {
-"name": "Tower Destruction II",
+"name": "Hospital Heal II",
 "spashImage" :  "game-bg.png",
 "BGImage" :  "woods_background",
 "gold" : 500,
@@ -357,7 +357,16 @@
         	{ "x": 6, "y": 2, "image": "tree.jpg" }
         ]
 },
-
+"description":
+{
+	"TOWER_DAMAGE" : "Heal",
+	"TOWER_ATTACK_SPEED" : "Heal Speed",
+	"TOWER_ATTACK_AMOUNT" : "Heal Amount of Patients",
+	"TOWER_ATTACK_MODE" : "Head Mode",
+	"TOWER_UPGRADE_DAMAGE" : "Upgrade Heal",
+	"TOWER_UPGRADE_ATTACK_SPEED" : "Upgrade Heal Speed",
+	"TOWER_UPGRADE_ATTACK_AMOUNT" : "Upgrade Heal Amount of Patients",
+},
 "resources":
 {
   	   
@@ -434,7 +443,7 @@
 	 "Type": "DefaultTower",
 	 "Name" : "Doctor Jason",
 	 "Image": "OldDoc",
-	 "Damage": -3,
+	 "Damage": -1,
 	 "Attack Speed": 0.8,
 	 "Attack Mode": 1,
 	 "Range": 100,	
@@ -447,7 +456,7 @@
 	 "Type": "DefaultTower",
 	 "Name" : "Doctor Newman",
 	 "Image": "OldDoc",
-	 "Damage": -3,
+	 "Damage": -1,
 	 "Attack Speed": 0.8,
 	 "Attack Mode": 1,
 	 "Range": 100,	
@@ -460,11 +469,11 @@
 	 "Type": "MultipleShootingTower",
 	 "Name" : "Doctor Duvall",
 	 "Image": "DuvallDoc",
-	 "Damage": -3,
-	 "Attack Speed": 3.5,
+	 "Damage": -1,
+	 "Attack Speed": 5,
 	 "Attack Mode": 2,
 	 "Attack Amount": 5,
-	 "Range": 80,	
+	 "Range": 100,	
 	 "Cost": 100, 
 	 "Sell Price":  50,
 	 "Specialty" : 0,
@@ -502,11 +511,13 @@
 "enemyType":[
 {
 	"id": "1",
-	"gold": 5,
+	"gold": -100,
 	"image": "OldPatient",
 	"life": 10,
 	"speed": 0.5,
    "skill": "Poison",
+   "Specialty" : 1,
+   "damage":-1
 }, 
 {
 	"id": "2",
@@ -514,7 +525,9 @@
 	"image": "KidPatient",
 	"life": 15,
 	"speed": 0.5,
-   "skill": "Light",
+   "skill": "",
+   "Specialty" : 2,
+   "damage":-1
 },
 {
 	"id": "3",
@@ -523,6 +536,8 @@
 	"life": 15,
 	"speed": 0.5,
    	"skill": "Armour",
+   	"Specialty" : 1,
+   	"damage":-1
 }
 ],
 

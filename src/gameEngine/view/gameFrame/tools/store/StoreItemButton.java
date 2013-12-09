@@ -3,6 +3,7 @@ package gameEngine.view.gameFrame.tools.store;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import gameEngine.model.purchase.PurchaseInfo;
@@ -33,15 +34,16 @@ public class StoreItemButton extends JButton {
      * @param hoverAction defines behavior when button is hovered over
      * @param clickAction defines behavior when button is clicked
      */
-    public StoreItemButton (PurchaseInfo itemPurchaseInfo, StoreButtonAction hoverExitAction,
+    public StoreItemButton (Map<String,String> images,PurchaseInfo itemPurchaseInfo, StoreButtonAction hoverExitAction,
                             StoreButtonAction hoverAction,
                             StoreButtonAction clickAction) {
         super("");
         active = false;
         this.setEnabled(false);
+        
         ImageIcon icon =
                 new ImageIcon("src/resources/img/" +
-                              itemPurchaseInfo.getInfo().get("Image").trim() + ".png");
+                              images.get(itemPurchaseInfo.getInfo().get("Image").trim()));
         this.setIcon(icon);
         String tempInt = itemPurchaseInfo.getInfo().get("Cost");
         this.cost = (int) Double.parseDouble(tempInt);

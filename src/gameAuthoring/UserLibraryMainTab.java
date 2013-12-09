@@ -1,20 +1,18 @@
 package gameAuthoring;
 
+import gameAuthoring.JSONObjects.GameData;
 import java.awt.Dimension;
-import java.util.Observer;
 import javax.swing.JTabbedPane;
 
 
 public class UserLibraryMainTab extends JTabbedPane {
 
-    public UserLibraryMainTab (Observer observer) {
-        this.setPreferredSize(new Dimension(300, 650));
-        UserImagesTab userImagesTab = new UserImagesTab();
+    public UserLibraryMainTab (GameData gameData) {
+        this.setPreferredSize(new Dimension(300, 600));
+        UserImagesTab userImagesTab = new UserImagesTab(gameData);
         UserSoundsTab userSoundsTab = new UserSoundsTab();
-        userImagesTab.addObserver(observer);
-        // userSoundsTab.addObserver(enemyDesignTab);
         this.add("Image Library", userImagesTab.getTab());
         this.add("Sound Library", userSoundsTab.getTab());
-        this.setFont(Constants.defaultBodyFont);
+        this.setFont(Constants.DEFAULT_BODY_FONT);
     }
 }

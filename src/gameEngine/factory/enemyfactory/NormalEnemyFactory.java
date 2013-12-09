@@ -23,6 +23,7 @@ public class NormalEnemyFactory implements EnemyFactory {
     private double speed;
     private String skill;
     private int specialty;
+    private int damage;
 
     /**
      * @param enemyInfo: the JSONObject that contains an enemy type information.
@@ -41,7 +42,7 @@ public class NormalEnemyFactory implements EnemyFactory {
         this.life = enemyInfo.getDouble("life");
         this.speed = enemyInfo.getDouble("speed");
         this.skill = enemyInfo.getString("skill");
-
+        this.damage= enemyInfo.getInt("damage");
     }
 
     /**
@@ -51,7 +52,8 @@ public class NormalEnemyFactory implements EnemyFactory {
     public Enemy create (Model model) {
         Enemy enemy =
                 new Enemy(gold, life, speed, id, true, GameEngineConstant.ENEMY_CID, image,
-                          specialty, model);
+                          specialty, model,damage);
+        System.out.println("created");
         model.addEnemy(enemy);
         System.out.println(skill);
         enemy.setSkill(skill);
