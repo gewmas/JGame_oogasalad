@@ -4,6 +4,7 @@ import gameEngine.controller.ControllerToViewInterface;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -22,7 +23,7 @@ public class AttackModeButton extends TowerUpgraderButton {
     private ItemOptionsDisplayer towerUpgrader;
     private JList<String> myAttackModeList;
     private DefaultListModel<String> myAttackModeListModel;
-    private int numAttackModes=4;    
+    private int numAttackModes=4;   
 
     public AttackModeButton (ItemOptionsDisplayer utility, ControllerToViewInterface controller_in) {
         super(NAME);

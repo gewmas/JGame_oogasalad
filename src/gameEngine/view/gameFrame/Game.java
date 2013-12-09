@@ -80,8 +80,8 @@ public class Game extends StdGame {
 
         this.setMoneyTitle(gameInfo.getMyGoldName());
         this.setLivesTitle(gameInfo.getMyLivesName());
+        
         Dimension size = gameInfo.getDimension();// view.getGameSize();
-
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
     }
@@ -96,16 +96,17 @@ public class Game extends StdGame {
                       new Highscore(0, "nobody"), // default entry for highscore
                       25 // max length of the player name
                 );
+        this.game_title = gameInfo.getMyName();
 
-        initial_lives = gameInfo.getLife();// view.getLives();
-        lives = initial_lives;// view.getLives();
-        score = gameInfo.getGold();// view.getMoney();
-        defineImage("RESERVEDslider_bar", "sb", 256, "slider_bar.png", "-");
-        defineImage("RESERVEDslider_toggle", "sb", 256, "slider_toggle.png", "-");
-        String background = controller.getGameInfo().getBGImage();// gameInfo.getBGImage();//view.getBGImage();
-
+        initial_lives = gameInfo.getLife();
+        lives = initial_lives;
+        score = gameInfo.getGold();
+        
+        String background = controller.getGameInfo().getBGImage();
         setBGImage(background);
+        
         startgame_ingame = true;
+        
         List<Tile> pathList = controller.getPath();
         int tileCount = 0;
         for (Tile tile : pathList) {
@@ -115,8 +116,6 @@ public class Game extends StdGame {
             setTile(tilePos.x, tilePos.y, "#" + String.valueOf(tileCount));
             tileCount++;
         }
-
-        this.game_title = gameInfo.getMyName();
 
         valuesToDisplay = new LinkedHashMap<String, String>();
         for (String str : GameEngineConstant.NORMAL_DISPLAY_KEYS()) {
@@ -128,7 +127,7 @@ public class Game extends StdGame {
         controller.startGame();
 
         gameInitializerItems.initialize();
-
+        
         frameRateSlider =
                 new FrameRateSlider("slider", true, pfWidth() / 2, pfHeight() - 40, 256,
                         "slider_toggle");
@@ -203,8 +202,6 @@ public class Game extends StdGame {
                     }
                     utilities.displayTowerInformation(tower.getInfo(), display,
                                                       mousePosition.x, mousePosition.y);
-                    // utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
-                    // mousePosition.x, mousePosition.y);
                 }
             }
 

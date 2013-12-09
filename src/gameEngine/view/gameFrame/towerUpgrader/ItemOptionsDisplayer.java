@@ -15,14 +15,14 @@ import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 public class ItemOptionsDisplayer {
     private InfoDisplayPanel display;
     private RangeDisplay rangeDisplay;
-    private Collection<TowerUpgraderButton> TowerUpgraderButtons;
+    private List<TowerUpgraderButton> TowerUpgraderButtons;
 
     public ItemOptionsDisplayer (InfoDisplayPanel display, ControllerToViewInterface controller) {
         this.display = display;
         this.TowerUpgraderButtons = new ArrayList<TowerUpgraderButton>();
         TowerUpgraderButtons.add(new UpgradeButton(this, controller));
-        TowerUpgraderButtons.add(new AttackModeButton(this,controller));
         TowerUpgraderButtons.add(new SellButton(this, controller));
+        TowerUpgraderButtons.add(new AttackModeButton(this,controller));
         for (TowerUpgraderButton button : TowerUpgraderButtons) {
             display.add(button);
         }
@@ -61,6 +61,10 @@ public class ItemOptionsDisplayer {
 
         for (TowerUpgraderButton button : TowerUpgraderButtons) {
             button.setVisible(true);
+        }
+        
+        if (!information.containsKey(GameEngineConstant.TOWER_ATTACK_MODE)){
+            TowerUpgraderButtons.get(2).setVisible(false);
         }
 
         for (TowerUpgraderButton button : TowerUpgraderButtons) {
