@@ -5,8 +5,10 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import jgame.JGPoint;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.View;
+import gameEngine.view.ViewConstants;
 
 
 public class ItemPurchaser {
@@ -29,24 +31,25 @@ public class ItemPurchaser {
      * Indicates that the user wants to buy a tower
      */
     public void placeTower (PurchaseInfo purchaseInfo) {
-        // if (purchasing) {
-        // setBGColor(JGColor.red);
-        String towerName = purchaseInfo.getInfo().get("Name");
 
-        
+        String towerName = purchaseInfo.getInfo().get(GameEngineConstant.PURCHASE_INFO_NAME);
+
         if (towerName.equals(towerToPurchaseName)) {
             restoreDefaultCursor();
-            
+
             towerToPurchase = null;
             towerToPurchaseName = null;
             purchasing = false;
             return;
         }
-        ;
-        setCursorImage("src/resources/img/"+view.getStoreImages().get(purchaseInfo.getInfo().get("Image")));
+        
+        setCursorImage(ViewConstants.IMAGE_PATH +
+                       view.getStoreImages()
+                               .get(purchaseInfo.getInfo()
+                                            .get(GameEngineConstant.PURCHASE_INFO_IMAGE)));
         purchasing = true;
         towerToPurchase = purchaseInfo;
-        towerToPurchaseName = purchaseInfo.getInfo().get("Name");
+        towerToPurchaseName = purchaseInfo.getInfo().get(GameEngineConstant.PURCHASE_INFO_NAME);
         // }
     }
 
@@ -58,7 +61,6 @@ public class ItemPurchaser {
                 purchasing = false;
                 restoreDefaultCursor();
             }
-            System.out.println(towerToPurchase);
         }
 
         return purchasing;
@@ -71,7 +73,7 @@ public class ItemPurchaser {
         Cursor c =
                 toolkit.createCustomCursor(image,
                                            new Point(image.getWidth(null) / 2, image
-                                                   .getHeight(null) / 2), "tower");
+                                                   .getHeight(null) / 2), "");
         gameFrame.setCursor(c);
     }
 

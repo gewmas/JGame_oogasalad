@@ -4,7 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import gameEngine.view.StyleConstants;
+import gameEngine.view.ViewConstants;
 
 
 /**
@@ -17,7 +17,7 @@ public class CancelButton extends JButton {
     JFrame frame;
 
     public CancelButton (JFrame frame) {
-        super(StyleConstants.resourceBundle.getString("Cancel"));
+        super(ViewConstants.resourceBundle.getString("Cancel"));
         this.frame = frame;
         addMouseAdapter();
 

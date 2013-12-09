@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import gameEngine.view.StyleConstants;
+import gameEngine.view.ViewConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.inputAndDisplay.InputAndDisplayFrame;
 import gameEngine.view.gameFrame.inputAndDisplay.InputSender;
@@ -111,7 +111,7 @@ public class GameFrame extends JFrame implements GameInitializable {
     }
 
     private InfoDisplayPanel addInfoDisplay () {
-        InfoDisplayPanel infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
+        InfoDisplayPanel infoPanel = new InfoDisplayPanel(ViewConstants.resourceBundle
                 .getString("ItemInfo"));
         return infoPanel;
     }
@@ -134,6 +134,6 @@ public class GameFrame extends JFrame implements GameInitializable {
     public void endGame () {
         infoPanel.clearDisplay();
         canvasPanel.endGame();
-        storePanel.closeStore();
+        storePanel.endGame();
     }
 }
