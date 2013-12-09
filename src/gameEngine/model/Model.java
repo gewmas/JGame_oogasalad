@@ -87,7 +87,8 @@ public class Model {
         gameInfo.SetIsWin(false);
         gameInfo.setLife(parser.getInt("numberOfLives"));
         gameInfo.setGold(parser.getInt("gold"));
-//        rule.ruleStart();
+        setCheatToWin(false);
+
         //Edited by Alex, call reset() instead of start()
         rule.reset();
 
@@ -277,6 +278,11 @@ public class Model {
     
     public Map<String, String> getImageURL(){
         return myResources.getImages(); 
+    }
+
+        // @Author Fabio
+    public void setCheatToWin (boolean isCheatToWin) {
+        this.isCheatToWin = isCheatToWin;
     }
     
     

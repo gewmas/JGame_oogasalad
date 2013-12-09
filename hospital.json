@@ -511,7 +511,7 @@
 "enemyType":[
 {
 	"id": "1",
-	"gold": 5,
+	"gold": -100,
 	"image": "OldPatient",
 	"life": 10,
 	"speed": 0.5,
