@@ -8,7 +8,6 @@ public class TowerDesignController extends DesignController {
 
     public TowerDesignController (GameData gameData) {
         super(gameData);
-        // TODO Auto-generated constructor stub
     }
 
     @Override

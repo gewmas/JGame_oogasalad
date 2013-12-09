@@ -6,6 +6,8 @@ import gameAuthoring.controllers.EnemyDesignController;
 import gameAuthoring.controllers.EnemyWaveCommunicationController;
 import gameAuthoring.controllers.MapDesignController;
 import gameAuthoring.controllers.SkillsDesignController;
+import gameAuthoring.controllers.TempBarrierDesignController;
+import gameAuthoring.controllers.TowerDesignController;
 import gameAuthoring.controllers.UserImagesController;
 import gameAuthoring.menuBar.MenuBar;
 import java.awt.Cursor;
@@ -57,6 +59,8 @@ public class GameAuthoringGUI {
         mapDesignTab.addObserver(mapDesignController);
 
         TowerDesignTab towerDesignTab = new TowerDesignTab();
+        TowerDesignController towerDesignController = new TowerDesignController(myGameData);
+        towerDesignTab.addObserver(towerDesignController);
 
         EnemyDesignController enemyDesignController = new EnemyDesignController(myGameData);
         EnemyDesignTab enemyDesignTab = new EnemyDesignTab();
@@ -72,7 +76,9 @@ public class GameAuthoringGUI {
         enemyWaveCommController.addObserver(waveDesignTab);
         enemyDesignTab.addObserver(enemyWaveCommController);
 
+        TempBarrierDesignController tempBarrierDesignController = new TempBarrierDesignController(myGameData);
         TempBarrierDesignTab tempBarrierTab = new TempBarrierDesignTab();
+        tempBarrierTab.addObserver(tempBarrierDesignController);
 
         myDuvallClippy = new JLabel();
         Image duvallImage;

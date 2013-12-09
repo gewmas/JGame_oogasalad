@@ -58,36 +58,32 @@ public class TowerDesignPanel extends JPanel {
             towerImageChooser;
 
     public TowerDesignPanel (TowerDesignTab towerDesignTab) {
-        FileNameExtensionFilter filter =
-                new FileNameExtensionFilter(
-                                            "JPG & GIF Images", "jpg", "gif", "png");
-        INPUT_CHOOSER.setFileFilter(filter);
-        initializeComponents();
-
-        myTowerDesignTab = towerDesignTab;
-
-        type = new JLabel("Type");
-
-        type.setFont(Constants.DEFAULT_BODY_FONT);
-
-        myTypeOptions = new JComboBox<String>(TOWER_TYPES);
-        myTypeOptions.setFont(Constants.DEFAULT_BODY_FONT);
-        myTypeOptions.addActionListener(createTowerTypeListener(this));
-
-        this.setLayout(new MigLayout("wrap 2"));
-        this.add(type);
-        this.add(myTypeOptions);
-
-        this.setLayout(new MigLayout("wrap 1"));
-        JPanel myDataPanel = createTowerPanel();
-        myDataPanel.setOpaque(false);
-        myDataPanel.add(createTowerButton);
-        this.add(myDataPanel);
-
-        Border b = BorderFactory.createLineBorder(Color.black, 1);
-        this.setBorder(b);
-        this.setOpaque(false);
-        this.setPreferredSize(new Dimension(380, 500));
+//        initializeComponents();
+//
+//        myTowerDesignTab = towerDesignTab;
+//
+//        type = new JLabel("Type");
+//
+//        type.setFont(Constants.DEFAULT_BODY_FONT);
+//
+//        myTypeOptions = new JComboBox<String>(TOWER_TYPES);
+//        myTypeOptions.setFont(Constants.DEFAULT_BODY_FONT);
+//        myTypeOptions.addActionListener(createTowerTypeListener(this));
+//
+//        this.setLayout(new MigLayout("wrap 2"));
+//        this.add(type);
+//        this.add(myTypeOptions);
+//
+//        this.setLayout(new MigLayout("wrap 1"));
+//        JPanel myDataPanel = createTowerPanel();
+//        myDataPanel.setOpaque(false);
+//        myDataPanel.add(createTowerButton);
+//        this.add(myDataPanel);
+//
+//        Border b = BorderFactory.createLineBorder(Color.black, 1);
+//        this.setBorder(b);
+//        this.setOpaque(false);
+//        this.setPreferredSize(new Dimension(380, 500));
     }
 
     private ActionListener createTowerTypeListener (final TowerDesignPanel towerPanel) {
