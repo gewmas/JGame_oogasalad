@@ -519,6 +519,9 @@ public class TowerDesignTab extends Tab {
         scrollPane = new JScrollPane(myDescriptionField);
     }
 
+    /**
+     * Initializing tower image chooser
+     */
     private void initializeTowerImageChooser () {
         myTowerImageChooser = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerImage"));
@@ -527,6 +530,9 @@ public class TowerDesignTab extends Tab {
         myTowerImage.setMutableStatusTrue();
     }
 
+    /**
+     * Initializes button for creating tower.
+     */
     private void initializeTowerCreationButton () {
         myCreateTowerButton = new JButton(StyleConstants.resourceBundle
                 .getString("TowerCreation"));
