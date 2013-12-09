@@ -242,6 +242,9 @@ public class Game extends StdGame {
 
     public void endGame () {
         view.stopWaves();
+        for (GameUpdatable updatable:gameUpdatables){
+            updatable.endGame();
+        }
         removeObjects(null, 0);
 
     }

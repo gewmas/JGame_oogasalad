@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import jgame.impl.JGEngineInterface;
+import gameAuthoring.MainPanel;
 import gameEngine.controller.Controller;
 import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
@@ -62,7 +63,7 @@ public class View implements MenuActions {
         catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null,
-                                          StyleConstants.resourceBundle.getString("FileReadError"));
+                                          ViewConstants.resourceBundle.getString("FileReadError"));
         }
     }
 
@@ -143,7 +144,14 @@ public class View implements MenuActions {
 
     @Override
     public void goToMainMenu () {
-        // TODO Auto-generated method stub
+        controller.startGame();
+        gameFrame.endGame();
+        gameFrame.quitGame();
+        gameFrame.dispose();
+        gameFrame = new GameFrame(this);
+        
+        MainPanel panel = new MainPanel();
+        panel.show();
 
     }
 
