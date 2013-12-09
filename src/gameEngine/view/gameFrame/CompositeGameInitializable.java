@@ -3,6 +3,10 @@ package gameEngine.view.gameFrame;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * @author Lalita Maraj
+ *Composite version of GameInitializable
+ */
 public class CompositeGameInitializable implements GameInitializable {
     private Collection<GameInitializable> gameInitializables;
     public CompositeGameInitializable(){
