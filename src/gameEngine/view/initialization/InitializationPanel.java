@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
-import gameEngine.view.StyleConstants;
+import gameEngine.view.ViewConstants;
 import gameEngine.view.View;
 
 
@@ -25,7 +25,7 @@ public class InitializationPanel extends JPanel {
     public InitializationPanel (JFrame initializationFrame, View view) {
         super();
         this.setLayout(new MigLayout(WRAP_CONSTNAT));
-        JLabel message = new JLabel(StyleConstants.resourceBundle.getString("Welcome"));
+        JLabel message = new JLabel(ViewConstants.resourceBundle.getString("Welcome"));
         add(message, MESSAGE_SPAN);
 
         JButton selectorButton = new FileSelectorButton(view);

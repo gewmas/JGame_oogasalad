@@ -1,6 +1,15 @@
 package gameEngine.view.gameFrame.tools;
 
+/**
+ * @author Lalita Maraj
+ *         Data Structure that encapsulates the formatting of information 
+ *         that is displayed on the InfoDisplay Panel
+ */
 public class DisplayValue {
+    private static final String CLOSING_COLOR_HTML = ">";
+    private static final String CLOSING_HTML = "</font><br>";
+    private static final String COLOR_HTML = ":</b></font>  <font color=";
+    private static final String OPENING_HTML = "<font color=blue> <b>";
     private String field;
     private String value;
     private String color;
@@ -12,7 +21,7 @@ public class DisplayValue {
     }
 
     public String toString () {
-        return "<font color=blue> <b>" + field + ":</b></font>  <font color=" +
-                color + ">" + value + "</font><br>";
+        return OPENING_HTML + field + COLOR_HTML +
+               color + CLOSING_COLOR_HTML + value + CLOSING_HTML;
     }
 }
