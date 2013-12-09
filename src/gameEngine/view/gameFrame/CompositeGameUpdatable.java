@@ -11,7 +11,7 @@ public class CompositeGameUpdatable implements GameUpdatable
 {
     private Collection<GameUpdatable> gameUpdatables;
     public CompositeGameUpdatable(){
-        gameUpdatables = new ArrayList();
+        gameUpdatables = new ArrayList<GameUpdatable>();
     }
     
     public void add(GameUpdatable gameUpdatable){

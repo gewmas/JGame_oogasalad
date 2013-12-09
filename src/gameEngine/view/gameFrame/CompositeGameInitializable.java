@@ -10,7 +10,7 @@ import java.util.Collection;
 public class CompositeGameInitializable implements GameInitializable {
     private Collection<GameInitializable> gameInitializables;
     public CompositeGameInitializable(){
-        gameInitializables = new ArrayList();
+        gameInitializables = new ArrayList<GameInitializable>();
     }
     
     public void add(GameInitializable gameInitializable){
