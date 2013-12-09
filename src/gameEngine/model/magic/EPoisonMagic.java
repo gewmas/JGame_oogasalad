@@ -33,7 +33,7 @@ public class EPoisonMagic extends Magic {
     public void move () {
         super.move();
         if (((Enemy) myTarget).getLife() > myHealthLevel)
-            ((Enemy) myTarget).setImage("Healthy");
+            remove();
         else {
             ((IEMagicable) myTarget).changeLife(myChangeRecord);
             alpha += increment;
