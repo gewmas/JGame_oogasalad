@@ -30,6 +30,7 @@ public class EnemyDesignPanel extends JPanel {
     private JTextField myGoldField;
     private JTextField myLifeField;
     private JTextField mySpeedField;
+    private JTextField myDamageField;
     private JPanel myAnimationPanel;
     private JScrollPane myAnimationScrollPane;
     private JLabel myEnemyImage;
@@ -52,6 +53,8 @@ public class EnemyDesignPanel extends JPanel {
         speed.setFont(Constants.DEFAULT_BODY_FONT);
         JLabel skill = new JLabel("Skill");
         skill.setFont(Constants.DEFAULT_BODY_FONT);
+        JLabel damage = new JLabel("Damage");
+        damage.setFont(Constants.DEFAULT_BODY_FONT);
 
         myNameField = new JTextField();
         myNameField.setFont(Constants.DEFAULT_BODY_FONT);
@@ -68,6 +71,10 @@ public class EnemyDesignPanel extends JPanel {
         mySpeedField = new JTextField();
         mySpeedField.setPreferredSize(new Dimension(200, 30));
         mySpeedField.setFont(Constants.DEFAULT_BODY_FONT);
+        
+        myDamageField = new JTextField();
+        myDamageField.setPreferredSize(new Dimension(200, 30));
+        myDamageField.setFont(Constants.DEFAULT_BODY_FONT);
 
         JButton enemyImageChooser = new JButton("Add Sprite");
         enemyImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
@@ -102,6 +109,8 @@ public class EnemyDesignPanel extends JPanel {
         this.add(myLifeField);
         this.add(speed);
         this.add(mySpeedField);
+        this.add(damage);
+        this.add(myDamageField);
         this.add(skill);
         this.add(mySkillOptions);
         this.add(myAnimationScrollPane, "span 2, gap 0 0 10 10");
@@ -154,6 +163,7 @@ public class EnemyDesignPanel extends JPanel {
                 try {
                     int gold = Integer.parseInt(myGoldField.getText());
                     int life = Integer.parseInt(myLifeField.getText());
+                    int damage = Integer.parseInt(myDamageField.getText());
                     double speed = Double.parseDouble(mySpeedField.getText());
                     String skill = (String) mySkillOptions.getSelectedItem();
                     myImageSource = myEnemyAnimations.get(0).getImageFile();
@@ -179,6 +189,7 @@ public class EnemyDesignPanel extends JPanel {
                                           gold,
                                           currentEnemyID,
                                           life,
+                                          damage,
                                           speed,
                                           skill);
                         myEnemyDesignTab.addEnemy(myImageSource, myNameField.getText());
