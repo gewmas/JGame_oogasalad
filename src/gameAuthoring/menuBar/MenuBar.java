@@ -1,10 +1,11 @@
 package gameAuthoring.menuBar;
 
+import gameAuthoring.BasicInfoTab;
+import gameAuthoring.MapDesignTab;
+import gameAuthoring.WaveDesignTab;
 import gameAuthoring.JSONObjects.GameData;
-import gameAuthoring.view.BasicInfoTab;
-import gameAuthoring.view.MapDesignTab;
-import gameAuthoring.view.WaveDesignTab;
 import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -20,22 +21,19 @@ public class MenuBar extends JMenuBar {
     private BasicInfoTab myBasicInfoTab;
     private MapDesignTab myMapDesignTab;
     private WaveDesignTab myWaveDesignTab;
-
+    
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");
     private Parser myParser;
     private Simulator simulator;
 
-    public MenuBar (GameData gameData,
-                    BasicInfoTab basicInfoTab,
-                    MapDesignTab mapDesignTab,
-                    WaveDesignTab waveDesignTab) {
+    public MenuBar (GameData gameData, BasicInfoTab basicInfoTab, MapDesignTab mapDesignTab, WaveDesignTab waveDesignTab) {
         add(fileMenu());
         myGameData = gameData;
         myBasicInfoTab = basicInfoTab;
         myMapDesignTab = mapDesignTab;
         myWaveDesignTab = waveDesignTab;
-        simulator = new Simulator();
+        simulator  = new Simulator();
     }
 
     private JMenu fileMenu () {
@@ -67,7 +65,9 @@ public class MenuBar extends JMenuBar {
                                                       "Error loading");
                         e1.printStackTrace();
                     }
+
                 }
+
             }
         });
         menu.add(new AbstractAction("Simulate") {

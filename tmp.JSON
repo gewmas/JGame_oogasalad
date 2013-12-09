@@ -7,36 +7,110 @@
       }],
       "image": [
          {
-            "id": "1",
-            "url": "tower1.png"
-         },
-         {
             "id": "woods_background",
             "url": "woods_background.png"
          },
          {
-            "id": "bullet",
-            "url": "tower1.png"
+            "id": "1",
+            "url": "path.jpg"
+         },
+         {
+            "id": "src/resources/img/space_background",
+            "url": "src/resources/img/space_background.jpg"
          }
       ]
    },
    "temporaryBarrierType": [],
    "enemyType": [],
-   "numberOfLives": 15,
-   "tilesPerRow": 20,
-   "difficultyScale": 1.5,
-   "goldName": "G",
-   "widthOfWindow": 600,
+   "numberOfLives": 10,
+   "BGImage": "src/resources/img/space_background.jpg",
+   "goldName": "AltG",
    "Tower": [],
-   "name": "Woo",
-   "livesName": "dfdd",
-   "wave": [],
+   "name": "Game",
    "map": {
       "Barriers": [],
-      "pathImage": "path.png",
-      "Path": []
+      "pathImage": "1",
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 0,
+            "x": 1
+         },
+         {
+            "y": 0,
+            "x": 2
+         },
+         {
+            "y": 0,
+            "x": 3
+         },
+         {
+            "y": 0,
+            "x": 4
+         },
+         {
+            "y": 0,
+            "x": 5
+         },
+         {
+            "y": 0,
+            "x": 6
+         },
+         {
+            "y": 0,
+            "x": 7
+         },
+         {
+            "y": 0,
+            "x": 8
+         },
+         {
+            "y": 0,
+            "x": 9
+         },
+         {
+            "y": 0,
+            "x": 10
+         },
+         {
+            "y": 0,
+            "x": 11
+         },
+         {
+            "y": 0,
+            "x": 12
+         },
+         {
+            "y": 0,
+            "x": 13
+         },
+         {
+            "y": 0,
+            "x": 14
+         },
+         {
+            "y": 0,
+            "x": 15
+         },
+         {
+            "y": 0,
+            "x": 16
+         },
+         {
+            "y": 0,
+            "x": 17
+         },
+         {
+            "y": 0,
+            "x": 18
+         }
+      ]
    },
-   "splashImage": "woods_background",
-   "heightOfWindow": 600,
-   "gold": 100
+   "wave": [],
+   "livesName": "AltL",
+   "splashImage": "woods_background.png",
+   "gold": 1000
 }
