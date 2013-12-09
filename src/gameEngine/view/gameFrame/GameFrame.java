@@ -22,6 +22,7 @@ import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
  * @author Lalita Maraj Alex Zhu
  * 
  */
+@SuppressWarnings("serial")
 public class GameFrame extends JFrame implements GameInitializable {
 
     private View view;
@@ -46,7 +47,7 @@ public class GameFrame extends JFrame implements GameInitializable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         CheatFrame cheatCodeFrame = addCheatCodeFrame(view);
 
-        this.gameKeyActivationItems = new ArrayList();
+        this.gameKeyActivationItems = new ArrayList<KeyActivationItem>();
         gameKeyActivationItems.add(cheatCodeFrame);
 
         infoPanel = addInfoDisplay();

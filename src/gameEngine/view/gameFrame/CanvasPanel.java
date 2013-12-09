@@ -10,6 +10,7 @@ import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
  * @author Alex Zhu
  * Swing Panel that holds the JGame canvas
  */
+@SuppressWarnings("serial")
 public class CanvasPanel extends JPanel {
     private Game game;
 
