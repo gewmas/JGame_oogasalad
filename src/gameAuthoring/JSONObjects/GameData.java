@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import javax.swing.JFileChooser;
 
 
@@ -19,41 +18,41 @@ import javax.swing.JFileChooser;
  * method
  * 
  */
+
 public class GameData extends JSONObject {
+    
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");
-    JSONArray myTowerList = new JSONArray();
-    JSONArray myEnemyList = new JSONArray();
-    JSONArray myBarrierList = new JSONArray();
-    JSONArray myWaveList = new JSONArray();
-
-    MapJSONObject myMap;
-    ResourcesJSONObject myResources = new ResourcesJSONObject();
-
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");  
+    private JSONArray myTowerList; 
+    private JSONArray myEnemyList; 
+    private JSONArray myBarrierList; 
+    private JSONArray myWaveList;
+    private MapJSONObject myMap;
+    private ResourcesJSONObject myResources;
+    
+    
     /**
      * Constructor for GameData class
      */
     public GameData () {
         super();
+        myTowerList = new JSONArray();
+        myEnemyList = new JSONArray();
+        myBarrierList = new JSONArray();
+        myWaveList = new JSONArray();
+        myResources = new ResourcesJSONObject();
+        
         this.put("Tower", myTowerList);
         this.put("enemyType", myEnemyList);
         this.put("temporaryBarrierType", myBarrierList);
         this.put("wave", myWaveList);
         this.put("resources", myResources);
-        
-        
-        Collection<Point2D> pathList = new ArrayList<Point2D>();       
+
+        Collection<Point2D> pathList = new ArrayList<Point2D>();
         myMap = new MapJSONObject("path.png", pathList);
         this.put("map", myMap);
-        
-        //TODO: Remove this later
-        this.put("widthOfWindow", 600);
-        this.put("heightOfWindow", 600);
-        this.put("tilesPerRow", 20);
-        this.put("difficultyScale", 1.5);
     }
 
-    
     /**
      * Sets name of game
      * 
@@ -72,10 +71,16 @@ public class GameData extends JSONObject {
         this.put("gold", gold);
     }
     
-    public void setGoldName(String goldName){
+
+    /**
+     * Sets name of gold
+     * 
+     * @param goldName Alternative name of gold
+     */
+    public void setGoldName (String goldName) {
         this.put("goldName", goldName);
     }
-    
+
     /**
      * Sets starting number of lives
      * 
@@ -84,8 +89,13 @@ public class GameData extends JSONObject {
     public void setLives (int lives) {
         this.put("numberOfLives", lives);
     }
-    
-    public void setLivesName(String livesName){
+
+    /**
+     * Set name of lives
+     * 
+     * @param livesName Alternative name of lives
+     */
+    public void setLivesName (String livesName) {
         this.put("livesName", livesName);
     }
 
@@ -108,151 +118,41 @@ public class GameData extends JSONObject {
     }
 
     /**
-     * Adds a tower to the towerList JSONArray
+     * Adds tower to myTowerList JSONArray
      * 
-     * @param name Tower ID
-     * @param imagePath Tower image name
-     * @param damage Damage inflicted by tower bullet
-     * @param attackSpeed Tower attack speed
-     * @param range Tower range
-     * @param cost Tower cost (gold)
-     * @param recyclePrice Quantity of gold gained when tower is sold
+     * @param tower TowerJSONObject to be added
      */
-    public void addTower (String type,
-                          String name,
-                          String imagePath,
-                          int damage,
-                          double attackSpeed,
-                          int attackMode,
-                          int range,
-                          int cost,
-                          int recyclePrice,
-                          String description) {
-
-        myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed, attackMode,
-                                            range, cost, recyclePrice, description));
-
-    }
-    
-    public void addMagicTower(String type,
-                          String name,
-                          String imagePath,
-                          int damage,
-                          double attackSpeed,
-                          int attackMode,
-                          int range,
-                          int cost,
-                          int recyclePrice,
-                          String description,
-                          double magicFactor,
-                          String magic){
-        
-        myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed, attackMode,
-                                            range, cost, recyclePrice, description, magicFactor, magic));
-    }
-    
-    public void addTower(TowerJSONObject tower){
+    public void addTower (TowerJSONObject tower) {
         myTowerList.put(tower);
     }
-    
-    public void addMultipleShootingTower(String type,
-                              String name,
-                              String imagePath,
-                              int damage,
-                              double attackSpeed,
-                              int attackMode,
-                              int attackAmount,
-                              int range,
-                              int cost,
-                              int recyclePrice,
-                              String description){
-            
-            myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed, attackMode, attackAmount,
-                                                range, cost, recyclePrice, description));
-        }
-    
-    public void addBoostTower(String type,
-                              String name,
-                              String imagePath,
-                              int damage,
-                              double attackSpeed,
-                              int range,
-                              int cost,
-                              int recyclePrice,
-                              String description, 
-                              double boostFactor){
-            
-            myTowerList.put(new TowerJSONObject(type, name, imagePath, damage, attackSpeed,
-                                                range, cost, recyclePrice, description, boostFactor));
-        }
 
     /**
      * Adds wave to myWaveList JSONArray
      * 
-     * @param type
-     * @param number
-     * @param period
-     * @param interval
+     * @param wave WaveJSONOBject to be added
      */
-    public void addWave (String type, int number, double period, int interval) {
-        myWaveList.put(new WaveJSONObject(type, number, period, interval));
-    }
-
-    public void addWave(WaveJSONObject wave){
+    public void addWave (WaveJSONObject wave) {
         myWaveList.put(wave);
     }
-    
+
     /**
      * Adds barrier to myBarrierList JSONArray
      * 
-     * @param name Barrier name
-     * @param image Barrier image
-     * @param damage Barrier damage
-     * @param cost Cost of barrier in gold
-     * @param expire Time barrier is active in game
-     * @param description Description of barrier
+     * @param barrier Barrier to be added
      */
-    public void addBarrier (String name,
-                            String image,
-                            int damage,
-                            int cost,
-                            int expire,
-                            String description) {
-
-        myBarrierList.put(new TemporaryBarrierJSONObject(name, image, damage, cost, expire,
-                                                         description));
-
-    }
-    
-    public void addBarrier (TemporaryBarrierJSONObject barrier){
+    public void addBarrier (TemporaryBarrierJSONObject barrier) {
         myBarrierList.put(barrier);
     }
 
     /**
-     * Adds an enemy to myEnemyList JSONArray
+     * Adds enemy to myEnemyListJSONArray 
      * 
-     * @param name Enemy ID
-     * @param gold Quantity of gold gained upon defeating enemy
-     * @param image Enemy image name
-     * @param life Number enemy lives (hits enemy can endure)
-     * @param speed Enemy speed
+     * @param enemy Enemy to be added
      */
-    public void addEnemy (String name, int gold, String image, int life, int damage, double speed, String skill) {
-        myEnemyList.put(new EnemyJSONObject(name, gold, image, life, damage, speed, skill));
-    }
-    
-    public void addEnemy(EnemyJSONObject enemy){
+    public void addEnemy (EnemyJSONObject enemy) {
         myEnemyList.put(enemy);
     }
 
-    /**
-     * Returns JSONArray of enemies
-     * 
-     * @return JSONArray of currently created enemies
-     */
-    public JSONArray getEnemyList () {
-        return myEnemyList;
-    }
 
     /**
      * Adds map
@@ -265,48 +165,81 @@ public class GameData extends JSONObject {
         myMap = new MapJSONObject(pathImage, pointList);
         this.put("map", myMap);
     }
-    
-    public void setMap (MapJSONObject map){
-        this.put("map", map);
-    }
 
+
+    /**
+     * Adds a barrier to the myMap
+     * 
+     * @param x x coordinate 
+     * @param y
+     * @param imageName
+     */
     public void addBarrier (int x, int y, String imageName) {
         myMap.addBarrier(x, y, imageName);
     }
 
+    /**
+     * Adds image myResources
+     * 
+     * @param id image ID
+     * @param url image URL
+     */
     public void addImage (String id, String url) {
         myResources.addImage(id, url);
     }
-    
-    public void addImage(ResourceJSONObject image){
+
+    /**
+     * 
+     * @param image
+     */
+    public void addImage (ResourceJSONObject image) {
         myResources.addImage(image);
     }
 
+    /**
+     * Adds audio to myResources
+     * 
+     * @param id Image ID
+     * @param url Image URL
+     */
     public void addAudio (String id, String url) {
         myResources.addAudio(id, url);
     }
-    
-    public void addAudio(ResourceJSONObject audio){
+
+    /**
+     * Adds audio to myResources
+     * 
+     * @param audio ResourceJSONObject to be added
+     */
+    public void addAudio (ResourceJSONObject audio) {
         myResources.addAudio(audio);
     }
 
-    public void addAnimation (String id, List<String> imagePaths) {
-        myResources.addAnimation(id, imagePaths);
-    }
-
-    public void addAnimation (AnimationJSONObject animation){
+    /**
+     * Adds animation to myResources
+     * 
+     * @param animation Animation to be added
+     */
+    public void addAnimation (AnimationJSONObject animation) {
         myResources.addAnimation(animation);
     }
-    
-    public ResourcesJSONObject getResources () {
-        return myResources;
-    }
-    
-    public void addBulletImage(String imageID){
+
+
+    /**
+     * Adds image for bullet
+     * 
+     * @param imageID ID of image
+     */
+    public void addBulletImage (String imageID) {
         this.put("bulletImage", imageID);
     }
-    
-    public void addBGAudio(String audioID){
+
+    /**
+     * Adds audio for background music
+     * 
+     * @param audioID ID of audio
+     */
+    public void addBGAudio (String audioID) {
         this.put("bgMusic", audioID);
     }
 
@@ -370,7 +303,8 @@ public class GameData extends JSONObject {
      * @author Lalita Maraj
      */
     private boolean isComplete () {
-       return (this.has("name") && this.has("splashImage") && this.has("BGImage") && this.has("gold") && this.has("numberOfLives"));
- 
+        return (this.has("name") && this.has("splashImage") && this.has("BGImage") &&
+                this.has("gold") && this.has("numberOfLives"));
+
     }
 }

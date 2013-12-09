@@ -37,7 +37,7 @@ public class TestJSONWrite {
         ArrayList<String> temp = new ArrayList<String>();
         temp.add("1");
         temp.add("2");
-        game.addAnimation("run", temp);
+        //game.addAnimation("run", temp);
         
         // Testing map writing
          Collection<Point2D> pathList = new ArrayList<Point2D>();
@@ -54,11 +54,11 @@ public class TestJSONWrite {
         // Testing wave writing
          //game.addWave("1", 5, 0.5, 7);
          game.addWave(w);
-         game.addWave("2", 1, 0.5, 3);
+         //game.addWave("2", 1, 0.5, 3);
 
         // Testing enemy writing
-         game.addEnemy("1", 5, "enemy1", 2, 3, 0.5, "Haste");
-         game.addEnemy("2", 10, "runRight", 3, 4, 0.1, "Light");
+//         game.addEnemy("1", 5, "enemy1", 2, 3, 0.5, "Haste");
+//         game.addEnemy("2", 10, "runRight", 3, 4, 0.1, "Light");
 
          System.out.println(game.toString(1));
     }

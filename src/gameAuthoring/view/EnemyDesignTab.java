@@ -3,7 +3,6 @@ package gameAuthoring.view;
 import gameAuthoring.JSONObjects.AnimationJSONObject;
 import gameAuthoring.JSONObjects.EnemyJSONObject;
 import gameEngine.parser.Parser;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -22,7 +21,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 
@@ -42,15 +40,16 @@ public class EnemyDesignTab extends Tab {
     private File myImageSource;
     private int myNumEnemies = 0;
     private JComboBox<String> mySkillOptions;
-
     private final String[] SKILLS = { "Haste", "Armour", "Heal", "Light", "Poison" };
-
     private static final Dimension TEXT_DIMENSION = new Dimension(200, 30);
     private static final Dimension ANIMATION_BOX_DIMENSION = new Dimension(200, 100);
     private static final Dimension IMAGE_LABEL_DIMENSION = new Dimension(50, 50);
     private static final Dimension CONTENT_PANEL_DIMENSION = new Dimension(380, 400);
     private static final Dimension CREATED_ENEMIES_DIMENSION = new Dimension(380, 400);
     private static final Dimension ANIMATION_PANE_DIMENSION = new Dimension(200, 80);
+    private static final String ANIMATION_SCROLL_PANE_FORMATTING = "gap 0 0 10 10";
+    private static final String SCROLL_PANEL_WRAP_MODE = "wrap 4";
+    private static final String CREATED_ENEMIES_PANEL_FORMATTING = "aligny center";
 
     public EnemyDesignTab () {
     }
@@ -60,7 +59,7 @@ public class EnemyDesignTab extends Tab {
         myMainPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myMainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
         addTitle();
-        myScrollPanel = new JPanel(new MigLayout("wrap 4"));
+        myScrollPanel = new JPanel(new MigLayout(SCROLL_PANEL_WRAP_MODE));
         myScrollPanel.setOpaque(false);
         createMainPanel();
         myMainPanel.add(myContentPanel);
@@ -68,14 +67,13 @@ public class EnemyDesignTab extends Tab {
         myCreatedEnemies.getViewport().setOpaque(false);
         myCreatedEnemies.setOpaque(false);
         myCreatedEnemies.setPreferredSize(CREATED_ENEMIES_DIMENSION);
-        Border b = BorderFactory.createLineBorder(Color.black, 1);
         myCreatedEnemies.setBorder(BorderFactory
-                .createTitledBorder(b,
+                .createTitledBorder(StyleConstants.DEFAULT_PANEL_BORDER,
                                     StyleConstants.resourceBundle.getString("EnemyCreatedEnemies"),
                                     TitledBorder.CENTER,
                                     TitledBorder.TOP,
                                     StyleConstants.TITLE_FONT_2));
-        myMainPanel.add(myCreatedEnemies, "aligny center");
+        myMainPanel.add(myCreatedEnemies, CREATED_ENEMIES_PANEL_FORMATTING);
         return myMainPanel;
     }
 
@@ -98,17 +96,18 @@ public class EnemyDesignTab extends Tab {
     private void createMainPanel () {
         myContentPanel = new JPanel();
         addName();
-        addLives();
         addGold();
+        addLives();
         addSpeed();
         addDamage();
         addSkill();
         addAnimation();
+        addEnemySpriteChooser();
+        addClearButton();
         addCreateEnemyButton();
-        myContentPanel.setLayout(new MigLayout("wrap 2"));
-        Border b = BorderFactory.createLineBorder(Color.black, 1);
+        myContentPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myContentPanel.setPreferredSize(CONTENT_PANEL_DIMENSION);
-        myContentPanel.setBorder(b);
+        myContentPanel.setBorder(StyleConstants.DEFAULT_PANEL_BORDER);
         myContentPanel.setOpaque(false);
     }
 
@@ -186,22 +185,9 @@ public class EnemyDesignTab extends Tab {
     }
 
     private void addAnimation () {
-
-        JButton enemyImageChooser =
-                new JButton(StyleConstants.resourceBundle.getString("EnemySprite"));
-        enemyImageChooser.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        enemyImageChooser.addMouseListener(createNewEnemyIconListener());
-        enemyImageChooser
-                .setToolTipText(StyleConstants.resourceBundle.getString("EnemySpriteTip"));
-
-        JButton clearButton =
-                new JButton(StyleConstants.resourceBundle.getString("EnemyClearSprites"));
-        clearButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        clearButton.addMouseListener(createClearAnimationsListener());
-        clearButton.setToolTipText(StyleConstants.resourceBundle.getString("EnemyClearSpritesTip"));
-        myContentPanel.add(enemyImageChooser);
-        myContentPanel.add(clearButton);
-
+        JLabel animation = new JLabel(StyleConstants.resourceBundle.getString("EnemyAnimation"));
+        animation.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        animation.setToolTipText(StyleConstants.resourceBundle.getString("EnemyAnimationTip"));
         myAnimationPanel = new JPanel();
         myAnimationPanel.setOpaque(false);
         myAnimationPanel.setPreferredSize(ANIMATION_BOX_DIMENSION);
@@ -210,15 +196,36 @@ public class EnemyDesignTab extends Tab {
         myAnimationScrollPane.getViewport().setOpaque(false);
         myAnimationScrollPane.setOpaque(false);
         myAnimationScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        myContentPanel.add(myAnimationScrollPane, "span 2, gap 0 0 10 10");
+        myContentPanel.add(animation);
+        myContentPanel.add(myAnimationScrollPane, ANIMATION_SCROLL_PANE_FORMATTING);
+    }
 
+    public void addEnemySpriteChooser () {
+        JButton enemyImageChooser =
+                new JButton(StyleConstants.resourceBundle.getString("EnemySprite"));
+        enemyImageChooser.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        enemyImageChooser.addMouseListener(createNewEnemyIconListener());
+        enemyImageChooser
+                .setToolTipText(StyleConstants.resourceBundle.getString("EnemySpriteTip"));
+        myContentPanel.add(enemyImageChooser);
+    }
+
+    public void addClearButton () {
+        JButton clearButton =
+                new JButton(StyleConstants.resourceBundle.getString("EnemyClearSprites"));
+        clearButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        clearButton.setToolTipText(StyleConstants.resourceBundle.getString("EnemyClearSpritesTip"));
+        clearButton.addMouseListener(createClearAnimationsListener());
+        clearButton.setToolTipText(StyleConstants.resourceBundle.getString("EnemyClearSpritesTip"));
+        myContentPanel.add(clearButton);
     }
 
     private void addCreateEnemyButton () {
-
         JButton createEnemyButton =
                 new JButton(StyleConstants.resourceBundle.getString("EnemyCreation"));
         createEnemyButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
+        createEnemyButton.setToolTipText(StyleConstants.resourceBundle
+                .getString("EnemyCreationTip"));
         createEnemyButton.addMouseListener(createEnemyButtonListener());
         createEnemyButton
                 .setToolTipText(StyleConstants.resourceBundle.getString("EnemyCreationTip"));
@@ -297,11 +304,11 @@ public class EnemyDesignTab extends Tab {
                         notifyObservers(enemy);
                         clearChanged();
                         addEnemy(myImageSource, myNameField.getText());
-                        myNameField.setText("");
-                        myGoldField.setText("");
-                        myLifeField.setText("");
-                        mySpeedField.setText("");
-                        myDamageField.setText("");
+                        myNameField.setText(StyleConstants.NULL_STRING);
+                        myGoldField.setText(StyleConstants.NULL_STRING);
+                        myLifeField.setText(StyleConstants.NULL_STRING);
+                        mySpeedField.setText(StyleConstants.NULL_STRING);
+                        myDamageField.setText(StyleConstants.NULL_STRING);
                         clearAnimationPanel();
                     }
                 }

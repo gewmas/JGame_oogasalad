@@ -28,7 +28,6 @@ import net.miginfocom.swing.MigLayout;
 public class WaveDesignTab extends Tab implements Observer {
     private JScrollPane myCreatedWaves;
     private JPanel myScrollPanel;
-    private JButton myTypeButton;
     private JTextField myNumberField;
     private JTextField myPeriodField;
     private JTextField myIntervalField;
@@ -163,7 +162,6 @@ public class WaveDesignTab extends Tab implements Observer {
                     notifyObservers(wave);
                     clearChanged();
                     addWave(type, number);
-                    myTypeButton.setText(DEFAULT_TYPE_TEXT);
                     myNumberField.setText("");
                     myPeriodField.setText("");
                     myIntervalField.setText("");

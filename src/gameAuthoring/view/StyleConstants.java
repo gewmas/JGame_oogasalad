@@ -25,5 +25,6 @@ public final class StyleConstants {
     public static final Dimension DEFAULT_PANEL_SIZE = new Dimension(500, 500);
     public static final Border DEFAULT_PANEL_BORDER = BorderFactory
             .createLineBorder(Color.black, 1);
+    public static final String NULL_STRING = "";
 
 }
