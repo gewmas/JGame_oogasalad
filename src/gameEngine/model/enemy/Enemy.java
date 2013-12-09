@@ -74,7 +74,7 @@ public class Enemy extends JGObject implements IEMagicable {
         this.orignalSpeed = speed;
         this.path = model.getPathList();
         this.pathIndex = 0;
-
+        this.damage=damage;
         this.x = path.get(0).getX();
         this.y = path.get(0).getY();
 
