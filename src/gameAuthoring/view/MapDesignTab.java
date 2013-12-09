@@ -88,7 +88,6 @@ public class MapDesignTab extends Tab {
     private void addPathImage () {
         myCurrentPathImage = new ImageLabel(50, 50);
         myCurrentPathImage.setMutableStatusTrue();
-        myCurrentPathImage.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myCurrentPathImage.addMouseListener(createPathListener());
         JLabel pathLabel = new JLabel(StyleConstants.resourceBundle.getString("MapPath"));
         pathLabel.setFont(StyleConstants.DEFAULT_BODY_FONT);

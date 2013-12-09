@@ -8,11 +8,14 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,6 +33,7 @@ public class WaveDesignTab extends Tab implements Observer {
     private JTextField myPeriodField;
     private JTextField myIntervalField;
     private List<String> myEnemyList = new ArrayList<String>();
+    private JComboBox<String> myEnemiesDropdown;
     private String[] myEnemyOptions = {};
     private static final String DEFAULT_TYPE_TEXT = "Select an Enemy Type";
     private static final Dimension DEFAULT_PANEL_DIMENSION = new Dimension(380, 350);
@@ -85,11 +89,11 @@ public class WaveDesignTab extends Tab implements Observer {
         JLabel type = new JLabel(StyleConstants.resourceBundle.getString("WavesEnemyType"));
         type.setFont(StyleConstants.DEFAULT_BODY_FONT);
         type.setToolTipText(StyleConstants.resourceBundle.getString("WavesEnemyTypeTip"));
-        myTypeButton = new JButton(DEFAULT_TYPE_TEXT);
-        myTypeButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        myTypeButton.addMouseListener(createWaveTypeListener());
+        myEnemiesDropdown = new JComboBox<String>(myEnemyOptions);
+        myEnemiesDropdown.setPreferredSize(TEXT_FIELD_DIMENSION);
         myContentPanel.add(type);
-        myContentPanel.add(myTypeButton);
+        myContentPanel.add(myEnemiesDropdown);
+
     }
 
     private void addEnemyAmount () {
@@ -142,43 +146,16 @@ public class WaveDesignTab extends Tab implements Observer {
 
     }
 
-    private MouseAdapter createWaveTypeListener () {
+   private MouseAdapter createWaveButtonListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                String[] enemyOptions = new String[myEnemyList.size()];
-                if (myEnemyList.size() > myEnemyOptions.length) {
-                    enemyOptions = new String[myEnemyList.size()];
-                    for (int i = 0; i < myEnemyList.size(); i++) {
-                        enemyOptions[i] = myEnemyList.get(i);
-                    }
-                }
-                String choice =
-                        (String) JOptionPane.showInputDialog(
-                                                             null,
-                                                             "Please select an enemy type",
-                                                             "Wave enemy type chooser",
-                                                             JOptionPane.PLAIN_MESSAGE,
-                                                             null,
-                                                             enemyOptions,
-                                                             "");
-                myTypeButton.setText(choice);
-            }
-        };
-        return listener;
 
-    }
+                String type = (String) myEnemiesDropdown.getSelectedItem();
+                int number = Integer.parseInt(myNumberField.getText());
+                double period = Double.parseDouble(myPeriodField.getText());
+                int interval = Integer.parseInt(myIntervalField.getText());
 
-    private MouseAdapter createWaveButtonListener () {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseClicked (MouseEvent e) {
-   
-                    String type = myTypeButton.getText();
-                    int number = Integer.parseInt(myNumberField.getText());
-                    double period = Double.parseDouble(myPeriodField.getText());
-                    int interval = Integer.parseInt(myIntervalField.getText());
-             
                 if (!type.equals(DEFAULT_TYPE_TEXT) && type != null && number > 0 && interval > 0 &&
                     0.0 < period && period < 1.0) {
                     WaveJSONObject wave = new WaveJSONObject(type, number, period, interval);
@@ -219,6 +196,22 @@ public class WaveDesignTab extends Tab implements Observer {
     public void update (Observable arg0, Object arg1) {
         System.out.println("WaveDesignTab received update from EnemyWaveController");
         myEnemyList = (ArrayList<String>) arg1;
+        System.out.println(myEnemyList);
+
+        myEnemyOptions = new String[myEnemyList.size()];
+        
+        for (int i = 0; i < myEnemyList.size(); i++) {
+            myEnemyOptions[i] = myEnemyList.get(i);
+        }
+        
+        System.out.println(Arrays.toString(myEnemyOptions));
+        
+        myEnemiesDropdown.removeAllItems();
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(myEnemyOptions);
+        myEnemiesDropdown.setModel(model);
+        myEnemiesDropdown.revalidate();
+        myEnemiesDropdown.repaint();
+       
     }
 
 }
