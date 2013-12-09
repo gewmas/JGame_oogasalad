@@ -1,7 +1,7 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.GameData;
-import gameAuthoring.menuBar.Simulator;
+import gameAuthoring.JSONObjects.ResourceJSONObject;
 import gameEngine.parser.Parser;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -43,8 +43,7 @@ public class BasicInfoTab extends Tab {
     private ImageLabel myImageLabel;
 
     public BasicInfoTab (GameData gameData) {
-        // super(gameData);
-        getTab();
+
     }
 
     // TO DO: Get rid of magic number
@@ -69,6 +68,7 @@ public class BasicInfoTab extends Tab {
         title.setFont(Constants.DEFAULT_BODY_FONT);
 
         JLabel bullet = new JLabel("Bullet Image");
+        bullet.setToolTipText("Select an image for the bullet that towers shoot");
         bullet.setFont(Constants.DEFAULT_BODY_FONT);
 
         myImageLabel = new ImageLabel();
@@ -90,10 +90,10 @@ public class BasicInfoTab extends Tab {
         mySplashImageLabel = new JLabel();
 
         JButton setInfoButton = new JButton("Set Info");
-        simulateButton = new JButton("Simulate");
-        simulateButton.setEnabled(false);
-        simulateButton.setFont(Constants.DEFAULT_BODY_FONT);
-        simulateButton.addMouseListener(setSimulateListener());
+        // simulateButton = new JButton("Simulate");
+        // simulateButton.setEnabled(false);
+        // simulateButton.setFont(Constants.DEFAULT_BODY_FONT);
+        // simulateButton.addMouseListener(setSimulateListener());
         setInfoButton.setFont(Constants.DEFAULT_BODY_FONT);
         setInfoButton
                 .setToolTipText("Once all fields have been completed, click the submit button. You can then proceed to 'preview' your game.");
@@ -142,7 +142,7 @@ public class BasicInfoTab extends Tab {
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
         subPanel.add(setInfoButton);
-        subPanel.add(simulateButton);
+        // subPanel.add(simulateButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         subPanel.setBorder(b);
         mainPanel.add(subPanel, "align center");
@@ -178,17 +178,17 @@ public class BasicInfoTab extends Tab {
 
     }
 
-    public MouseAdapter setSimulateListener () {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                Simulator simulator = new Simulator();
-                simulator.simulate(myGameData);
-            }
-        };
-        return listener;
-
-    }
+    // public MouseAdapter setSimulateListener () {
+    // MouseAdapter listener = new MouseAdapter() {
+    // @Override
+    // public void mouseClicked (MouseEvent e) {
+    // Simulator simulator = new Simulator();
+    // simulator.simulate(myGameData);
+    // }
+    // };
+    // return listener;
+    //
+    // }
 
     public void setBackgroundAudio (AudioLabel audio) {
         myAudioLabel = audio;
@@ -203,15 +203,14 @@ public class BasicInfoTab extends Tab {
             name != null && bulletName != null) {
             String goldName = altGoldText.getText();
             String livesName = altLivesText.getText();
-            myGameData.setGold(gold);
-            myGameData.setLives(lives);
-            myGameData.setSplashImage(mySplashImage.substring(0, mySplashImage.length() - 4));
-            myGameData.setGameName(name);
-            myGameData.addAudio(myAudioLabel.getID(), myAudioLabel.getAudioFile().getName());
-            myGameData.setGoldName(goldName);
-            myGameData.setLivesName(livesName);
-            myGameData.addImage("bullet", bulletName);
-            activateSimmulate();
+            String splashImage = mySplashImage.substring(0, mySplashImage.length() - 4);
+            BasicInformation gameDesignInfo =
+                    new BasicInformation(gold, lives, splashImage, name, myAudioLabel,
+                                         livesName, goldName, bulletName);
+            setChanged();
+            notifyObservers(gameDesignInfo);
+            clearChanged();
+            // activateSimmulate();
         }
 
         else {
@@ -220,9 +219,9 @@ public class BasicInfoTab extends Tab {
         }
     }
 
-    private void activateSimmulate () {
-        simulateButton.setEnabled(true);
-    }
+    // private void activateSimmulate () {
+    // simulateButton.setEnabled(true);
+    // }
 
     public MouseAdapter setSplashImageListener () {
         MouseAdapter listener = new MouseAdapter() {
@@ -232,14 +231,19 @@ public class BasicInfoTab extends Tab {
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
 
                     mySplashImage = INPUT_CHOOSER.getSelectedFile().getName();
-                    myGameData.addImage(mySplashImage.substring(0, mySplashImage.length() - 4),
-                                        mySplashImage);
+                    ResourceJSONObject splashImage =
+                            new ResourceJSONObject(
+                                                   mySplashImage.substring(0,
+                                                                           mySplashImage.length() - 4),
+                                                   mySplashImage);
+                    setChanged();
+                    notifyObservers(splashImage);
+                    clearChanged();
                     mySplashImageLabel.setText(mySplashImage);
                 }
 
             }
         };
         return listener;
-
     }
 }

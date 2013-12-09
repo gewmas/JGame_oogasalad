@@ -7,8 +7,6 @@ import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -77,12 +75,19 @@ public class WaveDesignTab extends Tab implements Observer {
         myContentPanel = new JPanel();
         JLabel type = new JLabel("Type of Enemy");
         type.setFont(Constants.DEFAULT_BODY_FONT);
+        type.setToolTipText("Select an enemy type to be in the wave.");
+
         JLabel quantity = new JLabel("Quantity of Enemy");
         quantity.setFont(Constants.DEFAULT_BODY_FONT);
+        quantity.setToolTipText("Select the number of enemies to be in the wave.");
+
         JLabel period = new JLabel("Period");
         period.setFont(Constants.DEFAULT_BODY_FONT);
+        period.setToolTipText("Input the period of time for which enemies will be active.");
+
         JLabel interval = new JLabel("Interval");
         interval.setFont(Constants.DEFAULT_BODY_FONT);
+        interval.setToolTipText("Input the interval of time for which enemies will be active.");
 
         myTypeButton = new JButton(DEFAULT_TYPE_TEXT);
         myTypeButton.setFont(Constants.DEFAULT_BODY_FONT);
@@ -91,10 +96,7 @@ public class WaveDesignTab extends Tab implements Observer {
         myEnemyChooser = new JComboBox<String>();
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(myEnemyOptions);
         myEnemyChooser.setModel(model);
-
         myEnemyChooser.setFont(Constants.DEFAULT_BODY_FONT);
-        myEnemyChooser.addMouseListener(createRevalidationListener());
-        myEnemyChooser.addActionListener(createDropdownListener());
 
         myNumberField = new JTextField();
         myNumberField.setPreferredSize(new Dimension(200, 30));
@@ -111,6 +113,8 @@ public class WaveDesignTab extends Tab implements Observer {
         JButton createWaveButton = new JButton("Create Wave");
         createWaveButton.setFont(Constants.DEFAULT_BODY_FONT);
         createWaveButton.addMouseListener(createWaveButtonListener());
+        createWaveButton
+                .setToolTipText("Once all fields are complete, click to finish creating a wave.");
 
         myContentPanel.setLayout(new MigLayout("wrap 2"));
         myContentPanel.add(type);
@@ -141,11 +145,12 @@ public class WaveDesignTab extends Tab implements Observer {
         MouseAdapter listener = new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                JSONArray enemyList = myGameData.getEnemyList();
-                String[] enemyOptions = new String[enemyList.length()];
-                for (int i = 0; i < enemyOptions.length; i++) {
-                    JSONObject enemy = (JSONObject) enemyList.get(i);
-                    enemyOptions[i] = enemy.getString("id");
+                String[] enemyOptions = new String[myEnemyList.size()];
+                if (myEnemyList.size() > myEnemyOptions.length) {
+                    enemyOptions = new String[myEnemyList.size()];
+                    for (int i = 0; i < myEnemyList.size(); i++) {
+                        enemyOptions[i] = myEnemyList.get(i);
+                    }
                 }
                 String choice =
                         (String) JOptionPane.showInputDialog(
@@ -161,43 +166,6 @@ public class WaveDesignTab extends Tab implements Observer {
         };
         return listener;
 
-    }
-
-    public MouseAdapter createRevalidationListener () {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                System.out.println("mouse");
-                String[] test = { "blah", "blah", "blah" };
-                myEnemyChooser = new JComboBox<String>(test);
-                myEnemyChooser.revalidate();
-            }
-        };
-        return listener;
-    }
-
-    public ActionListener createDropdownListener () {
-        ActionListener a = new ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent e) {
-                JSONArray enemyList = myGameData.getEnemyList();
-
-                if (myEnemyList.size() > myEnemyOptions.length) {
-                    String[] enemyOptions = new String[myEnemyList.size()];
-                    for (int i = 0; i < myEnemyList.size(); i++) {
-                        enemyOptions[i] = myEnemyList.get(i);
-                    }
-                }
-                String[] test = {};
-                myEnemyChooser.removeAllItems();
-                DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(test);
-                myEnemyChooser.setModel(model);
-                myEnemyChooser.revalidate();
-                myEnemyChooser.repaint();
-            }
-        };
-
-        return a;
     }
 
     public MouseAdapter createWaveButtonListener () {
@@ -239,7 +207,7 @@ public class WaveDesignTab extends Tab implements Observer {
             int number = (int) wave.get("number");
             double period = (double) wave.get("period");
             int interval = (int) wave.get("interval");
-            myGameData.addWave(type, number, period, interval);
+            // myGameData.addWave(type, number, period, interval);
             addWave(type, number);
         }
     }

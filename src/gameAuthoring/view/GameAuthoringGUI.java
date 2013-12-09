@@ -1,6 +1,7 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.controllers.BasicInfoDesignController;
 import gameAuthoring.controllers.EnemyDesignController;
 import gameAuthoring.controllers.EnemyWaveCommunicationController;
 import gameAuthoring.controllers.MapDesignController;
@@ -47,18 +48,21 @@ public class GameAuthoringGUI {
         gameDesignTab.setPreferredSize(new Dimension(750, 600));
 
         BasicInfoTab basicInfoTab = new BasicInfoTab(myGameData);
+        BasicInfoDesignController basicInfoDesignController =
+                new BasicInfoDesignController(myGameData);
+        basicInfoTab.addObserver(basicInfoDesignController);
 
-        MapDesignTab mapDesignTab = new MapDesignTab(myGameData);
+        MapDesignTab mapDesignTab = new MapDesignTab();
         MapDesignController mapDesignController = new MapDesignController(myGameData);
         mapDesignTab.addObserver(mapDesignController);
 
-        TowerDesignTab towerDesignTab = new TowerDesignTab(myGameData);
+        TowerDesignTab towerDesignTab = new TowerDesignTab();
 
         EnemyDesignController enemyDesignController = new EnemyDesignController(myGameData);
-        EnemyDesignTab enemyDesignTab = new EnemyDesignTab(myGameData);
+        EnemyDesignTab enemyDesignTab = new EnemyDesignTab();
         enemyDesignTab.addObserver(enemyDesignController);
 
-        WaveDesignTab waveDesignTab = new WaveDesignTab(myGameData);
+        WaveDesignTab waveDesignTab = new WaveDesignTab();
         SkillsDesignTab skillsDesignTab = new SkillsDesignTab();
         SkillsDesignController skillsDesignController = new SkillsDesignController(myGameData);
         skillsDesignTab.addObserver(skillsDesignController);
@@ -68,7 +72,7 @@ public class GameAuthoringGUI {
         enemyWaveCommController.addObserver(waveDesignTab);
         enemyDesignTab.addObserver(enemyWaveCommController);
 
-        TempBarrierDesignTab tempBarrierTab = new TempBarrierDesignTab(myGameData);
+        TempBarrierDesignTab tempBarrierTab = new TempBarrierDesignTab();
 
         myDuvallClippy = new JLabel();
         Image duvallImage;

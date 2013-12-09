@@ -96,16 +96,27 @@ public class EnemyDesignTab extends Tab {
         myContentPanel = new JPanel();
         JLabel name = new JLabel("Name");
         name.setFont(Constants.DEFAULT_BODY_FONT);
+        name.setToolTipText("Give your enemy a name that will be displayed in the game.");
+
         JLabel gold = new JLabel("Worth in Gold");
         gold.setFont(Constants.DEFAULT_BODY_FONT);
+        gold.setToolTipText("Set the amount of gold your enemy is worth.");
+
         JLabel lives = new JLabel("Number of Lives");
         lives.setFont(Constants.DEFAULT_BODY_FONT);
+        lives.setToolTipText("Set the number of lives your enemy starts with.");
+
         JLabel speed = new JLabel("Speed");
         speed.setFont(Constants.DEFAULT_BODY_FONT);
+        speed.setToolTipText("Set the speed of your enemy.");
+
         JLabel skill = new JLabel("Skill");
         skill.setFont(Constants.DEFAULT_BODY_FONT);
+        skill.setToolTipText("Select a special skill for your enemy.");
+
         JLabel damage = new JLabel("Damage");
         damage.setFont(Constants.DEFAULT_BODY_FONT);
+        damage.setToolTipText("Select the type of damage your enemy inflicts.");
 
         myNameField = new JTextField();
         myNameField.setFont(Constants.DEFAULT_BODY_FONT);
@@ -130,10 +141,13 @@ public class EnemyDesignTab extends Tab {
         JButton enemyImageChooser = new JButton("Add Sprite");
         enemyImageChooser.setFont(Constants.DEFAULT_BODY_FONT);
         enemyImageChooser.addMouseListener(createNewEnemyIconListener());
+        enemyImageChooser
+                .setToolTipText("Add an image to represent your enemy or be part of an animation sequence.");
 
         JButton clearButton = new JButton("Clear All Sprites");
         clearButton.setFont(Constants.DEFAULT_BODY_FONT);
         clearButton.addMouseListener(createClearAnimationsListener());
+        clearButton.setToolTipText("Clear all sprites loaded so far.");
 
         mySkillOptions = new JComboBox<String>(SKILLS);
         mySkillOptions.setFont(Constants.DEFAULT_BODY_FONT);
@@ -150,6 +164,8 @@ public class EnemyDesignTab extends Tab {
         JButton createEnemyButton = new JButton("Create Enemy");
         createEnemyButton.setFont(Constants.DEFAULT_BODY_FONT);
         createEnemyButton.addMouseListener(createEnemyButtonListener());
+        createEnemyButton
+                .setToolTipText("Once all fields are completed, click to finish creating an enemy.");
 
         myContentPanel.setLayout(new MigLayout("wrap 2"));
         myContentPanel.add(name);
@@ -244,6 +260,7 @@ public class EnemyDesignTab extends Tab {
                         myGoldField.setText("");
                         myLifeField.setText("");
                         mySpeedField.setText("");
+                        myDamageField.setText("");
                         clearAnimationPanel();
                     }
                 }
