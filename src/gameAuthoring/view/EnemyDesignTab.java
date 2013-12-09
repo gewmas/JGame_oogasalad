@@ -68,7 +68,8 @@ public class EnemyDesignTab extends Tab {
         myCreatedEnemies.setPreferredSize(new Dimension(380, 400));
         Border b = BorderFactory.createLineBorder(Color.black, 1);
         myCreatedEnemies.setBorder(BorderFactory
-                .createTitledBorder(b, StyleConstants.resourceBundle.getString("EnemyCreatedEnemies"),
+                .createTitledBorder(b,
+                                    StyleConstants.resourceBundle.getString("EnemyCreatedEnemies"),
                                     TitledBorder.CENTER,
                                     TitledBorder.TOP,
                                     new Font("Calibri", Font.PLAIN, 20)));
@@ -138,13 +139,15 @@ public class EnemyDesignTab extends Tab {
         myDamageField.setPreferredSize(new Dimension(200, 30));
         myDamageField.setFont(StyleConstants.DEFAULT_BODY_FONT);
 
-        JButton enemyImageChooser = new JButton(StyleConstants.resourceBundle.getString("EnemySprite"));
+        JButton enemyImageChooser =
+                new JButton(StyleConstants.resourceBundle.getString("EnemySprite"));
         enemyImageChooser.setFont(StyleConstants.DEFAULT_BODY_FONT);
         enemyImageChooser.addMouseListener(createNewEnemyIconListener());
         enemyImageChooser
                 .setToolTipText(StyleConstants.resourceBundle.getString("EnemySpriteTip"));
 
-        JButton clearButton = new JButton(StyleConstants.resourceBundle.getString("EnemyClearSprites"));
+        JButton clearButton =
+                new JButton(StyleConstants.resourceBundle.getString("EnemyClearSprites"));
         clearButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         clearButton.addMouseListener(createClearAnimationsListener());
         clearButton.setToolTipText(StyleConstants.resourceBundle.getString("EnemyClearSpritesTip"));
@@ -161,7 +164,8 @@ public class EnemyDesignTab extends Tab {
         myAnimationScrollPane.setOpaque(false);
         myAnimationScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 
-        JButton createEnemyButton = new JButton(StyleConstants.resourceBundle.getString("EnemyCreateEnemy"));
+        JButton createEnemyButton =
+                new JButton(StyleConstants.resourceBundle.getString("EnemyCreateEnemy"));
         createEnemyButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         createEnemyButton.addMouseListener(createEnemyButtonListener());
         createEnemyButton
@@ -250,7 +254,8 @@ public class EnemyDesignTab extends Tab {
                     if (gold < 0 || life < 0) {
                         JOptionPane
                                 .showMessageDialog(null,
-                                                   StyleConstants.resourceBundle.getString("EnemyNegativeInput"));
+                                                   StyleConstants.resourceBundle
+                                                           .getString("EnemyNegativeInput"));
                     }
                     else {
                         EnemyJSONObject enemy =
@@ -270,7 +275,8 @@ public class EnemyDesignTab extends Tab {
                 }
                 catch (NumberFormatException n)
                 {
-                    JOptionPane.showMessageDialog(null, StyleConstants.resourceBundle.getString("EnemyInvalidInput"));
+                    JOptionPane.showMessageDialog(null, StyleConstants.resourceBundle
+                            .getString("EnemyInvalidInput"));
                 }
             }
         };
