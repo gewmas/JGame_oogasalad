@@ -7,10 +7,7 @@
 "goldName": "Money",
 "livesName": "Population",
 "levels": 2,
-"widthOfWindow": 600,
-"heightOfWindow": 600,
 "tilesPerRow": 20,
-"difficultyScale": 1.5,
 "map":
 {
   	  "pathImage":  "path.png", 
