@@ -9,6 +9,7 @@ import gameAuthoring.controllers.SkillsDesignController;
 import gameAuthoring.controllers.TempBarrierDesignController;
 import gameAuthoring.controllers.TowerDesignController;
 import gameAuthoring.controllers.UserImagesController;
+import gameAuthoring.controllers.WaveDesignController;
 import gameAuthoring.menuBar.MenuBar;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -135,6 +136,8 @@ public class GameAuthoringGUI extends Observable {
         EnemyWaveCommunicationController enemyWaveCommController =
                 new EnemyWaveCommunicationController();
         myWaveDesignTab = new WaveDesignTab();
+        WaveDesignController waveDesignController= new WaveDesignController(myGameData);
+        myWaveDesignTab.addObserver(waveDesignController);
         enemyWaveCommController.addObserver(myWaveDesignTab);
         myEnemyDesignTab.addObserver(enemyWaveCommController);
         myGameDesignTab.addTab(StyleConstants.resourceBundle.getString("EnemyTab"),

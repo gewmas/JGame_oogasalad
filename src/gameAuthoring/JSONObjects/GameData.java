@@ -30,6 +30,22 @@ public class GameData extends JSONObject {
     private MapJSONObject myMap;
     private ResourcesJSONObject myResources;
     
+    private final static String TOWER_LIST_KEY = "Tower";
+    private final static String ENEMY_LIST_KEY = "enemyType";
+    private final static String TEMPBARRIER_LIST_KEY = "temporaryBarrierType";
+    private final static String WAVE_LIST_KEY = "wave";
+    private final static String RESOURCE_KEY = "resources";
+    
+    private final static String GAME_NAME_KEY = "name";
+    private final static String GOLD_KEY = "gold";
+    private final static String GOLD_NAME_KEY = "goldName";
+    private final static String LIVES_KEY = "numberOflives";
+    private final static String LIVES_NAME_KEY = "livesName";
+    
+    private final static String SPLASH_IMAGE_KEY = "splashImage";
+    private final static String BG_IMAGE_KEY = "BGImage";
+    private final static String BULLET_IMAGE_KEY = "bulletImage";
+    private final static String BG_MUSIC_KEY = "bgMusic";
     
     /**
      * Constructor for GameData class
@@ -42,11 +58,11 @@ public class GameData extends JSONObject {
         myWaveList = new JSONArray();
         myResources = new ResourcesJSONObject();
         
-        this.put("Tower", myTowerList);
-        this.put("enemyType", myEnemyList);
-        this.put("temporaryBarrierType", myBarrierList);
-        this.put("wave", myWaveList);
-        this.put("resources", myResources);
+        this.put(TOWER_LIST_KEY, myTowerList);
+        this.put(ENEMY_LIST_KEY, myEnemyList);
+        this.put(TEMPBARRIER_LIST_KEY, myBarrierList);
+        this.put(WAVE_LIST_KEY, myWaveList);
+        this.put(RESOURCE_KEY, myResources);
 
         Collection<Point2D> pathList = new ArrayList<Point2D>();
         myMap = new MapJSONObject("path.png", pathList);
@@ -59,7 +75,7 @@ public class GameData extends JSONObject {
      * @param gameName Name of game
      */
     public void setGameName (String gameName) {
-        this.put("name", gameName);
+        this.put(GAME_NAME_KEY, gameName);
     }
 
     /**
@@ -68,7 +84,7 @@ public class GameData extends JSONObject {
      * @param gold Quantity of gold
      */
     public void setGold (int gold) {
-        this.put("gold", gold);
+        this.put(GOLD_KEY, gold);
     }
     
 
@@ -78,7 +94,7 @@ public class GameData extends JSONObject {
      * @param goldName Alternative name of gold
      */
     public void setGoldName (String goldName) {
-        this.put("goldName", goldName);
+        this.put(GOLD_NAME_KEY, goldName);
     }
 
     /**
@@ -87,7 +103,7 @@ public class GameData extends JSONObject {
      * @param lives
      */
     public void setLives (int lives) {
-        this.put("numberOfLives", lives);
+        this.put(LIVES_KEY, lives);
     }
 
     /**
@@ -96,7 +112,7 @@ public class GameData extends JSONObject {
      * @param livesName Alternative name of lives
      */
     public void setLivesName (String livesName) {
-        this.put("livesName", livesName);
+        this.put(LIVES_NAME_KEY, livesName);
     }
 
     /**
@@ -105,7 +121,7 @@ public class GameData extends JSONObject {
      * @param splashImage Name of splash image
      */
     public void setSplashImage (String splashImage) {
-        this.put("splashImage", splashImage);
+        this.put(SPLASH_IMAGE_KEY, splashImage);
     }
 
     /**
@@ -114,7 +130,7 @@ public class GameData extends JSONObject {
      * @param backgroundImage
      */
     public void setBackgroundImage (String backgroundImage) {
-        this.put("BGImage", backgroundImage);
+        this.put(BG_IMAGE_KEY, backgroundImage);
     }
 
     /**
@@ -231,7 +247,7 @@ public class GameData extends JSONObject {
      * @param imageID ID of image
      */
     public void addBulletImage (String imageID) {
-        this.put("bulletImage", imageID);
+        this.put(BULLET_IMAGE_KEY, imageID);
     }
 
     /**
@@ -240,7 +256,7 @@ public class GameData extends JSONObject {
      * @param audioID ID of audio
      */
     public void addBGAudio (String audioID) {
-        this.put("bgMusic", audioID);
+        this.put(BG_MUSIC_KEY, audioID);
     }
 
     /**

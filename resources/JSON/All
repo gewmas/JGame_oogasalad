@@ -78,7 +78,7 @@
          "Name": "Default",
          "Damage": 50,
          "Description": "towerr",
-         "Range": 5,
+         "Range": 100,
          "Sell Price": 50,
          "Type": "DefaultTower",
          "Image": "3",
@@ -224,10 +224,10 @@
    "enemyType": [
       {
          "id": "D",
-         "life": 2,
-         "skill": "Haste",
+         "life": 1,
+         "skill": "Armour",
          "speed": 0.5,
-         "damage": 100,
+         "damage": 1,
          "image": "enemy1",
          "gold": 100
       },
@@ -236,7 +236,7 @@
          "life": 2,
          "skill": "Armour",
          "speed": 0.4,
-         "damage": 100,
+         "damage": 1,
          "image": "8",
          "gold": 100
       }
