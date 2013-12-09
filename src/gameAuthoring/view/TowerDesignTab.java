@@ -27,7 +27,12 @@ import net.miginfocom.swing.MigLayout;
 
 
 /**
- * @author BecLai
+ * @author Rebecca Lai & Susan Zhang
+ *         TowerDesignTab allows for users to design different types of Towers for a Tower Defense
+ *         game. Four types of towers are allowed to be defined: DefaultTower, MultipleShootingTower, 
+ *         BoostTower, and MagicTower. Users are able to define parameters such as tower name, the rate 
+ *         at which a tower fires, how much a tower costs, etc., as well any special tower specific 
+ *         attributes.
  * 
  */
 public class TowerDesignTab extends Tab {
@@ -68,7 +73,10 @@ public class TowerDesignTab extends Tab {
     JLabel type, myNameLabel, myDamageLabel, myAttackSpeedLabel, myAttackModeLabel, myRangeLabel,
             myCostLabel, myRecyclePriceLabel, myDescriptionLabel,
             myTowerImageChooser;
-
+    
+    /**
+     * Creates a new TowerDesignTab
+     */
     public TowerDesignTab () {
     }
 
@@ -87,13 +95,16 @@ public class TowerDesignTab extends Tab {
         initializeDescriptionField();
         initializeTowerImageChooser();
         initializeTowerCreationButton();
-        initializeContentPanel();
+        initializeContentPanel(); 
         myMainPanel.add(myContentPanel);
         initializeCreatedTowersPanel();
         myMainPanel.add(myCreatedTowers);
         return myMainPanel;
     }
 
+    /**
+     * Creates panel to store created towers
+     */
     public void initializeCreatedTowersPanel () {
         myCreatedTowersPanel = new JPanel(new MigLayout(CREATED_TOWERS_WRAP_MODE));
         myCreatedTowersPanel.setOpaque(false);
@@ -109,6 +120,9 @@ public class TowerDesignTab extends Tab {
                                     StyleConstants.TITLE_FONT_2));
     }
 
+    /**
+     * Initializes panel for user to fill out tower information
+     */
     private void initializeContentPanel () {
         myContentPanel.setLayout(new MigLayout(CONTENT_PANEL_WRAP_MODE));
         type = new JLabel("Type");
@@ -127,6 +141,12 @@ public class TowerDesignTab extends Tab {
         myContentPanel.setPreferredSize(PANEL_DIMENSION);
     }
 
+    /**
+     * Adds tower to myCreatedTowersPanel 
+     * 
+     * @param imgSource Tower image
+     * @param towerName Tower name
+     */
     public void addTower (File imgSource, String towerName) {
         JLabel towerIcon = new JLabel();
         Image towerImage;
@@ -149,6 +169,12 @@ public class TowerDesignTab extends Tab {
 
     }
 
+    /**
+     * Listener to change the JLabels and Fields depending on what type of tower is to be created
+     * 
+     * @param contentPanel Panel to be modified
+     * @return ActionListener that changes what type of tower can be created
+     */
     private ActionListener createTowerTypeListener (final JPanel contentPanel) {
         ActionListener listener = new ActionListener() {
             @Override
@@ -165,7 +191,7 @@ public class TowerDesignTab extends Tab {
                     else if (towerType.equals(MULTIPLE_SHOOTING_TOWER_NAME)) {
                         dataPanel = createMultipleShootingTowerPanel();
                     }
-                    else if (towerType.equals("BOOST_TOWER_NAME")) {
+                    else if (towerType.equals(BOOST_TOWER_NAME)) {
                         dataPanel = createBoostTowerPanel();
                     }
                     else {
@@ -190,6 +216,9 @@ public class TowerDesignTab extends Tab {
         return listener;
     }
 
+    /**
+     * @return Default Tower creation JPanel
+     */
     private JPanel createTowerPanel () {
         JPanel panel = new JPanel();
         panel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
@@ -214,6 +243,9 @@ public class TowerDesignTab extends Tab {
         return panel;
     }
 
+    /**
+     * @return Magic Tower creation JPanel
+     */
     private JPanel createMagicTowerPanel () {
         JPanel panel = createTowerPanel();
         JLabel magicFactor = new JLabel(StyleConstants.resourceBundle.getString("TowerMagic"));
@@ -233,6 +265,10 @@ public class TowerDesignTab extends Tab {
         return panel;
     }
 
+    /**
+     * 
+     * @return Boost Tower creation JPanel
+     */
     private JPanel createBoostTowerPanel () {
         JPanel panel = new JPanel();
         panel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
@@ -263,6 +299,11 @@ public class TowerDesignTab extends Tab {
         return panel;
     }
 
+    /**
+     * Creates Multiple Shooting Tower Panel
+     * 
+     * @return Multiple Shooting Tower JPanel
+     */
     private JPanel createMultipleShootingTowerPanel () {
         JPanel panel = createTowerPanel();
         JLabel attackAmount = new JLabel(StyleConstants.resourceBundle.getString("TowerAttack"));
@@ -277,6 +318,10 @@ public class TowerDesignTab extends Tab {
         return panel;
     }
 
+    /**
+     * 
+     * @return
+     */
     public MouseAdapter createTowerButtonListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override

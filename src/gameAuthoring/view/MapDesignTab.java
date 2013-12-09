@@ -34,7 +34,7 @@ import net.miginfocom.swing.MigLayout;
 public class MapDesignTab extends Tab {
 
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/img");
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources/img");
     private Grid myGrid;
     private ImageLabel myCurrentPathImage;
     private String myBackgroundImage;

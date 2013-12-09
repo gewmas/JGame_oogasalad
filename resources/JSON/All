@@ -82,7 +82,7 @@
          "Sell Price": 50,
          "Type": "DefaultTower",
          "Image": "3",
-         "Attack Speed": 0.4,
+         "Attack Speed": 2,
          "Attack Mode": 0
       },
       {
