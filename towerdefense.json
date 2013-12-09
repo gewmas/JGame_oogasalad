@@ -4,7 +4,6 @@
 "BGImage" :  "woods_background",
 "gold" : 500,
 "numberOfLives" : 10,
-
 "goldName": "Money",
 "livesName": "Lives",
 "levels": 2,
@@ -12,7 +11,6 @@
 "heightOfWindow": 600,
 "tilesPerRow": 20,
 "difficultyScale": 1.5,
-
 "map":
 {
   	  "pathImage":  "path.png", 
@@ -368,12 +366,10 @@
                { "id": "2", "url": "mr2.png" },
                { "id": "3", "url": "mr3.png" },
                { "id": "4", "url": "mr4.png" },
-
       			{ "id": "d1", "url": "d1.png" },
                { "id": "d2", "url": "d2.png" },
                { "id": "d3", "url": "d3.png" },
                { "id": "d4", "url": "d4.png" },
-
                
                { "id": "space_background", "url": "space_background.jpg" },
                { "id": "woods_background", "url": "woods_background.png" },
@@ -431,6 +427,7 @@
 	 "Cost": 50, 
 	 "Sell Price":  50,
 	 "Description": "Default tower will shoot enemy, Surprise!",
+	 "Specialty" : 0,
 	},
 	{
 	 "Type": "DefaultTower",
@@ -443,6 +440,7 @@
 	 "Cost": 10, 
 	 "Sell Price":  50,
 	 "Description": "Default tower will shoot enemy, Surprise!",
+	 "Specialty" : 0,
 	},
 	{
 	 "Type": "MultipleShootingTower",
@@ -456,6 +454,7 @@
 	 "Cost": 100, 
 	 "Sell Price":  50,
 	 "Description": "MultipleShooting tower will shoot multiple bullets at one time.",
+	 "Specialty" : 0,
 	},
 	{
 	 "Type": "BoostTower",
@@ -468,6 +467,7 @@
 	 "Sell Price":  50,
 	 "Description": "Boost tower will strength towers in adjacency.",
 	 "Boost Factor": 2.0,
+	 "Specialty" : 0,
 	},
 	{
 	 "Type": "MagicTower",
@@ -482,6 +482,7 @@
 	 "Description": "Magic tower will shoot a magic bullet to affect the enemy.",
 	 "Magic Factor": 2.0,
 	 "Magic" : ["FrozeMagic"],
+	 "Specialty" : 0,
 	}
 ],
 
@@ -493,6 +494,8 @@
 	"life": 10,
 	"speed": 0.5,
    "skill": "Poison",
+   "Specialty" : 0,
+   "damage":1
 }, 
 {
 	"id": "2",
@@ -501,6 +504,8 @@
 	"life": 15,
 	"speed": 0.5,
    "skill": "Light",
+   "Specialty" : 0,
+   "damage":1
 },
 {
 	"id": "3",
@@ -509,6 +514,8 @@
 	"life": 15,
 	"speed": 0.5,
    	"skill": "Armour",
+   	"Specialty" : 0,
+   	"damage":1
 }
 ],
 

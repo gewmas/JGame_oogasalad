@@ -1,4 +1,5 @@
 package gameEngine.model.enemy;
+
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.magicFactory.MagicsFactory;
 import gameEngine.model.Model;
@@ -24,7 +25,7 @@ public class Enemy extends JGObject implements IEMagicable {
 
     String id;
     String image;
-    Skill mySkill=null;
+    Skill mySkill = null;
     Model model;
     double gold;
     double life;
@@ -33,8 +34,10 @@ public class Enemy extends JGObject implements IEMagicable {
     double yMovement;
     int pathIndex;
     double pathStep;
+    int mySpecialty = 0;
+    int damage=0;
     LinkedList<Tile> path;
-    
+
     double pathX;
     double pathY;
 
@@ -52,9 +55,10 @@ public class Enemy extends JGObject implements IEMagicable {
                   boolean unique_id,
                   int collisionid,
                   String image,
-                  Model model) {
+                  int speciaty,
+                  Model model,int damage) {
         super(id, unique_id, model.getPathList().get(0).getX(), model.getPathList().get(0).getY(),
-              collisionid, image);
+              collisionid, image,damage);
 
         this.model = model;
         this.id = id;
@@ -62,7 +66,7 @@ public class Enemy extends JGObject implements IEMagicable {
         this.setGraphic(image);
         this.xMovement = 1;
         this.yMovement = 0;
-
+        this.mySpecialty = speciaty;
         this.gold = gold;
         this.life = life;
         this.originalLife = life;
@@ -73,10 +77,9 @@ public class Enemy extends JGObject implements IEMagicable {
 
         this.x = path.get(0).getX();
         this.y = path.get(0).getY();
-        
-        pathX=x;
-        pathY=y;
 
+        pathX = x;
+        pathY = y;
 
         this.currentMagics = 0;
         // Yuhua change it
@@ -89,8 +92,8 @@ public class Enemy extends JGObject implements IEMagicable {
 
     @Override
     public void move () {
-        //update skills
-        lifeLessThanZero() ;
+        // update skills
+        lifeLessThanZero();
         if (mySkill != null)
             mySkill.update((int) this.getCenterX(), (int) this.getCenterY());
         // Should walk along the Path
@@ -100,10 +103,10 @@ public class Enemy extends JGObject implements IEMagicable {
         }
         pathX += xMovement * speed;
         pathY += yMovement * speed;
-        JGRectangle box=this.getImageBBox();
+        JGRectangle box = this.getImageBBox();
 
-        this.x=pathX-(box.width-GameEngineConstant.PIXELSPERTILE)/2;
-        this.y=pathY-(box.height-GameEngineConstant.PIXELSPERTILE);
+        this.x = pathX - (box.width - GameEngineConstant.PIXELSPERTILE) / 2;
+        this.y = pathY - (box.height - GameEngineConstant.PIXELSPERTILE);
     }
 
     public boolean reachedPoint () {
@@ -118,14 +121,14 @@ public class Enemy extends JGObject implements IEMagicable {
 
         return false;
     }
-    
-    public void lifeLessThanZero() {
-        if(life <= 0) {
-            model.getGameInfo().addGold((int)gold);
-            CreateEffect effect=new CreateEffect();
+
+    public void lifeLessThanZero () {
+        if (life <= 0) {
+            model.getGameInfo().addGold((int) gold);
+            CreateEffect effect = new CreateEffect();
             effect.blood(this.getCenterX(), this.getCenterY());
             effect.Dollar(this.getCenterX(), this.getCenterY());
-            
+
             remove();
         }
     }
@@ -153,8 +156,11 @@ public class Enemy extends JGObject implements IEMagicable {
                      *         bullet can only hurt target enemy
                      *         no obj.remove(), let bullet kill itself
                      */
-
-                    life -= ((Bullet) obj).getDamage();
+                    double damage=  ((Bullet) obj).getDamage();
+                    if( ((Bullet)obj).getSpecialty()==mySpecialty){
+                        damage*=2;
+                    }
+                    life -= damage;
                     lifeLessThanZero();
                     /**
                      * @author wenxin
@@ -168,7 +174,7 @@ public class Enemy extends JGObject implements IEMagicable {
     }
 
     public void reachedGoal () {
-        model.getGameInfo().loseLife();
+        model.getGameInfo().loseLife(damage);
         remove();
     }
 
@@ -235,14 +241,15 @@ public class Enemy extends JGObject implements IEMagicable {
      * @author wenxin
      *         For the IMagicable interface implement
      */
-    public double getCenterX(){
-        
-        return x+this.getImageBBox().width/2;
+    public double getCenterX () {
+
+        return x + this.getImageBBox().width / 2;
     }
-    public double getCenterY(){
-        return y+this.getImageBBox().height/2;
+
+    public double getCenterY () {
+        return y + this.getImageBBox().height / 2;
     }
-    
+
     @Override
     public double getX () {
         return pathX;
@@ -265,43 +272,38 @@ public class Enemy extends JGObject implements IEMagicable {
 
     @Override
     public double changeLife (double offset) {
-        life+=offset;
+        life += offset;
         return offset;
     }
-    
+
     @Override
     public double changePercentLife (double percent) {
-        double change=life*percent;
-        life+=change;
-        return change;  
+        double change = life * percent;
+        life += change;
+        return change;
     }
 
     @Override
     public double changePercentSpeed (double percent) {
-        double change=speed*percent;
-        speed+=change;
-        return change;    
+        double change = speed * percent;
+        speed += change;
+        return change;
     }
-    
 
     @Override
-    public double changeSpeed(double offset){
-       speed+=offset;
-       return offset;
+    public double changeSpeed (double offset) {
+        speed += offset;
+        return offset;
     }
 
-
-
-    public void setLife(int value) {
+    public void setLife (int value) {
         life = value;
         lifeLessThanZero();
     }
 
-
-    public void setSkill(String skill){
-        SkillFactory sf= new SkillFactory(this.eng);
-        mySkill=sf.create(skill);
+    public void setSkill (String skill) {
+        SkillFactory sf = new SkillFactory(this.eng);
+        mySkill = sf.create(skill);
     }
-
 
 }

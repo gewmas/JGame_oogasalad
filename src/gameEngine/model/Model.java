@@ -2,6 +2,7 @@ package gameEngine.model;
 
 import gameEngine.cheats.Cheat;
 import gameEngine.cheats.CheatParser;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.factory.gridFactory.GridFactory;
 import gameEngine.factory.temporaryBarrier.TemporaryBarrierFactory;
 import gameEngine.factory.towerfactory.TowerFactory;
@@ -13,6 +14,7 @@ import gameEngine.model.warehouse.EnemyWarehouse;
 import gameEngine.model.warehouse.TemporaryBarrierWarehouse;
 import gameEngine.model.warehouse.TowerWarehouse;
 import gameEngine.parser.Parser;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
 import jgame.impl.JGEngineInterface;
 
 
@@ -47,6 +50,7 @@ public class Model {
     private ArrayList<Enemy> spawnedEnemies;
     private CheatParser cheatParser;
     private boolean isCheatToWin=false;
+    private Resources myResources=null;
 
     public Model () {
          
@@ -73,6 +77,10 @@ public class Model {
         cheatParser = new CheatParser(this);
        
         gameInfo = new GameInfo(parser);
+        
+        //Change Description In GameEngineConst
+        GameEngineConstant.updateDescription(parser);
+
     }
     // Fabio Changed it (added win and life reset)
     public void startGame () {
@@ -128,8 +136,8 @@ public class Model {
     //For detector use
     public void setJGEngine(JGEngineInterface eng){
         this.myEng = eng;
-        Resources r = new Resources(myEng);
-        r.register(parser);
+        myResources = new Resources(myEng);
+        myResources.register(parser);
         rule = new Rule(1, enemyWarehouse,eng);
         rule.readWaveFromJSon(parser.getJSONArray("wave"));
     }
@@ -145,6 +153,7 @@ public class Model {
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
     public PurchaseInfo getTowerInfo (int x, int y) {
+       
         return checkTowerAtXY(x, y).getPurchaseInfo();
     }
 
@@ -264,6 +273,10 @@ public class Model {
     
     public void stopWaves(){
         rule.stop();
+    }
+    
+    public Map<String, String> getImageURL(){
+        return myResources.getImages(); 
     }
     
     

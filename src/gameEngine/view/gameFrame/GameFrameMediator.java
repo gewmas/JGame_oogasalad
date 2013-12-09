@@ -1,8 +1,8 @@
 package gameEngine.view.gameFrame;
 
-
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 import gameEngine.view.gameFrame.tools.store.StorePanel;
+
 
 @Deprecated
 /**
@@ -22,7 +22,6 @@ import gameEngine.view.gameFrame.tools.store.StorePanel;
  * @author Lalita Maraj
  * 
  */
-
 public class GameFrameMediator {
 
     private GameFrame gameFrame;
@@ -45,34 +44,38 @@ public class GameFrameMediator {
         storePanel.closeStore();
     }
 
-
-
     @Deprecated
     public void addGameFrame (GameFrame gameFrame) {
         this.gameFrame = gameFrame;
 
     }
+
     @Deprecated
     public void addGame (CanvasPanel canvasPanel) {
         this.canvasPanel = canvasPanel;
 
     }
+
     @Deprecated
     public void addInfoPanel (InfoDisplayPanel towerInfoPanel) {
         this.towerInfoPanel = towerInfoPanel;
     }
+
     @Deprecated
     private void clearDisplay () {
         this.towerInfoPanel.clearDisplay();
     }
+
     @Deprecated
     public void openStore () {
         storePanel.openStore();
     }
+
     @Deprecated
     private void closeStore () {
         storePanel.closeStore();
     }
+
     @Deprecated
     /**
      * Updates the enabled status of store items.
@@ -80,6 +83,7 @@ public class GameFrameMediator {
     public void updateStoreStatus () {
         storePanel.update();
     }
+
     @Deprecated
     public void addStore (StorePanel storePanel) {
         this.storePanel = storePanel;
