@@ -1,12 +1,9 @@
 package gameEngine.view.gameFrame.towerUpgrader;
 
-import gameEngine.constant.GameEngineConstant;
 import gameEngine.controller.ControllerToViewInterface;
-import gameEngine.view.View;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -25,7 +22,6 @@ public class AttackModeButton extends TowerUpgraderButton {
     private ItemOptionsDisplayer towerUpgrader;
     private JList<String> myAttackModeList;
     private DefaultListModel<String> myAttackModeListModel;
-    private Map<String,String> towerInfo;
     private int numAttackModes=4;    
 
     public AttackModeButton (ItemOptionsDisplayer utility, ControllerToViewInterface controller_in) {
@@ -34,20 +30,16 @@ public class AttackModeButton extends TowerUpgraderButton {
         this.towerUpgrader = utility;
         myAttackModeListModel=new DefaultListModel<String>();
         myAttackModeList=new JList<String>(myAttackModeListModel);
-        towerInfo=new HashMap<String,String>();
+        for (int i=0;i<numAttackModes;i++){
+            myAttackModeListModel.addElement(ATTACK_MODES[i]);
+        }
 
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                myAttackModeListModel.clear();
-                towerInfo.get(GameEngineConstant.TOWER_ATTACK_MODE);
-                for (int i=0;i<numAttackModes;i++){
-                    myAttackModeListModel.addElement(ATTACK_MODES[i]);
-                }
                 buttonPushed();
                 int selectedItem=myAttackModeList.getSelectedIndex();
-                if (controller.setTowerAttackMode(towerX, towerY, selectedItem)){
-                }
+                controller.setTowerAttackMode(towerX, towerY, selectedItem);
             }
         });
         this.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
@@ -63,7 +55,6 @@ public class AttackModeButton extends TowerUpgraderButton {
     public void setTowerPosition (Map<String, String> information, int mouseX, int mouseY) {
         towerX = mouseX;
         towerY = mouseY;
-        towerInfo=information;
     }
 
 }
