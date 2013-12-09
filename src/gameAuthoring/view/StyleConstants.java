@@ -20,6 +20,7 @@ public final class StyleConstants {
     public static final String PATH_SELECTION_MODE = "path";
     public static final String BARRIER_SELECTION_MODE = "barrier";
     public static final String DEFAULT_WRAP_MODE = "wrap 2";
+    public static final String DEFAULT_SPAN_MODE = "span 2";
     public static final Dimension DEFAULT_PANEL_SIZE = new Dimension(500, 500);
     public static final Border DEFAULT_PANEL_BORDER = BorderFactory
             .createLineBorder(Color.black, 1);
