@@ -53,8 +53,9 @@ public class StorePanel extends JPanel implements GameUpdatable, GameInitializab
     public void openStore () {
         Map<String, List<PurchaseInfo>> storeInventory = view.getInventory();
         for (String item : storeInventory.keySet()) {
+            Map<String,String> images = view.getStoreImages();
             StoreOptionsPanel storeCategory =
-                    new StoreOptionsPanel(view, storeInventory.get(item), utilities, itemPurchaser);
+                    new StoreOptionsPanel(view, images, storeInventory.get(item), utilities, itemPurchaser);
             storeTabbedPane.addTab(item, storeCategory);
             storeCategories.add(storeCategory);
         }
