@@ -517,6 +517,7 @@
 	"speed": 0.5,
    "skill": "Poison",
    "Specialty" : 1,
+   "damage":-1
 }, 
 {
 	"id": "2",
@@ -526,6 +527,7 @@
 	"speed": 0.5,
    "skill": "",
    "Specialty" : 2,
+   "damage":-1
 },
 {
 	"id": "3",
@@ -535,6 +537,7 @@
 	"speed": 0.5,
    	"skill": "Armour",
    	"Specialty" : 1,
+   	"damage":-1
 }
 ],
 
