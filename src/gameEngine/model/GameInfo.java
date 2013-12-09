@@ -1,6 +1,7 @@
 package gameEngine.model;
 
 import gameEngine.parser.Parser;
+import gameEngine.constant.*;
 import java.awt.Dimension;
 
 
@@ -29,20 +30,15 @@ public class GameInfo {
           myLife =parser.getInt("numberOfLives");
 //        wave will be changed when the different levels are load.
         myWave = 1000;
-        int x = parser.getInt("widthOfWindow");
-        int y = parser.getInt("heightOfWindow");
-        int numPerRow =parser.getInt("tilesPerRow");
-//      myDimension=new Dimension(x/numPerRow,y/numPerRow);
+        int x = GameEngineConstant.GRID_WIDTH;
+        int y = GameEngineConstant.GRID_HEIGHT;
+        int numPerRow = GameEngineConstant.TILES_PER_ROW;
 //      right now I just put the 20*20 dimension
         myDimension = new Dimension(20, 20);
         myBGImage = parser.getString("BGImage");
         myName = parser.getString("name");
         myGoldName = parser.getString("goldName");
         myLivesName = parser.getString("livesName");
-        // myTowerInfo = new ArrayList<TowerInfo>();
-        
-    //    System.out.println(myGold+";"+myLife+";"+myWave+";"+x+";"+y+";"+myBGImage);
-        
     }
 
 

@@ -40,6 +40,7 @@ public class BasicInfoTab extends Tab {
     private JButton simulateButton;
 
     private AudioLabel myAudioLabel;
+    private ImageLabel myImageLabel;
 
     public BasicInfoTab (GameData gameData) {
         super(gameData);
@@ -66,6 +67,15 @@ public class BasicInfoTab extends Tab {
 
         JLabel title = new JLabel("Basic Game Info");
         title.setFont(Constants.DEFAULT_BODY_FONT);
+        
+        JLabel bullet = new JLabel("Bullet Image");
+        bullet.setFont(Constants.DEFAULT_BODY_FONT);
+        
+        myImageLabel = new ImageLabel();
+        myImageLabel.setMutableStatusTrue();
+        myImageLabel.setPreferredSize(new Dimension(50, 50));
+        Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
+        myImageLabel.setBorder(border);
 
         title.setFont(Constants.DEFAULT_TITLE_FONT);
         title.setForeground(new Color(80, 80, 80));
@@ -129,6 +139,8 @@ public class BasicInfoTab extends Tab {
         subPanel.add(myAudioLabel);
         subPanel.add(setSplashImageButton);
         subPanel.add(mySplashImageLabel);
+        subPanel.add(bullet);
+        subPanel.add(myImageLabel);
         subPanel.add(setInfoButton);
         subPanel.add(simulateButton);
         Border b = BorderFactory.createLineBorder(Color.black, 1);

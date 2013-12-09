@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -35,23 +37,15 @@ public class GameAuthoringGUI {
     private UserLibraryMainTab myUserLibraryTab;
     protected static ImageLabel myImageLabel = null;
     protected static AudioLabel myAudioLabel = null;
+    private JLabel myDuvallClippy;
 
     // TO DO: Get rid of magic numbers
     public GameAuthoringGUI () {
         GameData gameData = new GameData();
         myFrame = new JFrame();
-        JLabel title = new JLabel();
-        Image titleImage;
-        try {
-            titleImage = ImageIO.read(this.getClass().getResource("title.png"));
-            title.setIcon(new ImageIcon(titleImage));
-        }
-        catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        myFrame.setPreferredSize(new Dimension(1200, 800));
+        myFrame.setPreferredSize(new Dimension(1190, 780));
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        myMainPanel = new ImagePanel("texture0.jpg");
+        myMainPanel = new ImagePanel("texture0.png");
         myMainPanel.setLayout(new MigLayout("wrap 2"));
         JTabbedPane gameDesignTab = new JTabbedPane();
         gameDesignTab.setPreferredSize(new Dimension(750, 600));
@@ -64,15 +58,16 @@ public class GameAuthoringGUI {
         myTempBarrierTab = new TempBarrierDesignTab(gameData);
         myUserLibraryTab = new UserLibraryMainTab(gameData);
 
-        JLabel duvallClippy = new JLabel();
+        myDuvallClippy = new JLabel();
         Image duvallImage;
         try {
             duvallImage = ImageIO.read(this.getClass().getResource("duvall_clippy.png"));
-            duvallClippy.setIcon(new ImageIcon(duvallImage));
+            myDuvallClippy.setIcon(new ImageIcon(duvallImage));
         }
         catch (IOException e1) {
             e1.printStackTrace();
         }
+        myDuvallClippy.addMouseMotionListener(makeClippyDraggingListener());
 
         gameDesignTab.addTab("Basic Info", myBasicInfoTab.getTab());
         gameDesignTab.setFont(new Font("Calibri", Font.PLAIN, 14));
@@ -83,16 +78,26 @@ public class GameAuthoringGUI {
         gameDesignTab.addTab("Temp Barrier Design", myTempBarrierTab.getTab());
         gameDesignTab.addTab("Skills Design", mySkillsDesignTab.getTab());
         MenuBar menu = new MenuBar(gameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
-        myMainPanel.add(title, "span 2, align left, gap 0 0 15 0");
-        myMainPanel.add(gameDesignTab, "gap 50 20 20 40");
+        myMainPanel.add(gameDesignTab, "gap 50 20 100 40");
         myMainPanel.add(myUserLibraryTab);
-        myMainPanel.add(duvallClippy);
+        // myMainPanel.add(myDuvallClippy);
         myFrame.setJMenuBar(menu);
         myFrame.setContentPane(myMainPanel);
         myFrame.pack();
         myFrame.setLocationByPlatform(true);
         myFrame.setVisible(true);
         myFrame.setResizable(false);
+    }
+
+    public MouseMotionAdapter makeClippyDraggingListener () {
+        MouseMotionAdapter listener = new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged (MouseEvent e) {
+                e.translatePoint(e.getComponent().getLocation().x, e.getComponent().getLocation().y);
+                myDuvallClippy.setLocation(e.getX(), e.getY());
+            }
+        };
+        return listener;
     }
 
     public static void main (String[] arg) {

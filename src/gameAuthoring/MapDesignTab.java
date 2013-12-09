@@ -116,7 +116,7 @@ public class MapDesignTab extends Tab {
                 Image path;
                 try {
                     myPathImage =
-                            GameAuthoringGUI.myImageLabel.getID();
+                            GameAuthoringGUI.myImageLabel.getImageFile().getName();
                     path = ImageIO.read(imgSource).getScaledInstance(50, 50, Image.SCALE_FAST);
                     myCurrentPathImage.setIcon(new ImageIcon(path));
                 }
