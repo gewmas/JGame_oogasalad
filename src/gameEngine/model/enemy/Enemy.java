@@ -127,9 +127,8 @@ public class Enemy extends JGObject implements IEMagicable {
         if (life <= 0) {
            
             model.getGameInfo().addGold((int) gold);
-            CreateEffect effect = new CreateEffect();
-            effect.blood(this.getCenterX(), this.getCenterY());
-            effect.Dollar(this.getCenterX(), this.getCenterY());
+            CreateEffect.blood(this.getCenterX(), this.getCenterY());
+            CreateEffect.Dollar(this.getCenterX(), this.getCenterY());
 
             remove();
         }
