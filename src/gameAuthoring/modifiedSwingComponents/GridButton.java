@@ -19,6 +19,13 @@ import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
 
+/**
+ * GridButton is a modified JButton that is used to create a Grid. Each GridButton stores its own
+ * coordinates, whether it is a path start or end, and an image.
+ * 
+ * @author Rebecca Lai
+ * 
+ */
 @SuppressWarnings("serial")
 public class GridButton extends JButton {
 
@@ -30,6 +37,13 @@ public class GridButton extends JButton {
     private JMenuItem myStartOptionItem;
     private JMenuItem myEndOptionItem;
 
+    /**
+     * Creates new GridButton
+     * 
+     * @param x is x coordinate of GridButton
+     * @param y is y coordinate of GridButton
+     * @param grid is Grid to which button is added
+     */
     public GridButton (int x, int y, Grid grid) {
         myCoordinate = new Point2D.Double(x, y);
         myGrid = grid;
@@ -38,10 +52,21 @@ public class GridButton extends JButton {
         addPathListener(this);
     }
 
+    /**
+     * Set image for the GridButton
+     * 
+     * @param imgSource is image of GridButton
+     */
     public void setImageSource (File imgSource) {
         myImgSource = imgSource;
     }
 
+    /**
+     * Allows user to set path start/end by right clicking on GridButton
+     * Allows user to make GridButton part of path by left clicking on it
+     * 
+     * @param gButton is GridButton that responds to mouse action
+     */
     private void addPathListener (final GridButton gButton) {
         MouseAdapter listener = new MouseAdapter() {
 
@@ -104,6 +129,9 @@ public class GridButton extends JButton {
         gButton.addMouseListener(listener);
     }
 
+    /**
+     * Set image for GridButton if image has been defined
+     */
     public void setImage () {
         try {
             if (myImgSource == null) {
@@ -122,14 +150,23 @@ public class GridButton extends JButton {
         }
     }
 
+    /**
+     * Set GridButton's path status to false
+     */
     public void setPathStatusFalse () {
         isPath = false;
     }
 
+    /**
+     * Set GridButton's path status to true
+     */
     public void setPathStatusTrue () {
         isPath = true;
     }
 
+    /**
+     * @return path status of GridButton
+     */
     public boolean isPath () {
         return isPath;
     }

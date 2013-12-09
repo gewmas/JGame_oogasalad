@@ -9,13 +9,25 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 
+/**
+ * @author Rebecca Lai
+ *         GradientPanel is a modified version of a JPanel that has a gradiated background
+ */
 @SuppressWarnings("serial")
 public class GradientPanel extends JPanel {
 
+    /**
+     * Creates new GradientPanel
+     */
     public GradientPanel () {
         this.setOpaque(false);
     }
 
+    /**
+     * Sets layoutmanager for new GradientPanel
+     * 
+     * @param layoutManager is layout manager for panel
+     */
     public GradientPanel (LayoutManager layoutManager) {
         super(layoutManager);
         this.setOpaque(false);

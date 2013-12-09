@@ -1,5 +1,7 @@
 package gameAuthoring.test;
 
+import static org.junit.Assert.assertTrue;
+import gameAuthoring.JSONObjects.EnemyJSONObject;
 import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.controllers.EnemyDesignController;
 import gameAuthoring.view.EnemyDesignTab;
@@ -13,6 +15,7 @@ public class TestEnemyDesign {
     private static GameData myGameData;
     private static EnemyDesignTab myEnemyDesignTab;
     private static EnemyDesignController myEnemyDesignController;
+    private static JSONArray myEnemies;
 
     @BeforeClass
     public static void setUpBeforeClass () throws Exception {
@@ -20,11 +23,14 @@ public class TestEnemyDesign {
         myEnemyDesignTab = new EnemyDesignTab();
         myEnemyDesignController = new EnemyDesignController(myGameData);
         myEnemyDesignTab.addObserver(myEnemyDesignController);
-        JSONArray myEnemies = (JSONArray) myGameData.get("enemyType");
+        myEnemies = (JSONArray) myGameData.get("enemyType");
     }
 
     @Test
     public void testTabControllerCommunication () {
+        EnemyJSONObject dummyEnemy = new EnemyJSONObject("name", 0, "id", 0, 0, 0, "skill");
+        myEnemyDesignTab.notifyObservers(dummyEnemy);
+        assertTrue(myEnemies.length() == 1);
     }
 
 }

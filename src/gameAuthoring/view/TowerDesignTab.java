@@ -27,7 +27,7 @@ import net.miginfocom.swing.MigLayout;
 
 
 /**
- * @author BecLai
+ * @author Rebecca Lai & Susan Zhang
  * 
  */
 public class TowerDesignTab extends Tab {
