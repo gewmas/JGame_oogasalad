@@ -10,13 +10,9 @@
 "tilesPerRow": 20,
 "map":
 {
-<<<<<<< HEAD
   	  "pathImage":  "GroundTiles.png", 
 	  "Path": [
-=======
-            "pathImage":  "path.png", 
-          "Path": [
->>>>>>> 90f5b9ec3d851a375eb4418c4c22a04fee280b34
+
          {
             "y": 0,
             "x": 0
