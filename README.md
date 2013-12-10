@@ -5,6 +5,7 @@
 Fabio Berger, Jiaran Hao, Rebecca Lai, Yuhua Mai, Lalita Maraj, Harris Osserman, Wenxin Shi, Susan Zhang, Alex Zhu
 
 **Start Date:** Monday, October 28, 2013
+
 **End Date:** Monday December 9th, 2013
 
 **Hours worked:** Too many, 30h+/person 
@@ -59,8 +60,8 @@ The timers for each wave of enemies are done outside of jgame, so changing the f
 
 **Game Authoring:**
 
-- Rebecca Lai - Worked with Susan to create the GameAuthoringGUI. Primarily worked on 
-- Susan Zhang
+- Rebecca Lai - Worked with Susan to create the GameAuthoringGUI. Worked individually on user library and the "click-and-drag" mechanism of images and audio. 
+- Susan Zhang - Worked with Rebecca to create the GameAuthoringGUI. Worked individually on writing game information to JSON. 
 
 **Engine Front End:**
 
