@@ -319,8 +319,7 @@ public class TowerDesignTab extends Tab {
     }
 
     /**
-     * 
-     * @return
+     * @return MouseAdapter that extracts data from fields, notifies observers, and clears fields
      */
     public MouseAdapter createTowerButtonListener () {
         MouseAdapter listener = new MouseAdapter() {
@@ -410,6 +409,9 @@ public class TowerDesignTab extends Tab {
         return listener;
     }
 
+    /**
+     * Clears text fields
+     */
     private void clearTextFields () {
         myNameField.setText(StyleConstants.NULL_STRING);
         myDamageField.setText(StyleConstants.NULL_STRING);
@@ -424,6 +426,9 @@ public class TowerDesignTab extends Tab {
         myAttackAmountField.setText(StyleConstants.NULL_STRING);
     }
 
+    /**
+     * Adds title to tab
+     */
     private void initializeTitle () {
         JLabel title = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerTitle"));
@@ -431,6 +436,9 @@ public class TowerDesignTab extends Tab {
         myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
     }
 
+    /**
+     * Adds name label and field
+     */
     private void initializeNameField () {
         myNameLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerName"));
@@ -442,6 +450,9 @@ public class TowerDesignTab extends Tab {
                 .getString("TowerNameTip"));
     }
 
+    /**
+     * Adds damage label and field
+     */
     private void initializeDamageField () {
         myDamageLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerDamage"));
@@ -453,6 +464,9 @@ public class TowerDesignTab extends Tab {
                 .getString("TowerDamageTip"));
     }
 
+    /**
+     * Adds attack speed label and field
+     */
     private void initializeAttackSpeedField () {
         myAttackSpeedLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerAttackSpeed"));
@@ -464,6 +478,9 @@ public class TowerDesignTab extends Tab {
         myAttackSpeedField.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
+    /**
+     * Adds attack mode label and field
+     */
     private void initializeAttackModeField () {
         myAttackModeLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerAttackMode"));
@@ -474,6 +491,9 @@ public class TowerDesignTab extends Tab {
         myAttackModeOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
+   /**
+    * Adds range label and field
+    */
     private void initializeRangeField () {
         myRangeLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerRange"));
@@ -485,6 +505,9 @@ public class TowerDesignTab extends Tab {
         myRangeField.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
+    /**
+     * Adds cost label and field
+     */
     private void initializeCostField () {
         myCostLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerCost"));
@@ -496,6 +519,9 @@ public class TowerDesignTab extends Tab {
         myCostField.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
+    /**
+     * Adds recycle price label and field
+     */
     private void initializeRecycleField () {
         myRecyclePriceLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerRecyclePrice"));
@@ -507,6 +533,9 @@ public class TowerDesignTab extends Tab {
         myRecyclePriceField.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
+    /**
+     * Adds description label and field
+     */
     private void initializeDescriptionField () {
         myDescriptionLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerDescription"));

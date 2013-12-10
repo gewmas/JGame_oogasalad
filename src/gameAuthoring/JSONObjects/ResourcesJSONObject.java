@@ -7,8 +7,6 @@ import java.util.List;
 
 /**
  * Class that stores mappings of resource names to url for images, audio, and animation
- * 
- * 
  */
 public class ResourcesJSONObject extends JSONObject {
     private JSONArray myImages;
@@ -52,18 +50,4 @@ public class ResourcesJSONObject extends JSONObject {
         myAnimations.put(animation);
     }
 
-    public void addAnimation (String id, List<String> imagePaths) {
-        JSONObject animation = new JSONObject();
-        animation.put("id", id);
-
-        JSONArray sheet = new JSONArray();
-
-        for (String s : imagePaths) {
-            JSONObject x = new JSONObject();
-            x.put("id", s);
-            sheet.put(x);
-        }
-        animation.put("sheet", sheet);
-        myAnimations.put(animation);
-    }
 }

@@ -20,33 +20,33 @@ import javax.swing.JFileChooser;
  */
 
 public class GameData extends JSONObject {
-    
+
     private static final JFileChooser INPUT_CHOOSER =
-            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");  
-    private JSONArray myTowerList; 
-    private JSONArray myEnemyList; 
-    private JSONArray myBarrierList; 
+            new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");
+    private JSONArray myTowerList;
+    private JSONArray myEnemyList;
+    private JSONArray myBarrierList;
     private JSONArray myWaveList;
     private MapJSONObject myMap;
     private ResourcesJSONObject myResources;
-    
+
     private final static String TOWER_LIST_KEY = "Tower";
     private final static String ENEMY_LIST_KEY = "enemyType";
     private final static String TEMPBARRIER_LIST_KEY = "temporaryBarrierType";
     private final static String WAVE_LIST_KEY = "wave";
     private final static String RESOURCE_KEY = "resources";
-    
+
     private final static String GAME_NAME_KEY = "name";
     private final static String GOLD_KEY = "gold";
     private final static String GOLD_NAME_KEY = "goldName";
     private final static String LIVES_KEY = "numberOflives";
     private final static String LIVES_NAME_KEY = "livesName";
-    
+
     private final static String SPLASH_IMAGE_KEY = "splashImage";
     private final static String BG_IMAGE_KEY = "BGImage";
     private final static String BULLET_IMAGE_KEY = "bulletImage";
     private final static String BG_MUSIC_KEY = "bgMusic";
-    
+
     /**
      * Constructor for GameData class
      */
@@ -57,7 +57,7 @@ public class GameData extends JSONObject {
         myBarrierList = new JSONArray();
         myWaveList = new JSONArray();
         myResources = new ResourcesJSONObject();
-        
+
         this.put(TOWER_LIST_KEY, myTowerList);
         this.put(ENEMY_LIST_KEY, myEnemyList);
         this.put(TEMPBARRIER_LIST_KEY, myBarrierList);
@@ -86,7 +86,6 @@ public class GameData extends JSONObject {
     public void setGold (int gold) {
         this.put(GOLD_KEY, gold);
     }
-    
 
     /**
      * Sets name of gold
@@ -161,14 +160,13 @@ public class GameData extends JSONObject {
     }
 
     /**
-     * Adds enemy to myEnemyListJSONArray 
+     * Adds enemy to myEnemyListJSONArray
      * 
      * @param enemy Enemy to be added
      */
     public void addEnemy (EnemyJSONObject enemy) {
         myEnemyList.put(enemy);
     }
-
 
     /**
      * Adds map
@@ -182,11 +180,10 @@ public class GameData extends JSONObject {
         this.put("map", myMap);
     }
 
-
     /**
      * Adds a barrier to the myMap
      * 
-     * @param x x coordinate 
+     * @param x x coordinate
      * @param y
      * @param imageName
      */
@@ -239,7 +236,6 @@ public class GameData extends JSONObject {
     public void addAnimation (AnimationJSONObject animation) {
         myResources.addAnimation(animation);
     }
-
 
     /**
      * Adds image for bullet
