@@ -4,7 +4,7 @@ import java.util.Collection;
 import javax.swing.JPanel;
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
+import gameEngine.view.gameFrame.towerUpgrader.ItemOptionsDisplayer;
 
 
 /**

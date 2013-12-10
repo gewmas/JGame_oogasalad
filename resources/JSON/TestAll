@@ -84,7 +84,7 @@
          "gold": 30
       }
    ],
-   "numberOfLives": 10,
+   "numberOfLives": 20,
    "BGImage": "woods_background",
    "goldName": "Gold",
    "Tower": [

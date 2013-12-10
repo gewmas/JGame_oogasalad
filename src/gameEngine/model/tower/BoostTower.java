@@ -13,6 +13,7 @@ import java.util.List;
  *
  * BoostTower will boost several properties of Tower in range by boostFactor
  * Reverse back when the BoostTower is sold
+ * 
  */
 
 public class BoostTower extends Tower{
@@ -95,6 +96,11 @@ public class BoostTower extends Tower{
     public void downgrade (double factor) {
         boostFactor /= factor;
         addDescription();
+    }
+    
+    public void setAttackMode (int mode) {
+    	//No attackMode for BoostTower, do nothing
+    	return;
     }
 
     

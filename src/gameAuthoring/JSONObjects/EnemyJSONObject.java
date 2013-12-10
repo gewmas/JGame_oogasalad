@@ -17,12 +17,13 @@ public class EnemyJSONObject extends JSONObject {
      * @param lives Enemy's number of lives (hits that can be taken)
      * @param speed Enemy's speed
      */
-    public EnemyJSONObject (String ID, int gold, String imagePath, int lives, double speed, String skill) {
+    public EnemyJSONObject (String ID, int gold, String imagePath, int lives, int damage, double speed, String skill) {
         super();
         this.put("id", ID);
         this.put("gold", gold);
         this.put("image", imagePath);
         this.put("life", lives);
+        this.put("damage", damage);
         this.put("speed", speed);
         this.put("skill", skill);
     }
