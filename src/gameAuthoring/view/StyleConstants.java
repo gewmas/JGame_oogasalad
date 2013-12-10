@@ -10,7 +10,7 @@ import javax.swing.border.Border;
 
 /**
  * @author Rebecca Lai & Susan Zhang
- *         Constants that apply for ALL Game Authoring classes
+ *         Constants that apply for ALL Game Authoring classes pertaining to formatting
  */
 public final class StyleConstants {
     public static final String DEFAULT_RESOURCE_PACKAGE = "gameAuthoring/resources.";

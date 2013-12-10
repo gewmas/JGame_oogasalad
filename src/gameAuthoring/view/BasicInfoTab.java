@@ -204,37 +204,33 @@ public class BasicInfoTab extends Tab {
             myAltGoldText.setText(p.getString(GameData.GOLD_NAME_KEY));
             myLives.setText(String.valueOf(p.getInt(GameData.LIVES_KEY)));
             myAltLivesText.setText(p.getString(GameData.LIVES_NAME_KEY));
-            mySplashImage = p.getString("splashImage") + ".png";
+            mySplashImage = p.getString(JSONConstants.SPLASH_STRING) + ".png";
             mySplashImageLabel.setText(mySplashImage);
-
-            JSONObject resources = p.getJSONObject("resources");
-            JSONArray images = (JSONArray) resources.get("image");
-
+            JSONObject resources = p.getJSONObject(JSONConstants.RESOURCE_STRING);
+            JSONArray images = (JSONArray) resources.get(JSONConstants.IMAGE_STRING);
             Map<String, String> imageMap = new HashMap<String, String>();
             for (int i = 0; i < images.length(); i++) {
                 JSONObject image = images.getJSONObject(i);
-                String id = image.getString("id");
-                String url = image.getString("url");
+                String id = image.getString(JSONConstants.ID_STRING);
+                String url = image.getString(JSONConstants.URL_STRING);
                 imageMap.put(id, url);
             }
-
             Map<String, String> audioMap = new HashMap<String, String>();
-            JSONArray audio = (JSONArray) resources.get("audio");
+            JSONArray audio = (JSONArray) resources.get(JSONConstants.AUDIO_STRING);
             for (int i = 0; i < audio.length(); i++) {
                 JSONObject sound = audio.getJSONObject(i);
-                String id = sound.getString("id");
-                String url = sound.getString("url");
+                String id = sound.getString(JSONConstants.ID_STRING);
+                String url = sound.getString(JSONConstants.URL_STRING);
                 audioMap.put(id, url);
             }
-
-           
             myImageLabel.setLabelIcon(new File(GameAuthoringGUI.FILE_PREFIX +
-                                               imageMap.get("bullet")));
+                                               imageMap.get(JSONConstants.BULLET_STRING)));
             myImageLabel.setID("bulletImage");
-            String BGAudioID = (String) p.getString("BGAudio");
+            String BGAudioID = (String) p.getString(JSONConstants.BG_AUDIO_STRING);
             myAudioLabel = new AudioLabel(BGAudioID, true);
             myAudioLabel.revalidate();
-            myAudioLabel.setAudioFile(new File(GameAuthoringGUI.FILE_PREFIX + audioMap.get(BGAudioID)));
+            myAudioLabel.setAudioFile(new File(GameAuthoringGUI.FILE_PREFIX +
+                                               audioMap.get(BGAudioID)));
             setData();
         }
         catch (NumberFormatException n) {
@@ -254,7 +250,6 @@ public class BasicInfoTab extends Tab {
             }
         };
         return listener;
-
     }
 
     /**
@@ -286,7 +281,6 @@ public class BasicInfoTab extends Tab {
             notifyObservers(gameDesignInfo);
             clearChanged();
         }
-
         else {
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle

@@ -171,30 +171,26 @@ public class TowerDesignTab extends Tab {
 
     @Override
     public void loadJSON (Parser p) {
-        JSONArray towers = p.getJSONArray("Tower");
-
-        JSONObject resources = p.getJSONObject("resources");
-        JSONArray images = (JSONArray) resources.get("image");
-
+        JSONArray towers = p.getJSONArray(JSONConstants.TOWER_STRING);
+        JSONObject resources = p.getJSONObject(JSONConstants.RESOURCE_STRING);
+        JSONArray images = (JSONArray) resources.get(JSONConstants.IMAGE_STRING);
         Map<String, String> imageMap = new HashMap<String, String>();
         for (int i = 0; i < images.length(); i++) {
             JSONObject image = images.getJSONObject(i);
-            String id = image.getString("id");
-            String url = image.getString("url");
+            String id = image.getString(JSONConstants.ID_STRING);
+            String url = image.getString(JSONConstants.URL_STRING);
             imageMap.put(id, url);
         }
-
         for (int i = 0; i < towers.length(); i++) {
             JSONObject tower = towers.getJSONObject(i);
-            String name = tower.getString("Name");
-            String imageKey = tower.getString("Image");
+            String name = tower.getString(JSONConstants.NAME_STRING);
+            String imageKey = tower.getString(JSONConstants.IMAGE_STRING_2);
             File imageFile = new File(GameAuthoringGUI.FILE_PREFIX + imageMap.get(imageKey));
             setChanged();
             notifyObservers(tower);
             clearChanged();
             addTower(imageFile, name);
         }
-
     }
 
     /**
