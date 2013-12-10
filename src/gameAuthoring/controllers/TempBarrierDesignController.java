@@ -1,7 +1,7 @@
 package gameAuthoring.controllers;
 
-import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.JSONObjects.TemporaryBarrierJSONObject;
+import gameAuthoring.model.GameData;
 import java.util.Observable;
 
 

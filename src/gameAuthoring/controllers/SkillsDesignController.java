@@ -1,6 +1,6 @@
 package gameAuthoring.controllers;
 
-import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.model.GameData;
 import gameAuthoring.view.AudioLabel;
 import java.util.ArrayList;
 import java.util.List;

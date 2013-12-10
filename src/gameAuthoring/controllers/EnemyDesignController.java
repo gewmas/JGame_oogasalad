@@ -2,7 +2,7 @@ package gameAuthoring.controllers;
 
 import gameAuthoring.JSONObjects.AnimationJSONObject;
 import gameAuthoring.JSONObjects.EnemyJSONObject;
-import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.model.GameData;
 import java.util.Observable;
 
 

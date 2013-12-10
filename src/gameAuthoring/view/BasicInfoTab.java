@@ -1,7 +1,7 @@
 package gameAuthoring.view;
 
-import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.JSONObjects.ResourceJSONObject;
+import gameAuthoring.model.GameData;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;

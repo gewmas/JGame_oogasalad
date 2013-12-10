@@ -158,6 +158,7 @@ public class Grid extends JPanel {
      */
     public void toggleGridButton (int x, int y) {
         myGrid[x][y].setImage();
+        myGrid[x][y].togglePathStatus();
     }
 
     /**
@@ -189,6 +190,7 @@ public class Grid extends JPanel {
         if (startX < 0 || startX >= myGrid.length || startY < 0 || startY >= myGrid[0].length) { return false; }
         if (!myGrid[startX][startY].isPath()) { return false; }
         if (!myPathCoordinates.contains(myGrid[startX][startY].getCoordinate())) {
+            System.out.println(startX + " " + startY);
             myPathCoordinates.add(myGrid[startX][startY].getCoordinate());
         }
         else {

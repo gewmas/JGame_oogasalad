@@ -161,6 +161,10 @@ public class GridButton extends JButton {
     public void setPathStatusTrue () {
         isPath = true;
     }
+    
+    public void togglePathStatus(){
+        isPath = !isPath;
+    }
 
     /**
      * @return path status of GridButton

@@ -1,6 +1,6 @@
 package gameAuthoring.menuBar;
 
-import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.model.GameData;
 import gameAuthoring.view.BasicInfoTab;
 import gameAuthoring.view.DuvallClippy;
 import gameAuthoring.view.GameAuthoringGUI;

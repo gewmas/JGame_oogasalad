@@ -1,6 +1,6 @@
 package gameAuthoring.controllers;
 
-import gameAuthoring.JSONObjects.GameData;
+import gameAuthoring.model.GameData;
 import java.util.Observable;
 import java.util.Observer;
 

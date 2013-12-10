@@ -4,6 +4,7 @@ import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -137,10 +138,12 @@ public class MapDesignTab extends Tab {
             imageMap.put(id, url);
         }
         
-        myBackgroundImage = p.getString("BGImage");
+        myBackgroundImage = p.getString("BGImage") + ".png";
         JSONObject map = p.getJSONObject("map");
         myPathImage = (String) map.get("pathImage");
         myGrid.setImageSource(new File(GameAuthoringGUI.FILE_PREFIX + myPathImage));
+        myGrid.setBackgroundImageSource(new File(GameAuthoringGUI.FILE_PREFIX + myBackgroundImage));
+        
         JSONArray pathPoints = (JSONArray) map.get("Path");
         myGrid.reset();
         for (int i = 0; i < pathPoints.length(); i++) {
@@ -148,8 +151,8 @@ public class MapDesignTab extends Tab {
             int x = (Integer) point.get("y");
             int y = (Integer) point.get("x");
             myGrid.toggleGridButton(x, y);
-            if (i == 0) myGrid.setPathStart(new Point2D.Double(y, x));
-            if (i == pathPoints.length() - 1) myGrid.setPathEnd(new Point2D.Double(y, x));
+            if (i == 0) myGrid.setPathStart(new Point2D.Double(x, y));
+            if (i == pathPoints.length() - 1) myGrid.setPathEnd(new Point2D.Double(x, y));
         }
         File f = new File(GameAuthoringGUI.FILE_PREFIX +  myPathImage);
         try {

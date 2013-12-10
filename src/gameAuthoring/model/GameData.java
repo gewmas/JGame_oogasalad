@@ -1,5 +1,13 @@
-package gameAuthoring.JSONObjects;
+package gameAuthoring.model;
 
+import gameAuthoring.JSONObjects.AnimationJSONObject;
+import gameAuthoring.JSONObjects.EnemyJSONObject;
+import gameAuthoring.JSONObjects.MapJSONObject;
+import gameAuthoring.JSONObjects.ResourceJSONObject;
+import gameAuthoring.JSONObjects.ResourcesJSONObject;
+import gameAuthoring.JSONObjects.TemporaryBarrierJSONObject;
+import gameAuthoring.JSONObjects.TowerJSONObject;
+import gameAuthoring.JSONObjects.WaveJSONObject;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.geom.Point2D;

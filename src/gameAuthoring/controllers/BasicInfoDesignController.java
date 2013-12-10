@@ -1,7 +1,7 @@
 package gameAuthoring.controllers;
 
-import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.JSONObjects.ResourceJSONObject;
+import gameAuthoring.model.GameData;
 import gameAuthoring.view.BasicInformation;
 import java.util.Observable;
 
