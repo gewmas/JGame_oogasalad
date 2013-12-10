@@ -9,7 +9,6 @@ import gameAuthoring.controllers.TempBarrierDesignController;
 import gameAuthoring.controllers.TowerDesignController;
 import gameAuthoring.controllers.UserImagesController;
 import gameAuthoring.controllers.WaveDesignController;
-import gameAuthoring.menuBar.MenuBar;
 import gameAuthoring.model.GameData;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;

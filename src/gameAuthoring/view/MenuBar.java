@@ -1,4 +1,4 @@
-package gameAuthoring.menuBar;
+package gameAuthoring.view;
 
 import gameAuthoring.model.GameData;
 import gameAuthoring.view.BasicInfoTab;
@@ -82,7 +82,6 @@ public class MenuBar extends JMenuBar {
     private JMenu fileMenu () {
         JMenu menu = new JMenu(StyleConstants.resourceBundle.getString("File"));
         menu.add(new AbstractAction(StyleConstants.resourceBundle.getString("Save")) {
-
             @Override
             public void actionPerformed (ActionEvent e) {
                 myGameData.writeToFile();
@@ -110,7 +109,6 @@ public class MenuBar extends JMenuBar {
                 }
             }
         });
-
         return menu;
     }
 
