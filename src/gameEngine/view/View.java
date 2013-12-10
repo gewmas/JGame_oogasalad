@@ -1,16 +1,10 @@
 package gameEngine.view;
 
 import java.io.File;
-import java.util.List;
-import java.util.Map;
 import javax.swing.JOptionPane;
-import jgame.impl.JGEngineInterface;
 import gameAuthoring.MainPanel;
 import gameEngine.controller.Controller;
 import gameEngine.controller.ControllerToViewInterface;
-import gameEngine.model.GameInfo;
-import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.model.tile.Tile;
 import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.menu.MenuActions;
 import gameEngine.view.initialization.InitializationFrame;

@@ -3,7 +3,6 @@ package gameEngine.view.gameFrame;
 import java.util.Collection;
 import javax.swing.JPanel;
 import gameEngine.controller.ControllerToViewInterface;
-import gameEngine.view.View;
 import gameEngine.view.gameFrame.towerUpgrader.ItemOptionsDisplayer;
 
 
