@@ -46,6 +46,7 @@ public class TempBarrierDesignTab extends Tab {
     private static final Dimension PANEL_DIMENSION = new Dimension(380, 350);
     private static final Dimension TEXT_FIELD_DIMENSION = new Dimension(200, 30);
     private static final String SCROLL_PANEL_WRAP_MODE = "wrap 4";
+    private static final String CREATED_TEMP_BARRIERS_FORMATTING = "aligny center";
 
     /**
      * Creates new TempBarrierDesignTab
@@ -57,7 +58,7 @@ public class TempBarrierDesignTab extends Tab {
     public JPanel getTab () {
         myMainPanel.setLayout(new MigLayout(StyleConstants.DEFAULT_WRAP_MODE));
         myMainPanel.setPreferredSize(StyleConstants.DEFAULT_PANEL_SIZE);
-        JLabel title = new JLabel("Temporary Barrier Design");
+        JLabel title = new JLabel(StyleConstants.resourceBundle.getString("BarrierTitle"));
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
         myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
         myScrollPanel = new JPanel(new MigLayout(SCROLL_PANEL_WRAP_MODE));
@@ -75,7 +76,7 @@ public class TempBarrierDesignTab extends Tab {
         addBarrierCreationButton();
         myMainPanel.add(myContentPanel);
         addCreatedBarriers();
-        myMainPanel.add(myCreatedTempBarriers, "aligny center");
+        myMainPanel.add(myCreatedTempBarriers, CREATED_TEMP_BARRIERS_FORMATTING);
         return myMainPanel;
     }
 
@@ -259,11 +260,11 @@ public class TempBarrierDesignTab extends Tab {
                     notifyObservers(temporaryBarrier);
                     clearChanged();
                     addBarrier(myBarrierImage.getImageFile(), name);
-                    myNameField.setText("");
-                    myDamageField.setText("");
-                    myCostField.setText("");
-                    myExpiryField.setText("");
-                    myDescriptionField.setText("");
+                    myNameField.setText(StyleConstants.NULL_STRING);
+                    myDamageField.setText(StyleConstants.NULL_STRING);
+                    myCostField.setText(StyleConstants.NULL_STRING);
+                    myExpiryField.setText(StyleConstants.NULL_STRING);
+                    myDescriptionField.setText(StyleConstants.NULL_STRING);
                     myBarrierImage.reset();
                 }
                 else {
