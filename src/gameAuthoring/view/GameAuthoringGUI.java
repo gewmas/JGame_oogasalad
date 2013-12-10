@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.controllers.BasicInfoDesignController;
 import gameAuthoring.controllers.EnemyDesignController;
 import gameAuthoring.controllers.EnemyWaveCommunicationController;
@@ -10,7 +9,10 @@ import gameAuthoring.controllers.TempBarrierDesignController;
 import gameAuthoring.controllers.TowerDesignController;
 import gameAuthoring.controllers.UserImagesController;
 import gameAuthoring.controllers.WaveDesignController;
-import gameAuthoring.menuBar.MenuBar;
+import gameAuthoring.model.GameData;
+import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -18,6 +20,8 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -51,11 +55,15 @@ public class GameAuthoringGUI extends Observable {
     private SkillsDesignTab mySkillsDesignTab;
     private GameData myGameData;
     private JTabbedPane myGameDesignTab;
+    private UserImagesTab myUserImagesTab;
+    private UserSoundsTab myUserSoundsTab;
     private static final String GAME_DESIGN_TAB_FORMATTING = "gap 50 20 100 40";
     private static final String DEFAULT_PANEL_BG_IMAGE_NAME = "texture0.png";
     private static final Dimension GAME_DESIGN_TAB_DEFAULT_DIMENSION = new Dimension(750, 600);
     private static final Dimension RESOURCE_LIBRARY_DIMENSION = new Dimension(300, 600);
     private static final Dimension FRAME_DEFAULT_DIMENSION = new Dimension(1190, 780);
+    public static final String FILE_PREFIX = System.getProperties().getProperty("user.dir") +
+                                             "/src/resources/img/";
 
     /**
      * Constructor for GameAuthoringGUI that sets up all design tabs in the main frame
@@ -79,7 +87,8 @@ public class GameAuthoringGUI extends Observable {
         addSkillsDesignTab();
         myGameDesignTab.addChangeListener(observeTabChange());
         MenuBar menu =
-                new MenuBar(this, myGameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
+                new MenuBar(this, myGameData, myBasicInfoTab, myMapDesignTab, myEnemyDesignTab,
+                            myTowerDesignTab, myWaveDesignTab, myTempBarrierTab);
         myMainPanel.add(myGameDesignTab, GAME_DESIGN_TAB_FORMATTING);
         createUserLibraryTab();
         frame.setJMenuBar(menu);
@@ -125,7 +134,6 @@ public class GameAuthoringGUI extends Observable {
                                myTowerDesignTab.getTab());
     }
 
-
     /**
      * Adds controller to communicate between EnemyDesignTab and WaveDesignTab
      */
@@ -136,7 +144,7 @@ public class GameAuthoringGUI extends Observable {
         EnemyWaveCommunicationController enemyWaveCommController =
                 new EnemyWaveCommunicationController();
         myWaveDesignTab = new WaveDesignTab();
-        WaveDesignController waveDesignController= new WaveDesignController(myGameData);
+        WaveDesignController waveDesignController = new WaveDesignController(myGameData);
         myWaveDesignTab.addObserver(waveDesignController);
         enemyWaveCommController.addObserver(myWaveDesignTab);
         myEnemyDesignTab.addObserver(enemyWaveCommController);
@@ -145,7 +153,6 @@ public class GameAuthoringGUI extends Observable {
         myGameDesignTab.addTab(StyleConstants.resourceBundle.getString("WaveTab"),
                                myWaveDesignTab.getTab());
     }
-
 
     /**
      * Adds tab and label for temporary barrier design into main panel
@@ -158,7 +165,6 @@ public class GameAuthoringGUI extends Observable {
         myGameDesignTab.addTab(StyleConstants.resourceBundle.getString("TempBarrierTab"),
                                myTempBarrierTab.getTab());
     }
-
 
     /**
      * Adds tab and label for skills design tab into main panel
@@ -178,14 +184,14 @@ public class GameAuthoringGUI extends Observable {
     private void createUserLibraryTab () {
         JTabbedPane userLibrary = new JTabbedPane();
         userLibrary.setPreferredSize(RESOURCE_LIBRARY_DIMENSION);
-        UserImagesTab userImagesTab = new UserImagesTab();
+        myUserImagesTab = new UserImagesTab();
         UserImagesController userImagesController = new UserImagesController(myGameData);
-        userImagesTab.addObserver(userImagesController);
-        UserSoundsTab userSoundsTab = new UserSoundsTab();
+        myUserImagesTab.addObserver(userImagesController);
+        myUserSoundsTab = new UserSoundsTab();
         userLibrary.add(StyleConstants.resourceBundle.getString("ImagesTab"),
-                        userImagesTab.getTab());
+                        myUserImagesTab.getTab());
         userLibrary.add(StyleConstants.resourceBundle.getString("SoundsTab"),
-                        userSoundsTab.getTab());
+                        myUserSoundsTab.getTab());
         userLibrary.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myMainPanel.add(userLibrary);
     }
@@ -245,6 +251,43 @@ public class GameAuthoringGUI extends Observable {
 
     public static void main (String[] arg) {
         GameAuthoringGUI gameAuthoringGUI = new GameAuthoringGUI();
+    }
+
+    /**
+     * Method to load image library from JSON
+     * 
+     * @param p
+     */
+    public void loadJSON (Parser p) {
+        JSONObject resources = p.getJSONObject("resources");
+        JSONArray images = (JSONArray) resources.get("image");
+
+        for (int i = 0; i < images.length(); i++) {
+            JSONObject image = images.getJSONObject(i);
+            String id = image.getString("id");
+            String url = image.getString("url");
+
+            if (!id.equals("bullet")) {
+                myUserImagesTab.addImageLabel(new File(FILE_PREFIX + url), id);
+            }
+
+        }
+
+        JSONArray audio = (JSONArray) resources.get("audio");
+
+        for (int i = 0; i < audio.length(); i++) {
+            JSONObject sound = audio.getJSONObject(i);
+            String id = sound.getString("id");
+            String url = sound.getString("url");
+            myUserSoundsTab.addAudioLabel(new File(FILE_PREFIX + url));
+        }
+
+        JSONArray animations = (JSONArray) resources.get("animation");
+
+        for (int i = 0; i < animations.length(); i++) {
+            JSONObject animation = animations.getJSONObject(i);
+            myGameData.addAnimation(animation);
+        }
     }
 
 }

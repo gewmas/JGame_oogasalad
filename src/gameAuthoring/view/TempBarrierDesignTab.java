@@ -2,12 +2,16 @@ package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.TemporaryBarrierJSONObject;
 import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -77,8 +81,26 @@ public class TempBarrierDesignTab extends Tab {
 
     @Override
     public void loadJSON (Parser p) {
-        // TODO Auto-generated method stub
-
+        JSONArray tempBarriers = p.getJSONArray(JSONConstants.TEMP_BARRIER_STRING);
+        JSONObject resources = p.getJSONObject(JSONConstants.RESOURCE_STRING);
+        JSONArray images = (JSONArray) resources.get(JSONConstants.IMAGE_STRING);
+        Map<String, String> imageMap = new HashMap<String, String>();
+        for (int i = 0; i < images.length(); i++) {
+            JSONObject image = images.getJSONObject(i);
+            String id = image.getString(JSONConstants.ID_STRING);
+            String url = image.getString(JSONConstants.URL_STRING);
+            imageMap.put(id, url);
+        }
+        for (int i = 0; i < tempBarriers.length(); i++) {
+            JSONObject tempBarrier = tempBarriers.getJSONObject(i);
+            String name = tempBarrier.getString(JSONConstants.ID_STRING);
+            String imageKey = tempBarrier.getString(JSONConstants.IMAGE_STRING);
+            File imageFile = new File(GameAuthoringGUI.FILE_PREFIX + imageMap.get(imageKey));
+            setChanged();
+            notifyObservers(tempBarrier);
+            clearChanged();
+            addBarrier(imageFile, name);
+        }
     }
 
     /**
@@ -209,7 +231,6 @@ public class TempBarrierDesignTab extends Tab {
         catch (IOException e) {
             e.printStackTrace();
         }
-
         JLabel barrierNameLabel = new JLabel(BarrierName);
         myScrollPanel.add(barrierNameLabel);
         myScrollPanel.add(barrierIcon);

@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -28,11 +30,13 @@ public class UserImagesTab extends Observable {
     private static final String CONTENT_PANEL_WRAP_MODE = "wrap 1";
     private static final String UPLOAD_IMAGE_BUTTON_FORMATTING = "align center, gap 10 10 30 10";
     private static final String MAIN_PANEL_WRAP_MODE = "wrap 1";
+    private List<ImageLabel> myImageLabels;
 
     /**
      * Creates new UserImagesTab
      */
     public UserImagesTab () {
+        myImageLabels = new ArrayList<ImageLabel>();
     }
 
     /**
@@ -59,7 +63,7 @@ public class UserImagesTab extends Observable {
      * Select and upload image file to user image library
      * 
      * @param userImagesTab is UserImagesTab that needs to be updated with uploaded image
-     * @return MouseAdapater that allows images to be uploaded to the tab
+     * @return MouseAdapter that allows images to be uploaded to the tab
      */
     private MouseAdapter addFileUploadListener (final UserImagesTab userImagesTab) {
         MouseAdapter listener = new MouseAdapter() {
@@ -68,21 +72,26 @@ public class UserImagesTab extends Observable {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
                 if (loadObject == JFileChooser.APPROVE_OPTION) {
                     File imgSource = INPUT_CHOOSER.getSelectedFile();
-                    myNumImages++;
                     String id = "" + myNumImages;
-                    ImageLabel imageLabel = new ImageLabel("" + myNumImages);
-                    ResourceJSONObject imageResource =
-                            new ResourceJSONObject(id, imgSource.getName());
-                    setChanged();
-                    notifyObservers(imageResource);
-                    clearChanged();
-                    imageLabel.setLabelIcon(imgSource);
-                    GameAuthoringGUI.myImageLabel = imageLabel;
-                    myContentPanel.add(imageLabel);
-                    myContentPanel.revalidate();
+                    addImageLabel(imgSource, id);
                 }
             }
         };
         return listener;
+    }
+    
+    public void addImageLabel(File imgSource, String id){      
+        myNumImages++;
+        ImageLabel imageLabel = new ImageLabel(id);
+        ResourceJSONObject imageResource =
+                new ResourceJSONObject(id, imgSource.getName());
+        setChanged();
+        notifyObservers(imageResource);
+        clearChanged();
+        imageLabel.setLabelIcon(imgSource);
+        myImageLabels.add(imageLabel);
+        GameAuthoringGUI.myImageLabel = imageLabel;
+        myContentPanel.add(imageLabel);
+        myContentPanel.revalidate();
     }
 }

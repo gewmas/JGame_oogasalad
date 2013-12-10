@@ -1,5 +1,6 @@
 {
    "goldName": "Gold",
+   "BGAudio": "1",
    "resources": {
       "animation": [{
          "id": "enemy1",

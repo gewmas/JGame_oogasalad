@@ -2,6 +2,8 @@ package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.TowerJSONObject;
 import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -10,6 +12,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -29,9 +33,11 @@ import net.miginfocom.swing.MigLayout;
 /**
  * @author Rebecca Lai & Susan Zhang
  *         TowerDesignTab allows for users to design different types of Towers for a Tower Defense
- *         game. Four types of towers are allowed to be defined: DefaultTower, MultipleShootingTower, 
- *         BoostTower, and MagicTower. Users are able to define parameters such as tower name, the rate 
- *         at which a tower fires, how much a tower costs, etc., as well any special tower specific 
+ *         game. Four types of towers are allowed to be defined: DefaultTower,
+ *         MultipleShootingTower,
+ *         BoostTower, and MagicTower. Users are able to define parameters such as tower name, the
+ *         rate
+ *         at which a tower fires, how much a tower costs, etc., as well any special tower specific
  *         attributes.
  * 
  */
@@ -73,7 +79,7 @@ public class TowerDesignTab extends Tab {
     JLabel type, myNameLabel, myDamageLabel, myAttackSpeedLabel, myAttackModeLabel, myRangeLabel,
             myCostLabel, myRecyclePriceLabel, myDescriptionLabel,
             myTowerImageChooser;
-    
+
     /**
      * Creates a new TowerDesignTab
      */
@@ -95,7 +101,7 @@ public class TowerDesignTab extends Tab {
         initializeDescriptionField();
         initializeTowerImageChooser();
         initializeTowerCreationButton();
-        initializeContentPanel(); 
+        initializeContentPanel();
         myMainPanel.add(myContentPanel);
         initializeCreatedTowersPanel();
         myMainPanel.add(myCreatedTowers);
@@ -142,7 +148,7 @@ public class TowerDesignTab extends Tab {
     }
 
     /**
-     * Adds tower to myCreatedTowersPanel 
+     * Adds tower to myCreatedTowersPanel
      * 
      * @param imgSource Tower image
      * @param towerName Tower name
@@ -163,10 +169,33 @@ public class TowerDesignTab extends Tab {
         myCreatedTowersPanel.add(towerIcon);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see gameAuthoring.view.Tab#loadJSON(gameEngine.parser.Parser)
+     */
     @Override
     public void loadJSON (Parser p) {
-        // TODO Auto-generated method stub
-
+        JSONArray towers = p.getJSONArray(JSONConstants.TOWER_STRING);
+        JSONObject resources = p.getJSONObject(JSONConstants.RESOURCE_STRING);
+        JSONArray images = (JSONArray) resources.get(JSONConstants.IMAGE_STRING);
+        Map<String, String> imageMap = new HashMap<String, String>();
+        for (int i = 0; i < images.length(); i++) {
+            JSONObject image = images.getJSONObject(i);
+            String id = image.getString(JSONConstants.ID_STRING);
+            String url = image.getString(JSONConstants.URL_STRING);
+            imageMap.put(id, url);
+        }
+        for (int i = 0; i < towers.length(); i++) {
+            JSONObject tower = towers.getJSONObject(i);
+            String name = tower.getString(JSONConstants.NAME_STRING);
+            String imageKey = tower.getString(JSONConstants.IMAGE_STRING_2);
+            File imageFile = new File(GameAuthoringGUI.FILE_PREFIX + imageMap.get(imageKey));
+            setChanged();
+            notifyObservers(tower);
+            clearChanged();
+            addTower(imageFile, name);
+        }
     }
 
     /**
@@ -491,9 +520,9 @@ public class TowerDesignTab extends Tab {
         myAttackModeOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
-   /**
-    * Adds range label and field
-    */
+    /**
+     * Adds range label and field
+     */
     private void initializeRangeField () {
         myRangeLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerRange"));

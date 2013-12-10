@@ -158,6 +158,7 @@ public class Grid extends JPanel {
      */
     public void toggleGridButton (int x, int y) {
         myGrid[x][y].setImage();
+        myGrid[x][y].togglePathStatus();
     }
 
     /**

@@ -1,10 +1,16 @@
 package gameAuthoring.view;
 
 import gameAuthoring.JSONObjects.ResourceJSONObject;
+import gameAuthoring.model.GameData;
 import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -191,13 +197,45 @@ public class BasicInfoTab extends Tab {
         myContentPanel.add(mySplashImageLabel);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see gameAuthoring.view.Tab#loadJSON(gameEngine.parser.Parser)
+     */
     public void loadJSON (Parser p) {
         try {
-            myGameName.setText(p.getString("name"));
-            myGold.setText(String.valueOf(p.getInt("gold")));
-            myLives.setText(String.valueOf(p.getInt("numberOfLives")));
-            mySplashImage = p.getString("splashImage");
+            myGameName.setText(p.getString(GameData.GAME_NAME_KEY));
+            myGold.setText(String.valueOf(p.getInt(GameData.GOLD_KEY)));
+            myAltGoldText.setText(p.getString(GameData.GOLD_NAME_KEY));
+            myLives.setText(String.valueOf(p.getInt(GameData.LIVES_KEY)));
+            myAltLivesText.setText(p.getString(GameData.LIVES_NAME_KEY));
+            mySplashImage = p.getString(JSONConstants.SPLASH_STRING) + ".png";
             mySplashImageLabel.setText(mySplashImage);
+            JSONObject resources = p.getJSONObject(JSONConstants.RESOURCE_STRING);
+            JSONArray images = (JSONArray) resources.get(JSONConstants.IMAGE_STRING);
+            Map<String, String> imageMap = new HashMap<String, String>();
+            for (int i = 0; i < images.length(); i++) {
+                JSONObject image = images.getJSONObject(i);
+                String id = image.getString(JSONConstants.ID_STRING);
+                String url = image.getString(JSONConstants.URL_STRING);
+                imageMap.put(id, url);
+            }
+            Map<String, String> audioMap = new HashMap<String, String>();
+            JSONArray audio = (JSONArray) resources.get(JSONConstants.AUDIO_STRING);
+            for (int i = 0; i < audio.length(); i++) {
+                JSONObject sound = audio.getJSONObject(i);
+                String id = sound.getString(JSONConstants.ID_STRING);
+                String url = sound.getString(JSONConstants.URL_STRING);
+                audioMap.put(id, url);
+            }
+            myImageLabel.setLabelIcon(new File(GameAuthoringGUI.FILE_PREFIX +
+                                               imageMap.get(JSONConstants.BULLET_STRING)));
+            myImageLabel.setID("bulletImage");
+            String BGAudioID = (String) p.getString(JSONConstants.BG_AUDIO_STRING);
+            myAudioLabel = new AudioLabel(BGAudioID, true);
+            myAudioLabel.revalidate();
+            myAudioLabel.setAudioFile(new File(GameAuthoringGUI.FILE_PREFIX +
+                                               audioMap.get(BGAudioID)));
             setData();
         }
         catch (NumberFormatException n) {
@@ -217,7 +255,6 @@ public class BasicInfoTab extends Tab {
             }
         };
         return listener;
-
     }
 
     /**
@@ -249,7 +286,6 @@ public class BasicInfoTab extends Tab {
             notifyObservers(gameDesignInfo);
             clearChanged();
         }
-
         else {
             JOptionPane.showMessageDialog(null,
                                           StyleConstants.resourceBundle
@@ -278,7 +314,6 @@ public class BasicInfoTab extends Tab {
                     clearChanged();
                     mySplashImageLabel.setText(mySplashImage);
                 }
-
             }
         };
         return listener;

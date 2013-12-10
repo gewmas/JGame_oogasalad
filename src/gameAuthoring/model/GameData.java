@@ -1,5 +1,13 @@
-package gameAuthoring.JSONObjects;
+package gameAuthoring.model;
 
+import gameAuthoring.JSONObjects.AnimationJSONObject;
+import gameAuthoring.JSONObjects.EnemyJSONObject;
+import gameAuthoring.JSONObjects.MapJSONObject;
+import gameAuthoring.JSONObjects.ResourceJSONObject;
+import gameAuthoring.JSONObjects.ResourcesJSONObject;
+import gameAuthoring.JSONObjects.TemporaryBarrierJSONObject;
+import gameAuthoring.JSONObjects.TowerJSONObject;
+import gameAuthoring.JSONObjects.WaveJSONObject;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.geom.Point2D;
@@ -30,22 +38,22 @@ public class GameData extends JSONObject {
     private MapJSONObject myMap;
     private ResourcesJSONObject myResources;
 
-    private final static String TOWER_LIST_KEY = "Tower";
-    private final static String ENEMY_LIST_KEY = "enemyType";
-    private final static String TEMPBARRIER_LIST_KEY = "temporaryBarrierType";
-    private final static String WAVE_LIST_KEY = "wave";
-    private final static String RESOURCE_KEY = "resources";
+    public final static String TOWER_LIST_KEY = "Tower";
+    public final static String ENEMY_LIST_KEY = "enemyType";
+    public final static String TEMPBARRIER_LIST_KEY = "temporaryBarrierType";
+    public final static String WAVE_LIST_KEY = "wave";
+    public final static String RESOURCE_KEY = "resources";
 
-    private final static String GAME_NAME_KEY = "name";
-    private final static String GOLD_KEY = "gold";
-    private final static String GOLD_NAME_KEY = "goldName";
-    private final static String LIVES_KEY = "numberOflives";
-    private final static String LIVES_NAME_KEY = "livesName";
+    public final static String GAME_NAME_KEY = "name";
+    public final static String GOLD_KEY = "gold";
+    public final static String GOLD_NAME_KEY = "goldName";
+    public final static String LIVES_KEY = "numberOfLives";
+    public final static String LIVES_NAME_KEY = "livesName";
 
-    private final static String SPLASH_IMAGE_KEY = "splashImage";
-    private final static String BG_IMAGE_KEY = "BGImage";
-    private final static String BULLET_IMAGE_KEY = "bulletImage";
-    private final static String BG_MUSIC_KEY = "bgMusic";
+    public final static String SPLASH_IMAGE_KEY = "splashImage";
+    public final static String BG_IMAGE_KEY = "BGImage";
+    public final static String BULLET_IMAGE_KEY = "bulletImage";
+    public final static String BG_MUSIC_KEY = "bgMusic";
 
     /**
      * Constructor for GameData class
@@ -63,10 +71,6 @@ public class GameData extends JSONObject {
         this.put(TEMPBARRIER_LIST_KEY, myBarrierList);
         this.put(WAVE_LIST_KEY, myWaveList);
         this.put(RESOURCE_KEY, myResources);
-
-        Collection<Point2D> pathList = new ArrayList<Point2D>();
-        myMap = new MapJSONObject("path.png", pathList);
-        this.put("map", myMap);
     }
 
     /**
@@ -137,7 +141,7 @@ public class GameData extends JSONObject {
      * 
      * @param tower TowerJSONObject to be added
      */
-    public void addTower (TowerJSONObject tower) {
+    public void addTower (JSONObject tower) {
         myTowerList.put(tower);
     }
 
@@ -146,17 +150,17 @@ public class GameData extends JSONObject {
      * 
      * @param wave WaveJSONOBject to be added
      */
-    public void addWave (WaveJSONObject wave) {
+    public void addWave (JSONObject wave) {
         myWaveList.put(wave);
     }
 
     /**
      * Adds barrier to myBarrierList JSONArray
      * 
-     * @param barrier Barrier to be added
+     * @param temporaryBarrier Barrier to be added
      */
-    public void addBarrier (TemporaryBarrierJSONObject barrier) {
-        myBarrierList.put(barrier);
+    public void addBarrier (JSONObject temporaryBarrier) {
+        myBarrierList.put(temporaryBarrier);
     }
 
     /**
@@ -168,6 +172,11 @@ public class GameData extends JSONObject {
         myEnemyList.put(enemy);
     }
 
+    public void addEnemy (JSONObject enemy) {
+        myEnemyList.put(enemy);
+    }
+    
+    
     /**
      * Adds map
      * 
@@ -236,6 +245,10 @@ public class GameData extends JSONObject {
     public void addAnimation (AnimationJSONObject animation) {
         myResources.addAnimation(animation);
     }
+    
+    public void addAnimation(JSONObject animation){
+        myResources.addAnimation(animation);
+    }
 
     /**
      * Adds image for bullet
@@ -276,47 +289,4 @@ public class GameData extends JSONObject {
         }
     }
 
-    /**
-     * @author Lalita Maraj
-     *         This method is used to create a temporary file so that a user can simmulate
-     *         a game based on the parameters the game designer specified
-     *         without the hassel of saving, then loading a file
-     * @return
-     */
-    public File createSimmulationFile () {
-        if (true) {
-            File file = new File("tmp.JSON");
-            System.out.println("dlkfjsdjfdsjfdsjfs");
-            PrintStream out;
-            try {
-                file.createNewFile();
-                out = new PrintStream(file);
-                out.println(this.toString(3));
-                out.close();
-                return file;
-            }
-            catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            catch (IOException e) {
-
-                e.printStackTrace();
-            }
-
-        }
-        return null;
-    }
-
-    /**
-     * Method to check if the gameData is completely
-     * filled out.
-     * 
-     * @return boolean that indicates if gameData is complete
-     * @author Lalita Maraj
-     */
-    private boolean isComplete () {
-        return (this.has("name") && this.has("splashImage") && this.has("BGImage") &&
-                this.has("gold") && this.has("numberOfLives"));
-
-    }
 }

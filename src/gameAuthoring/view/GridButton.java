@@ -144,7 +144,7 @@ public class GridButton extends JButton {
             }
         }
         catch (IOException ex) {
-            System.out.println(StyleConstants.resourceBundle.getString("GridButtonImageNotFound"));
+            JOptionPane.showMessageDialog(null,StyleConstants.resourceBundle.getString("GridButtonImageNotFound"));
         }
     }
 
@@ -160,6 +160,13 @@ public class GridButton extends JButton {
      */
     public void setPathStatusTrue () {
         isPath = true;
+    }
+
+    /**
+     * Allows for path status to be toggled on and off
+     */
+    public void togglePathStatus () {
+        isPath = !isPath;
     }
 
     /**

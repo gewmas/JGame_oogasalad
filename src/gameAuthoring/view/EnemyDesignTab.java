@@ -3,6 +3,8 @@ package gameAuthoring.view;
 import gameAuthoring.JSONObjects.AnimationJSONObject;
 import gameAuthoring.JSONObjects.EnemyJSONObject;
 import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -10,7 +12,9 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -245,7 +249,6 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(myAnimationScrollPane, ANIMATION_SCROLL_PANE_FORMATTING);
     }
 
-
     /**
      * Adds button for adding another sprite box to animation scroll pane
      */
@@ -258,7 +261,6 @@ public class EnemyDesignTab extends Tab {
                 .setToolTipText(StyleConstants.resourceBundle.getString("EnemySpriteTip"));
         myContentPanel.add(enemyImageChooser);
     }
-
 
     /**
      * Adds button that allows for clearing of all sprites uploaded so far for enemy
@@ -400,10 +402,32 @@ public class EnemyDesignTab extends Tab {
         return listener;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see gameAuthoring.view.Tab#loadJSON(gameEngine.parser.Parser)
+     */
     @Override
     public void loadJSON (Parser p) {
-        // TODO Auto-generated method stub
-
+        JSONObject resources = p.getJSONObject(JSONConstants.RESOURCE_STRING);
+        JSONArray images = (JSONArray) resources.get(JSONConstants.IMAGE_STRING);
+        Map<String, String> imageMap = new HashMap<String, String>();
+        for (int i = 0; i < images.length(); i++) {
+            JSONObject image = images.getJSONObject(i);
+            String id = image.getString(JSONConstants.ID_STRING);
+            String url = image.getString(JSONConstants.URL_STRING);
+            imageMap.put(id, url);
+        }
+        JSONArray enemies = p.getJSONArray(JSONConstants.ENEMY_TYPE_STRING);
+        for (int i = 0; i < enemies.length(); i++) {
+            JSONObject enemy = enemies.getJSONObject(i);
+            String name = enemy.getString(JSONConstants.ID_STRING);
+            String imageKey = enemy.getString(JSONConstants.IMAGE_STRING);
+            File imageFile = new File(GameAuthoringGUI.FILE_PREFIX + imageMap.get(imageKey));
+            setChanged();
+            notifyObservers(enemy);
+            clearChanged();
+            addEnemy(imageFile, name);
+        }
     }
-
 }

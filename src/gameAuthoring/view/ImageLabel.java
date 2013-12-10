@@ -29,6 +29,7 @@ public class ImageLabel extends JLabel {
     protected File myImageSource;
     protected String myID;
     protected boolean isMutable = false;
+    private final static Dimension LABEL_DIMENSION = new Dimension(50, 50);
 
     /**
      * Creates new ImageLabel with basic initialization
@@ -65,7 +66,7 @@ public class ImageLabel extends JLabel {
         this.addMouseListener(createImageLabelListener(this));
         Border border = BorderFactory.createLineBorder(new Color(100, 100, 100), 2);
         this.setBorder(border);
-        this.setPreferredSize(new Dimension(50, 50));
+        this.setPreferredSize(LABEL_DIMENSION);
     }
 
     /**
@@ -88,6 +89,7 @@ public class ImageLabel extends JLabel {
             myImage = ImageIO.read(imageSource);
             myImage = myImage.getScaledInstance(50, 50, Image.SCALE_FAST);
             this.setIcon(new ImageIcon(myImage));
+            this.setPreferredSize(LABEL_DIMENSION);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -99,6 +101,13 @@ public class ImageLabel extends JLabel {
      */
     public String getID () {
         return myID;
+    }
+    
+    /**
+     * @param ID new image ID
+     */
+    public void setID (String ID){
+        myID = ID;
     }
 
     /**
