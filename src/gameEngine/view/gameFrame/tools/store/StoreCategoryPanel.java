@@ -6,7 +6,7 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.ViewConstants;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.ItemPurchaser;
-import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
+import gameEngine.view.gameFrame.towerUpgrader.ItemOptionsDisplayer;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collection;
