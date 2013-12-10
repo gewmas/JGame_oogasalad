@@ -26,20 +26,9 @@ import jgame.platform.StdGame;
  *         Displays the Game setting using JGEngine to facilitate
  *         graphics rendering
  */
+@SuppressWarnings("serial")
 public class Game extends StdGame {
-    private static final String[] DISPLAY_KEYS = { GameEngineConstant.PURCHASE_INFO_NAME,
 
-                                                   GameEngineConstant.TOWER_DAMAGE,
-                                                   GameEngineConstant.TOWER_ATTACK_SPEED,
-                                                   GameEngineConstant.TOWER_ATTACK_AMOUNT,
-                                                   GameEngineConstant.TOWER_ATTACK_MODE,
-                                                   GameEngineConstant.TOWER_RANGE,
-                                                   GameEngineConstant.TOWER_MAGIC,
-                                                   GameEngineConstant.TOWER_MAGIC_FACTOR,
-                                                   GameEngineConstant.TOWER_BOOST_FACTOR,
-                                                   GameEngineConstant.TOWER_SELL_PRICE,
-                                                   GameEngineConstant.TOWER_UPGRADE_PRICE,
-                                                   GameEngineConstant.PURCHASE_INFO_DESCRIPTION };
 
 
     private int WIDTH = 600;
