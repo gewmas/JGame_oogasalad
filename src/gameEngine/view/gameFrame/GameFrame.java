@@ -122,7 +122,6 @@ public class GameFrame extends JFrame implements GameInitializable {
     public void initialize () {
         infoPanel.setVisible(true);
         this.pack();
-
     }
 
     /**
@@ -137,5 +136,6 @@ public class GameFrame extends JFrame implements GameInitializable {
         infoPanel.clearDisplay();
         canvasPanel.endGame();
         storePanel.endGame();
+        this.pack();
     }
 }

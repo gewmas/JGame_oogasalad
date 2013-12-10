@@ -81,5 +81,9 @@ public class ItemOptionsDisplayer {
         this.display.updateDisplayInformation( displayValues);
         
     }
+    
+    public void closeDisplay(){
+        display.setVisible(false);
+    }
 
 }
