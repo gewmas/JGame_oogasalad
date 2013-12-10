@@ -204,7 +204,7 @@ public class BasicInfoTab extends Tab {
             myAltGoldText.setText(p.getString(GameData.GOLD_NAME_KEY));
             myLives.setText(String.valueOf(p.getInt(GameData.LIVES_KEY)));
             myAltLivesText.setText(p.getString(GameData.LIVES_NAME_KEY));
-            mySplashImage = p.getString("splashImage");
+            mySplashImage = p.getString("splashImage") + ".png";
             mySplashImageLabel.setText(mySplashImage);
 
             JSONObject resources = p.getJSONObject("resources");
@@ -231,8 +231,10 @@ public class BasicInfoTab extends Tab {
             myImageLabel.setLabelIcon(new File(GameAuthoringGUI.FILE_PREFIX +
                                                imageMap.get("bullet")));
             myImageLabel.setID("bulletImage");
-            String BGAudio = (String) p.getString("BGAudio")
-            myAudioLabel.setAudioFile(new File(GameAuthoringGUI.FILE_PREFIX + ))
+            String BGAudioID = (String) p.getString("BGAudio");
+            myAudioLabel = new AudioLabel(BGAudioID, true);
+            myAudioLabel.revalidate();
+            myAudioLabel.setAudioFile(new File(GameAuthoringGUI.FILE_PREFIX + audioMap.get(BGAudioID)));
             setData();
         }
         catch (NumberFormatException n) {

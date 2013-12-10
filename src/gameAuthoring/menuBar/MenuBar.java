@@ -98,9 +98,9 @@ public class MenuBar extends JMenuBar {
                         Scanner s = new Scanner(INPUT_CHOOSER.getSelectedFile());
                         myParser = new Parser(s);
                         myGameAuthoringGUI.loadJSON(myParser);
-                        myBasicInfoTab.loadJSON(myParser);
+                        //myBasicInfoTab.loadJSON(myParser);
                         myMapDesignTab.loadJSON(myParser);
-                        myWaveDesignTab.loadJSON(myParser);
+                        //myWaveDesignTab.loadJSON(myParser);
                     }
                     catch (FileNotFoundException e1) {
                         JOptionPane.showMessageDialog(null,

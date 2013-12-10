@@ -10,6 +10,8 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -124,22 +126,32 @@ public class MapDesignTab extends Tab {
     }
 
     public void loadJSON (Parser p) {
+        JSONObject resources = p.getJSONObject("resources");
+        JSONArray images = (JSONArray) resources.get("image");
+
+        Map<String, String> imageMap = new HashMap<String, String>();
+        for (int i = 0; i < images.length(); i++) {
+            JSONObject image = images.getJSONObject(i);
+            String id = image.getString("id");
+            String url = image.getString("url");
+            imageMap.put(id, url);
+        }
+        
         myBackgroundImage = p.getString("BGImage");
         JSONObject map = p.getJSONObject("map");
         myPathImage = (String) map.get("pathImage");
-        myGrid.setImageSource(new File(System.getProperties().getProperty("user.dir") + "/" +
-                                       myPathImage));
+        myGrid.setImageSource(new File(GameAuthoringGUI.FILE_PREFIX + myPathImage));
         JSONArray pathPoints = (JSONArray) map.get("Path");
         myGrid.reset();
         for (int i = 0; i < pathPoints.length(); i++) {
             JSONObject point = (JSONObject) pathPoints.get(i);
-            int x = (Integer) point.get("x");
-            int y = (Integer) point.get("y");
+            int x = (Integer) point.get("y");
+            int y = (Integer) point.get("x");
             myGrid.toggleGridButton(x, y);
-            if (i == 0) myGrid.setPathStart(new Point2D.Double(x, y));
-            if (i == pathPoints.length() - 1) myGrid.setPathEnd(new Point2D.Double(x, y));
+            if (i == 0) myGrid.setPathStart(new Point2D.Double(y, x));
+            if (i == pathPoints.length() - 1) myGrid.setPathEnd(new Point2D.Double(y, x));
         }
-        File f = new File(System.getProperties().getProperty("user.dir") + "/" + myPathImage);
+        File f = new File(GameAuthoringGUI.FILE_PREFIX +  myPathImage);
         try {
             myCurrentPathImage.setIcon(new ImageIcon(ImageIO.read(f)));
         }

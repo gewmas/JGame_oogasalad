@@ -278,12 +278,7 @@ public class GameAuthoringGUI extends Observable {
             JSONObject sound = audio.getJSONObject(i);
             String id = sound.getString("id");
             String url = sound.getString("url");
-
-            if (!id.equals("bullet")){
-                System.out.println("Sound" + FILE_PREFIX + url);
-                myUserSoundsTab.addAudioLabel(new File(FILE_PREFIX + url));
-            }
-            
+            myUserSoundsTab.addAudioLabel(new File(FILE_PREFIX + url));
         }
 
     }

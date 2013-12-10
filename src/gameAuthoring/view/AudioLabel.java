@@ -51,6 +51,7 @@ public class AudioLabel extends ImageLabel {
                 image = ImageIO.read(myImageSource);
                 myImage = image;
                 this.setIcon(new ImageIcon(image));
+               
             }
             catch (IOException e) {
                 e.printStackTrace();
