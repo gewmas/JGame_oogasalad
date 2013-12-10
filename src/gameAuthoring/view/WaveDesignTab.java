@@ -8,7 +8,6 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -25,6 +24,13 @@ import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * @author Rebecca Lai & Susan Zhang
+ *         WaveDesignTab allows the user to design each wave of enemy in the game. The user is given
+ *         the option to select the type of enemy that appears in the wave, the wave period (long
+ *         wave lasts), and the wave interval (amount of time between waves).
+ */
+@SuppressWarnings("unused")
 public class WaveDesignTab extends Tab implements Observer {
     private JScrollPane myCreatedWaves;
     private JPanel myScrollPanel;
@@ -40,6 +46,9 @@ public class WaveDesignTab extends Tab implements Observer {
     private static final String CREATED_WAVES_ALIGNMENT = "aligny center";
     private static final Dimension TEXT_FIELD_DIMENSION = new Dimension(200, 30);
 
+    /**
+     * Creates a WaveDesignTab
+     */
     public WaveDesignTab () {
     }
 
@@ -64,6 +73,9 @@ public class WaveDesignTab extends Tab implements Observer {
         return myMainPanel;
     }
 
+    /**
+     * Add scroll pane for displaying created waves
+     */
     private void addCreatedWaves () {
         myCreatedWaves = new JScrollPane(myScrollPanel);
         myCreatedWaves.getViewport().setOpaque(false);
@@ -78,12 +90,19 @@ public class WaveDesignTab extends Tab implements Observer {
         myMainPanel.add(myCreatedWaves, CREATED_WAVES_ALIGNMENT);
     }
 
+    /**
+     * Add title to tab
+     */
     private void addTitle () {
         JLabel title = new JLabel(StyleConstants.resourceBundle.getString("WavesTitle"));
         title.setFont(StyleConstants.DEFAULT_TITLE_FONT);
         myMainPanel.add(title, StyleConstants.DEFAULT_SPAN_MODE);
     }
 
+    /**
+     * Add label and drop down box for enemy type
+     * Enemy type is retrieved from the EnemyDesignTab
+     */
     private void addEnemyType () {
         JLabel type = new JLabel(StyleConstants.resourceBundle.getString("WavesEnemyType"));
         type.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -95,6 +114,9 @@ public class WaveDesignTab extends Tab implements Observer {
 
     }
 
+    /**
+     * Add label and text field to allow user to specify number of enemies in wave
+     */
     private void addEnemyAmount () {
         JLabel quantity = new JLabel(StyleConstants.resourceBundle.getString("WavesEnemyQuantity"));
         quantity.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -106,6 +128,9 @@ public class WaveDesignTab extends Tab implements Observer {
         myContentPanel.add(myNumberField);
     }
 
+    /**
+     * Add label and text field to allow user to set wave period (duration of wave)
+     */
     private void addPeriod () {
         JLabel period = new JLabel(StyleConstants.resourceBundle.getString("WavesPeriod"));
         period.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -117,6 +142,9 @@ public class WaveDesignTab extends Tab implements Observer {
         myContentPanel.add(myPeriodField);
     }
 
+    /**
+     * Add label and text field to allow user to set wave interval (amount of time between waves)
+     */
     private void addInterval () {
         JLabel interval = new JLabel(StyleConstants.resourceBundle.getString("WavesInterval"));
         interval.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -128,6 +156,10 @@ public class WaveDesignTab extends Tab implements Observer {
         myContentPanel.add(myIntervalField);
     }
 
+    /**
+     * Add button to allow wave to be created
+     * 
+     */
     private void addWaveCreationButton () {
         JButton createWaveButton =
                 new JButton(StyleConstants.resourceBundle.getString("WaveCreation"));
@@ -138,6 +170,12 @@ public class WaveDesignTab extends Tab implements Observer {
         myContentPanel.add(createWaveButton);
     }
 
+    /**
+     * Add wave to CreatedWaves pane
+     * 
+     * @param type is type of enemy in wave
+     * @param number is number of enemy in wave
+     */
     private void addWave (String type, int number) {
         JButton waveButton = new JButton(number + " " + type);
         waveButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
@@ -145,6 +183,11 @@ public class WaveDesignTab extends Tab implements Observer {
 
     }
 
+    /**
+     * Create a wave based on user-completed fields
+     * 
+     * @return MouseAdapter that allows for wave to be created once fields are set
+     */
     private MouseAdapter createWaveButtonListener () {
         MouseAdapter listener = new MouseAdapter() {
             @Override
@@ -160,9 +203,9 @@ public class WaveDesignTab extends Tab implements Observer {
                     notifyObservers(wave);
                     clearChanged();
                     addWave(type, number);
-                    myNumberField.setText("");
-                    myPeriodField.setText("");
-                    myIntervalField.setText("");
+                    myNumberField.setText(StyleConstants.NULL_STRING);
+                    myPeriodField.setText(StyleConstants.NULL_STRING);
+                    myIntervalField.setText(StyleConstants.NULL_STRING);
                 }
                 else {
                     JOptionPane.showMessageDialog(null,
@@ -190,7 +233,6 @@ public class WaveDesignTab extends Tab implements Observer {
     @SuppressWarnings("unchecked")
     @Override
     public void update (Observable arg0, Object arg1) {
-        System.out.println("WaveDesignTab received update from EnemyWaveController");
         myEnemyList = (ArrayList<String>) arg1;
         System.out.println(myEnemyList);
 
@@ -199,15 +241,11 @@ public class WaveDesignTab extends Tab implements Observer {
         for (int i = 0; i < myEnemyList.size(); i++) {
             myEnemyOptions[i] = myEnemyList.get(i);
         }
-
-        System.out.println(Arrays.toString(myEnemyOptions));
-
         myEnemiesDropdown.removeAllItems();
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(myEnemyOptions);
         myEnemiesDropdown.setModel(model);
         myEnemiesDropdown.revalidate();
         myEnemiesDropdown.repaint();
-
     }
 
 }

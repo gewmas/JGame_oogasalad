@@ -1,7 +1,5 @@
-package gameAuthoring.modifiedSwingComponents;
+package gameAuthoring.view;
 
-import gameAuthoring.view.Grid;
-import gameAuthoring.view.StyleConstants;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

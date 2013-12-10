@@ -1,8 +1,8 @@
 package gameAuthoring.menuBar;
 
 import gameAuthoring.JSONObjects.GameData;
-import gameAuthoring.modifiedSwingComponents.DuvallClippy;
 import gameAuthoring.view.BasicInfoTab;
+import gameAuthoring.view.DuvallClippy;
 import gameAuthoring.view.GameAuthoringGUI;
 import gameAuthoring.view.MapDesignTab;
 import gameAuthoring.view.WaveDesignTab;

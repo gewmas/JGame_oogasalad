@@ -1,4 +1,4 @@
-package gameAuthoring.modifiedSwingComponents;
+package gameAuthoring.view;
 
 import java.awt.Color;
 import java.awt.GradientPaint;
