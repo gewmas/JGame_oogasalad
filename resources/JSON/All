@@ -216,7 +216,7 @@
    "wave": [
    {"type": ["D"],
    "number" : [10],
-   "period": 0.4,
+   "period": 2,
    "interval": 20
    }
    

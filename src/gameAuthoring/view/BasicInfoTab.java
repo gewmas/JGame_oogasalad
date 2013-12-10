@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.JSONObjects.ResourceJSONObject;
 import gameAuthoring.model.GameData;
 import gameEngine.parser.Parser;
 import gameEngine.parser.JSONLibrary.JSONArray;
@@ -38,8 +37,6 @@ public class BasicInfoTab extends Tab {
     private JTextField myLives;
     private JTextField myAltGoldText;
     private JTextField myAltLivesText;
-    private JLabel mySplashImageLabel;
-    private String mySplashImage;
     private AudioLabel myAudioLabel;
     private ImageLabel myImageLabel;
     private static final Dimension TEXT_DIMENSION = new Dimension(200, 30);
@@ -64,7 +61,6 @@ public class BasicInfoTab extends Tab {
         addLives();
         addBackgroundAudio();
         addBullet();
-        addSplashImage();
         addSubmitButton();
         addTitle();
         myMainPanel.add(myContentPanel, CONTENT_PANEL_FORMATTING);
@@ -182,20 +178,6 @@ public class BasicInfoTab extends Tab {
         myContentPanel.add(myImageLabel);
     }
 
-    /**
-     * Adds label and button for setting game's splash image
-     */
-    private void addSplashImage () {
-        JButton setSplashImageButton =
-                new JButton(StyleConstants.resourceBundle.getString("BasicInfoSplashImage"));
-        setSplashImageButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
-        setSplashImageButton
-                .setToolTipText(StyleConstants.resourceBundle.getString("BasicInfoSplashImageTip"));
-        setSplashImageButton.addMouseListener(setSplashImageListener());
-        mySplashImageLabel = new JLabel();
-        myContentPanel.add(setSplashImageButton);
-        myContentPanel.add(mySplashImageLabel);
-    }
 
     /*
      * (non-Javadoc)
@@ -209,8 +191,7 @@ public class BasicInfoTab extends Tab {
             myAltGoldText.setText(p.getString(GameData.GOLD_NAME_KEY));
             myLives.setText(String.valueOf(p.getInt(GameData.LIVES_KEY)));
             myAltLivesText.setText(p.getString(GameData.LIVES_NAME_KEY));
-            mySplashImage = p.getString(JSONConstants.SPLASH_STRING) + ".png";
-            mySplashImageLabel.setText(mySplashImage);
+
             JSONObject resources = p.getJSONObject(JSONConstants.RESOURCE_STRING);
             JSONArray images = (JSONArray) resources.get(JSONConstants.IMAGE_STRING);
             Map<String, String> imageMap = new HashMap<String, String>();
@@ -230,12 +211,15 @@ public class BasicInfoTab extends Tab {
             }
             myImageLabel.setLabelIcon(new File(GameAuthoringGUI.FILE_PREFIX +
                                                imageMap.get(JSONConstants.BULLET_STRING)));
-            myImageLabel.setID("bulletImage");
+            myImageLabel.setID(JSONConstants.BULLET_KEY);
+            
+       
             String BGAudioID = (String) p.getString(JSONConstants.BG_AUDIO_STRING);
             myAudioLabel = new AudioLabel(BGAudioID, true);
             myAudioLabel.revalidate();
             myAudioLabel.setAudioFile(new File(GameAuthoringGUI.FILE_PREFIX +
                                                audioMap.get(BGAudioID)));
+
             setData();
         }
         catch (NumberFormatException n) {
@@ -274,13 +258,12 @@ public class BasicInfoTab extends Tab {
         int lives = Integer.parseInt(myLives.getText());
         String name = myGameName.getText();
         String bulletName = myImageLabel.getImageFile().getName();
-        if (myAudioLabel != null && gold > 0 && lives > 0 && mySplashImage != null &&
+        if (myAudioLabel != null && gold > 0 && lives > 0 &&
             name != null && bulletName != null) {
             String goldName = myAltGoldText.getText();
             String livesName = myAltLivesText.getText();
-            String splashImage = mySplashImage.substring(0, mySplashImage.length() - 4);
             BasicInformation gameDesignInfo =
-                    new BasicInformation(gold, lives, splashImage, name, myAudioLabel,
+                    new BasicInformation(gold, lives, name, myAudioLabel,
                                          livesName, goldName, bulletName);
             setChanged();
             notifyObservers(gameDesignInfo);
@@ -291,31 +274,5 @@ public class BasicInfoTab extends Tab {
                                           StyleConstants.resourceBundle
                                                   .getString("BasicInfoInvalidSubmission"));
         }
-    }
-
-    /**
-     * @return MouseAdapter that creates new ResourceJSONObject (i.e. image object) when game splash
-     *         image is set
-     */
-    private MouseAdapter setSplashImageListener () {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseClicked (MouseEvent e) {
-                int loadObject = INPUT_CHOOSER.showOpenDialog(null);
-                if (loadObject == JFileChooser.APPROVE_OPTION) {
-                    mySplashImage = INPUT_CHOOSER.getSelectedFile().getName();
-                    ResourceJSONObject splashImage =
-                            new ResourceJSONObject(
-                                                   mySplashImage.substring(0,
-                                                                           mySplashImage.length() - 4),
-                                                   mySplashImage);
-                    setChanged();
-                    notifyObservers(splashImage);
-                    clearChanged();
-                    mySplashImageLabel.setText(mySplashImage);
-                }
-            }
-        };
-        return listener;
     }
 }

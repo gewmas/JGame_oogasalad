@@ -261,29 +261,22 @@ public class GameAuthoringGUI extends Observable {
     public void loadJSON (Parser p) {
         JSONObject resources = p.getJSONObject("resources");
         JSONArray images = (JSONArray) resources.get("image");
-
         for (int i = 0; i < images.length(); i++) {
             JSONObject image = images.getJSONObject(i);
             String id = image.getString("id");
             String url = image.getString("url");
-
-            if (!id.equals("bullet")) {
+            if (id.matches("-?\\d+(\\.\\d+)?")) {
                 myUserImagesTab.addImageLabel(new File(FILE_PREFIX + url), id);
             }
-
         }
-
         JSONArray audio = (JSONArray) resources.get("audio");
-
         for (int i = 0; i < audio.length(); i++) {
             JSONObject sound = audio.getJSONObject(i);
             String id = sound.getString("id");
             String url = sound.getString("url");
             myUserSoundsTab.addAudioLabel(new File(FILE_PREFIX + url));
         }
-
         JSONArray animations = (JSONArray) resources.get("animation");
-
         for (int i = 0; i < animations.length(); i++) {
             JSONObject animation = animations.getJSONObject(i);
             myGameData.addAnimation(animation);

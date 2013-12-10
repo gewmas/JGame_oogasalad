@@ -398,6 +398,7 @@ public class TowerDesignTab extends Tab {
                                                         attackSpeed, mode, range, cost,
                                                         recyclePrice,
                                                         description, magicFactor, magicType);
+                            myMagicFactorField.setText(StyleConstants.NULL_STRING);
                         }
                         else if (type.equals(BOOST_TOWER_NAME)) {
                             double boostFactor = Double.parseDouble(myBoostFactorField.getText());
@@ -411,6 +412,7 @@ public class TowerDesignTab extends Tab {
                                                         recyclePrice,
                                                         description,
                                                         boostFactor);
+                            myBoostFactorField.setText(StyleConstants.NULL_STRING);
                         }
                         else {
                             int mode = myAttackModeOptions.getSelectedIndex();
@@ -419,6 +421,7 @@ public class TowerDesignTab extends Tab {
                                                         damage, attackSpeed, mode,
                                                         attackAmount, range, cost,
                                                         recyclePrice, description);
+                            myAttackAmountField.setText(StyleConstants.NULL_STRING);
                         }
                         addTower(myTowerImage.getImageFile(), name);
                         setChanged();
@@ -449,10 +452,7 @@ public class TowerDesignTab extends Tab {
         myCostField.setText(StyleConstants.NULL_STRING);
         myRecyclePriceField.setText(StyleConstants.NULL_STRING);
         myTowerImage.setIcon(null);
-        myDescriptionField.setText(StyleConstants.NULL_STRING);
-        myMagicFactorField.setText(StyleConstants.NULL_STRING);
-        myBoostFactorField.setText(StyleConstants.NULL_STRING);
-        myAttackAmountField.setText(StyleConstants.NULL_STRING);
+        myDescriptionField.setText(StyleConstants.NULL_STRING); 
     }
 
     /**

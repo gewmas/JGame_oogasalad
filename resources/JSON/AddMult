@@ -54,8 +54,8 @@
             "url": "DuvallDoc.png"
          },
          {
-            "id": "9",
-            "url": "barrier1.png"
+            "id": "12",
+            "url": "BoostTower.png"
          },
          {
             "id": "bullet",
@@ -72,7 +72,7 @@
       "expire": 100,
       "description": "Woop",
       "damage": 100,
-      "image": "9",
+      "image": "1",
       "cost": 150
    }],
    "enemyType": [
@@ -125,6 +125,31 @@
          "Magic": ["FrozeMagic"],
          "Magic Factor": 2.5,
          "Attack Mode": 0
+      },
+      {
+         "Cost": 100,
+         "Name": "Mult",
+         "Attack Amount": 5,
+         "Damage": 10,
+         "Description": "MS Tower",
+         "Range": 100,
+         "Sell Price": 50,
+         "Type": "MultipleShootingTower",
+         "Image": "1",
+         "Attack Speed": 2,
+         "Attack Mode": 1
+      },
+      {
+         "Name": "Boost",
+         "Cost": 50,
+         "Damage": 10,
+         "Range": 100,
+         "Description": "Woo",
+         "Sell Price": 25,
+         "Type": "BoostTower",
+         "Image": "12",
+         "Attack Speed": 3,
+         "Boost Factor": 2.5
       }
    ],
    "name": "dd",
@@ -238,12 +263,20 @@
          }
       ]
    },
-   "wave": [{
-      "interval": 20,
-      "number": [10],
-      "period": 0.5,
-      "type": ["D"]
-   }],
+   "wave": [
+      {
+         "interval": 20,
+         "number": [10],
+         "period": 2,
+         "type": ["D"]
+      },
+      {
+         "interval": 10,
+         "number": [15],
+         "period": 4,
+         "type": ["Duvall"]
+      }
+   ],
    "livesName": "Lives",
    "gold": 1000
 }

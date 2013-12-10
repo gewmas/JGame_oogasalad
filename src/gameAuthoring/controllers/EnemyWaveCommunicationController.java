@@ -1,6 +1,7 @@
 package gameAuthoring.controllers;
 
 import gameAuthoring.JSONObjects.EnemyJSONObject;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -40,6 +41,11 @@ public class EnemyWaveCommunicationController extends Observable implements Obse
             clearChanged();
         }
         catch (ClassCastException c) {
+            JSONObject enemy = (JSONObject) arg;
+            myCreatedEnemies.add((String) enemy.get("id"));
+            setChanged();
+            notifyObservers(myCreatedEnemies);
+            clearChanged();
         }
     }
 

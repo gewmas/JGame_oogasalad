@@ -37,7 +37,6 @@ public class BasicInfoDesignController extends DesignController {
             BasicInformation basicInformation = (BasicInformation) arg;
             myGameData.setGold(basicInformation.getGold());
             myGameData.setLives(basicInformation.getLives());
-            myGameData.setSplashImage(basicInformation.getSplashImage());
             myGameData.setGameName(basicInformation.getGameName());
             myGameData.addBGAudio(basicInformation.getBackgroundAudio().getID());
             myGameData.addAudio(basicInformation.getBackgroundAudio().getID(),

@@ -8,6 +8,7 @@
 "livesName": "Population",
 "levels": 2,
 "tilesPerRow": 20,
+"BGAudio": "alarm",
 "map":
 {
   	  "pathImage":  "GroundTiles.png", 
@@ -547,7 +548,7 @@
    "damage":-1
 },
 {
-        "id": "3",
+"id": "3",
         "gold": 10,
         "image": "BoyPatient",
         "life": 15,
