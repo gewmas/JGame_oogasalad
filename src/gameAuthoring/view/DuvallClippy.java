@@ -88,6 +88,9 @@ public class DuvallClippy extends JFrame implements Observer {
         new Timer(15, makeDuvallBlink).start();
     }
 
+    /**
+     * Add images to the list of animations. Allows for flexibility in playing animations
+     */
     public void addAnimations () {
         myImageStrings.add(DUVALL_IMAGE_1);
         myImageStrings.add(DUVALL_IMAGE_2);
