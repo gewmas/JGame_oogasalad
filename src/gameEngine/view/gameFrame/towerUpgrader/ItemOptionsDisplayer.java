@@ -7,12 +7,14 @@ import java.util.Map;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.View;
+import gameEngine.view.gameFrame.GameInitializable;
+import gameEngine.view.gameFrame.GameUpdatable;
 import gameEngine.view.gameFrame.gameObjects.RangeDisplay;
 import gameEngine.view.gameFrame.tools.DisplayValue;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 
 
-public class ItemOptionsDisplayer {
+public class ItemOptionsDisplayer implements GameInitializable{
     private InfoDisplayPanel display;
     private RangeDisplay rangeDisplay;
     private List<TowerOptionButton> TowerUpgraderButtons;
@@ -79,6 +81,16 @@ public class ItemOptionsDisplayer {
 
     public void updateDisplay (Collection<DisplayValue> displayValues) {
         this.display.updateDisplayInformation( displayValues);
+        
+    }
+    
+    public void closeDisplay(){
+        display.setVisible(false);
+    }
+
+    @Override
+    public void initialize () {
+        createRangeDisplay ();
         
     }
 

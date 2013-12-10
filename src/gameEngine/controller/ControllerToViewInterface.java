@@ -12,7 +12,7 @@ import jgame.impl.JGEngineInterface;
  * This interface defines methods that the controller must have in order for 
  * the view to operate correctly. 
  * 
- * Written by Alex Zhu
+ * @author alex zhu
  */
 public interface ControllerToViewInterface {
     public void newGame (File jsonFile) throws Exception;

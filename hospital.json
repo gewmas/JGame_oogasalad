@@ -382,6 +382,7 @@
                { "id": "bullet", "url": "bullet_heartbeating.gif" },
                { "id": "barrier1", "url": "barrier1.png" },
                { "id": "barrier2", "url": "barrier2.png" },
+               { "id": "Spoon", "url": "bullet1.png"},
 
                
                
@@ -392,6 +393,8 @@
                { "id": "Pill5", "url": "Pill5.png" },
                { "id": "Pill6", "url": "Pill6.png" },
                { "id": "PillEnd", "url": "PillEnd.png" },
+               
+               { "id": "RedHeart", "url": "bullet1.png"},
 
       		
       			
@@ -436,20 +439,20 @@
 },
 "temporaryBarrierType":[
         {
-         "id": "Lake",
-         "image": "barrier1",
-         "damage": 100,
+         "id": "Miracle Cure",
+         "image": "Pill2",
+         "damage": -100,
          "cost": 200,
          "expire": 20,
-         "description": "Buy a puddle of water to drown your enemies!  The sun is hot, so let's hope it doesn't evaporate too quickly"
+         "description": "This magical cure instantly heals!  But you don't have too much of it before it runs out"
         },  
         {
-         "id": "Fire",
-         "image": "barrier2",
-         "damage": 100,
+         "id": "A Spoonful of Sugar",
+         "image": "Spoon",
+         "damage": -100,
          "cost": 100,
          "expire": 10,
-         "description": "Buy a flame to burn your enemies!  The fire won't burn forever"
+         "description": "It helps the medicine go down...and it will keep your patient's heart beating :)"
         },
 ],
 

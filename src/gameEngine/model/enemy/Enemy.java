@@ -142,7 +142,7 @@ public class Enemy extends JGObject implements IEMagicable {
                  * @author Harris
                  * For killing enemies with temporary barriers
                  */
-                life--;
+                life-= ((TemporaryBarrier) obj).getDamage();
                 lifeLessThanZero();
    
             }
