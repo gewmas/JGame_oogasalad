@@ -100,6 +100,13 @@ public class ImageLabel extends JLabel {
     public String getID () {
         return myID;
     }
+    
+    /**
+     * @param ID new image ID
+     */
+    public void setID (String ID){
+        myID = ID;
+    }
 
     /**
      * @return File representation of image stored in ImageLabel

@@ -13,6 +13,9 @@ public class ResourcesJSONObject extends JSONObject {
     private JSONArray myAudio;
     private JSONArray myAnimations;
 
+    /**
+     * Constructor for ResourcesJSONObject
+     */
     public ResourcesJSONObject () {
         myAnimations = new JSONArray();
         myAudio = new JSONArray();
@@ -23,29 +26,50 @@ public class ResourcesJSONObject extends JSONObject {
         
     }
 
+    /**
+     * Adds image to resources
+     * 
+     * @param id Image ID
+     * @param url Image URL
+     */
     public void addImage (String id, String url) {
-        myImages.put(createBasicResource(id, url));
+        myImages.put(new ResourceJSONObject(id, url));
     }
     
+    /**
+     * Adds image ResourceJSONObject to resources
+     * 
+     * @param image ResourceJSONObject for image
+     */
     public void addImage(ResourceJSONObject image){
          myImages.put(image);
     }
 
+    /**
+     * Adds audio to resources
+     * 
+     * @param id Audio ID
+     * @param url Audio URL
+     */
     public void addAudio (String id, String url) {
-        myAudio.put(createBasicResource(id, url));
+        myAudio.put(new ResourceJSONObject(id, url));
     }
 
+    /**
+     * Adds audio ResourceJSONObject to resources
+     * 
+     * @param audio ResourceJSONObject for audio
+     */
     public void addAudio(ResourceJSONObject audio){
         myAudio.put(audio);
    }
     
-    private JSONObject createBasicResource (String id, String url) {
-        JSONObject image = new JSONObject();
-        image.put("id", id);
-        image.put("url", url);
-        return image;
-    }
-    
+ 
+    /**
+     * Adds AnimationJSONOBject to resource
+     * 
+     * @param animation AnimationJSONObject
+     */
     public void addAnimation(AnimationJSONObject animation){
         myAnimations.put(animation);
     }

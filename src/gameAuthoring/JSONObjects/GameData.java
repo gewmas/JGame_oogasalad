@@ -30,22 +30,22 @@ public class GameData extends JSONObject {
     private MapJSONObject myMap;
     private ResourcesJSONObject myResources;
 
-    private final static String TOWER_LIST_KEY = "Tower";
-    private final static String ENEMY_LIST_KEY = "enemyType";
-    private final static String TEMPBARRIER_LIST_KEY = "temporaryBarrierType";
-    private final static String WAVE_LIST_KEY = "wave";
-    private final static String RESOURCE_KEY = "resources";
+    public final static String TOWER_LIST_KEY = "Tower";
+    public final static String ENEMY_LIST_KEY = "enemyType";
+    public final static String TEMPBARRIER_LIST_KEY = "temporaryBarrierType";
+    public final static String WAVE_LIST_KEY = "wave";
+    public final static String RESOURCE_KEY = "resources";
 
-    private final static String GAME_NAME_KEY = "name";
-    private final static String GOLD_KEY = "gold";
-    private final static String GOLD_NAME_KEY = "goldName";
-    private final static String LIVES_KEY = "numberOflives";
-    private final static String LIVES_NAME_KEY = "livesName";
+    public final static String GAME_NAME_KEY = "name";
+    public final static String GOLD_KEY = "gold";
+    public final static String GOLD_NAME_KEY = "goldName";
+    public final static String LIVES_KEY = "numberOfLives";
+    public final static String LIVES_NAME_KEY = "livesName";
 
-    private final static String SPLASH_IMAGE_KEY = "splashImage";
-    private final static String BG_IMAGE_KEY = "BGImage";
-    private final static String BULLET_IMAGE_KEY = "bulletImage";
-    private final static String BG_MUSIC_KEY = "bgMusic";
+    public final static String SPLASH_IMAGE_KEY = "splashImage";
+    public final static String BG_IMAGE_KEY = "BGImage";
+    public final static String BULLET_IMAGE_KEY = "bulletImage";
+    public final static String BG_MUSIC_KEY = "bgMusic";
 
     /**
      * Constructor for GameData class
