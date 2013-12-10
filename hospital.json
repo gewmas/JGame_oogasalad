@@ -4,7 +4,7 @@
 "BGImage" :  "hospital_background",
 "gold" : 500,
 "numberOfLives" : 10,
-"goldName": "Money",
+"goldName": "GDP",
 "livesName": "Population",
 "levels": 2,
 "tilesPerRow": 20,
@@ -534,8 +534,7 @@
    "Specialty" : 1,
    "damage":-1
 }, 
-{
-        "id": "2",
+{        "id": "2",
         "gold": 10,
         "image": "KidPatient",
         "life": 15,

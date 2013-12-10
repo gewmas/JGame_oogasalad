@@ -46,6 +46,7 @@ public class Bullet extends JGObject {
         this.speed = 3;
         JGRectangle box=this.getBBox();
         this.setBBox(0, 0, box.width/2, box.height/2);
+        expiry=100;
     }
 
     @Override

@@ -9,8 +9,10 @@ import gameEngine.model.magic.IMagicable;
  *
  */
 public class EPoisonFactory implements IMagicFactory{
+
     private double myHeal=0.004;
     private double myHealLevel=35;
+
     
     @Override
     public void createMagicInstance (IMagicable target, IMagicable sender) {
