@@ -1,6 +1,5 @@
 package gameAuthoring.view;
 
-import gameAuthoring.modifiedSwingComponents.GradientPanel;
 import gameEngine.parser.Parser;
 import java.util.Observable;
 import javax.swing.JPanel;
