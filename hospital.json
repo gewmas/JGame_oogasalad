@@ -10,7 +10,7 @@
 "tilesPerRow": 20,
 "map":
 {
-  	  "pathImage":  "path.png", 
+  	  "pathImage":  "GroundTiles.png", 
 	  "Path": [
          {
             "y": 0,
@@ -381,6 +381,16 @@
                { "id": "bullet", "url": "bullet0.png" },
                { "id": "barrier1", "url": "barrier1.png" },
                { "id": "barrier2", "url": "barrier2.png" },
+               
+               
+               { "id": "Pill1", "url": "Pill1.png" },
+               { "id": "Pill2", "url": "Pill2.png" },
+               { "id": "Pill3", "url": "Pill3.png" },
+               { "id": "Pill4", "url": "Pill4.png" },
+               { "id": "Pill5", "url": "Pill5.png" },
+               { "id": "Pill6", "url": "Pill6.png" },
+               { "id": "PillEnd", "url": "PillEnd.png" },
+
       		
       			
       		   { "id": "BoyPatient1", "url": "BoyPatient1.png" },
@@ -414,6 +424,7 @@
       { "id": "BoyPatient", "sheet": [{"id":"BoyPatient1"},{"id":"BoyPatient2"},{"id":"BoyPatient3"},{"id":"BoyPatient4"}] },
       { "id": "GirlPatient", "sheet": [{"id":"GirlPatient1"},{"id":"GirlPatient2"},{"id":"GirlPatient3"},{"id":"GirlPatient4"}] },
       { "id": "KidPatient", "sheet": [{"id":"KidPatient1"},{"id":"KidPatient2"},{"id":"KidPatient3"},{"id":"KidPatient4"}] },
+      { "id": "bullet", "sheet": [{"id":"Pill1"},{"id":"Pill2"},{"id":"Pill3"},{"id":"Pill4"},{"id":"Pill5"},{"id":"Pill6"},{"id":"PillEnd"}] },
         ]
 },
 "temporaryBarrierType":[
