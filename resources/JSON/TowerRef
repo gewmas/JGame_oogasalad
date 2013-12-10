@@ -1,0 +1,34 @@
+{
+   "resources": {
+      "animation": [],
+      "audio": [],
+      "image": [{
+         "id": "1",
+         "url": "tower0.png"
+      }]
+   },
+   "temporaryBarrierType": [],
+   "widthOfWindow": 600,
+   "Tower": [{
+      "Cost": 50,
+      "Name": "Towaaa",
+      "Damage": 10,
+      "Description": "What",
+      "Range": 100,
+      "Sell Price": 25,
+      "Type": "DefaultTower",
+      "Image": "1",
+      "Attack Speed": 0.5,
+      "Attack Mode": 2
+   }],
+   "map": {
+      "Barriers": [],
+      "pathImage": "path.png",
+      "Path": []
+   },
+   "wave": [],
+   "enemyType": [],
+   "tilesPerRow": 20,
+   "difficultyScale": 1.5,
+   "heightOfWindow": 600
+}
