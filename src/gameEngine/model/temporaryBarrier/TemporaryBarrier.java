@@ -34,6 +34,10 @@ public class TemporaryBarrier extends JGObject {
         this.endTime = this.currentTime + 1000 * this.expire;
     }
     
+    public double getDamage() {
+        return damage;
+    }
+    
     @Override
     public void move () {
         if(System.currentTimeMillis() >= endTime) {

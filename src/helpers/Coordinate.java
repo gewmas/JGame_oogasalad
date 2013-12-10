@@ -4,7 +4,7 @@ package helpers;
  * 
  * @author Harris
  * 
- *         Create coordinate and allows of comparision of coordinates
+ *         Create coordinate and allows of comparison of coordinates
  *         Used in factory of grid class
  * 
  */
