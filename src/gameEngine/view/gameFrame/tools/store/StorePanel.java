@@ -91,6 +91,7 @@ public class StorePanel extends JPanel implements GameUpdatable, GameInitializab
 
     @Override
     public void initialize () {
+        this.setVisible(true);
         openAndStockStore();
 
     }
