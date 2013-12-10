@@ -1,10 +1,16 @@
 package gameAuthoring.view;
 
+import gameAuthoring.JSONObjects.GameData;
 import gameAuthoring.JSONObjects.ResourceJSONObject;
 import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -193,11 +199,40 @@ public class BasicInfoTab extends Tab {
 
     public void loadJSON (Parser p) {
         try {
-            myGameName.setText(p.getString("name"));
-            myGold.setText(String.valueOf(p.getInt("gold")));
-            myLives.setText(String.valueOf(p.getInt("numberOfLives")));
+            myGameName.setText(p.getString(GameData.GAME_NAME_KEY));
+            myGold.setText(String.valueOf(p.getInt(GameData.GOLD_KEY)));
+            myAltGoldText.setText(p.getString(GameData.GOLD_NAME_KEY));
+            myLives.setText(String.valueOf(p.getInt(GameData.LIVES_KEY)));
+            myAltLivesText.setText(p.getString(GameData.LIVES_NAME_KEY));
             mySplashImage = p.getString("splashImage");
             mySplashImageLabel.setText(mySplashImage);
+
+            JSONObject resources = p.getJSONObject("resources");
+            JSONArray images = (JSONArray) resources.get("image");
+
+            Map<String, String> imageMap = new HashMap<String, String>();
+            for (int i = 0; i < images.length(); i++) {
+                JSONObject image = images.getJSONObject(i);
+                String id = image.getString("id");
+                String url = image.getString("url");
+                imageMap.put(id, url);
+            }
+
+            Map<String, String> audioMap = new HashMap<String, String>();
+            JSONArray audio = (JSONArray) resources.get("audio");
+            for (int i = 0; i < audio.length(); i++) {
+                JSONObject sound = audio.getJSONObject(i);
+                String id = sound.getString("id");
+                String url = sound.getString("url");
+                audioMap.put(id, url);
+            }
+
+           
+            myImageLabel.setLabelIcon(new File(GameAuthoringGUI.FILE_PREFIX +
+                                               imageMap.get("bullet")));
+            myImageLabel.setID("bulletImage");
+            String BGAudio = (String) p.getString("BGAudio")
+            myAudioLabel.setAudioFile(new File(GameAuthoringGUI.FILE_PREFIX + ))
             setData();
         }
         catch (NumberFormatException n) {

@@ -39,6 +39,7 @@ public class BasicInfoDesignController extends DesignController {
             myGameData.setLives(basicInformation.getLives());
             myGameData.setSplashImage(basicInformation.getSplashImage());
             myGameData.setGameName(basicInformation.getGameName());
+            myGameData.addBGAudio(basicInformation.getBackgroundAudio().getID());
             myGameData.addAudio(basicInformation.getBackgroundAudio().getID(),
                                 basicInformation.getBackgroundAudio()
                                         .getAudioFile().getName());
