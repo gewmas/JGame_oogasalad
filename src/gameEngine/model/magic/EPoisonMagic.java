@@ -1,5 +1,7 @@
 package gameEngine.model.magic;
 
+import jgame.JGObject;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.enemy.Enemy;
 
 
@@ -33,7 +35,10 @@ public class EPoisonMagic extends Magic {
     public void move () {
         super.move();
         if (((Enemy) myTarget).getLife() > myHealthLevel){
-           this.setImage("Healthy");   
+           this.setImage("Healthy");
+           ((JGObject) myTarget).colid=GameEngineConstant.NORMALMAGIC_CID;
+           ((Enemy) myTarget).setInvisiable(true);
+           
         }
         else {
             ((IEMagicable) myTarget).changeLife(myChangeRecord);
