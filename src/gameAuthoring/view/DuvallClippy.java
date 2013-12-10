@@ -2,8 +2,6 @@ package gameAuthoring.view;
 
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,13 +12,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 
 public class DuvallClippy extends JFrame implements Observer {
 
     private Map<String, String> myDisplayTips = new HashMap<String, String>();
     private String myDisplayString = "test";
-    private JLabel myDisplayBox;
+    private JTextArea myDisplayBox;
 
     public DuvallClippy () {
         JPanel mainPanel = new ImagePanel("rainbow_texture.png");
@@ -35,31 +35,16 @@ public class DuvallClippy extends JFrame implements Observer {
             e1.printStackTrace();
         }
         mainPanel.add(duvallClippy);
-        duvallClippy.addMouseListener(displayTip());
-        myDisplayBox = new JLabel(myDisplayString);
-        myDisplayBox.setVisible(false);
-        mainPanel.add(myDisplayBox);
+        myDisplayBox = new JTextArea(myDisplayString);
+        myDisplayBox.setPreferredSize(new Dimension(100, 100));
+        JScrollPane scrollPane = new JScrollPane(myDisplayBox);
+        mainPanel.add(scrollPane);
         this.setContentPane(mainPanel);
         this.pack();
         this.setLocationByPlatform(true);
         this.setVisible(true);
         this.setResizable(false);
         fillDisplayTipsMap();
-    }
-
-    public MouseAdapter displayTip () {
-        MouseAdapter listener = new MouseAdapter() {
-            @Override
-            public void mouseEntered (MouseEvent e) {
-                myDisplayBox.setVisible(true);
-            }
-
-            @Override
-            public void mouseExited (MouseEvent e) {
-                myDisplayBox.setVisible(false);
-            }
-        };
-        return listener;
     }
 
     @Override
@@ -72,7 +57,7 @@ public class DuvallClippy extends JFrame implements Observer {
     }
 
     public void fillDisplayTipsMap () {
-        myDisplayTips.put("Basic Info", "Set all the basic information for your game here.");
+        myDisplayTips.put("Basic Info", StyleConstants.resourceBundle.getString("BasicInfoHelp"));
         myDisplayTips.put("Map Design", "Blah1");
         myDisplayTips.put("Tower Design", "Blah2");
         myDisplayTips.put("Enemy Design", "Blah3");
