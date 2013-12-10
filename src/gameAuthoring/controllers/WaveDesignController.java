@@ -31,7 +31,6 @@ public class WaveDesignController extends DesignController {
      */
     @Override
     public void update (Observable o, Object arg) {
-        System.out.println("WaveDesignController received update from WaveDesignTab");
         JSONObject wave = (JSONObject) arg;
         myGameData.addWave(wave);
     }

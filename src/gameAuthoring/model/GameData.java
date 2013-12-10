@@ -289,47 +289,4 @@ public class GameData extends JSONObject {
         }
     }
 
-    /**
-     * @author Lalita Maraj
-     *         This method is used to create a temporary file so that a user can simmulate
-     *         a game based on the parameters the game designer specified
-     *         without the hassel of saving, then loading a file
-     * @return
-     */
-    public File createSimmulationFile () {
-        if (true) {
-            File file = new File("tmp.JSON");
-            System.out.println("dlkfjsdjfdsjfdsjfs");
-            PrintStream out;
-            try {
-                file.createNewFile();
-                out = new PrintStream(file);
-                out.println(this.toString(3));
-                out.close();
-                return file;
-            }
-            catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            catch (IOException e) {
-
-                e.printStackTrace();
-            }
-
-        }
-        return null;
-    }
-
-    /**
-     * Method to check if the gameData is completely
-     * filled out.
-     * 
-     * @return boolean that indicates if gameData is complete
-     * @author Lalita Maraj
-     */
-    private boolean isComplete () {
-        return (this.has("name") && this.has("splashImage") && this.has("BGImage") &&
-                this.has("gold") && this.has("numberOfLives"));
-
-    }
 }

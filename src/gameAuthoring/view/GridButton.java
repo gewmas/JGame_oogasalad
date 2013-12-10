@@ -144,7 +144,7 @@ public class GridButton extends JButton {
             }
         }
         catch (IOException ex) {
-            System.out.println(StyleConstants.resourceBundle.getString("GridButtonImageNotFound"));
+            JOptionPane.showMessageDialog(null,StyleConstants.resourceBundle.getString("GridButtonImageNotFound"));
         }
     }
 
