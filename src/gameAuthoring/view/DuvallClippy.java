@@ -50,8 +50,6 @@ public class DuvallClippy extends JFrame implements Observer {
     @Override
     public void update (Observable arg0, Object arg1) {
         String displayKey = (String) arg1;
-        System.out.println("Clippy received update from GameAuthoringGUI");
-        System.out.println(myDisplayTips.get(displayKey));
         myDisplayString = myDisplayTips.get(displayKey);
         myDisplayBox.setText(myDisplayString);
     }

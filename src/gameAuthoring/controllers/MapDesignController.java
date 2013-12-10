@@ -31,7 +31,6 @@ public class MapDesignController extends DesignController {
     @Override
     public void update (Observable o, Object arg) {
         MapDesignInformation mapDesignInformation = (MapDesignInformation) arg;
-        System.out.println("MapDesignController received updates from MapDesignController");
         myGameData.setBackgroundImage(mapDesignInformation.getBackgroundImageKey());
         myGameData.addImage(mapDesignInformation.getBackgroundImageKey(),
                             mapDesignInformation.getBackgroundImage());

@@ -106,11 +106,11 @@ public class MenuBar extends JMenuBar {
                         Scanner s = new Scanner(INPUT_CHOOSER.getSelectedFile());
                         myParser = new Parser(s);
                         myGameAuthoringGUI.loadJSON(myParser);
-                        //myBasicInfoTab.loadJSON(myParser);
-                        //myMapDesignTab.loadJSON(myParser);
-                        //myEnemyDesignTab.loadJSON(myParser);
-                        //myTowerDesignTab.loadJSON(myParser);
-                        //myWaveDesignTab.loadJSON(myParser);
+                        myBasicInfoTab.loadJSON(myParser);
+                        myMapDesignTab.loadJSON(myParser);
+                        myEnemyDesignTab.loadJSON(myParser);
+                        myTowerDesignTab.loadJSON(myParser);
+                        myWaveDesignTab.loadJSON(myParser);
                         myTempBarrierDesignTab.loadJSON(myParser);
                       
                     }
