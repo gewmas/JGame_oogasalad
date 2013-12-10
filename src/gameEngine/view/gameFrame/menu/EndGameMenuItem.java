@@ -11,9 +11,9 @@ import javax.swing.AbstractAction;
  */
 @SuppressWarnings("serial")
 public class EndGameMenuItem extends AbstractAction {
-    private MenuAction menuActions;
+    private MenuActions menuActions;
 
-    public EndGameMenuItem (MenuAction menuActions) {
+    public EndGameMenuItem (MenuActions menuActions) {
 
         super(ViewConstants.resourceBundle.getString("EndGameFileMenu"));
 
@@ -22,7 +22,7 @@ public class EndGameMenuItem extends AbstractAction {
 
     @Override
     public void actionPerformed (ActionEvent e) {
-        menuActions.executeAction();
+        menuActions.endGame();
 
     }
 

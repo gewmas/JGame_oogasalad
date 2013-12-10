@@ -13,11 +13,15 @@ import gameEngine.view.gameFrame.GameFrame;
 import gameEngine.view.gameFrame.ItemPurchaser;
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.lang.reflect.*;
+import java.util.List;
 import jgame.JGPoint;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static org.hamcrest.CoreMatchers.*;
 
 /**
  * Tests the pipeline between the model and the view by initializing the game, checking the
@@ -58,6 +62,13 @@ public class TestGamePipeline {
         controller.newGame(new File(file.getAbsolutePath()+JSONURL));
     }
 
+    @After
+    public void tearDown () throws Exception {
+        view.endGame();        
+        view=null;
+        controller=null;
+        model=null;
+    }
 
 
 

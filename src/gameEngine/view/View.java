@@ -6,8 +6,7 @@ import gameAuthoring.MainPanel;
 import gameEngine.controller.Controller;
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.gameFrame.GameFrame;
-import gameEngine.view.gameFrame.menu.MenuAction;
-import gameEngine.view.gameFrame.menu.MenuActionFactory;
+import gameEngine.view.gameFrame.menu.MenuActions;
 import gameEngine.view.initialization.InitializationFrame;
 
 
@@ -17,20 +16,17 @@ import gameEngine.view.initialization.InitializationFrame;
  * This class serves as the interface to the controller as the front end.
  * No other front end elements are exposed to the rest of the game Engine.
  * 
- * 
- * Implements the MenuActionFactory interface to define the methods the
- * different menu items will call on
  * @author Lalita Maraj, Alex Zhu
  * 
  */
-public class View implements MenuActionFactory {
+public class View implements MenuActions {
     private GameFrame gameFrame;
     private InitializationFrame initializationFrame;
     private ControllerToViewInterface controller;
 
     public View (ControllerToViewInterface controller) {
         this.controller = controller;
-        this.gameFrame = new GameFrame(controller, this);
+        this.gameFrame = new GameFrame(controller,this);
         this.initializationFrame = new InitializationFrame(this);
 
     }
@@ -61,68 +57,32 @@ public class View implements MenuActionFactory {
         }
     }
 
+    @Override
     public void endGame () {
         gameFrame.endGame();
     }
 
-    private void selectNewGame () {
+    @Override
+    public void selectNewGame () {
         controller.startGame();
         gameFrame.endGame();
         gameFrame.quitGame();
         gameFrame.dispose();
-        gameFrame = new GameFrame(controller, this);
+        gameFrame = new GameFrame(controller,this);
         controller = new Controller();
         initializationFrame.showFrame();
     }
 
-    private void goToMainMenu () {
+    @Override
+    public void goToMainMenu () {
         controller.startGame();
         gameFrame.endGame();
         gameFrame.quitGame();
         gameFrame.dispose();
-        gameFrame = new GameFrame(controller, this);
-
+        gameFrame = new GameFrame(controller,this);
+        
         MainPanel panel = new MainPanel();
         panel.show();
-    }
-
-    @Override
-    public MenuAction createMenuAction (String menuAction) {
-        if (menuAction.equals(MenuActionFactory.END_GAME)) { return new MenuAction() {
-
-            @Override
-            public void executeAction () {
-                endGame();
-
-            }
-
-        }; }
-        if (menuAction.equals(MenuActionFactory.SELECT_NEW_GAME)) { return new MenuAction() {
-
-            @Override
-            public void executeAction () {
-                selectNewGame();
-
-            }
-
-        }; }
-        if (menuAction.equals(MenuActionFactory.MAIN_MENU)) { return new MenuAction() {
-
-            @Override
-            public void executeAction () {
-                goToMainMenu();
-
-            }
-
-        }; }
-        return new MenuAction() {
-
-            @Override
-            public void executeAction () {
-
-            }
-
-        };
     }
 
 }
