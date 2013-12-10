@@ -22,7 +22,11 @@ public class Cheat {
             if(i==0) {
                 this.code = cheatArgs[i];
             } else {
-                this.params.add(Integer.parseInt(cheatArgs[i]));
+                if (cheatArgs[i].matches("[0-9]+")) {
+                    this.params.add(Integer.parseInt(cheatArgs[i]));   
+                } else {
+                    this.params.add(0);
+                }
             }
         }
         this.model = model;

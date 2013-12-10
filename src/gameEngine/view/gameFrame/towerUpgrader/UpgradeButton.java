@@ -1,9 +1,9 @@
-package gameEngine.view.gameFrame.towerUpdrader;
+package gameEngine.view.gameFrame.towerUpgrader;
 
 import gameEngine.constant.GameEngineConstant;
+import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.tools.DisplayValue;
-
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,8 +12,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
-public class UpgradeButton extends TowerUpgraderButton {
+/**
+ * Allows the user to upgrade the selected tower
+ * @author alex
+ *
+ */
+public class UpgradeButton extends TowerOptionButton {
     private static final String NAME = "Upgrade";
     private static final String NORMAL_KEY = "black";
     private static final String UPGRADE_KEY = "red";
@@ -21,26 +25,26 @@ public class UpgradeButton extends TowerUpgraderButton {
     private static final int BUTTON_HEIGHT = 20;
     
     private static final String[] DISPLAY_NORMAL_COLORS = { NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
-                                                           NORMAL_KEY, NORMAL_KEY,
+                                                           NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
                                                            NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
                                                            NORMAL_KEY, NORMAL_KEY, NORMAL_KEY };
 
     private static final String[] DISPLAY_UPGRADED_COLORS = { NORMAL_KEY, UPGRADE_KEY, UPGRADE_KEY,
-                                                             NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
+                                                             NORMAL_KEY, NORMAL_KEY, NORMAL_KEY, NORMAL_KEY,
                                                              UPGRADE_KEY, UPGRADE_KEY, NORMAL_KEY,
                                                              NORMAL_KEY, NORMAL_KEY };
     private ItemOptionsDisplayer towerUpgrader;
     private Map<String, String> upgradedValuesToDisplay;
     private Map<String, String> normalValuesToDisplay;
-    private View view;
+    private ControllerToViewInterface controller;
     private int towerX, towerY;
     private Map<String, String> information;
     private boolean isActive;
 
-    public UpgradeButton (ItemOptionsDisplayer utility, View viewer) {
+    public UpgradeButton (ItemOptionsDisplayer utility, ControllerToViewInterface controller_in) {
         super(NAME);
         this.towerUpgrader = utility;
-        this.view = viewer;
+        this.controller = controller_in;
         normalValuesToDisplay = new LinkedHashMap<String, String>();
         upgradedValuesToDisplay = new LinkedHashMap<String, String>();
         
@@ -63,7 +67,7 @@ public class UpgradeButton extends TowerUpgraderButton {
             public void mouseClicked (MouseEvent e) {
             	updateValuesToDisplay();
                 if (isActive) {
-                    view.upgradeTower(towerX, towerY);
+                    controller.upgradeTower(towerX, towerY);
 
                     updateDisplayInformation(upgradedValuesToDisplay);
                 }
@@ -78,7 +82,7 @@ public class UpgradeButton extends TowerUpgraderButton {
     }
 
     protected void updateValuesToDisplay() {
-    	for (int i = 0; i < GameEngineConstant.UPGRADE_DISPLAY_KEYS().length; i++) {
+    	for (int i = 0; i < GameEngineConstant.NORMAL_DISPLAY_KEYS().length; i++) {
             normalValuesToDisplay.put(GameEngineConstant.NORMAL_DISPLAY_KEYS()[i], DISPLAY_NORMAL_COLORS[i]);
         }
         for (int i = 0; i < GameEngineConstant.UPGRADE_DISPLAY_KEYS().length; i++) {
@@ -88,7 +92,7 @@ public class UpgradeButton extends TowerUpgraderButton {
 
 	public void checkActive () {
 
-        int money = view.getGameInfo().getGold();
+        int money = controller.getGameInfo().getGold();
         isActive =
                 money >= Double
                         .parseDouble(information.get(GameEngineConstant.TOWER_UPGRADE_PRICE));

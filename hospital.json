@@ -378,7 +378,7 @@
                { "id": "space_background", "url": "space_background.jpg" },
                { "id": "woods_background", "url": "woods_background.png" },
                
-               { "id": "bullet", "url": "bullet0.png" },
+               { "id": "bullet", "url": "bullet_heartbeating.gif" },
                { "id": "barrier1", "url": "barrier1.png" },
                { "id": "barrier2", "url": "barrier2.png" },
       		
@@ -522,7 +522,7 @@
 	"image": "KidPatient",
 	"life": 15,
 	"speed": 0.5,
-   "skill": "",
+   "skill": "Poison",
    "Specialty" : 2,
    "damage":-1
 },
@@ -532,7 +532,7 @@
 	"image": "BoyPatient",
 	"life": 15,
 	"speed": 0.5,
-   	"skill": "Armour",
+   	"skill": "Poison",
    	"Specialty" : 1,
    	"damage":-1
 }
