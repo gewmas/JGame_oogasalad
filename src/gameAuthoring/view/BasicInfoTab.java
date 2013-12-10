@@ -197,6 +197,11 @@ public class BasicInfoTab extends Tab {
         myContentPanel.add(mySplashImageLabel);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see gameAuthoring.view.Tab#loadJSON(gameEngine.parser.Parser)
+     */
     public void loadJSON (Parser p) {
         try {
             myGameName.setText(p.getString(GameData.GAME_NAME_KEY));
@@ -309,7 +314,6 @@ public class BasicInfoTab extends Tab {
                     clearChanged();
                     mySplashImageLabel.setText(mySplashImage);
                 }
-
             }
         };
         return listener;

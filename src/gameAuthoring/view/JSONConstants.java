@@ -21,4 +21,5 @@ public final class JSONConstants {
     public static final String TOWER_STRING = "Tower";
     public static final String NAME_STRING = "Name";
     public static final String IMAGE_STRING_2 = "Image";
+    public static final String ENEMY_TYPE_STRING = "enemyType";
 }

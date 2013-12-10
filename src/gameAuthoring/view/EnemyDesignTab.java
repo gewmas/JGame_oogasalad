@@ -249,7 +249,6 @@ public class EnemyDesignTab extends Tab {
         myContentPanel.add(myAnimationScrollPane, ANIMATION_SCROLL_PANE_FORMATTING);
     }
 
-
     /**
      * Adds button for adding another sprite box to animation scroll pane
      */
@@ -262,7 +261,6 @@ public class EnemyDesignTab extends Tab {
                 .setToolTipText(StyleConstants.resourceBundle.getString("EnemySpriteTip"));
         myContentPanel.add(enemyImageChooser);
     }
-
 
     /**
      * Adds button that allows for clearing of all sprites uploaded so far for enemy
@@ -404,32 +402,32 @@ public class EnemyDesignTab extends Tab {
         return listener;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see gameAuthoring.view.Tab#loadJSON(gameEngine.parser.Parser)
+     */
     @Override
     public void loadJSON (Parser p) {
-        JSONObject resources = p.getJSONObject("resources");
-        JSONArray images = (JSONArray) resources.get("image");
-
+        JSONObject resources = p.getJSONObject(JSONConstants.RESOURCE_STRING);
+        JSONArray images = (JSONArray) resources.get(JSONConstants.IMAGE_STRING);
         Map<String, String> imageMap = new HashMap<String, String>();
         for (int i = 0; i < images.length(); i++) {
             JSONObject image = images.getJSONObject(i);
-            String id = image.getString("id");
-            String url = image.getString("url");
+            String id = image.getString(JSONConstants.ID_STRING);
+            String url = image.getString(JSONConstants.URL_STRING);
             imageMap.put(id, url);
         }
-        
-        JSONArray enemies = p.getJSONArray("enemyType");
-        
-        for (int i=0; i < enemies.length(); i++){
+        JSONArray enemies = p.getJSONArray(JSONConstants.ENEMY_TYPE_STRING);
+        for (int i = 0; i < enemies.length(); i++) {
             JSONObject enemy = enemies.getJSONObject(i);
-            String name = enemy.getString("id");
-            String imageKey = enemy.getString("image");
+            String name = enemy.getString(JSONConstants.ID_STRING);
+            String imageKey = enemy.getString(JSONConstants.IMAGE_STRING);
             File imageFile = new File(GameAuthoringGUI.FILE_PREFIX + imageMap.get(imageKey));
             setChanged();
             notifyObservers(enemy);
             clearChanged();
             addEnemy(imageFile, name);
         }
-
     }
-
 }

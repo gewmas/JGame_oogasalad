@@ -169,6 +169,11 @@ public class TowerDesignTab extends Tab {
         myCreatedTowersPanel.add(towerIcon);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see gameAuthoring.view.Tab#loadJSON(gameEngine.parser.Parser)
+     */
     @Override
     public void loadJSON (Parser p) {
         JSONArray towers = p.getJSONArray(JSONConstants.TOWER_STRING);
