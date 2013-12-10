@@ -73,7 +73,7 @@ public class GameFrame extends JFrame implements GameInitializable {
             public void submit (String cheat) {
                 controller.activateCheat(cheat);
             }
-        });
+        },ViewConstants.resourceBundle.getString("CheatFrame"));
         return new CheatFrame(inputFrame);
     }
 

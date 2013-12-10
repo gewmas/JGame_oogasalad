@@ -32,11 +32,11 @@ public class InputPanel extends JPanel {
     /**
      * @param inputSender tool that sends text input to necessary object
      */
-    public InputPanel (final InputSender inputSender) {
+    public InputPanel (final InputSender inputSender, String title) {
         super();
         MigLayout layout = new MigLayout(LAYOUT_WRAP_SETTING);
         this.setLayout(layout);
-        setBorder();
+        setBorder(title);
         JButton submit = new JButton("Submit");
         final JTextArea input = new JTextArea();
         input.setPreferredSize(new Dimension(TEXTBOX_WIDTH, TEXTBOX_HEIGHT));
@@ -53,9 +53,9 @@ public class InputPanel extends JPanel {
         });
     }
 
-    private void setBorder () {
+    private void setBorder (String title) {
         Border valuePanelBorder =
-                BorderFactory.createTitledBorder(ViewConstants.resourceBundle.getString("CheatFrame"));
+                BorderFactory.createTitledBorder(title);
         setBorder(valuePanelBorder);
     }
 }
