@@ -3,6 +3,7 @@ package gameAuthoring.controllers;
 import gameAuthoring.JSONObjects.AnimationJSONObject;
 import gameAuthoring.JSONObjects.EnemyJSONObject;
 import gameAuthoring.model.GameData;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.util.Observable;
 
 
@@ -38,6 +39,11 @@ public class EnemyDesignController extends DesignController {
         if (arg instanceof AnimationJSONObject) {
             AnimationJSONObject animation = (AnimationJSONObject) arg;
             myGameData.addAnimation(animation);
+        }
+        
+        else{
+            JSONObject enemy = (JSONObject) arg;
+            myGameData.addEnemy(enemy);
         }
     }
 

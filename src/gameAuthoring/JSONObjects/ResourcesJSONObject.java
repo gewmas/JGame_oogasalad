@@ -73,5 +73,11 @@ public class ResourcesJSONObject extends JSONObject {
     public void addAnimation(AnimationJSONObject animation){
         myAnimations.put(animation);
     }
+    
+    public void addAnimation(JSONObject animation){
+        myAnimations.put(animation);
+    }
+    
+    
 
 }

@@ -3,6 +3,8 @@ package gameAuthoring.view;
 import gameAuthoring.JSONObjects.AnimationJSONObject;
 import gameAuthoring.JSONObjects.EnemyJSONObject;
 import gameEngine.parser.Parser;
+import gameEngine.parser.JSONLibrary.JSONArray;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -10,7 +12,9 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -402,7 +406,29 @@ public class EnemyDesignTab extends Tab {
 
     @Override
     public void loadJSON (Parser p) {
-        // TODO Auto-generated method stub
+        JSONObject resources = p.getJSONObject("resources");
+        JSONArray images = (JSONArray) resources.get("image");
+
+        Map<String, String> imageMap = new HashMap<String, String>();
+        for (int i = 0; i < images.length(); i++) {
+            JSONObject image = images.getJSONObject(i);
+            String id = image.getString("id");
+            String url = image.getString("url");
+            imageMap.put(id, url);
+        }
+        
+        JSONArray enemies = p.getJSONArray("enemyType");
+        
+        for (int i=0; i < enemies.length(); i++){
+            JSONObject enemy = enemies.getJSONObject(i);
+            String name = enemy.getString("id");
+            String imageKey = enemy.getString("image");
+            File imageFile = new File(GameAuthoringGUI.FILE_PREFIX + imageMap.get(imageKey));
+            setChanged();
+            notifyObservers(enemy);
+            clearChanged();
+            addEnemy(imageFile, name);
+        }
 
     }
 

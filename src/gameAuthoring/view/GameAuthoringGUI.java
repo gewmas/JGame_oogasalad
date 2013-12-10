@@ -279,7 +279,13 @@ public class GameAuthoringGUI extends Observable {
             String url = sound.getString("url");
             myUserSoundsTab.addAudioLabel(new File(FILE_PREFIX + url));
         }
+        
+        JSONArray animations = (JSONArray) resources.get("animation");
 
+        for (int i = 0; i < animations.length(); i++) {
+           JSONObject animation = animations.getJSONObject(i);
+           myGameData.addAnimation(animation);
+        }
     }
 
 }

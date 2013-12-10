@@ -104,10 +104,10 @@ public class MenuBar extends JMenuBar {
                         myParser = new Parser(s);
                         myGameAuthoringGUI.loadJSON(myParser);
                         //myBasicInfoTab.loadJSON(myParser);
-                       // myMapDesignTab.loadJSON(myParser);
+                        //myMapDesignTab.loadJSON(myParser);
                         //myEnemyDesignTab.loadJSON(myParser);
-                        myTowerDesignTab.loadJSON(myParser);
-                        //myWaveDesignTab.loadJSON(myParser);
+                        //myTowerDesignTab.loadJSON(myParser);
+                        myWaveDesignTab.loadJSON(myParser);
                     }
                     catch (FileNotFoundException e1) {
                         JOptionPane.showMessageDialog(null,

@@ -172,6 +172,11 @@ public class GameData extends JSONObject {
         myEnemyList.put(enemy);
     }
 
+    public void addEnemy (JSONObject enemy) {
+        myEnemyList.put(enemy);
+    }
+    
+    
     /**
      * Adds map
      * 
@@ -238,6 +243,10 @@ public class GameData extends JSONObject {
      * @param animation Animation to be added
      */
     public void addAnimation (AnimationJSONObject animation) {
+        myResources.addAnimation(animation);
+    }
+    
+    public void addAnimation(JSONObject animation){
         myResources.addAnimation(animation);
     }
 

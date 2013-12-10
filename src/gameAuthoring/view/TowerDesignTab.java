@@ -33,9 +33,11 @@ import net.miginfocom.swing.MigLayout;
 /**
  * @author Rebecca Lai & Susan Zhang
  *         TowerDesignTab allows for users to design different types of Towers for a Tower Defense
- *         game. Four types of towers are allowed to be defined: DefaultTower, MultipleShootingTower, 
- *         BoostTower, and MagicTower. Users are able to define parameters such as tower name, the rate 
- *         at which a tower fires, how much a tower costs, etc., as well any special tower specific 
+ *         game. Four types of towers are allowed to be defined: DefaultTower,
+ *         MultipleShootingTower,
+ *         BoostTower, and MagicTower. Users are able to define parameters such as tower name, the
+ *         rate
+ *         at which a tower fires, how much a tower costs, etc., as well any special tower specific
  *         attributes.
  * 
  */
@@ -77,7 +79,7 @@ public class TowerDesignTab extends Tab {
     JLabel type, myNameLabel, myDamageLabel, myAttackSpeedLabel, myAttackModeLabel, myRangeLabel,
             myCostLabel, myRecyclePriceLabel, myDescriptionLabel,
             myTowerImageChooser;
-    
+
     /**
      * Creates a new TowerDesignTab
      */
@@ -99,7 +101,7 @@ public class TowerDesignTab extends Tab {
         initializeDescriptionField();
         initializeTowerImageChooser();
         initializeTowerCreationButton();
-        initializeContentPanel(); 
+        initializeContentPanel();
         myMainPanel.add(myContentPanel);
         initializeCreatedTowersPanel();
         myMainPanel.add(myCreatedTowers);
@@ -146,7 +148,7 @@ public class TowerDesignTab extends Tab {
     }
 
     /**
-     * Adds tower to myCreatedTowersPanel 
+     * Adds tower to myCreatedTowersPanel
      * 
      * @param imgSource Tower image
      * @param towerName Tower name
@@ -170,7 +172,7 @@ public class TowerDesignTab extends Tab {
     @Override
     public void loadJSON (Parser p) {
         JSONArray towers = p.getJSONArray("Tower");
-        
+
         JSONObject resources = p.getJSONObject("resources");
         JSONArray images = (JSONArray) resources.get("image");
 
@@ -181,23 +183,17 @@ public class TowerDesignTab extends Tab {
             String url = image.getString("url");
             imageMap.put(id, url);
         }
-        
-        for (int i = 0; i < towers.length(); i++){
+
+        for (int i = 0; i < towers.length(); i++) {
             JSONObject tower = towers.getJSONObject(i);
-            String name = tower.getString("Name");            
+            String name = tower.getString("Name");
             String imageKey = tower.getString("Image");
-            
             File imageFile = new File(GameAuthoringGUI.FILE_PREFIX + imageMap.get(imageKey));
-                    
             setChanged();
             notifyObservers(tower);
             clearChanged();
-            addTower(imageFile ,name);
+            addTower(imageFile, name);
         }
-        
-        
-        
-        
 
     }
 
@@ -523,9 +519,9 @@ public class TowerDesignTab extends Tab {
         myAttackModeOptions.setFont(StyleConstants.DEFAULT_BODY_FONT);
     }
 
-   /**
-    * Adds range label and field
-    */
+    /**
+     * Adds range label and field
+     */
     private void initializeRangeField () {
         myRangeLabel = new JLabel(StyleConstants.resourceBundle
                 .getString("TowerRange"));
