@@ -5,7 +5,13 @@ import gameEngine.model.tower.MultipleShootingTower;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
-
+/**
+ * 
+ * MultipleShootingTowerFactory creates MultipleShootingTower
+ * 
+ * @author Yuhua
+ *
+ */
 public class MultipleShootingTowerFactory extends DefaultTowerFactory {
     int attackAmount;
 

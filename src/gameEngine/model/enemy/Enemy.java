@@ -40,12 +40,11 @@ public class Enemy extends JGObject implements IEMagicable {
 
     double pathX;
     double pathY;
-
+    
     // wenxin add this attribution for magic.
     int currentMagics = 0;
 
-    final double originalLife;
-    final double orignalSpeed;
+    private boolean isInvisiable=false;
 
     public Enemy (
                   double gold,
@@ -59,7 +58,7 @@ public class Enemy extends JGObject implements IEMagicable {
                   Model model,int damage) {
         super(id, unique_id, model.getPathList().get(0).getX(), model.getPathList().get(0).getY(),
               collisionid, image);
-
+        
         this.model = model;
         this.id = id;
         this.image = image;
@@ -69,9 +68,7 @@ public class Enemy extends JGObject implements IEMagicable {
         this.mySpecialty = speciaty;
         this.gold = gold;
         this.life = life;
-        this.originalLife = life;
         this.speed = speed;
-        this.orignalSpeed = speed;
         this.path = model.getPathList();
         this.pathIndex = 0;
         this.damage=damage;
@@ -305,6 +302,14 @@ public class Enemy extends JGObject implements IEMagicable {
     public void setSkill (String skill) {
         SkillFactory sf = new SkillFactory(this.eng);
         mySkill = sf.create(skill);
+    }
+
+    public boolean isInvisiable () {
+        return isInvisiable;
+    }
+    
+    public void setInvisiable(boolean result){
+        isInvisiable=result;
     }
 
 }

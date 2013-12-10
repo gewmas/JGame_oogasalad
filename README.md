@@ -1,13 +1,14 @@
-oogasalad
+﻿oogasalad
 =========
 
 **Team Members:**
 Fabio Berger, Jiaran Hao, Rebecca Lai, Yuhua Mai, Lalita Maraj, Harris Osserman, Wenxin Shi, Susan Zhang, Alex Zhu
 
 **Start Date:** Monday, October 28, 2013
+
 **End Date:** Monday December 9th, 2013
 
-**Hours worked:** Too many, 30h+/person 
+**Hours worked:** Too many, 60h+/person 
 
 **Project Repo:** https://github.com/duke-compsci308-fall2013/oogasalad_FooBar
 
@@ -59,18 +60,18 @@ The timers for each wave of enemies are done outside of jgame, so changing the f
 
 **Game Authoring:**
 
-- Rebecca Lai - Worked with Susan to create the GameAuthoringGUI. Primarily worked on 
-- Susan Zhang
+- Rebecca Lai - Worked with Susan to create the GameAuthoringGUI. Worked individually on user library and the "click-and-drag" mechanism of images and audio. 
+- Susan Zhang - Worked with Rebecca to create the GameAuthoringGUI. Worked individually on writing game information to JSON. 
 
 **Engine Front End:**
 
-- Lalita Maraj
+- Lalita Maraj - Built store, Information Display Panel, cheat integration with backend and established the way the different front end components interact with each other. 
 - Alex Zhu - Built jgame interface, tower status, upgrade and sell, integration with backend, frame rate slider
 
 **Back End:**
 
 - Fabio Berger - built enemy core functionality, interfacing with tile class , enemy factory, cheat code handler and contributed to JSON parser, game end/begin mechanics and game graphics
-- Jiaran Hao
-- Yuhua Mai
+- Jiaran Hao - Build the Waves to handle generating enemies in game. Detector to help with other team members to make detection. Resources to register images,audio,animation from JSON. Skill lets Enemy to have different behaviors, eg casting magic. Effects and WordEffects to improve the graphics of game. Also, rewrites JGame to support Blending.    
+- Yuhua Mai - Built Tower(DefaultTower, MultipleShootingTower, MagicTower, BoostTower), Bullet class. Implement Towerwarehouse, TowerFactory to create Tower. Update PurchaseInfo. Figure out pipeline of Model.
 - Harris Osserman - Built JSON parser, tile initialization/path creation (with integration with other model objects and front end), temporary barriers (with refactoring of TowerInfo to PurchaseInfo class), and permanent barriers.  
-- Wenxin Shi -Build the magic for both of enemy and tower. Cooperate with creating the skill and the animation for the game. Refactor the code to let the enemy and tower place in the right position.
+- Wenxin Shi -Build the magic for both of enemy and tower. Cooperate with creating the skill and the animation for the game. Refactor the code to let the enemy and tower place in the right position. Creates fancy pictures using PS.

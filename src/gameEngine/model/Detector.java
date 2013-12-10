@@ -27,11 +27,8 @@ import jgame.impl.JGEngineInterface;
  * 
  * @author Jiaran
  * 
- */
-/**
- * @author sony
  *
- * @param <T>
+ * @param <T> type of JGObject one wants to detect
  */
 public class Detector<T extends JGObject> {
     private JGEngineInterface myEng;

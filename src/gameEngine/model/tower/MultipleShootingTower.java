@@ -4,6 +4,12 @@ import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 
+/**
+ * MultipleShootingTower can shoot multiple bullets at one time, depending on the attack amount
+ * 
+ * @author Yuhua
+ *
+ */
 public class MultipleShootingTower extends DefaultTower {
 
     public MultipleShootingTower (double damage,

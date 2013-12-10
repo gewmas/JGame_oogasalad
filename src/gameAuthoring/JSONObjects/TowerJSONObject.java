@@ -16,7 +16,7 @@ public class TowerJSONObject extends JSONObject {
      * 
      * @param type Type of tower
      * @param name Name of tower
-     * @param imagePath Name of tower image
+     * @param imageID Name of tower image
      * @param damage Damage each tower bullet inflicts
      * @param attackSpeed Tower attack speed
      * @param attackMode Tower attack mode
@@ -27,7 +27,7 @@ public class TowerJSONObject extends JSONObject {
      */
     public TowerJSONObject (String type,
                             String name,
-                            String imagePath,
+                            String imageID,
                             int damage,
                             double attackSpeed,
                             int attackMode,
@@ -38,7 +38,7 @@ public class TowerJSONObject extends JSONObject {
 
         this.put("Type", type);
         this.put("Name", name);
-        this.put("Image", imagePath);
+        this.put("Image", imageID);
         this.put("Damage", damage);
         this.put("Attack Speed", attackSpeed);
         this.put("Attack Mode", attackMode);
@@ -48,10 +48,25 @@ public class TowerJSONObject extends JSONObject {
         this.put("Description", description);
     }
 
-    //MultipleShootingTower
+
+    /**
+     * Constructor for Multiple Shooting Tower
+     * 
+     * @param type Type of tower
+     * @param name Name of tower
+     * @param imageID ID of tower image
+     * @param damage Damage each tower bullet inflicts
+     * @param attackSpeed Tower attack speed
+     * @param attackMode Tower attack mode
+     * @param attackAmount Tower attack amount
+     * @param range Tower attack range
+     * @param cost Cost in gold of purchasing tower
+     * @param recyclePrice Gold gained by selling tower
+     * @param description Brief description of tower behavior
+     */
     public TowerJSONObject (String type,
                             String name,
-                            String imagePath,
+                            String imageID,
                             int damage,
                             double attackSpeed,
                             int attackMode,
@@ -63,7 +78,7 @@ public class TowerJSONObject extends JSONObject {
 
         this.put("Type", type);
         this.put("Name", name);
-        this.put("Image", imagePath);
+        this.put("Image", imageID);
         this.put("Damage", damage);
         this.put("Attack Speed", attackSpeed);
         this.put("Attack Mode", attackMode);
@@ -74,13 +89,26 @@ public class TowerJSONObject extends JSONObject {
         this.put("Description", description);
     }
     
-    //BoostTower
+    /**
+     * Constructor for Boost Tower
+     * 
+     * @param type Type of tower
+     * @param name Name of tower
+     * @param imageID ID of tower image
+     * @param damage Damage each tower bullet inflicts
+     * @param attackSpeed Tower attack speed
+     * @param attackAmount Tower attack amount
+     * @param range Tower attack range
+     * @param cost Cost in gold of purchasing tower
+     * @param recyclePrice Gold gained by selling tower
+     * @param description Brief description of tower behavior
+     * @param boostFactor Boost factor
+     */
     public TowerJSONObject (String type,
                             String name,
                             String imagePath,
                             int damage,
                             double attackSpeed,
-                            //int attackMode, //Not in JSON
                             int range,
                             int cost,
                             int recyclePrice,
@@ -92,7 +120,6 @@ public class TowerJSONObject extends JSONObject {
         this.put("Image", imagePath);
         this.put("Damage", damage);
         this.put("Attack Speed", attackSpeed);
-        //this.put("attackMode", attackMode);
         this.put("Range", range);
         this.put("Cost", cost);
         this.put("Sell Price", recyclePrice);
@@ -100,7 +127,22 @@ public class TowerJSONObject extends JSONObject {
         this.put("Boost Factor", boostFactor);
     }
     
-    //MagicTower
+    /**
+     * Constructor for Magic Tower
+     * 
+     * @param type Type of tower
+     * @param name Name of tower
+     * @param imageID ID of tower image
+     * @param damage Damage each tower bullet inflicts
+     * @param attackSpeed Tower attack speed
+     * @param attackMode Tower attack mode
+     * @param attackAmount Tower attack amount
+     * @param range Tower attack range
+     * @param cost Cost in gold of purchasing tower
+     * @param recyclePrice Gold gained by selling tower
+     * @param description Brief description of tower behavior
+     * @param magicFacotor Magic factor
+     */
     public TowerJSONObject (String type,
                             String name,
                             String imagePath,

@@ -2,7 +2,7 @@ package gameEngine.view;
 
 import java.io.File;
 import javax.swing.JOptionPane;
-import gameAuthoring.MainPanel;
+import gameAuthoring.view.MainPanel;
 import gameEngine.controller.Controller;
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.gameFrame.GameFrame;

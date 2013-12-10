@@ -10,7 +10,8 @@ import gameEngine.parser.JSONLibrary.JSONObject;
 /**
  * 
  * @author Yuhua Fabio
- *         TowerFactory can create different types of Tower when called by the create() method
+ *
+ * DefaultTowerFactory creates DefaultTower
  * 
  */
 
