@@ -1,29 +1,34 @@
-package gameEngine.view.gameFrame.towerUpdrader;
+package gameEngine.view.gameFrame.towerUpgrader;
 
+import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.View;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
 
-
-public class SellButton extends TowerUpgraderButton {
+/**
+ * Allows the user to sell the corresponding tower
+ * @author alex zhu
+ *
+ */
+public class SellButton extends TowerOptionButton {
     private static final String NAME = "Sell Tower";
     private static final int BUTTON_WIDTH = 180;
     private static final int BUTTON_HEIGHT = 20;
 
-    private View view;
+    private ControllerToViewInterface controller;
     private int towerX, towerY;
     private ItemOptionsDisplayer towerUpgrader;
 
-    public SellButton (ItemOptionsDisplayer utility, View viewer) {
+    public SellButton (ItemOptionsDisplayer utility, ControllerToViewInterface controller_in) {
         super(NAME);
-        this.view = viewer;
+        this.controller = controller_in;
         this.towerUpgrader = utility;
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked (MouseEvent e) {
-                view.sellTower(towerX, towerY);
+                controller.sellTower(towerX, towerY);
                 towerUpgrader.clearDisplay();
             }
         });

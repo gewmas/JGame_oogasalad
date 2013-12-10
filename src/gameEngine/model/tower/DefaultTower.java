@@ -39,6 +39,7 @@ public class DefaultTower extends Tower {
      * 2 - shoot weakest enemy with least life
      * 3 - shoot strongest enemy with most life
      */
+    private static final String[] attackModeDescripition = {"Closest", "Furthest", "Weakest", "Strongest"};
     int attackMode;
     /**
      * Specialty is a special skill for current Tower.
@@ -92,7 +93,7 @@ public class DefaultTower extends Tower {
 
     public void addDescription () {
         super.addDescription();
-        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_MODE, String.valueOf(attackMode));
+        purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_MODE, attackModeDescripition[attackMode]);
         purchaseInfo.addToMap(GameEngineConstant.TOWER_DAMAGE, df.format(Math.abs(damage)));
         purchaseInfo.addToMap(GameEngineConstant.TOWER_ATTACK_SPEED, df.format(attackSpeed));
 
@@ -227,5 +228,10 @@ public class DefaultTower extends Tower {
     
     public int getAttackMode () {
         return attackMode;
+    }
+    
+    public void setAttackMode (int mode) {
+    	this.attackMode = mode;
+    	addDescription();
     }
 }

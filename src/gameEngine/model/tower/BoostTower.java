@@ -96,6 +96,11 @@ public class BoostTower extends Tower{
         boostFactor /= factor;
         addDescription();
     }
+    
+    public void setAttackMode (int mode) {
+    	//No attackMode for BoostTower, do nothing
+    	return;
+    }
 
     
 }

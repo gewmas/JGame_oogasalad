@@ -19,7 +19,7 @@ public class CheatParser {
             return new AddGoldCheat(cheat, model);
         } else if(code.equals("add_lives")  || code.equals(customLivesCheat())) {
             return new AddLivesCheat(cheat, model);
-        } else if(code.equals("kill_all")) {
+        } else if(code.equals("clear_all")) {
             return new ClearAllCheat(cheat, model);
         } else if(code.equals("win_game")) {
             return new WinGameCheat(cheat, model);

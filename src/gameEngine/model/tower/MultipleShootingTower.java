@@ -65,5 +65,6 @@ public class MultipleShootingTower extends DefaultTower {
         super.downgrade(factor);
         addDescription();
     }
+    
 
 }
