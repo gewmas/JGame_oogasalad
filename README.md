@@ -65,7 +65,7 @@ The timers for each wave of enemies are done outside of jgame, so changing the f
 
 **Engine Front End:**
 
-- Lalita Maraj
+- Lalita Maraj - Built store, Information Display Panel, cheat integration with backend and established the way the different front end components interact with each other. 
 - Alex Zhu - Built jgame interface, tower status, upgrade and sell, integration with backend, frame rate slider
 
 **Back End:**
