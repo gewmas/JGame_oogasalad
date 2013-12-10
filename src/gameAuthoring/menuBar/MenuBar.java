@@ -5,6 +5,7 @@ import gameAuthoring.view.BasicInfoTab;
 import gameAuthoring.view.DuvallClippy;
 import gameAuthoring.view.GameAuthoringGUI;
 import gameAuthoring.view.MapDesignTab;
+import gameAuthoring.view.StyleConstants;
 import gameAuthoring.view.WaveDesignTab;
 import gameEngine.parser.Parser;
 import java.awt.event.ActionEvent;
@@ -17,6 +18,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 
 
+/**
+ * @author Rebecca Lai & Susan Zhang
+ *         MenuBar is the menu bar used in GameAuthoringGUI. It allows the user to save a game or
+ *         load settings from an existing game.
+ * 
+ */
 public class MenuBar extends JMenuBar {
     private GameData myGameData;
     private BasicInfoTab myBasicInfoTab;
@@ -28,6 +35,15 @@ public class MenuBar extends JMenuBar {
     private Parser myParser;
     private GameAuthoringGUI myGameAuthoringGUI;
 
+    /**
+     * Creates new MenuBar
+     * 
+     * @param gameAuthoringGUI is GameAuthoringGUI that displays MenuBar
+     * @param gameData is GameData to which information is written
+     * @param basicInfoTab is BasicInfoTab that will be re-created when user selects "Load" option
+     * @param mapDesignTab is MapDesignTab that will be re-created when user selects "Load" option
+     * @param waveDesignTab is WaveDesignTab that will be re-created when user selects "Load" option
+     */
     public MenuBar (GameAuthoringGUI gameAuthoringGUI,
                     GameData gameData,
                     BasicInfoTab basicInfoTab,
@@ -42,9 +58,14 @@ public class MenuBar extends JMenuBar {
         myWaveDesignTab = waveDesignTab;
     }
 
+    /**
+     * Display option of menu bar
+     * 
+     * @return JMenu to be displayed in GameAuthoringGUI
+     */
     private JMenu showMenu () {
-        JMenu menu = new JMenu("Show");
-        menu.add(new AbstractAction("Clippy") {
+        JMenu menu = new JMenu(StyleConstants.resourceBundle.getString("Show"));
+        menu.add(new AbstractAction(StyleConstants.resourceBundle.getString("Clippy")) {
             public void actionPerformed (ActionEvent e) {
                 DuvallClippy duvall = new DuvallClippy();
                 myGameAuthoringGUI.addObserver(duvall);
@@ -53,16 +74,21 @@ public class MenuBar extends JMenuBar {
         return menu;
     }
 
+    /**
+     * Show option of menu bar
+     * 
+     * @return JMenu to be displayed in GameAuthoringGUI
+     */
     private JMenu fileMenu () {
-        JMenu menu = new JMenu("File");
-        menu.add(new AbstractAction("Save") {
+        JMenu menu = new JMenu(StyleConstants.resourceBundle.getString("File"));
+        menu.add(new AbstractAction(StyleConstants.resourceBundle.getString("Save")) {
 
             @Override
             public void actionPerformed (ActionEvent e) {
                 myGameData.writeToFile();
             }
         });
-        menu.add(new AbstractAction("Load") {
+        menu.add(new AbstractAction(StyleConstants.resourceBundle.getString("Load")) {
             @Override
             public void actionPerformed (ActionEvent e) {
                 int loadObject = INPUT_CHOOSER.showOpenDialog(null);
@@ -84,7 +110,7 @@ public class MenuBar extends JMenuBar {
                 }
             }
         });
-  
+
         return menu;
     }
 
