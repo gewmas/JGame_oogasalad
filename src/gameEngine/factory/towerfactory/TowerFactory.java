@@ -5,7 +5,13 @@ import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
-
+/**
+ * 
+ * @author Yuhua Fabio
+ *
+ * TowerFactory can create different types of Tower when called by the create() method
+ * 
+ */
 public abstract class TowerFactory {
 
     protected String type;

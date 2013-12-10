@@ -12,6 +12,13 @@ import java.util.LinkedList;
 import java.util.Map;
 
 
+/**
+ * 
+ * @author Jiaran
+ * 
+ * Similar to tower warehouse. Using to create all types of enemy using enemy id.
+ * 
+ */
 public class EnemyWarehouse extends Warehouse {
 
     private JSONArray jsonArray;
