@@ -378,7 +378,7 @@
                { "id": "space_background", "url": "space_background.jpg" },
                { "id": "woods_background", "url": "woods_background.png" },
                
-               { "id": "bullet", "url": "bullet0.png" },
+               { "id": "bullet", "url": "bullet_heartbeating.gif" },
                { "id": "barrier1", "url": "barrier1.png" },
                { "id": "barrier2", "url": "barrier2.png" },
       		
