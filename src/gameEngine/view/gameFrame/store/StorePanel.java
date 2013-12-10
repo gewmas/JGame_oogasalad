@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.tools.store;
+package gameEngine.view.gameFrame.store;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameInitializable;
 import gameEngine.view.gameFrame.GameUpdatable;
 import gameEngine.view.gameFrame.ItemPurchaser;

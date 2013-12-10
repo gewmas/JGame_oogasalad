@@ -15,9 +15,9 @@ public class Menu extends JMenuBar {
     public Menu (MenuActions menuOptions) {
 
         JMenu menuitem = new JMenu(ViewConstants.resourceBundle.getString("File"));
-        menuitem.add(new SelectNewGameItem(menuOptions));
-        menuitem.add(new EndGameMenuItem(menuOptions));
-        menuitem.add(new ReturnToMainMenuItem(menuOptions));
+        menuitem.add(new SelectNewGameItem(menuOptions,ViewConstants.resourceBundle.getString("NewGameFileMenu")));
+        menuitem.add(new EndGameMenuItem(menuOptions,ViewConstants.resourceBundle.getString("EndGameFileMenu")));
+        menuitem.add(new ReturnToMainMenuItem(menuOptions,ViewConstants.resourceBundle.getString("ReturnToMainMenu")));
         add(menuitem);
 
     }

@@ -2,8 +2,8 @@ package gameEngine.test;
 
 import static org.junit.Assert.*;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.gameFrame.tools.store.StoreButtonAction;
-import gameEngine.view.gameFrame.tools.store.StoreItemButton;
+import gameEngine.view.gameFrame.store.StoreButtonAction;
+import gameEngine.view.gameFrame.store.StoreItemButton;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

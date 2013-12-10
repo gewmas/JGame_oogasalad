@@ -15,6 +15,7 @@ import gameEngine.view.View;
  *         to start a new game
  */
 
+@SuppressWarnings("serial")
 public class InitializationPanel extends JPanel {
 
     private static final String SELECTOR_BUTTOM_ALIGNMENT = "align right";
