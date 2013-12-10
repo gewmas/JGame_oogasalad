@@ -10,8 +10,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
-
-public class AttackModeButton extends TowerUpgraderButton {
+/**
+ * Allows the user to set the attack mode of the associated tower
+ * @author alex zhu
+ *
+ */
+public class AttackModeButton extends TowerOptionButton {
     private static final String NAME = "Change Attack Mode";
     private static final String DIALOG="Please select an attack mode:";
     private static final String[] ATTACK_MODES={"1: Closest", "2: Farthest", "3: Least Life", "4: Most Life"};
