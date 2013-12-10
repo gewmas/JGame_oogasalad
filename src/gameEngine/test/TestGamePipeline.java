@@ -101,8 +101,8 @@ public class TestGamePipeline {
 
             //Test purchasing a tower
             PurchaseInfo defaultInfo=new PurchaseInfo("DefaultTower", "DefaultTower1", "tower1","",50);
-            itemPurchaser.placeTower(defaultInfo);
-            boolean bought=itemPurchaser.checkAndPlaceTower(new JGPoint(100,73));
+            itemPurchaser.selectPurchaseTower(defaultInfo);
+            boolean bought=itemPurchaser.purchaseTower(new JGPoint(100,73));
             assertEquals(bought,true);
 
             //Wait for jgame to process the new object

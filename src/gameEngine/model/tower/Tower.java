@@ -13,7 +13,8 @@ import jgame.JGRectangle;
 /**
  * @author Yuhua, wenxin shi for magic interface implementation
  * 
- * Tower will shoot the Enemy within shooting range with Bullet
+ * Tower serves as a base class for subTower with shared properties
+ * 
  */
 
 public abstract class Tower extends JGObject implements ITMagicable {

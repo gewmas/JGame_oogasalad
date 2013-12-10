@@ -1,6 +1,13 @@
 {
    "resources": {
-      "animation": [],
+      "animation": [{
+         "id": "enemy1",
+         "sheet": [
+            {"id": "5"},
+            {"id": "6"},
+            {"id": "7"}
+         ]
+      }],
       "audio": [{
          "id": "1",
          "url": "laser.wav"
@@ -53,23 +60,190 @@
          {
             "id": "bullet",
             "url": "barrier1.png"
+         },
+         {
+            "id": "woods_background",
+            "url": "woods_background.png"
          }
       ]
    },
-   "temporaryBarrierType": [],
-   "bgMusic": "1",
-   "enemyType": [],
+   "temporaryBarrierType": [{
+      "id": "Water",
+      "expire": 100,
+      "description": "Woop",
+      "damage": 100,
+      "image": "9",
+      "cost": 150
+   }],
+   "enemyType": [
+      {
+         "id": "D",
+         "life": 1,
+         "skill": "Armour",
+         "speed": 0.5,
+         "damage": 1,
+         "image": "enemy1",
+         "gold": 100
+      },
+      {
+         "id": "Duvall",
+         "life": 2,
+         "skill": "Armour",
+         "speed": 0.4,
+         "damage": 1,
+         "image": "8",
+         "gold": 100
+      }
+   ],
    "numberOfLives": 100,
+   "BGImage": "woods_background",
    "goldName": "Gold",
-   "Tower": [],
+   "BGAudio": "1",
+   "Tower": [
+      {
+         "Name": "Default",
+         "Cost": 100,
+         "Damage": 50,
+         "Range": 100,
+         "Description": "towerr",
+         "Sell Price": 50,
+         "Type": "DefaultTower",
+         "Image": "3",
+         "Attack Speed": 2,
+         "Attack Mode": 0
+      },
+      {
+         "Name": "M",
+         "Cost": 100,
+         "Damage": 100,
+         "Range": 150,
+         "Description": "mm",
+         "Sell Price": 50,
+         "Type": "MagicTower",
+         "Image": "4",
+         "Attack Speed": 0.2,
+         "Magic": ["FrozeMagic"],
+         "Magic Factor": 2.5,
+         "Attack Mode": 0
+      }
+   ],
    "name": "dd",
-   "livesName": "Lives",
-   "wave": [],
    "map": {
       "Barriers": [],
       "pathImage": "path.png",
-      "Path": []
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 0,
+            "x": 1
+         },
+         {
+            "y": 0,
+            "x": 2
+         },
+         {
+            "y": 0,
+            "x": 3
+         },
+         {
+            "y": 0,
+            "x": 4
+         },
+         {
+            "y": 0,
+            "x": 5
+         },
+         {
+            "y": 0,
+            "x": 6
+         },
+         {
+            "y": 0,
+            "x": 7
+         },
+         {
+            "y": 1,
+            "x": 7
+         },
+         {
+            "y": 2,
+            "x": 7
+         },
+         {
+            "y": 3,
+            "x": 7
+         },
+         {
+            "y": 4,
+            "x": 7
+         },
+         {
+            "y": 4,
+            "x": 8
+         },
+         {
+            "y": 4,
+            "x": 9
+         },
+         {
+            "y": 5,
+            "x": 9
+         },
+         {
+            "y": 5,
+            "x": 10
+         },
+         {
+            "y": 5,
+            "x": 11
+         },
+         {
+            "y": 6,
+            "x": 11
+         },
+         {
+            "y": 7,
+            "x": 11
+         },
+         {
+            "y": 7,
+            "x": 12
+         },
+         {
+            "y": 7,
+            "x": 13
+         },
+         {
+            "y": 7,
+            "x": 14
+         },
+         {
+            "y": 7,
+            "x": 15
+         },
+         {
+            "y": 7,
+            "x": 16
+         },
+         {
+            "y": 7,
+            "x": 17
+         },
+         {
+            "y": 7,
+            "x": 18
+         }
+      ]
    },
-   "splashImage": "space_backgr",
+   "wave": [{
+      "interval": 20,
+      "number": [10],
+      "period": 0.5,
+      "type": ["D"]
+   }],
+   "livesName": "Lives",
    "gold": 1000
 }

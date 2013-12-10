@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.tools.store;
+package gameEngine.view.gameFrame.store;
 
 import java.awt.Color;
 import java.awt.Image;
@@ -130,9 +130,9 @@ public class StoreItemButton extends JButton {
      * 
      * @param moneySupply user's money supply
      */
-    public void toggleButtonActivation (int moneySupply) {
-        setAbleToPurchase(moneySupply >= cost);
-
+    public boolean toggleButtonActivation (int moneySupply) {
+         setAbleToPurchase(moneySupply >= cost);
+         return moneySupply >= cost;
     }
 
     /**
@@ -142,9 +142,9 @@ public class StoreItemButton extends JButton {
      * @param hoverAction defines behavior when button is hovered over
      * @param clickAction defines behavior when button is clicked
      */
-    void addMouseAdapter (final StoreButtonAction hoverAction,
-                          final StoreButtonAction hoverExitAction,
-                          final StoreButtonAction clickAction) {
+    private void addMouseAdapter (final StoreButtonAction hoverAction,
+                                  final StoreButtonAction hoverExitAction,
+                                  final StoreButtonAction clickAction) {
         addMouseListener(new MouseAdapter() {
 
             /**

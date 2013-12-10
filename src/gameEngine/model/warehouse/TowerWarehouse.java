@@ -14,12 +14,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
 /**
+ * TowerWarehouse stores all kinds of TowerFactory
  * 
- * @author Jiaran
- *         similar to tower warehouse. Using to create all types of enemy using enemy id.
- * 
+ * @author Yuhua
+ *
  */
 
 public class TowerWarehouse extends Warehouse {

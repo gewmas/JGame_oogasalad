@@ -418,6 +418,17 @@ public class EnemyDesignTab extends Tab {
             String url = image.getString(JSONConstants.URL_STRING);
             imageMap.put(id, url);
         }
+        
+        JSONArray animations = (JSONArray) resources.get("animation");
+        for (int i = 0; i < animations.length(); i++) {
+            JSONObject animation = animations.getJSONObject(i);
+            String id = animation.getString(JSONConstants.ID_STRING);
+            JSONArray sheet = animation.getJSONArray("sheet");
+            String key = ((JSONObject) sheet.get(0)).getString(JSONConstants.ID_STRING);
+            String url = imageMap.get(key);
+            imageMap.put(id, url);
+        }
+        
         JSONArray enemies = p.getJSONArray(JSONConstants.ENEMY_TYPE_STRING);
         for (int i = 0; i < enemies.length(); i++) {
             JSONObject enemy = enemies.getJSONObject(i);

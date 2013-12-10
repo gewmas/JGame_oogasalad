@@ -1,0 +1,274 @@
+{
+   "resources": {
+      "animation": [{
+         "id": "enemy1",
+         "sheet": [
+            {"id": "5"},
+            {"id": "6"},
+            {"id": "7"}
+         ]
+      }],
+      "audio": [{
+         "id": "1",
+         "url": "laser.wav"
+      }],
+      "image": [
+         {
+            "id": "1",
+            "url": "barrier1.png"
+         },
+         {
+            "id": "2",
+            "url": "path.png"
+         },
+         {
+            "id": "3",
+            "url": "tower1.png"
+         },
+         {
+            "id": "4",
+            "url": "tower2.png"
+         },
+         {
+            "id": "5",
+            "url": "d1.png"
+         },
+         {
+            "id": "6",
+            "url": "d2.png"
+         },
+         {
+            "id": "7",
+            "url": "d3.png"
+         },
+         {
+            "id": "8",
+            "url": "DuvallDoc.png"
+         },
+         {
+            "id": "12",
+            "url": "BoostTower.png"
+         },
+         {
+            "id": "bullet",
+            "url": "barrier1.png"
+         },
+         {
+            "id": "woods_background",
+            "url": "woods_background.png"
+         }
+      ]
+   },
+   "temporaryBarrierType": [{
+      "id": "Water",
+      "expire": 100,
+      "description": "Woop",
+      "damage": 100,
+      "image": "1",
+      "cost": 150
+   }],
+   "enemyType": [
+      {
+         "id": "D",
+         "life": 1,
+         "skill": "Armour",
+         "speed": 0.5,
+         "damage": 1,
+         "image": "enemy1",
+         "gold": 100
+      },
+      {
+         "id": "Duvall",
+         "life": 2,
+         "skill": "Armour",
+         "speed": 0.4,
+         "damage": 1,
+         "image": "8",
+         "gold": 100
+      }
+   ],
+   "numberOfLives": 100,
+   "BGImage": "woods_background",
+   "goldName": "Gold",
+   "BGAudio": "1",
+   "Tower": [
+      {
+         "Cost": 100,
+         "Name": "Default",
+         "Damage": 50,
+         "Description": "towerr",
+         "Range": 100,
+         "Sell Price": 50,
+         "Type": "DefaultTower",
+         "Image": "3",
+         "Attack Speed": 2,
+         "Attack Mode": 0
+      },
+      {
+         "Cost": 100,
+         "Name": "M",
+         "Damage": 100,
+         "Description": "mm",
+         "Range": 150,
+         "Sell Price": 50,
+         "Type": "MagicTower",
+         "Image": "4",
+         "Magic": ["FrozeMagic"],
+         "Attack Speed": 0.2,
+         "Magic Factor": 2.5,
+         "Attack Mode": 0
+      },
+      {
+         "Name": "Mult",
+         "Cost": 100,
+         "Damage": 10,
+         "Attack Amount": 5,
+         "Range": 100,
+         "Description": "MS Tower",
+         "Sell Price": 50,
+         "Type": "MultipleShootingTower",
+         "Image": "1",
+         "Attack Speed": 2,
+         "Attack Mode": 1
+      },
+      {
+         "Cost": 50,
+         "Name": "Boost",
+         "Damage": 10,
+         "Description": "Woo",
+         "Range": 100,
+         "Sell Price": 25,
+         "Type": "BoostTower",
+         "Image": "12",
+         "Attack Speed": 3,
+         "Boost Factor": 2.5
+      }
+   ],
+   "name": "dd",
+   "map": {
+      "Barriers": [],
+      "pathImage": "path.png",
+      "Path": [
+         {
+            "y": 0,
+            "x": 0
+         },
+         {
+            "y": 0,
+            "x": 1
+         },
+         {
+            "y": 0,
+            "x": 2
+         },
+         {
+            "y": 0,
+            "x": 3
+         },
+         {
+            "y": 0,
+            "x": 4
+         },
+         {
+            "y": 0,
+            "x": 5
+         },
+         {
+            "y": 0,
+            "x": 6
+         },
+         {
+            "y": 0,
+            "x": 7
+         },
+         {
+            "y": 1,
+            "x": 7
+         },
+         {
+            "y": 2,
+            "x": 7
+         },
+         {
+            "y": 3,
+            "x": 7
+         },
+         {
+            "y": 4,
+            "x": 7
+         },
+         {
+            "y": 4,
+            "x": 8
+         },
+         {
+            "y": 4,
+            "x": 9
+         },
+         {
+            "y": 5,
+            "x": 9
+         },
+         {
+            "y": 5,
+            "x": 10
+         },
+         {
+            "y": 5,
+            "x": 11
+         },
+         {
+            "y": 6,
+            "x": 11
+         },
+         {
+            "y": 7,
+            "x": 11
+         },
+         {
+            "y": 7,
+            "x": 12
+         },
+         {
+            "y": 7,
+            "x": 13
+         },
+         {
+            "y": 7,
+            "x": 14
+         },
+         {
+            "y": 7,
+            "x": 15
+         },
+         {
+            "y": 7,
+            "x": 16
+         },
+         {
+            "y": 7,
+            "x": 17
+         },
+         {
+            "y": 7,
+            "x": 18
+         }
+      ]
+   },
+   "wave": [
+      {
+         "interval": 20,
+         "number": [10],
+         "type": ["D"],
+         "period": 2
+      },
+      {
+         "interval": 10,
+         "number": [15],
+         "type": ["Duvall"],
+         "period": 4
+      }
+   ],
+   "livesName": "Lives",
+   "gold": 1000
+}

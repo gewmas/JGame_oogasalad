@@ -10,7 +10,6 @@ public class BasicInformation {
 
     private int myGold;
     private int myLives;
-    private String mySplashImage;
     private String myGameName;
     private AudioLabel myBackgroundAudio;
     private String myLivesName;
@@ -20,7 +19,6 @@ public class BasicInformation {
     /**
      * @param gold is the starting amount of gold in the game
      * @param lives is the starting number of lives in the game
-     * @param splashImage is the path of the game's splash image
      * @param gameName is the user-defined name for the game
      * @param backgroundAudio is the background audio for the game
      * @param livesName is the alternate name for live
@@ -29,7 +27,6 @@ public class BasicInformation {
      */
     public BasicInformation (int gold,
                              int lives,
-                             String splashImage,
                              String gameName,
                              AudioLabel backgroundAudio,
                              String livesName,
@@ -37,7 +34,6 @@ public class BasicInformation {
                              String bulletName) {
         myGold = gold;
         myLives = lives;
-        mySplashImage = splashImage;
         myGameName = gameName;
         myBackgroundAudio = backgroundAudio;
         myLivesName = livesName;
@@ -57,13 +53,6 @@ public class BasicInformation {
      */
     public int getLives () {
         return myLives;
-    }
-
-    /**
-     * @return path of game's splash image
-     */
-    public String getSplashImage () {
-        return mySplashImage;
     }
 
     /**

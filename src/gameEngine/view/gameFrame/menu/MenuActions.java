@@ -1,7 +1,7 @@
 package gameEngine.view.gameFrame.menu;
 
 /**
- * @author lalitamaraj
+ * @author Lalita Maraj
  *         Interface that encapsulates all of the methods that would be needed
  *         by items in the menubar
  */

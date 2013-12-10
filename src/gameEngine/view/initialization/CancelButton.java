@@ -13,6 +13,7 @@ import gameEngine.view.ViewConstants;
  * @author Lalita Maraj
  * 
  */
+@SuppressWarnings("serial")
 public class CancelButton extends JButton {
     JFrame frame;
 

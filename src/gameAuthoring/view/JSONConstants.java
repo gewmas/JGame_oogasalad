@@ -16,6 +16,7 @@ public final class JSONConstants {
     public static final String PATH_STRING = "Path";
     public static final String SPLASH_STRING = "splashImage";
     public static final String AUDIO_STRING = "audio";
+    public static final String BULLET_KEY = "bulletImage";
     public static final String BULLET_STRING = "bullet";
     public static final String BG_AUDIO_STRING = "BGAudio";
     public static final String TOWER_STRING = "Tower";

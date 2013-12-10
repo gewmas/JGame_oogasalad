@@ -44,8 +44,7 @@ public class Enemy extends JGObject implements IEMagicable {
     // wenxin add this attribution for magic.
     int currentMagics = 0;
 
-    final double originalLife;
-    final double orignalSpeed;
+    private boolean isInvisiable=false;
 
     public Enemy (
                   double gold,
@@ -69,9 +68,7 @@ public class Enemy extends JGObject implements IEMagicable {
         this.mySpecialty = speciaty;
         this.gold = gold;
         this.life = life;
-        this.originalLife = life;
         this.speed = speed;
-        this.orignalSpeed = speed;
         this.path = model.getPathList();
         this.pathIndex = 0;
         this.damage=damage;
@@ -145,7 +142,7 @@ public class Enemy extends JGObject implements IEMagicable {
                  * @author Harris
                  * For killing enemies with temporary barriers
                  */
-                life--;
+                life-= ((TemporaryBarrier) obj).getDamage();
                 lifeLessThanZero();
    
             }
@@ -305,6 +302,14 @@ public class Enemy extends JGObject implements IEMagicable {
     public void setSkill (String skill) {
         SkillFactory sf = new SkillFactory(this.eng);
         mySkill = sf.create(skill);
+    }
+
+    public boolean isInvisiable () {
+        return isInvisiable;
+    }
+    
+    public void setInvisiable(boolean result){
+        isInvisiable=result;
     }
 
 }

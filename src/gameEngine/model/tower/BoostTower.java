@@ -13,6 +13,7 @@ import java.util.List;
  *
  * BoostTower will boost several properties of Tower in range by boostFactor
  * Reverse back when the BoostTower is sold
+ * 
  */
 
 public class BoostTower extends Tower{

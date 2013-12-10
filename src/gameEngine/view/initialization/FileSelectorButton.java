@@ -16,6 +16,7 @@ import gameEngine.view.ViewConstants;
  * @author Lalita Maraj
  * 
  */
+@SuppressWarnings("serial")
 public class FileSelectorButton extends JButton {
     private View view;
 
