@@ -1,10 +1,9 @@
-package gameEngine.view.gameFrame.tools.store;
+package gameEngine.view.gameFrame.store;
 
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.ViewConstants;
-import gameEngine.view.View;
 import gameEngine.view.gameFrame.ItemPurchaser;
 import gameEngine.view.gameFrame.towerUpgrader.ItemOptionsDisplayer;
 import java.awt.Dimension;

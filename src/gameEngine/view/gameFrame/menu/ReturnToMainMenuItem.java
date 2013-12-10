@@ -1,27 +1,26 @@
 package gameEngine.view.gameFrame.menu;
-import gameEngine.view.ViewConstants;
+
+
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
+
 
 /**
  * @author lalitamaraj
- *MenuItem that allows a user to return to the main menu
+ *         MenuItem that allows a user to return to the main menu
  */
 @SuppressWarnings("serial")
-public class ReturnToMainMenuItem extends AbstractAction{
-    private MenuActions menuActions;
-    public ReturnToMainMenuItem (MenuActions menuActions) {
+public class ReturnToMainMenuItem extends MenuItem {
 
-        super(ViewConstants.resourceBundle.getString("ReturnToMainMenu"));
+    public ReturnToMainMenuItem (MenuActions menuActions, String menuName) {
 
-        this.menuActions = menuActions;
+        super(menuActions, menuName);
+
     }
-
 
     @Override
     public void actionPerformed (ActionEvent e) {
         menuActions.goToMainMenu();
-        
+
     }
 
 }

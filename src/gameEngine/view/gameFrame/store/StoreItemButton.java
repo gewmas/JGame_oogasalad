@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.tools.store;
+package gameEngine.view.gameFrame.store;
 
 import java.awt.Color;
 import java.awt.Image;

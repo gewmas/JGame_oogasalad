@@ -1,8 +1,8 @@
 package gameEngine.view.gameFrame.menu;
 
-import gameEngine.view.ViewConstants;
+
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
+
 
 
 /**
@@ -10,14 +10,14 @@ import javax.swing.AbstractAction;
  * Menu item to end game
  */
 @SuppressWarnings("serial")
-public class EndGameMenuItem extends AbstractAction {
-    private MenuActions menuActions;
+public class EndGameMenuItem extends MenuItem {
+   
 
-    public EndGameMenuItem (MenuActions menuActions) {
+    public EndGameMenuItem (MenuActions menuActions,String menuName) {
 
-        super(ViewConstants.resourceBundle.getString("EndGameFileMenu"));
+        super(menuActions, menuName);
 
-        this.menuActions = menuActions;
+      
     }
 
     @Override

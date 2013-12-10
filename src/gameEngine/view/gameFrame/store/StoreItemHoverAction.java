@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.tools.store;
+package gameEngine.view.gameFrame.store;
 
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.purchase.PurchaseInfo;
