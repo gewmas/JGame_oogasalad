@@ -8,7 +8,7 @@ Fabio Berger, Jiaran Hao, Rebecca Lai, Yuhua Mai, Lalita Maraj, Harris Osserman,
 
 **End Date:** Monday December 9th, 2013
 
-**Hours worked:** Too many, 30h+/person 
+**Hours worked:** Too many, 60h+/person 
 
 **Project Repo:** https://github.com/duke-compsci308-fall2013/oogasalad_FooBar
 
