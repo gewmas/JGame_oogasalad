@@ -2,6 +2,7 @@ package gameAuthoring.controllers;
 
 import gameAuthoring.JSONObjects.TowerJSONObject;
 import gameAuthoring.model.GameData;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.util.Observable;
 
 
@@ -30,7 +31,7 @@ public class TowerDesignController extends DesignController {
      */
     @Override
     public void update (Observable o, Object arg) {
-        TowerJSONObject tower = (TowerJSONObject) arg;
+        JSONObject tower = (JSONObject) arg;
         myGameData.addTower(tower);
     }
 

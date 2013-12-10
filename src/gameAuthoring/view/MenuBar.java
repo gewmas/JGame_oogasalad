@@ -29,7 +29,9 @@ public class MenuBar extends JMenuBar {
     private BasicInfoTab myBasicInfoTab;
     private MapDesignTab myMapDesignTab;
     private WaveDesignTab myWaveDesignTab;
-
+    private EnemyDesignTab myEnemyDesignTab;
+    private TowerDesignTab myTowerDesignTab;
+    
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/resources/JSON");
     private Parser myParser;
@@ -48,6 +50,8 @@ public class MenuBar extends JMenuBar {
                     GameData gameData,
                     BasicInfoTab basicInfoTab,
                     MapDesignTab mapDesignTab,
+                    EnemyDesignTab enemyDesignTab,
+                    TowerDesignTab towerDesignTab,
                     WaveDesignTab waveDesignTab) {
         add(fileMenu());
         add(showMenu());
@@ -55,6 +59,8 @@ public class MenuBar extends JMenuBar {
         myGameData = gameData;
         myBasicInfoTab = basicInfoTab;
         myMapDesignTab = mapDesignTab;
+        myEnemyDesignTab = enemyDesignTab;
+        myTowerDesignTab = towerDesignTab;
         myWaveDesignTab = waveDesignTab;
     }
 
@@ -98,7 +104,9 @@ public class MenuBar extends JMenuBar {
                         myParser = new Parser(s);
                         myGameAuthoringGUI.loadJSON(myParser);
                         //myBasicInfoTab.loadJSON(myParser);
-                        myMapDesignTab.loadJSON(myParser);
+                       // myMapDesignTab.loadJSON(myParser);
+                        //myEnemyDesignTab.loadJSON(myParser);
+                        myTowerDesignTab.loadJSON(myParser);
                         //myWaveDesignTab.loadJSON(myParser);
                     }
                     catch (FileNotFoundException e1) {

@@ -183,7 +183,7 @@ public class TowerDesignTab extends Tab {
         }
         
         for (int i = 0; i < towers.length(); i++){
-            TowerJSONObject tower = (TowerJSONObject) towers.getJSONObject(i);
+            JSONObject tower = towers.getJSONObject(i);
             String name = tower.getString("Name");            
             String imageKey = tower.getString("Image");
             

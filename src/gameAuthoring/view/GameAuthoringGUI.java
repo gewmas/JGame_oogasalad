@@ -86,7 +86,7 @@ public class GameAuthoringGUI extends Observable {
         addSkillsDesignTab();
         myGameDesignTab.addChangeListener(observeTabChange());
         MenuBar menu =
-                new MenuBar(this, myGameData, myBasicInfoTab, myMapDesignTab, myWaveDesignTab);
+                new MenuBar(this, myGameData, myBasicInfoTab,  myMapDesignTab, myEnemyDesignTab, myTowerDesignTab, myWaveDesignTab);
         myMainPanel.add(myGameDesignTab, GAME_DESIGN_TAB_FORMATTING);
         createUserLibraryTab();
         frame.setJMenuBar(menu);

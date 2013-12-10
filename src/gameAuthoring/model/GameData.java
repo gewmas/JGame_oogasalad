@@ -71,10 +71,6 @@ public class GameData extends JSONObject {
         this.put(TEMPBARRIER_LIST_KEY, myBarrierList);
         this.put(WAVE_LIST_KEY, myWaveList);
         this.put(RESOURCE_KEY, myResources);
-
-        Collection<Point2D> pathList = new ArrayList<Point2D>();
-        myMap = new MapJSONObject("path.png", pathList);
-        this.put("map", myMap);
     }
 
     /**
@@ -145,7 +141,7 @@ public class GameData extends JSONObject {
      * 
      * @param tower TowerJSONObject to be added
      */
-    public void addTower (TowerJSONObject tower) {
+    public void addTower (JSONObject tower) {
         myTowerList.put(tower);
     }
 

@@ -1,0 +1,88 @@
+{
+   "resources": {
+      "animation": [],
+      "audio": [],
+      "image": [
+         {
+            "id": "1",
+            "url": "barrier1.png"
+         },
+         {
+            "id": "space_background",
+            "url": "space_background.jpg"
+         },
+         {
+            "id": "2",
+            "url": "path.png"
+         },
+         {
+            "id": "woods_background",
+            "url": "woods_background.png"
+         },
+         {
+            "id": "3",
+            "url": "tower1.png"
+         },
+         {
+            "id": "4",
+            "url": "tower2.png"
+         },
+         {
+            "id": "5",
+            "url": "d1.png"
+         },
+         {
+            "id": "6",
+            "url": "d2.png"
+         },
+         {
+            "id": "7",
+            "url": "d3.png"
+         },
+         {
+            "id": "8",
+            "url": "DuvallDoc.png"
+         },
+         {
+            "id": "9",
+            "url": "barrier1.png"
+         }
+      ]
+   },
+   "temporaryBarrierType": [],
+   "Tower": [
+      {
+         "Name": "Default",
+         "Cost": 100,
+         "Damage": 50,
+         "Range": 100,
+         "Description": "towerr",
+         "Sell Price": 50,
+         "Type": "DefaultTower",
+         "Image": "3",
+         "Attack Speed": 2,
+         "Attack Mode": 0
+      },
+      {
+         "Name": "M",
+         "Cost": 100,
+         "Damage": 100,
+         "Range": 150,
+         "Description": "mm",
+         "Sell Price": 50,
+         "Type": "MagicTower",
+         "Image": "4",
+         "Attack Speed": 0.2,
+         "Magic": ["FrozeMagic"],
+         "Magic Factor": 2.5,
+         "Attack Mode": 0
+      }
+   ],
+   "map": {
+      "Barriers": [],
+      "pathImage": "path.png",
+      "Path": []
+   },
+   "wave": [],
+   "enemyType": []
+}
