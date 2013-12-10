@@ -59,7 +59,7 @@ public class UserImagesTab extends Observable {
      * Select and upload image file to user image library
      * 
      * @param userImagesTab is UserImagesTab that needs to be updated with uploaded image
-     * @return MouseAdapater that allows images to be uploaded to the tab
+     * @return MouseAdapter that allows images to be uploaded to the tab
      */
     private MouseAdapter addFileUploadListener (final UserImagesTab userImagesTab) {
         MouseAdapter listener = new MouseAdapter() {
