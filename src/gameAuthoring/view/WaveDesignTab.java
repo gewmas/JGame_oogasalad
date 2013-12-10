@@ -222,10 +222,18 @@ public class WaveDesignTab extends Tab implements Observer {
         JSONArray waves = p.getJSONArray("wave");
         for (int i = 0; i < waves.length(); i++) {
             JSONObject wave = (JSONObject) waves.get(i);
-            String type =  wave.getString("type");
-            int number = (int) wave.get("number");
+            JSONArray typeArray =  wave.getJSONArray("type");          
+            String type = typeArray.getString(0);
+            
+            JSONArray numberArray = wave.getJSONArray("number");
+            int number = numberArray.getInt(0);
             double period = (double) wave.get("period");
             int interval = (int) wave.get("interval");
+            
+            setChanged();
+            notifyObservers(wave);
+            clearChanged();
+            
             addWave(type, number);
         }
     }

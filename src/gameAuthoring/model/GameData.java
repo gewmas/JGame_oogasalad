@@ -150,7 +150,7 @@ public class GameData extends JSONObject {
      * 
      * @param wave WaveJSONOBject to be added
      */
-    public void addWave (WaveJSONObject wave) {
+    public void addWave (JSONObject wave) {
         myWaveList.put(wave);
     }
 

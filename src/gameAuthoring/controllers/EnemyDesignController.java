@@ -36,13 +36,13 @@ public class EnemyDesignController extends DesignController {
             EnemyJSONObject enemy = (EnemyJSONObject) arg;
             myGameData.addEnemy(enemy);
         }
+        else if (arg instanceof JSONObject) {
+            JSONObject enemy = (JSONObject) arg;
+            myGameData.addEnemy(enemy);
+        }
         if (arg instanceof AnimationJSONObject) {
             AnimationJSONObject animation = (AnimationJSONObject) arg;
             myGameData.addAnimation(animation);
-        }
-        else {
-            JSONObject enemy = (JSONObject) arg;
-            myGameData.addEnemy(enemy);
         }
     }
 

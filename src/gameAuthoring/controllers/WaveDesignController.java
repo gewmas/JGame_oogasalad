@@ -2,6 +2,7 @@ package gameAuthoring.controllers;
 
 import gameAuthoring.JSONObjects.WaveJSONObject;
 import gameAuthoring.model.GameData;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.util.Observable;
 
 
@@ -31,7 +32,7 @@ public class WaveDesignController extends DesignController {
     @Override
     public void update (Observable o, Object arg) {
         System.out.println("WaveDesignController received update from WaveDesignTab");
-        WaveJSONObject wave = (WaveJSONObject) arg;
+        JSONObject wave = (JSONObject) arg;
         myGameData.addWave(wave);
     }
 
