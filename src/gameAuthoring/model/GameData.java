@@ -53,7 +53,7 @@ public class GameData extends JSONObject {
     public final static String SPLASH_IMAGE_KEY = "splashImage";
     public final static String BG_IMAGE_KEY = "BGImage";
     public final static String BULLET_IMAGE_KEY = "bulletImage";
-    public final static String BG_MUSIC_KEY = "bgMusic";
+    public final static String BG_MUSIC_KEY = "BGAudio";
 
     /**
      * Constructor for GameData class

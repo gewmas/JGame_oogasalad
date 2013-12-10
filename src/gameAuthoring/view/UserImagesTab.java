@@ -27,7 +27,7 @@ public class UserImagesTab extends Observable {
     private static final JFileChooser INPUT_CHOOSER =
             new JFileChooser(System.getProperties().getProperty("user.dir") + "/src/resources/img");
     private static final Dimension CONTENT_PANEL_DIMENSION = new Dimension(300, 500);
-    private static final String CONTENT_PANEL_WRAP_MODE = "wrap 1";
+    private static final String CONTENT_PANEL_WRAP_MODE = "wrap 4";
     private static final String UPLOAD_IMAGE_BUTTON_FORMATTING = "align center, gap 10 10 30 10";
     private static final String MAIN_PANEL_WRAP_MODE = "wrap 1";
     private List<ImageLabel> myImageLabels;
@@ -47,13 +47,13 @@ public class UserImagesTab extends Observable {
     public JPanel getTab () {
         JPanel mainPanel = new GradientPanel(new MigLayout(MAIN_PANEL_WRAP_MODE));
         myContentPanel = new JPanel(new MigLayout(CONTENT_PANEL_WRAP_MODE));
-        mainPanel.setOpaque(false);
-        myContentPanel.setPreferredSize(CONTENT_PANEL_DIMENSION);
+        mainPanel.setOpaque(false);       
         JButton uploadImageButton =
                 new JButton(StyleConstants.resourceBundle.getString("UserImagesTitle"));
         uploadImageButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         uploadImageButton.addMouseListener(addFileUploadListener(this));
         JScrollPane scrollPane = new JScrollPane(myContentPanel);
+        scrollPane.setPreferredSize(CONTENT_PANEL_DIMENSION);
         mainPanel.add(scrollPane);
         mainPanel.add(uploadImageButton, UPLOAD_IMAGE_BUTTON_FORMATTING);
         return mainPanel;

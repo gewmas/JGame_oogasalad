@@ -11,6 +11,7 @@
 "heightOfWindow": 600,
 "tilesPerRow": 20,
 "difficultyScale": 1.5,
+"BGAudio": "alarm",
 "map":
 {
   	  "pathImage":  "path.png", 

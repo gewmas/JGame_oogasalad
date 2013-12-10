@@ -265,12 +265,10 @@ public class GameAuthoringGUI extends Observable {
         for (int i = 0; i < images.length(); i++) {
             JSONObject image = images.getJSONObject(i);
             String id = image.getString("id");
-            String url = image.getString("url");
-
-            if (!id.equals("bullet")) {
+            String url = image.getString("url");            
+            if (id.matches("-?\\d+(\\.\\d+)?")) {
                 myUserImagesTab.addImageLabel(new File(FILE_PREFIX + url), id);
             }
-
         }
 
         JSONArray audio = (JSONArray) resources.get("audio");

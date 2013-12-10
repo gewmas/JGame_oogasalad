@@ -177,7 +177,7 @@ public class WaveDesignTab extends Tab implements Observer {
      * @param number is number of enemy in wave
      */
     private void addWave (String type, int number) {
-        JButton waveButton = new JButton(number + " " + type);
+        JButton waveButton = new JButton(number + " of " + type);
         waveButton.setFont(StyleConstants.DEFAULT_BODY_FONT);
         myScrollPanel.add(waveButton);
 
@@ -197,7 +197,7 @@ public class WaveDesignTab extends Tab implements Observer {
                 double period = Double.parseDouble(myPeriodField.getText());
                 int interval = Integer.parseInt(myIntervalField.getText());
                 if (!type.equals(DEFAULT_TYPE_TEXT) && type != null && number > 0 && interval > 0 &&
-                    0.0 < period && period < 1.0) {
+                    period > 0) {
                     WaveJSONObject wave = new WaveJSONObject(type, number, period, interval);
                     setChanged();
                     notifyObservers(wave);
@@ -226,8 +226,7 @@ public class WaveDesignTab extends Tab implements Observer {
             String type = typeArray.getString(0);
             JSONArray numberArray = wave.getJSONArray(JSONConstants.NUMBER_STRING);
             int number = numberArray.getInt(0);
-            double period = (double) wave.get(JSONConstants.PERIOD_STRING);
-            int interval = (int) wave.get(JSONConstants.INTERVAL_STRING);
+            
             setChanged();
             notifyObservers(wave);
             clearChanged();

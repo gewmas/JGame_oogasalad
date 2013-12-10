@@ -8,6 +8,7 @@
 "livesName": "Population",
 "levels": 2,
 "tilesPerRow": 20,
+"BGAudio": "alarm",
 "map":
 {
   	  "pathImage":  "path.png", 
@@ -531,7 +532,7 @@
 	"gold": 10,
 	"image": "BoyPatient",
 	"life": 15,
-	"speed": 0.5,
+	"speed": 1,
    	"skill": "Poison",
    	"Specialty" : 1,
    	"damage":-1
