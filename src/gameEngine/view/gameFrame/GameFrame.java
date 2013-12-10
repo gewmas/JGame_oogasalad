@@ -14,7 +14,7 @@ import gameEngine.view.gameFrame.inputFrame.InputSender;
 import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 import gameEngine.view.gameFrame.tools.store.StorePanel;
-import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
+import gameEngine.view.gameFrame.towerUpgrader.ItemOptionsDisplayer;
 
 
 /**

@@ -8,7 +8,7 @@ import gameEngine.model.tile.Tile;
 import gameEngine.view.View;
 import gameEngine.view.gameFrame.gameObjects.FrameRateSlider;
 import gameEngine.view.gameFrame.tools.DisplayValue;
-import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
+import gameEngine.view.gameFrame.towerUpgrader.ItemOptionsDisplayer;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,6 +32,7 @@ public class Game extends StdGame {
                                                    GameEngineConstant.TOWER_DAMAGE,
                                                    GameEngineConstant.TOWER_ATTACK_SPEED,
                                                    GameEngineConstant.TOWER_ATTACK_AMOUNT,
+                                                   GameEngineConstant.TOWER_ATTACK_MODE,
                                                    GameEngineConstant.TOWER_RANGE,
                                                    GameEngineConstant.TOWER_MAGIC,
                                                    GameEngineConstant.TOWER_MAGIC_FACTOR,
@@ -79,8 +80,8 @@ public class Game extends StdGame {
 
         this.setMoneyTitle(gameInfo.getMyGoldName());
         this.setLivesTitle(gameInfo.getMyLivesName());
+        
         Dimension size = gameInfo.getDimension();// view.getGameSize();
-
         setCanvasSettings(size.width, size.height, WIDTH / size.width,
                           HEIGHT / size.height, null, JGColor.white, null);
     }
@@ -95,16 +96,17 @@ public class Game extends StdGame {
                       new Highscore(0, "nobody"), // default entry for highscore
                       25 // max length of the player name
                 );
+        this.game_title = gameInfo.getMyName();
 
-        initial_lives = gameInfo.getLife();// view.getLives();
-        lives = initial_lives;// view.getLives();
-        score = gameInfo.getGold();// view.getMoney();
-        defineImage("RESERVEDslider_bar", "sb", 256, "slider_bar.png", "-");
-        defineImage("RESERVEDslider_toggle", "sb", 256, "slider_toggle.png", "-");
-        String background = controller.getGameInfo().getBGImage();// gameInfo.getBGImage();//view.getBGImage();
-
+        initial_lives = gameInfo.getLife();
+        lives = initial_lives;
+        score = gameInfo.getGold();
+        
+        String background = controller.getGameInfo().getBGImage();
         setBGImage(background);
+        
         startgame_ingame = true;
+        
         List<Tile> pathList = controller.getPath();
         int tileCount = 0;
         for (Tile tile : pathList) {
@@ -115,10 +117,8 @@ public class Game extends StdGame {
             tileCount++;
         }
 
-        this.game_title = gameInfo.getMyName();
-
         valuesToDisplay = new LinkedHashMap<String, String>();
-        for (String str : DISPLAY_KEYS) {
+        for (String str : GameEngineConstant.NORMAL_DISPLAY_KEYS()) {
             valuesToDisplay.put(str, "black");
         }
     }
@@ -127,7 +127,7 @@ public class Game extends StdGame {
         controller.startGame();
 
         gameInitializerItems.initialize();
-
+        
         frameRateSlider =
                 new FrameRateSlider("slider", true, pfWidth() / 2, pfHeight() - 40, 256,
                         "slider_toggle");
@@ -202,8 +202,6 @@ public class Game extends StdGame {
                     }
                     utilities.displayTowerInformation(tower.getInfo(), display,
                                                       mousePosition.x, mousePosition.y);
-                    // utilities.displayCheckedInformation(tower.getInfo(), valuesToDisplay,
-                    // mousePosition.x, mousePosition.y);
                 }
             }
 
@@ -216,7 +214,7 @@ public class Game extends StdGame {
     public void updateGameStats () {
         lives = gameInfo.getLife();
         money = gameInfo.getGold();
-        score = money + gameInfo.getCurrentWaveNumber() * 100 + lives;
+        score = money + lives*5;
     }
 
     /**
