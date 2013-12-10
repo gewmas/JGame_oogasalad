@@ -8,7 +8,6 @@ import jgame.JGPoint;
 import gameEngine.constant.GameEngineConstant;
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.model.purchase.PurchaseInfo;
-import gameEngine.view.View;
 import gameEngine.view.ViewConstants;
 
 /**
@@ -45,35 +44,36 @@ public class ItemPurchaser {
             towerToPurchase = null;
             towerToPurchaseName = null;
             purchasing = false;
-//            System.out.println("Cancelling purchase");
             return;
         }
-        
+
         setCursorImage(ViewConstants.IMAGE_PATH +
                        controller.getImageURL()
                                .get(purchaseInfo.getInfo()
-                                            .get(GameEngineConstant.PURCHASE_INFO_IMAGE)));
+                                       .get(GameEngineConstant.PURCHASE_INFO_IMAGE)));
         purchasing = true;
         towerToPurchase = purchaseInfo;
         towerToPurchaseName = purchaseInfo.getInfo().get(GameEngineConstant.PURCHASE_INFO_NAME);
         // }
     }
 
+
     /**
      * User has clicked on a position in the map, send the coordinates and tower info to the model
      */
     public boolean purchaseTower (JGPoint mousePosition) {
         boolean bought=false;
+
         if (purchasing) {
-            bought=controller.purchaseObject(mousePosition.x, mousePosition.y, towerToPurchase);
-            if (bought){
+            bought = controller.purchaseObject(mousePosition.x, mousePosition.y, towerToPurchase);
+            if (bought) {
                 towerToPurchase = null;
                 towerToPurchaseName = null;
                 purchasing = false;
                 restoreDefaultCursor();
             }
         }
-        
+
         return bought;
     }
 
