@@ -34,6 +34,13 @@ public class MapJSONObject extends JSONObject {
 
     }
     
+    /**
+     * Method to add (permanent barrier) to map
+     * 
+     * @param x x coordinate of barrier
+     * @param y y coordinate of barrier
+     * @param imageName ID of barrier image
+     */
     public void addBarrier(int x, int y, String imageName){
         JSONObject newBarrier = new JSONObject();
         newBarrier.put("x", x);

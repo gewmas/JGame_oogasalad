@@ -10,6 +10,11 @@ import gameEngine.parser.JSONLibrary.JSONObject;
  */
 public class AnimationJSONObject extends JSONObject {
 
+    /**
+     * Constructor for Animation JSONObject
+     * @param id ID of animation
+     * @param imagePaths IDs of images used in animation
+     */
     public AnimationJSONObject (String id, List<String> imagePaths) {
         this.put("id", id);
 
