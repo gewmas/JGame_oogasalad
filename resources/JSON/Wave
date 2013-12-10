@@ -1,0 +1,32 @@
+{
+   "resources": {
+      "animation": [],
+      "audio": [],
+      "image": [{
+         "id": "1",
+         "url": "barrier1.png"
+      }]
+   },
+   "temporaryBarrierType": [],
+   "Tower": [],
+   "map": {
+      "Barriers": [],
+      "pathImage": "path.png",
+      "Path": []
+   },
+   "wave": [{
+      "interval": 30,
+      "number": [10],
+      "period": 0.5,
+      "type": ["E1"]
+   }],
+   "enemyType": [{
+      "id": "E1",
+      "life": 1,
+      "skill": "Haste",
+      "speed": 0.2,
+      "damage": 100,
+      "image": "1",
+      "gold": 100
+   }]
+}

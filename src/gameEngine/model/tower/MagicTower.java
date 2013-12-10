@@ -9,8 +9,8 @@ import gameEngine.model.purchase.PurchaseInfo;
  * 
  * @author Yuhua
  * 
- *         Freeze Tower would slow down or other functionall enemies in range by slowFactor
- *         The enemies get back normal speed when out of range
+ * Freeze Tower would slow down or other functionall enemies in range by slowFactor
+ * The enemies get back normal speed when out of range
  * 
  */
 public class MagicTower extends DefaultTower {
