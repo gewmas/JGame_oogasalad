@@ -186,6 +186,7 @@ public class GameData extends JSONObject {
     public void setMap (String pathImage,
                         Collection<Point2D> pointList) {
         myMap = new MapJSONObject(pathImage, pointList);
+        System.out.println(myMap.toString());
         this.put("map", myMap);
     }
 
