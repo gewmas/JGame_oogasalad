@@ -1,7 +1,7 @@
 {
 "name": "Hospital Heal II",
 "spashImage" :  "game-bg.png",
-"BGImage" :  "woods_background",
+"BGImage" :  "hospital_background.png",
 "gold" : 500,
 "numberOfLives" : 10,
 "goldName": "Money",
