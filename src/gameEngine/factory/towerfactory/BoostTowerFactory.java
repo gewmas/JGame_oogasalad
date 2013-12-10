@@ -10,6 +10,8 @@ import gameEngine.parser.JSONLibrary.JSONObject;
  * 
  * @author Yuhua
  * 
+ * BoostTowerFactory creates BoostTower
+ * 
  */
 public class BoostTowerFactory extends TowerFactory {
 

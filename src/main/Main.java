@@ -1,10 +1,11 @@
 package main;
 
-import gameEngine.controller.Controller;
+import gameAuthoring.view.MainPanel;
+
 
 public class Main {
     public static void main (String[] args) {
-        Controller controller = new Controller();
-        controller.promptForFile();
+        MainPanel main = new MainPanel();
+        main.show();
     }
 }

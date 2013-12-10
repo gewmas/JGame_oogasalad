@@ -7,7 +7,13 @@ import gameEngine.model.tower.Tower;
 import gameEngine.parser.JSONLibrary.JSONArray;
 import gameEngine.parser.JSONLibrary.JSONObject;
 
-
+/**
+ * 
+ * MagicTowerFactory create MagicTower
+ * 
+ * @author Yuhua
+ *
+ */
 public class MagicTowerFactory extends DefaultTowerFactory {
 
     double magicFactor;

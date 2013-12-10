@@ -20,10 +20,10 @@ import jgame.JGObject;
  * 
  * @author Yuhua
  * 
- *         DefaultTower can attack enemy, those who also enemies should extends DefaultTower
- *         Like MultipleShootTower which shoot multiple Bullet at one time
- *         However, Tower like BoostTower and FreezeTower would not extends DefaultTower
- *         because they will not shoot, but change properties
+ * DefaultTower can attack enemy, those who also kill enemies extends DefaultTower
+ * Like MultipleShootTower which shoot multiple Bullet at one time
+ * However, Tower like BoostTower and FreezeTower would not extends DefaultTower
+ * because they will not shoot, but change properties
  * 
  */
 
