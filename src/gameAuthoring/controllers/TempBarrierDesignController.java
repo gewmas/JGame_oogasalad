@@ -2,6 +2,7 @@ package gameAuthoring.controllers;
 
 import gameAuthoring.JSONObjects.TemporaryBarrierJSONObject;
 import gameAuthoring.model.GameData;
+import gameEngine.parser.JSONLibrary.JSONObject;
 import java.util.Observable;
 
 
@@ -30,7 +31,7 @@ public class TempBarrierDesignController extends DesignController {
      */
     @Override
     public void update (Observable o, Object arg) {
-        TemporaryBarrierJSONObject temporaryBarrier = (TemporaryBarrierJSONObject) arg;
+        JSONObject temporaryBarrier = (JSONObject) arg;
         myGameData.addBarrier(temporaryBarrier);
 
     }

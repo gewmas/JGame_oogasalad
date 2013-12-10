@@ -157,10 +157,10 @@ public class GameData extends JSONObject {
     /**
      * Adds barrier to myBarrierList JSONArray
      * 
-     * @param barrier Barrier to be added
+     * @param temporaryBarrier Barrier to be added
      */
-    public void addBarrier (TemporaryBarrierJSONObject barrier) {
-        myBarrierList.put(barrier);
+    public void addBarrier (JSONObject temporaryBarrier) {
+        myBarrierList.put(temporaryBarrier);
     }
 
     /**
