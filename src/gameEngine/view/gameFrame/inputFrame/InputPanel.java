@@ -32,7 +32,7 @@ public class InputPanel extends JPanel {
     /**
      * @param inputSender tool that sends text input to necessary object
      */
-    protected InputPanel (final InputSender inputSender) {
+    public InputPanel (final InputSender inputSender) {
         super();
         MigLayout layout = new MigLayout(LAYOUT_WRAP_SETTING);
         this.setLayout(layout);

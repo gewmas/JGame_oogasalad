@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import gameEngine.controller.Controller;
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.ViewConstants;
 import gameEngine.view.View;
@@ -57,6 +56,7 @@ public class GameFrame extends JFrame implements GameInitializable {
         itemPurchaser = new ItemPurchaser(controller, this);
         storePanel = addStorePanel(towerUpgrader, itemPurchaser);
         gameInitializerItems = new CompositeGameInitializable();
+        gameInitializerItems.add(towerUpgrader);
         gameUpdatables = new CompositeGameUpdatable();
         gameUpdatables.add(storePanel);
         addGameTools(infoPanel, storePanel);
@@ -64,6 +64,9 @@ public class GameFrame extends JFrame implements GameInitializable {
         setJMenuBar(new Menu(view));
     }
 
+    /**
+     * Creates the cheat frame
+     */
     private CheatFrame addCheatCodeFrame () {
         InputFrame inputFrame = new InputFrame( new InputSender() {
             @Override
@@ -74,12 +77,18 @@ public class GameFrame extends JFrame implements GameInitializable {
         return new CheatFrame(inputFrame);
     }
 
+    /**
+     * Initializes the entire gameFrame
+     */
     public void showGame () {
         createGame();
         pack();
         setVisible(true);
     }
 
+    /**
+     * Creates the jgame instance
+     */
     public void createGame () {
         gameInitializerItems.add(this);
         canvasPanel =
@@ -92,9 +101,6 @@ public class GameFrame extends JFrame implements GameInitializable {
 
     /**
      * Create the store of Towers
-     * 
-     * @param storePanel
-     * @param infoPanel
      */
     private void addGameTools (InfoDisplayPanel infoPanel, StorePanel storePanel) {
         JPanel tools = new JPanel();
@@ -122,13 +128,11 @@ public class GameFrame extends JFrame implements GameInitializable {
     public void initialize () {
         infoPanel.setVisible(true);
         this.pack();
-
     }
 
     /**
      * Destroys the jgame instance so that it can be reloaded
      */
-
     public void quitGame () {
         canvasPanel.quitGame();
     }
@@ -137,5 +141,6 @@ public class GameFrame extends JFrame implements GameInitializable {
         infoPanel.clearDisplay();
         canvasPanel.endGame();
         storePanel.endGame();
+        this.pack();
     }
 }

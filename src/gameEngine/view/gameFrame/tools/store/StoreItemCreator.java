@@ -47,7 +47,7 @@ public class StoreItemCreator {
 
             @Override
             public void executeAction () {
-                itemPurchaser.placeTower(storeItemInformation);
+                itemPurchaser.selectPurchaseTower(storeItemInformation);
 
             }
 

@@ -82,15 +82,16 @@ public class StorePanel extends JPanel implements GameUpdatable, GameInitializab
 
     @Override
     public void endGame () {
-
+        itemOptionsDisplayer.closeDisplay();
         storeTabbedPane.removeAll();
+        this.setVisible(false);
         this.revalidate();
         this.repaint();
-
     }
 
     @Override
     public void initialize () {
+        this.setVisible(true);
         openAndStockStore();
 
     }
