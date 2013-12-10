@@ -33,18 +33,23 @@ public class EnemyDesignController extends DesignController {
     @Override
     public void update (Observable o, Object arg) {
         if (arg instanceof EnemyJSONObject) {
+            System.out.println("1");
             EnemyJSONObject enemy = (EnemyJSONObject) arg;
             myGameData.addEnemy(enemy);
         }
+        
+        else if (arg instanceof JSONObject) {
+            JSONObject enemy = (JSONObject) arg;
+            System.out.println("2");
+            myGameData.addEnemy(enemy);
+        }
+        
         if (arg instanceof AnimationJSONObject) {
             AnimationJSONObject animation = (AnimationJSONObject) arg;
             myGameData.addAnimation(animation);
         }
         
-        else{
-            JSONObject enemy = (JSONObject) arg;
-            myGameData.addEnemy(enemy);
-        }
+
     }
 
 }
