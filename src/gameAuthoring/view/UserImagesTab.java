@@ -13,6 +13,11 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 
 
+/**
+ * @author Rebecca Lai & Susan Zhang
+ *         UserImagesTab stores images uploaded by the user. It allows the user to click and drag
+ *         images in order to set images for various game fields.
+ */
 public class UserImagesTab extends Observable {
 
     private JPanel myContentPanel;
@@ -24,9 +29,17 @@ public class UserImagesTab extends Observable {
     private static final String UPLOAD_IMAGE_BUTTON_FORMATTING = "align center, gap 10 10 30 10";
     private static final String MAIN_PANEL_WRAP_MODE = "wrap 1";
 
+    /**
+     * Creates new UserImagesTab
+     */
     public UserImagesTab () {
     }
 
+    /**
+     * Get main panel
+     * 
+     * @return main content panel of UserImagesTab
+     */
     public JPanel getTab () {
         JPanel mainPanel = new GradientPanel(new MigLayout(MAIN_PANEL_WRAP_MODE));
         myContentPanel = new JPanel(new MigLayout(CONTENT_PANEL_WRAP_MODE));
@@ -42,6 +55,12 @@ public class UserImagesTab extends Observable {
         return mainPanel;
     }
 
+    /**
+     * Select and upload image file to user image library
+     * 
+     * @param userImagesTab is UserImagesTab that needs to be updated with uploaded image
+     * @return MouseAdapater that allows images to be uploaded to the tab
+     */
     private MouseAdapter addFileUploadListener (final UserImagesTab userImagesTab) {
         MouseAdapter listener = new MouseAdapter() {
             @Override
