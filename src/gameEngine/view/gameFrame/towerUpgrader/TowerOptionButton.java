@@ -4,9 +4,9 @@ import java.util.Map;
 import javax.swing.JButton;
 
 
-public abstract class TowerUpgraderButton extends JButton {
+public abstract class TowerOptionButton extends JButton {
 
-    public TowerUpgraderButton (String label) {
+    public TowerOptionButton (String label) {
         super(label);
 
     }

@@ -27,11 +27,13 @@ public class CanvasPanel extends JPanel {
         this.add(game);
         controller.setJGEngine(game);
     }
-
+    
+    // When we want to close the swing window, we must actively destroy the jgame object
     public void quitGame () {
         game.destroy();
     }
-
+    
+    // Simply stops the game but keeps the jgame window alive
     public void endGame () {
         game.loseGame();
     }

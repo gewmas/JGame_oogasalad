@@ -213,6 +213,13 @@ public abstract class StdGame extends JGEngine {
      */
     public boolean startgame_ingame = false, leveldone_ingame = false,
             lifelost_ingame = false,gamewon_ingame=false, gameover_ingame = false;
+    
+    /**
+     * Indicates whether the player has won the game
+     * 
+     * Added by Alex Zhu
+     */
+    public boolean gamewon=false;
 
     /** Horizontal margins to be used by status displays, default 12 pixels. */
     public int status_l_margin = 12, status_r_margin = 12;
@@ -574,6 +581,7 @@ public abstract class StdGame extends JGEngine {
     public final void gameWon () {
         if (inGameState("GameWon")
             || (!inGameState("InGame") && !inGameState("LifeLost"))) return;
+        gamewon=true;
         clearKey(key_continuegame);
         setFrameRate(30, 2);
         removeGameState("StartLevel");
@@ -609,6 +617,7 @@ public abstract class StdGame extends JGEngine {
         // System.err.println( "Warning: gameOver() called from other state"
         // +" than InGame or LifeLost." );
         // }
+        gamewon=false;
         clearKey(key_continuegame);
         setFrameRate(30,2);
         removeGameState("StartLevel");
@@ -636,7 +645,7 @@ public abstract class StdGame extends JGEngine {
         seqtimer = 0;
         clearKey(key_startgame);
         if (highscores != null
-            && Highscore.findPos(highscores, score) >= 0) {
+            && Highscore.findPos(highscores, score) >= 0 && gamewon) {
             setGameState("EnterHighscore");
         }
         else {
