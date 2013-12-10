@@ -1,4 +1,4 @@
-package gameEngine.view.gameFrame.towerUpdrader;
+package gameEngine.view.gameFrame.towerUpgrader;
 
 import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.view.View;
@@ -7,8 +7,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
 
-
-public class SellButton extends TowerUpgraderButton {
+/**
+ * Allows the user to sell the corresponding tower
+ * @author alex zhu
+ *
+ */
+public class SellButton extends TowerOptionButton {
     private static final String NAME = "Sell Tower";
     private static final int BUTTON_WIDTH = 180;
     private static final int BUTTON_HEIGHT = 20;

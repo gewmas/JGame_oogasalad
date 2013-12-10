@@ -2,7 +2,7 @@ package gameEngine.view.gameFrame.tools.store;
 
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.gameFrame.ItemPurchaser;
-import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
+import gameEngine.view.gameFrame.towerUpgrader.ItemOptionsDisplayer;
 
 
 /**
@@ -47,7 +47,7 @@ public class StoreItemCreator {
 
             @Override
             public void executeAction () {
-                itemPurchaser.placeTower(storeItemInformation);
+                itemPurchaser.selectPurchaseTower(storeItemInformation);
 
             }
 

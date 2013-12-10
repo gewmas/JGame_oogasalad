@@ -24,7 +24,7 @@ import javax.swing.border.Border;
 @SuppressWarnings("serial")
 public class InfoDisplayPanel extends JPanel {
 
-    private static final int DISPLAY_HEIGHT = 150;
+    private static final int DISPLAY_HEIGHT = 170;
     private static final int DISPLAY_WIDTH = 300;
 
     private JTextPane text;

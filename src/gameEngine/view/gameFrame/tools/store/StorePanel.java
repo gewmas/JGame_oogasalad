@@ -12,7 +12,7 @@ import gameEngine.view.View;
 import gameEngine.view.gameFrame.GameInitializable;
 import gameEngine.view.gameFrame.GameUpdatable;
 import gameEngine.view.gameFrame.ItemPurchaser;
-import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
+import gameEngine.view.gameFrame.towerUpgrader.ItemOptionsDisplayer;
 
 
 /**
@@ -82,15 +82,16 @@ public class StorePanel extends JPanel implements GameUpdatable, GameInitializab
 
     @Override
     public void endGame () {
-
+        itemOptionsDisplayer.closeDisplay();
         storeTabbedPane.removeAll();
+        this.setVisible(false);
         this.revalidate();
         this.repaint();
-
     }
 
     @Override
     public void initialize () {
+        this.setVisible(true);
         openAndStockStore();
 
     }

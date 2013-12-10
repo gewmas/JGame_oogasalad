@@ -10,7 +10,11 @@ import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.view.ViewConstants;
 
-
+/**
+ * Contains methods to parse user purchase instructions and send them to the model
+ * @author lalita alex
+ *
+ */
 public class ItemPurchaser {
 
     private String towerToPurchaseName;
@@ -30,7 +34,7 @@ public class ItemPurchaser {
     /**
      * Indicates that the user wants to buy a tower
      */
-    public void placeTower (PurchaseInfo purchaseInfo) {
+    public void selectPurchaseTower (PurchaseInfo purchaseInfo) {
 
         String towerName = purchaseInfo.getInfo().get(GameEngineConstant.PURCHASE_INFO_NAME);
 
@@ -53,8 +57,13 @@ public class ItemPurchaser {
         // }
     }
 
-    public boolean checkAndPlaceTower (JGPoint mousePosition) {
-        boolean bought = false;
+
+    /**
+     * User has clicked on a position in the map, send the coordinates and tower info to the model
+     */
+    public boolean purchaseTower (JGPoint mousePosition) {
+        boolean bought=false;
+
         if (purchasing) {
             bought = controller.purchaseObject(mousePosition.x, mousePosition.y, towerToPurchase);
             if (bought) {
@@ -68,6 +77,9 @@ public class ItemPurchaser {
         return bought;
     }
 
+    /**
+     * Sets the cursor image when the user selects a tower to purchase
+     */
     public void setCursorImage (String imagePath) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image =
