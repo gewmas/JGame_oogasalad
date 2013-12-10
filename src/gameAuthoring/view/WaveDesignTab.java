@@ -219,21 +219,18 @@ public class WaveDesignTab extends Tab implements Observer {
 
     @Override
     public void loadJSON (Parser p) {
-        JSONArray waves = p.getJSONArray("wave");
+        JSONArray waves = p.getJSONArray(JSONConstants.WAVE_STRING);
         for (int i = 0; i < waves.length(); i++) {
             JSONObject wave = (JSONObject) waves.get(i);
-            JSONArray typeArray =  wave.getJSONArray("type");          
+            JSONArray typeArray = wave.getJSONArray(JSONConstants.TYPE_STRING);
             String type = typeArray.getString(0);
-            
-            JSONArray numberArray = wave.getJSONArray("number");
+            JSONArray numberArray = wave.getJSONArray(JSONConstants.NUMBER_STRING);
             int number = numberArray.getInt(0);
-            double period = (double) wave.get("period");
-            int interval = (int) wave.get("interval");
-            
+            double period = (double) wave.get(JSONConstants.PERIOD_STRING);
+            int interval = (int) wave.get(JSONConstants.INTERVAL_STRING);
             setChanged();
             notifyObservers(wave);
             clearChanged();
-            
             addWave(type, number);
         }
     }
@@ -242,10 +239,7 @@ public class WaveDesignTab extends Tab implements Observer {
     @Override
     public void update (Observable arg0, Object arg1) {
         myEnemyList = (ArrayList<String>) arg1;
-        System.out.println(myEnemyList);
-
         myEnemyOptions = new String[myEnemyList.size()];
-
         for (int i = 0; i < myEnemyList.size(); i++) {
             myEnemyOptions[i] = myEnemyList.get(i);
         }

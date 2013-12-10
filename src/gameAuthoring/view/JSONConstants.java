@@ -22,4 +22,9 @@ public final class JSONConstants {
     public static final String NAME_STRING = "Name";
     public static final String IMAGE_STRING_2 = "Image";
     public static final String ENEMY_TYPE_STRING = "enemyType";
+    public static final String WAVE_STRING = "wave";
+    public static final String TYPE_STRING = "type";
+    public static final String NUMBER_STRING = "number";
+    public static final String PERIOD_STRING = "period";
+    public static final String INTERVAL_STRING = "interval";
 }
