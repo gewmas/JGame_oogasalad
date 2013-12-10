@@ -15,6 +15,7 @@ import gameEngine.parser.JSONLibrary.JSONObject;
  */
 public class GameEngineConstant {
 
+
     //Grid Constants
     public static final int GRID_WIDTH = 600;
     public static final int GRID_HEIGHT = 600;
@@ -131,4 +132,5 @@ public class GameEngineConstant {
 		}
 		else return 0;
 	}
+
 }

@@ -11,6 +11,7 @@ import gameEngine.view.View;
  * @author Lalita Maraj
  * 
  */
+@SuppressWarnings("serial")
 public class InitializationFrame extends JFrame {
 
     /**

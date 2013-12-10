@@ -48,6 +48,9 @@ Heal15	-	0	Heal15.png	-
 HealEnd	-	0	HealEnd.png	-
 HealMagic	Heal1;Heal2;Heal3;Heal4;Heal5;Heal6;Heal7;Heal8;Heal9;Heal10;Heal11;Heal12;Heal13;Heal4;Heal15;HealEnd		0.3	false
 
+Pill2	-	0	Pill2.png	-
+
+RedHeart	-	0	bullet1.png	-
 
 
 Light1	-	0	Light1.png	-
@@ -91,7 +94,7 @@ Letter0	-	0	Letter0.png	-
 Letter1	-	0	Letter1.png	-
 Letter2	-	0	Letter2.png	-
 Letter3	-	0	Letter3.png	-
-Letter3	-	0	Letter4.png	-
+Letter4	-	0	Letter4.png	-
 Letter5	-	0	Letter5.png	-
 Letter6	-	0	Letter6.png	-
 Letter7	-	0	Letter7.png	-

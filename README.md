@@ -5,9 +5,10 @@
 Fabio Berger, Jiaran Hao, Rebecca Lai, Yuhua Mai, Lalita Maraj, Harris Osserman, Wenxin Shi, Susan Zhang, Alex Zhu
 
 **Start Date:** Monday, October 28, 2013
+
 **End Date:** Monday December 9th, 2013
 
-**Hours worked:** Too many, 30h+/person 
+**Hours worked:** Too many, 60h+/person 
 
 **Project Repo:** https://github.com/duke-compsci308-fall2013/oogasalad_FooBar
 
@@ -55,16 +56,18 @@ The timers for each wave of enemies are done outside of jgame, so changing the f
 
 - To access extra help in the game authoring phase, click on Show -> Clippy to bring up our version of an Office Assistant, DuvallClippy. 
 
+- We have made a few changes to jgame in order to facilitate the features that we have added. These changes have been documented in the package.html file under jgame.platform.
+
 **Our Roles**
 
 **Game Authoring:**
 
-- Rebecca Lai - Worked with Susan to create the GameAuthoringGUI. Primarily worked on 
-- Susan Zhang
+- Rebecca Lai - Worked with Susan to create the GameAuthoringGUI. Worked individually on user library and the "click-and-drag" mechanism of images and audio. 
+- Susan Zhang - Worked with Rebecca to create the GameAuthoringGUI. Worked individually on writing game information to JSON. 
 
 **Engine Front End:**
 
-- Lalita Maraj
+- Lalita Maraj - Built store, Information Display Panel, cheat integration with backend and established the way the different front end components interact with each other. 
 - Alex Zhu - Built jgame interface, tower status, upgrade and sell, integration with backend, frame rate slider
 
 **Back End:**

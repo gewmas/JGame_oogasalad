@@ -1,5 +1,7 @@
 package gameEngine.model.magic;
 
+import jgame.JGObject;
+import gameEngine.constant.GameEngineConstant;
 import gameEngine.model.enemy.Enemy;
 
 
@@ -8,7 +10,7 @@ public class EPoisonMagic extends Magic {
     public static final String NAME = "PoisonMagic";
     private double myHealthLevel;
     private double increment;
-
+    
     public EPoisonMagic (int expire,
                          IMagicable target,
                          double poison,
@@ -23,6 +25,7 @@ public class EPoisonMagic extends Magic {
         }
         else myChangeRecord = poison;
         this.alpha = 0.8f;
+        
     }
 
     @Override
@@ -33,7 +36,10 @@ public class EPoisonMagic extends Magic {
     public void move () {
         super.move();
         if (((Enemy) myTarget).getLife() > myHealthLevel){
-           this.setImage("Healthy");   
+           this.setImage("Healthy");
+           ((JGObject) myTarget).colid=GameEngineConstant.NORMALMAGIC_CID;
+           ((Enemy) myTarget).setInvisiable(true);
+           
         }
         else {
             ((IEMagicable) myTarget).changeLife(myChangeRecord);
@@ -42,7 +48,6 @@ public class EPoisonMagic extends Magic {
                 increment = -0.01;
             else if (this.alpha < 0.3)
                 increment = 0.01;
-
         }
     }
 }

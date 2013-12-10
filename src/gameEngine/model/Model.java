@@ -31,7 +31,7 @@ public class Model {
     /**
      * @author Yuhua
      * 
-     * warehouse - store different kinds of tower, enemy warehouse
+     * Parson JSON file, create warehouse, generate rule for game, provide information for controller
      * 
      */
     
