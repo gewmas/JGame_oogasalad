@@ -27,4 +27,5 @@ public final class JSONConstants {
     public static final String NUMBER_STRING = "number";
     public static final String PERIOD_STRING = "period";
     public static final String INTERVAL_STRING = "interval";
+    public static final String TEMP_BARRIER_STRING = "temporaryBarrierType";
 }

@@ -81,7 +81,7 @@ public class TempBarrierDesignTab extends Tab {
 
     @Override
     public void loadJSON (Parser p) {
-        JSONArray tempBarriers = p.getJSONArray("temporaryBarrierType");
+        JSONArray tempBarriers = p.getJSONArray(JSONConstants.TEMP_BARRIER_STRING);
         JSONObject resources = p.getJSONObject(JSONConstants.RESOURCE_STRING);
         JSONArray images = (JSONArray) resources.get(JSONConstants.IMAGE_STRING);
         Map<String, String> imageMap = new HashMap<String, String>();
@@ -91,18 +91,16 @@ public class TempBarrierDesignTab extends Tab {
             String url = image.getString(JSONConstants.URL_STRING);
             imageMap.put(id, url);
         }
-        
-        for (int i = 0 ; i < tempBarriers.length(); i++){
+        for (int i = 0; i < tempBarriers.length(); i++) {
             JSONObject tempBarrier = tempBarriers.getJSONObject(i);
-            String name = tempBarrier.getString("id");
-            String imageKey = tempBarrier.getString("image");
+            String name = tempBarrier.getString(JSONConstants.ID_STRING);
+            String imageKey = tempBarrier.getString(JSONConstants.IMAGE_STRING);
             File imageFile = new File(GameAuthoringGUI.FILE_PREFIX + imageMap.get(imageKey));
             setChanged();
             notifyObservers(tempBarrier);
             clearChanged();
             addBarrier(imageFile, name);
         }
-
     }
 
     /**
@@ -233,7 +231,6 @@ public class TempBarrierDesignTab extends Tab {
         catch (IOException e) {
             e.printStackTrace();
         }
-
         JLabel barrierNameLabel = new JLabel(BarrierName);
         myScrollPanel.add(barrierNameLabel);
         myScrollPanel.add(barrierIcon);
