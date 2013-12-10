@@ -9,8 +9,8 @@ import javax.swing.AbstractAction;
  */
 @SuppressWarnings("serial")
 public class ReturnToMainMenuItem extends AbstractAction{
-    private MenuActions menuActions;
-    public ReturnToMainMenuItem (MenuActions menuActions) {
+    private MenuAction menuActions;
+    public ReturnToMainMenuItem (MenuAction menuActions) {
 
         super(ViewConstants.resourceBundle.getString("ReturnToMainMenu"));
 
@@ -20,7 +20,7 @@ public class ReturnToMainMenuItem extends AbstractAction{
 
     @Override
     public void actionPerformed (ActionEvent e) {
-        menuActions.goToMainMenu();
+        menuActions.executeAction();
         
     }
 

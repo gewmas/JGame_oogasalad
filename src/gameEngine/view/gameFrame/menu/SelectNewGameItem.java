@@ -13,9 +13,9 @@ import javax.swing.AbstractAction;
  */
 @SuppressWarnings("serial")
 class SelectNewGameItem extends AbstractAction {
-    private MenuActions menuActions;
+    private MenuAction menuActions;
 
-    public SelectNewGameItem (MenuActions menuActions) {
+    public SelectNewGameItem (MenuAction menuActions) {
         super(ViewConstants.resourceBundle.getString("NewGameFileMenu"));
         this.menuActions = menuActions;
     }
@@ -23,7 +23,7 @@ class SelectNewGameItem extends AbstractAction {
     @Override
     public void actionPerformed (ActionEvent e) {
 
-        menuActions.selectNewGame();
+        menuActions.executeAction();
 
     }
 
