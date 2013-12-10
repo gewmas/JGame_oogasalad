@@ -50,6 +50,7 @@ public class Model {
     private ArrayList<Enemy> spawnedEnemies;
     private CheatParser cheatParser;
     private boolean isCheatToWin=false;
+    private Resources myResources=null;
 
     public Model () {
          
@@ -78,7 +79,7 @@ public class Model {
         gameInfo = new GameInfo(parser);
         
         //Change Description In GameEngineConst
-//        GameEngineConstant.updateDescription(parser);
+        GameEngineConstant.updateDescription(parser);
 
     }
     // Fabio Changed it (added win and life reset)
@@ -86,7 +87,8 @@ public class Model {
         gameInfo.SetIsWin(false);
         gameInfo.setLife(parser.getInt("numberOfLives"));
         gameInfo.setGold(parser.getInt("gold"));
-//        rule.ruleStart();
+        setCheatToWin(false);
+
         //Edited by Alex, call reset() instead of start()
         rule.reset();
 
@@ -135,8 +137,8 @@ public class Model {
     //For detector use
     public void setJGEngine(JGEngineInterface eng){
         this.myEng = eng;
-        Resources r = new Resources(myEng);
-        r.register(parser);
+        myResources = new Resources(myEng);
+        myResources.register(parser);
         rule = new Rule(1, enemyWarehouse,eng);
         rule.readWaveFromJSon(parser.getJSONArray("wave"));
     }
@@ -152,6 +154,7 @@ public class Model {
     // Tower can implemetns Towerinfo which has getDescription,getDamage....
     // now it is not functional because no myEng, we need discussion on this.
     public PurchaseInfo getTowerInfo (int x, int y) {
+       
         return checkTowerAtXY(x, y).getPurchaseInfo();
     }
 
@@ -233,7 +236,11 @@ public class Model {
         return gameInfo;
     }
 
-    /**
+    public TowerWarehouse getTowerWarehouse() {
+		return towerWarehouse;
+	}
+
+	/**
      * @author Harris
      * Purchase temporary barrier
      **/
@@ -271,6 +278,15 @@ public class Model {
     
     public void stopWaves(){
         rule.stop();
+    }
+    
+    public Map<String, String> getImageURL(){
+        return myResources.getImages(); 
+    }
+
+        // @Author Fabio
+    public void setCheatToWin (boolean isCheatToWin) {
+        this.isCheatToWin = isCheatToWin;
     }
     
     

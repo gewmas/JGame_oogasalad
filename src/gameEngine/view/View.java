@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import jgame.impl.JGEngineInterface;
+import gameAuthoring.MainPanel;
 import gameEngine.controller.Controller;
+import gameEngine.controller.ControllerToViewInterface;
 import gameEngine.model.GameInfo;
 import gameEngine.model.purchase.PurchaseInfo;
 import gameEngine.model.tile.Tile;
@@ -26,11 +28,11 @@ import gameEngine.view.initialization.InitializationFrame;
 public class View implements MenuActions {
     private GameFrame gameFrame;
     private InitializationFrame initializationFrame;
-    private Controller controller;
+    private ControllerToViewInterface controller;
 
-    public View (Controller controller) {
+    public View (ControllerToViewInterface controller) {
         this.controller = controller;
-        this.gameFrame = new GameFrame(this);
+        this.gameFrame = new GameFrame(controller,this);
         this.initializationFrame = new InitializationFrame(this);
 
     }
@@ -40,7 +42,6 @@ public class View implements MenuActions {
      */
     public void promptForFile () {
         initializationFrame.showFrame();
-
     }
 
     /**
@@ -48,10 +49,6 @@ public class View implements MenuActions {
      */
     public void startJGame () {
         gameFrame.showGame();
-    }
-
-    public void startModel () {
-        controller.startGame();
     }
 
     public void newGame (File file) {
@@ -62,69 +59,13 @@ public class View implements MenuActions {
         catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null,
-                                          StyleConstants.resourceBundle.getString("FileReadError"));
+                                          ViewConstants.resourceBundle.getString("FileReadError"));
         }
     }
 
-    public void sendEngine (JGEngineInterface engine) {
-        controller.setJGEngine(engine);
-    }
-
-    /**
-     * Tells the controller to send tower purchase instructions to the model
-     * and then reset the cursor
-     */
-    public boolean buyTower (int x, int y, PurchaseInfo itemInformation) {
-        return (controller.purchaseObject(x, y, itemInformation));
-
-    }
-
-    /**
-     * Requests tower information for the tower at the given location
-     */
-    public PurchaseInfo getTowerInfo (int x, int y) {
-        return controller.getTowerInfo(x, y);
-    }
-
-    /**
-     * Gets game related information from the model:
-     * Title
-     * BGImage
-     * Gold
-     * Lives
-     * Wave Number
-     * IsWin
-     */
-    public GameInfo getGameInfo () {
-        return controller.getGameInfo();
-    }
-
-    public List<Tile> getPath () {
-        return controller.getPath();
-    }
-
-    public Map<String, List<PurchaseInfo>> getInventory () {
-        return controller.getInventory();
-    }
-
+    @Override
     public void endGame () {
         gameFrame.endGame();
-    }
-
-    public boolean activateCheat (String cheat) {
-        return controller.activateCheat(cheat);
-    }
-
-    public boolean upgradeTower (int x, int y) {
-        return controller.upgradeTower(x, y);
-    }
-
-    public boolean sellTower (int towerX, int towerY) {
-        return controller.sellTower(towerX, towerY);
-    }
-
-    public void stopWaves () {
-        controller.stopWaves();
     }
 
     @Override
@@ -133,16 +74,21 @@ public class View implements MenuActions {
         gameFrame.endGame();
         gameFrame.quitGame();
         gameFrame.dispose();
-        gameFrame = new GameFrame(this);
+        gameFrame = new GameFrame(controller,this);
         controller = new Controller();
         initializationFrame.showFrame();
-
     }
 
     @Override
     public void goToMainMenu () {
-        // TODO Auto-generated method stub
-
+        controller.startGame();
+        gameFrame.endGame();
+        gameFrame.quitGame();
+        gameFrame.dispose();
+        gameFrame = new GameFrame(controller,this);
+        
+        MainPanel panel = new MainPanel();
+        panel.show();
     }
 
 }

@@ -12,7 +12,7 @@ import java.util.Map;
 import jgame.impl.JGEngineInterface;
 
 
-public class Controller {
+public class Controller implements ControllerToViewInterface{
 
     Model model;
     View view;
@@ -34,10 +34,6 @@ public class Controller {
     public void newGame (File jsonFile) throws Exception {
         model.newGame(jsonFile); // will throw exception if fail
         view.startJGame();
-//        startGame();
-        // Model parses jsonFile and passes gameData to view
-        // view.initialize(gameData);
-        // view.showGame();
     }
 
     public void startGame () {
@@ -187,5 +183,8 @@ public class Controller {
 
     public void stopWaves(){
         model.stopWaves();
+    }
+    public Map<String,String> getImageURL(){
+        return model.getImageURL();
     }
 }

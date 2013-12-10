@@ -2,7 +2,6 @@ package gameEngine.view.gameFrame.tools;
 
 import java.awt.Dimension;
 import java.util.Collection;
-import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,27 +12,33 @@ import javax.swing.border.Border;
 /**
  * 
  * @author Lalita Maraj
- *         Panel that displays information as key
- *         value pairs in a table
+ *         Panel that displays information according to
+ *         html formating specified in the DisplayValue data structure.
+ *         This Panel takes as input a DisplayValue data structure
+ *         and calls the toString method on it to display the information stored
+ *         in the DisplayValue object and formats it according to the html
+ *         specified in the DisplayValue object
  * 
  * 
  */
+@SuppressWarnings("serial")
 public class InfoDisplayPanel extends JPanel {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
     private static final int DISPLAY_HEIGHT = 150;
     private static final int DISPLAY_WIDTH = 300;
 
     private JTextPane text;
 
-    public InfoDisplayPanel (String name) {
+    /**
+     * Constructor
+     * 
+     * @param panelTitle title to display on GUI
+     */
+    public InfoDisplayPanel (String panelTitle) {
         super();
 
         Border valuePanelBorder =
-                BorderFactory.createTitledBorder(name);
+                BorderFactory.createTitledBorder(panelTitle);
         setBorder(valuePanelBorder);
         addTextBox();
         this.setPreferredSize(new Dimension(DISPLAY_WIDTH, DISPLAY_HEIGHT));
@@ -41,10 +46,7 @@ public class InfoDisplayPanel extends JPanel {
     }
 
     /**
-     * Initlizes JList contents and adds
-     * 
-     * @param column2Name name of row
-     * @param keyName name of column
+     * Adds a textbox to the GUI
      */
     private void addTextBox () {
         text = new JTextPane();
@@ -55,10 +57,15 @@ public class InfoDisplayPanel extends JPanel {
         add(listScrollPane);
     }
 
-    public void updateDisplayInformation (Collection<DisplayValue> toDisplay) {
+    /**
+     * Updates the textbox with the values in the dispalyValues collection
+     * 
+     * @param displayValues Collection of information to be displayed
+     */
+    public void updateDisplayInformation (Collection<DisplayValue> displayValues) {
         clearDisplay();
         StringBuilder t = new StringBuilder();
-        for (DisplayValue display : toDisplay) {
+        for (DisplayValue display : displayValues) {
             t.append(display.toString());
         }
         text.setContentType("text/html");

@@ -89,4 +89,8 @@ public class TowerWarehouse extends Warehouse {
         return towerFactory;
     }
 
+	public Map<String, TowerFactory> getTowers() {
+		return towers;
+	}
+
 }

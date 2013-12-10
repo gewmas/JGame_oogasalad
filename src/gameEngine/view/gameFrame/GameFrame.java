@@ -3,14 +3,14 @@ package gameEngine.view.gameFrame;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import gameEngine.view.StyleConstants;
+import gameEngine.controller.Controller;
+import gameEngine.controller.ControllerToViewInterface;
+import gameEngine.view.ViewConstants;
 import gameEngine.view.View;
-import gameEngine.view.gameFrame.inputAndDisplay.InputAndDisplayFrame;
-import gameEngine.view.gameFrame.inputAndDisplay.InputSender;
+import gameEngine.view.gameFrame.inputFrame.InputFrame;
+import gameEngine.view.gameFrame.inputFrame.InputSender;
 import gameEngine.view.gameFrame.menu.Menu;
 import gameEngine.view.gameFrame.tools.InfoDisplayPanel;
 import gameEngine.view.gameFrame.tools.store.StorePanel;
@@ -24,53 +24,54 @@ import gameEngine.view.gameFrame.towerUpdrader.ItemOptionsDisplayer;
  * @author Lalita Maraj Alex Zhu
  * 
  */
+@SuppressWarnings("serial")
 public class GameFrame extends JFrame implements GameInitializable {
 
-    private View view;
-    private InputAndDisplayFrame cheatCodeFrame;
+    private ControllerToViewInterface controller;
     private StorePanel storePanel;
     private InfoDisplayPanel infoPanel;
     private CanvasPanel canvasPanel;
     private ItemOptionsDisplayer towerUpgrader;
     private ItemPurchaser itemPurchaser;
-    private Map<String, KeyActivationItem> gameKeyActivationItems;
-    private Collection<GameInitializable> gameInitializerItems;
-    private Collection<GameUpdatable> gameUpdatables;
+    private Collection<KeyActivationItem> gameKeyActivationItems;
+    private CompositeGameInitializable gameInitializerItems;
+    private CompositeGameUpdatable gameUpdatables;
 
     /**
      * @param controller facilitates communication between view and model
-     * @param view 
+     * @param controller
      */
-    public GameFrame ( final View view) {
+    public GameFrame (ControllerToViewInterface controller, View view) {
         super();
 
-        this.view = view;
+        this.controller = controller;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.cheatCodeFrame = addCheatCodeFrame(view);
+        CheatFrame cheatCodeFrame = addCheatCodeFrame();
 
-        this.gameKeyActivationItems = new HashMap();
-        gameKeyActivationItems.put("C", cheatCodeFrame);
+        this.gameKeyActivationItems = new ArrayList<KeyActivationItem>();
+        gameKeyActivationItems.add(cheatCodeFrame);
 
         infoPanel = addInfoDisplay();
-        towerUpgrader = new ItemOptionsDisplayer(infoPanel, view);
-        itemPurchaser = new ItemPurchaser(view, this);
+        towerUpgrader = new ItemOptionsDisplayer(infoPanel, controller);
+        itemPurchaser = new ItemPurchaser(controller, this);
         storePanel = addStorePanel(towerUpgrader, itemPurchaser);
-        gameInitializerItems = new ArrayList();
-        gameUpdatables = new ArrayList();
+        gameInitializerItems = new CompositeGameInitializable();
+        gameUpdatables = new CompositeGameUpdatable();
         gameUpdatables.add(storePanel);
         addGameTools(infoPanel, storePanel);
 
         setJMenuBar(new Menu(view));
     }
 
-    private InputAndDisplayFrame addCheatCodeFrame (final View view) {
-        return new InputAndDisplayFrame("Cheat Sheet", new InputSender() {
+    private CheatFrame addCheatCodeFrame () {
+        InputFrame inputFrame = new InputFrame( new InputSender() {
             @Override
             public void submit (String cheat) {
-                view.activateCheat(cheat);
+                controller.activateCheat(cheat);
             }
         });
+        return new CheatFrame(inputFrame);
     }
 
     public void showGame () {
@@ -82,7 +83,7 @@ public class GameFrame extends JFrame implements GameInitializable {
     public void createGame () {
         gameInitializerItems.add(this);
         canvasPanel =
-                new CanvasPanel(view, itemPurchaser, towerUpgrader, gameInitializerItems,
+                new CanvasPanel(controller, itemPurchaser, towerUpgrader, gameInitializerItems,
                                 gameUpdatables, gameKeyActivationItems);
         this.add(canvasPanel, BorderLayout.WEST);
 
@@ -105,13 +106,14 @@ public class GameFrame extends JFrame implements GameInitializable {
         this.add(tools, BorderLayout.EAST);
     }
 
-    private StorePanel addStorePanel (ItemOptionsDisplayer towerUpgrader, ItemPurchaser itemPurchaser) {
-        StorePanel storePanel = new StorePanel(view, towerUpgrader, itemPurchaser);
+    private StorePanel addStorePanel (ItemOptionsDisplayer towerUpgrader,
+                                      ItemPurchaser itemPurchaser) {
+        StorePanel storePanel = new StorePanel(controller, towerUpgrader, itemPurchaser);
         return storePanel;
     }
 
     private InfoDisplayPanel addInfoDisplay () {
-        InfoDisplayPanel infoPanel = new InfoDisplayPanel(StyleConstants.resourceBundle
+        InfoDisplayPanel infoPanel = new InfoDisplayPanel(ViewConstants.resourceBundle
                 .getString("ItemInfo"));
         return infoPanel;
     }
@@ -134,6 +136,6 @@ public class GameFrame extends JFrame implements GameInitializable {
     public void endGame () {
         infoPanel.clearDisplay();
         canvasPanel.endGame();
-        storePanel.closeStore();
+        storePanel.endGame();
     }
 }
