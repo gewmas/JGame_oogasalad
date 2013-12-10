@@ -56,6 +56,8 @@ The timers for each wave of enemies are done outside of jgame, so changing the f
 
 - To access extra help in the game authoring phase, click on Show -> Clippy to bring up our version of an Office Assistant, DuvallClippy. 
 
+- We have made a few changes to jgame in order to facilitate the features that we have added. These changes have been documented in the package.html file under jgame.platform.
+
 **Our Roles**
 
 **Game Authoring:**
