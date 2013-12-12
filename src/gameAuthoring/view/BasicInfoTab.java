@@ -178,7 +178,6 @@ public class BasicInfoTab extends Tab {
         myContentPanel.add(myImageLabel);
     }
 
-
     /*
      * (non-Javadoc)
      * 
@@ -191,7 +190,6 @@ public class BasicInfoTab extends Tab {
             myAltGoldText.setText(p.getString(GameData.GOLD_NAME_KEY));
             myLives.setText(String.valueOf(p.getInt(GameData.LIVES_KEY)));
             myAltLivesText.setText(p.getString(GameData.LIVES_NAME_KEY));
-
             JSONObject resources = p.getJSONObject(JSONConstants.RESOURCE_STRING);
             JSONArray images = (JSONArray) resources.get(JSONConstants.IMAGE_STRING);
             Map<String, String> imageMap = new HashMap<String, String>();
@@ -212,14 +210,11 @@ public class BasicInfoTab extends Tab {
             myImageLabel.setLabelIcon(new File(GameAuthoringGUI.FILE_PREFIX +
                                                imageMap.get(JSONConstants.BULLET_STRING)));
             myImageLabel.setID(JSONConstants.BULLET_KEY);
-            
-       
             String BGAudioID = (String) p.getString(JSONConstants.BG_AUDIO_STRING);
             myAudioLabel = new AudioLabel(BGAudioID, true);
             myAudioLabel.revalidate();
             myAudioLabel.setAudioFile(new File(GameAuthoringGUI.FILE_PREFIX +
                                                audioMap.get(BGAudioID)));
-
             setData();
         }
         catch (NumberFormatException n) {
@@ -257,9 +252,10 @@ public class BasicInfoTab extends Tab {
         int gold = Integer.parseInt(myGold.getText());
         int lives = Integer.parseInt(myLives.getText());
         String name = myGameName.getText();
-        String bulletName = myImageLabel.getImageFile().getName();
-        if (myAudioLabel != null && gold > 0 && lives > 0 &&
-            name != null && bulletName != null) {
+        if (myImageLabel.getImageFile() != null && myAudioLabel != null && gold > 0 &&
+            lives > 0 &&
+            name != null) {
+            String bulletName = myImageLabel.getImageFile().getName();
             String goldName = myAltGoldText.getText();
             String livesName = myAltLivesText.getText();
             BasicInformation gameDesignInfo =
@@ -268,6 +264,8 @@ public class BasicInfoTab extends Tab {
             setChanged();
             notifyObservers(gameDesignInfo);
             clearChanged();
+            JOptionPane.showMessageDialog(null, StyleConstants.resourceBundle
+                    .getString("BasicInfoValidSubmission"));
         }
         else {
             JOptionPane.showMessageDialog(null,

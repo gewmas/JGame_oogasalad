@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
@@ -28,7 +29,7 @@ public class SkillsDesignTab extends Tab {
     private static final String LIGHT = "light";
     private static final String POISON = "poison";
     private static final String BUTTON_ALIGNMENT = "align center";
-    private static final Dimension SUBPANEL_DIMENSION = new Dimension(300, 300);
+    private static final Dimension SUBPANEL_DIMENSION = new Dimension(300, 400);
     private static final String WRAP_MODE = "wrap 1";
 
     /**
@@ -152,6 +153,8 @@ public class SkillsDesignTab extends Tab {
                 setChanged();
                 notifyObservers(myAudioLabels);
                 clearChanged();
+                JOptionPane.showMessageDialog(null, StyleConstants.resourceBundle
+                        .getString("SkillsValidSubmission"));
             }
         };
         return listener;
