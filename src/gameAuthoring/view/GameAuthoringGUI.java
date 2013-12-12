@@ -265,7 +265,7 @@ public class GameAuthoringGUI extends Observable {
             JSONObject image = images.getJSONObject(i);
             String id = image.getString("id");
             String url = image.getString("url");
-            if (id.matches("-?\\d+(\\.\\d+)?")) {
+            if (!id.contains("background") && !id.equals("bullet")) {
                 myUserImagesTab.addImageLabel(new File(FILE_PREFIX + url), id);
             }
         }
